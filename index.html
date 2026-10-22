@@ -61,6 +61,51 @@ button{background:#45e0bd;border:0;padding:10px 16px;border-radius:7px;font-weig
 video{width:100%;max-height:60vh;background:#000}
 small{color:#b8c3d9}
 </style>
+  
+/* CSTV Android TV remote-friendly design */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #080d18;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+button, input, .channel, .card {
+  font-size: 18px;
+}
+
+button, input, a, .channel, .card {
+  outline: none;
+}
+
+button:focus, input:focus, a:focus,
+.channel:focus, .card:focus {
+  outline: 3px solid #19d3ff;
+  outline-offset: 4px;
+}
+
+button {
+  cursor: pointer;
+  padding: 12px 20px;
+  border-radius: 10px;
+}
+
+.channel, .card {
+  cursor: pointer;
+  border-radius: 12px;
+  transition: transform 0.15s ease;
+}
+
+.channel:focus, .card:focus,
+button:focus {
+  transform: scale(1.04);
+  background-color: #18334d;
+}
+  
 </head>
 <body>
 <header>📺 CSTV</header>
