@@ -1,1 +1,22 @@
-
+{
+  "channels": [
+    {
+      "name": "Channel I",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/28931315743beff50fc2c1312b1f8261",
+      "url": "https://tvsen6.aynaott.com/channeli/index.m3u8"
+    },
+    {
+      "name": "NTV",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/73c39182782a201338070c2f4429e449",
+      "url": "https://tvsen5.aynaott.com/xV4jEKf3D9zc/index.m3u8"
+    },
+    {
+      "name": "Bangla Vision",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/e86c14566b4d5b6dd68ac37dce4f6043",
+      "url": "https://tvsen5.aynaott.com/banglavision/index.m3u8"
+    }
+  ]
+}
