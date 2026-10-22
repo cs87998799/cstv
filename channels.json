@@ -1,0 +1,23 @@
+
+{
+  "channels": [
+    {
+      "name": "CSTV",
+      "category": "Bangla",
+      "logo": "",
+      "url": ""
+    },
+    {
+      "name": "Sports",
+      "category": "Sports",
+      "logo": "",
+      "url": ""
+    },
+    {
+      "name": "News",
+      "category": "News",
+      "logo": "",
+      "url": ""
+    }
+  ]
+}
