@@ -1,172 +1,368 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CSTV</title>
+<title>CSTV - Live TV</title>
+
 <style>
-  
-/* CSTV Android TV remote-friendly design */
 * {
   box-sizing: border-box;
 }
 
-body {
-  background: #080d18;
-  color: #ffffff;
-  font-family: Arial, sans-serif;
-  margin: 0;
+:root {
+  --bg: #080d18;
+  --panel: #131d30;
+  --card: #19263b;
+  --accent: #22d3ee;
+  --text: #f5f7ff;
+  --muted: #aab8d0;
 }
 
-button, input, .channel, .card {
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
   font-size: 18px;
 }
 
-button, input, a, .channel, .card {
-  outline: none;
+header {
+  padding: 22px 24px;
+  background: #101a2c;
+  border-bottom: 2px solid #243650;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-button:focus, input:focus, a:focus,
-.channel:focus, .card:focus {
-  outline: 3px solid #19d3ff;
-  outline-offset: 4px;
+.brand {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+.live {
+  color: #ff657a;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+main {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 25px;
+  margin: 8px 0 16px;
+}
+
+#search {
+  width: 100%;
+  padding: 16px;
+  margin: 0 0 20px;
+  border: 2px solid #30415e;
+  border-radius: 12px;
+  background: var(--panel);
+  color: white;
+  font-size: 19px;
+}
+
+#search::placeholder {
+  color: var(--muted);
+}
+
+#channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  min-width: 0;
+  padding: 18px;
+  background: var(--card);
+  border: 2px solid #273852;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.channel-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 58px;
+}
+
+.logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.channel-name {
+  font-size: 19px;
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+.category {
+  color: var(--muted);
+  font-size: 15px;
 }
 
 button {
-  cursor: pointer;
-  padding: 12px 20px;
+  width: 100%;
+  padding: 15px;
+  background: var(--accent);
+  color: #07111e;
+  border: 2px solid transparent;
   border-radius: 10px;
-}
-
-.channel, .card {
+  font-size: 19px;
+  font-weight: bold;
   cursor: pointer;
-  border-radius: 12px;
-  transition: transform 0.15s ease;
 }
 
-.channel:focus, .card:focus,
-button:focus {
-  transform: scale(1.04);
-  background-color: #18334d;
+button:focus,
+#search:focus,
+a:focus {
+  outline: 4px solid #fff;
+  outline-offset: 4px;
 }
 
-body{margin:0;background:#10131c;color:white;font-family:Arial,sans-serif}
-header{padding:20px;background:#191f30;color:#45e0bd;font-size:28px;font-weight:bold}
-main{padding:16px}
-input{width:100%;box-sizing:border-box;padding:13px;border-radius:8px;border:0;margin:10px 0 18px}
-.card{background:#20283a;padding:16px;margin:10px 0;border-radius:10px}
-.card img{width:42px;height:42px;object-fit:contain;vertical-align:middle;margin-right:10px}
-button{background:#45e0bd;border:0;padding:10px 16px;border-radius:7px;font-weight:bold}
-#playerBox{display:none;margin:12px 0;background:#000;padding:8px;border-radius:10px}
-video{width:100%;max-height:60vh;background:#000}
-small{color:#b8c3d9}
-body { background: #080d18 !important; color: white !important; }
-body { background: #080d18 !important; color: white !important; }
+.card:focus-within {
+  border-color: var(--accent);
+}
+
+button:active {
+  background: #9befff;
+}
+
+#playerBox {
+  display: none;
+  margin: 20px 0;
+  padding: 16px;
+  background: #000;
+  border: 2px solid #30415e;
+  border-radius: 16px;
+}
+
+#playingName {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 20px;
+}
+
+video {
+  width: 100%;
+  max-height: 65vh;
+  background: #000;
+}
+
+.close-button {
+  margin-top: 12px;
+  background: #293952;
+  color: white;
+}
+
+#status {
+  color: var(--muted);
+  padding: 12px 0;
+}
+
+footer {
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (min-width: 900px) {
+  main {
+    padding: 28px;
+  }
+
+  #channels {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
 </style>
-  /* CSTV Android TV remote-friendly design */
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background: #080d18;
-  color: #ffffff;
-  font-family: Arial, sans-serif;
-  margin: 0;
-}
-
-button, input, .channel, .card {
-  font-size: 18px;
-}
-
-button, input, a, .channel, .card {
-  outline: none;
-}
-
-button:focus, input:focus, a:focus,
-.channel:focus, .card:focus {
-  outline: 3px solid #19d3ff;
-  outline-offset: 4px;
-}
-
-button {
-  cursor: pointer;
-  padding: 12px 20px;
-  border-radius: 10px;
-}
-
-.channel, .card {
-  cursor: pointer;
-  border-radius: 12px;
-  transition: transform 0.15s ease;
-}
-
-.channel:focus, .card:focus,
-button:focus {
-  transform: scale(1.04);
-  background-color: #18334d;
-}
-  
 </head>
+
 <body>
-<header>📺 CSTV</header>
+<header>
+  <div class="brand">📺 CSTV</div>
+  <div class="live">● LIVE TV</div>
+</header>
+
 <main>
-<h2>Live Channels</h2>
-<input id="search" placeholder="Search channels..." oninput="render()">
-<div id="playerBox">
-  <b id="playingName"></b>
-  <video id="player" controls autoplay playsinline></video>
-  <p><button onclick="stopPlayer()">Close Player</button></p>
-</div>
-<div id="channels">Loading channels...</div>
+  <h2>Live Channels</h2>
+
+  <input
+    id="search"
+    type="search"
+    placeholder="🔎 Search channels..."
+    aria-label="Search channels"
+  >
+
+  <section id="playerBox">
+    <b id="playingName">Now Playing</b>
+    <video id="player" controls autoplay playsinline></video>
+    <button id="closePlayer" class="close-button">✕ Close Player</button>
+  </section>
+
+  <div id="status" role="status">Loading channels...</div>
+  <section id="channels"></section>
 </main>
+
+<footer>CSTV • Your Live TV</footer>
+
 <script>
-let channels=[];
-const playlistURL="https://cs87998799.github.io/cstv/channels.json";
+const playlistURL =
+  "https://cs87998799.github.io/cstv/channels.json";
 
-async function loadChannels(){
- try{
-  const r=await fetch(playlistURL+"?t="+Date.now());
-  if(!r.ok) throw Error();
-  const data=await r.json();
-  channels=data.channels||[];
-  render();
- }catch(e){
-  document.getElementById("channels").textContent="Could not load channels.";
- }
+let channels = [];
+
+const search = document.getElementById("search");
+const channelList = document.getElementById("channels");
+const statusBox = document.getElementById("status");
+const playerBox = document.getElementById("playerBox");
+const player = document.getElementById("player");
+
+function makeText(tag, className, value) {
+  const element = document.createElement(tag);
+  element.className = className;
+  element.textContent = value || "";
+  return element;
 }
 
-function render(){
- const q=document.getElementById("search").value.toLowerCase();
- const list=channels.filter(c=>
-  (c.name||"").toLowerCase().includes(q)||
-  (c.category||"").toLowerCase().includes(q)
- );
- document.getElementById("channels").innerHTML=list.map(c=>`
- <div class="card">
- ${c.logo?`<img src="${c.logo}" alt="">`:""}
- <b>${c.name||"Channel"}</b><br>
- <small>${c.category||""}</small><br><br>
- <button onclick="playChannel('${encodeURIComponent(c.url||"")}','${encodeURIComponent(c.name||"Channel")}')">Play</button>
- </div>`).join("")||"No channels found.";
+async function loadChannels() {
+  try {
+    const response = await fetch(
+      playlistURL + "?t=" + Date.now()
+    );
+
+    if (!response.ok) {
+      throw new Error("Playlist unavailable");
+    }
+
+    const data = await response.json();
+    channels = Array.isArray(data) ? data : data.channels || [];
+
+    statusBox.textContent = channels.length
+      ? channels.length + " channels available"
+      : "No channels available";
+
+    renderChannels();
+  } catch (error) {
+    statusBox.textContent =
+      "Could not load channels. Please check your internet connection.";
+  }
 }
 
-function playChannel(url,name){
- url=decodeURIComponent(url);
- if(!url){alert("Stream URL unavailable");return;}
- const p=document.getElementById("player");
- document.getElementById("playerBox").style.display="block";
- document.getElementById("playingName").textContent=decodeURIComponent(name);
- p.src=url;
- p.play().catch(()=>alert("এই স্ট্রিমটি ব্রাউজারে সরাসরি চলতে নাও পারে।"));
- document.getElementById("playerBox").scrollIntoView({behavior:"smooth"});
+function renderChannels() {
+  const query = search.value.trim().toLowerCase();
+
+  const filtered = channels.filter(channel =>
+    (channel.name || "").toLowerCase().includes(query) ||
+    (channel.category || "").toLowerCase().includes(query)
+  );
+
+  channelList.replaceChildren();
+
+  if (!filtered.length) {
+    statusBox.textContent = "No matching channels found.";
+    return;
+  }
+
+  statusBox.textContent = filtered.length + " channels";
+
+  filtered.forEach(channel => {
+    const card = document.createElement("article");
+    card.className = "card";
+
+    const head = document.createElement("div");
+    head.className = "channel-head";
+
+    if (channel.logo) {
+      const logo = document.createElement("img");
+      logo.className = "logo";
+      logo.src = channel.logo;
+      logo.alt = "";
+      logo.loading = "lazy";
+      head.appendChild(logo);
+    }
+
+    const name = makeText(
+      "div", "channel-name", channel.name || "Channel"
+    );
+
+    head.appendChild(name);
+    card.appendChild(head);
+
+    card.appendChild(
+      makeText("div", "category", channel.category || "Live TV")
+    );
+
+    const playButton = document.createElement("button");
+    playButton.type = "button";
+    playButton.textContent = "▶ Play Channel";
+    playButton.setAttribute(
+      "aria-label", "Play " + (channel.name || "Channel")
+    );
+
+    playButton.addEventListener("click", () => {
+      playChannel(channel);
+    });
+
+    card.appendChild(playButton);
+    channelList.appendChild(card);
+  });
 }
 
-function stopPlayer(){
- const p=document.getElementById("player");
- p.pause();p.removeAttribute("src");p.load();
- document.getElementById("playerBox").style.display="none";
+function playChannel(channel) {
+  if (!channel.url) {
+    alert("Stream URL unavailable.");
+    return;
+  }
+
+  playerBox.style.display = "block";
+  document.getElementById("playingName").textContent =
+    "▶ " + (channel.name || "Channel");
+
+  player.src = channel.url;
+  player.load();
+
+  player.play().catch(() => {
+    statusBox.textContent =
+      "Playback failed. This stream may not be supported by the player.";
+  });
+
+  playerBox.scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
+function stopPlayer() {
+  player.pause();
+  player.removeAttribute("src");
+  player.load();
+  playerBox.style.display = "none";
+}
+
+search.addEventListener("input", renderChannels);
+document.getElementById("closePlayer")
+  .addEventListener("click", stopPlayer);
+
 loadChannels();
 </script>
 </body>
