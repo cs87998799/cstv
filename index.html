@@ -5,188 +5,253 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#08090d">
-<title>CS TV</title>
+<title>CS TV | Live Television</title>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <style>
+:root{--bg:#08090d;--panel:#151720;--text:#f5f5f7;--muted:#9da3b1;--blue:#2997ff}
 *{box-sizing:border-box}
-body{margin:0;background:#08090d;color:#f5f6fa;font-family:Arial,sans-serif}
-header{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:22px 4%;flex-wrap:wrap}
-.brand{font-size:28px;font-weight:800;letter-spacing:-1px}
-.brand span{color:#8caaff}
-input{background:#171a23;color:white;border:1px solid #343947;border-radius:12px;padding:13px 16px;outline:none}
-input:focus,button:focus{outline:3px solid #8caaff;outline-offset:3px}
-#search{width:min(320px,90vw)}
-main{max-width:1500px;margin:auto;padding:0 4% 40px}
-.hero{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(240px,.8fr);gap:18px}
-.panel{background:linear-gradient(145deg,#191e2a,#101218);border:1px solid #292e3a;border-radius:22px;overflow:hidden}
-.player-head{padding:17px 20px}
-.small{font-size:12px;color:#9da6b8;text-transform:uppercase;letter-spacing:1.5px}
-h2{margin:8px 0;font-size:25px}
-video{display:block;width:100%;aspect-ratio:16/9;background:#000;object-fit:contain}
-.player-controls{display:flex;gap:9px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:14px}
-button{background:#202532;color:white;border:1px solid #363d4c;border-radius:12px;padding:11px 15px;font-weight:700;cursor:pointer}
-button:hover,button:focus{background:#303a50}
-.primary{background:#8caaff;color:#0b1020;border-color:#8caaff}
-.guide{padding:22px}
-.guide p{color:#aab2c2;line-height:1.6}
-.guide-item{border-top:1px solid #303440;padding:14px 0;color:#dce1ec;font-size:14px}
-.guide-item span{display:block;color:#8caaff;font-size:11px;margin-bottom:6px}
-.section{margin-top:28px}
-.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.section-head h2{font-size:23px}
-.categories{display:flex;gap:9px;overflow-x:auto;padding:8px 3px 15px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+header{height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:#08090dee;position:sticky;top:0;z-index:5;border-bottom:1px solid #ffffff10}
+.brand{font-size:23px;font-weight:800;letter-spacing:-1px}
+.brand span{color:var(--blue)}
+.search{width:min(40%,280px);background:#1c1e27;border:1px solid #343743;color:white;padding:12px 15px;border-radius:12px;font-size:15px}
+main{max-width:1500px;margin:auto;padding:22px 5% 60px}
+.hero{min-height:230px;padding:32px;border-radius:22px;background:radial-gradient(ellipse at 85% 20%,#164b7b 0%,transparent 42%),linear-gradient(115deg,#202330,#10131b 65%,#0b1927);display:flex;flex-direction:column;justify-content:center;margin-bottom:28px;overflow:hidden}
+.eyebrow{font-size:12px;letter-spacing:3px;color:#75baff;font-weight:bold}
+.hero h1{font-size:clamp(30px,5vw,52px);margin:12px 0}
+.hero p{color:#c5cad4;margin:0 0 22px}
+button{cursor:pointer;color:white;background:#222530;border:1px solid #ffffff12;border-radius:10px;padding:11px 16px;font-size:14px;font-weight:600}
+button:focus,input:focus{outline:2px solid var(--blue);outline-offset:3px}
+.primary{background:white;color:#101116;border:0}
+.section-title{font-size:21px;margin:28px 0 15px}
+.categories{display:flex;gap:9px;overflow-x:auto;padding:2px 2px 12px}
 .categories button{white-space:nowrap;border-radius:30px}
-.categories button.active{background:#f5f6fa;color:#10121a}
-#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:14px}
-.channel{position:relative;text-align:left;padding:12px;background:#151923;border:1px solid #2a303d;border-radius:17px;min-width:0}
-.channel:hover,.channel:focus{border-color:#8caaff;transform:translateY(-2px)}
-.logo{height:85px;background:#fff;border-radius:11px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:12px}
-.logo img{width:100%;height:100%;object-fit:contain;padding:8px}
-.logo b{color:#111;font-size:18px}
-.name{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px}
-.cat{display:block;color:#9da6b8;font-size:11px;margin-top:6px}
-#status{color:#aab2c2;font-size:12px}
-footer{color:#747e90;font-size:12px;padding:25px 0}
-@media(max-width:800px){.hero{grid-template-columns:1fr}}
-@media(max-width:500px){header{padding:18px 4%}main{padding:0 4% 30px}#grid{grid-template-columns:repeat(2,minmax(0,1fr))}.logo{height:75px}}
+.categories button.active{background:white;color:#101116}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:16px}
+.card{min-width:0;background:var(--panel);border:1px solid #ffffff0c;border-radius:15px;padding:13px;text-align:center;cursor:pointer;transition:transform .18s,border-color .18s}
+.card:hover,.card:focus{transform:translateY(-3px);border-color:#2997ff}
+.logo{height:92px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;background:#0c0e14;border-radius:10px;overflow:hidden}
+.logo img{max-width:90%;max-height:78px;object-fit:contain}
+.logo b{font-size:20px;color:#aeb9ce}
+.channel-name{font-size:14px;font-weight:700;overflow-wrap:anywhere}
+.channel-cat{font-size:11px;color:var(--muted);margin-top:6px}
+.player-wrap{display:none;margin:20px 0;background:#11131a;padding:12px;border-radius:16px}
+.player-wrap.show{display:block}
+#player{width:100%;max-height:65vh;aspect-ratio:16/9;background:black;border-radius:10px}
+.player-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.player-head h2{font-size:17px;margin:0}
+.player-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.status{color:var(--muted);font-size:13px;margin:12px 0}
+footer{text-align:center;color:#747b8b;font-size:12px;padding:25px}
+@media(max-width:520px){header{padding:0 4%;height:60px}.brand{font-size:20px}.search{width:48%;padding:10px;font-size:13px}main{padding:16px 4% 40px}.hero{padding:24px;min-height:210px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.logo{height:82px}}
 </style>
 </head>
 <body>
 <header>
-  <div class="brand"><span>CS</span> TV</div>
-  <input id="search" type="search" placeholder="Search channels..." aria-label="Search channels">
+  <div class="brand">CS <span>TV</span></div>
+  <input id="search" class="search" type="search" placeholder="Search channels..." aria-label="Search channels">
 </header>
+
 <main>
   <section class="hero">
-    <div class="panel">
-      <div class="player-head">
-        <div class="small">Now playing</div>
-        <h2 id="currentName">Choose a channel</h2>
-      </div>
-      <video id="video" controls playsinline></video>
-      <div class="player-controls">
-        <span id="status">Choose a channel below</span>
-        <div>
-          <button id="prev">← Previous</button>
-          <button id="next" class="primary">Next →</button>
-        </div>
-      </div>
-    </div>
-    <aside class="panel guide">
-      <div class="small">TV Guide</div>
-      <h2>What's on?</h2>
-      <p id="guideText">Select a channel to view its information.</p>
-      <div class="guide-item"><span>NOW</span>Programme schedule not connected</div>
-      <div class="guide-item"><span>NEXT</span>Add EPG data to show upcoming programmes</div>
-    </aside>
+    <div class="eyebrow">YOUR ENTERTAINMENT</div>
+    <h1>Television.<br>Reimagined.</h1>
+    <p>Your favourite channels, all in one place.</p>
+    <div><button class="primary" onclick="showChannels()">▶ Explore Channels</button></div>
   </section>
 
-  <section class="section">
-    <div class="section-head">
-      <div><h2>Explore channels</h2><div class="small">Your world. Live.</div></div>
-      <span id="count" class="small">Loading...</span>
+  <section id="playerWrap" class="player-wrap">
+    <div class="player-head">
+      <h2 id="nowPlaying">Now Playing</h2>
+      <button onclick="closePlayer()">✕ Close</button>
     </div>
-    <nav class="categories" id="categories">
-      <button class="active" data-cat="All">All channels</button>
-      <button data-cat="Bangla">Bangla</button>
-      <button data-cat="Sports">Sports</button>
-      <button data-cat="News">News</button>
-      <button data-cat="International">International</button>
-      <button data-cat="Entertainment">Entertainment</button>
-    </nav>
-    <div id="grid"></div>
+    <video id="player" controls autoplay playsinline></video>
+    <div class="player-controls">
+      <button onclick="previousChannel()">⏮ Previous</button>
+      <button onclick="nextChannel()">Next ⏭</button>
+      <button onclick="toggleFullscreen()">⛶ Fullscreen</button>
+    </div>
+    <p id="status" class="status">Ready to play</p>
   </section>
-  <footer>CS TV · Use your TV remote arrows and OK to navigate.</footer>
+
+  <h2 class="section-title" id="channels">Browse Channels</h2>
+  <nav class="categories" id="categories" aria-label="Channel categories">
+    <button class="active" data-cat="All">All</button>
+    <button data-cat="Bangla">Bangla</button>
+    <button data-cat="Sports">Sports</button>
+    <button data-cat="News">News</button>
+    <button data-cat="International">International</button>
+    <button data-cat="Entertainment">Entertainment</button>
+  </nav>
+
+  <div id="grid" class="grid">
+    <p class="status">Loading channels...</p>
+  </div>
 </main>
 
-<script>
-const video=document.getElementById('video');
-const grid=document.getElementById('grid');
-const search=document.getElementById('search');
-const status=document.getElementById('status');
-let channels=[],current=-1,category='All',hls=null;
+<footer>CS TV · Live Television</footer>
 
-function norm(s){
- s=String(s||'Bangla').toLowerCase();
- if(s.includes('sport'))return 'Sports';
- if(s.includes('news'))return 'News';
- if(s.includes('international'))return 'International';
- if(s.includes('entertain'))return 'Entertainment';
- return 'Bangla';
+<script>
+const grid = document.getElementById('grid');
+const search = document.getElementById('search');
+const player = document.getElementById('player');
+const playerWrap = document.getElementById('playerWrap');
+const statusText = document.getElementById('status');
+
+let channels = [];
+let visibleChannels = [];
+let currentIndex = -1;
+let hls = null;
+let activeCategory = 'All';
+
+function esc(value) {
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[ch]));
 }
-function esc(s){
- return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function categoryOf(channel) {
+  const cat = String(channel.category || 'Bangla').toLowerCase();
+  if (cat.includes('sport')) return 'Sports';
+  if (cat.includes('news')) return 'News';
+  if (cat.includes('international')) return 'International';
+  if (cat.includes('entertain')) return 'Entertainment';
+  return channel.category || 'Bangla';
 }
-function render(){
- const q=search.value.toLowerCase().trim();
- const list=channels.map((c,i)=>({...c,_i:i})).filter(c=>
-  (category==='All'||norm(c.category)===category)&&String(c.name).toLowerCase().includes(q)
- );
- grid.innerHTML='';
- list.forEach(c=>{
-  const b=document.createElement('button');
-  b.className='channel';
-  b.type='button';
-  const logo=c.logo?`<img src="${esc(c.logo)}" alt="" onerror="this.remove()">`:'';
-  b.innerHTML=`<div class="logo">${logo}<b>${esc(c.name.slice(0,3))}</b></div><span class="name">${esc(c.name)}</span><span class="cat">${norm(c.category)}</span>`;
-  b.addEventListener('click',()=>play(c._i));
-  grid.appendChild(b);
- });
- document.getElementById('count').textContent=list.length+' channels';
+
+async function loadChannels() {
+  try {
+    const response = await fetch('./channels.json?v=' + Date.now());
+    if (!response.ok) throw new Error('channels.json not found');
+    const data = await response.json();
+    channels = Array.isArray(data) ? data : data.channels;
+    if (!Array.isArray(channels)) throw new Error('Invalid channel list');
+    channels = channels.filter(c => c && c.name && c.url);
+    renderChannels();
+  } catch (error) {
+    grid.innerHTML = '<p class="status">Could not load channels.json. Check that the file exists in the same folder as index.html.</p>';
+  }
 }
-function play(i){
- if(!channels.length)return;
- current=(i+channels.length)%channels.length;
- const c=channels[current];
- document.getElementById('currentName').textContent=c.name;
- document.getElementById('guideText').textContent=c.name+' selected. Programme schedule is not connected yet.';
- status.textContent='Connecting...';
- if(hls){hls.destroy();hls=null}
- video.pause();video.removeAttribute('src');video.load();
- if(window.Hls&&Hls.isSupported()&&/\.m3u8($|\?)/i.test(c.url)){
-  hls=new Hls();
-  hls.loadSource(c.url);
-  hls.attachMedia(video);
-  hls.on(Hls.Events.MANIFEST_PARSED,()=>video.play().then(()=>status.textContent='Live: '+c.name).catch(()=>status.textContent='Press Play to start'));
-  hls.on(Hls.Events.ERROR,(_,d)=>{if(d.fatal)status.textContent='Stream unavailable or blocked'});
- }else{
-  video.src=c.url;
-  video.play().then(()=>status.textContent='Live: '+c.name).catch(()=>status.textContent='Press Play to start');
- }
+
+function renderChannels() {
+  const query = search.value.trim().toLowerCase();
+  visibleChannels = channels.filter(c => {
+    const category = categoryOf(c);
+    const categoryMatch = activeCategory === 'All' ||
+      category.toLowerCase() === activeCategory.toLowerCase();
+    const searchMatch = String(c.name).toLowerCase().includes(query);
+    return categoryMatch && searchMatch;
+  });
+
+  if (!visibleChannels.length) {
+    grid.innerHTML = '<p class="status">No channels found.</p>';
+    return;
+  }
+
+  grid.innerHTML = visibleChannels.map((c, i) => `
+    <div class="card" tabindex="0" role="button"
+      aria-label="Play ${esc(c.name)}" data-index="${i}">
+      <div class="logo">
+        ${c.logo ? `<img src="${esc(c.logo)}" alt="${esc(c.name)} logo"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='block'">` : ''}
+        <b style="${c.logo ? 'display:none' : ''}">${esc(String(c.name).slice(0,3).toUpperCase())}</b>
+      </div>
+      <div class="channel-name">${esc(c.name)}</div>
+      <div class="channel-cat">${esc(categoryOf(c))}</div>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.card').forEach(card => {
+    const play = () => playChannel(Number(card.dataset.index));
+    card.addEventListener('click', play);
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        play();
+      }
+    });
+  });
 }
-document.getElementById('prev').onclick=()=>play(current<=0?channels.length-1:current-1);
-document.getElementById('next').onclick=()=>play(current+1);
-search.addEventListener('input',render);
-document.getElementById('categories').addEventListener('click',e=>{
- const b=e.target.closest('[data-cat]');if(!b)return;
- category=b.dataset.cat;
- document.querySelectorAll('[data-cat]').forEach(x=>x.classList.toggle('active',x===b));
- render();
+
+function playChannel(index) {
+  const c = visibleChannels[index];
+  if (!c) return;
+  currentIndex = index;
+  playerWrap.classList.add('show');
+  document.getElementById('nowPlaying').textContent = c.name;
+  statusText.textContent = 'Connecting to stream...';
+
+  if (hls) {
+    hls.destroy();
+    hls = null;
+  }
+  player.pause();
+  player.removeAttribute('src');
+  player.load();
+
+  const url = c.url;
+  if (window.Hls && Hls.isSupported()) {
+    hls = new Hls();
+    hls.loadSource(url);
+    hls.attachMedia(player);
+    hls.on(Hls.Events.MANIFEST_PARSED, () => {
+      player.play().catch(() => {
+        statusText.textContent = 'Press Play to start the channel.';
+      });
+    });
+    hls.on(Hls.Events.ERROR, (event, data) => {
+      if (data.fatal) statusText.textContent =
+        'Stream unavailable or unsupported. Try another channel.';
+    });
+  } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
+    player.src = url;
+    player.play().catch(() => {
+      statusText.textContent = 'Press Play to start the channel.';
+    });
+  } else {
+    statusText.textContent = 'This device cannot play this stream format.';
+  }
+
+  playerWrap.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function nextChannel() {
+  if (visibleChannels.length) playChannel((currentIndex + 1) % visibleChannels.length);
+}
+function previousChannel() {
+  if (visibleChannels.length) playChannel((currentIndex - 1 + visibleChannels.length) % visibleChannels.length);
+}
+function closePlayer() {
+  player.pause();
+  if (hls) { hls.destroy(); hls = null; }
+  playerWrap.classList.remove('show');
+}
+function toggleFullscreen() {
+  if (player.requestFullscreen) player.requestFullscreen();
+  else if (player.webkitEnterFullscreen) player.webkitEnterFullscreen();
+}
+function showChannels() {
+  document.getElementById('channels').scrollIntoView({behavior:'smooth'});
+}
+
+search.addEventListener('input', renderChannels);
+
+document.getElementById('categories').addEventListener('click', e => {
+  const button = e.target.closest('button[data-cat]');
+  if (!button) return;
+  activeCategory = button.dataset.cat;
+  document.querySelectorAll('#categories button').forEach(b =>
+    b.classList.toggle('active', b === button));
+  renderChannels();
 });
-document.addEventListener('keydown',e=>{
- if(e.target===search&&e.key!=='Escape')return;
- const els=[...document.querySelectorAll('button,input')].filter(x=>x.offsetParent!==null);
- const i=els.indexOf(document.activeElement);
- if(['ArrowRight','ArrowDown','ArrowLeft','ArrowUp'].includes(e.key)&&els.length){
-  e.preventDefault();
-  const d=['ArrowRight','ArrowDown'].includes(e.key)?1:-1;
-  els[(i+d+els.length)%els.length].focus();
- }else if(e.key==='ChannelUp')play(current+1);
- else if(e.key==='ChannelDown')play(current<=0?channels.length-1:current-1);
- else if(e.key==='Escape')search.blur();
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closePlayer();
+  if (e.key === 'ArrowRight' && document.activeElement === document.body) nextChannel();
+  if (e.key === 'ArrowLeft' && document.activeElement === document.body) previousChannel();
 });
-fetch('./channels.json',{cache:'no-store'})
-.then(r=>{if(!r.ok)throw Error('channels.json missing');return r.json()})
-.then(data=>{
- if(!Array.isArray(data.channels))throw Error('Invalid JSON format');
- channels=data.channels.filter(c=>c.name&&c.url);
- render();status.textContent='Choose a channel to start';
-})
-.catch(()=>{
- document.getElementById('count').textContent='0 channels';
- status.textContent='Could not load channels.json';
- grid.innerHTML='<p style="color:#aab2c2">Upload channels.json beside index.html in your GitHub repository.</p>';
-});
+
+loadChannels();
 </script>
 </body>
 </html>
