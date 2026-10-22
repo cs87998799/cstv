@@ -1,1 +1,45 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSTV</title>
+<style>
+body{margin:0;background:#10131c;color:white;font-family:Arial,sans-serif}
+header{padding:20px;background:#191f30;color:#45e0bd;font-size:28px;font-weight:bold}
+main{padding:16px}
+input{width:100%;box-sizing:border-box;padding:13px;border-radius:8px;border:0;margin:10px 0 18px}
+.card{background:#20283a;padding:16px;margin:10px 0;border-radius:10px}
+button{background:#45e0bd;border:0;padding:10px 16px;border-radius:7px;font-weight:bold}
+small{color:#b8c3d9}
+</style>
+</head>
+<body>
+<header>📺 CSTV</header>
+<main>
+<h2>Live Channels</h2>
+<input id="search" placeholder="Search channels..." oninput="filter()">
+<div id="channels"></div>
+<small>Channel list can be connected to an online playlist.</small>
+</main>
+<script>
+const channels=[
+{name:"Bangladesh TV",category:"Bangla"},
+{name:"Sports Channel",category:"Sports"},
+{name:"News Channel",category:"News"}
+];
+function show(list){
+document.getElementById('channels').innerHTML=list.map(c=>
+`<div class="card"><b>${c.name}</b><br><small>${c.category}</small></div>`
+).join('');
+}
+function filter(){
+const q=document.getElementById('search').value.toLowerCase();
+show(channels.filter(c=>c.name.toLowerCase().includes(q)));
+}
+show(channels);
+</script>
+</body>
+</html>
+
