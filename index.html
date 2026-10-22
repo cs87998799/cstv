@@ -10,8 +10,10 @@ header{padding:20px;background:#191f30;color:#45e0bd;font-size:28px;font-weight:
 main{padding:16px}
 input{width:100%;box-sizing:border-box;padding:13px;border-radius:8px;border:0;margin:10px 0 18px}
 .card{background:#20283a;padding:16px;margin:10px 0;border-radius:10px}
-.card img{width:48px;height:48px;object-fit:contain;vertical-align:middle;margin-right:12px}
+.card img{width:42px;height:42px;object-fit:contain;vertical-align:middle;margin-right:10px}
 button{background:#45e0bd;border:0;padding:10px 16px;border-radius:7px;font-weight:bold}
+#playerBox{display:none;margin:12px 0;background:#000;padding:8px;border-radius:10px}
+video{width:100%;max-height:60vh;background:#000}
 small{color:#b8c3d9}
 </style>
 </head>
@@ -19,7 +21,12 @@ small{color:#b8c3d9}
 <header>📺 CSTV</header>
 <main>
 <h2>Live Channels</h2>
-<input id="search" placeholder="Search channels..." oninput="filterChannels()">
+<input id="search" placeholder="Search channels..." oninput="render()">
+<div id="playerBox">
+  <b id="playingName"></b>
+  <video id="player" controls autoplay playsinline></video>
+  <p><button onclick="stopPlayer()">Close Player</button></p>
+</div>
 <div id="channels">Loading channels...</div>
 </main>
 <script>
@@ -27,43 +34,48 @@ let channels=[];
 const playlistURL="https://cs87998799.github.io/cstv/channels.json";
 
 async function loadChannels(){
- const box=document.getElementById("channels");
  try{
-  const response=await fetch(playlistURL+"?t="+Date.now());
-  if(!response.ok) throw new Error("Playlist unavailable");
-  const data=await response.json();
+  const r=await fetch(playlistURL+"?t="+Date.now());
+  if(!r.ok) throw Error();
+  const data=await r.json();
   channels=data.channels||[];
-  filterChannels();
- }catch(error){
-  box.textContent="Could not load channels. Check channels.json.";
+  render();
+ }catch(e){
+  document.getElementById("channels").textContent="Could not load channels.";
  }
 }
 
-function filterChannels(){
+function render(){
  const q=document.getElementById("search").value.toLowerCase();
  const list=channels.filter(c=>
   (c.name||"").toLowerCase().includes(q)||
   (c.category||"").toLowerCase().includes(q)
  );
- document.getElementById("channels").innerHTML=list.map((c,i)=>
-  `<div class="card">
-   ${c.logo?`<img src="${c.logo}" alt="">`:""}
-   <b>${c.name||"Channel"}</b><br>
-   <small>${c.category||""}</small><br><br>
-   <button onclick="playChannel(${i})">Play</button>
-  </div>`
- ).join("")||"No channels found.";
+ document.getElementById("channels").innerHTML=list.map(c=>`
+ <div class="card">
+ ${c.logo?`<img src="${c.logo}" alt="">`:""}
+ <b>${c.name||"Channel"}</b><br>
+ <small>${c.category||""}</small><br><br>
+ <button onclick="playChannel('${encodeURIComponent(c.url||"")}','${encodeURIComponent(c.name||"Channel")}')">Play</button>
+ </div>`).join("")||"No channels found.";
 }
 
-function playChannel(i){
- const c=channels.filter(c=>
-  (c.name||"").toLowerCase().includes(document.getElementById("search").value.toLowerCase())||
-  (c.category||"").toLowerCase().includes(document.getElementById("search").value.toLowerCase())
- )[i];
- if(c&&c.url) window.open(c.url,"_blank");
- else alert("Stream URL unavailable.");
+function playChannel(url,name){
+ url=decodeURIComponent(url);
+ if(!url){alert("Stream URL unavailable");return;}
+ const p=document.getElementById("player");
+ document.getElementById("playerBox").style.display="block";
+ document.getElementById("playingName").textContent=decodeURIComponent(name);
+ p.src=url;
+ p.play().catch(()=>alert("এই স্ট্রিমটি ব্রাউজারে সরাসরি চলতে নাও পারে।"));
+ document.getElementById("playerBox").scrollIntoView({behavior:"smooth"});
 }
 
+function stopPlayer(){
+ const p=document.getElementById("player");
+ p.pause();p.removeAttribute("src");p.load();
+ document.getElementById("playerBox").style.display="none";
+}
 loadChannels();
 </script>
 </body>
