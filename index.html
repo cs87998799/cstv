@@ -5,6 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CSTV</title>
 <style>
+  
+/* CSTV Android TV remote-friendly design */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #080d18;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+button, input, .channel, .card {
+  font-size: 18px;
+}
+
+button, input, a, .channel, .card {
+  outline: none;
+}
+
+button:focus, input:focus, a:focus,
+.channel:focus, .card:focus {
+  outline: 3px solid #19d3ff;
+  outline-offset: 4px;
+}
+
+button {
+  cursor: pointer;
+  padding: 12px 20px;
+  border-radius: 10px;
+}
+
+.channel, .card {
+  cursor: pointer;
+  border-radius: 12px;
+  transition: transform 0.15s ease;
+}
+
+.channel:focus, .card:focus,
+button:focus {
+  transform: scale(1.04);
+  background-color: #18334d;
+}
+
 body{margin:0;background:#10131c;color:white;font-family:Arial,sans-serif}
 header{padding:20px;background:#191f30;color:#45e0bd;font-size:28px;font-weight:bold}
 main{padding:16px}
