@@ -1,314 +1,257 @@
+
 {
-"channels": [
-{
-"name": "Channel I",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/28931315743beff50fc2c1312b1f8261",
-"url": "https://tvsen6.aynaott.com/channeli/index.m3u8"
-},
-{
-"name": "NTV",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/73c39182782a201338070c2f4429e449",
-"url": "https://tvsen5.aynaott.com/xV4jEKf3D9zc/index.m3u8"
-},
-{
-"name": "Bangla Vision",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/e86c14566b4d5b6dd68ac37dce4f6043",
-"url": "https://tvsen5.aynaott.com/banglavision/index.m3u8"
-},
-{
-"name": "Rtv HD",
-"category": "Bangla",
-"logo": "",
-"url": "https://tvsen5.aynaott.com/RtvHD/index.m3u8"
-},
-{
-"name": "ATN Bangla",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/a4d2bbdb65b4abc239eaddedda1e5d22",
-"url": "https://tvsen5.aynaott.com/atnbangla/index.m3u8"
-},
-{
-"name": "Maasranga TV",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/5db4a54244a315684254b441e92539e2",
-"url": "https://tvsen5.aynaott.com/maasrangatv/index.m3u8"
-},
-{
-"name": "Deepto TV",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/12462ef0383fa0e927215d56cd51acf8",
-"url": "https://tvsen5.aynaott.com/DeeptoTVHD/index.m3u8"
-},
-{
-"name": "Duronto TV",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/1d3d06e02fc9ba45a990b65aebd04ebc",
-"url": "https://tvsen5.aynaott.com/durontotv/index.m3u8"
-},
-{
-"name": "ETV",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/d805cf57543080b49de8a2621cd54da4",
-"url": "https://tvsen6.aynaott.com/etv/index.m3u8"
-},
-{
-"name": "Somoy News TV",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/cbadf009eebf7506c7633b3a98a2f042",
-"url": "https://tvsen6.aynaott.com/somoytv/index.m3u8"
-},
-{
-"name": "T Sports HD",
-"category": "Sports",
-"logo": "https://s3.aynaott.com/storage/9fbf3e9ed22c8cc71c93f25d6cb9be32",
-"url": "https://tvsen5.aynaott.com/tsports/index.m3u8"
-},
-{
-"name": "Gazi TV",
-"category": "Sports",
-"logo": "https://s3.aynaott.com/storage/0b4d83d0baf7513beae135e134fced2c",
-"url": "https://tvsen5.aynaott.com/Ravc7gPCZpxk/index.m3u8"
-},
-{
-"name": "Desh TV",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/9ef657aca7c0009e4f0675af3b5190d8",
-"url": "https://tvsen6.aynaott.com/deshtv/index.m3u8"
-},
-{
-"name": "Boishakhi TV",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/ec66cdf9538da75b08112f9ae2f151bc",
-"url": "https://tvsen6.aynaott.com/boishakhitv/index.m3u8"
-},
-{
-"name": "Channel 9",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/affd223f023a705e3a1c5df263d0a7ef",
-"url": "https://tvsen6.aynaott.com/channel9/index.m3u8"
-},
-{
-"name": "Channel 24",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/502b8de24fcfc4443c376270a6e45527",
-"url": "https://tvsen6.aynaott.com/channel24/index.m3u8"
-},
-{
-"name": "Asian TV",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/8faf522ac37bfcd9c163145f77a9a024",
-"url": "https://tvsen6.aynaott.com/asiantv/index.m3u8"
-},
-{
-"name": "ATN News",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/8e9db8284bf110dce597f48674d1968a",
-"url": "https://tvsen6.aynaott.com/atnnews/index.m3u8"
-},
-{
-"name": "Independent TV",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/ee4466e6b775bf83f4f5a90a1dc89234",
-"url": "https://tvsen6.aynaott.com/independenttv/index.m3u8"
-},
-{
-"name": "SA TV",
-"category": "Bangla",
-"logo": "https://s3.aynaott.com/storage/83796140b05a889d37c4c98ed8c43821",
-"url": "https://tvsen6.aynaott.com/satv/index.m3u8"
-}
-  {
-"channels": [
-{
-"name": "Independent TV",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1704/output/index.m3u8"
-},
-{
-"name": "Channel 24",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1703/output/index.m3u8"
-},
-{
-"name": "News 24",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1708/output/index.m3u8"
-},
-{
-"name": "Somoy TV",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8"
-},
-{
-"name": "Ekattor TV",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1705/output/index.m3u8"
-},
-{
-"name": "Jamuna TV",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1701/output/index.m3u8"
-},
-{
-"name": "Star News",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1710/output/index.m3u8"
-},
-{
-"name": "DBC News",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1728/output/index.m3u8"
-},
-{
-"name": "ATN News",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1706/output/index.m3u8"
-},
-{
-"name": "Channel I",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1723/output/index.m3u8"
-},
-{
-"name": "Channel 9",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1729/output/index.m3u8"
-},
-{
-"name": "Maasranga TV",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1722/output/index.m3u8"
-},
-{
-"name": "BanglaVision",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1715/output/index.m3u8"
-},
-{
-"name": "NTV",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1716/output/index.m3u8"
-},
-{
-"name": "BTV",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8"
-},
-{
-"name": "Akash DTH 3",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1720/output/index.m3u8"
-},
-{
-"name": "Akash DTH 4",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1713/output/index.m3u8"
-},
-{
-"name": "Islamic TV",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1724/output/index.m3u8"
-},
-{
-"name": "Deepto TV",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1711/output/index.m3u8"
-},
-{
-"name": "Al Jazeera",
-"category": "International",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1721/output/index.m3u8"
-},
-{
-"name": "Akash DTH 1",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1730/output/master.m3u8"
-},
-{
-"name": "Akash DTH 2",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1731/output/master.m3u8"
-},
-{
-"name": "G Series",
-"category": "Entertainment",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://vods2.aynaott.com/gseriesDrama/tracks-v1a1/mono.ts.m3u8"
-},
-{
-"name": "Channel 1 4K",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/channel1bd.stream/tracks-v1a1/mono.m3u8"
-},
-{
-"name": "Channel S UK",
-"category": "International",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/chsukoff.stream/playlist.m3u8"
-},
-{
-"name": "Channel Europe",
-"category": "International",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://stream.channeleuropetvboxlondon.co.uk/live/channeleurope/chunklist_w572284654.m3u8"
-},
-{
-"name": "Ayna TV",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/ayna.stream/tracks-v1a1/mono.m3u8"
-},
-{
-"name": "SRK TV",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://srknowapp.ncare.live/srktvhlswodrm/srktv.stream/playlist.m3u8"
-},
-{
-"name": "Green TV",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/greentv.stream/playlist.m3u8"
-},
-{
-"name": "Rajdhani TV",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://stream.shariarsuvo.com/hls6/rajdhaniweb.m3u8"
-},
-{
-"name": "Jago News 24",
-"category": "Bangla",
-"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
-"url": "https://app.ncare.live/live-orgin/jagonews24.stream/playlist.m3u8"
-}
-]
-}
-]
+  "channels": [
+    {
+      "name": "Channel I",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/28931315743beff50fc2c1312b1f8261",
+      "url": "https://tvsen6.aynaott.com/channeli/index.m3u8"
+    },
+    {
+      "name": "NTV",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/73c39182782a201338070c2f4429e449",
+      "url": "https://tvsen5.aynaott.com/xV4jEKf3D9zc/index.m3u8"
+    },
+    {
+      "name": "Bangla Vision",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/e86c14566b4d5b6dd68ac37dce4f6043",
+      "url": "https://tvsen5.aynaott.com/banglavision/index.m3u8"
+    },
+    {
+      "name": "Rtv HD",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://tvsen5.aynaott.com/RtvHD/index.m3u8"
+    },
+    {
+      "name": "ATN Bangla",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/a4d2bbdb65b4abc239eaddedda1e5d22",
+      "url": "https://tvsen5.aynaott.com/atnbangla/index.m3u8"
+    },
+    {
+      "name": "Maasranga TV",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/5db4a54244a315684254b441e92539e2",
+      "url": "https://tvsen5.aynaott.com/maasrangatv/index.m3u8"
+    },
+    {
+      "name": "Deepto TV",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/12462ef0383fa0e927215d56cd51acf8",
+      "url": "https://tvsen5.aynaott.com/DeeptoTVHD/index.m3u8"
+    },
+    {
+      "name": "Duronto TV",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/1d3d06e02fc9ba45a990b65aebd04ebc",
+      "url": "https://tvsen5.aynaott.com/durontotv/index.m3u8"
+    },
+    {
+      "name": "ETV",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/d805cf57543080b49de8a2621cd54da4",
+      "url": "https://tvsen6.aynaott.com/etv/index.m3u8"
+    },
+    {
+      "name": "Somoy News TV",
+      "category": "News",
+      "logo": "https://s3.aynaott.com/storage/cbadf009eebf7506c7633b3a98a2f042",
+      "url": "https://tvsen6.aynaott.com/somoytv/index.m3u8"
+    },
+    {
+      "name": "T Sports HD",
+      "category": "Sports",
+      "logo": "https://s3.aynaott.com/storage/9fbf3e9ed22c8cc71c93f25d6cb9be32",
+      "url": "https://tvsen5.aynaott.com/tsports/index.m3u8"
+    },
+    {
+      "name": "Gazi TV",
+      "category": "Sports",
+      "logo": "https://s3.aynaott.com/storage/0b4d83d0baf7513beae135e134fced2c",
+      "url": "https://tvsen5.aynaott.com/Ravc7gPCZpxk/index.m3u8"
+    },
+    {
+      "name": "Desh TV",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/9ef657aca7c0009e4f0675af3b5190d8",
+      "url": "https://tvsen6.aynaott.com/deshtv/index.m3u8"
+    },
+    {
+      "name": "Boishakhi TV",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/ec66cdf9538da75b08112f9ae2f151bc",
+      "url": "https://tvsen6.aynaott.com/boishakhitv/index.m3u8"
+    },
+    {
+      "name": "Channel 9",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/affd223f023a705e3a1c5df263d0a7ef",
+      "url": "https://tvsen6.aynaott.com/channel9/index.m3u8"
+    },
+    {
+      "name": "Channel 24",
+      "category": "News",
+      "logo": "https://s3.aynaott.com/storage/502b8de24fcfc4443c376270a6e45527",
+      "url": "https://tvsen6.aynaott.com/channel24/index.m3u8"
+    },
+    {
+      "name": "Asian TV",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/8faf522ac37bfcd9c163145f77a9a024",
+      "url": "https://tvsen6.aynaott.com/asiantv/index.m3u8"
+    },
+    {
+      "name": "ATN News",
+      "category": "News",
+      "logo": "https://s3.aynaott.com/storage/8e9db8284bf110dce597f48674d1968a",
+      "url": "https://tvsen6.aynaott.com/atnnews/index.m3u8"
+    },
+    {
+      "name": "Independent TV",
+      "category": "News",
+      "logo": "https://s3.aynaott.com/storage/ee4466e6b775bf83f4f5a90a1dc89234",
+      "url": "https://tvsen6.aynaott.com/independenttv/index.m3u8"
+    },
+    {
+      "name": "SA TV",
+      "category": "Bangla",
+      "logo": "https://s3.aynaott.com/storage/83796140b05a889d37c4c98ed8c43821",
+      "url": "https://tvsen6.aynaott.com/satv/index.m3u8"
+    },
+    {
+      "name": "News 24",
+      "category": "News",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1708/output/index.m3u8"
+    },
+    {
+      "name": "Somoy TV",
+      "category": "News",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8"
+    },
+    {
+      "name": "Ekattor TV",
+      "category": "News",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1705/output/index.m3u8"
+    },
+    {
+      "name": "Jamuna TV",
+      "category": "News",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1701/output/index.m3u8"
+    },
+    {
+      "name": "Star News",
+      "category": "News",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1710/output/index.m3u8"
+    },
+    {
+      "name": "DBC News",
+      "category": "News",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1728/output/index.m3u8"
+    },
+    {
+      "name": "BTV",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8"
+    },
+    {
+      "name": "Akash DTH 3",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1720/output/index.m3u8"
+    },
+    {
+      "name": "Akash DTH 4",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1713/output/index.m3u8"
+    },
+    {
+      "name": "Islamic TV",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1724/output/index.m3u8"
+    },
+    {
+      "name": "Al Jazeera",
+      "category": "International",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1721/output/index.m3u8"
+    },
+    {
+      "name": "Akash DTH 1",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1730/output/master.m3u8"
+    },
+    {
+      "name": "Akash DTH 2",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1731/output/master.m3u8"
+    },
+    {
+      "name": "G Series",
+      "category": "Entertainment",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://vods2.aynaott.com/gseriesDrama/tracks-v1a1/mono.ts.m3u8"
+    },
+    {
+      "name": "Channel 1 4K",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/channel1bd.stream/tracks-v1a1/mono.m3u8"
+    },
+    {
+      "name": "Channel S UK",
+      "category": "International",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/chsukoff.stream/playlist.m3u8"
+    },
+    {
+      "name": "Channel Europe",
+      "category": "International",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://stream.channeleuropetvboxlondon.co.uk/live/channeleurope/chunklist_w572284654.m3u8"
+    },
+    {
+      "name": "Ayna TV",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/ayna.stream/tracks-v1a1/mono.m3u8"
+    },
+    {
+      "name": "SRK TV",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://srknowapp.ncare.live/srktvhlswodrm/srktv.stream/playlist.m3u8"
+    },
+    {
+      "name": "Green TV",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/greentv.stream/playlist.m3u8"
+    },
+    {
+      "name": "Rajdhani TV",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://stream.shariarsuvo.com/hls6/rajdhaniweb.m3u8"
+    },
+    {
+      "name": "Jago News 24",
+      "category": "News",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+      "url": "https://app.ncare.live/live-orgin/jagonews24.stream/playlist.m3u8"
+    }
+  ]
 }
