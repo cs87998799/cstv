@@ -1,275 +1,192 @@
+
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My Live TV</title>
+<meta name="theme-color" content="#08090d">
+<title>CS TV</title>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
 <style>
 *{box-sizing:border-box}
-body{
-  margin:0;background:#10131b;color:white;
-  font-family:Arial,sans-serif
-}
-header{padding:15px 20px;background:#191e2a}
-h2{margin:0;color:#48d9ff}
-#now{padding:12px 20px;color:#ddd}
-.player{width:100%;background:#000}
-video{width:100%;height:auto;max-height:65vh;display:block}
-.controls{
-  display:flex;gap:10px;align-items:center;
-  flex-wrap:wrap;padding:12px 16px
-}
-button,select{
-  background:#252d3c;color:white;border:1px solid #526077;
-  border-radius:7px;padding:10px 14px;font-size:15px
-}
-button:focus,select:focus,.channel:focus{
-  outline:3px solid #48d9ff
-}
-button:active{background:#087e9d}
-h3{margin:12px 16px}
-#channels{
-  display:flex;gap:12px;overflow-x:auto;
-  padding:12px 16px 22px;scroll-behavior:smooth
-}
-.channel{
-  flex:0 0 125px;background:#1b2230;border:2px solid transparent;
-  border-radius:10px;padding:12px 8px;text-align:center;
-  cursor:pointer;min-height:120px
-}
-.channel.active{border-color:#48d9ff;background:#26374a}
-.channel img{
-  width:65px;height:55px;object-fit:contain;
-  display:block;margin:0 auto 8px
-}
-.channel span{font-size:14px;overflow-wrap:anywhere}
-#status{padding:0 16px;color:#ffcf76;font-size:14px}
+body{margin:0;background:#08090d;color:#f5f6fa;font-family:Arial,sans-serif}
+header{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:22px 4%;flex-wrap:wrap}
+.brand{font-size:28px;font-weight:800;letter-spacing:-1px}
+.brand span{color:#8caaff}
+input{background:#171a23;color:white;border:1px solid #343947;border-radius:12px;padding:13px 16px;outline:none}
+input:focus,button:focus{outline:3px solid #8caaff;outline-offset:3px}
+#search{width:min(320px,90vw)}
+main{max-width:1500px;margin:auto;padding:0 4% 40px}
+.hero{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(240px,.8fr);gap:18px}
+.panel{background:linear-gradient(145deg,#191e2a,#101218);border:1px solid #292e3a;border-radius:22px;overflow:hidden}
+.player-head{padding:17px 20px}
+.small{font-size:12px;color:#9da6b8;text-transform:uppercase;letter-spacing:1.5px}
+h2{margin:8px 0;font-size:25px}
+video{display:block;width:100%;aspect-ratio:16/9;background:#000;object-fit:contain}
+.player-controls{display:flex;gap:9px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:14px}
+button{background:#202532;color:white;border:1px solid #363d4c;border-radius:12px;padding:11px 15px;font-weight:700;cursor:pointer}
+button:hover,button:focus{background:#303a50}
+.primary{background:#8caaff;color:#0b1020;border-color:#8caaff}
+.guide{padding:22px}
+.guide p{color:#aab2c2;line-height:1.6}
+.guide-item{border-top:1px solid #303440;padding:14px 0;color:#dce1ec;font-size:14px}
+.guide-item span{display:block;color:#8caaff;font-size:11px;margin-bottom:6px}
+.section{margin-top:28px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.section-head h2{font-size:23px}
+.categories{display:flex;gap:9px;overflow-x:auto;padding:8px 3px 15px}
+.categories button{white-space:nowrap;border-radius:30px}
+.categories button.active{background:#f5f6fa;color:#10121a}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:14px}
+.channel{position:relative;text-align:left;padding:12px;background:#151923;border:1px solid #2a303d;border-radius:17px;min-width:0}
+.channel:hover,.channel:focus{border-color:#8caaff;transform:translateY(-2px)}
+.logo{height:85px;background:#fff;border-radius:11px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:12px}
+.logo img{width:100%;height:100%;object-fit:contain;padding:8px}
+.logo b{color:#111;font-size:18px}
+.name{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px}
+.cat{display:block;color:#9da6b8;font-size:11px;margin-top:6px}
+#status{color:#aab2c2;font-size:12px}
+footer{color:#747e90;font-size:12px;padding:25px 0}
+@media(max-width:800px){.hero{grid-template-columns:1fr}}
+@media(max-width:500px){header{padding:18px 4%}main{padding:0 4% 30px}#grid{grid-template-columns:repeat(2,minmax(0,1fr))}.logo{height:75px}}
 </style>
 </head>
-
 <body>
-<header><h2>📺 My Live TV</h2></header>
+<header>
+  <div class="brand"><span>CS</span> TV</div>
+  <input id="search" type="search" placeholder="Search channels..." aria-label="Search channels">
+</header>
+<main>
+  <section class="hero">
+    <div class="panel">
+      <div class="player-head">
+        <div class="small">Now playing</div>
+        <h2 id="currentName">Choose a channel</h2>
+      </div>
+      <video id="video" controls playsinline></video>
+      <div class="player-controls">
+        <span id="status">Choose a channel below</span>
+        <div>
+          <button id="prev">← Previous</button>
+          <button id="next" class="primary">Next →</button>
+        </div>
+      </div>
+    </div>
+    <aside class="panel guide">
+      <div class="small">TV Guide</div>
+      <h2>What's on?</h2>
+      <p id="guideText">Select a channel to view its information.</p>
+      <div class="guide-item"><span>NOW</span>Programme schedule not connected</div>
+      <div class="guide-item"><span>NEXT</span>Add EPG data to show upcoming programmes</div>
+    </aside>
+  </section>
 
-<div id="now">চ্যানেল লোড হচ্ছে...</div>
-
-<div class="player">
-  <video id="video" controls autoplay playsinline></video>
-</div>
-
-<div class="controls">
-  <button id="prev">⏮ Previous</button>
-  <button id="play">▶ Play</button>
-  <button id="next">Next ⏭</button>
-  <label for="quality">Quality:</label>
-  <select id="quality">
-    <option value="-1">Auto</option>
-  </select>
-  <button id="full">⛶ Fullscreen</button>
-</div>
-
-<div id="status">প্রস্তুত হচ্ছে...</div>
-<h3>All Channels →</h3>
-<div id="channels"></div>
+  <section class="section">
+    <div class="section-head">
+      <div><h2>Explore channels</h2><div class="small">Your world. Live.</div></div>
+      <span id="count" class="small">Loading...</span>
+    </div>
+    <nav class="categories" id="categories">
+      <button class="active" data-cat="All">All channels</button>
+      <button data-cat="Bangla">Bangla</button>
+      <button data-cat="Sports">Sports</button>
+      <button data-cat="News">News</button>
+      <button data-cat="International">International</button>
+      <button data-cat="Entertainment">Entertainment</button>
+    </nav>
+    <div id="grid"></div>
+  </section>
+  <footer>CS TV · Use your TV remote arrows and OK to navigate.</footer>
+</main>
 
 <script>
-const CHANNELS_URL = "./channels.json";
+const video=document.getElementById('video');
+const grid=document.getElementById('grid');
+const search=document.getElementById('search');
+const status=document.getElementById('status');
+let channels=[],current=-1,category='All',hls=null;
 
-const video = document.getElementById("video");
-const list = document.getElementById("channels");
-const now = document.getElementById("now");
-const status = document.getElementById("status");
-const quality = document.getElementById("quality");
-
-let channels = [];
-let current = 0;
-let hls = null;
-let loading = false;
-
-async function init() {
-  try {
-    const response = await fetch(CHANNELS_URL + "?t=" + Date.now());
-    if (!response.ok) throw new Error("HTTP " + response.status);
-
-    const data = await response.json();
-    if (!Array.isArray(data.channels) || !data.channels.length)
-      throw new Error("No channels found");
-
-    channels = data.channels;
-    renderChannels();
-    playChannel(0);
-  } catch (e) {
-    now.textContent = "চ্যানেল লোড হয়নি। channels.json ফাইলের URL দেখো।";
-    status.textContent = e.message;
-  }
+function norm(s){
+ s=String(s||'Bangla').toLowerCase();
+ if(s.includes('sport'))return 'Sports';
+ if(s.includes('news'))return 'News';
+ if(s.includes('international'))return 'International';
+ if(s.includes('entertain'))return 'Entertainment';
+ return 'Bangla';
 }
-
-function renderChannels() {
-  list.innerHTML = "";
-
-  channels.forEach((c, i) => {
-    const card = document.createElement("div");
-    card.className = "channel";
-    card.tabIndex = 0;
-    card.dataset.index = i;
-
-    const img = document.createElement("img");
-    img.src = c.logo || "";
-    img.alt = "";
-    img.onerror = () => { img.style.visibility = "hidden"; };
-
-    const name = document.createElement("span");
-    name.textContent = c.name || "Channel";
-
-    card.append(img, name);
-    card.onclick = () => playChannel(i);
-    card.onkeydown = e => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        playChannel(i);
-      }
-    };
-    list.appendChild(card);
-  });
+function esc(s){
+ return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
-
-function updateSelection() {
-  document.querySelectorAll(".channel").forEach((el, i) => {
-    el.classList.toggle("active", i === current);
-  });
-
-  const selected = list.children[current];
-  if (selected) selected.scrollIntoView({
-    behavior: "smooth", block: "nearest", inline: "center"
-  });
+function render(){
+ const q=search.value.toLowerCase().trim();
+ const list=channels.map((c,i)=>({...c,_i:i})).filter(c=>
+  (category==='All'||norm(c.category)===category)&&String(c.name).toLowerCase().includes(q)
+ );
+ grid.innerHTML='';
+ list.forEach(c=>{
+  const b=document.createElement('button');
+  b.className='channel';
+  b.type='button';
+  const logo=c.logo?`<img src="${esc(c.logo)}" alt="" onerror="this.remove()">`:'';
+  b.innerHTML=`<div class="logo">${logo}<b>${esc(c.name.slice(0,3))}</b></div><span class="name">${esc(c.name)}</span><span class="cat">${norm(c.category)}</span>`;
+  b.addEventListener('click',()=>play(c._i));
+  grid.appendChild(b);
+ });
+ document.getElementById('count').textContent=list.length+' channels';
 }
-
-function playChannel(index) {
-  if (!channels.length || loading) return;
-  current = (index + channels.length) % channels.length;
-  const channel = channels[current];
-
-  if (!channel.url) {
-    status.textContent = "এই চ্যানেলের URL নেই।";
-    return;
-  }
-
-  loading = true;
-  if (hls) {
-    hls.destroy();
-    hls = null;
-  }
-
-  video.pause();
-  video.removeAttribute("src");
-  video.load();
-
-  quality.innerHTML = '<option value="-1">Auto</option>';
-  now.textContent = "▶ " + channel.name;
-  status.textContent = "স্ট্রিম লোড হচ্ছে...";
-  updateSelection();
-
-  if (window.Hls && Hls.isSupported()) {
-    hls = new Hls();
-    hls.loadSource(channel.url);
-    hls.attachMedia(video);
-
-    hls.on(Hls.Events.MANIFEST_PARSED, () => {
-      const levels = hls.levels;
-      const unique = new Map();
-
-      levels.forEach((level, i) => {
-        const height = level.height || 0;
-        const label = height
-          ? height + "p"
-          : Math.round((level.bitrate || 0) / 1000) + " kbps";
-
-        if (!unique.has(label)) unique.set(label, i);
-      });
-
-      unique.forEach((levelIndex, label) => {
-        const option = document.createElement("option");
-        option.value = levelIndex;
-        option.textContent = label;
-        quality.appendChild(option);
-      });
-
-      loading = false;
-      video.play().catch(() => {
-        status.textContent = "Play চাপ দিয়ে চালু করো।";
-      });
-    });
-
-    hls.on(Hls.Events.ERROR, (event, data) => {
-      if (data.fatal) {
-        loading = false;
-        status.textContent = "স্ট্রিম চালু হয়নি। URL বা নেটওয়ার্ক পরীক্ষা করো।";
-      }
-    });
-
-  } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-    video.src = channel.url;
-    loading = false;
-    video.play().catch(() => {
-      status.textContent = "Play চাপ দিয়ে চালু করো।";
-    });
-    status.textContent = "Native HLS: manual quality option সীমিত হতে পারে।";
-  } else {
-    loading = false;
-    status.textContent = "এই ব্রাউজারে HLS playback সমর্থিত নয়।";
-  }
+function play(i){
+ if(!channels.length)return;
+ current=(i+channels.length)%channels.length;
+ const c=channels[current];
+ document.getElementById('currentName').textContent=c.name;
+ document.getElementById('guideText').textContent=c.name+' selected. Programme schedule is not connected yet.';
+ status.textContent='Connecting...';
+ if(hls){hls.destroy();hls=null}
+ video.pause();video.removeAttribute('src');video.load();
+ if(window.Hls&&Hls.isSupported()&&/\.m3u8($|\?)/i.test(c.url)){
+  hls=new Hls();
+  hls.loadSource(c.url);
+  hls.attachMedia(video);
+  hls.on(Hls.Events.MANIFEST_PARSED,()=>video.play().then(()=>status.textContent='Live: '+c.name).catch(()=>status.textContent='Press Play to start'));
+  hls.on(Hls.Events.ERROR,(_,d)=>{if(d.fatal)status.textContent='Stream unavailable or blocked'});
+ }else{
+  video.src=c.url;
+  video.play().then(()=>status.textContent='Live: '+c.name).catch(()=>status.textContent='Press Play to start');
+ }
 }
-
-quality.onchange = () => {
-  if (hls) {
-    hls.currentLevel = Number(quality.value);
-  }
-};
-
-document.getElementById("prev").onclick = () =>
-  playChannel(current - 1);
-
-document.getElementById("next").onclick = () =>
-  playChannel(current + 1);
-
-document.getElementById("play").onclick = () => {
-  if (video.paused) video.play().catch(() => {});
-  else video.pause();
-};
-
-video.onplay = () => {
-  document.getElementById("play").textContent = "⏸ Pause";
-};
-
-video.onpause = () => {
-  document.getElementById("play").textContent = "▶ Play";
-};
-
-document.getElementById("full").onclick = () => {
-  if (video.requestFullscreen) video.requestFullscreen();
-  else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
-};
-
-document.addEventListener("keydown", e => {
-  if (e.target.matches("select,input")) return;
-
-  if (["MediaTrackNext", "PageDown"].includes(e.key)) {
-    e.preventDefault();
-    playChannel(current + 1);
-  } else if (["MediaTrackPrevious", "PageUp"].includes(e.key)) {
-    e.preventDefault();
-    playChannel(current - 1);
-  } else if (e.key === "ArrowRight" && e.altKey) {
-    e.preventDefault();
-    playChannel(current + 1);
-  } else if (e.key === "ArrowLeft" && e.altKey) {
-    e.preventDefault();
-    playChannel(current - 1);
-  }
+document.getElementById('prev').onclick=()=>play(current<=0?channels.length-1:current-1);
+document.getElementById('next').onclick=()=>play(current+1);
+search.addEventListener('input',render);
+document.getElementById('categories').addEventListener('click',e=>{
+ const b=e.target.closest('[data-cat]');if(!b)return;
+ category=b.dataset.cat;
+ document.querySelectorAll('[data-cat]').forEach(x=>x.classList.toggle('active',x===b));
+ render();
 });
-
-init();
+document.addEventListener('keydown',e=>{
+ if(e.target===search&&e.key!=='Escape')return;
+ const els=[...document.querySelectorAll('button,input')].filter(x=>x.offsetParent!==null);
+ const i=els.indexOf(document.activeElement);
+ if(['ArrowRight','ArrowDown','ArrowLeft','ArrowUp'].includes(e.key)&&els.length){
+  e.preventDefault();
+  const d=['ArrowRight','ArrowDown'].includes(e.key)?1:-1;
+  els[(i+d+els.length)%els.length].focus();
+ }else if(e.key==='ChannelUp')play(current+1);
+ else if(e.key==='ChannelDown')play(current<=0?channels.length-1:current-1);
+ else if(e.key==='Escape')search.blur();
+});
+fetch('./channels.json',{cache:'no-store'})
+.then(r=>{if(!r.ok)throw Error('channels.json missing');return r.json()})
+.then(data=>{
+ if(!Array.isArray(data.channels))throw Error('Invalid JSON format');
+ channels=data.channels.filter(c=>c.name&&c.url);
+ render();status.textContent='Choose a channel to start';
+})
+.catch(()=>{
+ document.getElementById('count').textContent='0 channels';
+ status.textContent='Could not load channels.json';
+ grid.innerHTML='<p style="color:#aab2c2">Upload channels.json beside index.html in your GitHub repository.</p>';
+});
 </script>
 </body>
 </html>
