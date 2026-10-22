@@ -120,5 +120,195 @@
 "logo": "https://s3.aynaott.com/storage/83796140b05a889d37c4c98ed8c43821",
 "url": "https://tvsen6.aynaott.com/satv/index.m3u8"
 }
+  {
+"channels": [
+{
+"name": "Independent TV",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1704/output/index.m3u8"
+},
+{
+"name": "Channel 24",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1703/output/index.m3u8"
+},
+{
+"name": "News 24",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1708/output/index.m3u8"
+},
+{
+"name": "Somoy TV",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8"
+},
+{
+"name": "Ekattor TV",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1705/output/index.m3u8"
+},
+{
+"name": "Jamuna TV",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1701/output/index.m3u8"
+},
+{
+"name": "Star News",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1710/output/index.m3u8"
+},
+{
+"name": "DBC News",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1728/output/index.m3u8"
+},
+{
+"name": "ATN News",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1706/output/index.m3u8"
+},
+{
+"name": "Channel I",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1723/output/index.m3u8"
+},
+{
+"name": "Channel 9",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1729/output/index.m3u8"
+},
+{
+"name": "Maasranga TV",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1722/output/index.m3u8"
+},
+{
+"name": "BanglaVision",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1715/output/index.m3u8"
+},
+{
+"name": "NTV",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1716/output/index.m3u8"
+},
+{
+"name": "BTV",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8"
+},
+{
+"name": "Akash DTH 3",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1720/output/index.m3u8"
+},
+{
+"name": "Akash DTH 4",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1713/output/index.m3u8"
+},
+{
+"name": "Islamic TV",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1724/output/index.m3u8"
+},
+{
+"name": "Deepto TV",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1711/output/index.m3u8"
+},
+{
+"name": "Al Jazeera",
+"category": "International",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1721/output/index.m3u8"
+},
+{
+"name": "Akash DTH 1",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1730/output/master.m3u8"
+},
+{
+"name": "Akash DTH 2",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1731/output/master.m3u8"
+},
+{
+"name": "G Series",
+"category": "Entertainment",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://vods2.aynaott.com/gseriesDrama/tracks-v1a1/mono.ts.m3u8"
+},
+{
+"name": "Channel 1 4K",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/channel1bd.stream/tracks-v1a1/mono.m3u8"
+},
+{
+"name": "Channel S UK",
+"category": "International",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/chsukoff.stream/playlist.m3u8"
+},
+{
+"name": "Channel Europe",
+"category": "International",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://stream.channeleuropetvboxlondon.co.uk/live/channeleurope/chunklist_w572284654.m3u8"
+},
+{
+"name": "Ayna TV",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/ayna.stream/tracks-v1a1/mono.m3u8"
+},
+{
+"name": "SRK TV",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://srknowapp.ncare.live/srktvhlswodrm/srktv.stream/playlist.m3u8"
+},
+{
+"name": "Green TV",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/greentv.stream/playlist.m3u8"
+},
+{
+"name": "Rajdhani TV",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://stream.shariarsuvo.com/hls6/rajdhaniweb.m3u8"
+},
+{
+"name": "Jago News 24",
+"category": "Bangla",
+"logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png",
+"url": "https://app.ncare.live/live-orgin/jagonews24.stream/playlist.m3u8"
+}
+]
+}
 ]
 }
