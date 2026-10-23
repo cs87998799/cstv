@@ -4,33 +4,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CS TV - Your Live Television</title>
+<title>CS TV - Live Television</title>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <style>
 :root{--bg:#080d17;--panel:#111a2b;--accent:#16d9a5;--text:#f5f7fb;--muted:#9ba9bf}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;background:#101827;position:sticky;top:0;z-index:20}
+header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:#101827;position:sticky;top:0;z-index:20}
 .brand{font-size:22px;font-weight:800;color:var(--accent)}
 .live{font-size:12px;background:#e32235;padding:5px 9px;border-radius:5px;animation:pulse 1.2s infinite}
 @keyframes pulse{50%{opacity:.45}}
 main{max-width:1400px;margin:auto;padding:14px}
 .player-layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:14px}
 .player-box{position:relative;background:#000;border-radius:12px;overflow:hidden;min-height:220px}
-video{width:100%;height:auto;max-height:72vh;aspect-ratio:16/9;display:block;background:#000;object-fit:contain}
+video,#youtubeFrame{width:100%;aspect-ratio:16/9;max-height:72vh;display:block;background:#000;border:0}
+video{object-fit:contain}
+#youtubeFrame{display:none}
+.player-box.youtube-mode #youtubeFrame{display:block}
+.player-box.youtube-mode video{display:none}
 .player-top{position:absolute;top:10px;left:10px;right:10px;display:flex;align-items:center;justify-content:space-between;z-index:4;pointer-events:none}
-.player-top>*{pointer-events:auto}
 .now-label{background:#101827d9;padding:7px 10px;border-radius:7px;font-size:13px;max-width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .player-controls{position:absolute;bottom:12px;left:12px;right:12px;display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:5;transition:opacity .3s}
-.player-controls button,.btn{background:#202d42;color:#fff;border:1px solid #3a4960;border-radius:8px;padding:10px 12px;cursor:pointer;font-size:14px}
-.player-controls button:hover,.btn:hover{background:#16a982}
+.player-controls button{background:#202d42;color:#fff;border:1px solid #3a4960;border-radius:8px;padding:10px 12px;cursor:pointer}
+.player-controls button:hover{background:#16a982}
 .player-controls input{width:100px;accent-color:var(--accent)}
+.player-box.youtube-mode #playBtn,.player-box.youtube-mode #muteBtn,.player-box.youtube-mode #volume{display:none}
+.player-box:fullscreen video,.player-box:fullscreen #youtubeFrame{width:100vw;height:100vh;max-height:none;aspect-ratio:auto}
+.player-box:fullscreen .player-controls{bottom:18px}
 .player-box.controls-hidden .player-controls,.player-box.controls-hidden .player-top{opacity:0;pointer-events:none}
 .player-box.controls-hidden:hover .player-controls,.player-box.controls-hidden:hover .player-top{opacity:1;pointer-events:auto}
-.player-box:fullscreen video{width:100vw;height:100vh;max-height:none;aspect-ratio:auto}
-.player-box:fullscreen .player-controls{left:12px;right:12px;bottom:18px}
-.player-box:fullscreen .player-top{top:18px}
-.popup{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#101827ed;border:1px solid #ffffff38;padding:15px 22px;border-radius:12px;text-align:center;z-index:8;max-width:85%;pointer-events:none;opacity:0;transition:opacity .25s}
+.popup{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#101827ed;border:1px solid #ffffff38;padding:15px 22px;border-radius:12px;text-align:center;z-index:8;pointer-events:none;opacity:0;transition:opacity .25s;max-width:85%}
 .popup.show{opacity:1}
 .popup strong{display:block;font-size:18px;margin-bottom:5px}
 .popup small{color:#c6d1e2}
@@ -52,7 +55,7 @@ h2{font-size:17px;margin:4px 0 12px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:10px}
 .grid .channel-card{min-height:70px}
 .empty{color:var(--muted);padding:16px}
-@media(max-width:850px){.player-layout{grid-template-columns:1fr}.sidebar{order:2}.channel-list{max-height:260px}.grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))}}
+@media(max-width:850px){.player-layout{grid-template-columns:1fr}.channel-list{max-height:260px}.grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))}}
 @media(max-width:480px){main{padding:8px}header{padding:12px}.brand{font-size:19px}.player-controls{gap:5px;bottom:7px}.player-controls button{padding:8px;font-size:12px}.player-controls input{width:70px}.player-box{border-radius:8px}}
 </style>
 </head>
@@ -67,6 +70,10 @@ h2{font-size:17px;margin:4px 0 12px}
     <section>
       <div class="player-box" id="playerBox">
         <video id="video" controls playsinline autoplay></video>
+        <iframe id="youtubeFrame" title="YouTube Live Player"
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"></iframe>
         <div class="player-top">
           <span class="now-label" id="nowLabel">CS TV • Select a channel</span>
           <span class="live">● LIVE</span>
@@ -112,143 +119,153 @@ h2{font-size:17px;margin:4px 0 12px}
 </main>
 
 <script>
-const video = document.getElementById('video');
-const playerBox = document.getElementById('playerBox');
-const statusEl = document.getElementById('status');
-const nowLabel = document.getElementById('nowLabel');
-const popup = document.getElementById('popup');
-const popupName = document.getElementById('popupName');
-const popupMessage = document.getElementById('popupMessage');
+const video=document.getElementById('video');
+const playerBox=document.getElementById('playerBox');
+const youtubeFrame=document.getElementById('youtubeFrame');
+const statusEl=document.getElementById('status');
+const nowLabel=document.getElementById('nowLabel');
+const popup=document.getElementById('popup');
+const popupName=document.getElementById('popupName');
+const popupMessage=document.getElementById('popupMessage');
 
-let channels = [];
-let currentIndex = -1;
-let activeCategory = 'All';
-let hls = null;
-let popupTimer = null;
-let controlsTimer = null;
+let channels=[],currentIndex=-1,activeCategory='All',hls=null;
+let popupTimer=null,controlsTimer=null;
 
-function readStore(key) {
-  try { return JSON.parse(localStorage.getItem(key) || '[]'); }
-  catch (e) { return []; }
+function readStore(key){
+  try{return JSON.parse(localStorage.getItem(key)||'[]')}
+  catch(e){return []}
 }
-function writeStore(key, value) {
-  try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
+function writeStore(key,value){
+  try{localStorage.setItem(key,JSON.stringify(value))}catch(e){}
 }
-let favourites = readStore('cstv-favourites');
-let recentlyWatched = readStore('cstv-recent');
+let favourites=readStore('cstv-favourites');
+let recentlyWatched=readStore('cstv-recent');
 
-function channelName(c) { return c.name || c.title || c.channel || 'Unnamed Channel'; }
-function channelUrl(c) { return c.url || c.stream || c.link || c.src || ''; }
-function channelLogo(c) { return c.logo || c.icon || c.image || ''; }
-function channelCategory(c) {
-  const v = c.category || c.group || c.genre || c['group-title'] || c.groupTitle || c.type;
-  return Array.isArray(v) ? v.join(', ') : (v || 'Other');
+function channelName(c){return c.name||c.title||c.channel||'Unnamed Channel'}
+function channelUrl(c){return c.url||c.stream||c.link||c.src||''}
+function channelLogo(c){return c.logo||c.icon||c.image||''}
+function channelCategory(c){
+  const v=c.category||c.group||c.genre||c['group-title']||c.groupTitle||c.type;
+  return Array.isArray(v)?v.join(', '):(v||'Other');
 }
-function showStatus(message) { statusEl.textContent = message; }
-
-function showPopup(c, message) {
-  popupName.textContent = channelName(c);
-  popupMessage.textContent = message || 'Now Playing';
+function showStatus(message){statusEl.textContent=message}
+function showPopup(c,message){
+  popupName.textContent=channelName(c);
+  popupMessage.textContent=message||'Now Playing';
   popup.classList.add('show');
   clearTimeout(popupTimer);
-  popupTimer = setTimeout(() => popup.classList.remove('show'), 3000);
+  popupTimer=setTimeout(()=>popup.classList.remove('show'),3000);
 }
-
-function stopHls() {
-  if (hls) {
-    hls.destroy();
-    hls = null;
-  }
+function stopHls(){
+  if(hls){hls.destroy();hls=null}
 }
-function addRecent(c) {
-  const url = channelUrl(c);
-  recentlyWatched = [url, ...recentlyWatched.filter(x => x !== url)].slice(0, 12);
-  writeStore('cstv-recent', recentlyWatched);
+function isFavourite(c){return favourites.includes(channelUrl(c))}
+function addRecent(c){
+  const url=channelUrl(c);
+  recentlyWatched=[url,...recentlyWatched.filter(x=>x!==url)].slice(0,12);
+  writeStore('cstv-recent',recentlyWatched);
   renderCollections();
 }
-function isFavourite(c) { return favourites.includes(channelUrl(c)); }
-function toggleFavourite(c) {
-  const url = channelUrl(c);
-  favourites = isFavourite(c) ? favourites.filter(x => x !== url) : [url, ...favourites];
-  writeStore('cstv-favourites', favourites);
+function toggleFavourite(c){
+  const url=channelUrl(c);
+  favourites=isFavourite(c)?favourites.filter(x=>x!==url):[url,...favourites];
+  writeStore('cstv-favourites',favourites);
   renderAll();
 }
 
-function playChannel(index) {
-  if (!channels.length) return;
-  currentIndex = (index + channels.length) % channels.length;
-  const c = channels[currentIndex];
-  const url = channelUrl(c);
-  if (!url) {
-    showStatus('এই চ্যানেলের stream URL পাওয়া যায়নি।');
-    return;
-  }
+function playChannel(index){
+  if(!channels.length)return;
+  currentIndex=(index+channels.length)%channels.length;
+  const c=channels[currentIndex];
+  const url=channelUrl(c);
+  if(!url){showStatus('এই চ্যানেলের stream URL পাওয়া যায়নি।');return}
 
   stopHls();
   video.pause();
   video.removeAttribute('src');
   video.load();
-  nowLabel.textContent = '📺 ' + channelName(c);
-  document.querySelectorAll('.channel-card').forEach(el => el.classList.toggle('active', el.dataset.url === url));
 
-  if (url.includes('.m3u8') && window.Hls && Hls.isSupported()) {
-    hls = new Hls();
+  /* YouTube URL হলে Embed Player চালু হবে */
+  const youtubeMatch=url.match(
+    /(?:youtube\.com\/(?:live\/|watch\?v=|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/
+  );
+
+  if(youtubeMatch){
+    playerBox.classList.add('youtube-mode');
+    youtubeFrame.src='https://www.youtube-nocookie.com/embed/'+
+      youtubeMatch[1]+'?autoplay=1&playsinline=1&rel=0';
+    nowLabel.textContent='📺 '+channelName(c);
+    showStatus('YouTube Player: '+channelName(c));
+    showPopup(c,'YouTube Live');
+    addRecent(c);
+    renderAll();
+    return;
+  }
+
+  /* অন্য চ্যানেলের জন্য আগের ভিডিও প্লেয়ার */
+  youtubeFrame.removeAttribute('src');
+  playerBox.classList.remove('youtube-mode');
+  nowLabel.textContent='📺 '+channelName(c);
+
+  if(url.includes('.m3u8')&&window.Hls&&Hls.isSupported()){
+    hls=new Hls();
     hls.loadSource(url);
     hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED, () => {
-      video.play().then(() => {
-        showStatus('Playing: ' + channelName(c));
-        showPopup(c, 'Now Playing');
-      }).catch(() => {
-        showStatus('Play চাপুন: ' + channelName(c));
-        showPopup(c, 'Play চাপুন');
+    hls.on(Hls.Events.MANIFEST_PARSED,()=>{
+      video.play().then(()=>{
+        showStatus('Playing: '+channelName(c));
+        showPopup(c,'Now Playing');
+      }).catch(()=>{
+        showStatus('Play চাপুন: '+channelName(c));
+        showPopup(c,'Play চাপুন');
       });
     });
-    hls.on(Hls.Events.ERROR, (event, data) => {
-      if (data.fatal) showStatus('Stream error — অন্য চ্যানেল চেষ্টা করুন।');
+    hls.on(Hls.Events.ERROR,(event,data)=>{
+      if(data.fatal)showStatus('Stream error — অন্য চ্যানেল চেষ্টা করুন।');
     });
-  } else {
-    video.src = url;
+  }else{
+    video.src=url;
     video.load();
-    video.play().then(() => {
-      showStatus('Playing: ' + channelName(c));
-      showPopup(c, 'Now Playing');
-    }).catch(() => {
-      showStatus('Play চাপুন: ' + channelName(c));
-      showPopup(c, 'Play চাপুন');
+    video.play().then(()=>{
+      showStatus('Playing: '+channelName(c));
+      showPopup(c,'Now Playing');
+    }).catch(()=>{
+      showStatus('Play চাপুন: '+channelName(c));
+      showPopup(c,'Play চাপুন');
     });
   }
   addRecent(c);
   renderAll();
 }
 
-function makeCard(c, index) {
-  const card = document.createElement('div');
-  card.className = 'channel-card' + (channelUrl(c) === channelUrl(channels[currentIndex] || {}) ? ' active' : '');
-  card.dataset.url = channelUrl(c);
+function makeCard(c,index){
+  const card=document.createElement('div');
+  card.className='channel-card'+(channelUrl(c)===channelUrl(channels[currentIndex]||{})?' active':'');
+  card.dataset.url=channelUrl(c);
 
-  const logo = document.createElement('img');
-  logo.alt = '';
-  logo.loading = 'lazy';
-  logo.src = channelLogo(c) || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="48" height="42"><rect width="100%" height="100%" fill="#192438"/><text x="50%" y="55%" fill="white" text-anchor="middle" font-size="18">TV</text></svg>');
-  logo.onerror = () => { logo.style.visibility = 'hidden'; };
+  const logo=document.createElement('img');
+  logo.alt='';
+  logo.loading='lazy';
+  logo.src=channelLogo(c)||'data:image/svg+xml,'+encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="42"><rect width="100%" height="100%" fill="#192438"/><text x="50%" y="55%" fill="white" text-anchor="middle" font-size="18">TV</text></svg>'
+  );
+  logo.onerror=()=>{logo.style.visibility='hidden'};
 
-  const details = document.createElement('div');
-  details.className = 'details';
-  const name = document.createElement('strong');
-  name.textContent = channelName(c);
-  const category = document.createElement('small');
-  category.textContent = channelCategory(c);
-  details.append(name, category);
+  const details=document.createElement('div');
+  details.className='details';
+  const name=document.createElement('strong');
+  name.textContent=channelName(c);
+  const category=document.createElement('small');
+  category.textContent=channelCategory(c);
+  details.append(name,category);
+  card.append(logo,details);
+  card.addEventListener('click',()=>playChannel(index));
 
-  card.append(logo, details);
-  card.addEventListener('click', () => playChannel(index));
-
-  const fav = document.createElement('button');
-  fav.className = 'fav';
-  fav.textContent = isFavourite(c) ? '★' : '☆';
-  fav.title = 'Toggle favourite';
-  fav.addEventListener('click', e => {
+  const fav=document.createElement('button');
+  fav.className='fav';
+  fav.textContent=isFavourite(c)?'★':'☆';
+  fav.title='Toggle favourite';
+  fav.addEventListener('click',e=>{
     e.stopPropagation();
     toggleFavourite(c);
   });
@@ -256,131 +273,122 @@ function makeCard(c, index) {
   return card;
 }
 
-function renderSide() {
-  const side = document.getElementById('sideList');
+function renderSide(){
+  const side=document.getElementById('sideList');
   side.replaceChildren();
-  channels.forEach((c, i) => side.appendChild(makeCard(c, i)));
+  channels.forEach((c,i)=>side.appendChild(makeCard(c,i)));
 }
-
-function renderCategories() {
-  const root = document.getElementById('categories');
+function renderCategories(){
+  const root=document.getElementById('categories');
   root.replaceChildren();
-  const cats = ['All', ...new Set(channels.map(channelCategory))];
-  cats.forEach(cat => {
-    const button = document.createElement('button');
-    button.className = 'category' + (cat === activeCategory ? ' active' : '');
-    button.textContent = cat;
-    button.addEventListener('click', () => {
-      activeCategory = cat;
+  const cats=['All',...new Set(channels.map(channelCategory))];
+  cats.forEach(cat=>{
+    const button=document.createElement('button');
+    button.className='category'+(cat===activeCategory?' active':'');
+    button.textContent=cat;
+    button.addEventListener('click',()=>{
+      activeCategory=cat;
       renderCategories();
       renderAllChannels();
     });
     root.appendChild(button);
   });
 }
-
-function renderAllChannels() {
-  const root = document.getElementById('allChannels');
+function renderAllChannels(){
+  const root=document.getElementById('allChannels');
   root.replaceChildren();
-  channels.forEach((c, i) => {
-    if (activeCategory !== 'All' && channelCategory(c) !== activeCategory) return;
-    root.appendChild(makeCard(c, i));
+  channels.forEach((c,i)=>{
+    if(activeCategory!=='All'&&channelCategory(c)!==activeCategory)return;
+    root.appendChild(makeCard(c,i));
   });
 }
-
-function renderCollections() {
-  const favRoot = document.getElementById('favourites');
-  const recentRoot = document.getElementById('recent');
+function renderCollections(){
+  const favRoot=document.getElementById('favourites');
+  const recentRoot=document.getElementById('recent');
   favRoot.replaceChildren();
   recentRoot.replaceChildren();
 
-  channels.forEach((c, i) => {
-    if (isFavourite(c)) favRoot.appendChild(makeCard(c, i));
+  channels.forEach((c,i)=>{
+    if(isFavourite(c))favRoot.appendChild(makeCard(c,i));
   });
-  recentlyWatched.forEach(url => {
-    const i = channels.findIndex(c => channelUrl(c) === url);
-    if (i >= 0) recentRoot.appendChild(makeCard(channels[i], i));
+  recentlyWatched.forEach(url=>{
+    const i=channels.findIndex(c=>channelUrl(c)===url);
+    if(i>=0)recentRoot.appendChild(makeCard(channels[i],i));
   });
-
-  if (!favRoot.children.length) favRoot.innerHTML = '<div class="empty">এখনও Favourite যোগ করা হয়নি।</div>';
-  if (!recentRoot.children.length) recentRoot.innerHTML = '<div class="empty">এখনও কোনো চ্যানেল চালানো হয়নি।</div>';
+  if(!favRoot.children.length)favRoot.innerHTML='<div class="empty">এখনও Favourite যোগ করা হয়নি।</div>';
+  if(!recentRoot.children.length)recentRoot.innerHTML='<div class="empty">এখনও কোনো চ্যানেল চালানো হয়নি।</div>';
 }
-
-function renderAll() {
+function renderAll(){
   renderSide();
   renderCategories();
   renderAllChannels();
   renderCollections();
 }
 
-document.getElementById('playBtn').addEventListener('click', () => {
-  if (video.paused) {
-    video.play().catch(() => showStatus('Play চাপুন অথবা অন্য চ্যানেল বাছুন।'));
-  } else {
-    video.pause();
-  }
+document.getElementById('playBtn').addEventListener('click',()=>{
+  if(video.paused)video.play().catch(()=>showStatus('Play চাপুন অথবা অন্য চ্যানেল বাছুন।'));
+  else video.pause();
 });
-document.getElementById('prevBtn').addEventListener('click', () => playChannel(currentIndex - 1));
-document.getElementById('nextBtn').addEventListener('click', () => playChannel(currentIndex + 1));
-document.getElementById('muteBtn').addEventListener('click', () => {
-  video.muted = !video.muted;
-  document.getElementById('muteBtn').textContent = video.muted ? '🔇' : '🔊';
+document.getElementById('prevBtn').addEventListener('click',()=>playChannel(currentIndex-1));
+document.getElementById('nextBtn').addEventListener('click',()=>playChannel(currentIndex+1));
+document.getElementById('muteBtn').addEventListener('click',()=>{
+  video.muted=!video.muted;
+  document.getElementById('muteBtn').textContent=video.muted?'🔇':'🔊';
 });
-document.getElementById('volume').addEventListener('input', e => {
-  video.volume = Number(e.target.value);
-  video.muted = video.volume === 0;
-  document.getElementById('muteBtn').textContent = video.muted ? '🔇' : '🔊';
+document.getElementById('volume').addEventListener('input',e=>{
+  video.volume=Number(e.target.value);
+  video.muted=video.volume===0;
+  document.getElementById('muteBtn').textContent=video.muted?'🔇':'🔊';
 });
-document.getElementById('fullBtn').addEventListener('click', async () => {
-  try {
-    if (!document.fullscreenElement) await playerBox.requestFullscreen();
+document.getElementById('fullBtn').addEventListener('click',async()=>{
+  try{
+    if(!document.fullscreenElement)await playerBox.requestFullscreen();
     else await document.exitFullscreen();
-  } catch (e) {
-    showStatus('এই ডিভাইসে fullscreen বোতাম বা video fullscreen ব্যবহার করুন।');
+  }catch(e){
+    showStatus('এই ডিভাইসে fullscreen সমর্থিত নয়।');
   }
 });
-video.addEventListener('play', () => document.getElementById('playBtn').textContent = '⏸');
-video.addEventListener('pause', () => document.getElementById('playBtn').textContent = '▶');
+video.addEventListener('play',()=>document.getElementById('playBtn').textContent='⏸');
+video.addEventListener('pause',()=>document.getElementById('playBtn').textContent='▶');
 
-function revealControls() {
+function revealControls(){
   playerBox.classList.remove('controls-hidden');
   clearTimeout(controlsTimer);
-  controlsTimer = setTimeout(() => {
-    if (!video.paused) playerBox.classList.add('controls-hidden');
-  }, 5000);
+  controlsTimer=setTimeout(()=>{
+    if(!video.paused)playerBox.classList.add('controls-hidden');
+  },5000);
 }
-playerBox.addEventListener('mousemove', revealControls);
-playerBox.addEventListener('touchstart', () => {
+playerBox.addEventListener('mousemove',revealControls);
+playerBox.addEventListener('touchstart',()=>{
   revealControls();
-  const c = channels[currentIndex];
-  if (c) showPopup(c, 'Now Playing');
-}, {passive:true});
-playerBox.addEventListener('click', e => {
-  if (e.target.closest('button,input')) return;
-  const c = channels[currentIndex];
-  if (c) showPopup(c, 'Now Playing');
+  const c=channels[currentIndex];
+  if(c)showPopup(c,'Now Playing');
+},{passive:true});
+playerBox.addEventListener('click',e=>{
+  if(e.target.closest('button,input'))return;
+  const c=channels[currentIndex];
+  if(c)showPopup(c,playerBox.classList.contains('youtube-mode')?'YouTube Live':'Now Playing');
   revealControls();
 });
-playerBox.addEventListener('mouseleave', () => {
-  if (!video.paused) playerBox.classList.add('controls-hidden');
+playerBox.addEventListener('mouseleave',()=>{
+  if(!video.paused)playerBox.classList.add('controls-hidden');
 });
 
-async function loadChannels() {
-  try {
-    const response = await fetch('channels.json', {cache:'no-store'});
-    if (!response.ok) throw new Error('channels.json not found');
-    const data = await response.json();
-    channels = Array.isArray(data) ? data : (data.channels || []);
-    channels = channels.filter(c => c && channelUrl(c));
-    if (!channels.length) {
+async function loadChannels(){
+  try{
+    const response=await fetch('channels.json',{cache:'no-store'});
+    if(!response.ok)throw new Error('channels.json not found');
+    const data=await response.json();
+    channels=Array.isArray(data)?data:(data.channels||[]);
+    channels=channels.filter(c=>c&&channelUrl(c));
+    if(!channels.length){
       showStatus('channels.json-এ কোনো বৈধ channel URL পাওয়া যায়নি।');
       return;
     }
     renderAll();
-    showStatus(channels.length + 'টি চ্যানেল লোড হয়েছে।');
-    const randomIndex = Math.floor(Math.random() * channels.length);
-    playChannel(randomIndex);
-  } catch (error) {
+    showStatus(channels.length+'টি চ্যানেল লোড হয়েছে।');
+    playChannel(Math.floor(Math.random()*channels.length));
+  }catch(error){
     showStatus('channels.json লোড হয়নি। ফাইলের নাম ও JSON format পরীক্ষা করুন।');
     console.error(error);
   }
