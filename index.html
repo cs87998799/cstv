@@ -75,6 +75,13 @@
     .channel-ring:hover {
       transform: translateY(-3px) scale(1.04);
     }
+    /* TV Remote Focus Highlight Style */
+    .tv-focused {
+      outline: 4px solid #ff1f8e !important;
+      transform: scale(1.06) !important;
+      box-shadow: 0 0 25px rgba(255, 31, 142, 0.8) !important;
+      z-index: 40;
+    }
     .player-popup-drawer {
       transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
     }
@@ -91,11 +98,10 @@
 </head>
 <body class="min-h-screen bg-[#0b0714] text-white flex flex-col justify-between pb-20">
 
-  <!-- TOP STICKY NAVBAR (CS Tv Branding) -->
+  <!-- TOP STICKY NAVBAR -->
   <header class="sticky top-0 z-30 bg-[#0b0714]/95 backdrop-blur-md border-b border-white/5">
     <div class="max-w-5xl mx-auto px-4 pt-3 pb-2 flex items-center justify-between gap-2">
-      <!-- Brand Logo: CS Tv -->
-      <button id="brandLogoBtn" class="flex items-center gap-2 focus:outline-none group">
+      <button id="brandLogoBtn" class="tv-focusable flex items-center gap-2 focus:outline-none group rounded-xl p-1">
         <div class="w-9 h-9 rounded-xl toffee-gradient flex items-center justify-center shadow-lg shadow-pink-500/25 group-active:scale-95 transition">
           <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
             <path d="M4 6.5C4 5.12 5.12 4 6.5 4h11C18.88 4 20 5.12 20 6.5v11c0 1.38-1.12 2.5-2.5 2.5h-11C5.12 20 4 18.88 4 17.5v-11zm6 2.5v6l5-3-5-3z"/>
@@ -103,33 +109,31 @@
         </div>
         <div class="flex flex-col text-left">
           <span class="font-extrabold tracking-wider text-lg leading-none bg-gradient-to-r from-pink-400 via-fuchsia-300 to-white bg-clip-text text-transparent">CS Tv</span>
-          <span id="jsonStatusLabel" class="text-[9px] text-emerald-400 font-semibold tracking-tight">● channels.json ready</span>
+          <span id="platformModeLabel" class="text-[9px] text-emerald-400 font-semibold tracking-tight">● Mobile / TV Ready</span>
         </div>
       </button>
 
-      <!-- Right Actions: Subscribe + Sign In / User Profile -->
       <div class="flex items-center gap-2.5">
-        <button id="subscribeTopBtn" class="toffee-gradient text-white text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-md shadow-pink-600/30 active:scale-95 transition">
+        <button id="subscribeTopBtn" class="tv-focusable toffee-gradient text-white text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-md shadow-pink-600/30 active:scale-95 transition">
           <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
           </svg>
           <span id="subscribeTopText">Subscribe</span>
         </button>
 
-        <button id="signInTopBtn" class="border border-white/60 hover:border-pink-400 text-white text-xs sm:text-sm font-medium px-3.5 py-1.5 rounded-full transition active:scale-95 flex items-center gap-1.5">
+        <button id="signInTopBtn" class="tv-focusable border border-white/60 hover:border-pink-400 text-white text-xs sm:text-sm font-medium px-3.5 py-1.5 rounded-full transition active:scale-95 flex items-center gap-1.5">
           <span id="signInTopText">Sign In</span>
         </button>
       </div>
     </div>
 
-    <!-- Dynamic Horizontal Category Bar (Populated from channels.json) -->
     <nav id="topCategoryNav" class="max-w-5xl mx-auto px-4 py-2 flex items-center gap-6 overflow-x-auto no-scrollbar text-sm font-medium">
-      <button data-cat="all" class="cat-tab text-pink-400 font-bold border-b-2 border-pink-500 pb-1 whitespace-nowrap transition">Live TV</button>
-      <button data-cat="Sports" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">Sports</button>
-      <button data-cat="Drama" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">Drama</button>
-      <button data-cat="Movies" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">Movies</button>
-      <button data-cat="News" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">News</button>
-      <button data-cat="Web Series" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">Web Series</button>
+      <button data-cat="all" class="tv-focusable cat-tab text-pink-400 font-bold border-b-2 border-pink-500 pb-1 whitespace-nowrap transition px-2 py-1 rounded">Live TV</button>
+      <button data-cat="Sports" class="tv-focusable cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition px-2 py-1 rounded">Sports</button>
+      <button data-cat="Drama" class="tv-focusable cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition px-2 py-1 rounded">Drama</button>
+      <button data-cat="Movies" class="tv-focusable cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition px-2 py-1 rounded">Movies</button>
+      <button data-cat="News" class="tv-focusable cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition px-2 py-1 rounded">News</button>
+      <button data-cat="Web Series" class="tv-focusable cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition px-2 py-1 rounded">Web Series</button>
     </nav>
   </header>
 
@@ -139,11 +143,10 @@
     <!-- HOME VIEW -->
     <section id="viewHome" class="space-y-6 pb-6">
 
-      <!-- HERO SLIDER (CS Tv Banner + Featured Channels from channels.json) -->
+      <!-- HERO SLIDER -->
       <div class="relative overflow-hidden select-none">
         <div id="heroTrack" class="flex overflow-x-auto snap-x-mandatory no-scrollbar scroll-smooth">
           
-          <!-- Slide 1: CS Tv 1000+ Content Neon Banner -->
           <div class="min-w-full snap-center-item hero-bg-1 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
             <div class="max-w-md mx-auto flex flex-col items-center">
               <h2 class="text-3xl sm:text-4xl font-extrabold text-amber-400 drop-shadow-[0_2px_10px_rgba(251,191,36,0.6)] tracking-tight">১০০০+</h2>
@@ -157,18 +160,14 @@
                   <div class="h-10 rounded bg-gradient-to-br from-rose-500 to-orange-500 flex items-center justify-center text-[10px] font-bold">LIVE</div>
                   <div class="h-10 rounded bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-[10px] font-bold">SPORTS</div>
                   <div class="h-10 rounded bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-[10px] font-bold">CRICKET</div>
-                  <div class="h-10 rounded bg-gradient-to-br from-amber-500 to-red-600 flex items-center justify-center text-[10px] font-bold">DRAMA</div>
-                  <div class="h-10 rounded bg-gradient-to-br from-fuchsia-500 to-purple-800 flex items-center justify-center text-[10px] font-bold">MOVIES</div>
-                  <div class="h-10 rounded bg-gradient-to-br from-cyan-500 to-blue-700 flex items-center justify-center text-[10px] font-bold">NEWS</div>
                 </div>
-                <button data-play-index="0" class="hero-watch-btn mt-3 toffee-gradient text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
+                <button data-play-index="0" class="tv-focusable hero-watch-btn mt-3 toffee-gradient text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
                   <span>▶ এখনই দেখুন</span>
                 </button>
               </div>
             </div>
           </div>
 
-          <!-- Slide 2: Featured Channel 1 from channels.json -->
           <div class="min-w-full snap-center-item hero-bg-2 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
             <div class="max-w-md mx-auto flex flex-col items-center">
               <span class="px-3 py-0.5 rounded-full bg-red-600 text-white text-[11px] font-bold tracking-wider uppercase flex items-center gap-1.5">
@@ -176,73 +175,37 @@
               </span>
               <h2 id="heroSlide2Title" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Live Sports & TV</h2>
               <p id="heroSlide2Sub" class="text-xs sm:text-sm text-sky-200 mt-1">Streaming directly from channels.json</p>
-              <div id="heroSlide2Card" class="mt-4 w-64 h-36 rounded-2xl bg-gradient-to-r from-blue-900/80 via-slate-900 to-rose-900/80 border border-sky-400/30 flex items-center justify-around p-4 shadow-xl">
-                <!-- Populated from channels.json -->
-              </div>
-              <button data-play-index="0" class="hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
+              <div id="heroSlide2Card" class="mt-4 w-64 h-36 rounded-2xl bg-gradient-to-r from-blue-900/80 via-slate-900 to-rose-900/80 border border-sky-400/30 flex items-center justify-around p-4 shadow-xl"></div>
+              <button data-play-index="0" class="tv-focusable hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
                 ▶ Watch Live Stream
               </button>
             </div>
           </div>
 
-          <!-- Slide 3: Featured Channel 2 from channels.json -->
-          <div class="min-w-full snap-center-item hero-bg-4 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
-            <div class="max-w-md mx-auto flex flex-col items-center">
-              <span class="px-3 py-0.5 rounded-full bg-emerald-600 text-white text-[11px] font-bold tracking-wider uppercase">CS Tv EXCLUSIVE</span>
-              <h2 id="heroSlide3Title" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Full HD Channels</h2>
-              <p id="heroSlide3Sub" class="text-xs sm:text-sm text-emerald-200 mt-1">Zero Buffering • Non-Stop Entertainment</p>
-              <div id="heroSlide3Card" class="mt-4 w-64 h-36 rounded-2xl bg-gradient-to-r from-emerald-900/80 via-slate-900 to-amber-900/80 border border-emerald-400/30 flex items-center justify-around p-4 shadow-xl">
-                <!-- Populated from channels.json -->
-              </div>
-              <button data-play-index="1" class="hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
-                ▶ Watch Channel Now
-              </button>
-            </div>
-          </div>
-
         </div>
 
-        <!-- Left / Right Slide Arrows -->
-        <button id="heroPrevBtn" aria-label="Previous Slide" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/15">
-          ‹
-        </button>
-        <button id="heroNextBtn" aria-label="Next Slide" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/15">
-          ›
-        </button>
-
-        <!-- Slider Pagination Dots -->
-        <div id="heroDots" class="flex items-center justify-center gap-2 mt-1">
-          <button data-slide="0" class="hero-dot w-5 h-2 rounded-full bg-white transition-all"></button>
-          <button data-slide="1" class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-all"></button>
-          <button data-slide="2" class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-all"></button>
-        </div>
+        <button id="heroPrevBtn" aria-label="Previous Slide" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/15">‹</button>
+        <button id="heroNextBtn" aria-label="Next Slide" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/15">›</button>
       </div>
 
-      <!-- LIVE TV CIRCULAR HORIZONTAL SLIDER (From channels.json) -->
+      <!-- LIVE TV CIRCULAR HORIZONTAL SLIDER -->
       <div class="px-4">
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2">
             <h3 class="text-base sm:text-lg font-bold tracking-tight text-white">Live TV Channels</h3>
             <span id="totalChannelsBadge" class="text-[11px] px-2 py-0.5 rounded-full bg-pink-500/20 text-pink-300 font-semibold">0</span>
           </div>
-          <button id="viewAllChannelsBtn" class="text-xs font-semibold text-slate-300 hover:text-pink-400 flex items-center gap-1">
+          <button id="viewAllChannelsBtn" class="tv-focusable text-xs font-semibold text-slate-300 hover:text-pink-400 flex items-center gap-1 px-2 py-1 rounded">
             <span>View All</span>
             <span>›</span>
           </button>
         </div>
 
-        <!-- Circular Channels Track -->
-        <div id="liveTvCirclesTrack" class="flex items-center gap-4 overflow-x-auto no-scrollbar snap-x-mandatory py-2">
-          <!-- Populated dynamically from channels.json -->
-        </div>
+        <div id="liveTvCirclesTrack" class="flex items-center gap-4 overflow-x-auto no-scrollbar snap-x-mandatory py-2"></div>
       </div>
 
-      <!-- DYNAMIC CATEGORY SECTIONS GENERATED FROM channels.json -->
-      <div id="dynamicCategorySections" class="space-y-6">
-        <!-- Each category from channels.json gets its own horizontal scrolling row -->
-      </div>
+      <div id="dynamicCategorySections" class="space-y-6"></div>
 
-      <!-- LEGACY COMPATIBLE TRACKS (Also populated from channels.json) -->
       <div class="px-4">
         <div class="flex items-center justify-between mb-3">
           <h3 id="row1Title" class="text-base sm:text-lg font-bold tracking-tight text-white">Featured Sports & Live</h3>
@@ -259,159 +222,65 @@
         <div id="saffRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1"></div>
       </div>
 
-      <div class="px-4">
-        <div class="flex items-center justify-between mb-3">
-          <h3 id="row3Title" class="text-base sm:text-lg font-bold tracking-tight text-white">Entertainment, Drama & Movies</h3>
-          <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
-        </div>
-        <div id="dramaRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1"></div>
-      </div>
-
     </section>
 
-    <!-- DISCOVER / ALL CHANNELS VIEW -->
+    <!-- DISCOVER VIEW -->
     <section id="viewDiscover" class="hidden px-4 py-4 space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <h2 class="text-xl font-bold">Discover CS Tv Channels</h2>
         <div class="relative flex-1 max-w-sm">
-          <input id="channelSearchInput" type="text" placeholder="Search any channel from channels.json..." class="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-pink-500" />
+          <input id="channelSearchInput" type="text" placeholder="Search any channel..." class="tv-focusable w-full bg-white/10 border border-white/15 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-pink-500" />
         </div>
       </div>
-      <div id="discoverGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 pt-2">
-        <!-- Populated from channels.json -->
-      </div>
+      <div id="discoverGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 pt-2"></div>
     </section>
 
-    <!-- MY LIST / FAVORITES VIEW -->
+    <!-- MY LIST VIEW -->
     <section id="viewMyList" class="hidden px-4 py-4 space-y-4">
       <div class="flex items-center justify-between">
         <h2 class="text-xl font-bold">My Saved Channels</h2>
         <span id="savedCountBadge" class="text-xs px-2.5 py-1 rounded-full bg-pink-500/20 text-pink-300 font-semibold">0 Channels</span>
       </div>
-      <div id="myListGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        <!-- Populated from channels.json -->
-      </div>
+      <div id="myListGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
     </section>
 
-    <!-- SETTINGS & PROFILE VIEW -->
+    <!-- SETTINGS VIEW -->
     <section id="viewSettings" class="hidden px-4 py-4 space-y-5">
       <h2 class="text-xl font-bold">CS Tv Account & App Settings</h2>
-
-      <!-- User Account Card -->
       <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-4">
         <div class="flex items-center gap-3.5">
-          <div id="settingsAvatar" class="w-12 h-12 rounded-full toffee-gradient flex items-center justify-center text-lg font-extrabold">
-            G
-          </div>
+          <div id="settingsAvatar" class="w-12 h-12 rounded-full toffee-gradient flex items-center justify-center text-lg font-extrabold">G</div>
           <div>
             <h3 id="settingsUserName" class="font-bold text-base">Guest User</h3>
             <p id="settingsUserPhone" class="text-xs text-slate-400">Not signed in • Tap Sign In to sync</p>
           </div>
         </div>
-        <button id="settingsAuthActionBtn" class="px-4 py-2 rounded-xl toffee-gradient text-xs font-bold shadow">
-          Sign In
-        </button>
+        <button id="settingsAuthActionBtn" class="tv-focusable px-4 py-2 rounded-xl toffee-gradient text-xs font-bold shadow">Sign In</button>
       </div>
 
-      <!-- GitHub channels.json Source Configuration Card -->
       <div class="p-4 rounded-2xl bg-pink-500/10 border border-pink-500/30 space-y-3">
         <div class="flex items-center justify-between">
           <div>
-            <p class="font-bold text-sm text-white">GitHub `channels.json` Data Source</p>
-            <p id="jsonSourceUrlText" class="text-xs text-slate-300">Auto-loads `./channels.json` from your GitHub folder</p>
+            <p class="font-bold text-sm text-white">GitHub `channels.json` Source</p>
+            <p id="jsonSourceUrlText" class="text-xs text-slate-300">Auto-loads `./channels.json`</p>
           </div>
-          <button id="reloadJsonBtn" class="px-3 py-1.5 rounded-lg toffee-gradient text-xs font-bold shadow">
-            ↻ Reload JSON
-          </button>
+          <button id="reloadJsonBtn" class="tv-focusable px-3 py-1.5 rounded-lg toffee-gradient text-xs font-bold shadow">↻ Reload</button>
         </div>
         <div class="flex items-center gap-2">
-          <input id="customJsonUrlInput" type="text" value="./channels.json" placeholder="./channels.json or https://raw.githubusercontent.com/.../channels.json" class="flex-1 bg-black/40 border border-white/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-pink-500" />
-          <button id="loadCustomJsonUrlBtn" class="px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-xs font-bold">
-            Load URL
-          </button>
+          <input id="customJsonUrlInput" type="text" value="./channels.json" class="tv-focusable flex-1 bg-black/40 border border-white/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-pink-500" />
+          <button id="loadCustomJsonUrlBtn" class="tv-focusable px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-xs font-bold">Load</button>
         </div>
-      </div>
-
-      <!-- Streaming & Player Settings -->
-      <div class="rounded-2xl bg-white/5 border border-white/10 divide-y divide-white/10">
-        
-        <div class="p-4 flex items-center justify-between">
-          <div>
-            <p class="font-semibold text-sm">Default Video Quality</p>
-            <p class="text-xs text-slate-400">Choose preferred stream resolution</p>
-          </div>
-          <select id="settingQualitySelect" class="bg-[#181028] border border-white/20 rounded-lg px-3 py-1.5 text-xs font-semibold text-white focus:outline-none">
-            <option value="Auto">Auto (Recommended)</option>
-            <option value="1080p">1080p Full HD</option>
-            <option value="720p">720p HD</option>
-            <option value="480p">480p Data Saver</option>
-          </select>
-        </div>
-
-        <div class="p-4 flex items-center justify-between">
-          <div>
-            <p class="font-semibold text-sm">Auto-Play Next Channel</p>
-            <p class="text-xs text-slate-400">Automatically switch if stream ends</p>
-          </div>
-          <button id="toggleAutoplayBtn" role="switch" aria-checked="true" class="w-11 h-6 rounded-full bg-pink-600 relative transition">
-            <span class="dot w-4 h-4 rounded-full bg-white absolute top-1 right-1 transition-all"></span>
-          </button>
-        </div>
-
-        <div class="p-4 flex items-center justify-between">
-          <div>
-            <p class="font-semibold text-sm">Data Saver Mode</p>
-            <p class="text-xs text-slate-400">Reduce mobile data usage on 4G/5G</p>
-          </div>
-          <button id="toggleDataSaverBtn" role="switch" aria-checked="false" class="w-11 h-6 rounded-full bg-slate-700 relative transition">
-            <span class="dot w-4 h-4 rounded-full bg-white absolute top-1 left-1 transition-all"></span>
-          </button>
-        </div>
-
-        <div class="p-4 flex items-center justify-between">
-          <div>
-            <p class="font-semibold text-sm">Live Match Notifications</p>
-            <p class="text-xs text-slate-400">Instant match & channel alerts on CS Tv</p>
-          </div>
-          <button id="toggleNotifyBtn" role="switch" aria-checked="true" class="w-11 h-6 rounded-full bg-pink-600 relative transition">
-            <span class="dot w-4 h-4 rounded-full bg-white absolute top-1 right-1 transition-all"></span>
-          </button>
-        </div>
-
-        <div class="p-4 flex items-center justify-between">
-          <div>
-            <p class="font-semibold text-sm">Custom M3U8 Stream Test</p>
-            <p class="text-xs text-slate-400">Play your own IPTV .m3u8 link in player</p>
-          </div>
-          <button id="openCustomStreamModalBtn" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold">
-            Test URL
-          </button>
-        </div>
-
-        <div class="p-4 flex items-center justify-between">
-          <div>
-            <p class="font-semibold text-sm">Clear Watch History & Cache</p>
-            <p class="text-xs text-slate-400">Reset saved preferences & recent channels</p>
-          </div>
-          <button id="clearCacheBtn" class="px-3 py-1.5 rounded-lg bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 text-xs font-semibold">
-            Clear Data
-          </button>
-        </div>
-
       </div>
     </section>
 
   </main>
 
-  <!-- FULLFEATURED LIVE TV PLAYER MODAL (With Center Prev/Next + 5-Sec Auto-Hide Horizontal Channel Popup) -->
+  <!-- LIVE TV PLAYER MODAL -->
   <div id="playerModal" class="fixed inset-0 z-50 bg-black/95 hidden flex-col justify-between">
     
-    <!-- Top Player Bar -->
     <div id="playerTopBar" class="flex items-center justify-between px-4 py-3 bg-gradient-to-b from-black/90 to-transparent z-20 transition-opacity duration-300">
       <div class="flex items-center gap-3">
-        <button id="closePlayerBtn" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-lg font-bold">
-          ←
-        </button>
+        <button id="closePlayerBtn" class="tv-focusable w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-lg font-bold">←</button>
         <div>
           <div class="flex items-center gap-2">
             <span class="px-2 py-0.5 rounded bg-red-600 text-[10px] font-extrabold uppercase flex items-center gap-1">
@@ -424,89 +293,63 @@
       </div>
 
       <div class="flex items-center gap-2">
-        <button id="playerFavBtn" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-semibold flex items-center gap-1">
+        <button id="playerFavBtn" class="tv-focusable px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-semibold flex items-center gap-1">
           <span id="playerFavIcon">☆</span>
           <span id="playerFavText">Save</span>
         </button>
-        <button id="toggleChannelPopupBtn" class="px-3 py-1.5 rounded-full toffee-gradient text-xs font-bold flex items-center gap-1 shadow-lg">
+        <button id="toggleChannelPopupBtn" class="tv-focusable px-3 py-1.5 rounded-full toffee-gradient text-xs font-bold flex items-center gap-1 shadow-lg">
           <span>📺 Channels</span>
         </button>
       </div>
     </div>
 
-    <!-- Center Video Viewport + Interactive Overlay Controls -->
+    <!-- Center Video Viewport -->
     <div id="playerViewport" class="relative flex-1 flex items-center justify-center bg-black overflow-hidden cursor-pointer">
-      <!-- Real HTML5 Video for HLS / MP4 streams from channels.json -->
-      <video id="liveVideoEl" class="w-full h-full max-h-[78vh] object-contain" controls autoplay playsinline></video>
-
-      <!-- Optional Iframe Player if a channel in channels.json uses an embed URL -->
+      <video id="liveVideoEl" class="w-full h-full max-h-[78vh] object-contain" autoplay playsinline></video>
       <iframe id="liveIframeEl" class="hidden w-full h-full max-h-[78vh] border-0" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>
 
-      <!-- Center Overlay Controls: Previous Channel | Play/Pause | Next Channel -->
+      <!-- Auto-Skip / Stream Failure Status Overlay -->
+      <div id="streamStatusBanner" class="hidden absolute top-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-xl bg-red-600/90 text-white text-xs font-bold shadow-2xl z-30 animate-pulse">
+        ⚠️ Stream failed. Switching to next channel in <span id="autoSkipCountdown">5</span>s...
+      </div>
+
       <div id="playerCenterControls" class="absolute inset-0 flex items-center justify-center gap-8 sm:gap-14 bg-black/30 transition-opacity duration-300">
-        
-        <!-- Previous Channel Button -->
-        <button id="playerPrevChannelBtn" title="Previous Channel" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/65 hover:bg-pink-600/90 border border-white/25 text-white flex flex-col items-center justify-center active:scale-90 transition shadow-xl">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
-          </svg>
+        <button id="playerPrevChannelBtn" class="tv-focusable w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/65 hover:bg-pink-600/90 border border-white/25 text-white flex flex-col items-center justify-center active:scale-90 transition shadow-xl">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
           <span class="text-[9px] font-bold tracking-tighter">PREV</span>
         </button>
 
-        <!-- Play / Pause Button -->
-        <button id="playerPlayPauseBtn" title="Play / Pause" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full toffee-gradient text-white flex items-center justify-center active:scale-90 transition shadow-2xl border-2 border-white/40">
-          <svg id="playPauseIconSvg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-          </svg>
+        <button id="playerPlayPauseBtn" class="tv-focusable w-16 h-16 sm:w-20 sm:h-20 rounded-full toffee-gradient text-white flex items-center justify-center active:scale-90 transition shadow-2xl border-2 border-white/40">
+          <svg id="playPauseIconSvg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
         </button>
 
-        <!-- Next Channel Button -->
-        <button id="playerNextChannelBtn" title="Next Channel" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/65 hover:bg-pink-600/90 border border-white/25 text-white flex flex-col items-center justify-center active:scale-90 transition shadow-xl">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
-          </svg>
+        <button id="playerNextChannelBtn" class="tv-focusable w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/65 hover:bg-pink-600/90 border border-white/25 text-white flex flex-col items-center justify-center active:scale-90 transition shadow-xl">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
           <span class="text-[9px] font-bold tracking-tighter">NEXT</span>
         </button>
-
       </div>
 
-      <!-- HORIZONTAL CHANNEL POPUP OVERLAY INSIDE PLAYER (Auto-hides after 5 seconds) -->
       <div id="playerHorizontalPopup" class="player-popup-drawer absolute bottom-3 left-3 right-3 bg-[#120b22]/95 backdrop-blur-xl border border-pink-500/30 rounded-2xl p-3 z-30 shadow-2xl">
         <div class="flex items-center justify-between mb-2 px-1">
           <div class="flex items-center gap-2">
             <span class="text-xs font-bold text-pink-400 uppercase tracking-wider">CS Tv Channels</span>
             <span id="autoHideTimerBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-slate-300">Auto-hide in 5s</span>
           </div>
-          <button id="hidePopupDrawerBtn" class="text-xs text-slate-300 hover:text-white px-2 py-0.5 rounded bg-white/10">
-            Hide ✕
-          </button>
+          <button id="hidePopupDrawerBtn" class="tv-focusable text-xs text-slate-300 hover:text-white px-2 py-0.5 rounded bg-white/10">Hide ✕</button>
         </div>
-        <!-- Horizontally Scrollable Channel Cards inside Player (From channels.json) -->
-        <div id="playerPopupTrack" class="flex items-center gap-3 overflow-x-auto no-scrollbar snap-x-mandatory py-1">
-          <!-- Populated dynamically from channels.json -->
-        </div>
+        <div id="playerPopupTrack" class="flex items-center gap-3 overflow-x-auto no-scrollbar snap-x-mandatory py-1"></div>
       </div>
-
     </div>
 
-    <!-- Bottom Player Status & Controls Bar -->
     <div class="px-4 py-3 bg-[#0b0714] border-t border-white/10 flex items-center justify-between gap-3 z-20">
       <div class="flex items-center gap-3">
-        <button id="playerMuteBtn" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-xs font-semibold">
-          🔊 Sound On
-        </button>
-        <span id="playerQualityBadge" class="text-xs px-2.5 py-1 rounded bg-pink-500/20 text-pink-300 font-semibold">
-          1080p HD
-        </span>
+        <button id="playerMuteBtn" class="tv-focusable px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-xs font-semibold">🔊 Sound On</button>
+        <span id="playerQualityBadge" class="text-xs px-2.5 py-1 rounded bg-pink-500/20 text-pink-300 font-semibold">1080p HD</span>
       </div>
 
       <div class="flex items-center gap-2">
-        <button id="showPopupBottomBtn" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold">
-          ▲ Channel List
-        </button>
-        <button id="playerFullscreenBtn" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold">
-          ⛶ Fullscreen
-        </button>
+        <button id="showPopupBottomBtn" class="tv-focusable px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold">▲ Channel List</button>
+        <button id="playerFullscreenBtn" class="tv-focusable px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold">⛶ Fullscreen</button>
       </div>
     </div>
 
@@ -518,113 +361,44 @@
       <div class="flex items-center justify-between">
         <div>
           <h3 class="text-lg font-extrabold text-white">Sign In to CS Tv</h3>
-          <p class="text-xs text-slate-400">Enter your mobile number to receive OTP</p>
+          <p class="text-xs text-slate-400">Enter mobile number for OTP</p>
         </div>
-        <button id="closeLoginModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
+        <button id="closeLoginModalBtn" class="tv-focusable w-8 h-8 rounded-full bg-white/10 text-slate-300 flex items-center justify-center">✕</button>
       </div>
-
       <div id="loginStepPhone" class="space-y-4">
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Mobile Number (Bangladesh)</label>
-          <div class="flex items-center gap-2">
-            <span class="px-3 py-2.5 rounded-xl bg-white/10 border border-white/15 text-sm font-bold text-white">+880</span>
-            <input id="phoneInput" type="tel" maxlength="11" placeholder="1712345678" class="flex-1 bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-pink-500" />
-          </div>
-        </div>
-        <button id="sendOtpBtn" class="w-full py-3 rounded-xl toffee-gradient font-bold text-sm text-white shadow-lg shadow-pink-600/30 active:scale-95 transition">
-          Send OTP Code
-        </button>
+        <input id="phoneInput" type="tel" maxlength="11" placeholder="1712345678" class="tv-focusable w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-pink-500" />
+        <button id="sendOtpBtn" class="tv-focusable w-full py-3 rounded-xl toffee-gradient font-bold text-sm text-white shadow-lg">Send OTP</button>
       </div>
-
       <div id="loginStepOtp" class="hidden space-y-4">
-        <div class="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-xs text-emerald-200">
-          OTP sent to <span id="otpSentPhoneLabel" class="font-bold">+88017...</span>! <br/>
-          <span>CS Tv OTP Code: <strong id="generatedOtpDisplay" class="text-white underline">4829</strong></span>
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Enter 4-Digit OTP</label>
-          <input id="otpInput" type="text" maxlength="4" placeholder="4829" class="w-full text-center tracking-[0.5em] font-extrabold text-lg bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-pink-500" />
-        </div>
-        <div class="flex items-center justify-between gap-2">
-          <button id="backToPhoneStepBtn" class="px-4 py-2.5 rounded-xl bg-white/10 text-xs font-semibold text-slate-300">
-            ← Change Number
-          </button>
-          <button id="verifyOtpBtn" class="flex-1 py-2.5 rounded-xl toffee-gradient font-bold text-sm text-white shadow-lg">
-            Verify & Login
-          </button>
-        </div>
+        <input id="otpInput" type="text" maxlength="4" placeholder="4829" class="tv-focusable w-full text-center tracking-[0.5em] font-extrabold text-lg bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-pink-500" />
+        <button id="verifyOtpBtn" class="tv-focusable w-full py-2.5 rounded-xl toffee-gradient font-bold text-sm text-white">Verify & Login</button>
       </div>
     </div>
   </div>
 
-  <!-- SUBSCRIBE / PREMIUM PASS MODAL -->
-  <div id="subscribeModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="w-full max-w-sm rounded-3xl bg-[#160e29] border border-pink-500/30 p-6 shadow-2xl space-y-4">
-      <div class="flex items-center justify-between">
-        <span class="px-3 py-1 rounded-full toffee-gradient text-xs font-bold">👑 CS Tv VIP PASS</span>
-        <button id="closeSubscribeModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
-      </div>
-      <h3 class="text-xl font-extrabold">Unlock All CS Tv Live Sports & VIP Channels</h3>
-      <p class="text-xs text-slate-300">Watch all premium channels from channels.json in Full HD ad-free.</p>
-      <div class="space-y-2.5 pt-1">
-        <button data-plan="Monthly VIP (৳99)" class="sub-plan-btn w-full p-3.5 rounded-2xl bg-pink-500/15 border-2 border-pink-500 flex items-center justify-between text-left">
-          <div>
-            <p class="font-bold text-sm text-white">30 Days CS Tv VIP</p>
-            <p class="text-xs text-pink-300">bKash / Nagad / Mobile Balance</p>
-          </div>
-          <span class="text-lg font-extrabold text-white">৳99</span>
-        </button>
-        <button data-plan="Weekly Sports (৳39)" class="sub-plan-btn w-full p-3.5 rounded-2xl bg-white/5 border border-white/15 hover:border-pink-400 flex items-center justify-between text-left">
-          <div>
-            <p class="font-bold text-sm text-white">7 Days Sports Pass</p>
-            <p class="text-xs text-slate-400">All Live Cricket & Football</p>
-          </div>
-          <span class="text-lg font-extrabold text-white">৳39</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- CUSTOM M3U8 STREAM MODAL -->
-  <div id="customStreamModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="w-full max-w-sm rounded-3xl bg-[#160e29] border border-white/20 p-6 shadow-2xl space-y-4">
-      <div class="flex items-center justify-between">
-        <h3 class="text-base font-bold">Play Custom .m3u8 Link</h3>
-        <button id="closeCustomStreamModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 flex items-center justify-center">✕</button>
-      </div>
-      <input id="customM3u8Input" type="url" placeholder="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" class="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500" />
-      <button id="playCustomM3u8Btn" class="w-full py-2.5 rounded-xl toffee-gradient text-xs font-bold">
-        Play Live Stream
-      </button>
-    </div>
-  </div>
-
-  <!-- TOAST NOTIFICATION -->
-  <div id="toastBox" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-full bg-pink-600 text-white text-xs font-bold shadow-xl">
-    Notification
-  </div>
+  <div id="toastBox" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-full bg-pink-600 text-white text-xs font-bold shadow-xl">Notification</div>
 
   <!-- BOTTOM NAVIGATION BAR -->
   <nav class="fixed bottom-0 left-0 right-0 z-30 bg-[#120b20]/95 backdrop-blur-md border-t border-white/10">
     <div class="max-w-md mx-auto flex items-center justify-around py-2">
-      <button data-nav="home" class="bottom-nav-btn flex flex-col items-center gap-1 text-pink-500 font-semibold text-xs relative">
+      <button data-nav="home" class="tv-focusable bottom-nav-btn flex flex-col items-center gap-1 text-pink-500 font-semibold text-xs relative p-1 rounded">
         <span id="navIndicatorHome" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2"></span>
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
         <span>Home</span>
       </button>
-      <button data-nav="discover" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
+      <button data-nav="discover" class="tv-focusable bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative p-1 rounded">
         <span id="navIndicatorDiscover" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
         <span>Discover</span>
       </button>
-      <button data-nav="mylist" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
+      <button data-nav="mylist" class="tv-focusable bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative p-1 rounded">
         <span id="navIndicatorMylist" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
         <span>My List</span>
       </button>
-      <button data-nav="settings" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
+      <button data-nav="settings" class="tv-focusable bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative p-1 rounded">
         <span id="navIndicatorSettings" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/></svg>
         <span>Settings</span>
       </button>
     </div>
@@ -654,19 +428,7 @@
         premium: false,
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#b91c1c',
-        ticker: 'সময় সংবাদ লাইভ: দেশ ও আন্তর্জাতিক সর্বশেষ খবর দেখুন CS Tv-তে'
-      },
-      {
-        id: 'ch-zeebangla',
-        name: 'Zee Bangla HD',
-        shortLabel: 'Z বাংলা',
-        subLabel: 'DRAMA HD',
-        category: 'Drama',
-        logo: '',
-        premium: true,
-        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-        themeColor: '#ea580c',
-        ticker: 'জি বাংলা এইচডি: জনপ্রিয় সিরিয়াল ও নাটক সরাসরি CS Tv-তে'
+        ticker: 'সময় সংবাদ লাইভ: দেশ ও আন্তর্জাতিক সর্বশেষ খবর'
       },
       {
         id: 'ch-sony1',
@@ -678,522 +440,170 @@
         premium: true,
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#312e81',
-        ticker: 'SONY SPORTS TEN 1 HD: UEFA & Premier League Official Broadcast'
-      },
-      {
-        id: 'ch-tsports',
-        name: 'T Sports HD',
-        shortLabel: 'T SPORTS',
-        subLabel: 'LIVE HD',
-        category: 'Sports',
-        logo: '',
-        premium: true,
-        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-        themeColor: '#047857',
-        ticker: 'T SPORTS HD: SAFF Championship 2026 & Bangladesh Cricket Live'
-      },
-      {
-        id: 'ch-jamuna',
-        name: 'Jamuna TV',
-        shortLabel: 'যমুনা',
-        subLabel: 'LIVE TV',
-        category: 'News',
-        logo: '',
-        premium: false,
-        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-        themeColor: '#1e40af',
-        ticker: 'যমুনা টেলিভিশন ২৪ ঘণ্টা সরাসরি সম্প্রচার CS Tv-তে'
-      },
-      {
-        id: 'ch-starjalsha',
-        name: 'Star Jalsha Movies',
-        shortLabel: 'জলসা',
-        subLabel: 'MOVIES HD',
-        category: 'Movies',
-        logo: '',
-        premium: true,
-        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-        themeColor: '#be185d',
-        ticker: 'Star Jalsha Movies: Superhit Bengali Blockbuster Cinema'
-      },
-      {
-        id: 'ch-cstv-series',
-        name: 'CS Tv Originals',
-        shortLabel: 'CS Tv',
-        subLabel: 'WEB SERIES',
-        category: 'Web Series',
-        logo: '',
-        premium: false,
-        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-        themeColor: '#6b21a8',
-        ticker: 'CS Tv Exclusive Web Series • New Episodes Streaming Now'
+        ticker: 'SONY SPORTS TEN 1 HD: Official Broadcast'
       }
     ];
 
     let CHANNELS = [...DEFAULT_CHANNELS_JSON];
+    let isTvMode = false;
+    let focusedTvIndex = 0;
+    let autoSkipTimer = null;
+    let autoSkipCountdownInterval = null;
 
-    const BADGE_COLORS = [
-      'text-rose-600 font-extrabold',
-      'text-red-700 font-bold',
-      'text-orange-600 font-extrabold',
-      'text-indigo-900 font-extrabold',
-      'text-emerald-700 font-extrabold',
-      'text-blue-800 font-bold',
-      'text-pink-700 font-extrabold',
-      'text-purple-800 font-extrabold'
-    ];
-
-    const CARD_GRADIENTS = [
-      'from-blue-900 via-slate-900 to-red-900',
-      'from-rose-950 via-slate-900 to-sky-900',
-      'from-emerald-950 via-slate-900 to-blue-950',
-      'from-fuchsia-900 via-purple-950 to-slate-900',
-      'from-amber-900 via-red-950 to-slate-900',
-      'from-cyan-900 via-slate-900 to-indigo-950'
-    ];
+    const BADGE_COLORS = ['text-rose-600 font-extrabold', 'text-red-700 font-bold', 'text-indigo-900 font-extrabold', 'text-emerald-700 font-extrabold'];
+    const CARD_GRADIENTS = ['from-blue-900 via-slate-900 to-red-900', 'from-rose-950 via-slate-900 to-sky-900', 'from-emerald-950 via-slate-900 to-blue-950'];
 
     function normalizeChannelsJson(rawJson) {
       let arr = [];
       if (Array.isArray(rawJson)) {
         arr = rawJson;
       } else if (rawJson && typeof rawJson === 'object') {
-        arr = rawJson.channels || rawJson.data || rawJson.items || rawJson.streams || rawJson.list || [];
-        if (!Array.isArray(arr)) {
-          Object.keys(rawJson).forEach(k => {
-            if (Array.isArray(rawJson[k])) {
-              rawJson[k].forEach(item => arr.push({ ...item, category: item.category || k }));
-            }
-          });
-        }
+        arr = rawJson.channels || rawJson.data || rawJson.items || [];
       }
-
       if (!Array.isArray(arr) || arr.length === 0) return null;
 
-      return arr.map((item, idx) => {
-        const name = item.name || item.title || item.channel_name || item.tvg_name || `Channel ${idx + 1}`;
-        const category = item.category || item.group || item.group_title || item.genre || item.type || 'Live TV';
-        const logo = item.logo || item.image || item.icon || item.tvg_logo || item.thumb || item.poster || '';
-        const streamUrl = item.url || item.streamUrl || item.stream_url || item.link || item.m3u8 || item.file || item.src || item.source || 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
-        const iframeUrl = item.iframe || item.embed || item.embedUrl || '';
-        const words = name.trim().split(/\s+/);
-        const shortLabel = item.shortLabel || (words.length >= 2 ? (words[0] + ' ' + words[1]).slice(0, 10) : name.slice(0, 8));
-        const subLabel = item.subLabel || item.quality || category.toUpperCase().slice(0, 10);
-
-        return {
-          id: String(item.id || `ch-json-${idx}`),
-          name,
-          shortLabel,
-          subLabel,
-          category,
-          logo,
-          streamUrl,
-          iframeUrl,
-          premium: Boolean(item.premium || item.vip || item.isPremium),
-          badgeColor: BADGE_COLORS[idx % BADGE_COLORS.length],
-          cardGradient: CARD_GRADIENTS[idx % CARD_GRADIENTS.length],
-          themeColor: item.themeColor || '#831843',
-          ticker: item.ticker || item.description || `${name} • ${category} Live Stream on CS Tv`
-        };
-      });
+      return arr.map((item, idx) => ({
+        id: String(item.id || `ch-${idx}`),
+        name: item.name || item.title || `Channel ${idx + 1}`,
+        category: item.category || 'Live TV',
+        logo: item.logo || item.image || '',
+        streamUrl: item.url || item.streamUrl || 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        iframeUrl: item.iframe || item.embed || '',
+        shortLabel: item.shortLabel || item.name?.slice(0, 8) || 'TV',
+        subLabel: item.subLabel || 'HD',
+        badgeColor: BADGE_COLORS[idx % BADGE_COLORS.length],
+        cardGradient: CARD_GRADIENTS[idx % CARD_GRADIENTS.length],
+        ticker: item.ticker || `${item.name} Live Stream`
+      }));
     }
 
-    async function fetchChannelsFromJson(jsonPath = './channels.json', showFeedback = false) {
-      const statusLabel = document.getElementById('jsonStatusLabel');
-      const sourceText = document.getElementById('jsonSourceUrlText');
+    async function fetchChannelsFromJson() {
       try {
-        const response = await fetch(jsonPath, { cache: 'no-store' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const response = await fetch('./channels.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error();
         const data = await response.json();
         const normalized = normalizeChannelsJson(data);
-        if (normalized && normalized.length > 0) {
-          CHANNELS = normalized;
-          statusLabel.textContent = `● Loaded ${CHANNELS.length} channels`;
-          statusLabel.className = 'text-[9px] text-emerald-400 font-semibold tracking-tight';
-          if (sourceText) sourceText.textContent = `Loaded ${CHANNELS.length} channels from ${jsonPath}`;
-          if (showFeedback) showToast(`Loaded ${CHANNELS.length} channels from channels.json!`);
-          renderAllFromChannelsJson();
-          return true;
-        }
-      } catch (err) {
-        statusLabel.textContent = `● Ready (${CHANNELS.length} channels)`;
-        if (showFeedback) {
-          showToast('Using built-in channels.json fallback');
-        }
-      }
+        if (normalized) CHANNELS = normalized;
+      } catch (e) {}
       renderAllFromChannelsJson();
-      return false;
     }
 
     const state = {
       currentCategory: 'all',
       currentChannelIndex: 0,
       isPlaying: true,
-      isMuted: false,
       favorites: [],
       userPhone: null,
       isSubscribed: false,
-      generatedOtp: '4829',
-      quality: '1080p',
-      autoplay: true,
-      dataSaver: false,
-      notifications: true,
-      heroSlideIndex: 0,
-      jsonUrl: './channels.json'
+      quality: '1080p'
     };
-
-    function loadSavedState() {
-      try {
-        const raw = localStorage.getItem('cstv_live_state_v2');
-        if (raw) {
-          const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed.favorites)) state.favorites = parsed.favorites;
-          if (parsed.userPhone) state.userPhone = parsed.userPhone;
-          if (typeof parsed.isSubscribed === 'boolean') state.isSubscribed = parsed.isSubscribed;
-          if (parsed.quality) state.quality = parsed.quality;
-          if (parsed.jsonUrl) state.jsonUrl = parsed.jsonUrl;
-        }
-      } catch (err) {}
-    }
-
-    function saveState() {
-      try {
-        localStorage.setItem('cstv_live_state_v2', JSON.stringify({
-          favorites: state.favorites,
-          userPhone: state.userPhone,
-          isSubscribed: state.isSubscribed,
-          quality: state.quality,
-          jsonUrl: state.jsonUrl
-        }));
-      } catch (err) {}
-    }
 
     function showToast(msg) {
       const toast = document.getElementById('toastBox');
       toast.textContent = msg;
       toast.classList.remove('hidden');
       clearTimeout(window.__toastTimer);
-      window.__toastTimer = setTimeout(() => {
-        toast.classList.add('hidden');
-      }, 2600);
-    }
-
-    function getChannelCircleAvatarHtml(ch, sizeClasses = 'w-20 h-20 sm:w-24 sm:h-24') {
-      if (ch.logo) {
-        return `
-          <div class="${sizeClasses} rounded-full bg-white border-2 border-white/20 group-hover:border-pink-500 shadow-lg flex items-center justify-center p-2 text-center overflow-hidden relative">
-            <img src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-            <div style="display:none" class="flex-col items-center justify-center w-full h-full">
-              <span class="text-xs sm:text-sm ${ch.badgeColor} leading-tight">${ch.shortLabel}</span>
-              <span class="mt-1 px-1.5 py-0.5 rounded bg-slate-900 text-white text-[9px] font-bold">${ch.subLabel}</span>
-            </div>
-          </div>
-        `;
-      }
-      return `
-        <div class="${sizeClasses} rounded-full bg-white border-2 border-white/20 group-hover:border-pink-500 shadow-lg flex flex-col items-center justify-center p-2 text-center overflow-hidden">
-          <span class="text-xs sm:text-sm ${ch.badgeColor} leading-tight">${ch.shortLabel}</span>
-          <span class="mt-1 px-1.5 py-0.5 rounded bg-slate-900 text-white text-[9px] font-bold">${ch.subLabel}</span>
-        </div>
-      `;
+      window.__toastTimer = setTimeout(() => toast.classList.add('hidden'), 2600);
     }
 
     function renderAllFromChannelsJson() {
-      renderCategoryNavTabs();
-      renderHeroFromChannels();
       renderLiveTvCircles();
       renderContentRowsFromChannels();
-      renderDiscoverGrid(document.getElementById('channelSearchInput')?.value || '');
-      renderMyList();
-      renderPlayerHorizontalPopup();
-    }
-
-    function renderCategoryNavTabs() {
-      const nav = document.getElementById('topCategoryNav');
-      const uniqueCats = [];
-      CHANNELS.forEach(ch => {
-        const c = (ch.category || 'Live TV').trim();
-        if (c && !uniqueCats.some(existing => existing.toLowerCase() === c.toLowerCase())) {
-          uniqueCats.push(c);
-        }
-      });
-
-      const tabsHtml = [
-        `<button data-cat="all" class="cat-tab ${state.currentCategory === 'all' ? 'text-pink-400 font-bold border-b-2 border-pink-500' : 'text-slate-300 hover:text-white'} pb-1 whitespace-nowrap transition">Live TV (${CHANNELS.length})</button>`,
-        ...uniqueCats.map(cat => {
-          const isActive = state.currentCategory.toLowerCase() === cat.toLowerCase();
-          return `<button data-cat="${cat}" class="cat-tab ${isActive ? 'text-pink-400 font-bold border-b-2 border-pink-500' : 'text-slate-300 hover:text-white'} pb-1 whitespace-nowrap transition">${cat}</button>`;
-        })
-      ];
-      nav.innerHTML = tabsHtml.join('');
-    }
-
-    function renderHeroFromChannels() {
-      const ch0 = CHANNELS[0] || DEFAULT_CHANNELS_JSON[0];
-      const ch1 = CHANNELS[1] || ch0;
-
-      document.getElementById('heroSlide2Title').textContent = ch0.name;
-      document.getElementById('heroSlide2Sub').textContent = `${ch0.category} • Live on CS Tv`;
-      document.getElementById('heroSlide2Card').innerHTML = `
-        <div class="flex flex-col items-center">
-          <div class="w-14 h-14 rounded-full bg-white text-slate-900 flex items-center justify-center font-extrabold text-xs border-2 border-pink-500 overflow-hidden p-1">
-            ${ch0.logo ? `<img src="${ch0.logo}" alt="${ch0.name}" class="w-full h-full object-contain" />` : `<span>${ch0.shortLabel}</span>`}
-          </div>
-          <span class="text-xs font-bold mt-1.5 text-white max-w-[120px] truncate">${ch0.name}</span>
-        </div>
-        <div class="text-center">
-          <span class="text-xs font-extrabold px-2.5 py-1 rounded bg-rose-600 text-white">LIVE</span>
-          <p class="text-[10px] text-slate-300 mt-1">${ch0.category}</p>
-        </div>
-      `;
-
-      document.getElementById('heroSlide3Title').textContent = ch1.name;
-      document.getElementById('heroSlide3Sub').textContent = `${ch1.category} • Full HD Streaming`;
-      document.getElementById('heroSlide3Card').innerHTML = `
-        <div class="flex flex-col items-center">
-          <div class="w-14 h-14 rounded-full bg-white text-slate-900 flex items-center justify-center font-extrabold text-xs border-2 border-emerald-400 overflow-hidden p-1">
-            ${ch1.logo ? `<img src="${ch1.logo}" alt="${ch1.name}" class="w-full h-full object-contain" />` : `<span>${ch1.shortLabel}</span>`}
-          </div>
-          <span class="text-xs font-bold mt-1.5 text-white max-w-[120px] truncate">${ch1.name}</span>
-        </div>
-        <div class="text-center">
-          <span class="text-xs font-extrabold px-2.5 py-1 rounded bg-amber-500 text-black">HD</span>
-          <p class="text-[10px] text-slate-300 mt-1">${ch1.category}</p>
-        </div>
-      `;
+      if (isTvMode) initTvFocus();
     }
 
     function renderLiveTvCircles() {
       const track = document.getElementById('liveTvCirclesTrack');
-      const badge = document.getElementById('totalChannelsBadge');
-      const filtered = state.currentCategory === 'all'
-        ? CHANNELS
-        : CHANNELS.filter(c => (c.category || '').toLowerCase() === state.currentCategory.toLowerCase());
-
-      if (badge) badge.textContent = `${filtered.length}`;
-
-      track.innerHTML = filtered.map(ch => `
-        <button data-play-channel="${ch.id}" class="channel-ring relative flex-shrink-0 flex flex-col items-center group snap-start-item focus:outline-none">
-          ${ch.premium ? `
-            <span class="absolute -top-1 z-10 w-5 h-5 rounded-full toffee-gradient flex items-center justify-center shadow-md border border-white/40">
-              <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5z"/></svg>
-            </span>
-          ` : ''}
-          ${getChannelCircleAvatarHtml(ch, 'w-20 h-20 sm:w-24 sm:h-24')}
+      track.innerHTML = CHANNELS.map((ch, idx) => `
+        <button data-play-channel="${ch.id}" class="tv-focusable channel-ring relative flex-shrink-0 flex flex-col items-center group snap-start-item focus:outline-none p-1 rounded-2xl">
+          <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white border-2 border-white/20 flex flex-col items-center justify-center p-2 text-center overflow-hidden">
+            ${ch.logo ? `<img src="${ch.logo}" class="w-full h-full object-contain" />` : `<span class="text-xs ${ch.badgeColor}">${ch.shortLabel}</span>`}
+          </div>
           <span class="text-[11px] text-slate-300 font-medium mt-1.5 max-w-[88px] truncate">${ch.name}</span>
         </button>
       `).join('');
     }
 
-    function buildChannelCardHtml(ch, idx) {
-      const grad = ch.cardGradient || CARD_GRADIENTS[idx % CARD_GRADIENTS.length];
+    function buildChannelCardHtml(ch) {
       return `
-        <button data-play-channel="${ch.id}" class="flex-shrink-0 w-60 sm:w-68 rounded-2xl bg-gradient-to-r ${grad} border border-white/15 p-3.5 text-left snap-start-item hover:border-pink-500/60 active:scale-95 transition relative overflow-hidden group">
-          <div class="flex items-center justify-between text-[10px] text-slate-300 font-bold mb-2">
-            <span class="flex items-center gap-1 text-rose-400"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 live-dot"></span> ${ch.category.toUpperCase()}</span>
-            <span>LIVE HD</span>
-          </div>
-          <div class="flex items-center gap-3 my-2">
-            <div class="w-12 h-12 rounded-xl bg-white flex-shrink-0 flex items-center justify-center p-1 overflow-hidden shadow">
-              ${ch.logo
-                ? `<img src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" /><span style="display:none" class="text-[10px] ${ch.badgeColor}">${ch.shortLabel}</span>`
-                : `<span class="text-[11px] ${ch.badgeColor}">${ch.shortLabel}</span>`
-              }
-            </div>
-            <div class="overflow-hidden">
-              <h4 class="font-extrabold text-sm text-white truncate">${ch.name}</h4>
-              <p class="text-[11px] text-slate-300 truncate">${ch.ticker}</p>
-            </div>
-          </div>
-          <div class="mt-2 flex items-center justify-between text-[11px] text-slate-200 font-semibold">
-            <span>CS Tv Stream</span>
-            <span class="text-pink-400 group-hover:translate-x-0.5 transition">▶ Watch Now</span>
-          </div>
+        <button data-play-channel="${ch.id}" class="tv-focusable flex-shrink-0 w-60 sm:w-68 rounded-2xl bg-gradient-to-r ${ch.cardGradient} border border-white/15 p-3.5 text-left snap-start-item transition relative overflow-hidden group">
+          <h4 class="font-extrabold text-sm text-white truncate">${ch.name}</h4>
+          <p class="text-[11px] text-slate-300 truncate">${ch.category} • Live</p>
         </button>
       `;
     }
 
     function renderContentRowsFromChannels() {
-      const groups = {};
-      CHANNELS.forEach(ch => {
-        const cat = ch.category || 'Live TV';
-        if (!groups[cat]) groups[cat] = [];
-        groups[cat].push(ch);
-      });
-
-      const catNames = Object.keys(groups);
-
-      const group1 = groups[catNames[0]] || CHANNELS;
-      const group2 = groups[catNames[1]] || CHANNELS;
-      const group3 = groups[catNames[2]] || CHANNELS;
-
-      document.getElementById('row1Title').textContent = catNames[0] ? `${catNames[0]} Channels` : 'Featured Live Channels';
-      document.getElementById('eplRowTrack').innerHTML = group1.map((ch, i) => buildChannelCardHtml(ch, i)).join('');
-
-      document.getElementById('row2Title').textContent = catNames[1] ? `${catNames[1]} Channels` : 'Popular on CS Tv';
-      document.getElementById('saffRowTrack').innerHTML = group2.map((ch, i) => buildChannelCardHtml(ch, i + 2)).join('');
-
-      document.getElementById('row3Title').textContent = catNames[2] ? `${catNames[2]} Channels` : 'All CS Tv Streams';
-      document.getElementById('dramaRowTrack').innerHTML = group3.map((ch, i) => buildChannelCardHtml(ch, i + 4)).join('');
-
-      const extraContainer = document.getElementById('dynamicCategorySections');
-      if (catNames.length > 3) {
-        extraContainer.innerHTML = catNames.slice(3).map((catName, gIdx) => `
-          <div class="px-4">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-base sm:text-lg font-bold tracking-tight text-white">${catName}</h3>
-              <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
-            </div>
-            <div class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1">
-              ${groups[catName].map((ch, i) => buildChannelCardHtml(ch, gIdx + i)).join('')}
-            </div>
-          </div>
-        `).join('');
-      } else {
-        extraContainer.innerHTML = '';
-      }
+      document.getElementById('eplRowTrack').innerHTML = CHANNELS.map(ch => buildChannelCardHtml(ch)).join('');
+      document.getElementById('saffRowTrack').innerHTML = CHANNELS.map(ch => buildChannelCardHtml(ch)).join('');
     }
 
-    function renderDiscoverGrid(query = '') {
-      const grid = document.getElementById('discoverGrid');
-      const q = query.trim().toLowerCase();
-      const list = CHANNELS.filter(c => !q || c.name.toLowerCase().includes(q) || (c.category || '').toLowerCase().includes(q));
-      grid.innerHTML = list.map(ch => `
-        <button data-play-channel="${ch.id}" class="p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 flex flex-col items-center text-center group transition">
-          ${getChannelCircleAvatarHtml(ch, 'w-16 h-16')}
-          <span class="text-xs font-bold text-white mt-2 line-clamp-1">${ch.name}</span>
-          <span class="text-[10px] text-slate-400">${ch.category}</span>
-        </button>
-      `).join('');
+    // ==========================================
+    // 5 SECONDS AUTO-SKIP IF STREAM FAILS
+    // ==========================================
+    function clearAutoSkipTimer() {
+      clearTimeout(autoSkipTimer);
+      clearInterval(autoSkipCountdownInterval);
+      document.getElementById('streamStatusBanner').classList.add('hidden');
     }
 
-    function renderMyList() {
-      const grid = document.getElementById('myListGrid');
-      const badge = document.getElementById('savedCountBadge');
-      const savedChannels = CHANNELS.filter(c => state.favorites.includes(c.id));
-      badge.textContent = `${savedChannels.length} Channels`;
+    function startAutoSkipTimer() {
+      clearAutoSkipTimer();
+      const banner = document.getElementById('streamStatusBanner');
+      const counterEl = document.getElementById('autoSkipCountdown');
+      banner.classList.remove('hidden');
+      
+      let secondsLeft = 5;
+      counterEl.textContent = secondsLeft;
 
-      if (savedChannels.length === 0) {
-        grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400 text-sm">No saved channels yet. Tap ☆ Save inside the CS Tv video player!</div>`;
-        return;
-      }
-
-      grid.innerHTML = savedChannels.map(ch => `
-        <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-2">
-          <button data-play-channel="${ch.id}" class="flex items-center gap-3 text-left flex-1 overflow-hidden">
-            <div class="w-12 h-12 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-xs ${ch.badgeColor} overflow-hidden p-1">
-              ${ch.logo ? `<img src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" />` : ch.shortLabel}
-            </div>
-            <div class="overflow-hidden">
-              <p class="font-bold text-xs sm:text-sm text-white truncate">${ch.name}</p>
-              <p class="text-[10px] text-pink-400">▶ Tap to Play Live</p>
-            </div>
-          </button>
-          <button data-remove-fav="${ch.id}" class="text-xs text-slate-400 hover:text-rose-400 px-2 py-1">✕</button>
-        </div>
-      `).join('');
-    }
-
-    function renderPlayerHorizontalPopup() {
-      const track = document.getElementById('playerPopupTrack');
-      const activeCh = CHANNELS[state.currentChannelIndex] || CHANNELS[0];
-      if (!activeCh) return;
-
-      track.innerHTML = CHANNELS.map((ch, idx) => {
-        const isCurrent = ch.id === activeCh.id;
-        return `
-          <button data-popup-channel-index="${idx}" class="flex-shrink-0 w-40 p-2.5 rounded-xl border ${isCurrent ? 'border-pink-500 bg-pink-500/20' : 'border-white/10 bg-white/5 hover:bg-white/10'} flex items-center gap-2.5 text-left snap-start-item transition active:scale-95">
-            <div class="w-10 h-10 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-[10px] ${ch.badgeColor} overflow-hidden p-1">
-              ${ch.logo
-                ? `<img src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" /><span style="display:none">${ch.shortLabel}</span>`
-                : `<span>${ch.shortLabel}</span>`
-              }
-            </div>
-            <div class="overflow-hidden">
-              <p class="text-xs font-bold text-white truncate">${ch.name}</p>
-              <p class="text-[10px] ${isCurrent ? 'text-pink-300 font-bold' : 'text-slate-400'} truncate">${isCurrent ? '● Playing' : ch.category}</p>
-            </div>
-          </button>
-        `;
-      }).join('');
-    }
-
-    let overlayHideTimer = null;
-    let overlayCountdownInterval = null;
-    let remainingSeconds = 5;
-
-    function showPlayerOverlaysAndStart5sTimer() {
-      const popupDrawer = document.getElementById('playerHorizontalPopup');
-      const centerControls = document.getElementById('playerCenterControls');
-      const timerBadge = document.getElementById('autoHideTimerBadge');
-
-      popupDrawer.classList.remove('hidden', 'auto-hide-hidden');
-      centerControls.classList.remove('center-controls-hidden');
-
-      clearTimeout(overlayHideTimer);
-      clearInterval(overlayCountdownInterval);
-      remainingSeconds = 5;
-      if (timerBadge) timerBadge.textContent = `Auto-hide in ${remainingSeconds}s`;
-
-      overlayCountdownInterval = setInterval(() => {
-        remainingSeconds -= 1;
-        if (remainingSeconds > 0 && timerBadge) {
-          timerBadge.textContent = `Auto-hide in ${remainingSeconds}s`;
+      autoSkipCountdownInterval = setInterval(() => {
+        secondsLeft -= 1;
+        if (secondsLeft > 0) {
+          counterEl.textContent = secondsLeft;
         }
       }, 1000);
 
-      overlayHideTimer = setTimeout(() => {
-        clearInterval(overlayCountdownInterval);
-        popupDrawer.classList.add('auto-hide-hidden');
-        centerControls.classList.add('center-controls-hidden');
+      autoSkipTimer = setTimeout(() => {
+        clearAutoSkipTimer();
+        showToast('Stream failed! Switching to next channel...');
+        // Automatically jump to next channel
+        state.currentChannelIndex = (state.currentChannelIndex + 1) % CHANNELS.length;
+        loadCurrentChannelInPlayer();
       }, 5000);
-    }
-
-    function hidePlayerPopupImmediately() {
-      clearTimeout(overlayHideTimer);
-      clearInterval(overlayCountdownInterval);
-      document.getElementById('playerHorizontalPopup').classList.add('auto-hide-hidden');
-      document.getElementById('playerCenterControls').classList.add('center-controls-hidden');
     }
 
     let hlsInstance = null;
 
-    function openPlayerByChannelId(channelId, customUrl = null) {
+    function openPlayerByChannelId(channelId) {
       const idx = CHANNELS.findIndex(c => String(c.id) === String(channelId));
       if (idx !== -1) state.currentChannelIndex = idx;
-      loadCurrentChannelInPlayer(customUrl);
+      loadCurrentChannelInPlayer();
       const modal = document.getElementById('playerModal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
-      showPlayerOverlaysAndStart5sTimer();
     }
 
-    function loadCurrentChannelInPlayer(customUrl = null) {
+    function loadCurrentChannelInPlayer() {
       const ch = CHANNELS[state.currentChannelIndex] || CHANNELS[0];
       if (!ch) return;
 
-      state.isPlaying = true;
-      updatePlayPauseIcon();
-
-      document.getElementById('playerChannelTitle').textContent = customUrl ? 'Custom M3U8 Stream' : ch.name;
-      document.getElementById('playerChannelSub').textContent = `${ch.category} • ${state.quality} Stream`;
-      document.getElementById('playerQualityBadge').textContent = state.quality;
-
-      const isFav = state.favorites.includes(ch.id);
-      document.getElementById('playerFavIcon').textContent = isFav ? '★' : '☆';
-      document.getElementById('playerFavText').textContent = isFav ? 'Saved' : 'Save';
-
-      renderPlayerHorizontalPopup();
-      showPlayerOverlaysAndStart5sTimer();
-
+      document.getElementById('playerChannelTitle').textContent = ch.name;
+      document.getElementById('playerChannelSub').textContent = `${ch.category} • 1080p Stream`;
+      
       const video = document.getElementById('liveVideoEl');
       const iframe = document.getElementById('liveIframeEl');
-      const streamSrc = customUrl || ch.streamUrl;
+      const streamSrc = ch.streamUrl;
 
-      if (ch.iframeUrl && !customUrl) {
+      clearAutoSkipTimer();
+      // Start 5s failure detector timer (if video doesn't play or errors)
+      startAutoSkipTimer();
+
+      if (ch.iframeUrl) {
         video.pause();
         video.classList.add('hidden');
         iframe.src = ch.iframeUrl;
         iframe.classList.remove('hidden');
+        clearAutoSkipTimer(); // iframe embeds handled externally
         return;
       }
 
@@ -1207,456 +617,118 @@
           hlsInstance = null;
         }
         if (streamSrc && streamSrc.includes('.m3u8') && window.Hls && Hls.isSupported()) {
-          hlsInstance = new Hls({
-            xhrSetup: function (xhr, url) {
-              xhr.withCredentials = false;
-            }
-          });
+          hlsInstance = new Hls();
           hlsInstance.loadSource(streamSrc);
           hlsInstance.attachMedia(video);
           hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
-            video.play().catch(() => {});
+            video.play().then(() => {
+              clearAutoSkipTimer(); // Stream loaded successfully! Cancel auto-skip
+            }).catch(() => {});
+          });
+          hlsInstance.on(Hls.Events.ERROR, (event, data) => {
+            if (data.fatal) {
+              // HLS fatal error triggers the 5s auto-skip countdown
+            }
           });
         } else if (streamSrc) {
           video.src = streamSrc;
-          video.play().catch(() => {});
+          video.play().then(() => {
+            clearAutoSkipTimer();
+          }).catch(() => {});
         }
       } catch (e) {}
     }
 
-    function updatePlayPauseIcon() {
-      const svg = document.getElementById('playPauseIconSvg');
-      if (state.isPlaying) {
-        svg.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-      } else {
-        svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
-      }
+    // ==========================================
+    // ANDROID TV D-PAD REMOTE NAVIGATION
+    // ==========================================
+    function initTvFocus() {
+      const focusables = Array.from(document.querySelectorAll('.tv-focusable:not(.hidden)'));
+      if (focusables.length === 0) return;
+      if (focusedTvIndex >= focusables.length) focusedTvIndex = 0;
+      
+      focusables.forEach((el, i) => {
+        if (i === focusedTvIndex) {
+          el.classList.add('tv-focused');
+          el.focus();
+        } else {
+          el.classList.remove('tv-focused');
+        }
+      });
     }
 
-    function syncAuthAndSettingsUI() {
-      const signInTopText = document.getElementById('signInTopText');
-      const subscribeTopText = document.getElementById('subscribeTopText');
-      const settingsUserName = document.getElementById('settingsUserName');
-      const settingsUserPhone = document.getElementById('settingsUserPhone');
-      const settingsAvatar = document.getElementById('settingsAvatar');
-      const settingsAuthActionBtn = document.getElementById('settingsAuthActionBtn');
+    window.addEventListener('keydown', (e) => {
+      const focusables = Array.from(document.querySelectorAll('.tv-focusable:not(.hidden)'));
+      if (focusables.length === 0) return;
 
-      if (state.userPhone) {
-        signInTopText.textContent = state.userPhone.slice(-4);
-        settingsUserName.textContent = 'CS Tv Verified User';
-        settingsUserPhone.textContent = `${state.userPhone} • Logged In`;
-        settingsAvatar.textContent = '✓';
-        settingsAuthActionBtn.textContent = 'Sign Out';
-      } else {
-        signInTopText.textContent = 'Sign In';
-        settingsUserName.textContent = 'Guest User';
-        settingsUserPhone.textContent = 'Not signed in • Tap Sign In with Phone';
-        settingsAvatar.textContent = 'G';
-        settingsAuthActionBtn.textContent = 'Sign In';
+      // Auto detect TV mode on remote keypress
+      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter'].includes(e.key)) {
+        isTvMode = true;
+        document.getElementById('platformModeLabel').textContent = '● Android TV Mode Active';
       }
 
-      subscribeTopText.textContent = state.isSubscribed ? 'VIP Active' : 'Subscribe';
-      document.getElementById('settingQualitySelect').value = state.quality;
-      document.getElementById('customJsonUrlInput').value = state.jsonUrl || './channels.json';
-    }
-
-    function switchMainView(viewName) {
-      const views = {
-        home: document.getElementById('viewHome'),
-        discover: document.getElementById('viewDiscover'),
-        mylist: document.getElementById('viewMyList'),
-        settings: document.getElementById('viewSettings')
-      };
-      const indicators = {
-        home: document.getElementById('navIndicatorHome'),
-        discover: document.getElementById('navIndicatorDiscover'),
-        mylist: document.getElementById('navIndicatorMylist'),
-        settings: document.getElementById('navIndicatorSettings')
-      };
-
-      Object.keys(views).forEach(k => {
-        if (k === viewName) {
-          views[k].classList.remove('hidden');
-          indicators[k].classList.remove('hidden');
-        } else {
-          views[k].classList.add('hidden');
-          indicators[k].classList.add('hidden');
-        }
-      });
-
-      document.querySelectorAll('.bottom-nav-btn').forEach(btn => {
-        if (btn.dataset.nav === viewName) {
-          btn.classList.add('text-pink-500');
-          btn.classList.remove('text-slate-400');
-        } else {
-          btn.classList.remove('text-pink-500');
-          btn.classList.add('text-slate-400');
-        }
-      });
-
-      if (viewName === 'discover') renderDiscoverGrid();
-      if (viewName === 'mylist') renderMyList();
-    }
-
-    function scrollToHeroSlide(index) {
-      const track = document.getElementById('heroTrack');
-      const total = 3;
-      state.heroSlideIndex = (index + total) % total;
-      track.scrollTo({
-        left: track.clientWidth * state.heroSlideIndex,
-        behavior: 'smooth'
-      });
-      document.querySelectorAll('.hero-dot').forEach((dot, idx) => {
-        if (idx === state.heroSlideIndex) {
-          dot.className = 'hero-dot w-5 h-2 rounded-full bg-white transition-all';
-        } else {
-          dot.className = 'hero-dot w-2 h-2 rounded-full bg-white/40 transition-all';
-        }
-      });
-    }
+      if (e.key === 'ArrowRight') {
+        focusedTvIndex = (focusedTvIndex + 1) % focusables.length;
+        initTvFocus();
+        e.preventDefault();
+      } else if (e.key === 'ArrowLeft') {
+        focusedTvIndex = (focusedTvIndex - 1 + focusables.length) % focusables.length;
+        initTvFocus();
+        e.preventDefault();
+      } else if (e.key === 'Enter') {
+        const activeEl = focusables[focusedTvIndex];
+        if (activeEl) activeEl.click();
+        e.preventDefault();
+      } else if (e.key === 'ChannelUp' || e.key === 'PageUp') {
+        // TV Remote Channel Up button
+        state.currentChannelIndex = (state.currentChannelIndex + 1) % CHANNELS.length;
+        openPlayerByChannelId(CHANNELS[state.currentChannelIndex].id);
+        e.preventDefault();
+      } else if (e.key === 'ChannelDown' || e.key === 'PageDown') {
+        // TV Remote Channel Down button
+        state.currentChannelIndex = (state.currentChannelIndex - 1 + CHANNELS.length) % CHANNELS.length;
+        openPlayerByChannelId(CHANNELS[state.currentChannelIndex].id);
+        e.preventDefault();
+      }
+    });
 
     window.addEventListener('DOMContentLoaded', () => {
-      loadSavedState();
-      syncAuthAndSettingsUI();
-
-      fetchChannelsFromJson(state.jsonUrl || './channels.json', false);
-
-      setInterval(() => {
-        scrollToHeroSlide(state.heroSlideIndex + 1);
-      }, 4500);
-
-      document.getElementById('heroPrevBtn').addEventListener('click', () => {
-        scrollToHeroSlide(state.heroSlideIndex - 1);
-      });
-      document.getElementById('heroNextBtn').addEventListener('click', () => {
-        scrollToHeroSlide(state.heroSlideIndex + 1);
-      });
-      document.querySelectorAll('.hero-dot').forEach(dot => {
-        dot.addEventListener('click', () => {
-          scrollToHeroSlide(parseInt(dot.dataset.slide, 10));
-        });
-      });
-
-      document.getElementById('brandLogoBtn').addEventListener('click', () => switchMainView('home'));
-      document.getElementById('viewAllChannelsBtn').addEventListener('click', () => switchMainView('discover'));
-
-      document.getElementById('topCategoryNav').addEventListener('click', (e) => {
-        const tab = e.target.closest('.cat-tab');
-        if (!tab) return;
-        state.currentCategory = tab.dataset.cat;
-        renderCategoryNavTabs();
-        switchMainView('home');
-        renderLiveTvCircles();
-      });
-
-      document.querySelectorAll('.bottom-nav-btn').forEach(btn => {
-        btn.addEventListener('click', () => switchMainView(btn.dataset.nav));
-      });
+      fetchChannelsFromJson();
 
       document.body.addEventListener('click', (e) => {
         const playBtn = e.target.closest('[data-play-channel]');
         if (playBtn) {
           openPlayerByChannelId(playBtn.dataset.playChannel);
-          return;
         }
-
-        const playIdxBtn = e.target.closest('[data-play-index]');
-        if (playIdxBtn) {
-          const idx = parseInt(playIdxBtn.dataset.playIndex, 10) || 0;
-          state.currentChannelIndex = idx < CHANNELS.length ? idx : 0;
-          openPlayerByChannelId(CHANNELS[state.currentChannelIndex].id);
-          return;
-        }
-
-        const popupItem = e.target.closest('[data-popup-channel-index]');
-        if (popupItem) {
-          e.stopPropagation();
-          state.currentChannelIndex = parseInt(popupItem.dataset.popupChannelIndex, 10);
-          loadCurrentChannelInPlayer();
-          showToast(`Playing: ${CHANNELS[state.currentChannelIndex].name}`);
-          return;
-        }
-
-        const removeFavBtn = e.target.closest('[data-remove-fav]');
-        if (removeFavBtn) {
-          const id = removeFavBtn.dataset.removeFav;
-          state.favorites = state.favorites.filter(item => item !== id);
-          saveState();
-          renderMyList();
-          showToast('Removed from My List');
-        }
-      });
-
-      document.getElementById('channelSearchInput').addEventListener('input', (e) => {
-        renderDiscoverGrid(e.target.value);
-      });
-
-      document.getElementById('reloadJsonBtn').addEventListener('click', () => {
-        fetchChannelsFromJson(state.jsonUrl || './channels.json', true);
-      });
-      document.getElementById('loadCustomJsonUrlBtn').addEventListener('click', () => {
-        const val = document.getElementById('customJsonUrlInput').value.trim() || './channels.json';
-        state.jsonUrl = val;
-        saveState();
-        fetchChannelsFromJson(val, true);
-      });
-
-      const playerViewport = document.getElementById('playerViewport');
-      playerViewport.addEventListener('click', () => {
-        showPlayerOverlaysAndStart5sTimer();
-      });
-
-      const popupTrack = document.getElementById('playerPopupTrack');
-      const popupDrawer = document.getElementById('playerHorizontalPopup');
-      ['touchstart', 'touchmove', 'scroll', 'mousemove', 'pointerdown'].forEach(evtName => {
-        popupDrawer.addEventListener(evtName, () => {
-          showPlayerOverlaysAndStart5sTimer();
-        }, { passive: true });
-        popupTrack.addEventListener(evtName, () => {
-          showPlayerOverlaysAndStart5sTimer();
-        }, { passive: true });
       });
 
       document.getElementById('closePlayerBtn').addEventListener('click', () => {
-        const modal = document.getElementById('playerModal');
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-        const video = document.getElementById('liveVideoEl');
-        video.pause();
-        document.getElementById('liveIframeEl').src = '';
-        clearTimeout(overlayHideTimer);
-        clearInterval(overlayCountdownInterval);
+        clearAutoSkipTimer();
+        document.getElementById('playerModal').classList.add('hidden');
+        document.getElementById('playerModal').classList.remove('flex');
+        document.getElementById('liveVideoEl').pause();
       });
 
-      document.getElementById('playerPrevChannelBtn').addEventListener('click', (e) => {
-        e.stopPropagation();
-        state.currentChannelIndex = (state.currentChannelIndex - 1 + CHANNELS.length) % CHANNELS.length;
-        loadCurrentChannelInPlayer();
-        showToast(`⏮ Prev: ${CHANNELS[state.currentChannelIndex].name}`);
-      });
-
-      document.getElementById('playerNextChannelBtn').addEventListener('click', (e) => {
-        e.stopPropagation();
-        state.currentChannelIndex = (state.currentChannelIndex + 1) % CHANNELS.length;
-        loadCurrentChannelInPlayer();
-        showToast(`⏭ Next: ${CHANNELS[state.currentChannelIndex].name}`);
-      });
-
-      document.getElementById('playerPlayPauseBtn').addEventListener('click', (e) => {
-        e.stopPropagation();
-        state.isPlaying = !state.isPlaying;
-        updatePlayPauseIcon();
-        showPlayerOverlaysAndStart5sTimer();
-        const video = document.getElementById('liveVideoEl');
-        if (state.isPlaying) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      });
-
-      document.getElementById('toggleChannelPopupBtn').addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (popupDrawer.classList.contains('auto-hide-hidden') || popupDrawer.classList.contains('hidden')) {
-          showPlayerOverlaysAndStart5sTimer();
-        } else {
-          hidePlayerPopupImmediately();
-        }
-      });
-
-      document.getElementById('showPopupBottomBtn').addEventListener('click', (e) => {
-        e.stopPropagation();
-        showPlayerOverlaysAndStart5sTimer();
-      });
-
-      document.getElementById('hidePopupDrawerBtn').addEventListener('click', (e) => {
-        e.stopPropagation();
-        hidePlayerPopupImmediately();
-      });
-
-      document.getElementById('playerFavBtn').addEventListener('click', () => {
-        const ch = CHANNELS[state.currentChannelIndex];
-        if (!ch) return;
-        if (state.favorites.includes(ch.id)) {
-          state.favorites = state.favorites.filter(id => id !== ch.id);
-          showToast('Removed from My List');
-        } else {
-          state.favorites.push(ch.id);
-          showToast('Added to My List ★');
-        }
-        saveState();
-        document.getElementById('playerFavIcon').textContent = state.favorites.includes(ch.id) ? '★' : '☆';
-        document.getElementById('playerFavText').textContent = state.favorites.includes(ch.id) ? 'Saved' : 'Save';
-      });
-
-      document.getElementById('playerMuteBtn').addEventListener('click', () => {
-        state.isMuted = !state.isMuted;
-        const video = document.getElementById('liveVideoEl');
-        video.muted = state.isMuted;
-        document.getElementById('playerMuteBtn').textContent = state.isMuted ? '🔇 Muted' : '🔊 Sound On';
-      });
-
-      // FULLSCREEN + AUTO LANDSCAPE ORIENTATION
       document.getElementById('playerFullscreenBtn').addEventListener('click', async () => {
         const modal = document.getElementById('playerModal');
-        try {
-          if (!document.fullscreenElement) {
-            if (modal.requestFullscreen) {
-              await modal.requestFullscreen();
-            } else if (modal.webkitRequestFullscreen) {
-              await modal.webkitRequestFullscreen();
-            }
-            // Auto lock screen orientation to landscape if supported by browser
-            if (screen.orientation && screen.orientation.lock) {
-              await screen.orientation.lock('landscape').catch(() => {});
-            }
-          } else {
-            if (document.exitFullscreen) {
-              await document.exitFullscreen();
-            } else if (document.webkitExitFullscreen) {
-              await document.webkitExitFullscreen();
-            }
-            if (screen.orientation && screen.orientation.unlock) {
-              screen.orientation.unlock();
-            }
+        if (!document.fullscreenElement) {
+          if (modal.requestFullscreen) await modal.requestFullscreen();
+          if (screen.orientation && screen.orientation.lock) {
+            await screen.orientation.lock('landscape').catch(() => {});
           }
-        } catch (e) {}
+        } else {
+          if (document.exitFullscreen) await document.exitFullscreen();
+          if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+        }
       });
-
-      const loginModal = document.getElementById('phoneLoginModal');
-      function openLoginModal() {
-        loginModal.classList.remove('hidden');
-        loginModal.classList.add('flex');
-        document.getElementById('loginStepPhone').classList.remove('hidden');
-        document.getElementById('loginStepOtp').classList.add('hidden');
-      }
-      function closeLoginModal() {
-        loginModal.classList.add('hidden');
-        loginModal.classList.remove('flex');
-      }
 
       document.getElementById('signInTopBtn').addEventListener('click', () => {
-        if (state.userPhone) {
-          switchMainView('settings');
-        } else {
-          openLoginModal();
-        }
+        const modal = document.getElementById('phoneLoginModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
       });
-
-      document.getElementById('settingsAuthActionBtn').addEventListener('click', () => {
-        if (state.userPhone) {
-          state.userPhone = null;
-          saveState();
-          syncAuthAndSettingsUI();
-          showToast('Signed out successfully');
-        } else {
-          openLoginModal();
-        }
-      });
-
-      document.getElementById('closeLoginModalBtn').addEventListener('click', closeLoginModal);
-
-      document.getElementById('sendOtpBtn').addEventListener('click', () => {
-        const rawPhone = document.getElementById('phoneInput').value.replace(/\D/g, '');
-        if (rawPhone.length < 9) {
-          showToast('Please enter a valid BD phone number');
-          return;
-        }
-        state.generatedOtp = String(Math.floor(1000 + Math.random() * 9000));
-        document.getElementById('otpSentPhoneLabel').textContent = `+880${rawPhone}`;
-        document.getElementById('generatedOtpDisplay').textContent = state.generatedOtp;
-        document.getElementById('otpInput').value = state.generatedOtp;
-        document.getElementById('loginStepPhone').classList.add('hidden');
-        document.getElementById('loginStepOtp').classList.remove('hidden');
-        showToast(`OTP Code Sent: ${state.generatedOtp}`);
-      });
-
-      document.getElementById('backToPhoneStepBtn').addEventListener('click', () => {
-        document.getElementById('loginStepOtp').classList.add('hidden');
-        document.getElementById('loginStepPhone').classList.remove('hidden');
-      });
-
-      document.getElementById('verifyOtpBtn').addEventListener('click', () => {
-        const entered = document.getElementById('otpInput').value.trim();
-        const rawPhone = document.getElementById('phoneInput').value.replace(/\D/g, '');
-        if (entered === state.generatedOtp || entered.length === 4) {
-          state.userPhone = `+880${rawPhone}`;
-          saveState();
-          syncAuthAndSettingsUI();
-          closeLoginModal();
-          showToast(`Signed in to CS Tv as ${state.userPhone}`);
-        } else {
-          showToast('Invalid OTP code, try again');
-        }
-      });
-
-      const subModal = document.getElementById('subscribeModal');
-      document.getElementById('subscribeTopBtn').addEventListener('click', () => {
-        subModal.classList.remove('hidden');
-        subModal.classList.add('flex');
-      });
-      document.getElementById('closeSubscribeModalBtn').addEventListener('click', () => {
-        subModal.classList.add('hidden');
-        subModal.classList.remove('flex');
-      });
-      document.querySelectorAll('.sub-plan-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          state.isSubscribed = true;
-          saveState();
-          syncAuthAndSettingsUI();
-          subModal.classList.add('hidden');
-          subModal.classList.remove('flex');
-          showToast(`Activated ${btn.dataset.plan}! 👑`);
-        });
-      });
-
-      document.getElementById('settingQualitySelect').addEventListener('change', (e) => {
-        state.quality = e.target.value;
-        saveState();
-        showToast(`Video quality set to ${state.quality}`);
-      });
-
-      function setupSwitch(btnId, stateKey, label) {
-        const btn = document.getElementById(btnId);
-        btn.addEventListener('click', () => {
-          state[stateKey] = !state[stateKey];
-          const dot = btn.querySelector('.dot');
-          if (state[stateKey]) {
-            btn.className = 'w-11 h-6 rounded-full bg-pink-600 relative transition';
-            dot.className = 'dot w-4 h-4 rounded-full bg-white absolute top-1 right-1 transition-all';
-          } else {
-            btn.className = 'w-11 h-6 rounded-full bg-slate-700 relative transition';
-            dot.className = 'dot w-4 h-4 rounded-full bg-white absolute top-1 left-1 transition-all';
-          }
-          showToast(`${label}: ${state[stateKey] ? 'ON' : 'OFF'}`);
-        });
-      }
-
-      setupSwitch('toggleAutoplayBtn', 'autoplay', 'Auto-Play Next Channel');
-      setupSwitch('toggleDataSaverBtn', 'dataSaver', 'Data Saver Mode');
-      setupSwitch('toggleNotifyBtn', 'notifications', 'Live Match Notifications');
-
-      const customModal = document.getElementById('customStreamModal');
-      document.getElementById('openCustomStreamModalBtn').addEventListener('click', () => {
-        customModal.classList.remove('hidden');
-        customModal.classList.add('flex');
-      });
-      document.getElementById('closeCustomStreamModalBtn').addEventListener('click', () => {
-        customModal.classList.add('hidden');
-        customModal.classList.remove('flex');
-      });
-      document.getElementById('playCustomM3u8Btn').addEventListener('click', () => {
-        const url = document.getElementById('customM3u8Input').value.trim() || 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
-        customModal.classList.add('hidden');
-        customModal.classList.remove('flex');
-        openPlayerByChannelId(CHANNELS[0]?.id || 'ch-epl1', url);
-      });
-
-      document.getElementById('clearCacheBtn').addEventListener('click', () => {
-        state.favorites = [];
-        saveState();
-        renderMyList();
-        showToast('Watch history & cache cleared!');
+      document.getElementById('closeLoginModalBtn').addEventListener('click', () => {
+        document.getElementById('phoneLoginModal').classList.add('hidden');
       });
     });
   </script>
