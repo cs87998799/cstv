@@ -1,6 +1,11 @@
 {
   "channels": [
-    {"name":"UEFA Nations League 2","category":"Sports","logo":"","url":"https://serieAleague.akamaized.net/hls/live/2107107/A1@25853-tapmad/master.m3u8"},
+   {
+  "name": "ARY Digital",
+  "url": "https://www.youtube.com/live/1k5dM9-_DyA?si=CnwiV3KXWwIhnY1j",
+  "category": "Entertainment",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Ary_Digital_Logo.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original"
+} {"name":"UEFA Nations League 2","category":"Sports","logo":"","url":"https://serieAleague.akamaized.net/hls/live/2107107/A1@25853-tapmad/master.m3u8"},
     {"name":"T Sports","category":"Sports","logo":"","url":"https://mycoffeetime.net/play/tSDRdsaoGGQ2qYgRPDEe9q-qMIzoahbJArH3W3vOiEaB97nXMpWmLb0Ts759Tjsp/m3u8"},
     {"name":"Bein Sports Xtra HD","category":"Sports","logo":"","url":"https://bein-esp-xumo.amagi.tv/playlistR1080p.m3u8"},
     {"name":"PTV Sports","category":"Sports","logo":"","url":"https://tvsen5.aynaott.com/kP9vX2mZ7qL5wN3t/index.m3u8"},
