@@ -5,95 +5,133 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080b12">
-<title>CSTV — Live TV</title>
+<title>CSTV — Your Live TV</title>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#080b12;color:#fff;font-family:Arial,sans-serif}
+:root{--bg:#080b12;--panel:#121b28;--line:#29394e;--green:#20d997;--muted:#aebdce}
+body{margin:0;background:var(--bg);color:#fff;font-family:Arial,sans-serif}
 button,input,select,textarea{font:inherit}
-button{padding:10px 14px;border:0;border-radius:9px;background:#243246;color:white;cursor:pointer}
-button:focus-visible,.channel:focus-visible{outline:3px solid #20d997}
-.green{background:#20d997;color:#06140e;font-weight:bold}
-header{padding:16px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #263243}
-.logo{font-size:25px;font-weight:900}.logo span{color:#20d997}
-input,textarea{background:#131e2c;border:1px solid #35445a;color:white;border-radius:9px;padding:11px;width:100%}
-#search{max-width:280px}
-main{max-width:1300px;margin:auto;padding:20px 5%}
-.hero{padding:25px;border-radius:18px;background:linear-gradient(120deg,#173d35,#152238);margin-bottom:22px}
-.hero h1{font-size:clamp(30px,5vw,46px);margin:12px 0}
-.muted{color:#aebdce;font-size:13px;line-height:1.6}
-.settings{padding:16px;background:#121b28;border:1px solid #273649;border-radius:13px;margin-bottom:24px}
-textarea{min-height:85px;margin:8px 0;resize:vertical}
+button{padding:11px 15px;border:1px solid #35445a;border-radius:10px;background:#243246;color:white;cursor:pointer;transition:.2s}
+button:hover{border-color:var(--green);filter:brightness(1.1)}
+button:focus-visible,.channel:focus-visible{outline:3px solid var(--green)}
+.green{background:var(--green);color:#06140e;font-weight:bold;border-color:var(--green)}
+header{padding:16px 5%;display:flex;justify-content:space-between;align-items:center;gap:14px;border-bottom:1px solid var(--line);background:#0b111c;position:sticky;top:0;z-index:10}
+.logo{font-size:27px;font-weight:900;letter-spacing:-1px;white-space:nowrap}
+.logo span{color:var(--green)}
+input,textarea,select{background:#131e2c;border:1px solid #35445a;color:white;border-radius:10px;padding:12px;width:100%;min-width:0}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--green);border-color:var(--green)}
+#search{max-width:300px}
+main{max-width:1300px;margin:auto;padding:22px 5%}
+.hero{padding:clamp(22px,5vw,42px);border:1px solid #254a45;border-radius:20px;background:radial-gradient(ellipse at top right,#1b5145 0,transparent 55%),linear-gradient(125deg,#142b2b,#152238 75%);margin-bottom:22px}
+.live-label{font-size:12px;font-weight:bold;color:var(--green);letter-spacing:2px}
+.hero h1{font-size:clamp(32px,6vw,52px);margin:13px 0}
+.hero p{max-width:550px}
+.muted{color:var(--muted);font-size:13px;line-height:1.7}
+.settings{padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:16px;margin-bottom:24px}
+h2{font-size:20px;margin:24px 0 13px}
+.settings h2{margin-top:0}
+textarea{min-height:120px;margin:9px 0;resize:vertical;line-height:1.65;font-size:13px}
 .actions{display:flex;flex-wrap:wrap;gap:8px}
-h2{font-size:20px;margin:24px 0 12px}
-.categories{display:flex;gap:8px;overflow:auto;padding:5px 0 13px}
-.categories button{white-space:nowrap}
-.categories .active{background:#20d997;color:#06140e}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:12px}
-.channel{background:#141e2c;border:1px solid #273649;border-radius:12px;padding:12px;cursor:pointer;min-width:0}
-.channel:hover{border-color:#20d997}
-.channel-logo{height:80px;border-radius:8px;background:#080e17;display:flex;align-items:center;justify-content:center;margin-bottom:10px;overflow:hidden}
-.channel-logo img{max-width:90%;max-height:72px;object-fit:contain}
-.channel-name{font-size:14px;font-weight:bold;overflow-wrap:anywhere}
-.channel-cat{font-size:11px;color:#aebdce;margin-top:6px}
-#player{display:none;background:#111a26;border-radius:13px;padding:12px;margin:18px 0}
+.playlist-note{margin:10px 0 0}
+#player{display:none;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;margin:20px 0}
 #player.show{display:block}
-video{width:100%;aspect-ratio:16/9;background:black;display:block;max-height:75vh}
-.playerbar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-#status{font-size:12px;color:#b9cadb;margin-top:10px;overflow-wrap:anywhere}
-footer{text-align:center;padding:25px;color:#8495a9;font-size:12px}
-@media(max-width:500px){header,main{padding-left:4%;padding-right:4%}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+video{width:100%;aspect-ratio:16/9;background:#000;display:block;max-height:75vh;border-radius:9px}
+.playerbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.playerbar strong{font-size:16px;overflow-wrap:anywhere}
+#quality{width:auto;max-width:180px}
+#status{font-size:12px;color:#b9cadb;margin-top:10px;line-height:1.6;overflow-wrap:anywhere}
+.categories{display:flex;gap:8px;overflow-x:auto;padding:5px 0 14px;scrollbar-width:thin}
+.categories button{white-space:nowrap}
+.categories .active{background:var(--green);color:#06140e;border-color:var(--green);font-weight:bold}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:13px}
+.channel{background:#121c2a;border:1px solid #29394e;border-radius:14px;padding:12px;cursor:pointer;min-width:0;transition:transform .18s,border-color .18s}
+.channel:hover{border-color:var(--green);transform:translateY(-2px)}
+.channel-logo{height:88px;border-radius:9px;background:#080e17;display:flex;align-items:center;justify-content:center;margin-bottom:11px;overflow:hidden;position:relative}
+.channel-logo img{max-width:90%;max-height:76px;object-fit:contain;position:relative;z-index:1}
+.channel-logo b{position:absolute;color:var(--green);font-size:22px}
+.channel-name{font-size:14px;font-weight:bold;overflow-wrap:anywhere;line-height:1.4}
+.channel-cat{font-size:11px;color:var(--muted);margin-top:7px}
+.empty{padding:25px 12px;text-align:center;border:1px dashed var(--line);border-radius:12px;color:var(--muted);grid-column:1/-1}
+footer{text-align:center;padding:28px 12px;color:#8495a9;font-size:12px;border-top:1px solid #192434;margin-top:25px}
+@media(max-width:600px){
+ header{padding:12px 4%;gap:10px}
+ .logo{font-size:23px}
+ #search{max-width:none;font-size:13px;padding:10px}
+ main{padding:17px 4%}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .channel{padding:10px}
+ .channel-logo{height:78px}
+ .playerbar{align-items:flex-start}
+ .playerbar .actions{width:100%}
+ .playerbar .actions button{flex:1;padding:10px 8px}
+ #quality{max-width:155px}
+}
 </style>
 </head>
+
 <body>
 <header>
-  <div class="logo">CS <span>TV</span></div>
-  <input id="search" placeholder="Search channels..." type="search">
+  <div class="logo">CS<span>TV</span></div>
+  <input id="search" placeholder="🔎 Search channels..." type="search" aria-label="Search channels">
 </header>
 
 <main>
 <section class="hero">
-  <div>🔴 LIVE TELEVISION</div>
-  <h1>Welcome to CSTV</h1>
-  <p class="muted">Your channels, your playlist, one place.</p>
+  <div class="live-label">● LIVE TELEVISION</div>
+  <h1>Welcome to <span style="color:#20d997">CSTV</span></h1>
+  <p class="muted">আপনার পছন্দের চ্যানেল, স্পোর্টস ও লাইভ স্ট্রিম এক জায়গায়।</p>
   <button class="green" onclick="document.querySelector('#browse').scrollIntoView({behavior:'smooth'})">▶ Browse Channels</button>
 </section>
 
 <section class="settings">
-  <h2 style="margin-top:0">Playlist Manager</h2>
-  <p class="muted">প্রতি লাইনে একটি করে নিজের অনুমোদিত JSON, M3U বা M3U8 playlist-এর Raw URL দাও। URL সেভ থাকলে পরের বারও ব্যবহার হবে।</p>
-  <textarea id="sources" placeholder="https://raw.githubusercontent.com/OWNER/REPO/main/playlist.m3u&#10;https://raw.githubusercontent.com/OWNER/REPO/main/channels.json"></textarea>
+  <h2>⚙ Playlist Manager</h2>
+  <p class="muted">
+    প্রতি লাইনে একটি করে playlist URL রাখ। JSON, M3U এবং M3U8 playlist সমর্থিত।
+    পরিবর্তনের পর Save &amp; Load চাপলে নতুন তালিকা সেভ হবে।
+  </p>
+
+  <textarea id="sources" spellcheck="false" aria-label="Playlist URLs" placeholder="প্রতি লাইনে একটি playlist URL"></textarea>
+
   <div class="actions">
-    <button class="green" onclick="saveAndLoad()">↻ Save & Load</button>
-    <button onclick="discoverSony()">Find SonyLIV Files</button>
-    <button onclick="loadChannels()">Refresh</button>
+    <button class="green" onclick="saveAndLoad()">↻ Save &amp; Load</button>
+    <button onclick="loadChannels()">⟳ Refresh</button>
+    <button onclick="discoverSony()">⌕ Find SonyLIV Files</button>
+    <button onclick="resetSources()">↺ Reset Default Links</button>
   </div>
-  <p class="muted">SonyLIV repository: srhady/SonyLiv. ফাইল খুঁজে পাওয়া মানেই তাতে playable video URL আছে, এমন নয়।</p>
+
+  <p class="muted playlist-note">
+    SonyLiv JSON · Tapmad BD M3U · H Playlist M3U8
+    <br>স্ট্রিম চালাতে বৈধ অ্যাক্সেস এবং সমর্থিত ভিডিও ফরম্যাট প্রয়োজন।
+  </p>
 </section>
 
 <section id="player">
   <div class="playerbar">
     <strong id="playingName">CSTV Player</strong>
     <div class="actions">
-      <button onclick="previousChannel()">⏮</button>
-      <button onclick="nextChannel()">⏭</button>
+      <button onclick="previousChannel()">⏮ Previous</button>
+      <button onclick="nextChannel()">Next ⏭</button>
       <button onclick="fullscreen()">⛶ Fullscreen</button>
       <button onclick="closePlayer()">✕ Close</button>
     </div>
   </div>
+
   <video id="video" controls playsinline autoplay></video>
-  <div class="playerbar" style="margin-top:9px">
+
+  <div class="playerbar" style="margin-top:12px;margin-bottom:0">
     <button onclick="togglePlay()">▶ Play / Pause</button>
-    <select id="quality" onchange="changeQuality(this.value)">
+    <select id="quality" onchange="changeQuality(this.value)" aria-label="Video quality">
       <option value="-1">Quality: Auto</option>
     </select>
   </div>
-  <div id="status">Loading...</div>
+  <div id="status" role="status" aria-live="polite">Ready.</div>
 </section>
 
 <section id="browse">
   <h2>📺 Live Channels</h2>
-  <nav id="categories" class="categories">
+  <nav id="categories" class="categories" aria-label="Channel categories">
     <button class="active" data-cat="All">All</button>
     <button data-cat="Bangla">Bangla</button>
     <button data-cat="Sports">Sports</button>
@@ -102,253 +140,473 @@ footer{text-align:center;padding:25px;color:#8495a9;font-size:12px}
     <button data-cat="International">International</button>
     <button data-cat="Other">Other</button>
   </nav>
-  <div id="grid" class="grid">Loading channels...</div>
+  <div id="grid" class="grid">
+    <div class="empty">Loading playlists...</div>
+  </div>
 </section>
 </main>
-<footer>CSTV · JSON + M3U/M3U8</footer>
+
+<footer>
+  CSTV · Live TV Playlist Manager · JSON + M3U + M3U8
+</footer>
 
 <script>
-const $=id=>document.getElementById(id);
-const DEFAULT_SOURCE='https://raw.githubusercontent.com/cs87998799/cstv/main/channels.json';
+'use strict';
 
-let channels=[],visible=[],current=-1,category='All',hls=null;
+const $ = id => document.getElementById(id);
 
-function status(s){$('status').textContent=s}
-function escapeHTML(s){
- return String(s??'').replace(/[&<>"']/g,c=>({
-  '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
- }[c]));
+const DEFAULT_PLAYLISTS = [
+  'https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv_playlist.json',
+  'https://gist.githubusercontent.com/albatr0ssss/3cff7a26be49b1d352c15f615067e7cd/raw/tapmad_bd.m3u',
+  'https://rashedan.short.gy/H.m3u8'
+];
+
+const STORAGE_KEY = 'cstv_sources_v2';
+
+let channels = [];
+let visible = [];
+let current = -1;
+let category = 'All';
+let hls = null;
+let loadToken = 0;
+
+function status(message) {
+  $('status').textContent = message;
 }
 
-function normalizeItem(x){
- if(!x||typeof x!=='object')return null;
- const name=x.name||x.title||x.channel||x.event_name||
-  x.eventName||x.match_name||x.contentTitle||x.label;
- const url=x.url||x.stream||x.stream_url||x.streamUrl||
-  x.hlsUrl||x.playbackUrl||x.playback_url||x.manifest||
-  x.mpd||x.m3u8||x.link;
- if(!name||typeof url!=='string'||!/^https?:\/\//i.test(url))return null;
- return {
-  name:String(name),url,
-  logo:x.logo||x.tvg_logo||x.tvgLogo||x.image||x.thumbnail||'',
-  category:x.category||x.group||x.groupTitle||
-   x['group-title']||x.event_category||'Other'
- };
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>"']/g, c => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
+  }[c]));
 }
 
-function parseJSON(data){
- const out=[],seen=new Set();
- function walk(x,depth){
-  if(!x||depth>9)return;
-  if(Array.isArray(x)){x.forEach(v=>walk(v,depth+1));return}
-  if(typeof x!=='object')return;
-  const c=normalizeItem(x);
-  if(c&&!seen.has(c.url)){seen.add(c.url);out.push(c)}
-  Object.values(x).forEach(v=>{
-   if(v&&typeof v==='object')walk(v,depth+1);
-  });
- }
- walk(data,0);
- return out;
-}
-
-function parseM3U(text){
- const lines=text.replace(/^\uFEFF/,'').split(/\r?\n/);
- const out=[];
- let info='';
- for(const raw of lines){
-  const s=raw.trim();
-  if(s.startsWith('#EXTINF')){
-   info=s;
-  }else if(s&&!s.startsWith('#')&&info){
-   const attr=k=>{
-    const m=info.match(new RegExp(k+'="([^"]*)"','i'));
-    return m?m[1]:'';
-   };
-   const comma=info.indexOf(',');
-   out.push({
-    name:comma>=0?info.slice(comma+1).trim():'Channel',
-    url:s,
-    logo:attr('tvg-logo'),
-    category:attr('group-title')||'Other'
-   });
-   info='';
+function getSavedSources() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved !== null) return saved;
+  } catch (e) {
+    console.warn('Local storage unavailable:', e);
   }
- }
- return out;
+  return DEFAULT_PLAYLISTS.join('\n');
 }
 
-async function fetchPlaylist(url){
- const response=await fetch(url,{cache:'no-store'});
- if(!response.ok)throw Error('HTTP '+response.status);
- const text=await response.text();
- if(/^\s*#EXTM3U|#EXTINF/i.test(text.slice(0,5000))){
-  return parseM3U(text);
- }
- return parseJSON(JSON.parse(text));
-}
+function saveAndLoad() {
+  const urls = $('sources').value
+    .split(/\r?\n/)
+    .map(s => s.trim())
+    .filter(Boolean);
 
-function saveAndLoad(){
- try{localStorage.setItem('cstv_sources',$('sources').value)}catch(e){}
- loadChannels();
-}
+  const invalid = urls.filter(url => !/^https?:\/\//i.test(url));
 
-async function loadChannels(){
- status('Loading playlists...');
- const urls=[
-  DEFAULT_SOURCE,
-  ...$('sources').value.split(/\r?\n/).map(s=>s.trim()).filter(s=>/^https?:\/\//i.test(s))
- ];
- let all=[],loaded=0,failed=0;
- for(const url of [...new Set(urls)]){
-  try{
-   all.push(...await fetchPlaylist(url));
-   loaded++;
-  }catch(e){
-   failed++;
-   console.warn('Playlist failed:',url,e);
+  if (invalid.length) {
+    status('Invalid URL found. প্রতি লাইনে একটি সম্পূর্ণ http/https URL দে।');
+    return;
   }
- }
- const map=new Map();
- all.forEach(c=>{if(c.url&&!map.has(c.url))map.set(c.url,c)});
- channels=[...map.values()];
- render();
- status(channels.length
-  ?channels.length+' channels loaded. Sources OK: '+loaded+'. Failed: '+failed+'.'
-  :'No channels found. Check Raw URLs, JSON format and CORS.');
+
+  try {
+    localStorage.setItem(STORAGE_KEY, urls.join('\n'));
+  } catch (e) {
+    status('Browser storage unavailable. Playlist এই সেশনে লোড করার চেষ্টা করছি।');
+  }
+
+  loadChannels();
 }
 
-async function discoverSony(){
- status('Searching SonyLIV repository for JSON/M3U files...');
- try{
-  const r=await fetch('https://api.github.com/repos/srhady/SonyLiv/git/trees/main?recursive=1');
-  if(!r.ok)throw Error('GitHub API: '+r.status);
-  const tree=await r.json();
-  const files=(tree.tree||[]).filter(f=>
-   f.type==='blob'&&/\.(m3u|m3u8|json)$/i.test(f.path)
-  );
-  if(!files.length)throw Error('No JSON/M3U files found on main branch.');
-  $('sources').value=files.map(f=>
-   'https://raw.githubusercontent.com/srhady/SonyLiv/main/'+
-   f.path.split('/').map(encodeURIComponent).join('/')
-  ).join('\n');
+function resetSources() {
+  $('sources').value = DEFAULT_PLAYLISTS.join('\n');
   saveAndLoad();
- }catch(e){
-  status('Could not auto-discover files: '+e.message+
-   '. Open the repository and copy the Raw URL of the required file.');
- }
 }
 
-function catOf(c){
- const s=String(c.category).toLowerCase();
- if(/sport|cricket|football/.test(s))return 'Sports';
- if(/news/.test(s))return 'News';
- if(/entertain/.test(s))return 'Entertainment';
- if(/international/.test(s))return 'International';
- if(/bangla|bangladesh/.test(s))return 'Bangla';
- return 'Other';
+function normalizeItem(x) {
+  if (!x || typeof x !== 'object') return null;
+
+  const name = x.name || x.title || x.channel || x.event_name ||
+    x.eventName || x.match_name || x.contentTitle || x.label ||
+    x.channelName || x.channel_name;
+
+  const url = x.url || x.stream || x.stream_url || x.streamUrl ||
+    x.hlsUrl || x.playbackUrl || x.playback_url || x.manifest ||
+    x.mpd || x.m3u8 || x.link;
+
+  if (!name || typeof url !== 'string' ||
+      !/^https?:\/\//i.test(url)) return null;
+
+  return {
+    name: String(name),
+    url: url.trim(),
+    logo: x.logo || x.tvg_logo || x.tvgLogo || x.image ||
+      x.thumbnail || x.icon || '',
+    category: x.category || x.group || x.groupTitle ||
+      x['group-title'] || x.event_category || x.genre || 'Other'
+  };
 }
 
-function render(){
- const q=$('search').value.trim().toLowerCase();
- visible=channels.filter(c=>
-  (category==='All'||catOf(c)===category)&&
-  c.name.toLowerCase().includes(q)
- );
- if(!visible.length){$('grid').textContent='No channels found.';return}
- $('grid').innerHTML=visible.map((c,i)=>`
-  <div class="channel" tabindex="0" role="button" data-i="${i}">
-   <div class="channel-logo">
-    ${c.logo?`<img src="${escapeHTML(c.logo)}" alt="" onerror="this.remove()">`:''}
-    <b>${escapeHTML(c.name.slice(0,3).toUpperCase())}</b>
-   </div>
-   <div class="channel-name">${escapeHTML(c.name)}</div>
-   <div class="channel-cat">${escapeHTML(c.category)}</div>
-  </div>`).join('');
- $('grid').querySelectorAll('.channel').forEach(el=>{
-  const open=()=>playChannel(Number(el.dataset.i));
-  el.addEventListener('click',open);
-  el.addEventListener('keydown',e=>{
-   if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}
+function parseJSON(data) {
+  const out = [];
+  const seen = new Set();
+
+  function walk(x, depth) {
+    if (!x || depth > 12) return;
+
+    if (Array.isArray(x)) {
+      x.forEach(v => walk(v, depth + 1));
+      return;
+    }
+
+    if (typeof x !== 'object') return;
+
+    const c = normalizeItem(x);
+    if (c && !seen.has(c.url)) {
+      seen.add(c.url);
+      out.push(c);
+    }
+
+    Object.values(x).forEach(v => {
+      if (v && typeof v === 'object') walk(v, depth + 1);
+    });
+  }
+
+  walk(data, 0);
+  return out;
+}
+
+function parseM3U(text) {
+  const lines = text.replace(/^\uFEFF/, '').split(/\r?\n/);
+  const out = [];
+  let info = '';
+
+  for (const raw of lines) {
+    const s = raw.trim();
+
+    if (s.startsWith('#EXTINF')) {
+      info = s;
+    } else if (s && !s.startsWith('#') && info) {
+      const attr = key => {
+        const safeKey = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const m = info.match(new RegExp(safeKey + '="([^"]*)"', 'i'));
+        return m ? m[1] : '';
+      };
+
+      const comma = info.indexOf(',');
+      const name = comma >= 0 ? info.slice(comma + 1).trim() : 'Channel';
+
+      out.push({
+        name: name || 'Channel',
+        url: s,
+        logo: attr('tvg-logo'),
+        category: attr('group-title') || 'Other'
+      });
+
+      info = '';
+    }
+  }
+
+  return out;
+}
+
+async function fetchPlaylist(url) {
+  const response = await fetch(url, {cache:'no-store'});
+
+  if (!response.ok) {
+    throw Error('HTTP ' + response.status);
+  }
+
+  const text = await response.text();
+  const trimmed = text.replace(/^\uFEFF/, '').trim();
+
+  if (/^#EXTM3U\b/i.test(trimmed) || /#EXTINF:/i.test(trimmed)) {
+    return parseM3U(trimmed);
+  }
+
+  try {
+    return parseJSON(JSON.parse(trimmed));
+  } catch (e) {
+    throw Error('Unsupported playlist format or invalid JSON');
+  }
+}
+
+async function loadChannels() {
+  const token = ++loadToken;
+  const urls = $('sources').value
+    .split(/\r?\n/)
+    .map(s => s.trim())
+    .filter(s => /^https?:\/\//i.test(s));
+
+  if (!urls.length) {
+    channels = [];
+    render();
+    status('কোনো playlist URL নেই। Playlist Manager-এ লিংক যোগ কর।');
+    return;
+  }
+
+  $('grid').innerHTML = '<div class="empty">Loading playlists...</div>';
+  status('Loading ' + urls.length + ' playlist(s)...');
+
+  let all = [];
+  let loaded = 0;
+  const errors = [];
+
+  for (const url of [...new Set(urls)]) {
+    if (token !== loadToken) return;
+
+    try {
+      const result = await fetchPlaylist(url);
+      all.push(...result);
+      loaded++;
+      console.log('Playlist loaded:', url, result.length);
+    } catch (e) {
+      errors.push(url + ': ' + e.message);
+      console.warn('Playlist failed:', url, e);
+    }
+  }
+
+  if (token !== loadToken) return;
+
+  const map = new Map();
+
+  all.forEach(c => {
+    if (c.url && !map.has(c.url)) map.set(c.url, c);
   });
- });
+
+  channels = [...map.values()];
+  render();
+
+  if (channels.length) {
+    status(channels.length + ' channels loaded. Successful playlists: ' +
+      loaded + '/' + new Set(urls).size +
+      (errors.length ? '. কিছু playlist লোড হয়নি; Console-এ বিস্তারিত আছে।' : '.'));
+  } else {
+    status('কোনো channel পাওয়া যায়নি। URL, JSON structure, CORS এবং playlist format পরীক্ষা কর।');
+  }
 }
 
-function playChannel(i){
- const c=visible[i];if(!c)return;
- current=i;
- $('player').classList.add('show');
- $('playingName').textContent=c.name;
- status('Connecting to '+c.name+'...');
- stopPlayer();
- const url=c.url;
- if(/\.m3u8?($|[?#])/i.test(url)&&window.Hls&&Hls.isSupported()){
-  hls=new Hls();
-  hls.loadSource(url);
-  hls.attachMedia($('video'));
-  hls.on(Hls.Events.MANIFEST_PARSED,()=>{
-   fillQuality();
-   $('video').play().then(()=>status('Playing: '+c.name))
-    .catch(()=>status('Press Play. Autoplay may be blocked.'));
+async function discoverSony() {
+  status('Searching SonyLiv repository for JSON/M3U files...');
+
+  try {
+    const response = await fetch(
+      'https://api.github.com/repos/srhady/SonyLiv/git/trees/main?recursive=1'
+    );
+
+    if (!response.ok) throw Error('GitHub API: ' + response.status);
+
+    const data = await response.json();
+    const files = (data.tree || []).filter(f =>
+      f.type === 'blob' && /\.(m3u|m3u8|json)$/i.test(f.path)
+    );
+
+    if (!files.length) throw Error('No JSON/M3U files found.');
+
+    $('sources').value = files.map(f =>
+      'https://raw.githubusercontent.com/srhady/SonyLiv/main/' +
+      f.path.split('/').map(encodeURIComponent).join('/')
+    ).join('\n');
+
+    saveAndLoad();
+  } catch (e) {
+    status('SonyLiv discovery failed: ' + e.message +
+      '. তোর নির্দিষ্ট JSON playlist URL ইতিমধ্যেই দেওয়া আছে।');
+  }
+}
+
+function catOf(c) {
+  const s = String(c.category).toLowerCase();
+
+  if (/sport|cricket|football|tennis|match/.test(s)) return 'Sports';
+  if (/news|সংবাদ/.test(s)) return 'News';
+  if (/entertain|movie|film|music/.test(s)) return 'Entertainment';
+  if (/international|world|foreign/.test(s)) return 'International';
+  if (/bangla|bangladesh|বাংলা/.test(s)) return 'Bangla';
+
+  return 'Other';
+}
+
+function render() {
+  const query = $('search').value.trim().toLowerCase();
+
+  visible = channels.filter(c =>
+    (category === 'All' || catOf(c) === category) &&
+    c.name.toLowerCase().includes(query)
+  );
+
+  if (!visible.length) {
+    $('grid').innerHTML =
+      '<div class="empty">কোনো channel পাওয়া যায়নি।<br>Playlist load হয়েছে কি না উপরের status দেখ।</div>';
+    return;
+  }
+
+  $('grid').innerHTML = visible.map((c, i) => `
+    <div class="channel" tabindex="0" role="button"
+         aria-label="Play ${escapeHTML(c.name)}" data-i="${i}">
+      <div class="channel-logo">
+        <b>${escapeHTML(c.name.slice(0, 3).toUpperCase())}</b>
+        ${c.logo ? `<img src="${escapeHTML(c.logo)}" alt=""
+          loading="lazy" onerror="this.remove()">` : ''}
+      </div>
+      <div class="channel-name">${escapeHTML(c.name)}</div>
+      <div class="channel-cat">${escapeHTML(c.category)}</div>
+    </div>
+  `).join('');
+
+  $('grid').querySelectorAll('.channel').forEach(el => {
+    const open = () => playChannel(Number(el.dataset.i));
+
+    el.addEventListener('click', open);
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        open();
+      }
+    });
   });
-  hls.on(Hls.Events.ERROR,(e,d)=>{
-   if(d.fatal)status('Stream error: URL expired, CORS, authentication or unsupported stream.');
+}
+
+function stopPlayer() {
+  if (hls) {
+    hls.destroy();
+    hls = null;
+  }
+
+  const video = $('video');
+  video.pause();
+  video.removeAttribute('src');
+  video.load();
+
+  $('quality').innerHTML = '<option value="-1">Quality: Auto</option>';
+}
+
+function playChannel(i) {
+  const c = visible[i];
+  if (!c) return;
+
+  current = i;
+  $('player').classList.add('show');
+  $('playingName').textContent = c.name;
+
+  stopPlayer();
+  status('Connecting to ' + c.name + '...');
+
+  const video = $('video');
+  const url = c.url;
+
+  if (/\.m3u8?($|[?#])/i.test(url) &&
+      window.Hls && Hls.isSupported()) {
+    hls = new Hls({
+      enableWorker: true,
+      capLevelToPlayerSize: true
+    });
+
+    hls.loadSource(url);
+    hls.attachMedia(video);
+
+    hls.on(Hls.Events.MANIFEST_PARSED, () => {
+      fillQuality();
+      video.play()
+        .then(() => status('Playing: ' + c.name))
+        .catch(() => status('Stream ready. Press Play to start.'));
+    });
+
+    hls.on(Hls.Events.ERROR, (event, data) => {
+      if (data.fatal) {
+        status('Stream error. URL expired, CORS, authentication, network or unsupported stream হতে পারে.');
+      }
+    });
+  } else {
+    video.src = url;
+
+    video.play()
+      .then(() => status('Playing: ' + c.name))
+      .catch(() => status('Playback failed. Format, browser support বা stream access পরীক্ষা কর।'));
+  }
+
+  $('player').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function closePlayer() {
+  stopPlayer();
+  $('player').classList.remove('show');
+  status('Player closed.');
+}
+
+function nextChannel() {
+  if (visible.length) playChannel((current + 1) % visible.length);
+}
+
+function previousChannel() {
+  if (visible.length) {
+    playChannel((current - 1 + visible.length) % visible.length);
+  }
+}
+
+function togglePlay() {
+  const video = $('video');
+
+  if (video.paused) {
+    video.play().catch(() => status('Playback failed. Press Play again or check stream access.'));
+  } else {
+    video.pause();
+  }
+}
+
+function fullscreen() {
+  const video = $('video');
+
+  if (video.requestFullscreen) {
+    video.requestFullscreen().catch(() => {});
+  } else if (video.webkitEnterFullscreen) {
+    video.webkitEnterFullscreen();
+  }
+}
+
+function fillQuality() {
+  $('quality').innerHTML = '<option value="-1">Quality: Auto</option>';
+
+  if (!hls) return;
+
+  hls.levels.forEach((level, i) => {
+    if (!level.height) return;
+
+    const option = document.createElement('option');
+    option.value = i;
+    option.textContent = level.height + 'p';
+    $('quality').appendChild(option);
   });
- }else{
-  $('video').src=url;
-  $('video').play().then(()=>status('Playing: '+c.name))
-   .catch(()=>status('Cannot play this stream. Check its format and access requirements.'));
- }
- $('player').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function stopPlayer(){
- if(hls){hls.destroy();hls=null}
- $('video').pause();
- $('video').removeAttribute('src');
- $('video').load();
- $('quality').innerHTML='<option value="-1">Quality: Auto</option>';
+function changeQuality(value) {
+  if (hls) hls.currentLevel = Number(value);
 }
-function closePlayer(){stopPlayer();$('player').classList.remove('show')}
-function nextChannel(){if(visible.length)playChannel((current+1)%visible.length)}
-function previousChannel(){if(visible.length)playChannel((current-1+visible.length)%visible.length)}
-function togglePlay(){
- const v=$('video');
- if(v.paused)v.play().catch(()=>{});else v.pause();
-}
-function fullscreen(){
- const v=$('video');
- if(v.requestFullscreen)v.requestFullscreen().catch(()=>{});
- else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen();
-}
-function fillQuality(){
- $('quality').innerHTML='<option value="-1">Quality: Auto</option>';
- if(!hls)return;
- hls.levels.forEach((l,i)=>{
-  if(!l.height)return;
-  const o=document.createElement('option');
-  o.value=i;o.textContent=l.height+'p';
-  $('quality').appendChild(o);
- });
-}
-function changeQuality(v){if(hls)hls.currentLevel=Number(v)}
 
-$('search').addEventListener('input',render);
-$('categories').addEventListener('click',e=>{
- const b=e.target.closest('button[data-cat]');if(!b)return;
- category=b.dataset.cat;
- $('categories').querySelectorAll('button').forEach(x=>
-  x.classList.toggle('active',x===b)
- );
- render();
+$('search').addEventListener('input', render);
+
+$('categories').addEventListener('click', e => {
+  const button = e.target.closest('button[data-cat]');
+  if (!button) return;
+
+  category = button.dataset.cat;
+
+  $('categories').querySelectorAll('button').forEach(b => {
+    b.classList.toggle('active', b === button);
+  });
+
+  render();
 });
-document.addEventListener('keydown',e=>{
- if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;
- if(e.key==='ArrowRight')nextChannel();
- if(e.key==='ArrowLeft')previousChannel();
- if(e.key==='Enter')togglePlay();
+
+document.addEventListener('keydown', e => {
+  if (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+
+  if (e.key === 'ArrowRight') nextChannel();
+  if (e.key === 'ArrowLeft') previousChannel();
+  if (e.key === 'Enter' && $('player').classList.contains('show')) togglePlay();
 });
-try{$('sources').value=localStorage.getItem('cstv_sources')||''}catch(e){}
+
+// New storage key ensures old saved playlist URLs are replaced
+// by the three new defaults on the first launch of this version.
+$('sources').value = getSavedSources();
 loadChannels();
 </script>
 </body>
