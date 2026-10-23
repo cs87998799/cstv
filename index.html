@@ -3,382 +3,707 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#080808">
-<title>CS TV | Watch Live</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#09090d">
+<title>CSTV — Live TV</title>
+
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<style>
-:root{--bg:#080808;--panel:#181818;--red:#e50914;--muted:#aaa}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:white;font-family:Arial,Helvetica,sans-serif}
-button,input,select{font:inherit}
-button{cursor:pointer}
-button:focus-visible,a:focus-visible,input:focus-visible,.channel:focus-visible{outline:3px solid white;outline-offset:3px}
-header{height:66px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;gap:15px;background:#080808;position:sticky;top:0;z-index:10;border-bottom:1px solid #ffffff12}
-.brand{font-size:27px;font-weight:900;letter-spacing:-1px;white-space:nowrap}
-.brand span{color:var(--red)}
-.search{width:min(320px,50%);background:#181818;border:1px solid #555;color:white;border-radius:5px;padding:11px 13px}
-main{max-width:1500px;margin:auto;padding:22px 5%}
-.hero{min-height:350px;border-radius:9px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(24px,5vw,65px);overflow:hidden;position:relative;background:linear-gradient(90deg,#080808 0%,#080808e8 35%,#08080850 100%),radial-gradient(ellipse at 78% 45%,#9e111a,#421015 32%,#171717 68%,#080808)}
-.hero:after{content:"CS TV";position:absolute;right:3%;bottom:-35px;font-size:clamp(70px,15vw,190px);font-weight:900;color:#ffffff08;pointer-events:none}
-.live{background:var(--red);padding:6px 10px;border-radius:3px;font-size:11px;font-weight:bold;letter-spacing:1px}
-.hero h1{font-size:clamp(38px,6vw,70px);letter-spacing:-2px;line-height:1.03;margin:18px 0 12px;max-width:720px}
-.hero p{color:#ddd;line-height:1.6;max-width:530px}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-.btn{border:0;border-radius:5px;padding:12px 18px;font-weight:bold;background:#333;color:white}
-.btn-red{background:var(--red)}
-.btn-red:hover{background:#bd0710}
-.btn:hover{filter:brightness(1.15)}
-h2{font-size:22px;margin:28px 0 15px}
-.categories{display:flex;gap:9px;overflow-x:auto;padding:4px 2px 12px}
-.categories button{white-space:nowrap;border:1px solid #ffffff25;background:#202020;color:white;padding:9px 15px;border-radius:22px}
-.categories button.active{background:white;color:#111}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:15px}
-.channel{background:linear-gradient(145deg,#202020,#111);border:1px solid #ffffff12;border-radius:8px;padding:11px;min-width:0;cursor:pointer;transition:transform .18s,border-color .18s}
-.channel:hover,.channel:focus-visible{transform:translateY(-3px);border-color:#777;background:#252525}
-.logo{height:100px;border-radius:6px;background:#0b0b0b;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:11px}
-.logo img{max-width:92%;max-height:85px;object-fit:contain}
-.logo b{font-size:21px;color:#eee}
-.channel-name{font-weight:bold;font-size:14px;overflow-wrap:anywhere}
-.channel-meta{color:var(--muted);font-size:11px;margin-top:7px}
-.player{display:none;background:#111;border:1px solid #333;border-radius:8px;margin:22px 0;padding:12px}
-.player.show{display:block}
-.playerhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
-.playerhead h2{font-size:18px;margin:0}
-.stage{position:relative;aspect-ratio:16/9;max-height:78vh;background:black;border-radius:6px;overflow:hidden}
-video{display:block;width:100%;height:100%;object-fit:contain;background:#000}
-.overlay{position:absolute;inset:0;padding:12px;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none;background:linear-gradient(#000a,transparent 25%,transparent 60%,#000c)}
-.overlay button,.overlay select{pointer-events:auto;background:#202020e8;color:white;border:1px solid #ffffff35;border-radius:5px;padding:9px 12px}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.group{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
-#status{font-size:12px;color:#ccc;padding:8px 2px 0}
-#notice{display:none;padding:15px;background:#251012;border:1px solid #6d2026;border-radius:6px;margin:15px 0}
-footer{border-top:1px solid #ffffff15;color:#888;text-align:center;padding:25px;font-size:12px}
-body.directMode{overflow:hidden}
-body.directMode header,body.directMode .hero,body.directMode #browseTitle,body.directMode #categories,body.directMode #grid,body.directMode footer{display:none!important}
-body.directMode main{padding:0;max-width:none}
-body.directMode #player{display:block!important;position:fixed;inset:0;z-index:100;margin:0;padding:0;border:0;border-radius:0;background:#000}
-body.directMode .stage{width:100vw;height:100dvh;max-height:none;aspect-ratio:auto;border-radius:0}
-body.directMode video{width:100%;height:100%;object-fit:contain}
-body.directMode .playerhead{position:absolute;z-index:2;top:10px;left:12px;right:12px;text-shadow:0 1px 5px black}
-body.directMode .playerhead h2{font-size:15px}
-body.directMode .playerhead button{background:#222e}
-body.directMode #status{position:absolute;bottom:4px;left:12px;z-index:3;text-shadow:0 1px 5px black}
-@media(max-width:600px){
- header{height:58px;padding:0 4%}.brand{font-size:23px}
- main{padding:14px 4%}.hero{min-height:265px;padding:24px}
- .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
- .logo{height:80px}.player{padding:6px}
- .overlay{padding:6px}.overlay button,.overlay select{font-size:11px;padding:7px}
-}
 
-/* CSTV Premium animations */
+<style>
+:root {
+  --bg: #09090d;
+  --panel: #17171f;
+  --red: #e50914;
+  --text: #fff;
+  --muted: #aaa;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  background: #101015;
+  border-bottom: 1px solid #292932;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.brand {
+  color: var(--red);
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+.brand small {
+  display: block;
+  color: #ddd;
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+#search {
+  width: min(48%, 300px);
+  padding: 11px 13px;
+  border: 1px solid #383842;
+  border-radius: 22px;
+  background: #22222b;
+  color: white;
+  outline: none;
+}
+main { padding: 16px; }
+h2 { font-size: 19px; margin: 16px 0 12px; }
+button, select { cursor: pointer; }
+button {
+  border: 1px solid #383842;
+  border-radius: 8px;
+  padding: 9px 12px;
+  color: white;
+  background: #24242d;
+  font-size: 13px;
+}
+button:active { transform: scale(.97); }
+button.active, button.primary {
+  background: var(--red);
+  border-color: var(--red);
+}
+.tools, #categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+.tools button { border-radius: 20px; }
+#player {
+  background: #111116;
+  border: 1px solid #292932;
+  border-radius: 13px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+#playerTitle {
+  padding: 12px 14px;
+  font-size: 16px;
+  font-weight: bold;
+}
+#stage {
+  position: relative;
+  background: #000;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+#video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+#stage:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
+}
+#stage:fullscreen #video {
+  width: 100%;
+  height: 100%;
+}
 .live {
-  animation: cstvPulse 1.8s infinite;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  padding: 6px 10px;
+  border-radius: 5px;
+  background: var(--red);
+  font-weight: bold;
+  font-size: 12px;
+  pointer-events: none;
+  animation: livePulse 1.4s infinite;
 }
-
-@keyframes cstvPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .72; }
+@keyframes livePulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 #e5091460; }
+  50% { opacity: .72; box-shadow: 0 0 0 7px #e5091400; }
 }
-
-.channel {
-  transition: transform .22s ease, border-color .22s ease,
-              box-shadow .22s ease;
+.overlay {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 35px 10px 12px;
+  background: linear-gradient(transparent, #000d);
+  transition: opacity .3s, visibility .3s;
 }
-
-.channel:hover {
-  transform: translateY(-4px) scale(1.015);
-  border-color: #e50914;
-  box-shadow: 0 8px 24px #e5091430;
-}
-
-.channel:active {
-  transform: scale(.98);
-}
-</style>
-</head>
-<body>
-<header>
-  <div class="brand"><span>CS</span> TV</div>
-  <input id="search" class="search" type="search" placeholder="চ্যানেল খুঁজুন..." aria-label="চ্যানেল খুঁজুন">
-</header>
-
-<main>
-  <section class="hero">
-    <span class="live">● LIVE TV</span>
-    <h1>Entertainment.<br>Anytime.</h1>
-    <p>তোমার পছন্দের লাইভ টিভি চ্যানেল—এক জায়গায়, নতুন সিনেমাটিক অভিজ্ঞতায়।</p>
-    <div class="actions">
-      <button class="btn btn-red" id="browseBtn">▶ চ্যানেল দেখুন</button>
-      <button class="btn" id="heroPlayBtn">▶ লাইভ চালান</button>
-    </div>
-  </section>
-
-  <section id="player" class="player">
-    <div class="playerhead">
-      <h2 id="playerTitle">CS TV Live</h2>
-      <button class="btn" id="closeBtn">✕ বন্ধ</button>
-    </div>
-    <div class="stage" id="stage">
-      <video id="video" controls playsinline autoplay></video>
-      <div class="overlay">
-        <div class="bar">
-          <span class="live">● LIVE</span>
-          <div class="group">
-            <button id="prevBtn" title="আগের চ্যানেল">◀ আগের</button>
-            <button id="nextBtn" title="পরের চ্যানেল">পরের ▶</button>
-          </div>
-        </div>
-        <div class="bar">
-          <div class="group">
-            <button id="playBtn">⏸ Pause</button>
-            <select id="quality" aria-label="ভিডিও কোয়ালিটি">
-              <option value="-1">Auto Quality</option>
-            </select>
-          </div>
-          <button id="fullBtn">⛶ Full Screen</button>
-        </div>
-      </div>
-    </div>
-    <div id="status" role="status">চ্যানেল প্রস্তুত হচ্ছে...</div>
-  </section>
-
-  <h2 id="browseTitle">Explore Channels</h2>
-  <nav class="categories" id="categories" aria-label="চ্যানেল ক্যাটাগরি"></nav>
-  <div id="notice"></div>
-  <section class="grid" id="grid"></section>
-</main>
-<footer>CS TV · Live Television</footer>
-
-<script>
-(function(){
-'use strict';
-const $=id=>document.getElementById(id);
-const video=$('video');
-const grid=$('grid');
-const notice=$('notice');
-const player=$('player');
-let channels=[];
-let filtered=[];
-let currentIndex=-1;
-let currentCategory='সব';
-let hls=null;
-let directMode=/\bwv\b|Version\/[\d.]+.*Chrome\/[\d.]+.*Mobile/i.test(navigator.userAgent);
-document.body.classList.toggle('directMode',directMode);
-
-function setStatus(message){$('status').textContent=message}
-function showNotice(message){notice.style.display='block';notice.textContent=message}
-function hideNotice(){notice.style.display='none'}
-function channelName(c){return String(c.name||c.title||c.channel||'Unnamed Channel')}
-function channelUrl(c){return String(c.url||c.stream||c.link||'')}
-function channelCategory(c){return String(c.category||'অন্যান্য')}
-function logoUrl(c){return String(c.logo||'')}
-
-async function loadChannels(){
- try{
-  const response=await fetch('./channels.json?v='+Date.now(),{cache:'no-store'});
-  if(!response.ok)throw new Error('HTTP '+response.status);
-  const data=await response.json();
-  channels=Array.isArray(data)?data:(Array.isArray(data.channels)?data.channels:[]);
-  channels=channels.filter(c=>c&&channelUrl(c));
-  if(!channels.length)throw new Error('channels.json-এ কোনো বৈধ চ্যানেল বা URL পাওয়া যায়নি।');
-  filtered=channels.slice();
-  renderCategories();
-  renderChannels();
-  hideNotice();
-  if(directMode){
-   let saved=-1;
-   try{saved=Number(localStorage.getItem('cstv_last_channel'))}catch(e){}
-   if(!Number.isInteger(saved)||saved<0||saved>=channels.length)saved=0;
-   playChannel(saved);
-  }
- }catch(e){
-  showNotice('চ্যানেল লোড করা যায়নি। channels.json ফাইল, JSON ফরম্যাট ও GitHub Pages deployment পরীক্ষা করো। বিস্তারিত: '+e.message);
- }
-}
-
-function renderCategories(){
- const names=['সব',...new Set(channels.map(channelCategory))];
- const root=$('categories');
- root.replaceChildren();
- names.forEach(name=>{
-  const b=document.createElement('button');
-  b.textContent=name;
-  b.className=name===currentCategory?'active':'';
-  b.onclick=()=>{
-   currentCategory=name;
-   renderCategories();
-   renderChannels();
-  };
-  root.appendChild(b);
- });
-}
-
-function renderChannels(){
- const query=$('search').value.trim().toLowerCase();
- filtered=channels.map((c,i)=>({c,i})).filter(({c})=>{
-  const matchesCategory=currentCategory==='সব'||channelCategory(c)===currentCategory;
-  const matchesSearch=(channelName(c)+' '+channelCategory(c)).toLowerCase().includes(query);
-  return matchesCategory&&matchesSearch;
- });
- grid.replaceChildren();
- if(!filtered.length){
-  showNotice('কোনো চ্যানেল পাওয়া যায়নি। অন্য নামে খুঁজে দেখো।');
-  return;
- }
- hideNotice();
- filtered.forEach(({c,i})=>{
-  const card=document.createElement('article');
-  card.className='channel';
-  card.tabIndex=0;
-  card.setAttribute('role','button');
-  card.setAttribute('aria-label',channelName(c)+' চালান');
-  const logo=document.createElement('div');
-  logo.className='logo';
-  const image=logoUrl(c);
-  if(image){
-   const img=document.createElement('img');
-   img.src=image;img.alt=channelName(c)+' logo';
-   img.onerror=()=>{logo.replaceChildren();const b=document.createElement('b');b.textContent=channelName(c).slice(0,2).toUpperCase();logo.appendChild(b)};
-   logo.appendChild(img);
-  }else{
-   const b=document.createElement('b');b.textContent=channelName(c).slice(0,2).toUpperCase();logo.appendChild(b);
-  }
-  const name=document.createElement('div');name.className='channel-name';name.textContent=channelName(c);
-  const meta=document.createElement('div');meta.className='channel-meta';meta.textContent='● LIVE  ·  '+channelCategory(c);
-  card.append(logo,name,meta);
-  card.onclick=()=>playChannel(i);
-  card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();playChannel(i)}};
-  grid.appendChild(card);
- });
-}
-
-function destroyHls(){
- if(hls){hls.destroy();hls=null}
-}
-function playChannel(index){
- if(!channels.length)return;
- index=(index+channels.length)%channels.length;
- const c=channels[index];
- const url=channelUrl(c);
- if(!url){setStatus('এই চ্যানেলের স্ট্রিম লিংক নেই।');return}
- currentIndex=index;
- $('playerTitle').textContent=channelName(c);
- player.classList.add('show');
- setStatus('চ্যানেল চালু করার চেষ্টা হচ্ছে...');
- $('quality').replaceChildren();
- const auto=document.createElement('option');auto.value='-1';auto.textContent='Auto Quality';$('quality').appendChild(auto);
- destroyHls();
- video.pause();
- video.removeAttribute('src');
- video.load();
- try{localStorage.setItem('cstv_last_channel',String(index))}catch(e){}
- const isHls=/\.m3u8(?:$|[?#])/i.test(url);
- if(isHls&&window.Hls&&Hls.isSupported()){
-  hls=new Hls({enableWorker:true});
-  hls.loadSource(url);
-  hls.attachMedia(video);
-  hls.on(Hls.Events.MANIFEST_PARSED,()=>{
-   if(hls&&hls.levels){
-    hls.levels.forEach((level,i)=>{
-     const op=document.createElement('option');op.value=String(i);
-     op.textContent=level.height?level.height+'p':(level.bitrate?Math.round(level.bitrate/1000)+' kbps':'Quality '+(i+1));
-     $('quality').appendChild(op);
-    });
-   }
-   video.play().then(()=>setStatus('লাইভ চলছে: '+channelName(c))).catch(()=>setStatus('Play চাপো। অটোপ্লে ব্রাউজার ব্লক করতে পারে।'));
-  });
-  hls.on(Hls.Events.ERROR,(event,data)=>{
-   if(data.fatal)setStatus('স্ট্রিম চালু হয়নি। লিংক, নেটওয়ার্ক বা স্ট্রিম অনুমতি পরীক্ষা করো।');
-  });
- }else{
-  video.src=url;
-  video.load();
-  video.play().then(()=>setStatus('লাইভ চলছে: '+channelName(c))).catch(()=>setStatus('Play চাপো। অটোপ্লে ব্লক হলে ম্যানুয়ালি চালাও।'));
-  if(!isHls&&video.canPlayType('application/vnd.apple.mpegurl'))setStatus('চ্যানেল চালু করার চেষ্টা হচ্ছে...');
- }
- if(directMode){
-  document.body.classList.add('directMode');
-  player.classList.add('show');
- }else{
-  player.scrollIntoView({behavior:'smooth',block:'start'});
- }
-}
-
-$('search').addEventListener('input',renderChannels);
-$('browseBtn').onclick=()=> $('browseTitle').scrollIntoView({behavior:'smooth'});
-$('heroPlayBtn').onclick=()=>{
- if(currentIndex>=0)playChannel(currentIndex);
- else if(channels.length)playChannel(0);
-};
-$('prevBtn').onclick=()=>playChannel(currentIndex-1);
-$('nextBtn').onclick=()=>playChannel(currentIndex+1);
-$('playBtn').onclick=()=>{
- if(video.paused){
-  video.play().then(()=>setStatus('প্লেব্যাক চলছে।')).catch(()=>setStatus('এই স্ট্রিম চালু করা যায়নি।'));
- }else{video.pause();setStatus('পজ করা হয়েছে।')}
-};
-video.addEventListener('play',()=>$('playBtn').textContent='⏸ Pause');
-video.addEventListener('pause',()=>$('playBtn').textContent='▶ Play');
-$('quality').onchange=()=>{
- if(hls){hls.currentLevel=Number($('quality').value);setStatus('ভিডিও কোয়ালিটি আপডেট করা হয়েছে।')}
-};
-$('fullBtn').onclick=async()=>{
- try{
-  if(document.fullscreenElement)await document.exitFullscreen();
-  else await $('stage').requestFullscreen();
- }catch(e){setStatus('এই ডিভাইসে fullscreen সমর্থিত নয়।')}
-};
-$('closeBtn').onclick=()=>{
- video.pause();destroyHls();video.removeAttribute('src');video.load();
- player.classList.remove('show');
- if(directMode)setStatus('চ্যানেল নির্বাচন করতে অ্যাপটি পুনরায় খোলো।');
-};
-document.addEventListener('keydown',e=>{
- const tag=(document.activeElement&&document.activeElement.tagName||'').toLowerCase();
- if(tag==='input'||tag==='select'||tag==='textarea')return;
- if(e.key==='ArrowRight'||e.key==='ArrowUp'){e.preventDefault();if(channels.length)playChannel(currentIndex+1)}
- else if(e.key==='ArrowLeft'||e.key==='ArrowDown'){e.preventDefault();if(channels.length)playChannel(currentIndex-1)}
- else if(e.key==='Enter'&&player.classList.contains('show')){e.preventDefault();$('playBtn').click()}
- else if(e.key.toLowerCase()==='f')$('fullBtn').click();
- else if(e.key==='Escape'&&directMode){/* Browser handles fullscreen exit. */}
-});
-loadChannels();
-})();
-</script>
- 
-<style>
-#stage .overlay {
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-#stage .overlay.cstv-hidden {
+.overlay.cstv-hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
+.overlay button { background: #202027e8; }
+#quality {
+  max-width: 105px;
+  padding: 9px;
+  background: #24242d;
+  color: white;
+  border: 1px solid #555;
+  border-radius: 8px;
+}
+#status {
+  color: var(--muted);
+  padding: 0 14px 12px;
+  font-size: 12px;
+}
+#grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+  gap: 13px;
+}
+.channel {
+  position: relative;
+  min-width: 0;
+  background: var(--panel);
+  border: 1px solid #292932;
+  border-radius: 11px;
+  padding: 12px;
+  cursor: pointer;
+  transition: transform .22s, border-color .22s, box-shadow .22s;
+  outline: none;
+}
+.channel:hover, .channel:focus {
+  transform: translateY(-4px) scale(1.015);
+  border-color: var(--red);
+  box-shadow: 0 8px 24px #e5091430;
+}
+.channel:active { transform: scale(.98); }
+.logo {
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 9px;
+}
+.logo img {
+  max-width: 100%;
+  max-height: 70px;
+  object-fit: contain;
+}
+.logoFallback {
+  font-size: 27px;
+  font-weight: bold;
+  color: var(--red);
+}
+.channelName {
+  font-size: 14px;
+  font-weight: bold;
+  overflow-wrap: anywhere;
+  padding-right: 3px;
+}
+.meta {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 7px;
+}
+.fav {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  padding: 6px 8px;
+  border-radius: 16px;
+  background: #08080bdc;
+  border-color: #555;
+  z-index: 2;
+}
+.fav.is-fav { color: #ffd54a; border-color: #ffd54a; }
+#empty {
+  display: none;
+  color: var(--muted);
+  text-align: center;
+  padding: 30px 10px;
+}
+footer {
+  color: #777;
+  text-align: center;
+  font-size: 11px;
+  padding: 22px;
+}
+@media (max-width: 500px) {
+  header { padding: 12px; }
+  .brand { font-size: 23px; }
+  main { padding: 12px; }
+  #grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .channel { padding: 10px; }
+  .overlay { gap: 5px; }
+  .overlay button { padding: 8px; }
+}
 </style>
+</head>
+
+<body>
+<header>
+  <div class="brand">CSTV<small>LIVE TELEVISION</small></div>
+  <input id="search" type="search" placeholder="চ্যানেল খুঁজুন...">
+</header>
+
+<main>
+  <section id="player">
+    <div id="playerTitle">CSTV Live Player</div>
+    <div id="stage">
+      <video id="video" controls playsinline autoplay></video>
+      <div class="live">● LIVE</div>
+      <div class="overlay">
+        <button id="prevBtn">⏮ Previous</button>
+        <button id="playBtn">▶ Play</button>
+        <button id="nextBtn">Next ⏭</button>
+        <select id="quality" aria-label="Video quality">
+          <option value="-1">Auto Quality</option>
+        </select>
+        <button id="fullBtn">⛶ Fullscreen</button>
+      </div>
+    </div>
+    <div id="status">চ্যানেল চালু করতে নিচ থেকে একটি চ্যানেল বেছে নাও।</div>
+  </section>
+
+  <h2>তোমার CSTV</h2>
+  <div class="tools">
+    <button id="allBtn" class="active">📺 সব চ্যানেল</button>
+    <button id="favoritesBtn">⭐ Favourite</button>
+    <button id="recentBtn">🕘 Recently Watched</button>
+    <button id="autoFullBtn">⛶ Auto Fullscreen: OFF</button>
+    <button id="refreshBtn">↻ Refresh Channels</button>
+  </div>
+
+  <nav id="categories" aria-label="Channel categories"></nav>
+
+  <h2 id="sectionTitle">সব চ্যানেল</h2>
+  <section id="grid"></section>
+  <div id="empty">এখানে কোনো চ্যানেল পাওয়া যায়নি।</div>
+</main>
+
+<footer>CSTV • Personal Live TV</footer>
 
 <script>
-(function () {
-  const stage = document.getElementById('stage');
-  const video = document.getElementById('video');
-  const overlay = stage && stage.querySelector('.overlay');
+(() => {
+  const $ = id => document.getElementById(id);
 
-  if (!stage || !video || !overlay) return;
+  const video = $('video');
+  const stage = $('stage');
+  const grid = $('grid');
+  const status = $('status');
+  const quality = $('quality');
 
-  let hideTimer;
+  let channels = [];
+  let visibleChannels = [];
+  let currentChannel = null;
+  let currentCategory = 'সব';
+  let viewMode = 'all';
+  let hls = null;
+  let hideTimer = null;
+  let autoFullscreen = localStorage.getItem('cstv_auto_fullscreen') === 'true';
+
+  function readArray(key) {
+    try {
+      const value = JSON.parse(localStorage.getItem(key) || '[]');
+      return Array.isArray(value) ? value : [];
+    } catch (_) {
+      return [];
+    }
+  }
+
+  function saveArray(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch (_) {}
+  }
+
+  function channelName(c) {
+    return String(c.name || c.title || c.channel || 'Unnamed Channel');
+  }
+
+  function channelUrl(c) {
+    return String(c.url || c.stream || c.link || '');
+  }
+
+  function channelCategory(c) {
+    return String(c.category || 'অন্যান্য');
+  }
+
+  function logoUrl(c) {
+    return String(c.logo || '');
+  }
+
+  function isFavorite(c) {
+    return readArray('cstv_favorites').includes(channelUrl(c));
+  }
+
+  function updateFeatureButtons() {
+    $('autoFullBtn').textContent =
+      '⛶ Auto Fullscreen: ' + (autoFullscreen ? 'ON' : 'OFF');
+
+    $('autoFullBtn').classList.toggle('active', autoFullscreen);
+    $('allBtn').classList.toggle('active', viewMode === 'all');
+    $('favoritesBtn').classList.toggle('active', viewMode === 'favorites');
+    $('recentBtn').classList.toggle('active', viewMode === 'recent');
+  }
+
+  function showNotice(message) {
+    status.textContent = message;
+  }
+
+  function renderCategories() {
+    const nav = $('categories');
+    nav.replaceChildren();
+
+    const names = ['সব', ...new Set(channels.map(channelCategory))];
+
+    names.forEach(name => {
+      const btn = document.createElement('button');
+      btn.textContent = name;
+      btn.classList.toggle('active', currentCategory === name);
+      btn.onclick = () => {
+        currentCategory = name;
+        renderCategories();
+        renderChannels();
+      };
+      nav.appendChild(btn);
+    });
+  }
+
+  function toggleFavorite(channel, button) {
+    const url = channelUrl(channel);
+    let favorites = readArray('cstv_favorites');
+
+    if (favorites.includes(url)) {
+      favorites = favorites.filter(item => item !== url);
+    } else {
+      favorites.unshift(url);
+    }
+
+    saveArray('cstv_favorites', favorites);
+    button.textContent = isFavorite(channel) ? '★' : '☆';
+    button.classList.toggle('is-fav', isFavorite(channel));
+    button.title = isFavorite(channel) ? 'Remove Favourite' : 'Add Favourite';
+
+    if (viewMode === 'favorites') renderChannels();
+  }
+
+  function renderChannels() {
+    const query = $('search').value.trim().toLowerCase();
+    const favorites = readArray('cstv_favorites');
+    const recent = readArray('cstv_recent');
+
+    visibleChannels = channels.filter(c => {
+      const matchesCategory =
+        currentCategory === 'সব' || channelCategory(c) === currentCategory;
+
+      const matchesSearch =
+        channelName(c).toLowerCase().includes(query) ||
+        channelCategory(c).toLowerCase().includes(query);
+
+      const matchesView =
+        viewMode === 'all' ||
+        (viewMode === 'favorites' && favorites.includes(channelUrl(c))) ||
+        (viewMode === 'recent' && recent.includes(channelUrl(c)));
+
+      return matchesCategory && matchesSearch && matchesView;
+    });
+
+    if (viewMode === 'recent') {
+      visibleChannels.sort((a, b) =>
+        recent.indexOf(channelUrl(a)) - recent.indexOf(channelUrl(b))
+      );
+    }
+
+    grid.replaceChildren();
+
+    visibleChannels.forEach(channel => {
+      const card = document.createElement('article');
+      card.className = 'channel';
+      card.tabIndex = 0;
+
+      const logo = document.createElement('div');
+      logo.className = 'logo';
+
+      if (logoUrl(channel)) {
+        const img = document.createElement('img');
+        img.src = logoUrl(channel);
+        img.alt = channelName(channel) + ' logo';
+        img.loading = 'lazy';
+        img.onerror = () => {
+          logo.replaceChildren();
+          const fallback = document.createElement('span');
+          fallback.className = 'logoFallback';
+          fallback.textContent = channelName(channel).slice(0, 2).toUpperCase();
+          logo.appendChild(fallback);
+        };
+        logo.appendChild(img);
+      } else {
+        const fallback = document.createElement('span');
+        fallback.className = 'logoFallback';
+        fallback.textContent = channelName(channel).slice(0, 2).toUpperCase();
+        logo.appendChild(fallback);
+      }
+
+      const name = document.createElement('div');
+      name.className = 'channelName';
+      name.textContent = channelName(channel);
+
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      meta.textContent = channelCategory(channel);
+
+      const fav = document.createElement('button');
+      fav.className = 'fav' + (isFavorite(channel) ? ' is-fav' : '');
+      fav.textContent = isFavorite(channel) ? '★' : '☆';
+      fav.title = isFavorite(channel) ? 'Remove Favourite' : 'Add Favourite';
+      fav.setAttribute('aria-label', 'Toggle favourite');
+      fav.onclick = event => {
+        event.stopPropagation();
+        toggleFavorite(channel, fav);
+      };
+
+      card.append(logo, name, meta, fav);
+      card.onclick = () => playChannel(channel);
+      card.onkeydown = event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          playChannel(channel);
+        }
+      };
+
+      grid.appendChild(card);
+    });
+
+    $('empty').style.display = visibleChannels.length ? 'none' : 'block';
+
+    const titles = {
+      all: 'সব চ্যানেল',
+      favorites: '⭐ Favourite Channels',
+      recent: '🕘 Recently Watched'
+    };
+    $('sectionTitle').textContent = titles[viewMode];
+    updateFeatureButtons();
+  }
+
+  function addRecent(channel) {
+    const url = channelUrl(channel);
+    const recent = readArray('cstv_recent').filter(item => item !== url);
+    recent.unshift(url);
+    saveArray('cstv_recent', recent.slice(0, 12));
+  }
+
+  function destroyHls() {
+    if (hls) {
+      try { hls.destroy(); } catch (_) {}
+      hls = null;
+    }
+  }
+
+  function fillQuality() {
+    quality.replaceChildren();
+    const auto = document.createElement('option');
+    auto.value = '-1';
+    auto.textContent = 'Auto Quality';
+    quality.appendChild(auto);
+  }
+
+  async function requestFullscreen() {
+    try {
+      if (document.fullscreenElement) return;
+
+      if (stage.requestFullscreen) {
+        await stage.requestFullscreen();
+      } else if (video.webkitEnterFullscreen) {
+        video.webkitEnterFullscreen();
+      }
+    } catch (_) {
+      showNotice('এই ডিভাইসে Auto Fullscreen অনুমোদিত নয়। Fullscreen বোতাম ব্যবহার করো।');
+    }
+  }
+
+  async function playChannel(channel) {
+    const url = channelUrl(channel);
+    if (!url) return;
+
+    currentChannel = channel;
+    $('playerTitle').textContent = channelName(channel);
+    showNotice('লোড হচ্ছে: ' + channelName(channel));
+
+    addRecent(channel);
+    renderChannels();
+
+    destroyHls();
+    fillQuality();
+
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
+
+    const isHls = /\.m3u8($|\?)/i.test(url) ||
+                  url.toLowerCase().includes('.m3u8');
+
+    if (isHls && window.Hls && Hls.isSupported()) {
+      hls = new Hls({ enableWorker: true });
+
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        if (hls && hls.levels) {
+          hls.levels.forEach((level, index) => {
+            const option = document.createElement('option');
+            option.value = String(index);
+            option.textContent = level.height
+              ? level.height + 'p'
+              : 'Quality ' + (index + 1);
+            quality.appendChild(option);
+          });
+        }
+
+        video.play().catch(() => {
+          showNotice('প্লেয়ার প্রস্তুত। Play বোতাম চাপো।');
+        });
+      });
+
+      hls.on(Hls.Events.ERROR, (_, data) => {
+        if (data.fatal) {
+          showNotice('স্ট্রিম চালানো যাচ্ছে না। লিংক বা নেটওয়ার্ক পরীক্ষা করো।');
+          if (hls) hls.destroy();
+          hls = null;
+        }
+      });
+
+      hls.loadSource(url);
+      hls.attachMedia(video);
+    } else {
+      video.src = url;
+      video.load();
+      video.play().catch(() => {
+        showNotice('প্লেয়ার প্রস্তুত। Play বোতাম চাপো।');
+      });
+    }
+
+    if (autoFullscreen) {
+      requestFullscreen();
+    }
+  }
+
+  function playAdjacent(direction) {
+    if (!visibleChannels.length) return;
+
+    let index = visibleChannels.findIndex(c =>
+      currentChannel && channelUrl(c) === channelUrl(currentChannel)
+    );
+
+    if (index < 0) index = 0;
+    else index = (index + direction + visibleChannels.length) %
+                 visibleChannels.length;
+
+    playChannel(visibleChannels[index]);
+  }
+
+  $('allBtn').onclick = () => {
+    viewMode = 'all';
+    renderChannels();
+  };
+
+  $('favoritesBtn').onclick = () => {
+    viewMode = 'favorites';
+    renderChannels();
+  };
+
+  $('recentBtn').onclick = () => {
+    viewMode = 'recent';
+    renderChannels();
+  };
+
+  $('autoFullBtn').onclick = () => {
+    autoFullscreen = !autoFullscreen;
+    try {
+      localStorage.setItem('cstv_auto_fullscreen', String(autoFullscreen));
+    } catch (_) {}
+    updateFeatureButtons();
+
+    if (autoFullscreen && currentChannel) requestFullscreen();
+    showNotice('Auto Fullscreen ' + (autoFullscreen ? 'চালু' : 'বন্ধ') + ' করা হয়েছে।');
+  };
+
+  $('refreshBtn').onclick = loadChannels;
+  $('search').addEventListener('input', renderChannels);
+
+  $('prevBtn').onclick = () => playAdjacent(-1);
+  $('nextBtn').onclick = () => playAdjacent(1);
+
+  $('playBtn').onclick = () => {
+    if (video.paused) {
+      video.play().catch(() => showNotice('এই স্ট্রিমটি চালানো যাচ্ছে না।'));
+    } else {
+      video.pause();
+    }
+  };
+
+  video.addEventListener('play', () => {
+    $('playBtn').textContent = '⏸ Pause';
+    showNotice('চলছে: ' + (currentChannel ? channelName(currentChannel) : 'Live TV'));
+    showControls();
+  });
+
+  video.addEventListener('pause', () => {
+    $('playBtn').textContent = '▶ Play';
+    showControls();
+  });
+
+  video.addEventListener('waiting', () => showNotice('বাফার হচ্ছে...'));
+  video.addEventListener('playing', () => {
+    showNotice('চলছে: ' + (currentChannel ? channelName(currentChannel) : 'Live TV'));
+  });
+
+  video.addEventListener('error', () => {
+    showNotice('ভিডিও চালাতে সমস্যা হচ্ছে। স্ট্রিম URL পরীক্ষা করো।');
+  });
+
+  quality.onchange = () => {
+    if (hls && quality.value !== '-1') {
+      hls.currentLevel = Number(quality.value);
+    } else if (hls) {
+      hls.currentLevel = -1;
+    }
+  };
+
+  $('fullBtn').onclick = async () => {
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else {
+        await requestFullscreen();
+      }
+    } catch (_) {
+      showNotice('Fullscreen এই ব্রাউজারে সমর্থিত নয়।');
+    }
+  };
+
+  $('video').addEventListener('dblclick', requestFullscreen);
+
+  document.addEventListener('keydown', event => {
+    const tag = document.activeElement && document.activeElement.tagName;
+    if (tag === 'INPUT' || tag === 'SELECT') return;
+
+    if (event.key === 'ArrowRight') playAdjacent(1);
+    if (event.key === 'ArrowLeft') playAdjacent(-1);
+    if (event.key.toLowerCase() === 'f') requestFullscreen();
+  });
 
   function showControls() {
+    const overlay = stage.querySelector('.overlay');
     clearTimeout(hideTimer);
     overlay.classList.remove('cstv-hidden');
 
     if (!video.paused) {
-      hideTimer = setTimeout(function () {
-        if (!video.paused) {
-          overlay.classList.add('cstv-hidden');
-        }
+      hideTimer = setTimeout(() => {
+        if (!video.paused) overlay.classList.add('cstv-hidden');
       }, 5000);
     }
   }
@@ -386,8 +711,40 @@ loadChannels();
   stage.addEventListener('mousemove', showControls);
   stage.addEventListener('touchstart', showControls);
   stage.addEventListener('click', showControls);
-  video.addEventListener('play', showControls);
-  video.addEventListener('pause', showControls);
+
+  async function loadChannels() {
+    showNotice('চ্যানেল লোড হচ্ছে...');
+
+    try {
+      const response = await fetch('./channels.json?v=' + Date.now(), {
+        cache: 'no-store'
+      });
+
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+
+      const data = await response.json();
+      const list = Array.isArray(data) ? data : data.channels;
+
+      if (!Array.isArray(list)) throw new Error('Invalid channels.json');
+
+      channels = list.filter(c => c && channelUrl(c));
+
+      renderCategories();
+      renderChannels();
+
+      if (channels.length) {
+        showNotice(channels.length + 'টি চ্যানেল লোড হয়েছে।');
+      } else {
+        showNotice('channels.json ফাইলে কোনো বৈধ চ্যানেল নেই।');
+      }
+    } catch (error) {
+      console.error(error);
+      showNotice('চ্যানেল লোড হয়নি। channels.json ফাইল ও GitHub Pages পরীক্ষা করো।');
+    }
+  }
+
+  updateFeatureButtons();
+  loadChannels();
 })();
 </script>
 </body>
