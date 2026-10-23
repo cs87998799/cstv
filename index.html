@@ -624,7 +624,7 @@
       </button>
       <button data-nav="settings" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
         <span id="navIndicatorSettings" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
         <span>Settings</span>
       </button>
     </div>
@@ -1157,6 +1157,29 @@
 
     let hlsInstance = null;
 
+    // Feature 1 & Feature 2 implementation variables and logic
+    let streamCheckTimer = null;
+
+    function clearStreamCheck() {
+      if (streamCheckTimer) {
+        clearTimeout(streamCheckTimer);
+        streamCheckTimer = null;
+      }
+    }
+
+    function setupAutoSwitchOnFail() {
+      clearStreamCheck();
+      const video = document.getElementById('liveVideoEl');
+      
+      // 5 second timer: Jodi video play na hoy (duration 0 ba paused/stalled thake), tahole auto next channel e jabe kono notification chara
+      streamCheckTimer = setTimeout(() => {
+        if (video && (video.paused || video.ended || video.currentTime === 0 || isNaN(video.duration))) {
+          state.currentChannelIndex = (state.currentChannelIndex + 1) % CHANNELS.length;
+          loadCurrentChannelInPlayer();
+        }
+      }, 5000);
+    }
+
     function openPlayerByChannelId(channelId, customUrl = null) {
       const idx = CHANNELS.findIndex(c => String(c.id) === String(channelId));
       if (idx !== -1) state.currentChannelIndex = idx;
@@ -1194,12 +1217,16 @@
         video.classList.add('hidden');
         iframe.src = ch.iframeUrl;
         iframe.classList.remove('hidden');
+        clearStreamCheck();
         return;
       }
 
       iframe.src = '';
       iframe.classList.add('hidden');
       video.classList.remove('hidden');
+
+      // Setup 5-sec failover check
+      setupAutoSwitchOnFail();
 
       try {
         if (hlsInstance) {
@@ -1215,11 +1242,23 @@
           hlsInstance.loadSource(streamSrc);
           hlsInstance.attachMedia(video);
           hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
-            video.play().catch(() => {});
+            video.play().then(() => {
+              clearStreamCheck(); // Play successful hole timer cancel kore dibo
+            }).catch(() => {});
+          });
+          // HLS error ba staling handle korar jonno
+          hlsInstance.on(Hls.Events.ERROR, (event, data) => {
+            if (data.fatal) {
+              // Fatal error hole auto next channel e jabe kono notification chara
+              state.currentChannelIndex = (state.currentChannelIndex + 1) % CHANNELS.length;
+              loadCurrentChannelInPlayer();
+            }
           });
         } else if (streamSrc) {
           video.src = streamSrc;
-          video.play().catch(() => {});
+          video.play().then(() => {
+            clearStreamCheck();
+          }).catch(() => {});
         }
       } catch (e) {}
     }
@@ -1373,7 +1412,7 @@
           e.stopPropagation();
           state.currentChannelIndex = parseInt(popupItem.dataset.popupChannelIndex, 10);
           loadCurrentChannelInPlayer();
-          showToast(`Playing: ${CHANNELS[state.currentChannelIndex].name}`);
+          // Notification chara channel change hobe, tai showToast call kora hoyni
           return;
         }
 
@@ -1426,20 +1465,37 @@
         document.getElementById('liveIframeEl').src = '';
         clearTimeout(overlayHideTimer);
         clearInterval(overlayCountdownInterval);
+        clearStreamCheck();
       });
 
       document.getElementById('playerPrevChannelBtn').addEventListener('click', (e) => {
         e.stopPropagation();
         state.currentChannelIndex = (state.currentChannelIndex - 1 + CHANNELS.length) % CHANNELS.length;
         loadCurrentChannelInPlayer();
-        showToast(`⏮ Prev: ${CHANNELS[state.currentChannelIndex].name}`);
+        // Notification chara channel change (কোনো showToast কল করা হয়নি)
       });
 
       document.getElementById('playerNextChannelBtn').addEventListener('click', (e) => {
         e.stopPropagation();
         state.currentChannelIndex = (state.currentChannelIndex + 1) % CHANNELS.length;
         loadCurrentChannelInPlayer();
-        showToast(`⏭ Next: ${CHANNELS[state.currentChannelIndex].name}`);
+        // Notification chara channel change (কোনো showToast কল করা হয়নি)
+      });
+
+      // Feature 2: Keyboard Left and Right arrow key support to change channel without notification
+      window.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('playerModal');
+        if (modal.classList.contains('hidden')) return;
+
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          state.currentChannelIndex = (state.currentChannelIndex - 1 + CHANNELS.length) % CHANNELS.length;
+          loadCurrentChannelInPlayer();
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          state.currentChannelIndex = (state.currentChannelIndex + 1) % CHANNELS.length;
+          loadCurrentChannelInPlayer();
+        }
       });
 
       document.getElementById('playerPlayPauseBtn').addEventListener('click', (e) => {
@@ -1506,7 +1562,6 @@
             } else if (modal.webkitRequestFullscreen) {
               await modal.webkitRequestFullscreen();
             }
-            // Auto lock screen orientation to landscape if supported by browser
             if (screen.orientation && screen.orientation.lock) {
               await screen.orientation.lock('landscape').catch(() => {});
             }
@@ -1572,6 +1627,7 @@
       });
 
       document.getElementById('backToPhoneStepBtn').addEventListener('click', () => {
+        document.getElementById('loginPlayerOtp')?.classList?.add('hidden');
         document.getElementById('loginStepOtp').classList.add('hidden');
         document.getElementById('loginStepPhone').classList.remove('hidden');
       });
