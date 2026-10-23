@@ -772,7 +772,6 @@
       } else if (rawJson && typeof rawJson === 'object') {
         arr = rawJson.channels || rawJson.data || rawJson.items || rawJson.streams || rawJson.list || [];
         if (!Array.isArray(arr)) {
-          // If object of category keys -> arrays
           Object.keys(rawJson).forEach(k => {
             if (Array.isArray(rawJson[k])) {
               rawJson[k].forEach(item => arr.push({ ...item, category: item.category || k }));
@@ -787,7 +786,7 @@
         const name = item.name || item.title || item.channel_name || item.tvg_name || `Channel ${idx + 1}`;
         const category = item.category || item.group || item.group_title || item.genre || item.type || 'Live TV';
         const logo = item.logo || item.image || item.icon || item.tvg_logo || item.thumb || item.poster || '';
-        const streamUrl = item.url || item.streamUrl || item.stream_url || item.link || item.m3u8 || item.file || item.src || item.source || '';
+        const streamUrl = item.url || item.streamUrl || item.stream_url || item.link || item.m3u8 || item.file || item.src || item.source || 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
         const iframeUrl = item.iframe || item.embed || item.embedUrl || '';
         const words = name.trim().split(/\s+/);
         const shortLabel = item.shortLabel || (words.length >= 2 ? (words[0] + ' ' + words[1]).slice(0, 10) : name.slice(0, 8));
@@ -830,10 +829,9 @@
           return true;
         }
       } catch (err) {
-        // If running inside preview or local file without server, keep current/default channels
         statusLabel.textContent = `● Ready (${CHANNELS.length} channels)`;
         if (showFeedback) {
-          showToast('Using built-in channels.json fallback (upload to GitHub folder to auto-load)');
+          showToast('Using built-in channels.json fallback');
         }
       }
       renderAllFromChannelsJson();
@@ -871,9 +869,7 @@
           if (parsed.quality) state.quality = parsed.quality;
           if (parsed.jsonUrl) state.jsonUrl = parsed.jsonUrl;
         }
-      } catch (err) {
-        // Ignore storage errors
-      }
+      } catch (err) {}
     }
 
     function saveState() {
@@ -885,9 +881,7 @@
           quality: state.quality,
           jsonUrl: state.jsonUrl
         }));
-      } catch (err) {
-        // Ignore storage errors
-      }
+      } catch (err) {}
     }
 
     function showToast(msg) {
@@ -900,7 +894,6 @@
       }, 2600);
     }
 
-    // Helper to render channel logo or fallback text badge inside circular icons
     function getChannelCircleAvatarHtml(ch, sizeClasses = 'w-20 h-20 sm:w-24 sm:h-24') {
       if (ch.logo) {
         return `
@@ -958,7 +951,6 @@
       const ch0 = CHANNELS[0] || DEFAULT_CHANNELS_JSON[0];
       const ch1 = CHANNELS[1] || ch0;
 
-      // Update Slide 2 & Slide 3 dynamically from channels.json
       document.getElementById('heroSlide2Title').textContent = ch0.name;
       document.getElementById('heroSlide2Sub').textContent = `${ch0.category} • Live on CS Tv`;
       document.getElementById('heroSlide2Card').innerHTML = `
@@ -1012,7 +1004,6 @@
       `).join('');
     }
 
-    // Builds horizontal scrolling cards for every channel & category in channels.json
     function buildChannelCardHtml(ch, idx) {
       const grad = ch.cardGradient || CARD_GRADIENTS[idx % CARD_GRADIENTS.length];
       return `
@@ -1042,7 +1033,6 @@
     }
 
     function renderContentRowsFromChannels() {
-      // Group channels by category from channels.json
       const groups = {};
       CHANNELS.forEach(ch => {
         const cat = ch.category || 'Live TV';
@@ -1052,7 +1042,6 @@
 
       const catNames = Object.keys(groups);
 
-      // Populate the 3 main horizontal tracks directly from channels.json groups
       const group1 = groups[catNames[0]] || CHANNELS;
       const group2 = groups[catNames[1]] || CHANNELS;
       const group3 = groups[catNames[2]] || CHANNELS;
@@ -1066,7 +1055,6 @@
       document.getElementById('row3Title').textContent = catNames[2] ? `${catNames[2]} Channels` : 'All CS Tv Streams';
       document.getElementById('dramaRowTrack').innerHTML = group3.map((ch, i) => buildChannelCardHtml(ch, i + 4)).join('');
 
-      // If channels.json has more than 3 categories, render additional horizontal rows automatically!
       const extraContainer = document.getElementById('dynamicCategorySections');
       if (catNames.length > 3) {
         extraContainer.innerHTML = catNames.slice(3).map((catName, gIdx) => `
@@ -1125,7 +1113,6 @@
       `).join('');
     }
 
-    // Renders the Horizontal Popup Channel Switcher inside the Video Player (100% from channels.json)
     function renderPlayerHorizontalPopup() {
       const track = document.getElementById('playerPopupTrack');
       const activeCh = CHANNELS[state.currentChannelIndex] || CHANNELS[0];
@@ -1150,9 +1137,9 @@
       }).join('');
     }
 
-    // ==========================================================
-    // 5-SECOND AUTO-HIDE LOGIC FOR PLAYER HORIZONTAL POPUP & UI
-    // ==========================================================
+    // ==========================================
+    // 5-SECOND AUTO-HIDE LOGIC FOR PLAYER POPUP
+    // ==========================================
     let overlayHideTimer = null;
     let overlayCountdownInterval = null;
     let remainingSeconds = 5;
@@ -1227,7 +1214,6 @@
           ctx.stroke();
         }
 
-        // CS Tv Watermark Top Right
         ctx.fillStyle = 'rgba(0,0,0,0.55)';
         ctx.fillRect(610, 24, 165, 42);
         ctx.fillStyle = '#ff1f8e';
@@ -1238,7 +1224,6 @@
         ctx.font = 'bold 15px Inter, sans-serif';
         ctx.fillText('CS Tv • HD', 645, 50);
 
-        // Center Channel Name
         ctx.fillStyle = 'rgba(255,255,255,0.95)';
         ctx.font = 'bold 34px Inter, Hind Siliguri, sans-serif';
         ctx.textAlign = 'center';
@@ -1248,7 +1233,6 @@
         ctx.font = '600 18px Inter, sans-serif';
         ctx.fillText(`${channel.category} • ${state.quality} Live Feed`, 400, 238);
 
-        // Bottom Ticker Bar
         ctx.fillStyle = 'rgba(15, 7, 30, 0.9)';
         ctx.fillRect(0, 390, 800, 60);
         ctx.fillStyle = '#ff1f8e';
@@ -1303,7 +1287,6 @@
       const iframe = document.getElementById('liveIframeEl');
       const streamSrc = customUrl || ch.streamUrl;
 
-      // Reset iframe & video visibility
       if (ch.iframeUrl && !customUrl) {
         video.pause();
         video.classList.add('hidden');
@@ -1325,27 +1308,35 @@
           hlsInstance = null;
         }
         if (streamSrc && streamSrc.includes('.m3u8') && window.Hls && Hls.isSupported()) {
-          hlsInstance = new Hls();
+          hlsInstance = new Hls({
+            xhrSetup: function (xhr, url) {
+              xhr.withCredentials = false;
+            }
+          });
           hlsInstance.loadSource(streamSrc);
           hlsInstance.attachMedia(video);
           hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
             video.play().then(() => {
               document.getElementById('fallbackBroadcastCanvas').classList.add('hidden');
-            }).catch(() => {});
+            }).catch(() => {
+              startFallbackBroadcastCanvas(ch);
+            });
           });
-          hlsInstance.on(Hls.Events.ERROR, () => {
-            document.getElementById('fallbackBroadcastCanvas').classList.remove('hidden');
+          hlsInstance.on(Hls.Events.ERROR, (event, data) => {
+            if (data.fatal) {
+              startFallbackBroadcastCanvas(ch);
+            }
           });
         } else if (streamSrc) {
           video.src = streamSrc;
           video.play().then(() => {
             document.getElementById('fallbackBroadcastCanvas').classList.add('hidden');
           }).catch(() => {
-            document.getElementById('fallbackBroadcastCanvas').classList.remove('hidden');
+            startFallbackBroadcastCanvas(ch);
           });
         }
       } catch (e) {
-        // Fallback canvas stays active
+        startFallbackBroadcastCanvas(ch);
       }
     }
 
@@ -1358,9 +1349,6 @@
       }
     }
 
-    // ==========================================
-    // AUTH & SETTINGS UI SYNC
-    // ==========================================
     function syncAuthAndSettingsUI() {
       const signInTopText = document.getElementById('signInTopText');
       const subscribeTopText = document.getElementById('subscribeTopText');
@@ -1388,9 +1376,6 @@
       document.getElementById('customJsonUrlInput').value = state.jsonUrl || './channels.json';
     }
 
-    // ==========================================
-    // NAVIGATION & EVENT LISTENERS
-    // ==========================================
     function switchMainView(viewName) {
       const views = {
         home: document.getElementById('viewHome'),
@@ -1450,10 +1435,8 @@
       loadSavedState();
       syncAuthAndSettingsUI();
 
-      // Automatically load channels.json from the same GitHub directory!
       fetchChannelsFromJson(state.jsonUrl || './channels.json', false);
 
-      // Auto-slide Hero Banner every 4.5s
       setInterval(() => {
         scrollToHeroSlide(state.heroSlideIndex + 1);
       }, 4500);
@@ -1470,11 +1453,9 @@
         });
       });
 
-      // Brand Logo returns Home
       document.getElementById('brandLogoBtn').addEventListener('click', () => switchMainView('home'));
       document.getElementById('viewAllChannelsBtn').addEventListener('click', () => switchMainView('discover'));
 
-      // Delegated Category Filter Tabs
       document.getElementById('topCategoryNav').addEventListener('click', (e) => {
         const tab = e.target.closest('.cat-tab');
         if (!tab) return;
@@ -1484,12 +1465,10 @@
         renderLiveTvCircles();
       });
 
-      // Bottom Nav Buttons
       document.querySelectorAll('.bottom-nav-btn').forEach(btn => {
         btn.addEventListener('click', () => switchMainView(btn.dataset.nav));
       });
 
-      // Delegated Click for Playing Any Channel, Hero Watch Button, or Removing Favorite
       document.body.addEventListener('click', (e) => {
         const playBtn = e.target.closest('[data-play-channel]');
         if (playBtn) {
@@ -1524,12 +1503,10 @@
         }
       });
 
-      // Discover Search
       document.getElementById('channelSearchInput').addEventListener('input', (e) => {
         renderDiscoverGrid(e.target.value);
       });
 
-      // Reload / Custom channels.json URL in Settings
       document.getElementById('reloadJsonBtn').addEventListener('click', () => {
         fetchChannelsFromJson(state.jsonUrl || './channels.json', true);
       });
@@ -1540,13 +1517,11 @@
         fetchChannelsFromJson(val, true);
       });
 
-      // Player Viewport Tap: Show overlays and restart 5-second auto-hide timer
       const playerViewport = document.getElementById('playerViewport');
       playerViewport.addEventListener('click', () => {
         showPlayerOverlaysAndStart5sTimer();
       });
 
-      // Keep Horizontal Popup visible while scrolling/touching, then auto-hide 5s after touch ends
       const popupTrack = document.getElementById('playerPopupTrack');
       const popupDrawer = document.getElementById('playerHorizontalPopup');
       ['touchstart', 'touchmove', 'scroll', 'mousemove', 'pointerdown'].forEach(evtName => {
@@ -1558,7 +1533,6 @@
         }, { passive: true });
       });
 
-      // Player Controls: Close, Prev, Next, Play/Pause, Popup Toggle
       document.getElementById('closePlayerBtn').addEventListener('click', () => {
         const modal = document.getElementById('playerModal');
         modal.classList.add('hidden');
@@ -1619,7 +1593,6 @@
         hidePlayerPopupImmediately();
       });
 
-      // Favorite Save inside Player
       document.getElementById('playerFavBtn').addEventListener('click', () => {
         const ch = CHANNELS[state.currentChannelIndex];
         if (!ch) return;
@@ -1635,7 +1608,6 @@
         document.getElementById('playerFavText').textContent = state.favorites.includes(ch.id) ? 'Saved' : 'Save';
       });
 
-      // Sound Mute & Fullscreen
       document.getElementById('playerMuteBtn').addEventListener('click', () => {
         state.isMuted = !state.isMuted;
         const video = document.getElementById('liveVideoEl');
@@ -1652,9 +1624,6 @@
         }
       });
 
-      // ==========================================
-      // PHONE LOGIN MODAL FLOW (+880 OTP)
-      // ==========================================
       const loginModal = document.getElementById('phoneLoginModal');
       function openLoginModal() {
         loginModal.classList.remove('hidden');
@@ -1722,9 +1691,6 @@
         }
       });
 
-      // ==========================================
-      // SUBSCRIBE MODAL FLOW
-      // ==========================================
       const subModal = document.getElementById('subscribeModal');
       document.getElementById('subscribeTopBtn').addEventListener('click', () => {
         subModal.classList.remove('hidden');
@@ -1745,9 +1711,6 @@
         });
       });
 
-      // ==========================================
-      // SETTINGS CONTROLS
-      // ==========================================
       document.getElementById('settingQualitySelect').addEventListener('change', (e) => {
         state.quality = e.target.value;
         saveState();
@@ -1774,7 +1737,6 @@
       setupSwitch('toggleDataSaverBtn', 'dataSaver', 'Data Saver Mode');
       setupSwitch('toggleNotifyBtn', 'notifications', 'Live Match Notifications');
 
-      // Custom M3U8 Stream Modal
       const customModal = document.getElementById('customStreamModal');
       document.getElementById('openCustomStreamModalBtn').addEventListener('click', () => {
         customModal.classList.remove('hidden');
