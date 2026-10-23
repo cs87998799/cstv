@@ -323,5 +323,47 @@ document.addEventListener('keydown',e=>{
 loadChannels();
 })();
 </script>
+ 
+<style>
+#stage .overlay {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+#stage .overlay.cstv-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+</style>
+
+<script>
+(function () {
+  const stage = document.getElementById('stage');
+  const video = document.getElementById('video');
+  const overlay = stage && stage.querySelector('.overlay');
+
+  if (!stage || !video || !overlay) return;
+
+  let hideTimer;
+
+  function showControls() {
+    clearTimeout(hideTimer);
+    overlay.classList.remove('cstv-hidden');
+
+    if (!video.paused) {
+      hideTimer = setTimeout(function () {
+        if (!video.paused) {
+          overlay.classList.add('cstv-hidden');
+        }
+      }, 5000);
+    }
+  }
+
+  stage.addEventListener('mousemove', showControls);
+  stage.addEventListener('touchstart', showControls);
+  stage.addEventListener('click', showControls);
+  video.addEventListener('play', showControls);
+  video.addEventListener('pause', showControls);
+})();
+</script>
 </body>
 </html>
