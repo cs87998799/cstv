@@ -3,665 +3,352 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#09090d">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b12">
 <title>CSTV — Live TV</title>
-
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
 <style>
-:root {
-  --bg:#09090d;
-  --panel:#15151d;
-  --panel2:#20202a;
-  --red:#e50914;
-  --text:#fff;
-  --muted:#a3a3b2;
-  --line:#292933;
-  --sidebar:220px;
-}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:20px}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-}
-button,input{font:inherit}
-button,a,input{outline-offset:4px}
-button:focus-visible,a:focus-visible,input:focus-visible{
-  outline:2px solid white;
-}
-button{cursor:pointer}
-a{color:inherit;text-decoration:none}
-.app{min-height:100vh}
-
-/* SIDEBAR */
-.sidebar{
-  position:fixed;inset:0 auto 0 0;width:var(--sidebar);
-  background:#0d0d13;border-right:1px solid var(--line);
-  padding:24px 15px;z-index:50;
-  display:flex;flex-direction:column;
-}
-.brand{
-  display:flex;align-items:center;gap:11px;
-  font-size:27px;font-weight:900;letter-spacing:1px;
-  color:var(--red);padding:0 10px 30px;
-}
-.brand-icon{
-  width:39px;height:39px;background:var(--red);
-  color:#fff;border-radius:11px;display:grid;place-items:center;
-  font-size:20px;
-}
-.nav-label{
-  font-size:10px;letter-spacing:2px;color:#777786;
-  font-weight:bold;padding:0 12px 10px;
-}
-.nav{display:grid;gap:7px}
-.nav a{
-  display:flex;align-items:center;gap:14px;
-  padding:13px 12px;border-radius:9px;
-  color:#b9b9c6;font-size:14px;font-weight:600;
-  transition:background .15s,color .15s;
-}
-.nav a .ico{width:23px;text-align:center;font-size:19px}
-.nav a:hover,.nav a.active{
-  color:white;background:#2b1117;
-}
-.nav a.active{box-shadow:inset 3px 0 var(--red)}
-.sidebar-bottom{margin-top:auto}
-.connection{
-  border:1px solid var(--line);background:#14141b;
-  border-radius:10px;padding:13px;font-size:12px;color:var(--muted);
-  line-height:1.7;
-}
-.dot{display:inline-block;width:7px;height:7px;
-  background:#777;border-radius:50%;margin-right:7px}
-.dot.ok{background:#28d982}
-.dot.bad{background:#ff626a}
-
-/* MAIN */
-.main{margin-left:var(--sidebar);min-width:0}
-.topbar{
-  height:72px;position:sticky;top:0;z-index:30;
-  display:flex;align-items:center;gap:15px;
-  padding:0 30px;background:rgba(9,9,13,.94);
-  border-bottom:1px solid #ffffff0b;backdrop-filter:blur(12px);
-}
-.top-title{font-size:15px;font-weight:800;white-space:nowrap}
-.search{
-  margin-left:auto;width:min(320px,45%);
-  background:#17171f;border:1px solid #30303b;
-  border-radius:9px;display:flex;align-items:center;
-  padding:0 13px;gap:9px;
-}
-.search span{color:var(--muted)}
-.search input{
-  width:100%;min-width:0;padding:12px 0;
-  border:0;background:transparent;color:white;outline:none;
-}
-.search input::placeholder{color:#858593}
-.refresh{
-  border:1px solid #383843;background:#1a1a23;
-  color:white;border-radius:8px;padding:10px 13px;
-}
-.refresh:hover{background:var(--red)}
-
-/* HERO */
-.hero{
-  min-height:370px;position:relative;overflow:hidden;
-  display:flex;align-items:center;padding:45px;
-  background:
-    linear-gradient(90deg,#09090df7 0%,#09090dc9 43%,#09090d20 100%),
-    linear-gradient(0deg,var(--bg),transparent 55%),
-    radial-gradient(ellipse at 78% 42%,#9d2532 0%,#4b1929 27%,#201522 57%,#09090d 85%);
-}
-.hero:before{
-  content:"";position:absolute;width:270px;height:270px;
-  right:10%;top:12%;border-radius:50%;
-  border:1px solid #ffffff20;
-  box-shadow:0 0 0 32px #ffffff05,0 0 0 68px #ffffff04;
-}
-.hero-content{position:relative;z-index:2;max-width:590px}
-.eyebrow{
-  font-size:12px;color:#ff737c;font-weight:900;
-  letter-spacing:3px;text-transform:uppercase;
-}
-.hero h1{
-  margin:15px 0;font-size:clamp(39px,5vw,70px);
-  line-height:1.02;letter-spacing:-2px;font-weight:900;
-}
-.hero h1 span{color:var(--red)}
-.hero p{color:#d0cfd8;line-height:1.7;font-size:15px;max-width:460px}
-.hero-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:23px}
-.primary,.secondary{
-  border:0;border-radius:7px;padding:13px 19px;font-weight:800;
-}
-.primary{background:var(--red);color:white}
-.primary:hover{background:#ff2430}
-.secondary{background:#ffffff20;color:white;border:1px solid #ffffff20}
-.secondary:hover{background:#ffffff30}
-
-/* CONTENT */
-.content{padding:12px 30px 55px}
-.notice{
-  display:none;background:#241419;border:1px solid #603039;
-  border-radius:9px;padding:13px;margin:12px 0;color:#ffd9dc;
-  font-size:13px;
-}
-.player-box{
-  display:none;margin:22px 0 30px;background:#111117;
-  border:1px solid #30303b;border-radius:12px;padding:14px;
-  scroll-margin-top:85px;
-}
-.player-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.player-head strong{font-size:16px;flex:1;overflow-wrap:anywhere}
-.live-label{font-size:10px;background:var(--red);padding:5px 7px;border-radius:4px;font-weight:bold}
-.close-btn{border:0;background:#282832;color:white;padding:9px 12px;border-radius:6px}
-#player{display:block;width:100%;max-height:65vh;background:black;border-radius:8px}
-.section{margin:30px 0}
-.section-head{display:flex;align-items:center;gap:11px;margin-bottom:7px}
-.section h2{font-size:22px;margin:0;font-weight:850}
-.count{font-size:11px;background:#252530;color:#c6c6d2;border-radius:20px;padding:5px 9px}
-.section-sub{color:var(--muted);font-size:13px;margin:0 0 17px}
-.category-list{
-  display:flex;gap:9px;overflow-x:auto;padding:3px 2px 13px;
-  scrollbar-width:thin;
-}
-.category-btn{
-  flex:none;border:1px solid #33333e;background:#17171f;
-  color:#d5d5df;border-radius:7px;padding:9px 15px;
-}
-.category-btn.active,.category-btn:hover{background:var(--red);border-color:var(--red);color:white}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:15px}
-.channel-card{
-  min-width:0;overflow:hidden;background:#15151d;
-  border:1px solid #2b2b35;border-radius:10px;cursor:pointer;
-  transition:transform .16s,border-color .16s;
-}
-.channel-card:hover,.channel-card:focus-visible{
-  transform:translateY(-3px);border-color:#a13a45;
-}
-.card-art{
-  height:115px;position:relative;display:grid;place-items:center;
-  overflow:hidden;background:
-  radial-gradient(circle at 70% 20%,#68242e,#29202d 47%,#14141d);
-}
-.card-art img{width:68px;height:68px;object-fit:contain;position:relative;z-index:1}
-.fallback-logo{
-  font-size:24px;font-weight:900;background:var(--red);
-  padding:11px;border-radius:10px;max-width:85%;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-}
-.live-pill{
-  position:absolute;top:9px;left:9px;z-index:2;
-  background:var(--red);border-radius:4px;padding:4px 6px;
-  font-size:9px;font-weight:900;letter-spacing:1px;
-}
-.card-info{padding:12px}
-.card-title{font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-category{font-size:11px;color:var(--muted);margin-top:6px}
-.card-bottom{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:13px}
-.watch-text{font-size:10px;color:#a4a4b3}
-.card-play{border:0;border-radius:5px;background:#30303b;color:white;padding:7px 10px;font-size:11px;font-weight:800}
-.card-play:hover{background:var(--red)}
-.empty{
-  grid-column:1/-1;padding:28px 14px;border:1px dashed #393944;
-  color:var(--muted);text-align:center;border-radius:10px;
-}
-footer{border-top:1px solid var(--line);padding:22px 30px;color:#777784;font-size:11px}
-
-/* MOBILE */
-.mobile-brand,.bottom-nav{display:none}
-
-@media(max-width:760px){
-  :root{--sidebar:0px}
-  .sidebar{display:none}
-  .main{margin-left:0;padding-bottom:70px}
-  .topbar{height:61px;padding:0 14px;gap:10px}
-  .mobile-brand{display:flex;align-items:center;gap:8px;font-weight:900;color:var(--red);font-size:21px}
-  .mobile-brand .brand-icon{width:31px;height:31px;font-size:15px;border-radius:8px}
-  .top-title{display:none}
-  .search{width:auto;flex:1}
-  .search input{font-size:13px;padding:10px 0}
-  .refresh{padding:9px 10px}
-  .hero{min-height:310px;padding:28px 20px}
-  .hero:before{right:-100px;top:10%;width:220px;height:220px}
-  .hero h1{font-size:clamp(38px,10vw,54px)}
-  .hero p{font-size:13px}
-  .content{padding:8px 14px 35px}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .card-art{height:100px}
-  .card-art img{width:55px;height:55px}
-  .card-info{padding:10px}
-  .card-title{font-size:12px}
-  .watch-text{display:none}
-  .card-play{padding:7px 8px}
-  .section h2{font-size:19px}
-  .player-box{padding:9px}
-  .player-head strong{font-size:14px}
-  footer{padding:18px 14px}
-  .bottom-nav{
-    position:fixed;bottom:0;left:0;right:0;z-index:100;
-    display:flex;justify-content:space-around;align-items:center;
-    padding:9px 4px calc(9px + env(safe-area-inset-bottom));
-    background:#101016f5;border-top:1px solid #30303b;
-  }
-  .bottom-nav a{
-    display:flex;flex-direction:column;align-items:center;gap:4px;
-    color:#a6a6b4;font-size:10px;min-width:50px;
-  }
-  .bottom-nav .ico{font-size:20px}
-  .bottom-nav a.active{color:#ff4b55}
-}
-@media(max-width:360px){
-  .hero{min-height:285px}
-  .hero h1{font-size:35px}
-  .grid{gap:7px}
-  .card-art{height:86px}
-  .card-bottom{margin-top:9px}
-}
-@media(min-width:761px) and (max-width:1000px){
-  :root{--sidebar:185px}
-  .hero{padding:30px;min-height:330px}
-  .content{padding-left:20px;padding-right:20px}
-  .grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
-}
+body{margin:0;background:#080b12;color:#fff;font-family:Arial,sans-serif}
+button,input,select,textarea{font:inherit}
+button{padding:10px 14px;border:0;border-radius:9px;background:#243246;color:white;cursor:pointer}
+button:focus-visible,.channel:focus-visible{outline:3px solid #20d997}
+.green{background:#20d997;color:#06140e;font-weight:bold}
+header{padding:16px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #263243}
+.logo{font-size:25px;font-weight:900}.logo span{color:#20d997}
+input,textarea{background:#131e2c;border:1px solid #35445a;color:white;border-radius:9px;padding:11px;width:100%}
+#search{max-width:280px}
+main{max-width:1300px;margin:auto;padding:20px 5%}
+.hero{padding:25px;border-radius:18px;background:linear-gradient(120deg,#173d35,#152238);margin-bottom:22px}
+.hero h1{font-size:clamp(30px,5vw,46px);margin:12px 0}
+.muted{color:#aebdce;font-size:13px;line-height:1.6}
+.settings{padding:16px;background:#121b28;border:1px solid #273649;border-radius:13px;margin-bottom:24px}
+textarea{min-height:85px;margin:8px 0;resize:vertical}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+h2{font-size:20px;margin:24px 0 12px}
+.categories{display:flex;gap:8px;overflow:auto;padding:5px 0 13px}
+.categories button{white-space:nowrap}
+.categories .active{background:#20d997;color:#06140e}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:12px}
+.channel{background:#141e2c;border:1px solid #273649;border-radius:12px;padding:12px;cursor:pointer;min-width:0}
+.channel:hover{border-color:#20d997}
+.channel-logo{height:80px;border-radius:8px;background:#080e17;display:flex;align-items:center;justify-content:center;margin-bottom:10px;overflow:hidden}
+.channel-logo img{max-width:90%;max-height:72px;object-fit:contain}
+.channel-name{font-size:14px;font-weight:bold;overflow-wrap:anywhere}
+.channel-cat{font-size:11px;color:#aebdce;margin-top:6px}
+#player{display:none;background:#111a26;border-radius:13px;padding:12px;margin:18px 0}
+#player.show{display:block}
+video{width:100%;aspect-ratio:16/9;background:black;display:block;max-height:75vh}
+.playerbar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+#status{font-size:12px;color:#b9cadb;margin-top:10px;overflow-wrap:anywhere}
+footer{text-align:center;padding:25px;color:#8495a9;font-size:12px}
+@media(max-width:500px){header,main{padding-left:4%;padding-right:4%}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
-
 <body>
-<div class="app">
+<header>
+  <div class="logo">CS <span>TV</span></div>
+  <input id="search" placeholder="Search channels..." type="search">
+</header>
 
-  <aside class="sidebar">
-    <a class="brand" href="#home">
-      <span class="brand-icon">▶</span><span>CSTV</span>
-    </a>
+<main>
+<section class="hero">
+  <div>🔴 LIVE TELEVISION</div>
+  <h1>Welcome to CSTV</h1>
+  <p class="muted">Your channels, your playlist, one place.</p>
+  <button class="green" onclick="document.querySelector('#browse').scrollIntoView({behavior:'smooth'})">▶ Browse Channels</button>
+</section>
 
-    <div class="nav-label">MENU</div>
-    <nav class="nav">
-      <a href="#home" class="active"><span class="ico">⌂</span>Home</a>
-      <a href="#channels-section" data-filter="All"><span class="ico">▣</span>Live TV</a>
-      <a href="#channels-section" data-filter="Sports"><span class="ico">⚽</span>Sports</a>
-      <a href="#channels-section" data-filter="Movies"><span class="ico">▤</span>Movies</a>
-      <a href="#search" id="searchNav"><span class="ico">⌕</span>Search</a>
-      <a href="#settings"><span class="ico">⚙</span>Settings</a>
-    </nav>
-
-    <div class="sidebar-bottom">
-      <div class="connection">
-        <div><span class="dot" id="sideDot"></span><span id="sideStatus">Connecting...</span></div>
-        <div id="sideCount">Loading channels</div>
-        <div style="margin-top:7px;color:#777784">Stream Your World</div>
-      </div>
-    </div>
-  </aside>
-
-  <div class="main">
-    <header class="topbar">
-      <a class="mobile-brand" href="#home">
-        <span class="brand-icon">▶</span>CSTV
-      </a>
-      <div class="top-title" id="pageTitle">Discover</div>
-      <label class="search">
-        <span>⌕</span>
-        <input id="search" type="search" placeholder="Search channels..." aria-label="Search channels">
-      </label>
-      <button class="refresh" id="refreshBtn" type="button" title="Refresh channel list">↻</button>
-    </header>
-
-    <section class="hero" id="home">
-      <div class="hero-content">
-        <div class="eyebrow">YOUR ENTERTAINMENT HUB</div>
-        <h1>STREAM YOUR<br><span>WORLD.</span></h1>
-        <p>তোমার পছন্দের Live TV, Sports এবং আরও অনেক কিছু—এক জায়গায়। পছন্দের চ্যানেল বেছে নাও, উপভোগ করো।</p>
-        <div class="hero-actions">
-          <button class="primary" id="browseBtn">▶ &nbsp; Watch Live</button>
-          <button class="secondary" id="heroRefresh">↻ &nbsp; Refresh</button>
-        </div>
-      </div>
-    </section>
-
-    <main class="content">
-      <div class="notice" id="notice" role="status"></div>
-
-      <section class="player-box" id="playerBox" aria-label="Video player">
-        <div class="player-head">
-          <span class="live-label">LIVE</span>
-          <strong id="playingName">Now Playing</strong>
-          <button class="close-btn" id="closePlayer">✕</button>
-        </div>
-        <video id="player" controls autoplay playsinline></video>
-      </section>
-
-      <section class="section" id="channels-section">
-        <div class="section-head">
-          <h2 id="sectionTitle">Live Channels</h2>
-          <span class="count" id="channelCount">Loading...</span>
-        </div>
-        <p class="section-sub" id="sectionSub">তোমার পছন্দের চ্যানেল বেছে নাও</p>
-        <div class="category-list" id="categories"></div>
-        <div class="grid" id="channels">
-          <div class="empty">Loading channels...</div>
-        </div>
-      </section>
-
-      <section class="section" id="settings">
-        <div class="section-head"><h2>Settings</h2></div>
-        <p class="section-sub">CSTV channel list</p>
-        <button class="secondary" id="settingsRefresh">↻ Refresh channel list</button>
-      </section>
-    </main>
-
-    <footer>© CSTV · Stream Your World</footer>
+<section class="settings">
+  <h2 style="margin-top:0">Playlist Manager</h2>
+  <p class="muted">প্রতি লাইনে একটি করে নিজের অনুমোদিত JSON, M3U বা M3U8 playlist-এর Raw URL দাও। URL সেভ থাকলে পরের বারও ব্যবহার হবে।</p>
+  <textarea id="sources" placeholder="https://raw.githubusercontent.com/OWNER/REPO/main/playlist.m3u&#10;https://raw.githubusercontent.com/OWNER/REPO/main/channels.json"></textarea>
+  <div class="actions">
+    <button class="green" onclick="saveAndLoad()">↻ Save & Load</button>
+    <button onclick="discoverSony()">Find SonyLIV Files</button>
+    <button onclick="loadChannels()">Refresh</button>
   </div>
+  <p class="muted">SonyLIV repository: srhady/SonyLiv. ফাইল খুঁজে পাওয়া মানেই তাতে playable video URL আছে, এমন নয়।</p>
+</section>
 
-  <nav class="bottom-nav" aria-label="Mobile navigation">
-    <a href="#home" class="active"><span class="ico">⌂</span>Home</a>
-    <a href="#channels-section" data-filter="All"><span class="ico">▣</span>Live TV</a>
-    <a href="#channels-section" data-filter="Sports"><span class="ico">⚽</span>Sports</a>
-    <a href="#search" id="mobileSearch"><span class="ico">⌕</span>Search</a>
+<section id="player">
+  <div class="playerbar">
+    <strong id="playingName">CSTV Player</strong>
+    <div class="actions">
+      <button onclick="previousChannel()">⏮</button>
+      <button onclick="nextChannel()">⏭</button>
+      <button onclick="fullscreen()">⛶ Fullscreen</button>
+      <button onclick="closePlayer()">✕ Close</button>
+    </div>
+  </div>
+  <video id="video" controls playsinline autoplay></video>
+  <div class="playerbar" style="margin-top:9px">
+    <button onclick="togglePlay()">▶ Play / Pause</button>
+    <select id="quality" onchange="changeQuality(this.value)">
+      <option value="-1">Quality: Auto</option>
+    </select>
+  </div>
+  <div id="status">Loading...</div>
+</section>
+
+<section id="browse">
+  <h2>📺 Live Channels</h2>
+  <nav id="categories" class="categories">
+    <button class="active" data-cat="All">All</button>
+    <button data-cat="Bangla">Bangla</button>
+    <button data-cat="Sports">Sports</button>
+    <button data-cat="News">News</button>
+    <button data-cat="Entertainment">Entertainment</button>
+    <button data-cat="International">International</button>
+    <button data-cat="Other">Other</button>
   </nav>
-</div>
+  <div id="grid" class="grid">Loading channels...</div>
+</section>
+</main>
+<footer>CSTV · JSON + M3U/M3U8</footer>
 
 <script>
-"use strict";
+const $=id=>document.getElementById(id);
+const DEFAULT_SOURCE='https://raw.githubusercontent.com/cs87998799/cstv/main/channels.json';
 
-let channels = [];
-let activeCategory = "All";
+let channels=[],visible=[],current=-1,category='All',hls=null;
 
-/* Existing CSTV auto-updating playlist source */
-const playlistURL = "https://cs87998799.github.io/cstv/channels.json";
-
-const $ = id => document.getElementById(id);
-const searchInput = $("search");
-
-function safeText(value) {
-  return String(value == null ? "" : value);
+function status(s){$('status').textContent=s}
+function escapeHTML(s){
+ return String(s??'').replace(/[&<>"']/g,c=>({
+  '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+ }[c]));
 }
 
-function showNotice(message) {
-  $("notice").textContent = message;
-  $("notice").style.display = "block";
+function normalizeItem(x){
+ if(!x||typeof x!=='object')return null;
+ const name=x.name||x.title||x.channel||x.event_name||
+  x.eventName||x.match_name||x.contentTitle||x.label;
+ const url=x.url||x.stream||x.stream_url||x.streamUrl||
+  x.hlsUrl||x.playbackUrl||x.playback_url||x.manifest||
+  x.mpd||x.m3u8||x.link;
+ if(!name||typeof url!=='string'||!/^https?:\/\//i.test(url))return null;
+ return {
+  name:String(name),url,
+  logo:x.logo||x.tvg_logo||x.tvgLogo||x.image||x.thumbnail||'',
+  category:x.category||x.group||x.groupTitle||
+   x['group-title']||x.event_category||'Other'
+ };
 }
 
-async function loadChannels() {
-  $("refreshBtn").disabled = true;
-  $("sideStatus").textContent = "Updating...";
+function parseJSON(data){
+ const out=[],seen=new Set();
+ function walk(x,depth){
+  if(!x||depth>9)return;
+  if(Array.isArray(x)){x.forEach(v=>walk(v,depth+1));return}
+  if(typeof x!=='object')return;
+  const c=normalizeItem(x);
+  if(c&&!seen.has(c.url)){seen.add(c.url);out.push(c)}
+  Object.values(x).forEach(v=>{
+   if(v&&typeof v==='object')walk(v,depth+1);
+  });
+ }
+ walk(data,0);
+ return out;
+}
 
-  try {
-    const response = await fetch(
-      playlistURL + "?t=" + Date.now(),
-      {cache:"no-store"}
-    );
-
-    if (!response.ok) throw new Error("HTTP " + response.status);
-
-    const data = await response.json();
-    if (!data || !Array.isArray(data.channels)) {
-      throw new Error("Invalid channel list");
-    }
-
-    channels = data.channels;
-    $("sideStatus").textContent = "Channel list ready";
-    $("sideDot").className = "dot ok";
-    $("sideCount").textContent = channels.length + " channels";
-    $("notice").style.display = "none";
-
-    renderCategories();
-    render();
-  } catch (error) {
-    $("sideStatus").textContent = "Offline";
-    $("sideDot").className = "dot bad";
-    showNotice("চ্যানেল লিস্ট লোড হয়নি। ইন্টারনেট চেক করে Refresh চাপো।");
-
-    if (!channels.length) {
-      $("channels").replaceChildren();
-      const empty = document.createElement("div");
-      empty.className = "empty";
-      empty.textContent = "Channel list could not be loaded.";
-      $("channels").appendChild(empty);
-    }
-  } finally {
-    $("refreshBtn").disabled = false;
+function parseM3U(text){
+ const lines=text.replace(/^\uFEFF/,'').split(/\r?\n/);
+ const out=[];
+ let info='';
+ for(const raw of lines){
+  const s=raw.trim();
+  if(s.startsWith('#EXTINF')){
+   info=s;
+  }else if(s&&!s.startsWith('#')&&info){
+   const attr=k=>{
+    const m=info.match(new RegExp(k+'="([^"]*)"','i'));
+    return m?m[1]:'';
+   };
+   const comma=info.indexOf(',');
+   out.push({
+    name:comma>=0?info.slice(comma+1).trim():'Channel',
+    url:s,
+    logo:attr('tvg-logo'),
+    category:attr('group-title')||'Other'
+   });
+   info='';
   }
+ }
+ return out;
 }
 
-function getCategories() {
-  return [
-    "All",
-    ...new Set(
-      channels
-        .map(c => safeText(c.category).trim())
-        .filter(Boolean)
-    )
-  ];
+async function fetchPlaylist(url){
+ const response=await fetch(url,{cache:'no-store'});
+ if(!response.ok)throw Error('HTTP '+response.status);
+ const text=await response.text();
+ if(/^\s*#EXTM3U|#EXTINF/i.test(text.slice(0,5000))){
+  return parseM3U(text);
+ }
+ return parseJSON(JSON.parse(text));
 }
 
-function renderCategories() {
-  const root = $("categories");
-  root.replaceChildren();
-
-  getCategories().forEach(category => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className =
-      "category-btn" + (category === activeCategory ? " active" : "");
-    button.textContent = category;
-    button.setAttribute("aria-pressed", String(category === activeCategory));
-
-    button.addEventListener("click", () => {
-      activeCategory = category;
-      renderCategories();
-      render();
-    });
-
-    root.appendChild(button);
-  });
+function saveAndLoad(){
+ try{localStorage.setItem('cstv_sources',$('sources').value)}catch(e){}
+ loadChannels();
 }
 
-function render() {
-  const query = searchInput.value.trim().toLowerCase();
-
-  const list = channels.filter(channel => {
-    const name = safeText(channel.name).toLowerCase();
-    const category = safeText(channel.category).toLowerCase();
-
-    return (
-      (name.includes(query) || category.includes(query)) &&
-      (activeCategory === "All" ||
-       safeText(channel.category).trim() === activeCategory)
-    );
-  });
-
-  $("channelCount").textContent =
-    list.length + (list.length === 1 ? " channel" : " channels");
-  $("sideCount").textContent = channels.length + " channels";
-
-  const root = $("channels");
-  root.replaceChildren();
-
-  if (!list.length) {
-    const empty = document.createElement("div");
-    empty.className = "empty";
-    empty.textContent = channels.length
-      ? "কোনো চ্যানেল পাওয়া যায়নি। অন্য নামে Search করো।"
-      : "Loading channels...";
-    root.appendChild(empty);
-    return;
+async function loadChannels(){
+ status('Loading playlists...');
+ const urls=[
+  DEFAULT_SOURCE,
+  ...$('sources').value.split(/\r?\n/).map(s=>s.trim()).filter(s=>/^https?:\/\//i.test(s))
+ ];
+ let all=[],loaded=0,failed=0;
+ for(const url of [...new Set(urls)]){
+  try{
+   all.push(...await fetchPlaylist(url));
+   loaded++;
+  }catch(e){
+   failed++;
+   console.warn('Playlist failed:',url,e);
   }
-
-  list.forEach(channel => {
-    const name = safeText(channel.name || "Channel");
-    const card = document.createElement("article");
-    card.className = "channel-card";
-    card.tabIndex = 0;
-    card.setAttribute("role", "button");
-    card.setAttribute("aria-label", "Play " + name);
-
-    const art = document.createElement("div");
-    art.className = "card-art";
-
-    const pill = document.createElement("span");
-    pill.className = "live-pill";
-    pill.textContent = "● LIVE";
-    art.appendChild(pill);
-
-    if (channel.logo) {
-      const img = document.createElement("img");
-      img.src = channel.logo;
-      img.alt = name + " logo";
-      img.loading = "lazy";
-
-      img.onerror = () => {
-        img.remove();
-        addFallback(art, name);
-      };
-      art.appendChild(img);
-    } else {
-      addFallback(art, name);
-    }
-
-    const info = document.createElement("div");
-    info.className = "card-info";
-
-    const title = document.createElement("div");
-    title.className = "card-title";
-    title.textContent = name;
-
-    const category = document.createElement("div");
-    category.className = "card-category";
-    category.textContent = safeText(channel.category || "Live TV");
-
-    const bottom = document.createElement("div");
-    bottom.className = "card-bottom";
-
-    const hint = document.createElement("span");
-    hint.className = "watch-text";
-    hint.textContent = "Watch now";
-
-    const play = document.createElement("button");
-    play.type = "button";
-    play.className = "card-play";
-    play.textContent = "▶ Play";
-    play.addEventListener("click", event => {
-      event.stopPropagation();
-      playChannel(channel.url, name);
-    });
-
-    bottom.append(hint, play);
-    info.append(title, category, bottom);
-    card.append(art, info);
-
-    card.addEventListener("click", () => playChannel(channel.url, name));
-    card.addEventListener("keydown", event => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        playChannel(channel.url, name);
-      }
-    });
-
-    root.appendChild(card);
-  });
+ }
+ const map=new Map();
+ all.forEach(c=>{if(c.url&&!map.has(c.url))map.set(c.url,c)});
+ channels=[...map.values()];
+ render();
+ status(channels.length
+  ?channels.length+' channels loaded. Sources OK: '+loaded+'. Failed: '+failed+'.'
+  :'No channels found. Check Raw URLs, JSON format and CORS.');
 }
 
-function addFallback(container, name) {
-  const logo = document.createElement("span");
-  logo.className = "fallback-logo";
-  logo.textContent = name.slice(0, 8);
-  container.appendChild(logo);
+async function discoverSony(){
+ status('Searching SonyLIV repository for JSON/M3U files...');
+ try{
+  const r=await fetch('https://api.github.com/repos/srhady/SonyLiv/git/trees/main?recursive=1');
+  if(!r.ok)throw Error('GitHub API: '+r.status);
+  const tree=await r.json();
+  const files=(tree.tree||[]).filter(f=>
+   f.type==='blob'&&/\.(m3u|m3u8|json)$/i.test(f.path)
+  );
+  if(!files.length)throw Error('No JSON/M3U files found on main branch.');
+  $('sources').value=files.map(f=>
+   'https://raw.githubusercontent.com/srhady/SonyLiv/main/'+
+   f.path.split('/').map(encodeURIComponent).join('/')
+  ).join('\n');
+  saveAndLoad();
+ }catch(e){
+  status('Could not auto-discover files: '+e.message+
+   '. Open the repository and copy the Raw URL of the required file.');
+ }
 }
 
-/* Preserve the existing direct video playback behaviour */
-function playChannel(url, name) {
-  if (!url) {
-    showNotice("এই চ্যানেলের Stream URL পাওয়া যায়নি।");
-    return;
-  }
-
-  const player = $("player");
-  $("playerBox").style.display = "block";
-  $("playingName").textContent = safeText(name);
-  $("notice").style.display = "none";
-
-  player.pause();
-  player.removeAttribute("src");
-  player.load();
-  player.src = url;
-
-  player.play().catch(() => {
-    showNotice(
-      "এই স্ট্রিমটি ব্রাউজারে সরাসরি নাও চলতে পারে। অন্য একটি চ্যানেল চেষ্টা করো।"
-    );
-  });
-
-  $("playerBox").scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
+function catOf(c){
+ const s=String(c.category).toLowerCase();
+ if(/sport|cricket|football/.test(s))return 'Sports';
+ if(/news/.test(s))return 'News';
+ if(/entertain/.test(s))return 'Entertainment';
+ if(/international/.test(s))return 'International';
+ if(/bangla|bangladesh/.test(s))return 'Bangla';
+ return 'Other';
 }
 
-function stopPlayer() {
-  const player = $("player");
-  player.pause();
-  player.removeAttribute("src");
-  player.load();
-  $("playerBox").style.display = "none";
+function render(){
+ const q=$('search').value.trim().toLowerCase();
+ visible=channels.filter(c=>
+  (category==='All'||catOf(c)===category)&&
+  c.name.toLowerCase().includes(q)
+ );
+ if(!visible.length){$('grid').textContent='No channels found.';return}
+ $('grid').innerHTML=visible.map((c,i)=>`
+  <div class="channel" tabindex="0" role="button" data-i="${i}">
+   <div class="channel-logo">
+    ${c.logo?`<img src="${escapeHTML(c.logo)}" alt="" onerror="this.remove()">`:''}
+    <b>${escapeHTML(c.name.slice(0,3).toUpperCase())}</b>
+   </div>
+   <div class="channel-name">${escapeHTML(c.name)}</div>
+   <div class="channel-cat">${escapeHTML(c.category)}</div>
+  </div>`).join('');
+ $('grid').querySelectorAll('.channel').forEach(el=>{
+  const open=()=>playChannel(Number(el.dataset.i));
+  el.addEventListener('click',open);
+  el.addEventListener('keydown',e=>{
+   if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}
+  });
+ });
 }
 
-function chooseCategory(category) {
-  activeCategory = category;
-  $("pageTitle").textContent =
-    category === "All" ? "Live TV" : category;
-  $("sectionTitle").textContent =
-    category === "All" ? "Live Channels" : category;
-  renderCategories();
-  render();
-
-  $("channels-section").scrollIntoView({
-    behavior: "smooth",
-    block: "start"
+function playChannel(i){
+ const c=visible[i];if(!c)return;
+ current=i;
+ $('player').classList.add('show');
+ $('playingName').textContent=c.name;
+ status('Connecting to '+c.name+'...');
+ stopPlayer();
+ const url=c.url;
+ if(/\.m3u8?($|[?#])/i.test(url)&&window.Hls&&Hls.isSupported()){
+  hls=new Hls();
+  hls.loadSource(url);
+  hls.attachMedia($('video'));
+  hls.on(Hls.Events.MANIFEST_PARSED,()=>{
+   fillQuality();
+   $('video').play().then(()=>status('Playing: '+c.name))
+    .catch(()=>status('Press Play. Autoplay may be blocked.'));
   });
+  hls.on(Hls.Events.ERROR,(e,d)=>{
+   if(d.fatal)status('Stream error: URL expired, CORS, authentication or unsupported stream.');
+  });
+ }else{
+  $('video').src=url;
+  $('video').play().then(()=>status('Playing: '+c.name))
+   .catch(()=>status('Cannot play this stream. Check its format and access requirements.'));
+ }
+ $('player').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-document.querySelectorAll("[data-filter]").forEach(link => {
-  link.addEventListener("click", () => {
-    chooseCategory(link.dataset.filter);
-  });
+function stopPlayer(){
+ if(hls){hls.destroy();hls=null}
+ $('video').pause();
+ $('video').removeAttribute('src');
+ $('video').load();
+ $('quality').innerHTML='<option value="-1">Quality: Auto</option>';
+}
+function closePlayer(){stopPlayer();$('player').classList.remove('show')}
+function nextChannel(){if(visible.length)playChannel((current+1)%visible.length)}
+function previousChannel(){if(visible.length)playChannel((current-1+visible.length)%visible.length)}
+function togglePlay(){
+ const v=$('video');
+ if(v.paused)v.play().catch(()=>{});else v.pause();
+}
+function fullscreen(){
+ const v=$('video');
+ if(v.requestFullscreen)v.requestFullscreen().catch(()=>{});
+ else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen();
+}
+function fillQuality(){
+ $('quality').innerHTML='<option value="-1">Quality: Auto</option>';
+ if(!hls)return;
+ hls.levels.forEach((l,i)=>{
+  if(!l.height)return;
+  const o=document.createElement('option');
+  o.value=i;o.textContent=l.height+'p';
+  $('quality').appendChild(o);
+ });
+}
+function changeQuality(v){if(hls)hls.currentLevel=Number(v)}
+
+$('search').addEventListener('input',render);
+$('categories').addEventListener('click',e=>{
+ const b=e.target.closest('button[data-cat]');if(!b)return;
+ category=b.dataset.cat;
+ $('categories').querySelectorAll('button').forEach(x=>
+  x.classList.toggle('active',x===b)
+ );
+ render();
 });
-
-document.querySelectorAll(".nav a, .bottom-nav a").forEach(link => {
-  link.addEventListener("click", () => {
-    document.querySelectorAll(".nav a, .bottom-nav a")
-      .forEach(item => item.classList.remove("active"));
-    link.classList.add("active");
-  });
+document.addEventListener('keydown',e=>{
+ if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;
+ if(e.key==='ArrowRight')nextChannel();
+ if(e.key==='ArrowLeft')previousChannel();
+ if(e.key==='Enter')togglePlay();
 });
-
-searchInput.addEventListener("input", render);
-
-function openSearch() {
-  searchInput.focus();
-  if (window.matchMedia("(max-width:760px)").matches) {
-    window.scrollTo({top:0, behavior:"smooth"});
-  }
-}
-
-$("searchNav").addEventListener("click", openSearch);
-$("mobileSearch").addEventListener("click", openSearch);
-
-$("closePlayer").addEventListener("click", stopPlayer);
-$("refreshBtn").addEventListener("click", loadChannels);
-$("heroRefresh").addEventListener("click", loadChannels);
-$("settingsRefresh").addEventListener("click", loadChannels);
-
-$("browseBtn").addEventListener("click", () => {
-  $("channels-section").scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
-});
-
+try{$('sources').value=localStorage.getItem('cstv_sources')||''}catch(e){}
 loadChannels();
 </script>
 </body>
