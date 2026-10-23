@@ -437,13 +437,10 @@
     <!-- Center Video Viewport + Interactive Overlay Controls -->
     <div id="playerViewport" class="relative flex-1 flex items-center justify-center bg-black overflow-hidden cursor-pointer">
       <!-- Real HTML5 Video for HLS / MP4 streams from channels.json -->
-      <video id="liveVideoEl" class="w-full h-full max-h-[78vh] object-contain" playsinline autoplay></video>
+      <video id="liveVideoEl" class="w-full h-full max-h-[78vh] object-contain" controls autoplay playsinline></video>
 
       <!-- Optional Iframe Player if a channel in channels.json uses an embed URL -->
       <iframe id="liveIframeEl" class="hidden w-full h-full max-h-[78vh] border-0" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>
-
-      <!-- Live Broadcast Fallback Canvas (If stream is offline or CORS-restricted in browser preview) -->
-      <canvas id="fallbackBroadcastCanvas" class="hidden absolute inset-0 w-full h-full object-contain pointer-events-none"></canvas>
 
       <!-- Center Overlay Controls: Previous Channel | Play/Pause | Next Channel -->
       <div id="playerCenterControls" class="absolute inset-0 flex items-center justify-center gap-8 sm:gap-14 bg-black/30 transition-opacity duration-300">
@@ -515,7 +512,7 @@
 
   </div>
 
-  <!-- PHONE LOGIN MODAL (Real OTP Flow with BD +880 Phone Verification) -->
+  <!-- PHONE LOGIN MODAL -->
   <div id="phoneLoginModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="w-full max-w-sm rounded-3xl bg-[#160e29] border border-pink-500/30 p-6 shadow-2xl space-y-5">
       <div class="flex items-center justify-between">
@@ -526,7 +523,6 @@
         <button id="closeLoginModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
       </div>
 
-      <!-- Step 1: Phone Input -->
       <div id="loginStepPhone" class="space-y-4">
         <div>
           <label class="block text-xs font-semibold text-slate-300 mb-1.5">Mobile Number (Bangladesh)</label>
@@ -540,7 +536,6 @@
         </button>
       </div>
 
-      <!-- Step 2: OTP Verification -->
       <div id="loginStepOtp" class="hidden space-y-4">
         <div class="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-xs text-emerald-200">
           OTP sent to <span id="otpSentPhoneLabel" class="font-bold">+88017...</span>! <br/>
@@ -636,10 +631,6 @@
   </nav>
 
   <script>
-    // ====================================================
-    // DEFAULT FALLBACK CHANNELS (Used only if channels.json
-    // cannot be fetched in offline/preview mode)
-    // ====================================================
     const DEFAULT_CHANNELS_JSON = [
       {
         id: 'ch-epl1',
@@ -761,10 +752,6 @@
       'from-cyan-900 via-slate-900 to-indigo-950'
     ];
 
-    // ====================================================
-    // UNIVERSAL channels.json PARSER & FETCHER
-    // Supports any GitHub channels.json structure!
-    // ====================================================
     function normalizeChannelsJson(rawJson) {
       let arr = [];
       if (Array.isArray(rawJson)) {
@@ -802,7 +789,6 @@
           streamUrl,
           iframeUrl,
           premium: Boolean(item.premium || item.vip || item.isPremium),
-          ringBg: 'bg-white',
           badgeColor: BADGE_COLORS[idx % BADGE_COLORS.length],
           cardGradient: CARD_GRADIENTS[idx % CARD_GRADIENTS.length],
           themeColor: item.themeColor || '#831843',
@@ -838,9 +824,6 @@
       return false;
     }
 
-    // ==========================================
-    // SAFE STATE & LOCAL STORAGE
-    // ==========================================
     const state = {
       currentCategory: 'all',
       currentChannelIndex: 0,
@@ -914,9 +897,6 @@
       `;
     }
 
-    // ==========================================================
-    // RENDER EVERYTHING DYNAMICALLY FROM channels.json
-    // ==========================================================
     function renderAllFromChannelsJson() {
       renderCategoryNavTabs();
       renderHeroFromChannels();
@@ -1137,9 +1117,6 @@
       }).join('');
     }
 
-    // ==========================================
-    // 5-SECOND AUTO-HIDE LOGIC FOR PLAYER POPUP
-    // ==========================================
     let overlayHideTimer = null;
     let overlayCountdownInterval = null;
     let remainingSeconds = 5;
@@ -1178,82 +1155,7 @@
       document.getElementById('playerCenterControls').classList.add('center-controls-hidden');
     }
 
-    // ==========================================
-    // VIDEO PLAYER + HLS + ANIMATED FALLBACK FEED
-    // ==========================================
     let hlsInstance = null;
-    let fallbackAnimId = null;
-
-    function startFallbackBroadcastCanvas(channel) {
-      const canvas = document.getElementById('fallbackBroadcastCanvas');
-      canvas.classList.remove('hidden');
-      const ctx = canvas.getContext('2d');
-      let tick = 0;
-
-      if (fallbackAnimId) cancelAnimationFrame(fallbackAnimId);
-
-      function drawFrame() {
-        canvas.width = 800;
-        canvas.height = 450;
-        tick += 1;
-
-        const grad = ctx.createLinearGradient(0, 0, 800, 450);
-        grad.addColorStop(0, '#0f071e');
-        grad.addColorStop(0.5, channel.themeColor || '#831843');
-        grad.addColorStop(1, '#090514');
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, 800, 450);
-
-        ctx.strokeStyle = 'rgba(255,255,255,0.08)';
-        ctx.lineWidth = 2;
-        for (let i = 0; i < 6; i++) {
-          ctx.beginPath();
-          const yOffset = 100 + i * 50 + Math.sin((tick + i * 20) * 0.04) * 18;
-          ctx.moveTo(0, yOffset);
-          ctx.quadraticCurveTo(400, yOffset - 35, 800, yOffset);
-          ctx.stroke();
-        }
-
-        ctx.fillStyle = 'rgba(0,0,0,0.55)';
-        ctx.fillRect(610, 24, 165, 42);
-        ctx.fillStyle = '#ff1f8e';
-        ctx.beginPath();
-        ctx.arc(630, 45, 6, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = '#ffffff';
-        ctx.font = 'bold 15px Inter, sans-serif';
-        ctx.fillText('CS Tv • HD', 645, 50);
-
-        ctx.fillStyle = 'rgba(255,255,255,0.95)';
-        ctx.font = 'bold 34px Inter, Hind Siliguri, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(channel.name, 400, 200);
-
-        ctx.fillStyle = '#f472b6';
-        ctx.font = '600 18px Inter, sans-serif';
-        ctx.fillText(`${channel.category} • ${state.quality} Live Feed`, 400, 238);
-
-        ctx.fillStyle = 'rgba(15, 7, 30, 0.9)';
-        ctx.fillRect(0, 390, 800, 60);
-        ctx.fillStyle = '#ff1f8e';
-        ctx.fillRect(0, 390, 130, 60);
-        ctx.fillStyle = '#ffffff';
-        ctx.font = 'bold 16px Inter, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('CS Tv LIVE', 65, 425);
-
-        ctx.textAlign = 'left';
-        ctx.font = '500 16px Inter, Hind Siliguri, sans-serif';
-        const scrollX = 800 - ((tick * 2.2) % 1200);
-        ctx.fillText(channel.ticker || channel.name, Math.max(145, scrollX), 425);
-
-        if (state.isPlaying) {
-          fallbackAnimId = requestAnimationFrame(drawFrame);
-        }
-      }
-
-      drawFrame();
-    }
 
     function openPlayerByChannelId(channelId, customUrl = null) {
       const idx = CHANNELS.findIndex(c => String(c.id) === String(channelId));
@@ -1290,7 +1192,6 @@
       if (ch.iframeUrl && !customUrl) {
         video.pause();
         video.classList.add('hidden');
-        document.getElementById('fallbackBroadcastCanvas').classList.add('hidden');
         iframe.src = ch.iframeUrl;
         iframe.classList.remove('hidden');
         return;
@@ -1299,8 +1200,6 @@
       iframe.src = '';
       iframe.classList.add('hidden');
       video.classList.remove('hidden');
-
-      startFallbackBroadcastCanvas(ch);
 
       try {
         if (hlsInstance) {
@@ -1316,28 +1215,13 @@
           hlsInstance.loadSource(streamSrc);
           hlsInstance.attachMedia(video);
           hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
-            video.play().then(() => {
-              document.getElementById('fallbackBroadcastCanvas').classList.add('hidden');
-            }).catch(() => {
-              startFallbackBroadcastCanvas(ch);
-            });
-          });
-          hlsInstance.on(Hls.Events.ERROR, (event, data) => {
-            if (data.fatal) {
-              startFallbackBroadcastCanvas(ch);
-            }
+            video.play().catch(() => {});
           });
         } else if (streamSrc) {
           video.src = streamSrc;
-          video.play().then(() => {
-            document.getElementById('fallbackBroadcastCanvas').classList.add('hidden');
-          }).catch(() => {
-            startFallbackBroadcastCanvas(ch);
-          });
+          video.play().catch(() => {});
         }
-      } catch (e) {
-        startFallbackBroadcastCanvas(ch);
-      }
+      } catch (e) {}
     }
 
     function updatePlayPauseIcon() {
@@ -1542,7 +1426,6 @@
         document.getElementById('liveIframeEl').src = '';
         clearTimeout(overlayHideTimer);
         clearInterval(overlayCountdownInterval);
-        if (fallbackAnimId) cancelAnimationFrame(fallbackAnimId);
       });
 
       document.getElementById('playerPrevChannelBtn').addEventListener('click', (e) => {
@@ -1567,10 +1450,8 @@
         const video = document.getElementById('liveVideoEl');
         if (state.isPlaying) {
           video.play().catch(() => {});
-          startFallbackBroadcastCanvas(CHANNELS[state.currentChannelIndex]);
         } else {
           video.pause();
-          if (fallbackAnimId) cancelAnimationFrame(fallbackAnimId);
         }
       });
 
@@ -1615,13 +1496,31 @@
         document.getElementById('playerMuteBtn').textContent = state.isMuted ? '🔇 Muted' : '🔊 Sound On';
       });
 
-      document.getElementById('playerFullscreenBtn').addEventListener('click', () => {
+      // FULLSCREEN + AUTO LANDSCAPE ORIENTATION
+      document.getElementById('playerFullscreenBtn').addEventListener('click', async () => {
         const modal = document.getElementById('playerModal');
-        if (!document.fullscreenElement && modal.requestFullscreen) {
-          modal.requestFullscreen().catch(() => {});
-        } else if (document.exitFullscreen) {
-          document.exitFullscreen().catch(() => {});
-        }
+        try {
+          if (!document.fullscreenElement) {
+            if (modal.requestFullscreen) {
+              await modal.requestFullscreen();
+            } else if (modal.webkitRequestFullscreen) {
+              await modal.webkitRequestFullscreen();
+            }
+            // Auto lock screen orientation to landscape if supported by browser
+            if (screen.orientation && screen.orientation.lock) {
+              await screen.orientation.lock('landscape').catch(() => {});
+            }
+          } else {
+            if (document.exitFullscreen) {
+              await document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+              await document.webkitExitFullscreen();
+            }
+            if (screen.orientation && screen.orientation.unlock) {
+              screen.orientation.unlock();
+            }
+          }
+        } catch (e) {}
       });
 
       const loginModal = document.getElementById('phoneLoginModal');
