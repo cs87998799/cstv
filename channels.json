@@ -1,382 +1,1540 @@
 {
   "channels": [
     {
-      "name": "Channel I",
-      "url": "https://tvsen6.aynaott.com/channeli/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/28931315743beff50fc2c1312b1f8261"
-    },
-    {
-      "name": "NTV",
-      "url": "https://tvsen5.aynaott.com/xV4jEKf3D9zc/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/73c39182782a201338070c2f4429e449"
-    },
-    {
-      "name": "Bangla Vision",
-      "url": "https://tvsen5.aynaott.com/banglavision/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/e86c14566b4d5b6dd68ac37dce4f6043"
-    },
-    {
-      "name": "RTV",
-      "url": "https://tvsen5.aynaott.com/RtvHD/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/fd634ca672c8294f109225ca42d20991"
-    },
-    {
-      "name": "ATN Bangla",
-      "url": "https://tvsen5.aynaott.com/atnbangla/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/a4d2bbdb65b4abc239eaddedda1e5d22"
-    },
-    {
-      "name": "Maasranga TV",
-      "url": "https://tvsen5.aynaott.com/maasrangatv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/5db4a54244a315684254b441e92539e2"
-    },
-    {
-      "name": "Deepto TV",
-      "url": "https://tvsen5.aynaott.com/DeeptoTVHD/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/12462ef0383fa0e927215d56cd51acf8"
-    },
-    {
-      "name": "Duronto TV",
-      "url": "https://tvsen5.aynaott.com/durontotv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/1d3d06e02fc9ba45a990b65aebd04ebc"
-    },
-    {
-      "name": "ETV",
-      "url": "https://tvsen6.aynaott.com/etv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/d805cf57543080b49de8a2621cd54da4"
-    },
-    {
-      "name": "Somoy News TV",
-      "url": "https://tvsen6.aynaott.com/somoytv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/cbadf009eebf7506c7633b3a98a2f042"
-    },
-    {
-      "name": "T Sports HD",
-      "url": "https://tvsen5.aynaott.com/tsports/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/9fbf3e9ed22c8cc71c93f25d6cb9be32"
-    },
-    {
-      "name": "Gazi TV",
-      "url": "https://tvsen5.aynaott.com/Ravc7gPCZpxk/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/0b4d83d0baf7513beae135e134fced2c"
-    },
-    {
-      "name": "Desh TV",
-      "url": "https://tvsen6.aynaott.com/deshtv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/9ef657aca7c0009e4f0675af3b5190d8"
-    },
-    {
-      "name": "Boishakhi TV",
-      "url": "https://tvsen6.aynaott.com/boishakhitv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/ec66cdf9538da75b08112f9ae2f151bc"
-    },
-    {
-      "name": "Channel 9",
-      "url": "https://tvsen6.aynaott.com/channel9/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/affd223f023a705e3a1c5df263d0a7ef"
+      "name": "Independent TV",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1704/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
       "name": "Channel 24",
-      "url": "https://tvsen6.aynaott.com/channel24/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/502b8de24fcfc4443c376270a6e45527"
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1703/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Asian TV",
-      "url": "https://tvsen6.aynaott.com/asiantv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/8faf522ac37bfcd9c163145f77a9a024"
+      "name": "News 24",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1708/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "ATN News",
-      "url": "https://tvsen6.aynaott.com/atnnews/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/8e9db8284bf110dce597f48674d1968a"
-    },
-    {
-      "name": "Independent TV",
-      "url": "https://tvsen6.aynaott.com/independenttv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/ee4466e6b775bf83f4f5a90a1dc89234"
-    },
-    {
-      "name": "SA TV",
-      "url": "https://tvsen6.aynaott.com/satv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/83796140b05a889d37c4c98ed8c43821"
-    },
-    {
-      "name": "DBC News",
-      "url": "https://tvsen6.aynaott.com/dbcnews/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/e8bb743022a2b6b0ee714bbdb2715cbe"
-    },
-    {
-      "name": "Ekhon TV",
-      "url": "https://tvsen6.aynaott.com/ekhontv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/94ff4123b6c533d0332d63944ccf5868"
-    },
-    {
-      "name": "News 24 BD",
-      "url": "https://tvsen6.aynaott.com/news24/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/b102f206ea73dfdbc591e9cf6c8c478d"
-    },
-    {
-      "name": "Bangla TV",
-      "url": "https://tvsen6.aynaott.com/banglatv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/5b22893ae4e816ef2cf87e63c96e9e08"
+      "name": "Somoy TV",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
       "name": "Ekattor TV",
-      "url": "https://tvsen6.aynaott.com/ekattorbdtv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/c69d4851784c5fefa6d0117653d227c3"
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1705/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
       "name": "Jamuna TV",
-      "url": "https://tvsen6.aynaott.com/jamunatv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/18c65f48bb15b1e59a8d91b8d1675122"
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1701/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Mohona TV",
-      "url": "https://tvsen6.aynaott.com/mohonatv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/663c8079982ff6a45fc99e78c865a63d"
+      "name": "Star News",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1710/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "NEXUS TV",
-      "url": "https://tvsen6.aynaott.com/nexustv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/db85422953e3a1652e26b0a14eed92a9"
+      "name": "DBC News",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1728/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Bijoy TV",
-      "url": "https://tvsen6.aynaott.com/bijoytv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/589934eb6a1c264a0ee6bf6d82fad81c"
+      "name": "ATN News",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1706/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Global TV",
-      "url": "https://tvsen6.aynaott.com/globaltvhd/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/bda05e1c2173251baebc20ffe43dea0b"
+      "name": "Channel I",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1723/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "My TV",
-      "url": "https://tvsen6.aynaott.com/mytv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/d93b76211f818fcce66e7f44119ce0be"
+      "name": "Channel 9",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1729/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Ananda TV",
-      "url": "https://tvsen6.aynaott.com/anandatv/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/225c955ff4174c976ab01d7214b3f28f"
+      "name": "Maasranga TV",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1722/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "A sports",
-      "url": "https://tvsen7.aynaott.com/asports-bkp/index.m3u8",
-      "category": "Channels",
-      "logo": "https://s3.aynaott.com/storage/f32cb68f73e383cf0e3f12ad2732b902"
+      "name": "BanglaVision",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1715/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "SET HD",
-      "url": "https://tataplay.slivcdn.com/hls/live/2011671/SETHD/master.m3u8",
-      "category": "Entertainment",
-      "logo": "https://i.postimg.cc/xCV0N1yy/SONY-SET-HD.png"
+      "name": "NTV",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1716/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony SAB HD",
-      "url": "https://tataplay.slivcdn.com/hls/live/2011749/SABHD/master.m3u8",
-      "category": "Entertainment",
-      "logo": "https://i.postimg.cc/HLrGvfHN/SONY-SAB-HD.png"
+      "name": "BTV",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony Marathii",
-      "url": "https://tataplay.slivcdn.com/hls/live/2011740/SonyMarathi/master.m3u8",
-      "category": "Entertainment",
-      "logo": "https://i.postimg.cc/ZqvcSG5j/SONY-MARATHI.png"
+      "name": "Akash DTH 3",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1720/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony Pal",
-      "url": "https://tataplay.slivcdn.com/hls/live/2011741/SonyPalSD/master.m3u8",
-      "category": "Entertainment",
-      "logo": "https://i.postimg.cc/nrQ6V7MG/SONY-PAL.png"
+      "name": "Akash DTH 4",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1713/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony Aath",
-      "url": "https://tataplay.slivcdn.com/hls/live/2011641/SonyAathSD/master.m3u8",
-      "category": "Entertainment",
-      "logo": "https://i.postimg.cc/bY12WVTm/SONY-AATH.png"
+      "name": "Islamic TV",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1724/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony Yay",
-      "url": "https://tataplay.slivcdn.com/hls/live/2011746/SonyYaySD/master.m3u8",
-      "category": "Kids",
-      "logo": "https://i.postimg.cc/qRxtS9Gy/SONY-YAY.png"
+      "name": "Deepto TV",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1711/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony MAX HD",
-      "url": "https://tataplay.slivcdn.com/hls/live/2011670/SonyMaxhd/master.m3u8",
-      "category": "Movies",
-      "logo": "https://i.postimg.cc/XYF71G8F/SONY-MAX-HD.png"
+      "name": "Al Jazeera",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1721/output/index.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony MAX",
-      "url": "https://tataplay.slivcdn.com/hls/live/2011745/SonyMaxSD/master.m3u8",
-      "category": "Movies",
-      "logo": "https://i.postimg.cc/X7MmrgCs/SONY-MAX.png"
+      "name": "Akash DTH 1",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1730/output/master.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony MAX 2",
-      "url": "https://tataplay.slivcdn.com/hls/live/2011908/MAX2/master.m3u8",
-      "category": "Movies",
-      "logo": "https://www.sonypicturesnetworks.com/images/logos/Sony_MAX2.png"
+      "name": "Akash DTH 2",
+      "url": "https://owrcovcrpy.gpcdn.net/bpk-tv/1731/output/master.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony WAH",
-      "url": "https://tataplay.slivcdn.com/hls/live/2011906/SonyWah/master.m3u8",
-      "category": "Movies",
-      "logo": "https://sonypicturesnetworks.com/images/logos/Sony_WAH.png"
+      "name": "G Series",
+      "url": "https://vods2.aynaott.com/gseriesDrama/tracks-v1a1/mono.ts.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony PIX HD",
-      "url": "https://tataplay.slivcdn.com/hls/live/2011748/PIXHD/master.m3u8",
-      "category": "Movies",
-      "logo": "https://i.postimg.cc/hGYnSKpg/SONY-PIX-HD.png"
+      "name": "Channel 1 4K",
+      "url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/channel1bd.stream/tracks-v1a1/mono.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony BBC Earth HD",
-      "url": "https://tataplay.slivcdn.com/hls/live/2011907/SonyBBCEarthHD/master.m3u8",
-      "category": "Infotainment",
-      "logo": "https://i.postimg.cc/t4g4cy4Z/SONY-BBC-EARTH.png"
+      "name": "Channel S UK",
+      "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/chsukoff.stream/playlist.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony Sports Ten 1 HD",
-      "url": "https://tataplay.slivcdn.com//hls/live/2011747/TEN1HD/master.m3u8",
-      "category": "Sports",
-      "logo": "https://i.postimg.cc/d00sTpK0/SONY-SPORTS-TEN-1-HD.png"
+      "name": "Channel Europe",
+      "url": "https://stream.channeleuropetvboxlondon.co.uk/live/channeleurope/chunklist_w572284654.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony Sports Ten 2 HD",
-      "url": "https://tataplay.slivcdn.com/hls/live/2020434/TEN2HD/master.m3u8",
-      "category": "Sports",
-      "logo": "https://i.postimg.cc/wvfsmLrC/SONY-SPORTS-TEN-2-HD.png"
+      "name": "Ayna TV",
+      "url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/ayna.stream/tracks-v1a1/mono.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony Sports Ten 3 HD",
-      "url": "https://tataplay.slivcdn.com/hls/live/2020591/TEN3HD/master.m3u8",
-      "category": "Sports",
-      "logo": "https://i.postimg.cc/2SGvDswj/SONY-SPORTS-TEN-3-HD.png"
+      "name": "SRK TV",
+      "url": "https://srknowapp.ncare.live/srktvhlswodrm/srktv.stream/playlist.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony Sports Ten 4 HD",
-      "url": "https://tataplay.slivcdn.com/hls/live/2020589/ten4hd/master.m3u8",
-      "category": "Sports",
-      "logo": "https://www.sonypicturesnetworks.com/images/logos/SONY_SportsTen4_HD_Logo_CLR.png"
+      "name": "Green TV",
+      "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/greentv.stream/playlist.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony Sports Ten 5 HD",
-      "url": "https://tataplay.slivcdn.com/hls/live/2020593/SONYSIXHD/master.m3u8",
-      "category": "Sports",
-      "logo": "https://i.postimg.cc/xCzcchKz/SONY-SPORTS-TEN-5-HD.png"
+      "name": "Rajdhani TV",
+      "url": "https://stream.shariarsuvo.com/hls6/rajdhaniweb.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Sony KAL",
-      "url": "https://spt-sonykal-1-us.lg.wurl.tv/playlist.m3u8",
-      "category": "SonyLIV by CRICFy",
-      "logo": "https://i.postimg.cc/ZqnmcXdx/Sony-KAL.png"
+      "name": "Jago News 24",
+      "url": "https://app.ncare.live/live-orgin/jagonews24.stream/playlist.m3u8",
+      "category": "Bangladesh*",
+      "logo": "https://i.postimg.cc/rpgK51Ff/Akash-Digital.png"
     },
     {
-      "name": "Star Sports Hindi 1",
-      "url": "https://live.dinesh29.com.np/stream/jiotvplus/starsportshindi1/master.m3u8",
-      "category": "Entertainment",
-      "logo": "https://live.dinesh29.com.np/logos/jiotvplus/starsportshindi1.png"
+      "name": "JAMUNA TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHgjWx6302-fgPo99hW7ns7otJ2677IMmOOpplgC6xgeQ/m3u8",
+      "category": "Other",
+      "logo": ""
     },
     {
-      "name": "Star Sports Select HD1",
-      "url": "https://live.dinesh29.com.np/stream/jiotvplus/starsportsselecthd1/master.m3u8",
-      "category": "Sports",
-      "logo": "https://live.dinesh29.com.np/logos/jiotvplus/starsportsselecthd1.png"
+      "name": "JAMUNA TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlsUvCSnLHV8NLCSj_iAj68Inw4LjXmZnPyc6Tfc6jcA/m3u8",
+      "category": "Other",
+      "logo": ""
     },
     {
-      "name": "Star Sports Select HD2",
-      "url": "https://live.dinesh29.com.np/stream/jiotvplus/starsportsselecthd2/master.m3u8",
-      "category": "Sports",
-      "logo": "https://live.dinesh29.com.np/logos/jiotvplus/starsportsselecthd2.png"
+      "name": "SOMOY TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHtfclz9wN_LgB93XqphvbT9vL_5w2Hl7iA_s9KC8XmOj/m3u8",
+      "category": "Other",
+      "logo": ""
     },
     {
-      "name": "Star Sports HD1",
-      "url": "https://live.dinesh29.com.np/stream/jiotvplus/starsportshd1/master.m3u8",
-      "category": "Sports",
-      "logo": "https://live.dinesh29.com.np/logos/jiotvplus/starsportshd1.png"
+      "name": "INDEPENDENT",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHq2jOuUjDkuVKBTHA-SKF0fbZVcYJJo3Sqe5WtEYFfbc/m3u8",
+      "category": "Other",
+      "logo": ""
     },
     {
-      "name": "Star Sports HD2",
-      "url": "https://live.dinesh29.com.np/stream/jiotvplus/starsportshd2/master.m3u8",
-      "category": "Sports",
-      "logo": "https://live.dinesh29.com.np/logos/jiotvplus/starsportshd2.png"
+      "name": "EKATTOR TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHm8rLDP6uFXzKK1Zz9IKtnXRv2YtVwzfXG2zlxScnDa0/m3u8",
+      "category": "Other",
+      "logo": ""
     },
     {
-      "name": "Star Gold Select HD",
-      "url": "https://live.dinesh29.com.np/stream/jiotvplus/stargoldselecthd/master.m3u8",
-      "category": "Movies",
-      "logo": "https://live.dinesh29.com.np/logos/jiotvplus/stargoldselecthd.png"
+      "name": "CHANNEL 24 HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlsUvCSnLHV8NLCSj_iAj689p15pJd6GvMXq-GmtL6xq/m3u8",
+      "category": "Other",
+      "logo": ""
     },
     {
-      "name": "Star Gold 2 HD",
-      "url": "https://live.dinesh29.com.np/stream/jiotvplus/stargold2hd/master.m3u8",
-      "category": "Movies",
-      "logo": "https://live.dinesh29.com.np/logos/jiotvplus/stargold2hd.png"
+      "name": "ATN NEWS HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHn2sYdNOPg76WULY_4B9qfHKVBOTUTnOjrdyQ8RvCopG/m3u8",
+      "category": "Other",
+      "logo": ""
     },
     {
-      "name": "Star Gold HD",
-      "url": "https://live.dinesh29.com.np/stream/jiotvplus/stargoldhd/master.m3u8",
-      "category": "Movies",
-      "logo": "https://live.dinesh29.com.np/logos/jiotvplus/stargoldhd.png"
+      "name": "NEWS 24 HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnuhVEpkLKcN20upMFQQ0V6NlhOpwJam2aUppT56s9QZ/m3u8",
+      "category": "Other",
+      "logo": ""
     },
     {
-      "name": "Star Jalsha HD",
-      "url": "https://live.dinesh29.com.np/stream/jiotvplus/starjalshahd/master.m3u8",
-      "category": "Entertainment",
-      "logo": "https://live.dinesh29.com.np/logos/jiotvplus/starjalshahd.png"
+      "name": "DBC NEWS HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnuhVEpkLKcN20upMFQQ0V6c05GKRjJJKN4l7ALckGdk/m3u8",
+      "category": "Other",
+      "logo": ""
     },
     {
-      "name": "Jalsha Movies HD",
-      "url": "https://live.dinesh29.com.np/stream/jiotvplus/jalshamovieshd/master.m3u8",
-      "category": "Movies",
-      "logo": "https://live.dinesh29.com.np/logos/jiotvplus/jalshamovieshd.png"
+      "name": "STAR NEWS HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvUCM0zshG1q0eA5TneBB8UclrORE1a9CYuBseeIwLKl/m3u8",
+      "category": "Other",
+      "logo": ""
     },
     {
-      "name": "Colors HD",
-      "url": "https://live.dinesh29.com.np/stream/jiotvplus/colorshd/master.m3u8",
-      "category": "Entertainment",
-      "logo": "https://live.dinesh29.com.np/logos/jiotvplus/colorshd.png"
+      "name": "BTV NEWS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHt90B40lcUmrhmejWo629ATX9_jBRvekqk1nqP7VO_6U/m3u8",
+      "category": "Other",
+      "logo": ""
     },
     {
-      "name": "Colors Bengali HD",
-      "url": "https://live.dinesh29.com.np/stream/jiotvplus/colorsbengalihd/master.m3u8",
-      "category": "Entertainment",
-      "logo": "https://live.dinesh29.com.np/logos/jiotvplus/colorsbengalihd.png"
+      "name": "ATN BANGLA HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHkwD4RTXZoY8JeiooU05a6LDVyCVOI23FohQMQRx5_Xi/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "CHANNEL I HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHrFDFfilW9c7_oE_ndow-_dIsr-aR-GHHJjZlLdrRzad/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "EKUSHEY TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHkbp2JoPgtlU9rt4SesAnM_LFCrwzcCtalBOXAXKIqR_/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "NTV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHrslZwlwHpalG4-CYxHjMr7SKl_W9b00xFms_P10GR0u/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "RTV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHrYkMlTXqqpAq8CeiqJlzVt9EK-jZna-4yixLmdYPJZq/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "BOISHAKHAI TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvm6MtHcXlDTqRW5E3O3NeUzYSBKbiL85kdjo1McDBLB/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "BANGLA VISION HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhwTMq--onhOAFkG-C6ARIvORbV3TWIybGIzu0yPwrVR/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHiUICVI_D3MR72Ljx4hABs0_wTEa_OqgT1WVqWhUEt3v/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "MOHONA TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHmG4Mmq-Q1JyVwllsXQQncXBEVXHBZr9fXXvkHBMTHNK/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "MAASRANGA TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvjXtteY95qY4RXCA4oCfeSO5xCgcptkRjUZi2H2CgId/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "CHANNEL 9 HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnEUkT3klFMwavLKn56aQpe0XVoyXjKMBBpUW141oDfe/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "GAZI TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHphk7W0kunrQJF9nhO3ujHQM6x8mqXEcXxql8ncDWepH/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ASIAN TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhSINJP5BV-SEeSmJ4MkMJF5Xt8POre5m_hWAoWELO7T/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DESH TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnEXxpr3KmXQGApLu-VqWqDUoNvoC-QpcpNOOorH9juw/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "SATV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHmgANlGroUDmbbUtuJRQyND9I11aLBphOypiaeQPA-HP/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "BIJOY TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHr5ELogGTezb1ZdQ0yN9p6DYL4UUo7FMf4lA3rG1-K2I/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DEEPTO TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHst9jK3FZMlRgmKXFEGFwflBZi1zqLnKKocSH6H3_QUo/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "NAGORIK TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHgUOGuyP2KXSERLYjAmXml8-VmfBFKgY6-qdvxS1NjOP/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DURONTO TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnABKkgxEFctw7t9ppTVsqQn3M1isi9wN-o_Jwz5aziG/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ANANDA TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHpvtSpojIwuKtHYfH5f3KhxrmZ0rgFl8PN5tG2a_nJW6/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "NEXUS TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHndnsm70JMkKOcrjsTLgisxJqKni_83ZxV0ir8olWN2m/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "EKHON TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhFKUzLtr4_sJplVbdpOlBkSNsLi6SUQ6MEVwJ7wpc-c/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "GLOBAL TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHtb95bHMVOW95t__vZA80LFITY-0dQzQsUVjNZWvqxdt/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "MOVIE BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHqFn96rTri8vAf2wRTB6VKyyenOFky1EISppE2tyyRCs/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "BANGLA TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnbImc3rCDCHzgk9aFeGTov_VFATquapqiRsWdA1iN1-/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "STAR JALSHA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlEM6yNeeYkbpou29dZSeeHmtqWjKcBe9S8OSjRUgGfM/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "JALSHA MOVIES*",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHpnKtFuVRUEyEm8lg_ceuyJsUVictJoR-sdMMIQP8AB5/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ZEE BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHiQQG7IyqMOwnWz_pJ-f9TZQwuS73KX55OLhVRKTsylw/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ZEE BANGLA HD*",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHsLrXO4oiYHRJmq1WIorDXWUG_gwM1_ad4lCCZFL-fKM/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ZEE BANGLA CINEMA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHqi5WUotW_3PxoAvKvEs5tkJSVbCrO8lVeMSLaCs6QkI/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "COLORS BANGLA HD*",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHr9MISI9davfLDvlfHzWvuKiZTma-3C0HqV9DZ1sx8B7/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "COLORS BANGLA CINEMA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHjRacyfW11RCJxS8ZNb6yG70iLU3Xog_hziyZLEIAhrF/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IN: ENTER 10 BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHpVmKRCt95h-TdI0CnmGmHm12Pm626vPr8RoiaTbx6-w/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "SONY AATH",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHgYoPL-iYMiqw34w5rAGcZMLjuP-cTMJdkqhNLxWRddi/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "RUPOSHI BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlyIEfSc3prPKKXGvUah696PMLfCaccIKaF4j0U0k69T/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "AAKASH AATH",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnh8ep4rzwynSBp0ikkMEsbwGsrK3Ief9N7wZhoz1VG6/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "SANGEET BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnSorFbA2BVzqNXFFEFCh8YNaa9PqstmnZbftRKbA8MY/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DD BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHl-Ag_T72UeHVT3hso0GKUEao2a8GpBJ8ZygrxbjpSQB/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IND | AMAR DIGITAL",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHshY0qTibx9S1g5z-AAVrN7vjQH3sFVfdknLMR5UkYIJ/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IND | AMAR BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHjrYN1UNZGMMAqMfTAMVcSMx_bOGMLULTV4scHD3Fz8Y/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "BANGLA PLUS HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHpnRHoBUGSdDYk5kh0Z2eZ-dVcMSll_PJmRb_668CX8V/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "KHUSBU BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHuFI07VG6qZrd18zEn32oPcbS0pGj3RvV9O7q-HFii-3/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "NEWS 18 BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHtZjlOqWlNb3UpWnlwmnodQg3Z-jAwLMSt5kXf5MRsjC/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ABP ANANDA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHtCQg6veF9SFM4JayT1cLzPcgJWrhyYd3d5AhUS_z50z/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "R PLUS GOLD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHq1XXDlgimH9Kuls41uw9XnzMm-XNyqZs5qcxz7YfGSS/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "TV 9 BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHrphAuGXHyBSKH-sxqGPoOkx1ZT1RIAgC3cSYlv30iop/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "BANGLA JAGO",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHmyfWBNaaZKsSTD46dgEXx1JMwn1kqoYxGeWr8dV-FAL/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ZEE 24 GHANTA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHrkgQr7VaPMW9kre8WBn06_MjoDU99rHc0ewqffypVo8/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IN: -HINDI- STAR SPORTS 1 HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHkXtKesAWHifgDWZ8ej_5SCJWAUFya4LOS9FQliHP-s4/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IN: STAR SPORTS 1  HD*",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnffbqu4R2O-eHbKJkJxsTq29WPO67UzvWhLdqxGVvty/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IN: STAR SPORTS SELECT 1 HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHmsSV9J_oR56Tg_dENAIV7m3ZnBCHasYomPqqHEoZFmh/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IN: STAR SPORTS 3",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHtANXxVScaymJFcqjGHfuUOJs4ztXPkCdRjMXEa_zG7K/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "BD: T SPORTS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvpjPu1n6ZKr72Pk9QSaJe0V2CGlD91rxHJFvs5X4A7k/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "BD: T SPORTS HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvvxxWsq870UIKp0k9QNzoNhK2Zr8h9NI32dfXfxSRyR/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IN: SONY SPORTS TEN 1 HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHk8PktnumSSBFPj4sUj1iigIz5qeT80aLC5AekbNwW18/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IN: SONY SPORTS TEN 2 HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHjtXoIujUTm4o1pT8aKvRDe5u4M_gAMXd4O8NKfrYxfj/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IN: SONY SPORTS TEN 3 HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHiZ6aEKhhdjgMr0IS4rnOVsInO1wyTTcoz8Di4KV-sz2/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IN: EUROSPORT HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhpVF460bI2e7QrfBp7GwokhpvuRaHpD2dmRjIY1KtIU/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IN: DD SPORTS HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnEUkT3klFMwavLKn56aQpdV9mCdPI9AGwiEzUeBuTHc/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "PK: TEN SPORTS HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlpWcr1YuA2WN6oiMrYQXU3qCsHI-v-7E_jFXIn5f5Ks/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "PK: GEO SUPER",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHp0E5zNEmqSBJ3Vq2NQPbkkGuyVJpF7RbG8L_5QWRjJt/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "PK: PTV SPORTS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHmVzeNB4u_OnSH2A7i8-GdebFYOZkbZb33jyvDFz5ioQ/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "US: WILLOW SPORTS HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlPoBAEiiPbB0oLhK2vfmfoKkKe0IzMfxHcDDotlaZNg/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "US: SKY SPORTS CRICKET",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHiPMrqQMePv5QlT1MMtxHGddxOObj3yqYGGS-K7OeoVo/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "RED BULL TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHsndb9-Ts2QRYyA06EWwXSBVzfuo5-B5CLLdwjcR81oD/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ANIMAL PLANET HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHgYoPL-iYMiqw34w5rAGcZMreD8bvCCA3Pr2u9iCmVsb/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DISCOVERY BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnDwIiGV9Z5M2lqPkAOgrdVUGWcLy1vC5gpOFKXb2LnY/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DISCOVERY HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHt25-p1KtRXtWJyzsUKDu-xjvmo8uTz1Cz_vtDZfKqCO/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DISCOVERY SCIENCE",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHuRDBcpxWN7clafNJF50WQdmqOc62qI6iDDzVHfV9Hgc/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "NAT GEO WILD HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhYc5bZSWmvRSWmGwNF14iwhq28lvIaOJJeqgxXfD3W5/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "INVESTIGATION DISCOVERY",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmqYB18BEwwI7TzsxVGJA9Bx/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "WILD EARTH",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHsxxsG8DFwX6ndvs5mCyso4104H01K2KVgHFgca0D381/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "TRAVEL XP HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHu_6Sdgo9LjzpSqQwjHPQh5DxkdR6FDmhG4Y6SzpInhe/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "US: SKY SPORTS FOOTBALL",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvbM-oSa5OIVoDwkpHCkDWVeyj2g7uPLESmDMM2TNSHK/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "SONY MAX HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlsUvCSnLHV8NLCSj_iAj68gb7RqZbjTMnrGcHkTneiF/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "STAR GOLD HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHmuOLeBfKgE1CyrJh1l2RGAyyqyEjvqX2DC430tFqaW5/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "STAR GOLD 2",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHtL4Is7KFo-S8iD5d2jzIVYKs1RQ0Nlc_FfAwwgFCW35/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "STAR GOLD ROMANCE",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvNQQxZYQfPqKqwu66lFSDwDftMKDq9dPMFPK8flFcHG/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "STAR GOLD THRILLS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHtQGQRX7bxuD_kDiVXxK8V2AMrS4ax6lra-LRx--9BgT/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "COLORS CINEPLEX HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHtXxhAwnOOpPIPXn3P8vBvEhDxiOMy0MQbQWaN0QO9Ob/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "COLORS CINEPLEX BOLLYWOOD*",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHh0tTaKkEnRYWn4Z4kaOcII4J_gpyd8sIa6jaga7Lr77/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "COLORS CINEPLEX SUPERHIT",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvz7SyM44kqpQUh9GcczyzB0xL2cB0i_IMhH5rG8ooj2/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ZEE CINEMA HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHgYoPL-iYMiqw34w5rAGcZMsXi3fjfikMVjd6cBhC_yY/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "BOLLYWOOD CLASSIC HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHtE-nJL07JHdzqqnYLCKctDobDV6LvHXsgG0MyNfy3ls/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "STAR PLUS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHgs8Er5vGQ6BkM142sC5wXT0V3VuNOrq3mOoQiIgPTnq/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "STAR PLUS HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHjzAJ2wESlF9HemC_xNnH1Bl8VVJhdv3RtLTUlDDktwm/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "STAR BHARAT HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhGdiAwvGBVWVA1NmGPSSA5_H1v1XZadrqMaR1nnuRu9/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "SONY TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHkme9ubeJKfgms3mJkPb2HIGPSiETwRwC4TkSycak4jJ/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "SONY SAB HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHkme9ubeJKfgms3mJkPb2HKc7PZ3RdGQ7d4psrhtRFXR/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ZEE TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHgYoPL-iYMiqw34w5rAGcZOgksu_YpqDUcUOCsmJeKDK/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "COLORS HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHprw83DEHEeFtv7Reg3fmXwXiF2zcdGSiOTRYqHi7An-/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "&TV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHgYoPL-iYMiqw34w5rAGcZMgacd4vrnaLvWBLxiN1yx9/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DD NATIONAL",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHj7IUfC_1nkFntAy-V_q3Wc2TGHmXILx9XWhuVWi42PO/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DANGAL TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHtrSKKm-C8p0RVzVZqTtq1kutNq7dHJIVnnXfOCCHxUi/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DANGAL 2",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHk0nWGlwXIyXFEmY4hd8g8zQnA-mKtCh2cTZIUCneCB_/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ISHAARA TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvmuH-NG1yKhI5y5FhznTAtPB-dptnagwyKPzfvT5Rck/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "NAZARA TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHoEBms9shmfbvS3oJmlQgdORH3ArRumiLezeuTf7PhcH/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "Fimachi",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHucuHWbI6qfxAzluNpBw3PUVkQLWduPUMM-Htcizty-i/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DABANGG",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnEUkT3klFMwavLKn56aQpcEUur6wXgeqgbyw3Yw76os/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "CANADA ONE",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHuxvSQxMV7QSRpy-4ya_KAi0BMWNQCQVX5Yd_ONBGgjA/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ABP NEWS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHu9D_cyUeVrJTEAFiftO5ZlMffc_PZzkYVyh1yDxP9Qw/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DD NEWS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnueu8k1ho0MGReacZjKrrkVItVw5QCdkIyN0cpE6hhx/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "9XM",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHuXZIbun7pCEWLw18IhNIaBrnkZ_fnB3jkkPvEjYwkDP/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "9X JALWA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHn4PSeLK3dQ0tBCDy0KaMyVt7_oIcpXSvJU9fy2UI79X/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "EPIC MUSIC",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHglYj9WBpbSaw63mBfJTybEp9_dWGq9tvSVMqfe9Zkb5/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "MTV HD +",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHsRuvfxjKbcC7yyvnRoHa6IvPUla9PwBbgv0_hwKEJ1M/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ZOOM",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHg-Givdao3pdAV6smJfB4wsarLt-G0ilrU7HmNM7H6Jz/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "MUSIC INDIA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHpw2aT33X9uJDTGZx0s1bMxxQhoo3GANpm0F8QaiUy4-/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "PTC MUSIC",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHh1anj4NdqSUX4Xx7AKEHaQGyPGvME1MXpBluXtlO-IW/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "PK:  JOO MUSIC",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHpVmKRCt95h-TdI0CnmGmHmg9h3cLfhW76Xj7Buj7ijR/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "BHOJPURI CINEMA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHuFfXpa-WsjjxVyGVDPmfzNa-by_G5QMAiHKq2NeJm-x/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ISAI ARUVI TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHoQjudWxC1Cwxh68a1UPbe7QpsxOPLyGTJPh76llEfP5/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "NICK BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHtX1Llh1Y6TOR_lKO1vAgeSDwb5DEWwldqy4rkYaU-IH/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IN: CARTOON NETWORK",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHjBoe4ppkbDRyKpenUcuw_SDHaiCxORt4tzINLypayIT/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "SONY YAY !",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHpLMfyy_yr1dw2ngov7tAtz1AfIIF7afpwrLBb67KCLq/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "Disney hindi",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHsoLZyNLm4WhFGehLjCw5AWGXd26EF9Orm5OEaJZclxE/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "NICK JR",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlWQhY6plGeq45jwxRxUql2Ij9PU2GtUtWj534l1umEt/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DISNEY JUNIOR",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHodUD1WdvXVucAFlSNSdiWDYD8DcIPWL5cvlKE1bRKoj/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "SPOCETOON",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHiZ6aEKhhdjgMr0IS4rnOVuPIrjfbXXGUqRfoQx03CaD/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "STAR MOVIES HD*",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHtaQxA7RKPu8y7Z-CBJEOS2wC0_L38lInfYL_flPqams/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ACTION HOLLYWOOD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHiKTMxlAygPdddKYbuUW_WBWJR4Dvcv2h2jClBkguYYi/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "HOLLYWOOD HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHgvWbrBIDJr8D210r3n8pmbwjg1gzfVojQ9aRQwWQlut/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "MY CINEMA HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHia8jw9dVW_pDcRN0WPJgG5fgolKuOqC3-6cIAv7W7RM/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "SyFy",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHre0cShWQOLkFWPawPCjVd3gTJyEcXJsvfJ727Svx_O2/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "NASA TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHllgdBWfRhaszjgOENQ0o4XragaKFQR-T9rhBhXp5Acv/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ADVENTURE 4K",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHiQQG7IyqMOwnWz_pJ-f9TbhR3gd8gA72YpZWMN7i19X/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "VIASAT NATURE",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlVWaBa3X4KVzNdXaO-_2X65QNlvL160MCnsyx6DH9Uf/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DMAX",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnI4gIowra6qWnEnWLFetsn_Hp7bKfY1gq63aW5BFmlq/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "SONY BBC EARTH HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHtP6AH8-JeGWKnokJUtw6N_mpMsybjza9TetTfqu6JYL/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "AL JAZEERA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhzGUhECLiXMN15dwbCUaXMMF9QNrB-9tK6OB6nVeZfl/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DW NEWS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHu53NkdqT_XvqucSAj377_0LrUwvCRxQ7abBvXMPA3mV/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "CGTN",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHus7a7wy7xp0cQxcIF6kFx8IYS5ZGe8AcFweDJFxQtbW/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "FRANCE 24",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHgECVJWM0Zb2w1B6vXHO-HhPPogKZHrF9mueqY_W-JjU/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "NHK WORLD (JAPAN)",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvNAD-vRbtaICZZp4R_lfdd2AIn9KFCacteAtkciD9HI/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "US: SKY NEWS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHqigRg2QTxeCkSeruWNVzHL5ofhXSOwZNOxxKlgxfflg/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "US: FOX  NEWS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHrWQnc1I3qrcD_QJBcmIypGwJnShWGSQAHICUgdzmllQ/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ABC NEWS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHrWQnc1I3qrcD_QJBcmIypHdgw04EZNP15zdi6GPiZ8V/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "AAJ TAK HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvGat_pxSKb95CHf6EiFXhPm45CcM_m_K1MVo9oga6bH/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "NDTV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHgH0bEY75rWMH4sghd9zXmzihxbvZUHspN8QSgVSAwsj/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "GOOD NEWS TODAY",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhqDRb5vphnt4FWSf5ngLuJgoSmGGN0jloZyZsUg1Bdd/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IND: ZEE BUSINESS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHj9iv5j7RYXsXvqsMVRKVpj9v1VU8s33iYmArwQXomRv/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IND: ZEE NEWS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHg9PLCxPcKobWDlqapk0IaRFIJJpRXu2PW8iQis0ib01/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "MAKKAH LIVE",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHu_boDVKk-C39NdZFZ1dimf-E_M-uLVy_RZ6W3iwgA1N/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "MADANI TV BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHsAXl9xQsRJHYiIc_ZkoY-2jRFssukuFF14XJQD7Vx9O/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "EPIC",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHucuHWbI6qfxAzluNpBw3PVQrWNOyXqRRaPbxQpRec1U/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "TRACE URBAN",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvBzfUR-uim0q3ypeJFTRovZEy-VXwIWryUgHSGKahJP/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "TRACE LATINA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHrwX0z6naEBo2eTwxbKpuIu58YT3LlECgoZgEjAffG15/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ARIRANG TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHu9D_cyUeVrJTEAFiftO5ZlIhnRA7cS8EcTlx_UUe-Xv/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "CBS NEWS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHu9D_cyUeVrJTEAFiftO5ZlkxaSeiB4sFPUS8b3spm8W/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "IND: WION",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHu9D_cyUeVrJTEAFiftO5Zke3lt197DBWGN-8T7hEkTJ/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "TRT WORLD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHu9D_cyUeVrJTEAFiftO5ZmteyQXfIzbRKJ9znB-3djG/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "REPUBLIC BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHu9D_cyUeVrJTEAFiftO5ZkwbiDOg3ILumOXSwR5zVFD/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DEEN TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHu9D_cyUeVrJTEAFiftO5Zl5FuH54FlAf0pvR2TNdLWk/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "Dhaka FM 90.4",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHsGUXBVRy-iSQZSrIm7ysMzOO7Mn1SgWuIH38c0ceX-P/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "AL-QURAN BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHsGUXBVRy-iSQZSrIm7ysMwJK9RbIoG4YyF7ZeksZKcY/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "Radio Bangla Rock",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHsGUXBVRy-iSQZSrIm7ysMx3WIL_jJN0Poe0f7DVnplc/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "Radio Padma – 99.2 FM",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHsGUXBVRy-iSQZSrIm7ysMxKggZWJENVLiDETHTe544X/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "BANGLA HITS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnueu8k1ho0MGReacZjKrrk_p8udASWQyW4W8CWYDpQu/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "PEACE TV BENGALI",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlrR5SwGO_AAaqxxFY5YoVKnhN77Mgwu-sqCeV7EdwAH/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "NDTV 24x7",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHmhNwLPl5Hj6bwjMaRfIgB6mC-dxf6Ek8Rl1eNe5A4ol/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "TLC",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlrR5SwGO_AAaqxxFY5YoVK-7HL8QxVwhNXsijEIGzvw/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "BBC NEWS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHrWQnc1I3qrcD_QJBcmIypFQc_8mRRKGDmRvmOu7Njey/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "CNN INTERNATIONLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHre0cShWQOLkFWPawPCjVd0MhBOzHHpD06lqFe4QR-tD/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "CHANNEL S HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHl6xMfcfrCx9YZVoO8Oy7_AkiKAygcVy9D8gycWx9GrI/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "QURAN TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHgs8Er5vGQ6BkM142sC5wXQvOgKAeoDGn4mNw3du_lKD/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "GREEN TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHg1ZQxvjIqoLQV4bMiTucnS6y8Ofn0bAKHsTosNLOeM2/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "TRACE Sport Stars HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnDwIiGV9Z5M2lqPkAOgrdWBjBJFYL6nNRSaVFfs-Ljf/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "MY TIME MOVIE",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHu9D_cyUeVrJTEAFiftO5Zno-uOo4z_nS6OYG63OvxKy/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "B4U MUSIC",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHgYoPL-iYMiqw34w5rAGcZP9fFs0UHBYwDcpCCzylf9X/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ZING",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnYNUfK1GmfRTP_z84VEAVrC-Jb8efMSMXcdmDQAkc7B/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "MBC BOLLYWOOD HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHndTanwtBANR6JbZlE7IJYY-GpFyQcxU1Az4Ju4bfka9/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "9x JHAKAAS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlsUvCSnLHV8NLCSj_iAj6817CuppTdLP4vaLNKjfL3c/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "MR BEAN HD KIDS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvUCM0zshG1q0eA5TneBB8XCp_MnPUl3jtuVtaJN8Jxq/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "CHANNEL 1 HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHtX1Llh1Y6TOR_lKO1vAgeRfyrSdn8HyLc76lQeJKkZP/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "Anondo TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmrF1Mk6o99Kug1L3dRt-vRQ/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "GREEN TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmowHkxZMZOKYNKOV2Ac5kLF/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "PEACE TV BANGLA",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmpu_FfChDVw2jQiF-7kmDJf/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "RAJDHANI TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmrxfEKad4lST4NmmIzC_a0c/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "RTV HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmpQVFJU539zkX98lMenKVQT/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "RUPASHI BANGLA TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmqviRvCk-WabG-bJpDRkCYu/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "T SPORTS HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmrnZGGoTyfpWgm695UyDFvS/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ATN MUSIC",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmrC-1OZ86-oFTSK-8gPGL3v/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "NEWS 24",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmqS4oc6I8o-QxQ267vGWSU7/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DBC NEWS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmrxxNhGkN72gnt1Z2rsWIzF/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "DESH TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmrPYa_i9CMR74YnQDSE-ck-/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "EKATTOR TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmqV_GNzxXEz12AQJzYGFXxg/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "EKHON TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmo_a0gsuUPYKiNHCNKSK-EG/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "INDEPENDENT TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmoKOEfqFOLq25ps1ZMrd8A8/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "JAMUNA TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmqmJUOJ1cjy16rO-N6X_Tbw/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "MAASRANGA TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmo4Ww9soWlyngiMFJ9jQOwT/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "MY TV",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmrOA0uqmtspQun78hmvWBhS/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "NEXUS TELEVISION",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmq91MAiGm74IcDor6iYruWQ/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "PTV NEWS",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmoW9FEYTPoswAaNhE1E6RIC/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "#1 SPORTS | LIVE ONLY",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnDwIiGV9Z5M2lqPkAOgrdW4SQpOkijYLvhOep7LFC4O/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "#2 SPORTS | LIVE ONLY",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHnDwIiGV9Z5M2lqPkAOgrdUU_QUzBEA8dLKHFa4UZ4jt/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "#3 SPORTS | LIVE ONLY",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvUCM0zshG1q0eA5TneBB8WHQsT1L0xBBLJhTtfVXKQm/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "#4 SPORTS | LIVE ONLY",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvUCM0zshG1q0eA5TneBB8XZnaen_m_8pgPcH4YZpGZw/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "#5 SPORTS | LIVE ONLY",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvUCM0zshG1q0eA5TneBB8W5EPKX727qP3iLkeCZrWna/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "#1 FOOTBALL | LIVE ONLY",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvUCM0zshG1q0eA5TneBB8XhI_nJ-_7965kOQ09DHvGE/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "#4 FOOTBALL | LIVE ONLY",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHvUCM0zshG1q0eA5TneBB8VaaiGus0_D1tZqnm1W09PL/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "MADINA LIVE",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhQ9mh3I2h6AKBUO1h3INmpbqIuDy63A5Vt6j7ZE2NMi/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "Tapmad [LIVE 1]",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHuxvSQxMV7QSRpy-4ya_KAjvUwrJziEJn4npOlAFX24s/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "#1 World Championship Of League 2026",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHl1QAol_kKSMtSQpqK5yo1_nsdQ-bNnoNQ8-GgHDa8vm/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "SONY PIX HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlsUvCSnLHV8NLCSj_iAj681wRuxNu28rSwJtHEszYHq/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "BTV CTG",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlsUvCSnLHV8NLCSj_iAj6982_P3dYM1SCjJlERtW2ry/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ASEAN CUP 2026",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlsUvCSnLHV8NLCSj_iAj6-thjQK-QZVwTwKnAe_sN6o/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "ASEAN CUP 2026 (only live)",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlsUvCSnLHV8NLCSj_iAj69Zt7wMNeTtWN7gQmZjyUjn/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "UEFA Nations League 2026-27 (only live 1)",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHlsUvCSnLHV8NLCSj_iAj6-bm-DK_1oqxwKGQz_UyeHy/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "BTV NATIONAL HD",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHhl-tFRAKYgS7QVMWTwyQXnbQ_BtOmp2N-NXVgmNVqry/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "#2 World Championship Of League 2026",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHqi5WUotW_3PxoAvKvEs5tkEBKxjyeyrY_R4u7BVgwMQ/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "Tapmad [LIVE 1]",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHqi5WUotW_3PxoAvKvEs5tnYYVw-5bTm2AeLOgPlLKGG/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "Hindi Big Boss 24/7 2026",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHqi5WUotW_3PxoAvKvEs5tl-25XjLGYY5uezkcnRC7bD/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "World Championship Of League 2026",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHqi5WUotW_3PxoAvKvEs5tkSVJKTxr8fSnzp-hgS1ge9/m3u8",
+      "category": "Other",
+      "logo": ""
+    },
+    {
+      "name": "Zoo Moo",
+      "url": "http://dvltv.cc:80/play/OLxEPsbGNJelc4JQua2jHsI93p8blvhax11HQ_46BhFkIAOEN6-D_WxA8Taeu0V5/m3u8",
+      "category": "Other",
+      "logo": ""
     }
   ]
 }
