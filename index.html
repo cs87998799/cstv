@@ -1,515 +1,171 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>CS Tv - Live TV & Sports Streaming</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js"></script>
-  <style>
-    * {
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Inter', 'Hind Siliguri', sans-serif;
-      background-color: #0b0714;
-      color: #f8fafc;
-      overflow-x: hidden;
-    }
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    .snap-x-mandatory {
-      scroll-snap-type: x mandatory;
-    }
-    .snap-center-item {
-      scroll-snap-align: center;
-    }
-    .snap-start-item {
-      scroll-snap-align: start;
-    }
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 18px rgba(255, 0, 128, 0.45); }
-      50% { box-shadow: 0 0 32px rgba(255, 0, 128, 0.85); }
-    }
-    .neon-box {
-      animation: pulseGlow 3s infinite ease-in-out;
-    }
-    @keyframes liveDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.35; transform: scale(0.8); }
-    }
-    .live-dot {
-      animation: liveDot 1.4s infinite;
-    }
-    .toffee-gradient {
-      background: linear-gradient(90deg, #ff1f8e 0%, #a81eff 100%);
-    }
-    .hero-bg-1 {
-      background: radial-gradient(circle at 50% 35%, #581166 0%, #240734 48%, #0b0714 100%);
-    }
-    .hero-bg-2 {
-      background: radial-gradient(circle at 50% 35%, #0f3d6e 0%, #091a3a 48%, #0b0714 100%);
-    }
-    .hero-bg-3 {
-      background: radial-gradient(circle at 50% 35%, #611233 0%, #2b081c 48%, #0b0714 100%);
-    }
-    .hero-bg-4 {
-      background: radial-gradient(circle at 50% 35%, #0e4f3c 0%, #07231e 48%, #0b0714 100%);
-    }
-    .channel-ring {
-      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
-    }
-    .channel-ring:active {
-      transform: scale(0.92);
-    }
-    .channel-ring:hover {
-      transform: translateY(-3px) scale(1.04);
-    }
-    .player-popup-drawer {
-      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
-    }
-    .auto-hide-hidden {
-      opacity: 0 !important;
-      pointer-events: none !important;
-      transform: translateY(16px);
-    }
-    .center-controls-hidden {
-      opacity: 0 !important;
-      pointer-events: none !important;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS Tv - Multi JSON Live Player</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- HLS.js for .m3u8 streaming -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js"></script>
 </head>
-<body class="min-h-screen bg-[#0b0714] text-white flex flex-col justify-between pb-20">
+<body class="bg-slate-950 text-white min-h-screen flex flex-col justify-between">
 
-  <!-- TOP STICKY NAVBAR -->
-  <header class="sticky top-0 z-30 bg-[#0b0714]/95 backdrop-blur-md border-b border-white/5">
-    <div class="max-w-5xl mx-auto px-4 pt-3 pb-2 flex items-center justify-between gap-2">
-      <button id="brandLogoBtn" class="flex items-center gap-2 focus:outline-none group">
-        <div class="w-9 h-9 rounded-xl toffee-gradient flex items-center justify-center shadow-lg shadow-pink-500/25 group-active:scale-95 transition">
-          <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M4 6.5C4 5.12 5.12 4 6.5 4h11C18.88 4 20 5.12 20 6.5v11c0 1.38-1.12 2.5-2.5 2.5h-11C5.12 20 4 18.88 4 17.5v-11zm6 2.5v6l5-3-5-3z"/>
-          </svg>
-        </div>
-        <div class="flex flex-col text-left">
-          <span class="font-extrabold tracking-wider text-lg leading-none bg-gradient-to-r from-pink-400 via-fuchsia-300 to-white bg-clip-text text-transparent">CS Tv</span>
-          <span id="jsonStatusLabel" class="text-[9px] text-emerald-400 font-semibold tracking-tight">● Multi-JSON Ready</span>
-        </div>
-      </button>
+    <!-- Header -->
+    <header class="bg-slate-900 border-b border-slate-800 p-4 sticky top-0 z-20 flex justify-between items-center">
+        <h1 class="text-xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">CS Tv Live</h1>
+        <span id="status-badge" class="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full font-semibold">Loading Channels...</span>
+    </header>
 
-      <div class="flex items-center gap-2.5">
-        <button id="subscribeTopBtn" class="toffee-gradient text-white text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-md shadow-pink-600/30 active:scale-95 transition">
-          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
-          </svg>
-          <span id="subscribeTopText">Subscribe</span>
-        </button>
-
-        <button id="signInTopBtn" class="border border-white/60 hover:border-pink-400 text-white text-xs sm:text-sm font-medium px-3.5 py-1.5 rounded-full transition active:scale-95 flex items-center gap-1.5">
-          <span id="signInTopText">Sign In</span>
-        </button>
-      </div>
-    </div>
-
-    <nav id="topCategoryNav" class="max-w-5xl mx-auto px-4 py-2 flex items-center gap-6 overflow-x-auto no-scrollbar text-sm font-medium">
-      <button data-cat="all" class="cat-tab text-pink-400 font-bold border-b-2 border-pink-500 pb-1 whitespace-nowrap transition">Live TV</button>
-    </nav>
-  </header>
-
-  <!-- MAIN CONTENT VIEWS -->
-  <main class="flex-1 max-w-5xl w-full mx-auto">
-
-    <!-- HOME VIEW -->
-    <section id="viewHome" class="space-y-6 pb-6">
-
-      <!-- HERO SLIDER -->
-      <div class="relative overflow-hidden select-none">
-        <div id="heroTrack" class="flex overflow-x-auto snap-x-mandatory no-scrollbar scroll-smooth">
-          
-          <div class="min-w-full snap-center-item hero-bg-1 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
-            <div class="max-w-md mx-auto flex flex-col items-center">
-              <h2 class="text-3xl sm:text-4xl font-extrabold text-amber-400 drop-shadow-[0_2px_10px_rgba(251,191,36,0.6)] tracking-tight">Multi-Source</h2>
-              <p class="text-2xl sm:text-3xl font-extrabold text-white mt-0.5 drop-shadow">লাইভ চ্যানেল ও কনটেন্ট</p>
-              <div class="mt-3 px-5 py-2 rounded-xl border-2 border-pink-400/90 bg-purple-950/60 neon-box">
-                <p class="text-xs sm:text-sm font-semibold text-white">GitHub & Custom JSON একত্রে <span class="text-pink-400 font-bold">CS Tv -তে</span></p>
-              </div>
-              <button data-play-index="0" class="hero-watch-btn mt-5 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
-                ▶ এখনই দেখুন
-              </button>
-            </div>
-          </div>
-
-          <div class="min-w-full snap-center-item hero-bg-2 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
-            <div class="max-w-md mx-auto flex flex-col items-center">
-              <span class="px-3 py-0.5 rounded-full bg-red-600 text-white text-[11px] font-bold tracking-wider uppercase">SonyLiv Stream</span>
-              <h2 id="heroSlide2Title" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Live Sports & TV</h2>
-              <button data-play-index="0" class="hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
-                ▶ Watch Live Stream
-              </button>
-            </div>
-          </div>
-
-        </div>
-
-        <button id="heroPrevBtn" aria-label="Previous" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center">‹</button>
-        <button id="heroNextBtn" aria-label="Next" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center">›</button>
-      </div>
-
-      <!-- LIVE TV CIRCULAR HORIZONTAL SLIDER -->
-      <div class="px-4">
-        <div class="flex items-center justify-between mb-3">
-          <div class="flex items-center gap-2">
-            <h3 class="text-base sm:text-lg font-bold tracking-tight text-white">Live TV Channels</h3>
-            <span id="totalChannelsBadge" class="text-[11px] px-2 py-0.5 rounded-full bg-pink-500/20 text-pink-300 font-semibold">0</span>
-          </div>
-          <button id="viewAllChannelsBtn" class="text-xs font-semibold text-slate-300 hover:text-pink-400">View All ›</button>
-        </div>
-        <div id="liveTvCirclesTrack" class="flex items-center gap-4 overflow-x-auto no-scrollbar snap-x-mandatory py-2"></div>
-      </div>
-
-      <!-- CONTENT ROWS -->
-      <div class="px-4">
-        <div class="flex items-center justify-between mb-3">
-          <h3 id="row1Title" class="text-base sm:text-lg font-bold tracking-tight text-white">Featured Channels</h3>
-          <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
-        </div>
-        <div id="eplRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1"></div>
-      </div>
-
-    </section>
-
-    <!-- DISCOVER VIEW -->
-    <section id="viewDiscover" class="hidden px-4 py-4 space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <h2 class="text-xl font-bold">Discover All Channels</h2>
-        <input id="channelSearchInput" type="text" placeholder="Search channels..." class="w-full sm:max-w-sm bg-white/10 border border-white/15 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-pink-500" />
-      </div>
-      <div id="discoverGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 pt-2"></div>
-    </section>
-
-    <!-- MY LIST VIEW -->
-    <section id="viewMyList" class="hidden px-4 py-4 space-y-4">
-      <div class="flex items-center justify-between">
-        <h2 class="text-xl font-bold">My Saved Channels</h2>
-        <span id="savedCountBadge" class="text-xs px-2.5 py-1 rounded-full bg-pink-500/20 text-pink-300 font-semibold">0 Channels</span>
-      </div>
-      <div id="myListGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
-    </section>
-
-    <!-- SETTINGS VIEW -->
-    <section id="viewSettings" class="hidden px-4 py-4 space-y-5">
-      <h2 class="text-xl font-bold">CS Tv Account & Sources</h2>
-
-      <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-4">
-        <div class="flex items-center gap-3.5">
-          <div id="settingsAvatar" class="w-12 h-12 rounded-full toffee-gradient flex items-center justify-center text-lg font-extrabold">G</div>
-          <div>
-            <h3 id="settingsUserName" class="font-bold text-base">Guest User</h3>
-            <p id="settingsUserPhone" class="text-xs text-slate-400">Not signed in</p>
-          </div>
-        </div>
-        <button id="settingsAuthActionBtn" class="px-4 py-2 rounded-xl toffee-gradient text-xs font-bold">Sign In</button>
-      </div>
-
-      <!-- JSON Sources Configuration -->
-      <div class="p-4 rounded-2xl bg-pink-500/10 border border-pink-500/30 space-y-3">
-        <p class="font-bold text-sm text-white">Multi-JSON Data Sources</p>
-        <p class="text-xs text-slate-300">১) srhady/SonyLiv GitHub Raw Link</p>
-        <input id="jsonUrl1Input" type="text" value="https://raw.githubusercontent.com/srhady/SonyLiv/main/channels.json" class="w-full bg-black/40 border border-white/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none" />
+    <!-- Main Content -->
+    <main class="max-w-4xl w-full mx-auto p-4 flex-1">
+        <h2 class="text-lg font-bold mb-4">Available Channels</h2>
         
-        <p class="text-xs text-slate-300">২) আপনার অন্য যেকোনো JSON ফাইলের লিংক বা পাথ</p>
-        <input id="jsonUrl2Input" type="text" value="my-channels.json" class="w-full bg-black/40 border border-white/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none" />
+        <!-- Channel List Grid -->
+        <div id="channels-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <!-- Channels will be loaded here dynamically -->
+        </div>
+    </main>
+
+    <!-- Video Player Modal / Section -->
+    <div id="player-modal" class="fixed inset-0 bg-black/90 z-50 hidden flex flex-col justify-between p-4">
+        <div class="flex justify-between items-center">
+            <h3 id="player-title" class="text-base font-bold text-pink-400">Playing Channel</h3>
+            <button id="close-player" class="bg-white/10 hover:bg-white/20 px-3 py-1 rounded-lg text-sm font-bold">✕ Close</button>
+        </div>
         
-        <button id="reloadJsonBtn" class="w-full py-2.5 rounded-xl toffee-gradient text-xs font-bold shadow">
-          ↻ Load & Combine Both JSON Files
-        </button>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- PLAYER MODAL -->
-  <div id="playerModal" class="fixed inset-0 z-50 bg-black/95 hidden flex-col justify-between">
-    <div id="playerTopBar" class="flex items-center justify-between px-4 py-3 bg-gradient-to-b from-black/90 to-transparent z-20">
-      <div class="flex items-center gap-3">
-        <button id="closePlayerBtn" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white text-lg font-bold">←</button>
-        <div>
-          <h3 id="playerChannelTitle" class="font-bold text-sm sm:text-base">Channel Name</h3>
-          <p id="playerChannelSub" class="text-xs text-slate-300">Live Stream</p>
+        <div class="flex-1 flex items-center justify-center my-4">
+            <video id="video-player" class="w-full max-h-[70vh] bg-black rounded-xl shadow-2xl" controls autoplay playsinline></video>
         </div>
-      </div>
-      <button id="playerFavBtn" class="px-3 py-1.5 rounded-full bg-white/10 text-xs font-semibold">☆ Save</button>
-    </div>
-
-    <div id="playerViewport" class="relative flex-1 flex items-center justify-center bg-black overflow-hidden cursor-pointer">
-      <video id="liveVideoEl" class="w-full h-full max-h-[78vh] object-contain" controls autoplay playsinline></video>
-      <iframe id="liveIframeEl" class="hidden w-full h-full max-h-[78vh] border-0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-      <!-- Center Controls -->
-      <div id="playerCenterControls" class="absolute inset-0 flex items-center justify-center gap-10 bg-black/30 transition-opacity">
-        <button id="playerPrevChannelBtn" class="w-12 h-12 rounded-full bg-black/65 border border-white/25 text-white flex items-center justify-center font-bold text-xs">PREV</button>
-        <button id="playerPlayPauseBtn" class="w-16 h-16 rounded-full toffee-gradient text-white flex items-center justify-center font-bold text-xs">PLAY</button>
-        <button id="playerNextChannelBtn" class="w-12 h-12 rounded-full bg-black/65 border border-white/25 text-white flex items-center justify-center font-bold text-xs">NEXT</button>
-      </div>
-
-      <!-- Horizontal Popup Drawer -->
-      <div id="playerHorizontalPopup" class="player-popup-drawer absolute bottom-3 left-3 right-3 bg-[#120b22]/95 border border-pink-500/30 rounded-2xl p-3 z-30">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-xs font-bold text-pink-400 uppercase">All Channels</span>
-          <button id="hidePopupDrawerBtn" class="text-xs text-slate-300">Hide ✕</button>
+        
+        <div class="text-center text-xs text-slate-400">
+            CS Tv Secure Streaming Player
         </div>
-        <div id="playerPopupTrack" class="flex items-center gap-3 overflow-x-auto no-scrollbar py-1"></div>
-      </div>
     </div>
-  </div>
 
-  <!-- TOAST -->
-  <div id="toastBox" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2 rounded-full bg-pink-600 text-white text-xs font-bold"></div>
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 p-3 text-center text-xs text-slate-400">
+        © 2026 CS Tv • All Rights Reserved
+    </footer>
 
-  <!-- BOTTOM NAVBAR -->
-  <nav class="fixed bottom-0 left-0 right-0 z-30 bg-[#120b20]/95 border-t border-white/10">
-    <div class="max-w-md mx-auto flex items-center justify-around py-2">
-      <button data-nav="home" class="bottom-nav-btn flex flex-col items-center gap-1 text-pink-500 font-semibold text-xs relative">
-        <span id="navIndicatorHome" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2"></span>
-        <span>Home</span>
-      </button>
-      <button data-nav="discover" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 font-medium text-xs relative">
-        <span id="navIndicatorDiscover" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
-        <span>Discover</span>
-      </button>
-      <button data-nav="mylist" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 font-medium text-xs relative">
-        <span id="navIndicatorMylist" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
-        <span>My List</span>
-      </button>
-      <button data-nav="settings" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 font-medium text-xs relative">
-        <span id="navIndicatorSettings" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
-        <span>Settings</span>
-      </button>
-    </div>
-  </nav>
+    <!-- JavaScript Logic -->
+    <script>
+        // আপনার GitHub Raw JSON লিংক এবং আপনার অন্য JSON ফাইলের লিংক এখানে দিন
+        const jsonSources = [
+            'https://raw.githubusercontent.com/srhady/SonyLiv/main/channels.json',
+            'my-channels.json' // এখানে আপনার দ্বিতীয় JSON ফাইলের সঠিক লিংক বা পাথ দিন
+        ];
 
-  <script>
-    let CHANNELS = [];
+        let allChannels = [];
+        let hlsInstance = null;
 
-    function showToast(msg) {
-      const t = document.getElementById('toastBox');
-      t.textContent = msg;
-      t.classList.remove('hidden');
-      setTimeout(() => t.classList.add('hidden'), 2500);
-    }
+        async function fetchAllJsonFiles() {
+            const statusBadge = document.getElementById('status-badge');
+            
+            try {
+                // একসাথে সবকটি JSON ফেচ করা
+                const promises = jsonSources.map(url => 
+                    fetch(url)
+                        .then(res => {
+                            if (!res.ok) throw new Error(`Failed: ${url}`);
+                            return res.json();
+                        })
+                        .catch(err => {
+                            console.warn(err);
+                            return []; // কোনো ফাইল লোড না হলে ফাঁকা অ্যারে রিটার্ন করবে যাতে ক্র্যাশ না করে
+                        })
+                );
 
-    // একসাথে আপনার GitHub JSON এবং অন্য JSON ফাইল ফেচ করে একত্রিত করার ফাংশন
-    async function loadMultiJsonChannels() {
-      const url1 = document.getElementById('jsonUrl1Input').value.trim();
-      const url2 = document.getElementById('jsonUrl2Input').value.trim();
-      const statusLabel = document.getElementById('jsonStatusLabel');
+                const results = await Promise.all(promises);
+                
+                // সব ডেটা এক করা
+                let combined = [];
+                results.forEach(data => {
+                    if (Array.isArray(data)) {
+                        combined = [...combined, ...data];
+                    } else if (data && typeof data === 'object') {
+                        // যদি অবজেক্টের ভেতরে channels অ্যারে থাকে
+                        const list = data.channels || data.data || data.items || [];
+                        combined = [...combined, ...list];
+                    }
+                });
 
-      try {
-        const promises = [fetch(url1).then(res => res.json()).catch(() => [])];
-        if (url2) {
-          promises.push(fetch(url2).then(res => res.json()).catch(() => []));
+                allChannels = combined;
+
+                if (allChannels.length > 0) {
+                    statusBadge.textContent = `${allChannels.length} Channels Loaded`;
+                    statusBadge.className = "text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full font-semibold";
+                    renderChannels(allChannels);
+                } else {
+                    statusBadge.textContent = "No channels found";
+                    statusBadge.className = "text-xs bg-rose-500/20 text-rose-400 px-3 py-1 rounded-full font-semibold";
+                }
+
+            } catch (error) {
+                console.error('Error loading JSONs:', error);
+                statusBadge.textContent = "Load Error";
+                statusBadge.className = "text-xs bg-rose-500/20 text-rose-400 px-3 py-1 rounded-full font-semibold";
+            }
         }
 
-        const results = await Promise.all(promises);
-        
-        let combined = [];
-        results.forEach(resData => {
-          let arr = [];
-          if (Array.isArray(resData)) arr = resData;
-          else if (resData && typeof resData === 'object') {
-            arr = resData.channels || resData.data || resData.items || [];
-          }
-          combined = [...combined, ...arr];
+        function renderChannels(channels) {
+            const grid = document.getElementById('channels-grid');
+            grid.innerHTML = channels.map((ch, index) => `
+                <button onclick="playChannel(${index})" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-pink-500 p-4 rounded-xl flex flex-col items-center text-center transition group">
+                    <div class="w-14 h-14 rounded-full bg-slate-800 flex items-center justify-center mb-2 overflow-hidden border border-slate-700">
+                        ${ch.logo ? `<img src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" />` : `<span class="text-pink-400 font-bold text-sm">TV</span>`}
+                    </div>
+                    <span class="text-sm font-bold text-white group-hover:text-pink-400 truncate w-full">${ch.name || 'Live Channel'}</span>
+                    <span class="text-[10px] text-slate-400 mt-0.5">${ch.category || 'Live'}</span>
+                </button>
+            `).join('');
+        }
+
+        function playChannel(index) {
+            const ch = allChannels[index];
+            if (!ch) return;
+
+            const modal = document.getElementById('player-modal');
+            const title = document.getElementById('player-title');
+            const video = document.getElementById('video-player');
+
+            title.textContent = ch.name;
+            modal.classList.remove('hidden');
+
+            const streamUrl = ch.url || ch.streamUrl || ch.link;
+
+            if (hlsInstance) {
+                hlsInstance.destroy();
+                hlsInstance = null;
+            }
+
+            if (streamUrl && streamUrl.includes('.m3u8') && window.Hls && Hls.isSupported()) {
+                hlsInstance = new Hls();
+                hlsInstance.loadSource(streamUrl);
+                hlsInstance.attachMedia(video);
+                hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
+                    video.play().catch(e => console.log("Autoplay blocked:", e));
+                });
+            } else if (streamUrl) {
+                video.src = streamUrl;
+                video.play().catch(e => console.log("Autoplay blocked:", e));
+            }
+        }
+
+        document.getElementById('close-player').addEventListener('click', () => {
+            const modal = document.getElementById('player-modal');
+            const video = document.getElementById('video-player');
+            video.pause();
+            video.src = "";
+            modal.classList.add('hidden');
+            if (hlsInstance) {
+                hlsInstance.destroy();
+                hlsInstance = null;
+            }
         });
 
-        if (combined.length > 0) {
-          CHANNELS = combined.map((item, idx) => ({
-            id: String(item.id || `ch-${idx}`),
-            name: item.name || item.title || `Channel ${idx + 1}`,
-            shortLabel: item.shortLabel || item.name?.slice(0, 8) || 'Live',
-            subLabel: item.subLabel || 'HD',
-            category: item.category || 'Live TV',
-            logo: item.logo || item.image || '',
-            streamUrl: item.url || item.streamUrl || item.link || '',
-            iframeUrl: item.iframe || item.embed || ''
-          }));
-
-          statusLabel.textContent = `● Loaded ${CHANNELS.length} channels`;
-          showToast(`Successfully loaded ${CHANNELS.length} channels from both JSON files!`);
-        } else {
-          throw new Error('No channels found');
-        }
-      } catch (err) {
-        statusLabel.textContent = '● JSON Load Error';
-        showToast('Could not load JSON files properly.');
-      }
-
-      renderAll();
-    }
-
-    const state = {
-      currentCategory: 'all',
-      currentChannelIndex: 0,
-      favorites: []
-    };
-
-    function renderAll() {
-      renderCategoryNavTabs();
-      renderLiveTvCircles();
-      renderContentRows();
-      renderDiscoverGrid();
-      renderMyList();
-      renderPlayerHorizontalPopup();
-    }
-
-    function renderCategoryNavTabs() {
-      const nav = document.getElementById('topCategoryNav');
-      const cats = ['all', ...new Set(CHANNELS.map(c => c.category || 'Live TV'))];
-      nav.innerHTML = cats.map(cat => `
-        <button data-cat="${cat}" class="cat-tab ${state.currentCategory === cat ? 'text-pink-400 font-bold border-b-2 border-pink-500' : 'text-slate-300'} pb-1 whitespace-nowrap">${cat.toUpperCase()}</button>
-      `).join('');
-    }
-
-    function renderLiveTvCircles() {
-      const track = document.getElementById('liveTvCirclesTrack');
-      const filtered = state.currentCategory === 'all' ? CHANNELS : CHANNELS.filter(c => c.category === state.currentCategory);
-      document.getElementById('totalChannelsBadge').textContent = filtered.length;
-
-      track.innerHTML = filtered.map((ch, idx) => `
-        <button data-play-channel="${ch.id}" class="channel-ring flex-shrink-0 flex flex-col items-center group">
-          <div class="w-20 h-20 rounded-full bg-white border-2 border-white/20 flex items-center justify-center p-2 text-slate-900 font-bold text-xs overflow-hidden">
-            ${ch.logo ? `<img src="${ch.logo}" class="w-full h-full object-contain" />` : ch.shortLabel}
-          </div>
-          <span class="text-[11px] text-slate-300 mt-1.5 max-w-[88px] truncate">${ch.name}</span>
-        </button>
-      `).join('');
-    }
-
-    function renderContentRows() {
-      const track = document.getElementById('eplRowTrack');
-      track.innerHTML = CHANNELS.map((ch, idx) => `
-        <button data-play-channel="${ch.id}" class="flex-shrink-0 w-60 rounded-2xl bg-gradient-to-r from-blue-900 via-slate-900 to-red-900 border border-white/15 p-3.5 text-left">
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center p-1 text-black font-bold text-xs overflow-hidden">
-              ${ch.logo ? `<img src="${ch.logo}" class="w-full h-full object-contain" />` : ch.shortLabel}
-            </div>
-            <div class="overflow-hidden">
-              <h4 class="font-extrabold text-sm text-white truncate">${ch.name}</h4>
-              <p class="text-[11px] text-pink-400">▶ Watch Live</p>
-            </div>
-          </div>
-        </button>
-      `).join('');
-    }
-
-    function renderDiscoverGrid(query = '') {
-      const grid = document.getElementById('discoverGrid');
-      const q = query.toLowerCase();
-      const list = CHANNELS.filter(c => !q || c.name.toLowerCase().includes(q));
-      grid.innerHTML = list.map(ch => `
-        <button data-play-channel="${ch.id}" class="p-3 rounded-2xl bg-white/5 border border-white/10 flex flex-col items-center text-center">
-          <div class="w-16 h-16 rounded-full bg-white flex items-center justify-center p-1 text-black font-bold text-xs overflow-hidden">
-            ${ch.logo ? `<img src="${ch.logo}" class="w-full h-full object-contain" />` : ch.shortLabel}
-          </div>
-          <span class="text-xs font-bold text-white mt-2 truncate w-full">${ch.name}</span>
-        </button>
-      `).join('');
-    }
-
-    function renderMyList() {
-      const grid = document.getElementById('myListGrid');
-      const saved = CHANNELS.filter(c => state.favorites.includes(c.id));
-      document.getElementById('savedCountBadge').textContent = `${saved.length} Channels`;
-      grid.innerHTML = saved.map(ch => `
-        <button data-play-channel="${ch.id}" class="p-3 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-2">
-          <span class="text-xs font-bold text-white truncate">${ch.name}</span>
-        </button>
-      `).join('');
-    }
-
-    function renderPlayerHorizontalPopup() {
-      const track = document.getElementById('playerPopupTrack');
-      track.innerHTML = CHANNELS.map((ch, idx) => `
-        <button data-popup-index="${idx}" class="flex-shrink-0 w-36 p-2 rounded-xl bg-white/5 border border-white/10 text-left">
-          <p class="text-xs font-bold text-white truncate">${ch.name}</p>
-        </button>
-      `).join('');
-    }
-
-    let hlsInstance = null;
-    function openPlayer(channelId) {
-      const idx = CHANNELS.findIndex(c => c.id === String(channelId));
-      if (idx !== -1) state.currentChannelIndex = idx;
-      const ch = CHANNELS[state.currentChannelIndex];
-      if (!ch) return;
-
-      document.getElementById('playerChannelTitle').textContent = ch.name;
-      document.getElementById('playerChannelSub').textContent = `${ch.category} • Live`;
-      
-      const modal = document.getElementById('playerModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-
-      const video = document.getElementById('liveVideoEl');
-      if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
-
-      if (ch.streamUrl && ch.streamUrl.includes('.m3u8') && window.Hls && Hls.isSupported()) {
-        hlsInstance = new Hls();
-        hlsInstance.loadSource(ch.streamUrl);
-        hlsInstance.attachMedia(video);
-        hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(()=>{}));
-      } else if (ch.streamUrl) {
-        video.src = ch.streamUrl;
-        video.play().catch(()=>{});
-      }
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      loadMultiJsonChannels();
-
-      document.getElementById('reloadJsonBtn').addEventListener('click', loadMultiJsonChannels);
-      document.getElementById('brandLogoBtn').addEventListener('click', () => switchView('home'));
-      document.getElementById('viewAllChannelsBtn').addEventListener('click', () => switchView('discover'));
-
-      document.querySelectorAll('.bottom-nav-btn').forEach(btn => {
-        btn.addEventListener('click', () => switchView(btn.dataset.nav));
-      });
-
-      document.body.addEventListener('click', (e) => {
-        const playBtn = e.target.closest('[data-play-channel]');
-        if (playBtn) openPlayer(playBtn.dataset.playChannel);
-
-        const popupBtn = e.target.closest('[data-popup-index]');
-        if (popupBtn) {
-          state.currentChannelIndex = parseInt(popupBtn.dataset.popupIndex, 10);
-          openPlayer(CHANNELS[state.currentChannelIndex].id);
-        }
-      });
-
-      document.getElementById('closePlayerBtn').addEventListener('click', () => {
-        document.getElementById('playerModal').classList.add('hidden');
-        document.getElementById('liveVideoEl').pause();
-      });
-
-      document.getElementById('channelSearchInput').addEventListener('input', (e) => {
-        renderDiscoverGrid(e.target.value);
-      });
-    });
-
-    function switchView(viewName) {
-      ['home', 'discover', 'mylist', 'settings'].forEach(v => {
-        document.getElementById(`view${v.charAt(0).toUpperCase() + v.slice(1)}`).classList.toggle('hidden', v !== viewName);
-      });
-    }
-  </script>
+        // পেজ লোড হওয়ার সাথে সাথে JSON ফেচ ফাংশন কল হবে
+        window.addEventListener('DOMContentLoaded', fetchAllJsonFiles);
+    </script>
 </body>
 </html>
