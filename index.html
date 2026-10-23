@@ -1,201 +1,1551 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en" class="dark">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#000000">
-<title>CSTV – Live TV</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Hind+Siliguri:wght@400;500;600;700&display=swap">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.13/hls.min.js"></script>
-<style>
-:root{--red:#e50914;--bg:#000;--card:#181818;--line:#2a2a2a;--tx:#fff;--mut:#b3b3b3}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--tx);font-family:"Hind Siliguri",system-ui,sans-serif;min-height:100vh}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-:focus-visible{outline:2px solid #fff;outline-offset:2px}
-header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;gap:28px;padding:calc(14px + env(safe-area-inset-top,0px)) 4% 14px;background:linear-gradient(#000e,#0000);transition:background .25s}
-header.s{background:#000}
-.logo{font-family:"Bebas Neue";font-size:38px;color:var(--red);letter-spacing:1px;line-height:1}
-nav{display:flex;gap:20px;overflow-x:auto;scrollbar-width:none}
-nav button{font-size:15px;color:#e5e5e5;white-space:nowrap;padding:4px 0}
-nav button.on{font-weight:700;color:#fff;border-bottom:2px solid var(--red)}
-.search{margin-left:auto;display:flex;align-items:center;gap:8px;border:1px solid transparent;padding:6px 10px;border-radius:4px;background:#0006}
-.search input{width:0;background:none;border:0;color:#fff;font:inherit;font-size:14px;outline:0;transition:width .25s}
-.search:focus-within{border-color:#fff;background:#000}
-.search:focus-within input,.search input:not(:placeholder-shown){width:200px}
-.hero{position:relative;min-height:68vh;display:flex;align-items:flex-end;padding:0 4% 70px;background:radial-gradient(ellipse at 75% 20%,#e5091466,transparent 55%),linear-gradient(160deg,#2b0407,#0c0c0c 70%)}
-.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:35%;background:linear-gradient(#0000,#000)}
-.hero>div{position:relative;z-index:1;max-width:560px}
-.live{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#fff}
-.live::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 #e50914aa;animation:p 1.6s infinite}
-@keyframes p{70%{box-shadow:0 0 0 9px #e5091400}}
-.hero h1{font-family:"Bebas Neue";font-size:clamp(48px,9vw,96px);line-height:.95;font-weight:400;margin:8px 0 10px}
-.hero p{color:#ddd;font-size:16px;margin-bottom:20px}
-.b{display:inline-flex;align-items:center;gap:8px;padding:10px 26px;border-radius:4px;font-weight:700;font-size:16px;margin-right:10px}
-.b.w{background:#fff;color:#000}.b.g{background:#6d6d6eb3}
-.b.w:hover{background:#ffffffbb}
-main{margin-top:-40px;position:relative;z-index:2;padding-bottom:40px}
-.page{padding-top:90px}
-.sec{margin-top:26px}
-.sec h2{font-size:20px;font-weight:600;padding:0 4%;margin-bottom:10px}
-.row{display:flex;gap:8px;overflow-x:auto;padding:14px 4% 24px;scrollbar-width:none;scroll-snap-type:x proximity}
-.row.wrap{flex-wrap:wrap}
-.t{flex:none;width:210px;scroll-snap-align:start;position:relative;transition:transform .2s;cursor:pointer}
-.t:hover,.t:focus-visible{transform:scale(1.1);z-index:5}
-.img{aspect-ratio:16/10;border-radius:4px;background:linear-gradient(145deg,#262626,#111);display:grid;place-items:center;overflow:hidden}
-.img img{width:62%;height:62%;object-fit:contain}
-.img span{font-family:"Bebas Neue";font-size:44px;color:#555}
-.t b{display:block;font-size:14px;font-weight:500;margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tg{position:absolute;top:7px;left:7px;background:var(--red);font-size:10px;font-weight:700;padding:1px 7px;border-radius:2px}
-.fav{position:absolute;top:2px;right:4px;font-size:20px;color:#fff9;text-shadow:0 1px 3px #000}
-.fav.on{color:#ffd54a}
-.empty{color:var(--mut);text-align:center;padding:70px 20px;line-height:1.8}
-#pl{position:fixed;inset:0;background:#000;z-index:50;display:none}
-#pl.on{display:block}
-#v{width:100%;height:100%;background:#000}
-.pt{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:14px;padding:calc(14px + env(safe-area-inset-top,0px)) 20px 30px;background:linear-gradient(#000c,#0000);transition:opacity .3s}
-.pt b{font-size:20px}
-.pt .bk{font-size:26px;width:40px;height:40px}
-.pt .lst{margin-left:auto;background:#fff2;padding:8px 16px;border-radius:4px;font-size:14px}
-#pl.h .pt{opacity:0;pointer-events:none}
-#msg{position:absolute;inset:0;display:none;place-items:center;text-align:center;padding:30px;color:#ff8a8f;line-height:1.7;background:#000c}
-#msg.on{display:grid}
-#dr{position:absolute;top:0;right:0;bottom:0;width:300px;background:#0d0d0df2;transform:translateX(100%);transition:transform .25s;overflow-y:auto;padding:70px 0 20px}
-#dr.on{transform:none}
-#dr button{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:10px 18px;font-size:14px}
-#dr button:hover{background:#ffffff14}
-#dr button.cur{border-left:3px solid var(--red);background:#ffffff1a}
-#dr img,#dr i{width:44px;height:30px;object-fit:contain;flex:none;font:normal 600 16px "Bebas Neue";color:#777;text-align:center;line-height:30px}
-@media (max-width:760px){
- header{gap:14px;flex-wrap:wrap;row-gap:8px}
- nav{order:3;width:100%;gap:16px}
- .search:focus-within input,.search input:not(:placeholder-shown){width:130px}
- .hero{min-height:58vh;padding-bottom:50px}
- .t{width:150px}
- .page{padding-top:110px}
- #dr{top:auto;width:100%;height:55%;transform:translateY(100%);border-radius:14px 14px 0 0;padding-top:16px}
- #dr.on{transform:none}
-}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
-</head>
-<body>
-<header id="hd">
- <div class="logo">CSTV</div>
- <nav id="nav"></nav>
- <label class="search"><span>🔍</span><input id="q" type="search" placeholder="Search" autocomplete="off" aria-label="Search channels"></label>
-</header>
-<main id="app"><div class="empty page">Loading channels…</div></main>
-
-<div id="pl" role="dialog" aria-modal="true" aria-label="Player">
- <video id="v" controls autoplay playsinline></video>
- <div id="msg"></div>
- <div class="pt"><button class="bk" id="px" aria-label="Back">←</button><span class="live">LIVE</span><b id="pt"></b><button class="lst" id="pd">Channels</button></div>
- <div id="dr"></div>
-</div>
-
-<script>
-// Local file or raw GitHub link: "https://raw.githubusercontent.com/USERNAME/REPO/main/channels.json"
-const CHANNELS_URL = "channels.json";
-
-const NAV = [["home","Home"],["live","Live TV"],["sports","Sports"],["movies","Movies"],["entertainment","Entertainment"],["news","News"],["kids","Kids"],["islamic","Islamic"],["__fav","My List"]];
-let ALL = [], cur = "home", term = "", hls = null, now = -1, favs = [];
-try { favs = JSON.parse(localStorage.getItem("cstv_favs") || "[]"); } catch (e) {}
-const $ = s => document.querySelector(s);
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const cat = c => String(c.category || c.group || "Live TV").trim();
-const key = c => c.name + "|" + c.url;
-
-function nav() {
-  $("#nav").innerHTML = NAV.map(n => `<button data-k="${n[0]}" class="${n[0]===cur?"on":""}">${n[1]}</button>`).join("");
-}
-$("#nav").onclick = e => { const b = e.target.closest("button"); if (b) { cur = b.dataset.k; scrollTo(0,0); nav(); render(); } };
-$("#q").oninput = e => { term = e.target.value.trim().toLowerCase(); render(); };
-addEventListener("scroll", () => $("#hd").classList.toggle("s", scrollY > 30), {passive:true});
-nav();
-
-fetch(CHANNELS_URL, {cache:"no-store"})
-  .then(r => { if (!r.ok) throw 0; return r.json(); })
-  .then(d => {
-    ALL = (Array.isArray(d) ? d : d.channels || []).map(c => ({...c, url: c.url || c.stream || c.src})).filter(c => c.name && c.url);
-    render();
-  })
-  .catch(() => { $("#app").innerHTML = `<div class="empty page">channels.json load hoyni.<br>File ta index.html er pashe ache kina, ar JSON thik ache kina dekhun.</div>`; });
-
-function tile(c) {
-  const i = ALL.indexOf(c), on = favs.includes(key(c));
-  const im = c.logo ? `<img src="${esc(c.logo)}" alt="" loading="lazy" onerror="this.outerHTML='<span>${esc(c.name[0])}</span>'">` : `<span>${esc(c.name[0])}</span>`;
-  return `<div class="t" tabindex="0" role="button" data-i="${i}"><div class="img">${im}</div><span class="tg">LIVE</span><button class="fav${on?" on":""}" data-f="${i}" aria-label="My List">${on?"★":"☆"}</button><b>${esc(c.name)}</b></div>`;
-}
-function sec(title, list, wrap) {
-  return list.length ? `<section class="sec"><h2>${esc(title)}</h2><div class="row${wrap?" wrap":""}">${list.map(tile).join("")}</div></section>` : "";
-}
-function render() {
-  let list = term ? ALL.filter(c => (c.name + " " + cat(c)).toLowerCase().includes(term)) : ALL, h = "";
-  if (cur === "home" && !term && ALL[0]) {
-    const f = ALL[0];
-    h += `<div class="hero"><div><span class="live">LIVE NOW</span><h1>${esc(f.name)}</h1><p>${ALL.length} ti channel live dekhun, jekono somoy.</p><button class="b w" data-i="0">▶ Watch Live</button><button class="b g" data-f="0">＋ My List</button></div></div><div style="margin-top:-30px">`;
-    h += sec("Live TV", ALL);
-    const g = {};
-    ALL.forEach(c => (g[cat(c)] = g[cat(c)] || []).push(c));
-    Object.keys(g).forEach(k => { if (k.toLowerCase() !== "live tv") h += sec(k, g[k]); });
-    h += "</div>";
-  } else {
-    let t = "Search results";
-    if (!term) {
-      t = NAV.find(n => n[0] === cur)[1];
-      if (cur === "__fav") list = list.filter(c => favs.includes(key(c)));
-      else if (cur !== "home" && cur !== "live") list = list.filter(c => cat(c).toLowerCase().includes(t.toLowerCase()));
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Toffee Live TV - Streaming & Live Sports</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js"></script>
+  <style>
+    * {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      box-sizing: border-box;
     }
-    h = `<div class="page">${list.length ? sec(t, list, true) : `<div class="empty">${cur==="__fav"&&!term?"Kono channel save kora nei.<br>Channel er ☆ chap dile ekhane joma hobe.":"Kichu pawa jayni."}</div>`}</div>`;
-  }
-  $("#app").innerHTML = h || `<div class="empty page">Kono channel nei.</div>`;
-}
-$("#app").onclick = e => {
-  const f = e.target.closest("[data-f]");
-  if (f) {
-    e.stopPropagation();
-    const k = key(ALL[f.dataset.f]), x = favs.indexOf(k);
-    x < 0 ? favs.push(k) : favs.splice(x, 1);
-    try { localStorage.setItem("cstv_favs", JSON.stringify(favs)); } catch (er) {}
-    return render();
-  }
-  const t = e.target.closest("[data-i]");
-  if (t) play(+t.dataset.i);
-};
-$("#app").onkeydown = e => { if (e.key === "Enter" && e.target.dataset.i) play(+e.target.dataset.i); };
+    body {
+      font-family: 'Inter', 'Hind Siliguri', sans-serif;
+      background-color: #0b0714;
+      color: #f8fafc;
+      overflow-x: hidden;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .snap-x-mandatory {
+      scroll-snap-type: x mandatory;
+    }
+    .snap-center-item {
+      scroll-snap-align: center;
+    }
+    .snap-start-item {
+      scroll-snap-align: start;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 18px rgba(255, 0, 128, 0.45); }
+      50% { box-shadow: 0 0 32px rgba(255, 0, 128, 0.85); }
+    }
+    .neon-box {
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+    @keyframes liveDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+    .live-dot {
+      animation: liveDot 1.4s infinite;
+    }
+    .toffee-gradient {
+      background: linear-gradient(90deg, #ff1f8e 0%, #a81eff 100%);
+    }
+    .hero-bg-1 {
+      background: radial-gradient(circle at 50% 35%, #581166 0%, #240734 48%, #0b0714 100%);
+    }
+    .hero-bg-2 {
+      background: radial-gradient(circle at 50% 35%, #0f3d6e 0%, #091a3a 48%, #0b0714 100%);
+    }
+    .hero-bg-3 {
+      background: radial-gradient(circle at 50% 35%, #611233 0%, #2b081c 48%, #0b0714 100%);
+    }
+    .hero-bg-4 {
+      background: radial-gradient(circle at 50% 35%, #0e4f3c 0%, #07231e 48%, #0b0714 100%);
+    }
+    .channel-ring {
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
+    }
+    .channel-ring:active {
+      transform: scale(0.92);
+    }
+    .channel-ring:hover {
+      transform: translateY(-3px) scale(1.04);
+    }
+    .player-popup-drawer {
+      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#0b0714] text-white flex flex-col justify-between pb-20">
 
-// ===== Player =====
-const v = $("#v"), msg = $("#msg"), pl = $("#pl"), dr = $("#dr");
-let idle;
-function fail(t) { msg.textContent = t; msg.classList.add("on"); }
-function wake() { pl.classList.remove("h"); clearTimeout(idle); idle = setTimeout(() => { if (!dr.classList.contains("on")) pl.classList.add("h"); }, 3500); }
-["mousemove","touchstart","keydown"].forEach(ev => pl.addEventListener(ev, wake, {passive:true}));
-function play(i) {
-  const c = ALL[i]; if (!c) return;
-  now = i; $("#pt").textContent = c.name; msg.classList.remove("on"); dr.classList.remove("on");
-  pl.classList.add("on"); wake(); stop(); drawer();
-  const u = c.url;
-  if (location.protocol === "https:" && u.startsWith("http:")) return fail("Ei stream http link, kintu site https e cholche. Browser eta block kore. Stream er https link bebohar korun.");
-  if (u.includes("m3u8")) {
-    if (window.Hls && Hls.isSupported()) {
-      hls = new Hls({lowLatencyMode: true});
-      hls.loadSource(u); hls.attachMedia(v);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => v.play().catch(() => {}));
-      hls.on(Hls.Events.ERROR, (_, d) => { if (d.fatal) fail("Ei channel ekhon chalano jacche na. Stream bondho ba block (CORS) hote pare."); });
-    } else if (v.canPlayType("application/vnd.apple.mpegurl")) { v.src = u; v.play().catch(() => {}); }
-    else fail("Ei browser HLS support kore na.");
-  } else { v.src = u; v.play().catch(() => {}); v.onerror = () => fail("Ei channel ekhon chalano jacche na."); }
-}
-function drawer() {
-  dr.innerHTML = ALL.map((c, i) => `<button data-p="${i}" class="${i===now?"cur":""}">${c.logo ? `<img src="${esc(c.logo)}" alt="">` : `<i>${esc(c.name[0])}</i>`}${esc(c.name)}</button>`).join("");
-}
-dr.onclick = e => { const b = e.target.closest("[data-p]"); if (b) play(+b.dataset.p); };
-$("#pd").onclick = () => dr.classList.toggle("on");
-function stop() { if (hls) { hls.destroy(); hls = null; } v.onerror = null; v.pause(); v.removeAttribute("src"); v.load(); }
-function close_() { stop(); pl.classList.remove("on"); dr.classList.remove("on"); }
-$("#px").onclick = close_;
-addEventListener("keydown", e => { if (e.key === "Escape") close_(); });
-</script>
+  <!-- TOP STICKY NAVBAR (Toffee Style) -->
+  <header class="sticky top-0 z-30 bg-[#0b0714]/95 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-5xl mx-auto px-4 pt-3 pb-2 flex items-center justify-between gap-2">
+      <!-- Brand Logo -->
+      <button id="brandLogoBtn" class="flex items-center gap-2 focus:outline-none group">
+        <div class="w-9 h-9 rounded-xl toffee-gradient flex items-center justify-center shadow-lg shadow-pink-500/25 group-active:scale-95 transition">
+          <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M4 6.5C4 5.12 5.12 4 6.5 4h11C18.88 4 20 5.12 20 6.5v11c0 1.38-1.12 2.5-2.5 2.5h-11C5.12 20 4 18.88 4 17.5v-11zm6 2.5v6l5-3-5-3z"/>
+          </svg>
+        </div>
+        <span class="font-extrabold tracking-wider text-lg bg-gradient-to-r from-pink-400 via-fuchsia-300 to-white bg-clip-text text-transparent">TOFFEE</span>
+      </button>
+
+      <!-- Right Actions: Subscribe + Sign In / User Profile -->
+      <div class="flex items-center gap-2.5">
+        <button id="subscribeTopBtn" class="toffee-gradient text-white text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-md shadow-pink-600/30 active:scale-95 transition">
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+          </svg>
+          <span id="subscribeTopText">Subscribe</span>
+        </button>
+
+        <button id="signInTopBtn" class="border border-white/60 hover:border-pink-400 text-white text-xs sm:text-sm font-medium px-3.5 py-1.5 rounded-full transition active:scale-95 flex items-center gap-1.5">
+          <span id="signInTopText">Sign In</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Horizontal Category Bar -->
+    <nav id="topCategoryNav" class="max-w-5xl mx-auto px-4 py-2 flex items-center gap-6 overflow-x-auto no-scrollbar text-sm font-medium">
+      <button data-cat="all" class="cat-tab text-pink-400 font-bold border-b-2 border-pink-500 pb-1 whitespace-nowrap transition">Live TV</button>
+      <button data-cat="Sports" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">Sports</button>
+      <button data-cat="Drama" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">Drama</button>
+      <button data-cat="Movies" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">Movies</button>
+      <button data-cat="News" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">News</button>
+      <button data-cat="Web Series" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">Web Series</button>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT VIEWS -->
+  <main class="flex-1 max-w-5xl w-full mx-auto">
+
+    <!-- HOME VIEW -->
+    <section id="viewHome" class="space-y-6 pb-6">
+
+      <!-- HERO SLIDER (Touch/Swipe + Auto Slide + Neon Banner like Screenshot) -->
+      <div class="relative overflow-hidden select-none">
+        <div id="heroTrack" class="flex overflow-x-auto snap-x-mandatory no-scrollbar scroll-smooth">
+          
+          <!-- Slide 1: 1000+ Content Neon Banner -->
+          <div class="min-w-full snap-center-item hero-bg-1 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
+            <div class="max-w-md mx-auto flex flex-col items-center">
+              <h2 class="text-3xl sm:text-4xl font-extrabold text-amber-400 drop-shadow-[0_2px_10px_rgba(251,191,36,0.6)] tracking-tight">১০০০+</h2>
+              <p class="text-2xl sm:text-3xl font-extrabold text-white mt-0.5 drop-shadow">কনটেন্ট</p>
+              <p class="text-xl sm:text-2xl font-extrabold text-amber-300 mt-0.5">নতুন যোগ হলো!</p>
+              <div class="mt-3 px-5 py-2 rounded-xl border-2 border-pink-400/90 bg-purple-950/60 neon-box">
+                <p class="text-xs sm:text-sm font-semibold text-white">এখন আরো বেশি দেখুন <span class="text-pink-400 font-bold">টফি -তে</span></p>
+              </div>
+              <!-- Visual Globe / Content Montage Card -->
+              <div class="mt-5 w-48 h-40 sm:w-56 sm:h-44 rounded-2xl bg-gradient-to-b from-pink-500/30 via-purple-600/20 to-transparent border border-pink-500/30 flex flex-col items-center justify-center p-3 relative overflow-hidden">
+                <div class="grid grid-cols-3 gap-1.5 w-full opacity-90 transform -rotate-6 scale-105">
+                  <div class="h-10 rounded bg-gradient-to-br from-rose-500 to-orange-500 flex items-center justify-center text-[10px] font-bold">LIVE</div>
+                  <div class="h-10 rounded bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-[10px] font-bold">EPL</div>
+                  <div class="h-10 rounded bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-[10px] font-bold">CRICKET</div>
+                  <div class="h-10 rounded bg-gradient-to-br from-amber-500 to-red-600 flex items-center justify-center text-[10px] font-bold">DRAMA</div>
+                  <div class="h-10 rounded bg-gradient-to-br from-fuchsia-500 to-purple-800 flex items-center justify-center text-[10px] font-bold">MOVIES</div>
+                  <div class="h-10 rounded bg-gradient-to-br from-cyan-500 to-blue-700 flex items-center justify-center text-[10px] font-bold">NEWS</div>
+                </div>
+                <button data-play-channel="ch-sony1" class="hero-watch-btn mt-3 toffee-gradient text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
+                  <span>▶ এখনই দেখুন</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: EPL Live Matchweek -->
+          <div class="min-w-full snap-center-item hero-bg-2 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
+            <div class="max-w-md mx-auto flex flex-col items-center">
+              <span class="px-3 py-0.5 rounded-full bg-red-600 text-white text-[11px] font-bold tracking-wider uppercase flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-white live-dot"></span> PREMIER LEAGUE LIVE
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">EPL Matchweek 8 Live</h2>
+              <p class="text-xs sm:text-sm text-sky-200 mt-1">Ipswich vs Nottingham • Aston Villa vs Man City</p>
+              <div class="mt-4 w-64 h-36 rounded-2xl bg-gradient-to-r from-blue-900/80 via-slate-900 to-rose-900/80 border border-sky-400/30 flex items-center justify-around p-4 shadow-xl">
+                <div class="flex flex-col items-center">
+                  <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center font-extrabold text-sm border-2 border-white">IPS</div>
+                  <span class="text-xs font-bold mt-1.5">Ipswich</span>
+                </div>
+                <div class="text-center">
+                  <span class="text-xs font-extrabold px-2.5 py-1 rounded bg-rose-600 text-white">VS</span>
+                  <p class="text-[10px] text-slate-300 mt-1">1:00 AM</p>
+                </div>
+                <div class="flex flex-col items-center">
+                  <div class="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center font-extrabold text-sm border-2 border-white">NFO</div>
+                  <span class="text-xs font-bold mt-1.5">Nottingham</span>
+                </div>
+              </div>
+              <button data-play-channel="ch-epl1" class="hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
+                ▶ Watch Live Stream
+              </button>
+            </div>
+          </div>
+
+          <!-- Slide 3: SAFF Championship 2026 -->
+          <div class="min-w-full snap-center-item hero-bg-4 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
+            <div class="max-w-md mx-auto flex flex-col items-center">
+              <span class="px-3 py-0.5 rounded-full bg-emerald-600 text-white text-[11px] font-bold tracking-wider uppercase">SAFF CHAMPIONSHIP 2026</span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Bangladesh vs Saudi U23</h2>
+              <p class="text-xs sm:text-sm text-emerald-200 mt-1">Full HD Sports Streaming • Zero Buffering</p>
+              <div class="mt-4 w-64 h-36 rounded-2xl bg-gradient-to-r from-emerald-900/80 via-slate-900 to-amber-900/80 border border-emerald-400/30 flex items-center justify-around p-4 shadow-xl">
+                <div class="flex flex-col items-center">
+                  <div class="w-12 h-12 rounded-full bg-emerald-700 flex items-center justify-center font-extrabold text-sm border-2 border-red-500">BAN</div>
+                  <span class="text-xs font-bold mt-1.5">Bangladesh</span>
+                </div>
+                <div class="text-center">
+                  <span class="text-xs font-extrabold px-2.5 py-1 rounded bg-amber-500 text-black">LIVE</span>
+                  <p class="text-[10px] text-slate-300 mt-1">8:00 PM</p>
+                </div>
+                <div class="flex flex-col items-center">
+                  <div class="w-12 h-12 rounded-full bg-green-800 flex items-center justify-center font-extrabold text-sm border-2 border-white">KSA</div>
+                  <span class="text-xs font-bold mt-1.5">Saudi XI</span>
+                </div>
+              </div>
+              <button data-play-channel="ch-tsports" class="hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
+                ▶ Watch Match Now
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Left / Right Slide Arrows for Desktop & Touch -->
+        <button id="heroPrevBtn" aria-label="Previous Slide" class=" absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/15">
+          ‹
+        </button>
+        <button id="heroNextBtn" aria-label="Next Slide" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/15">
+          ›
+        </button>
+
+        <!-- Slider Pagination Dots -->
+        <div id="heroDots" class="flex items-center justify-center gap-2 mt-1">
+          <button data-slide="0" class="hero-dot w-5 h-2 rounded-full bg-white transition-all"></button>
+          <button data-slide="1" class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-all"></button>
+          <button data-slide="2" class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-all"></button>
+        </div>
+      </div>
+
+      <!-- LIVE TV CIRCULAR HORIZONTAL SLIDER -->
+      <div class="px-4">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-base sm:text-lg font-bold tracking-tight text-white">Live TV</h3>
+          <button id="viewAllChannelsBtn" class="text-xs font-semibold text-slate-300 hover:text-pink-400 flex items-center gap-1">
+            <span>View All</span>
+            <span>›</span>
+          </button>
+        </div>
+
+        <!-- Circular Channels Track -->
+        <div id="liveTvCirclesTrack" class="flex items-center gap-4 overflow-x-auto no-scrollbar snap-x-mandatory py-2">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- EPL MATCH: WEEK 8 HORIZONTAL CARDS -->
+      <div class="px-4">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-base sm:text-lg font-bold tracking-tight text-white">EPL Match: Week 8</h3>
+          <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
+        </div>
+        <div id="eplRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <!-- SAFF CHAMPIONSHIP 2026 HORIZONTAL CARDS -->
+      <div class="px-4">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-base sm:text-lg font-bold tracking-tight text-white">SAFF Championship 2026</h3>
+          <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
+        </div>
+        <div id="saffRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <!-- TRENDING DRAMA & MOVIES -->
+      <div class="px-4">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-base sm:text-lg font-bold tracking-tight text-white">Popular Drama & Movies</h3>
+          <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
+        </div>
+        <div id="dramaRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- DISCOVER / ALL CHANNELS VIEW -->
+    <section id="viewDiscover" class="hidden px-4 py-4 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <h2 class="text-xl font-bold">Discover Live Channels</h2>
+        <div class="relative flex-1 max-w-sm">
+          <input id="channelSearchInput" type="text" placeholder="Search Somoy, Sony Sports, Zee Bangla..." class="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-pink-500" />
+        </div>
+      </div>
+      <div id="discoverGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 pt-2">
+        <!-- Populated via JS -->
+      </div>
+    </section>
+
+    <!-- MY LIST / FAVORITES VIEW -->
+    <section id="viewMyList" class="hidden px-4 py-4 space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xl font-bold">My Saved Channels</h2>
+        <span id="savedCountBadge" class="text-xs px-2.5 py-1 rounded-full bg-pink-500/20 text-pink-300 font-semibold">0 Channels</span>
+      </div>
+      <div id="myListGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <!-- Populated via JS -->
+      </div>
+    </section>
+
+    <!-- SETTINGS & PROFILE VIEW -->
+    <section id="viewSettings" class="hidden px-4 py-4 space-y-5">
+      <h2 class="text-xl font-bold">Account & App Settings</h2>
+
+      <!-- User Account Card -->
+      <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3.5">
+          <div id="settingsAvatar" class="w-12 h-12 rounded-full toffee-gradient flex items-center justify-center text-lg font-extrabold">
+            G
+          </div>
+          <div>
+            <h3 id="settingsUserName" class="font-bold text-base">Guest User</h3>
+            <p id="settingsUserPhone" class="text-xs text-slate-400">Not signed in • Tap Sign In to sync</p>
+          </div>
+        </div>
+        <button id="settingsAuthActionBtn" class="px-4 py-2 rounded-xl toffee-gradient text-xs font-bold shadow">
+          Sign In
+        </button>
+      </div>
+
+      <!-- Streaming & Player Settings -->
+      <div class="rounded-2xl bg-white/5 border border-white/10 divide-y divide-white/10">
+        
+        <div class="p-4 flex items-center justify-between">
+          <div>
+            <p class="font-semibold text-sm">Default Video Quality</p>
+            <p class="text-xs text-slate-400">Choose preferred stream resolution</p>
+          </div>
+          <select id="settingQualitySelect" class="bg-[#181028] border border-white/20 rounded-lg px-3 py-1.5 text-xs font-semibold text-white focus:outline-none">
+            <option value="Auto">Auto (Recommended)</option>
+            <option value="1080p">1080p Full HD</option>
+            <option value="720p">720p HD</option>
+            <option value="480p">480p Data Saver</option>
+          </select>
+        </div>
+
+        <div class="p-4 flex items-center justify-between">
+          <div>
+            <p class="font-semibold text-sm">Auto-Play Next Channel</p>
+            <p class="text-xs text-slate-400">Automatically switch if stream ends</p>
+          </div>
+          <button id="toggleAutoplayBtn" role="switch" aria-checked="true" class="w-11 h-6 rounded-full bg-pink-600 relative transition">
+            <span class="dot w-4 h-4 rounded-full bg-white absolute top-1 right-1 transition-all"></span>
+          </button>
+        </div>
+
+        <div class="p-4 flex items-center justify-between">
+          <div>
+            <p class="font-semibold text-sm">Data Saver Mode</p>
+            <p class="text-xs text-slate-400">Reduce mobile data usage on 4G/5G</p>
+          </div>
+          <button id="toggleDataSaverBtn" role="switch" aria-checked="false" class="w-11 h-6 rounded-full bg-slate-700 relative transition">
+            <span class="dot w-4 h-4 rounded-full bg-white absolute top-1 left-1 transition-all"></span>
+          </button>
+        </div>
+
+        <div class="p-4 flex items-center justify-between">
+          <div>
+            <p class="font-semibold text-sm">Live Match Notifications</p>
+            <p class="text-xs text-slate-400">Goal alerts & toss updates for EPL / SAFF</p>
+          </div>
+          <button id="toggleNotifyBtn" role="switch" aria-checked="true" class="w-11 h-6 rounded-full bg-pink-600 relative transition">
+            <span class="dot w-4 h-4 rounded-full bg-white absolute top-1 right-1 transition-all"></span>
+          </button>
+        </div>
+
+        <div class="p-4 flex items-center justify-between">
+          <div>
+            <p class="font-semibold text-sm">Custom M3U8 Stream Test</p>
+            <p class="text-xs text-slate-400">Play your own IPTV .m3u8 link in player</p>
+          </div>
+          <button id="openCustomStreamModalBtn" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold">
+            Test URL
+          </button>
+        </div>
+
+        <div class="p-4 flex items-center justify-between">
+          <div>
+            <p class="font-semibold text-sm">Clear Watch History & Cache</p>
+            <p class="text-xs text-slate-400">Reset saved preferences & recent channels</p>
+          </div>
+          <button id="clearCacheBtn" class="px-3 py-1.5 rounded-lg bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 text-xs font-semibold">
+            Clear Data
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FULLFEATURED LIVE TV PLAYER MODAL (With Center Prev/Next + Horizontal Channel Popup Drawer) -->
+  <div id="playerModal" class="fixed inset-0 z-50 bg-black/95 hidden flex-col justify-between">
+    
+    <!-- Top Player Bar -->
+    <div class="flex items-center justify-between px-4 py-3 bg-gradient-to-b from-black/90 to-transparent z-20">
+      <div class="flex items-center gap-3">
+        <button id="closePlayerBtn" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-lg font-bold">
+          ←
+        </button>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-red-600 text-[10px] font-extrabold uppercase flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-white live-dot"></span> LIVE
+            </span>
+            <h3 id="playerChannelTitle" class="font-bold text-sm sm:text-base">Sony Sports Ten 1 HD</h3>
+          </div>
+          <p id="playerChannelSub" class="text-xs text-slate-300">Sports • 1080p HD Stream</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="playerFavBtn" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-semibold flex items-center gap-1">
+          <span id="playerFavIcon">☆</span>
+          <span id="playerFavText">Save</span>
+        </button>
+        <button id="toggleChannelPopupBtn" class="px-3 py-1.5 rounded-full toffee-gradient text-xs font-bold flex items-center gap-1 shadow-lg">
+          <span>📺 Channels</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Center Video Viewport + Interactive Overlay Controls -->
+    <div id="playerViewport" class="relative flex-1 flex items-center justify-center bg-black overflow-hidden">
+      <!-- Real HTML5 Video for HLS streams -->
+      <video id="liveVideoEl" class="w-full h-full max-h-[75vh] object-contain" playsinline></video>
+
+      <!-- Live Broadcast Fallback Canvas (Draws crisp animated TV feed if HLS URL is blocked or offline) -->
+      <canvas id="fallbackBroadcastCanvas" class="hidden absolute inset-0 w-full h-full object-contain"></canvas>
+
+      <!-- Center Overlay Controls: Previous Channel | Play/Pause | Next Channel -->
+      <div id="playerCenterControls" class="absolute inset-0 flex items-center justify-center gap-8 sm:gap-14 bg-black/30 transition-opacity duration-200">
+        
+        <!-- Previous Channel Button -->
+        <button id="playerPrevChannelBtn" title="Previous Channel" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/65 hover:bg-pink-600/90 border border-white/25 text-white flex flex-col items-center justify-center active:scale-90 transition shadow-xl">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+          </svg>
+          <span class="text-[9px] font-bold tracking-tighter">PREV</span>
+        </button>
+
+        <!-- Play / Pause Button -->
+        <button id="playerPlayPauseBtn" title="Play / Pause" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full toffee-gradient text-white flex items-center justify-center active:scale-90 transition shadow-2xl border-2 border-white/40">
+          <svg id="playPauseIconSvg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+          </svg>
+        </button>
+
+        <!-- Next Channel Button -->
+        <button id="playerNextChannelBtn" title="Next Channel" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/65 hover:bg-pink-600/90 border border-white/25 text-white flex flex-col items-center justify-center active:scale-90 transition shadow-xl">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+          </svg>
+          <span class="text-[9px] font-bold tracking-tighter">NEXT</span>
+        </button>
+
+      </div>
+
+      <!-- HORIZONTAL CHANNEL POPUP OVERLAY INSIDE PLAYER -->
+      <div id="playerHorizontalPopup" class="player-popup-drawer absolute bottom-3 left-3 right-3 bg-[#120b22]/95 backdrop-blur-xl border border-pink-500/30 rounded-2xl p-3 z-30 shadow-2xl">
+        <div class="flex items-center justify-between mb-2 px-1">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-pink-400 uppercase tracking-wider">Quick Switch Channels</span>
+            <span class="text-[11px] text-slate-400">(Tap any channel to play)</span>
+          </div>
+          <button id="hidePopupDrawerBtn" class="text-xs text-slate-300 hover:text-white px-2 py-0.5 rounded bg-white/10">
+            Hide ✕
+          </button>
+        </div>
+        <!-- Horizontally Scrollable Channel Cards inside Player -->
+        <div id="playerPopupTrack" class="flex items-center gap-3 overflow-x-auto no-scrollbar snap-x-mandatory py-1">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Player Status & Controls Bar -->
+    <div class="px-4 py-3 bg--[#0b0714] border-t border-white/10 flex items-center justify-between gap-3 z-20">
+      <div class="flex items-center gap-3">
+        <button id="playerMuteBtn" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-xs font-semibold">
+          🔊 Sound On
+        </button>
+        <span id="playerQualityBadge" class="text-xs px-2.5 py-1 rounded bg-pink-500/20 text-pink-300 font-semibold">
+          1080p HD
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="showPopupBottomBtn" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold">
+          ▲ Channel List
+        </button>
+        <button id="playerFullscreenBtn" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold">
+          ⛶ Fullscreen
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PHONE LOGIN MODAL (Real OTP Flow with BD +880 Phone Verification) -->
+  <div id="phoneLoginModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="w-full max-w-sm rounded-3xl bg-[#160e29] border border-pink-500/30 p-6 shadow-2xl space-y-5">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-lg font-extrabold text-white">Sign In with Phone</h3>
+          <p class="text-xs text-slate-400">Enter your mobile number to receive OTP</p>
+        </div>
+        <button id="closeLoginModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
+      </div>
+
+      <!-- Step 1: Phone Input -->
+      <div id="loginStepPhone" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Mobile Number (Bangladesh)</label>
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-2.5 rounded-xl bg-white/10 border border-white/15 text-sm font-bold text-white">+880</span>
+            <input id="phoneInput" type="tel" maxlength="11" placeholder="1712345678" class="flex-1 bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-pink-500" />
+          </div>
+        </div>
+        <button id="sendOtpBtn" class="w-full py-3 rounded-xl toffee-gradient font-bold text-sm text-white shadow-lg shadow-pink-600/30 active:scale-95 transition">
+          Send OTP Code
+        </button>
+      </div>
+
+      <!-- Step 2: OTP Verification -->
+      <div id="loginStepOtp" class="hidden space-y-4">
+        <div class="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-xs text-emerald-200">
+          OTP sent to <span id="otpSentPhoneLabel" class="font-bold">+88017...</span>! <br/>
+          <span>Demo Real OTP Code: <strong id="generatedOtpDisplay" class="text-white underline">4829</strong></span>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Enter 4-Digit OTP</label>
+          <input id="otpInput" type="text" maxlength="4" placeholder="4829" class="w-full text-center tracking-[0.5em] font-extrabold text-lg bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-pink-500" />
+        </div>
+        <div class="flex items-center justify-between gap-2">
+          <button id="backToPhoneStepBtn" class="px-4 py-2.5 rounded-xl bg-white/10 text-xs font-semibold text-slate-300">
+            ← Change Number
+          </button>
+          <button id="verifyOtpBtn" class="flex-1 py-2.5 rounded-xl toffee-gradient font-bold text-sm text-white shadow-lg">
+            Verify & Login
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBSCRIBE / PREMIUM PASS MODAL -->
+  <div id="subscribeModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="w-full max-w-sm rounded-3xl bg-[#160e29] border border-pink-500/30 p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between">
+        <span class="px-3 py-1 rounded-full toffee-gradient text-xs font-bold">👑 TOFFEE VIP PASS</span>
+        <button id="closeSubscribeModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
+      </div>
+      <h3 class="text-xl font-extrabold">Unlock All Live Sports & VIP Channels</h3>
+      <p class="text-xs text-slate-300">Watch EPL, SAFF Championship, Sony Sports HD & 1000+ exclusive dramas ad-free.</p>
+      <div class="space-y-2.5 pt-1">
+        <button data-plan="Monthly VIP (৳99)" class="sub-plan-btn w-full p-3.5 rounded-2xl bg-pink-500/15 border-2 border-pink-500 flex items-center justify-between text-left">
+          <div>
+            <p class="font-bold text-sm text-white">30 Days VIP Pack</p>
+            <p class="text-xs text-pink-300">bKash / Nagad / Mobile Balance</p>
+          </div>
+          <span class="text-lg font-extrabold text-white">৳99</span>
+        </button>
+        <button data-plan="Weekly Sports (৳39)" class="sub-plan-btn w-full p-3.5 rounded-2xl bg-white/5 border border-white/15 hover:border-pink-400 flex items-center justify-between text-left">
+          <div>
+            <p class="font-bold text-sm text-white">7 Days Sports Pass</p>
+            <p class="text-xs text-slate-400">All Live Cricket & Football</p>
+          </div>
+          <span class="text-lg font-extrabold text-white">৳39</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOM M3U8 STREAM MODAL -->
+  <div id="customStreamModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="w-full max-w-sm rounded-3xl bg-[#160e29] border border-white/20 p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold">Play Custom .m3u8 Link</h3>
+        <button id="closeCustomStreamModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 flex items-center justify-center">✕</button>
+      </div>
+      <input id="customM3u8Input" type="url" placeholder="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" class="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500" />
+      <button id="playCustomM3u8Btn" class="w-full py-2.5 rounded-xl toffee-gradient text-xs font-bold">
+        Play Live Stream
+      </button>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toastBox" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-full bg-pink-600 text-white text-xs font-bold shadow-xl">
+    Notification
+  </div>
+
+  <!-- BOTTOM NAVIGATION BAR (Matches Screenshot) -->
+  <nav class="fixed bottom-0 left-0 right-0 z-30 bg-[#120b20]/95 backdrop-blur-md border-t border-white/10">
+    <div class="max-w-md mx-auto flex items-center justify-around py-2">
+      <button data-nav="home" class="bottom-nav-btn flex flex-col items-center gap-1 text-pink-500 font-semibold text-xs relative">
+        <span id="navIndicatorHome" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2"></span>
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span>Home</span>
+      </button>
+      <button data-nav="discover" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
+        <span id="navIndicatorDiscover" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <span>Discover</span>
+      </button>
+      <button data-nav="mylist" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
+        <span id="navIndicatorMylist" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        <span>My List</span>
+      </button>
+      <button data-nav="settings" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
+        <span id="navIndicatorSettings" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+        <span>Settings</span>
+      </button>
+    </div>
+  </nav>
+
+  <script>
+    // ==========================================
+    // CHANNEL & MATCH DATA (Matches Screenshot)
+    // ==========================================
+    const CHANNELS = [
+      {
+        id: 'ch-epl1',
+        name: 'IPS vs NFO • EPL',
+        shortLabel: 'IPS vs NFO',
+        subLabel: '•EPL',
+        category: 'Sports',
+        premium: true,
+        ringBg: 'bg-white',
+        badgeColor: 'text-rose-600 font-extrabold',
+        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        themeColor: '#e11d48',
+        ticker: 'LIVE EPL: Ipswich Town vs Nottingham Forest • Kickoff 1:00 AM'
+      },
+      {
+        id: 'ch-somoy',
+        name: 'Somoy TV Live',
+        shortLabel: 'সময়',
+        subLabel: 'NEWS 24/7',
+        category: 'News',
+        premium: false,
+        ringBg: 'bg-white',
+        badgeColor: 'text-red-700 font-bold',
+        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        themeColor: '#b91c1c',
+        ticker: 'সময় সংবাদ লাইভ: দেশ ও আন্তর্জাতিক সর্বশেষ খবর দেখুন'
+      },
+      {
+        id: 'ch-zeebangla',
+        name: 'Zee Bangla HD',
+        shortLabel: 'Z বাংলা',
+        subLabel: 'DRAMA HD',
+        category: 'Drama',
+        premium: true,
+        ringBg: 'bg-white',
+        badgeColor: 'text-orange-600 font-extrabold',
+        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        themeColor: '#ea580c',
+        ticker: 'জি বাংলা এইচডি: জনপ্রিয় সিরিয়াল ও পরিবারিক নাটক পর্ব'
+      },
+      {
+        id: 'ch-sony1',
+        name: 'Sony Sports Ten 1',
+        shortLabel: 'SONY',
+        subLabel: 'SPORTS 1 HD',
+        category: 'Sports',
+        premium: true,
+        ringBg: 'bg-white',
+        badgeColor: 'text-indigo-900 font-extrabold',
+        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        themeColor: '#312e81',
+        ticker: 'SONY SPORTS TEN 1 HD: UEFA & Premier League Official Broadcast'
+      },
+      {
+        id: 'ch-tsports',
+        name: 'T Sports HD',
+        shortLabel: 'T SPORTS',
+        subLabel: 'LIVE HD',
+        category: 'Sports',
+        premium: true,
+        ringBg: 'bg-white',
+        badgeColor: 'text-emerald-700 font-extrabold',
+        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        themeColor: '#047857',
+        ticker: 'T SPORTS HD: SAFF Championship 2026 & Bangladesh Cricket Live'
+      },
+      {
+        id: 'ch-jamuna',
+        name: 'Jamuna TV',
+        shortLabel: 'যমুনা',
+        subLabel: 'LIVE TV',
+        category: 'News',
+        premium: false,
+        ringBg: 'bg-white',
+        badgeColor: 'text-blue-800 font-bold',
+        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        themeColor: '#1e40af',
+        ticker: 'যমুনা টেলিভিশন ২৪ ঘণ্টা সরাসরি সম্প্রচার'
+      },
+      {
+        id: 'ch-starjalsha',
+        name: 'Star Jalsha Movies',
+        shortLabel: 'জলসা',
+        subLabel: 'MOVIES HD',
+        category: 'Movies',
+        premium: true,
+        ringBg: 'bg-white',
+        badgeColor: 'text-pink-700 font-extrabold',
+        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        themeColor: '#be185d',
+        ticker: 'Star Jalsha Movies: Superhit Bengali Blockbuster Cinema'
+      },
+      {
+        id: 'ch-toffee-series',
+        name: 'Toffee Originals',
+        shortLabel: 'TOFFEE',
+        subLabel: 'WEB SERIES',
+        category: 'Web Series',
+        premium: false,
+        ringBg: 'bg-white',
+        badgeColor: 'text-purple-800 font-extrabold',
+        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        themeColor: '#6b21a8',
+        ticker: 'Toffee Exclusive Web Series • New Episodes Streaming Now'
+      }
+    ];
+
+    const EPL_MATCHES = [
+      {
+        id: 'm-epl-1',
+        channelId: 'ch-epl1',
+        teamA: 'IPSWICH',
+        teamB: 'NOTTINGHAM',
+        time: '24 OCT, 1:00 AM',
+        bgGradient: 'from-blue-900 via-slate-900 to-red-900'
+      },
+      {
+        id: 'm-epl-2',
+        channelId: 'ch-sony1',
+        teamA: 'ASTON VILLA',
+        teamB: 'MAN CITY',
+        time: '24 OCT, 5:30 PM',
+        bgGradient: 'from-rose-950 via-slate-900 to-sky-900'
+      },
+      {
+        id: 'm-epl-3',
+        channelId: 'ch-sony1',
+        teamA: 'ARSENAL',
+        teamB: 'LIVERPOOL',
+        time: '25 OCT, 9:30 PM',
+        bgGradient: 'from-red-900 via-slate-900 to-rose-950'
+      }
+    ];
+
+    const SAFF_MATCHES = [
+      {
+        id: 'm-saff-1',
+        channelId: 'ch-tsports',
+        teamA: 'PAKISTAN',
+        teamB: 'INDIA',
+        time: '5 NOV, 3:30 PM',
+        bgGradient: 'from-emerald-950 via-slate-900 to-blue-950'
+      },
+      {
+        id: 'm-saff-2',
+        channelId: 'ch-tsports',
+        teamA: 'BANGLADESH',
+        teamB: 'SAUDI U23',
+        time: '5 NOV, 8:00 PM',
+        bgGradient: 'from-green-900 via-slate-900 to-amber-900'
+      },
+      {
+        id: 'm-saff-3',
+        channelId: 'ch-tsports',
+        teamA: 'NEPAL',
+        teamB: 'MALDIVES',
+        time: '6 NOV, 6:00 PM',
+        bgGradient: 'from-indigo-950 via-slate-900 to-teal-900'
+      }
+    ];
+
+    const DRAMA_MOVIES = [
+      {
+        id: 'dm-1',
+        channelId: 'ch-zeebangla',
+        title: 'মিঠাই - নতুন পর্ব',
+        tag: 'Drama • HD',
+        bgGradient: 'from-fuchsia-900 via-purple-950 to-slate-900'
+      },
+      {
+        id: 'dm-2',
+        channelId: 'ch-starjalsha',
+        title: 'তুফান (Toofan Movie)',
+        tag: 'Blockbuster • 4K',
+        bgGradient: 'from-amber-900 via-red-950 to-slate-900'
+      },
+      {
+        id: 'dm-3',
+        channelId: 'ch-toffee-series',
+        title: 'কারাগার (Karagar S2)',
+        tag: 'Web Series • Exclusive',
+        bgGradient: 'from-cyan-900 via-slate-900 to-indigo-950'
+      }
+    ];
+
+    // ==========================================
+    // SAFE STATE & LOCAL STORAGE
+    // ==========================================
+    const state = {
+      currentCategory: 'all',
+      currentChannelIndex: 0,
+      isPlaying: true,
+      isMuted: false,
+      favorites: ['ch-epl1', 'ch-somoy'],
+      userPhone: null,
+      isSubscribed: false,
+      generatedOtp: '4829',
+      quality: '1080p',
+      autoplay: true,
+      dataSaver: false,
+      notifications: true,
+      heroSlideIndex: 0
+    };
+
+    function loadSavedState() {
+      try {
+        const raw = localStorage.getItem('toffee_live_state_v1');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed.favorites)) state.favorites = parsed.favorites;
+          if (parsed.userPhone) state.userPhone = parsed.userPhone;
+          if (typeof parsed.isSubscribed === 'boolean') state.isSubscribed = parsed.isSubscribed;
+          if (parsed.quality) state.quality = parsed.quality;
+        }
+      } catch (err) {
+        // Ignore storage errors inside restricted iframe
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem('toffee_live_state_v1', JSON.stringify({
+          favorites: state.favorites,
+          userPhone: state.userPhone,
+          isSubscribed: state.isSubscribed,
+          quality: state.quality
+        }));
+      } catch (err) {
+        // Ignore storage errors
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastBox');
+      toast.textContent = msg;
+      toast.classList.remove('hidden');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 2600);
+    }
+
+    // ==========================================
+    // RENDER FUNCTIONS (CIRCLES, CARDS, POPUP)
+    // ==========================================
+    function renderLiveTvCircles() {
+      const track = document.getElementById('liveTvCirclesTrack');
+      const filtered = state.currentCategory === 'all'
+        ? CHANNELS
+        : CHANNELS.filter(c => c.category.toLowerCase() === state.currentCategory.toLowerCase());
+
+      track.innerHTML = filtered.map(ch => `
+        <button data-play-channel="${ch.id}" class="channel-ring relative flex-shrink-0 flex flex-col items-center group snap-start-item focus:outline-none">
+          ${ch.premium ? `
+            <span class="absolute -top-1 z-10 w-5 h-5 rounded-full toffee-gradient flex items-center justify-center shadow-md border border-white/40">
+              <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5z"/></svg>
+            </span>
+          ` : ''}
+          <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full ${ch.ringBg} border-2 border-white/20 group-hover:border-pink-500 shadow-lg flex flex-col items-center justify-center p-2 text-center overflow-hidden">
+            <span class="text-xs sm:text-sm ${ch.badgeColor} leading-tight">${ch.shortLabel}</span>
+            <span class="mt-1 px-1.5 py-0.5 rounded bg-slate-900 text-white text-[9px] font-bold">${ch.subLabel}</span>
+          </div>
+          <span class="text-[11px] text-slate-300 font-medium mt-1.5 max-w-[84px] truncate">${ch.name}</span>
+        </button>
+      `).join('');
+    }
+
+    function renderMatchRows() {
+      const eplTrack = document.getElementById('eplRowTrack');
+      eplTrack.innerHTML = EPL_MATCHES.map(m => `
+        <button data-play-channel="${m.channelId}" class="flex-shrink-0 w-64 sm:w-72 rounded-2xl bg-gradient-to-r ${m.bgGradient} border border-white/15 p-3.5 text-left snap-start-item hover:border-pink-500/60 active:scale-95 transition relative overflow-hidden group">
+          <div class="flex items-center justify-between text-[10px] text-slate-300 font-bold mb-2">
+            <span class="flex items-center gap-1 text-rose-400"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 live-dot"></span> PREMIER LEAGUE</span>
+            <span>HD</span>
+          </div>
+          <div class="flex items-center justify-between my-2">
+            <div class="text-xs font-extrabold text-white bg-blue-600/40 px-2 py-1 rounded">${m.teamA}</div>
+            <span class="text-[11px] font-black text-pink-400">VS</span>
+            <div class="text-xs font-extrabold text-white bg-rose-600/40 px-2 py-1 rounded">${m.teamB}</div>
+          </div>
+          <div class="mt-2 flex items-center justify-between text-[11px] text-slate-200 font-semibold">
+            <span>${m.time}</span>
+            <span class="text-pink-400 group-hover:translate-x-0.5 transition">▶ Watch</span>
+          </div>
+        </button>
+      `).join('');
+
+      const saffTrack = document.getElementById('saffRowTrack');
+      saffTrack.innerHTML = SAFF_MATCHES.map(m => `
+        <button data-play-channel="${m.channelId}" class="flex-shrink-0 w-64 sm:w-72 rounded-2xl bg-gradient-to-r ${m.bgGradient} border border-white/15 p-3.5 text-left snap-start-item hover:border-pink-500/60 active:scale-95 transition relative overflow-hidden group">
+          <div class="flex items-center justify-between text-[10px] text-emerald-300 font-bold mb-2">
+            <span>SAFF 2026</span>
+            <span>LIVE STREAM</span>
+          </div>
+          <div class="flex items-center justify-between my-2">
+            <div class="text-xs font-extrabold text-white bg-emerald-600/40 px-2 py-1 rounded">${m.teamA}</div>
+            <span class="text-[11px] font-black text-amber-400">VS</span>
+            <div class="text-xs font-extrabold text-white bg-amber-600/40 px-2 py-1 rounded">${m.teamB}</div>
+          </div>
+          <div class="mt-2 flex items-center justify-between text-[11px] text-slate-200 font-semibold">
+            <span>${m.time}</span>
+            <span class="text-pink-400 group-hover:translate-x-0.5 transition">▶ Watch</span>
+          </div>
+        </button>
+      `).join('');
+
+      const dramaTrack = document.getElementById('dramaRowTrack');
+      dramaTrack.innerHTML = DRAMA_MOVIES.map(d => `
+        <button data-play-channel="${d.channelId}" class="flex-shrink-0 w-56 sm:w-64 rounded-2xl bg-gradient-to-br ${d.bgGradient} border border-white/15 p-4 text-left snap-start-item hover:border-pink-500/60 active:scale-95 transition">
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-pink-500/30 text-pink-200">${d.tag}</span>
+          <h4 class="font-bold text-sm sm:text-base text-white mt-2">${d.title}</h4>
+          <p class="text-xs text-slate-300 mt-1">Tap to stream now ›</p>
+        </button>
+      `).join('');
+    }
+
+    function renderDiscoverGrid(query = '') {
+      const grid = document.getElementById('discoverGrid');
+      const q = query.trim().toLowerCase();
+      const list = CHANNELS.filter(c => !q || c.name.toLowerCase().includes(q) || c.category.toLowerCase().includes(q));
+      grid.innerHTML = list.map(ch => `
+        <button data-play-channel="${ch.id}" class="p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 flex flex-col items-center text-center group transition">
+          <div class="w-16 h-16 rounded-full bg-white flex flex-col items-center justify-center p-1.5 shadow">
+            <span class="text-xs ${ch.badgeColor}">${ch.shortLabel}</span>
+            <span class="text-[8px] font-bold bg-slate-900 text-white px-1 rounded mt-0.5">${ch.subLabel}</span>
+          </div>
+          <span class="text-xs font-bold text-white mt-2 line-clamp-1">${ch.name}</span>
+          <span class="text-[10px] text-slate-400">${ch.category}</span>
+        </button>
+      `).join('');
+    }
+
+    function renderMyList() {
+      const grid = document.getElementById('myListGrid');
+      const badge = document.getElementById('savedCountBadge');
+      const savedChannels = CHANNELS.filter(c => state.favorites.includes(c.id));
+      badge.textContent = `${savedChannels.length} Channels`;
+
+      if (savedChannels.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400 text-sm">No saved channels yet. Tap ☆ Save inside the video player!</div>`;
+        return;
+      }
+
+      grid.innerHTML = savedChannels.map(ch => `
+        <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-2">
+          <button data-play-channel="${ch.id}" class="flex items-center gap-3 text-left flex-1">
+            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-xs ${ch.badgeColor}">${ch.shortLabel}</div>
+            <div>
+              <p class="font-bold text-xs sm:text-sm text-white">${ch.name}</p>
+              <p class="text-[10px] text-pink-400">▶ Tap to Play Live</p>
+            </div>
+          </button>
+          <button data-remove-fav="${ch.id}" class="text-xs text-slate-400 hover:text-rose-400 px-2 py-1">✕</button>
+        </div>
+      `).join('');
+    }
+
+    // Renders the Horizontal Popup Channel Switcher inside the Video Player
+    function renderPlayerHorizontalPopup() {
+      const track = document.getElementById('playerPopupTrack');
+      const activeCh = CHANNELS[state.currentChannelIndex];
+      track.innerHTML = CHANNELS.map((ch, idx) => {
+        const isCurrent = ch.id === activeCh.id;
+        return `
+          <button data-popup-channel-index="${idx}" class="flex-shrink-0 w-36 p-2.5 rounded-xl border ${isCurrent ? 'border-pink-500 bg-pink-500/20' : 'border-white/10 bg-white/5 hover:bg-white/10'} flex items-center gap-2.5 text-left snap-start-item transition active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-[10px] ${ch.badgeColor}">
+              ${ch.shortLabel}
+            </div>
+            <div class="overflow-hidden">
+              <p class="text-xs font-bold text-white truncate">${ch.name}</p>
+              <p class="text-[10px] ${isCurrent ? 'text-pink-300 font-bold' : 'text-slate-400'}">${isCurrent ? '● Playing' : ch.category}</p>
+            </div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    // ==========================================
+    // VIDEO PLAYER + HLS + ANIMATED FALLBACK FEED
+    // ==========================================
+    let hlsInstance = null;
+    let fallbackAnimId = null;
+
+    function startFallbackBroadcastCanvas(channel) {
+      const canvas = document.getElementById('fallbackBroadcastCanvas');
+      canvas.classList.remove('hidden');
+      const ctx = canvas.getContext('2d');
+      let tick = 0;
+
+      if (fallbackAnimId) cancelAnimationFrame(fallbackAnimId);
+
+      function drawFrame() {
+        canvas.width = 800;
+        canvas.height = 450;
+        tick += 1;
+
+        // Animated Stadium / Studio Background
+        const grad = ctx.createLinearGradient(0, 0, 800, 450);
+        grad.addColorStop(0, '#0f071e');
+        grad.addColorStop(0.5, channel.themeColor || '#831843');
+        grad.addColorStop(1, '#090514');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, 800, 450);
+
+        // Moving Broadcast Signal Waves
+        ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+        ctx.lineWidth = 2;
+        for (let i = 0; i < 6; i++) {
+          ctx.beginPath();
+          const yOffset = 100 + i * 50 + Math.sin((tick + i * 20) * 0.04) * 18;
+          ctx.moveTo(0, yOffset);
+          ctx.quadraticCurveTo(400, yOffset - 35, 800, yOffset);
+          ctx.stroke();
+        }
+
+        // Live Channel Watermark Top Right
+        ctx.fillStyle = 'rgba(0,0,0,0.55)';
+        ctx.fillRect(610, 24, 165, 42);
+        ctx.fillStyle = '#ff1f8e';
+        ctx.beginPath();
+        ctx.arc(630, 45, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 15px Inter, sans-serif';
+        ctx.fillText(channel.shortLabel + ' HD', 645, 50);
+
+        // Center Scoreboard / Live Feed Graphic
+        ctx.fillStyle = 'rgba(255,255,255,0.95)';
+        ctx.font = 'bold 34px Inter, Hind Siliguri, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(channel.name, 400, 200);
+
+        ctx.fillStyle = '#f472b6';
+        ctx.font = '600 18px Inter, sans-serif';
+        ctx.fillText(`${channel.category} • ${state.quality} Live Feed`, 400, 238);
+
+        // Bottom Breaking News / Match Ticker Bar
+        ctx.fillStyle = 'rgba(15, 7, 30, 0.9)';
+        ctx.fillRect(0, 390, 800, 60);
+        ctx.fillStyle = '#ff1f8e';
+        ctx.fillRect(0, 390, 130, 60);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 16px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('LIVE TV', 65, 425);
+
+        ctx.textAlign = 'left';
+        ctx.font = '500 16px Inter, Hind Siliguri, sans-serif';
+        const scrollX = 800 - ((tick * 2.2) % 1200);
+        ctx.fillText(channel.ticker, Math.max(145, scrollX), 425);
+
+        if (state.isPlaying) {
+          fallbackAnimId = requestAnimationFrame(drawFrame);
+        }
+      }
+
+      drawFrame();
+    }
+
+    function openPlayerByChannelId(channelId, customUrl = null) {
+      const idx = CHANNELS.findIndex(c => c.id === channelId);
+      if (idx !== -1) state.currentChannelIndex = idx;
+      loadCurrentChannelInPlayer(customUrl);
+      const modal = document.getElementById('playerModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function loadCurrentChannelInPlayer(customUrl = null) {
+      const ch = CHANNELS[state.currentChannelIndex];
+      state.isPlaying = true;
+      updatePlayPauseIcon();
+
+      document.getElementById('playerChannelTitle').textContent = customUrl ? 'Custom M3U8 Stream' : ch.name;
+      document.getElementById('playerChannelSub').textContent = `${ch.category} • ${state.quality} Stream`;
+      document.getElementById('playerQualityBadge').textContent = state.quality;
+
+      const isFav = state.favorites.includes(ch.id);
+      document.getElementById('playerFavIcon').textContent = isFav ? '★' : '☆';
+      document.getElementById('playerFavText').textContent = isFav ? 'Saved' : 'Save';
+
+      renderPlayerHorizontalPopup();
+
+      const video = document.getElementById('liveVideoEl');
+      const streamSrc = customUrl || ch.streamUrl;
+
+      // Always run the animated broadcast canvas underneath or as fallback
+      startFallbackBroadcastCanvas(ch);
+
+      try {
+        if (hlsInstance) {
+          hlsInstance.destroy();
+          hlsInstance = null;
+        }
+        if (window.Hls && Hls.isSupported()) {
+          hlsInstance = new Hls();
+          hlsInstance.loadSource(streamSrc);
+          hlsInstance.attachMedia(video);
+          hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
+            video.play().then(() => {
+              document.getElementById('fallbackBroadcastCanvas').classList.add('hidden');
+            }).catch(() => {});
+          });
+          hlsInstance.on(Hls.Events.ERROR, () => {
+            document.getElementById('fallbackBroadcastCanvas').classList.remove('hidden');
+          });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src = streamSrc;
+          video.play().catch(() => {});
+        }
+      } catch (e) {
+        // Fallback canvas is already active
+      }
+    }
+
+    function updatePlayPauseIcon() {
+      const svg = document.getElementById('playPauseIconSvg');
+      if (state.isPlaying) {
+        svg.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+      } else {
+        svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
+      }
+    }
+
+    // ==========================================
+    // AUTH & SETTINGS UI SYNC
+    // ==========================================
+    function syncAuthAndSettingsUI() {
+      const signInTopText = document.getElementById('signInTopText');
+      const subscribeTopText = document.getElementById('subscribeTopText');
+      const settingsUserName = document.getElementById('settingsUserName');
+      const settingsUserPhone = document.getElementById('settingsUserPhone');
+      const settingsAvatar = document.getElementById('settingsAvatar');
+      const settingsAuthActionBtn = document.getElementById('settingsAuthActionBtn');
+
+      if (state.userPhone) {
+        signInTopText.textContent = state.userPhone.slice(-4);
+        settingsUserName.textContent = 'Verified Subscriber';
+        settingsUserPhone.textContent = `${state.userPhone} • Active on Android & Web`;
+        settingsAvatar.textContent = '✓';
+        settingsAuthActionBtn.textContent = 'Sign Out';
+      } else {
+        signInTopText.textContent = 'Sign In';
+        settingsUserName.textContent = 'Guest User';
+        settingsUserPhone.textContent = 'Not signed in • Tap Sign In with Phone';
+        settingsAvatar.textContent = 'G';
+        settingsAuthActionBtn.textContent = 'Sign In';
+      }
+
+      subscribeTopText.textContent = state.isSubscribed ? 'VIP Active' : 'Subscribe';
+      document.getElementById('settingQualitySelect').value = state.quality;
+    }
+
+    // ==========================================
+    // NAVIGATION & EVENT LISTENERS
+    // ==========================================
+    function switchMainView(viewName) {
+      const views = {
+        home: document.getElementById('viewHome'),
+        discover: document.getElementById('viewDiscover'),
+        mylist: document.getElementById('viewMyList'),
+        settings: document.getElementById('viewSettings')
+      };
+      const indicators = {
+        home: document.getElementById('navIndicatorHome'),
+        discover: document.getElementById('navIndicatorDiscover'),
+        mylist: document.getElementById('navIndicatorMylist'),
+        settings: document.getElementById('navIndicatorSettings')
+      };
+
+      Object.keys(views).forEach(k => {
+        if (k === viewName) {
+          views[k].classList.remove('hidden');
+          indicators[k].classList.remove('hidden');
+        } else {
+          views[k].classList.add('hidden');
+          indicators[k].classList.add('hidden');
+        }
+      });
+
+      document.querySelectorAll('.bottom-nav-btn').forEach(btn => {
+        if (btn.dataset.nav === viewName) {
+          btn.classList.add('text-pink-500');
+          btn.classList.remove('text-slate-400');
+        } else {
+          btn.classList.remove('text-pink-500');
+          btn.classList.add('text-slate-400');
+        }
+      });
+
+      if (viewName === 'discover') renderDiscoverGrid();
+      if (viewName === 'mylist') renderMyList();
+    }
+
+    function scrollToHeroSlide(index) {
+      const track = document.getElementById('heroTrack');
+      const total = 3;
+      state.heroSlideIndex = (index + total) % total;
+      track.scrollTo({
+        left: track.clientWidth * state.heroSlideIndex,
+        behavior: 'smooth'
+      });
+      document.querySelectorAll('.hero-dot').forEach((dot, idx) => {
+        if (idx === state.heroSlideIndex) {
+          dot.className = 'hero-dot w-5 h-2 rounded-full bg-white transition-all';
+        } else {
+          dot.className = 'hero-dot w-2 h-2 rounded-full bg-white/40 transition-all';
+        }
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSavedState();
+      renderLiveTvCircles();
+      renderMatchRows();
+      renderDiscoverGrid();
+      renderMyList();
+      syncAuthAndSettingsUI();
+
+      // Auto-slide Hero Banner every 4.5s
+      setInterval(() => {
+        scrollToHeroSlide(state.heroSlideIndex + 1);
+      }, 4500);
+
+      document.getElementById('heroPrevBtn').addEventListener('click', () => {
+        scrollToHeroSlide(state.heroSlideIndex - 1);
+      });
+      document.getElementById('heroNextBtn').addEventListener('click', () => {
+        scrollToHeroSlide(state.heroSlideIndex + 1);
+      });
+      document.querySelectorAll('.hero-dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+          scrollToHeroSlide(parseInt(dot.dataset.slide, 10));
+        });
+      });
+
+      // Brand Logo returns Home
+      document.getElementById('brandLogoBtn').addEventListener('click', () => switchMainView('home'));
+      document.getElementById('viewAllChannelsBtn').addEventListener('click', () => switchMainView('discover'));
+
+      // Category Filter Tabs
+      document.querySelectorAll('.cat-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          state.currentCategory = tab.dataset.cat;
+          document.querySelectorAll('.cat-tab').forEach(t => {
+            t.className = 'cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition';
+          });
+          tab.className = 'cat-tab text-pink-400 font-bold border-b-2 border-pink-500 pb-1 whitespace-nowrap transition';
+          switchMainView('home');
+          renderLiveTvCircles();
+        });
+      });
+
+      // Bottom Nav Buttons
+      document.querySelectorAll('.bottom-nav-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchMainView(btn.dataset.nav));
+      });
+
+      // Delegated Click for Playing Any Channel or Removing Favorite
+      document.body.addEventListener('click', (e) => {
+        const playBtn = e.target.closest('[data-play-channel]');
+        if (playBtn) {
+          openPlayerByChannelId(playBtn.dataset.playChannel);
+          return;
+        }
+
+        const popupItem = e.target.closest('[data-popup-channel-index]');
+        if (popupItem) {
+          state.currentChannelIndex = parseInt(popupItem.dataset.popupChannelIndex, 10);
+          loadCurrentChannelInPlayer();
+          showToast(`Switched to ${CHANNELS[state.currentChannelIndex].name}`);
+          return;
+        }
+
+        const removeFavBtn = e.target.closest('[data-remove-fav]');
+        if (removeFavBtn) {
+          const id = removeFavBtn.dataset.removeFav;
+          state.favorites = state.favorites.filter(item => item !== id);
+          saveState();
+          renderMyList();
+          showToast('Removed from My List');
+        }
+      });
+
+      // Discover Search
+      document.getElementById('channelSearchInput').addEventListener('input', (e) => {
+        renderDiscoverGrid(e.target.value);
+      });
+
+      // Player Controls: Close, Prev, Next, Play/Pause, Popup Toggle
+      document.getElementById('closePlayerBtn').addEventListener('click', () => {
+        const modal = document.getElementById('playerModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        const video = document.getElementById('liveVideoEl');
+        video.pause();
+        if (fallbackAnimId) cancelAnimationFrame(fallbackAnimId);
+      });
+
+      document.getElementById('playerPrevChannelBtn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        state.currentChannelIndex = (state.currentChannelIndex - 1 + CHANNELS.length) % CHANNELS.length;
+        loadCurrentChannelInPlayer();
+        showToast(`⏮ Prev: ${CHANNELS[state.currentChannelIndex].name}`);
+      });
+
+      document.getElementById('playerNextChannelBtn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        state.currentChannelIndex = (state.currentChannelIndex + 1) % CHANNELS.length;
+        loadCurrentChannelInPlayer();
+        showToast(`⏭ Next: ${CHANNELS[state.currentChannelIndex].name}`);
+      });
+
+      document.getElementById('playerPlayPauseBtn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        state.isPlaying = !state.isPlaying;
+        updatePlayPauseIcon();
+        const video = document.getElementById('liveVideoEl');
+        if (state.isPlaying) {
+          video.play().catch(() => {});
+          startFallbackBroadcastCanvas(CHANNELS[state.currentChannelIndex]);
+        } else {
+          video.pause();
+          if (fallbackAnimId) cancelAnimationFrame(fallbackAnimId);
+        }
+      });
+
+      // Toggle Horizontal Popup Drawer inside Player
+      const popupDrawer = document.getElementById('playerHorizontalPopup');
+      function togglePlayerPopup() {
+        popupDrawer.classList.toggle('hidden');
+      }
+      document.getElementById('toggleChannelPopupBtn').addEventListener('click', togglePlayerPopup);
+      document.getElementById('showPopupBottomBtn').addEventListener('click', () => {
+        popupDrawer.classList.remove('hidden');
+      });
+      document.getElementById('hidePopupDrawerBtn').addEventListener('click', () => {
+        popupDrawer.classList.add('hidden');
+      });
+
+      // Favorite Save inside Player
+      document.getElementById('playerFavBtn').addEventListener('click', () => {
+        const ch = CHANNELS[state.currentChannelIndex];
+        if (state.favorites.includes(ch.id)) {
+          state.favorites = state.favorites.filter(id => id !== ch.id);
+          showToast('Removed from My List');
+        } else {
+          state.favorites.push(ch.id);
+          showToast('Added to My List ★');
+        }
+        saveState();
+        document.getElementById('playerFavIcon').textContent = state.favorites.includes(ch.id) ? '★' : '☆';
+        document.getElementById('playerFavText').textContent = state.favorites.includes(ch.id) ? 'Saved' : 'Save';
+      });
+
+      // Sound Mute & Fullscreen
+      document.getElementById('playerMuteBtn').addEventListener('click', () => {
+        state.isMuted = !state.isMuted;
+        const video = document.getElementById('liveVideoEl');
+        video.muted = state.isMuted;
+        document.getElementById('playerMuteBtn').textContent = state.isMuted ? '🔇 Muted' : '🔊 Sound On';
+      });
+
+      document.getElementById('playerFullscreenBtn').addEventListener('click', () => {
+        const modal = document.getElementById('playerModal');
+        if (!document.fullscreenElement && modal.requestFullscreen) {
+          modal.requestFullscreen().catch(() => {});
+        } else if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        }
+      });
+
+      // ==========================================
+      // PHONE LOGIN MODAL FLOW (+880 OTP)
+      // ==========================================
+      const loginModal = document.getElementById('phoneLoginModal');
+      function openLoginModal() {
+        loginModal.classList.remove('hidden');
+        loginModal.classList.add('flex');
+        document.getElementById('loginStepPhone').classList.remove('hidden');
+        document.getElementById('loginStepOtp').classList.add('hidden');
+      }
+      function closeLoginModal() {
+        loginModal.classList.add('hidden');
+        loginModal.classList.remove('flex');
+      }
+
+      document.getElementById('signInTopBtn').addEventListener('click', () => {
+        if (state.userPhone) {
+          switchMainView('settings');
+        } else {
+          openLoginModal();
+        }
+      });
+
+      document.getElementById('settingsAuthActionBtn').addEventListener('click', () => {
+        if (state.userPhone) {
+          state.userPhone = null;
+          saveState();
+          syncAuthAndSettingsUI();
+          showToast('Signed out successfully');
+        } else {
+          openLoginModal();
+        }
+      });
+
+      document.getElementById('closeLoginModalBtn').addEventListener('click', closeLoginModal);
+
+      document.getElementById('sendOtpBtn').addEventListener('click', () => {
+        const rawPhone = document.getElementById('phoneInput').value.replace(/\D/g, '');
+        if (rawPhone.length < 9) {
+          showToast('Please enter a valid BD phone number');
+          return;
+        }
+        state.generatedOtp = String(Math.floor(1000 + Math.random() * 9000));
+        document.getElementById('otpSentPhoneLabel').textContent = `+880${rawPhone}`;
+        document.getElementById('generatedOtpDisplay').textContent = state.generatedOtp;
+        document.getElementById('otpInput').value = state.generatedOtp;
+        document.getElementById('loginStepPhone').classList.add('hidden');
+        document.getElementById('loginStepOtp').classList.remove('hidden');
+        showToast(`OTP Code Sent: ${state.generatedOtp}`);
+      });
+
+      document.getElementById('backToPhoneStepBtn').addEventListener('click', () => {
+        document.getElementById('loginStepOtp').classList.add('hidden');
+        document.getElementById('loginStepPhone').classList.remove('hidden');
+      });
+
+      document.getElementById('verifyOtpBtn').addEventListener('click', () => {
+        const entered = document.getElementById('otpInput').value.trim();
+        const rawPhone = document.getElementById('phoneInput').value.replace(/\D/g, '');
+        if (entered === state.generatedOtp || entered.length === 4) {
+          state.userPhone = `+880${rawPhone}`;
+          saveState();
+          syncAuthAndSettingsUI();
+          closeLoginModal();
+          showToast(`Signed in as ${state.userPhone}`);
+        } else {
+          showToast('Invalid OTP code, try again');
+        }
+      });
+
+      // ==========================================
+      // SUBSCRIBE MODAL FLOW
+      // ==========================================
+      const subModal = document.getElementById('subscribeModal');
+      document.getElementById('subscribeTopBtn').addEventListener('click', () => {
+        subModal.classList.remove('hidden');
+        subModal.classList.add('flex');
+      });
+      document.getElementById('closeSubscribeModalBtn').addEventListener('click', () => {
+        subModal.classList.add('hidden');
+        subModal.classList.remove('flex');
+      });
+      document.querySelectorAll('.sub-plan-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.isSubscribed = true;
+          saveState();
+          syncAuthAndSettingsUI();
+          subModal.classList.add('hidden');
+          subModal.classList.remove('flex');
+          showToast(`Activated ${btn.dataset.plan}! 👑`);
+        });
+      });
+
+      // ==========================================
+      // SETTINGS CONTROLS
+      // ==========================================
+      document.getElementById('settingQualitySelect').addEventListener('change', (e) => {
+        state.quality = e.target.value;
+        saveState();
+        showToast(`Video quality set to ${state.quality}`);
+      });
+
+      function setupSwitch(btnId, stateKey, label) {
+        const btn = document.getElementById(btnId);
+        btn.addEventListener('click', () => {
+          state[stateKey] = !state[stateKey];
+          const dot = btn.querySelector('.dot');
+          if (state[stateKey]) {
+            btn.className = 'w-11 h-6 rounded-full bg-pink-600 relative transition';
+            dot.className = 'dot w-4 h-4 rounded-full bg-white absolute top-1 right-1 transition-all';
+          } else {
+            btn.className = 'w-11 h-6 rounded-full bg-slate-700 relative transition';
+            dot.className = 'dot w-4 h-4 rounded-full bg-white absolute top-1 left-1 transition-all';
+          }
+          showToast(`${label}: ${state[stateKey] ? 'ON' : 'OFF'}`);
+        });
+      }
+
+      setupSwitch('toggleAutoplayBtn', 'autoplay', 'Auto-Play Next Channel');
+      setupSwitch('toggleDataSaverBtn', 'dataSaver', 'Data Saver Mode');
+      setupSwitch('toggleNotifyBtn', 'notifications', 'Live Match Notifications');
+
+      // Custom M3U8 Stream Modal
+      const customModal = document.getElementById('customStreamModal');
+      document.getElementById('openCustomStreamModalBtn').addEventListener('click', () => {
+        customModal.classList.remove('hidden');
+        customModal.classList.add('flex');
+      });
+      document.getElementById('closeCustomStreamModalBtn').addEventListener('click', () => {
+        customModal.classList.add('hidden');
+        customModal.classList.remove('flex');
+      });
+      document.getElementById('playCustomM3u8Btn').addEventListener('click', () => {
+        const url = document.getElementById('customM3u8Input').value.trim() || 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+        customModal.classList.add('hidden');
+        customModal.classList.remove('flex');
+        openPlayerByChannelId('ch-sony1', url);
+      });
+
+      document.getElementById('clearCacheBtn').addEventListener('click', () => {
+        state.favorites = [];
+        saveState();
+        renderMyList();
+        showToast('Watch history & cache cleared!');
+      });
+    });
+  </script>
 </body>
 </html>
