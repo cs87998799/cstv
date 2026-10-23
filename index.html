@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>CS Live TV - Streaming & Live Sports</title>
+  <title>CS Tv - Live TV & Sports Streaming</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
@@ -76,23 +76,35 @@
       transform: translateY(-3px) scale(1.04);
     }
     .player-popup-drawer {
-      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
+    }
+    .auto-hide-hidden {
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transform: translateY(16px);
+    }
+    .center-controls-hidden {
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
   </style>
 </head>
 <body class="min-h-screen bg-[#0b0714] text-white flex flex-col justify-between pb-20">
 
-  <!-- TOP STICKY NAVBAR (Toffee Style) -->
+  <!-- TOP STICKY NAVBAR (CS Tv Branding) -->
   <header class="sticky top-0 z-30 bg-[#0b0714]/95 backdrop-blur-md border-b border-white/5">
     <div class="max-w-5xl mx-auto px-4 pt-3 pb-2 flex items-center justify-between gap-2">
-      <!-- Brand Logo -->
+      <!-- Brand Logo: CS Tv -->
       <button id="brandLogoBtn" class="flex items-center gap-2 focus:outline-none group">
         <div class="w-9 h-9 rounded-xl toffee-gradient flex items-center justify-center shadow-lg shadow-pink-500/25 group-active:scale-95 transition">
           <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
             <path d="M4 6.5C4 5.12 5.12 4 6.5 4h11C18.88 4 20 5.12 20 6.5v11c0 1.38-1.12 2.5-2.5 2.5h-11C5.12 20 4 18.88 4 17.5v-11zm6 2.5v6l5-3-5-3z"/>
           </svg>
         </div>
-        <span class="font-extrabold tracking-wider text-lg bg-gradient-to-r from-pink-400 via-fuchsia-300 to-white bg-clip-text text-transparent">TOFFEE</span>
+        <div class="flex flex-col text-left">
+          <span class="font-extrabold tracking-wider text-lg leading-none bg-gradient-to-r from-pink-400 via-fuchsia-300 to-white bg-clip-text text-transparent">CS Tv</span>
+          <span id="jsonStatusLabel" class="text-[9px] text-emerald-400 font-semibold tracking-tight">● channels.json ready</span>
+        </div>
       </button>
 
       <!-- Right Actions: Subscribe + Sign In / User Profile -->
@@ -110,7 +122,7 @@
       </div>
     </div>
 
-    <!-- Horizontal Category Bar -->
+    <!-- Dynamic Horizontal Category Bar (Populated from channels.json) -->
     <nav id="topCategoryNav" class="max-w-5xl mx-auto px-4 py-2 flex items-center gap-6 overflow-x-auto no-scrollbar text-sm font-medium">
       <button data-cat="all" class="cat-tab text-pink-400 font-bold border-b-2 border-pink-500 pb-1 whitespace-nowrap transition">Live TV</button>
       <button data-cat="Sports" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">Sports</button>
@@ -127,94 +139,71 @@
     <!-- HOME VIEW -->
     <section id="viewHome" class="space-y-6 pb-6">
 
-      <!-- HERO SLIDER (Touch/Swipe + Auto Slide + Neon Banner like Screenshot) -->
+      <!-- HERO SLIDER (CS Tv Banner + Featured Channels from channels.json) -->
       <div class="relative overflow-hidden select-none">
         <div id="heroTrack" class="flex overflow-x-auto snap-x-mandatory no-scrollbar scroll-smooth">
           
-          <!-- Slide 1: 1000+ Content Neon Banner -->
+          <!-- Slide 1: CS Tv 1000+ Content Neon Banner -->
           <div class="min-w-full snap-center-item hero-bg-1 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
             <div class="max-w-md mx-auto flex flex-col items-center">
               <h2 class="text-3xl sm:text-4xl font-extrabold text-amber-400 drop-shadow-[0_2px_10px_rgba(251,191,36,0.6)] tracking-tight">১০০০+</h2>
-              <p class="text-2xl sm:text-3xl font-extrabold text-white mt-0.5 drop-shadow">কনটেন্ট</p>
+              <p class="text-2xl sm:text-3xl font-extrabold text-white mt-0.5 drop-shadow">লাইভ চ্যানেল ও কনটেন্ট</p>
               <p class="text-xl sm:text-2xl font-extrabold text-amber-300 mt-0.5">নতুন যোগ হলো!</p>
               <div class="mt-3 px-5 py-2 rounded-xl border-2 border-pink-400/90 bg-purple-950/60 neon-box">
-                <p class="text-xs sm:text-sm font-semibold text-white">এখন আরো বেশি দেখুন <span class="text-pink-400 font-bold">টফি -তে</span></p>
+                <p class="text-xs sm:text-sm font-semibold text-white">এখন আরো বেশি দেখুন <span class="text-pink-400 font-bold">CS Tv -তে</span></p>
               </div>
-              <!-- Visual Globe / Content Montage Card -->
               <div class="mt-5 w-48 h-40 sm:w-56 sm:h-44 rounded-2xl bg-gradient-to-b from-pink-500/30 via-purple-600/20 to-transparent border border-pink-500/30 flex flex-col items-center justify-center p-3 relative overflow-hidden">
-                <div class="grid grid-cols-3 gap-1.5 w-full opacity-90 transform -rotate-6 scale-105">
+                <div id="heroMontageGrid" class="grid grid-cols-3 gap-1.5 w-full opacity-90 transform -rotate-6 scale-105">
                   <div class="h-10 rounded bg-gradient-to-br from-rose-500 to-orange-500 flex items-center justify-center text-[10px] font-bold">LIVE</div>
-                  <div class="h-10 rounded bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-[10px] font-bold">EPL</div>
+                  <div class="h-10 rounded bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-[10px] font-bold">SPORTS</div>
                   <div class="h-10 rounded bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-[10px] font-bold">CRICKET</div>
                   <div class="h-10 rounded bg-gradient-to-br from-amber-500 to-red-600 flex items-center justify-center text-[10px] font-bold">DRAMA</div>
                   <div class="h-10 rounded bg-gradient-to-br from-fuchsia-500 to-purple-800 flex items-center justify-center text-[10px] font-bold">MOVIES</div>
                   <div class="h-10 rounded bg-gradient-to-br from-cyan-500 to-blue-700 flex items-center justify-center text-[10px] font-bold">NEWS</div>
                 </div>
-                <button data-play-channel="ch-sony1" class="hero-watch-btn mt-3 toffee-gradient text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
+                <button data-play-index="0" class="hero-watch-btn mt-3 toffee-gradient text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
                   <span>▶ এখনই দেখুন</span>
                 </button>
               </div>
             </div>
           </div>
 
-          <!-- Slide 2: EPL Live Matchweek -->
+          <!-- Slide 2: Featured Channel 1 from channels.json -->
           <div class="min-w-full snap-center-item hero-bg-2 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
             <div class="max-w-md mx-auto flex flex-col items-center">
               <span class="px-3 py-0.5 rounded-full bg-red-600 text-white text-[11px] font-bold tracking-wider uppercase flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-white live-dot"></span> PREMIER LEAGUE LIVE
+                <span class="w-2 h-2 rounded-full bg-white live-dot"></span> CS Tv LIVE STREAM
               </span>
-              <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">EPL Matchweek 8 Live</h2>
-              <p class="text-xs sm:text-sm text-sky-200 mt-1">Ipswich vs Nottingham • Aston Villa vs Man City</p>
-              <div class="mt-4 w-64 h-36 rounded-2xl bg-gradient-to-r from-blue-900/80 via-slate-900 to-rose-900/80 border border-sky-400/30 flex items-center justify-around p-4 shadow-xl">
-                <div class="flex flex-col items-center">
-                  <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center font-extrabold text-sm border-2 border-white">IPS</div>
-                  <span class="text-xs font-bold mt-1.5">Ipswich</span>
-                </div>
-                <div class="text-center">
-                  <span class="text-xs font-extrabold px-2.5 py-1 rounded bg-rose-600 text-white">VS</span>
-                  <p class="text-[10px] text-slate-300 mt-1">1:00 AM</p>
-                </div>
-                <div class="flex flex-col items-center">
-                  <div class="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center font-extrabold text-sm border-2 border-white">NFO</div>
-                  <span class="text-xs font-bold mt-1.5">Nottingham</span>
-                </div>
+              <h2 id="heroSlide2Title" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Live Sports & TV</h2>
+              <p id="heroSlide2Sub" class="text-xs sm:text-sm text-sky-200 mt-1">Streaming directly from channels.json</p>
+              <div id="heroSlide2Card" class="mt-4 w-64 h-36 rounded-2xl bg-gradient-to-r from-blue-900/80 via-slate-900 to-rose-900/80 border border-sky-400/30 flex items-center justify-around p-4 shadow-xl">
+                <!-- Populated from channels.json -->
               </div>
-              <button data-play-channel="ch-epl1" class="hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
+              <button data-play-index="0" class="hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
                 ▶ Watch Live Stream
               </button>
             </div>
           </div>
 
-          <!-- Slide 3: SAFF Championship 2026 -->
+          <!-- Slide 3: Featured Channel 2 from channels.json -->
           <div class="min-w-full snap-center-item hero-bg-4 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
             <div class="max-w-md mx-auto flex flex-col items-center">
-              <span class="px-3 py-0.5 rounded-full bg-emerald-600 text-white text-[11px] font-bold tracking-wider uppercase">SAFF CHAMPIONSHIP 2026</span>
-              <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Bangladesh vs Saudi U23</h2>
-              <p class="text-xs sm:text-sm text-emerald-200 mt-1">Full HD Sports Streaming • Zero Buffering</p>
-              <div class="mt-4 w-64 h-36 rounded-2xl bg-gradient-to-r from-emerald-900/80 via-slate-900 to-amber-900/80 border border-emerald-400/30 flex items-center justify-around p-4 shadow-xl">
-                <div class="flex flex-col items-center">
-                  <div class="w-12 h-12 rounded-full bg-emerald-700 flex items-center justify-center font-extrabold text-sm border-2 border-red-500">BAN</div>
-                  <span class="text-xs font-bold mt-1.5">Bangladesh</span>
-                </div>
-                <div class="text-center">
-                  <span class="text-xs font-extrabold px-2.5 py-1 rounded bg-amber-500 text-black">LIVE</span>
-                  <p class="text-[10px] text-slate-300 mt-1">8:00 PM</p>
-                </div>
-                <div class="flex flex-col items-center">
-                  <div class="w-12 h-12 rounded-full bg-green-800 flex items-center justify-center font-extrabold text-sm border-2 border-white">KSA</div>
-                  <span class="text-xs font-bold mt-1.5">Saudi XI</span>
-                </div>
+              <span class="px-3 py-0.5 rounded-full bg-emerald-600 text-white text-[11px] font-bold tracking-wider uppercase">CS Tv EXCLUSIVE</span>
+              <h2 id="heroSlide3Title" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Full HD Channels</h2>
+              <p id="heroSlide3Sub" class="text-xs sm:text-sm text-emerald-200 mt-1">Zero Buffering • Non-Stop Entertainment</p>
+              <div id="heroSlide3Card" class="mt-4 w-64 h-36 rounded-2xl bg-gradient-to-r from-emerald-900/80 via-slate-900 to-amber-900/80 border border-emerald-400/30 flex items-center justify-around p-4 shadow-xl">
+                <!-- Populated from channels.json -->
               </div>
-              <button data-play-channel="ch-tsports" class="hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
-                ▶ Watch Match Now
+              <button data-play-index="1" class="hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
+                ▶ Watch Channel Now
               </button>
             </div>
           </div>
 
         </div>
 
-        <!-- Left / Right Slide Arrows for Desktop & Touch -->
-        <button id="heroPrevBtn" aria-label="Previous Slide" class=" absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/15">
+        <!-- Left / Right Slide Arrows -->
+        <button id="heroPrevBtn" aria-label="Previous Slide" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/15">
           ‹
         </button>
         <button id="heroNextBtn" aria-label="Next Slide" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/15">
@@ -229,10 +218,13 @@
         </div>
       </div>
 
-      <!-- LIVE TV CIRCULAR HORIZONTAL SLIDER -->
+      <!-- LIVE TV CIRCULAR HORIZONTAL SLIDER (From channels.json) -->
       <div class="px-4">
         <div class="flex items-center justify-between mb-3">
-          <h3 class="text-base sm:text-lg font-bold tracking-tight text-white">Live TV</h3>
+          <div class="flex items-center gap-2">
+            <h3 class="text-base sm:text-lg font-bold tracking-tight text-white">Live TV Channels</h3>
+            <span id="totalChannelsBadge" class="text-[11px] px-2 py-0.5 rounded-full bg-pink-500/20 text-pink-300 font-semibold">0</span>
+          </div>
           <button id="viewAllChannelsBtn" class="text-xs font-semibold text-slate-300 hover:text-pink-400 flex items-center gap-1">
             <span>View All</span>
             <span>›</span>
@@ -241,41 +233,38 @@
 
         <!-- Circular Channels Track -->
         <div id="liveTvCirclesTrack" class="flex items-center gap-4 overflow-x-auto no-scrollbar snap-x-mandatory py-2">
-          <!-- Populated dynamically via JS -->
+          <!-- Populated dynamically from channels.json -->
         </div>
       </div>
 
-      <!-- EPL MATCH: WEEK 8 HORIZONTAL CARDS -->
-      <div class="px-4">
-        <div class="flex items-center justify-between mb-3">
-          <h3 class="text-base sm:text-lg font-bold tracking-tight text-white">EPL Match: Week 8</h3>
-          <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
-        </div>
-        <div id="eplRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1">
-          <!-- Populated via JS -->
-        </div>
+      <!-- DYNAMIC CATEGORY SECTIONS GENERATED FROM channels.json -->
+      <div id="dynamicCategorySections" class="space-y-6">
+        <!-- Each category from channels.json gets its own horizontal scrolling row -->
       </div>
 
-      <!-- SAFF CHAMPIONSHIP 2026 HORIZONTAL CARDS -->
+      <!-- LEGACY COMPATIBLE TRACKS (Also populated from channels.json) -->
       <div class="px-4">
         <div class="flex items-center justify-between mb-3">
-          <h3 class="text-base sm:text-lg font-bold tracking-tight text-white">SAFF Championship 2026</h3>
+          <h3 id="row1Title" class="text-base sm:text-lg font-bold tracking-tight text-white">Featured Sports & Live</h3>
           <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
         </div>
-        <div id="saffRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1">
-          <!-- Populated via JS -->
-        </div>
+        <div id="eplRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1"></div>
       </div>
 
-      <!-- TRENDING DRAMA & MOVIES -->
       <div class="px-4">
         <div class="flex items-center justify-between mb-3">
-          <h3 class="text-base sm:text-lg font-bold tracking-tight text-white">Popular Drama & Movies</h3>
+          <h3 id="row2Title" class="text-base sm:text-lg font-bold tracking-tight text-white">News & Information</h3>
           <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
         </div>
-        <div id="dramaRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1">
-          <!-- Populated via JS -->
+        <div id="saffRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1"></div>
+      </div>
+
+      <div class="px-4">
+        <div class="flex items-center justify-between mb-3">
+          <h3 id="row3Title" class="text-base sm:text-lg font-bold tracking-tight text-white">Entertainment, Drama & Movies</h3>
+          <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
         </div>
+        <div id="dramaRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1"></div>
       </div>
 
     </section>
@@ -283,13 +272,13 @@
     <!-- DISCOVER / ALL CHANNELS VIEW -->
     <section id="viewDiscover" class="hidden px-4 py-4 space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <h2 class="text-xl font-bold">Discover Live Channels</h2>
+        <h2 class="text-xl font-bold">Discover CS Tv Channels</h2>
         <div class="relative flex-1 max-w-sm">
-          <input id="channelSearchInput" type="text" placeholder="Search Somoy, Sony Sports, Zee Bangla..." class="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-pink-500" />
+          <input id="channelSearchInput" type="text" placeholder="Search any channel from channels.json..." class="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-pink-500" />
         </div>
       </div>
       <div id="discoverGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 pt-2">
-        <!-- Populated via JS -->
+        <!-- Populated from channels.json -->
       </div>
     </section>
 
@@ -300,13 +289,13 @@
         <span id="savedCountBadge" class="text-xs px-2.5 py-1 rounded-full bg-pink-500/20 text-pink-300 font-semibold">0 Channels</span>
       </div>
       <div id="myListGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        <!-- Populated via JS -->
+        <!-- Populated from channels.json -->
       </div>
     </section>
 
     <!-- SETTINGS & PROFILE VIEW -->
     <section id="viewSettings" class="hidden px-4 py-4 space-y-5">
-      <h2 class="text-xl font-bold">Account & App Settings</h2>
+      <h2 class="text-xl font-bold">CS Tv Account & App Settings</h2>
 
       <!-- User Account Card -->
       <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-4">
@@ -322,6 +311,25 @@
         <button id="settingsAuthActionBtn" class="px-4 py-2 rounded-xl toffee-gradient text-xs font-bold shadow">
           Sign In
         </button>
+      </div>
+
+      <!-- GitHub channels.json Source Configuration Card -->
+      <div class="p-4 rounded-2xl bg-pink-500/10 border border-pink-500/30 space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="font-bold text-sm text-white">GitHub `channels.json` Data Source</p>
+            <p id="jsonSourceUrlText" class="text-xs text-slate-300">Auto-loads `./channels.json` from your GitHub folder</p>
+          </div>
+          <button id="reloadJsonBtn" class="px-3 py-1.5 rounded-lg toffee-gradient text-xs font-bold shadow">
+            ↻ Reload JSON
+          </button>
+        </div>
+        <div class="flex items-center gap-2">
+          <input id="customJsonUrlInput" type="text" value="./channels.json" placeholder="./channels.json or https://raw.githubusercontent.com/.../channels.json" class="flex-1 bg-black/40 border border-white/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-pink-500" />
+          <button id="loadCustomJsonUrlBtn" class="px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-xs font-bold">
+            Load URL
+          </button>
+        </div>
       </div>
 
       <!-- Streaming & Player Settings -->
@@ -363,7 +371,7 @@
         <div class="p-4 flex items-center justify-between">
           <div>
             <p class="font-semibold text-sm">Live Match Notifications</p>
-            <p class="text-xs text-slate-400">Goal alerts & toss updates for EPL / SAFF</p>
+            <p class="text-xs text-slate-400">Instant match & channel alerts on CS Tv</p>
           </div>
           <button id="toggleNotifyBtn" role="switch" aria-checked="true" class="w-11 h-6 rounded-full bg-pink-600 relative transition">
             <span class="dot w-4 h-4 rounded-full bg-white absolute top-1 right-1 transition-all"></span>
@@ -395,11 +403,11 @@
 
   </main>
 
-  <!-- FULLFEATURED LIVE TV PLAYER MODAL (With Center Prev/Next + Horizontal Channel Popup Drawer) -->
+  <!-- FULLFEATURED LIVE TV PLAYER MODAL (With Center Prev/Next + 5-Sec Auto-Hide Horizontal Channel Popup) -->
   <div id="playerModal" class="fixed inset-0 z-50 bg-black/95 hidden flex-col justify-between">
     
     <!-- Top Player Bar -->
-    <div class="flex items-center justify-between px-4 py-3 bg-gradient-to-b from-black/90 to-transparent z-20">
+    <div id="playerTopBar" class="flex items-center justify-between px-4 py-3 bg-gradient-to-b from-black/90 to-transparent z-20 transition-opacity duration-300">
       <div class="flex items-center gap-3">
         <button id="closePlayerBtn" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-lg font-bold">
           ←
@@ -407,11 +415,11 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="px-2 py-0.5 rounded bg-red-600 text-[10px] font-extrabold uppercase flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-white live-dot"></span> LIVE
+              <span class="w-1.5 h-1.5 rounded-full bg-white live-dot"></span> CS Tv LIVE
             </span>
-            <h3 id="playerChannelTitle" class="font-bold text-sm sm:text-base">Sony Sports Ten 1 HD</h3>
+            <h3 id="playerChannelTitle" class="font-bold text-sm sm:text-base">Channel Name</h3>
           </div>
-          <p id="playerChannelSub" class="text-xs text-slate-300">Sports • 1080p HD Stream</p>
+          <p id="playerChannelSub" class="text-xs text-slate-300">Live • 1080p HD Stream</p>
         </div>
       </div>
 
@@ -427,15 +435,18 @@
     </div>
 
     <!-- Center Video Viewport + Interactive Overlay Controls -->
-    <div id="playerViewport" class="relative flex-1 flex items-center justify-center bg-black overflow-hidden">
-      <!-- Real HTML5 Video for HLS streams -->
-      <video id="liveVideoEl" class="w-full h-full max-h-[75vh] object-contain" playsinline></video>
+    <div id="playerViewport" class="relative flex-1 flex items-center justify-center bg-black overflow-hidden cursor-pointer">
+      <!-- Real HTML5 Video for HLS / MP4 streams from channels.json -->
+      <video id="liveVideoEl" class="w-full h-full max-h-[78vh] object-contain" playsinline autoplay></video>
 
-      <!-- Live Broadcast Fallback Canvas (Draws crisp animated TV feed if HLS URL is blocked or offline) -->
-      <canvas id="fallbackBroadcastCanvas" class="hidden absolute inset-0 w-full h-full object-contain"></canvas>
+      <!-- Optional Iframe Player if a channel in channels.json uses an embed URL -->
+      <iframe id="liveIframeEl" class="hidden w-full h-full max-h-[78vh] border-0" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>
+
+      <!-- Live Broadcast Fallback Canvas (If stream is offline or CORS-restricted in browser preview) -->
+      <canvas id="fallbackBroadcastCanvas" class="hidden absolute inset-0 w-full h-full object-contain pointer-events-none"></canvas>
 
       <!-- Center Overlay Controls: Previous Channel | Play/Pause | Next Channel -->
-      <div id="playerCenterControls" class="absolute inset-0 flex items-center justify-center gap-8 sm:gap-14 bg-black/30 transition-opacity duration-200">
+      <div id="playerCenterControls" class="absolute inset-0 flex items-center justify-center gap-8 sm:gap-14 bg-black/30 transition-opacity duration-300">
         
         <!-- Previous Channel Button -->
         <button id="playerPrevChannelBtn" title="Previous Channel" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/65 hover:bg-pink-600/90 border border-white/25 text-white flex flex-col items-center justify-center active:scale-90 transition shadow-xl">
@@ -462,27 +473,27 @@
 
       </div>
 
-      <!-- HORIZONTAL CHANNEL POPUP OVERLAY INSIDE PLAYER -->
+      <!-- HORIZONTAL CHANNEL POPUP OVERLAY INSIDE PLAYER (Auto-hides after 5 seconds) -->
       <div id="playerHorizontalPopup" class="player-popup-drawer absolute bottom-3 left-3 right-3 bg-[#120b22]/95 backdrop-blur-xl border border-pink-500/30 rounded-2xl p-3 z-30 shadow-2xl">
         <div class="flex items-center justify-between mb-2 px-1">
           <div class="flex items-center gap-2">
-            <span class="text-xs font-bold text-pink-400 uppercase tracking-wider">Quick Switch Channels</span>
-            <span class="text-[11px] text-slate-400">(Tap any channel to play)</span>
+            <span class="text-xs font-bold text-pink-400 uppercase tracking-wider">CS Tv Channels</span>
+            <span id="autoHideTimerBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-slate-300">Auto-hide in 5s</span>
           </div>
           <button id="hidePopupDrawerBtn" class="text-xs text-slate-300 hover:text-white px-2 py-0.5 rounded bg-white/10">
             Hide ✕
           </button>
         </div>
-        <!-- Horizontally Scrollable Channel Cards inside Player -->
+        <!-- Horizontally Scrollable Channel Cards inside Player (From channels.json) -->
         <div id="playerPopupTrack" class="flex items-center gap-3 overflow-x-auto no-scrollbar snap-x-mandatory py-1">
-          <!-- Populated dynamically via JS -->
+          <!-- Populated dynamically from channels.json -->
         </div>
       </div>
 
     </div>
 
     <!-- Bottom Player Status & Controls Bar -->
-    <div class="px-4 py-3 bg--[#0b0714] border-t border-white/10 flex items-center justify-between gap-3 z-20">
+    <div class="px-4 py-3 bg-[#0b0714] border-t border-white/10 flex items-center justify-between gap-3 z-20">
       <div class="flex items-center gap-3">
         <button id="playerMuteBtn" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-xs font-semibold">
           🔊 Sound On
@@ -509,7 +520,7 @@
     <div class="w-full max-w-sm rounded-3xl bg-[#160e29] border border-pink-500/30 p-6 shadow-2xl space-y-5">
       <div class="flex items-center justify-between">
         <div>
-          <h3 class="text-lg font-extrabold text-white">Sign In with Phone</h3>
+          <h3 class="text-lg font-extrabold text-white">Sign In to CS Tv</h3>
           <p class="text-xs text-slate-400">Enter your mobile number to receive OTP</p>
         </div>
         <button id="closeLoginModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
@@ -533,7 +544,7 @@
       <div id="loginStepOtp" class="hidden space-y-4">
         <div class="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-xs text-emerald-200">
           OTP sent to <span id="otpSentPhoneLabel" class="font-bold">+88017...</span>! <br/>
-          <span>Demo Real OTP Code: <strong id="generatedOtpDisplay" class="text-white underline">4829</strong></span>
+          <span>CS Tv OTP Code: <strong id="generatedOtpDisplay" class="text-white underline">4829</strong></span>
         </div>
         <div>
           <label class="block text-xs font-semibold text-slate-300 mb-1.5">Enter 4-Digit OTP</label>
@@ -555,15 +566,15 @@
   <div id="subscribeModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="w-full max-w-sm rounded-3xl bg-[#160e29] border border-pink-500/30 p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between">
-        <span class="px-3 py-1 rounded-full toffee-gradient text-xs font-bold">👑 TOFFEE VIP PASS</span>
+        <span class="px-3 py-1 rounded-full toffee-gradient text-xs font-bold">👑 CS Tv VIP PASS</span>
         <button id="closeSubscribeModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
       </div>
-      <h3 class="text-xl font-extrabold">Unlock All Live Sports & VIP Channels</h3>
-      <p class="text-xs text-slate-300">Watch EPL, SAFF Championship, Sony Sports HD & 1000+ exclusive dramas ad-free.</p>
+      <h3 class="text-xl font-extrabold">Unlock All CS Tv Live Sports & VIP Channels</h3>
+      <p class="text-xs text-slate-300">Watch all premium channels from channels.json in Full HD ad-free.</p>
       <div class="space-y-2.5 pt-1">
         <button data-plan="Monthly VIP (৳99)" class="sub-plan-btn w-full p-3.5 rounded-2xl bg-pink-500/15 border-2 border-pink-500 flex items-center justify-between text-left">
           <div>
-            <p class="font-bold text-sm text-white">30 Days VIP Pack</p>
+            <p class="font-bold text-sm text-white">30 Days CS Tv VIP</p>
             <p class="text-xs text-pink-300">bKash / Nagad / Mobile Balance</p>
           </div>
           <span class="text-lg font-extrabold text-white">৳99</span>
@@ -598,7 +609,7 @@
     Notification
   </div>
 
-  <!-- BOTTOM NAVIGATION BAR (Matches Screenshot) -->
+  <!-- BOTTOM NAVIGATION BAR -->
   <nav class="fixed bottom-0 left-0 right-0 z-30 bg-[#120b20]/95 backdrop-blur-md border-t border-white/10">
     <div class="max-w-md mx-auto flex items-center justify-around py-2">
       <button data-nav="home" class="bottom-nav-btn flex flex-col items-center gap-1 text-pink-500 font-semibold text-xs relative">
@@ -625,22 +636,22 @@
   </nav>
 
   <script>
-    // ==========================================
-    // CHANNEL & MATCH DATA (Matches Screenshot)
-    // ==========================================
-    const CHANNELS = [
+    // ====================================================
+    // DEFAULT FALLBACK CHANNELS (Used only if channels.json
+    // cannot be fetched in offline/preview mode)
+    // ====================================================
+    const DEFAULT_CHANNELS_JSON = [
       {
         id: 'ch-epl1',
         name: 'IPS vs NFO • EPL',
         shortLabel: 'IPS vs NFO',
         subLabel: '•EPL',
         category: 'Sports',
+        logo: '',
         premium: true,
-        ringBg: 'bg-white',
-        badgeColor: 'text-rose-600 font-extrabold',
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#e11d48',
-        ticker: 'LIVE EPL: Ipswich Town vs Nottingham Forest • Kickoff 1:00 AM'
+        ticker: 'CS Tv LIVE: Ipswich Town vs Nottingham Forest • Premier League'
       },
       {
         id: 'ch-somoy',
@@ -648,12 +659,11 @@
         shortLabel: 'সময়',
         subLabel: 'NEWS 24/7',
         category: 'News',
+        logo: '',
         premium: false,
-        ringBg: 'bg-white',
-        badgeColor: 'text-red-700 font-bold',
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#b91c1c',
-        ticker: 'সময় সংবাদ লাইভ: দেশ ও আন্তর্জাতিক সর্বশেষ খবর দেখুন'
+        ticker: 'সময় সংবাদ লাইভ: দেশ ও আন্তর্জাতিক সর্বশেষ খবর দেখুন CS Tv-তে'
       },
       {
         id: 'ch-zeebangla',
@@ -661,12 +671,11 @@
         shortLabel: 'Z বাংলা',
         subLabel: 'DRAMA HD',
         category: 'Drama',
+        logo: '',
         premium: true,
-        ringBg: 'bg-white',
-        badgeColor: 'text-orange-600 font-extrabold',
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#ea580c',
-        ticker: 'জি বাংলা এইচডি: জনপ্রিয় সিরিয়াল ও পরিবারিক নাটক পর্ব'
+        ticker: 'জি বাংলা এইচডি: জনপ্রিয় সিরিয়াল ও নাটক সরাসরি CS Tv-তে'
       },
       {
         id: 'ch-sony1',
@@ -674,9 +683,8 @@
         shortLabel: 'SONY',
         subLabel: 'SPORTS 1 HD',
         category: 'Sports',
+        logo: '',
         premium: true,
-        ringBg: 'bg-white',
-        badgeColor: 'text-indigo-900 font-extrabold',
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#312e81',
         ticker: 'SONY SPORTS TEN 1 HD: UEFA & Premier League Official Broadcast'
@@ -687,9 +695,8 @@
         shortLabel: 'T SPORTS',
         subLabel: 'LIVE HD',
         category: 'Sports',
+        logo: '',
         premium: true,
-        ringBg: 'bg-white',
-        badgeColor: 'text-emerald-700 font-extrabold',
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#047857',
         ticker: 'T SPORTS HD: SAFF Championship 2026 & Bangladesh Cricket Live'
@@ -700,12 +707,11 @@
         shortLabel: 'যমুনা',
         subLabel: 'LIVE TV',
         category: 'News',
+        logo: '',
         premium: false,
-        ringBg: 'bg-white',
-        badgeColor: 'text-blue-800 font-bold',
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#1e40af',
-        ticker: 'যমুনা টেলিভিশন ২৪ ঘণ্টা সরাসরি সম্প্রচার'
+        ticker: 'যমুনা টেলিভিশন ২৪ ঘণ্টা সরাসরি সম্প্রচার CS Tv-তে'
       },
       {
         id: 'ch-starjalsha',
@@ -713,105 +719,126 @@
         shortLabel: 'জলসা',
         subLabel: 'MOVIES HD',
         category: 'Movies',
+        logo: '',
         premium: true,
-        ringBg: 'bg-white',
-        badgeColor: 'text-pink-700 font-extrabold',
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#be185d',
         ticker: 'Star Jalsha Movies: Superhit Bengali Blockbuster Cinema'
       },
       {
-        id: 'ch-toffee-series',
-        name: 'Toffee Originals',
-        shortLabel: 'TOFFEE',
+        id: 'ch-cstv-series',
+        name: 'CS Tv Originals',
+        shortLabel: 'CS Tv',
         subLabel: 'WEB SERIES',
         category: 'Web Series',
+        logo: '',
         premium: false,
-        ringBg: 'bg-white',
-        badgeColor: 'text-purple-800 font-extrabold',
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#6b21a8',
-        ticker: 'Toffee Exclusive Web Series • New Episodes Streaming Now'
+        ticker: 'CS Tv Exclusive Web Series • New Episodes Streaming Now'
       }
     ];
 
-    const EPL_MATCHES = [
-      {
-        id: 'm-epl-1',
-        channelId: 'ch-epl1',
-        teamA: 'IPSWICH',
-        teamB: 'NOTTINGHAM',
-        time: '24 OCT, 1:00 AM',
-        bgGradient: 'from-blue-900 via-slate-900 to-red-900'
-      },
-      {
-        id: 'm-epl-2',
-        channelId: 'ch-sony1',
-        teamA: 'ASTON VILLA',
-        teamB: 'MAN CITY',
-        time: '24 OCT, 5:30 PM',
-        bgGradient: 'from-rose-950 via-slate-900 to-sky-900'
-      },
-      {
-        id: 'm-epl-3',
-        channelId: 'ch-sony1',
-        teamA: 'ARSENAL',
-        teamB: 'LIVERPOOL',
-        time: '25 OCT, 9:30 PM',
-        bgGradient: 'from-red-900 via-slate-900 to-rose-950'
-      }
+    let CHANNELS = [...DEFAULT_CHANNELS_JSON];
+
+    const BADGE_COLORS = [
+      'text-rose-600 font-extrabold',
+      'text-red-700 font-bold',
+      'text-orange-600 font-extrabold',
+      'text-indigo-900 font-extrabold',
+      'text-emerald-700 font-extrabold',
+      'text-blue-800 font-bold',
+      'text-pink-700 font-extrabold',
+      'text-purple-800 font-extrabold'
     ];
 
-    const SAFF_MATCHES = [
-      {
-        id: 'm-saff-1',
-        channelId: 'ch-tsports',
-        teamA: 'PAKISTAN',
-        teamB: 'INDIA',
-        time: '5 NOV, 3:30 PM',
-        bgGradient: 'from-emerald-950 via-slate-900 to-blue-950'
-      },
-      {
-        id: 'm-saff-2',
-        channelId: 'ch-tsports',
-        teamA: 'BANGLADESH',
-        teamB: 'SAUDI U23',
-        time: '5 NOV, 8:00 PM',
-        bgGradient: 'from-green-900 via-slate-900 to-amber-900'
-      },
-      {
-        id: 'm-saff-3',
-        channelId: 'ch-tsports',
-        teamA: 'NEPAL',
-        teamB: 'MALDIVES',
-        time: '6 NOV, 6:00 PM',
-        bgGradient: 'from-indigo-950 via-slate-900 to-teal-900'
-      }
+    const CARD_GRADIENTS = [
+      'from-blue-900 via-slate-900 to-red-900',
+      'from-rose-950 via-slate-900 to-sky-900',
+      'from-emerald-950 via-slate-900 to-blue-950',
+      'from-fuchsia-900 via-purple-950 to-slate-900',
+      'from-amber-900 via-red-950 to-slate-900',
+      'from-cyan-900 via-slate-900 to-indigo-950'
     ];
 
-    const DRAMA_MOVIES = [
-      {
-        id: 'dm-1',
-        channelId: 'ch-zeebangla',
-        title: 'মিঠাই - নতুন পর্ব',
-        tag: 'Drama • HD',
-        bgGradient: 'from-fuchsia-900 via-purple-950 to-slate-900'
-      },
-      {
-        id: 'dm-2',
-        channelId: 'ch-starjalsha',
-        title: 'তুফান (Toofan Movie)',
-        tag: 'Blockbuster • 4K',
-        bgGradient: 'from-amber-900 via-red-950 to-slate-900'
-      },
-      {
-        id: 'dm-3',
-        channelId: 'ch-toffee-series',
-        title: 'কারাগার (Karagar S2)',
-        tag: 'Web Series • Exclusive',
-        bgGradient: 'from-cyan-900 via-slate-900 to-indigo-950'
+    // ====================================================
+    // UNIVERSAL channels.json PARSER & FETCHER
+    // Supports any GitHub channels.json structure!
+    // ====================================================
+    function normalizeChannelsJson(rawJson) {
+      let arr = [];
+      if (Array.isArray(rawJson)) {
+        arr = rawJson;
+      } else if (rawJson && typeof rawJson === 'object') {
+        arr = rawJson.channels || rawJson.data || rawJson.items || rawJson.streams || rawJson.list || [];
+        if (!Array.isArray(arr)) {
+          // If object of category keys -> arrays
+          Object.keys(rawJson).forEach(k => {
+            if (Array.isArray(rawJson[k])) {
+              rawJson[k].forEach(item => arr.push({ ...item, category: item.category || k }));
+            }
+          });
+        }
       }
-    ];
+
+      if (!Array.isArray(arr) || arr.length === 0) return null;
+
+      return arr.map((item, idx) => {
+        const name = item.name || item.title || item.channel_name || item.tvg_name || `Channel ${idx + 1}`;
+        const category = item.category || item.group || item.group_title || item.genre || item.type || 'Live TV';
+        const logo = item.logo || item.image || item.icon || item.tvg_logo || item.thumb || item.poster || '';
+        const streamUrl = item.url || item.streamUrl || item.stream_url || item.link || item.m3u8 || item.file || item.src || item.source || '';
+        const iframeUrl = item.iframe || item.embed || item.embedUrl || '';
+        const words = name.trim().split(/\s+/);
+        const shortLabel = item.shortLabel || (words.length >= 2 ? (words[0] + ' ' + words[1]).slice(0, 10) : name.slice(0, 8));
+        const subLabel = item.subLabel || item.quality || category.toUpperCase().slice(0, 10);
+
+        return {
+          id: String(item.id || `ch-json-${idx}`),
+          name,
+          shortLabel,
+          subLabel,
+          category,
+          logo,
+          streamUrl,
+          iframeUrl,
+          premium: Boolean(item.premium || item.vip || item.isPremium),
+          ringBg: 'bg-white',
+          badgeColor: BADGE_COLORS[idx % BADGE_COLORS.length],
+          cardGradient: CARD_GRADIENTS[idx % CARD_GRADIENTS.length],
+          themeColor: item.themeColor || '#831843',
+          ticker: item.ticker || item.description || `${name} • ${category} Live Stream on CS Tv`
+        };
+      });
+    }
+
+    async function fetchChannelsFromJson(jsonPath = './channels.json', showFeedback = false) {
+      const statusLabel = document.getElementById('jsonStatusLabel');
+      const sourceText = document.getElementById('jsonSourceUrlText');
+      try {
+        const response = await fetch(jsonPath, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        const normalized = normalizeChannelsJson(data);
+        if (normalized && normalized.length > 0) {
+          CHANNELS = normalized;
+          statusLabel.textContent = `● Loaded ${CHANNELS.length} channels`;
+          statusLabel.className = 'text-[9px] text-emerald-400 font-semibold tracking-tight';
+          if (sourceText) sourceText.textContent = `Loaded ${CHANNELS.length} channels from ${jsonPath}`;
+          if (showFeedback) showToast(`Loaded ${CHANNELS.length} channels from channels.json!`);
+          renderAllFromChannelsJson();
+          return true;
+        }
+      } catch (err) {
+        // If running inside preview or local file without server, keep current/default channels
+        statusLabel.textContent = `● Ready (${CHANNELS.length} channels)`;
+        if (showFeedback) {
+          showToast('Using built-in channels.json fallback (upload to GitHub folder to auto-load)');
+        }
+      }
+      renderAllFromChannelsJson();
+      return false;
+    }
 
     // ==========================================
     // SAFE STATE & LOCAL STORAGE
@@ -821,7 +848,7 @@
       currentChannelIndex: 0,
       isPlaying: true,
       isMuted: false,
-      favorites: ['ch-epl1', 'ch-somoy'],
+      favorites: [],
       userPhone: null,
       isSubscribed: false,
       generatedOtp: '4829',
@@ -829,31 +856,34 @@
       autoplay: true,
       dataSaver: false,
       notifications: true,
-      heroSlideIndex: 0
+      heroSlideIndex: 0,
+      jsonUrl: './channels.json'
     };
 
     function loadSavedState() {
       try {
-        const raw = localStorage.getItem('toffee_live_state_v1');
+        const raw = localStorage.getItem('cstv_live_state_v2');
         if (raw) {
           const parsed = JSON.parse(raw);
           if (Array.isArray(parsed.favorites)) state.favorites = parsed.favorites;
           if (parsed.userPhone) state.userPhone = parsed.userPhone;
           if (typeof parsed.isSubscribed === 'boolean') state.isSubscribed = parsed.isSubscribed;
           if (parsed.quality) state.quality = parsed.quality;
+          if (parsed.jsonUrl) state.jsonUrl = parsed.jsonUrl;
         }
       } catch (err) {
-        // Ignore storage errors inside restricted iframe
+        // Ignore storage errors
       }
     }
 
     function saveState() {
       try {
-        localStorage.setItem('toffee_live_state_v1', JSON.stringify({
+        localStorage.setItem('cstv_live_state_v2', JSON.stringify({
           favorites: state.favorites,
           userPhone: state.userPhone,
           isSubscribed: state.isSubscribed,
-          quality: state.quality
+          quality: state.quality,
+          jsonUrl: state.jsonUrl
         }));
       } catch (err) {
         // Ignore storage errors
@@ -870,14 +900,104 @@
       }, 2600);
     }
 
-    // ==========================================
-    // RENDER FUNCTIONS (CIRCLES, CARDS, POPUP)
-    // ==========================================
+    // Helper to render channel logo or fallback text badge inside circular icons
+    function getChannelCircleAvatarHtml(ch, sizeClasses = 'w-20 h-20 sm:w-24 sm:h-24') {
+      if (ch.logo) {
+        return `
+          <div class="${sizeClasses} rounded-full bg-white border-2 border-white/20 group-hover:border-pink-500 shadow-lg flex items-center justify-center p-2 text-center overflow-hidden relative">
+            <img src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div style="display:none" class="flex-col items-center justify-center w-full h-full">
+              <span class="text-xs sm:text-sm ${ch.badgeColor} leading-tight">${ch.shortLabel}</span>
+              <span class="mt-1 px-1.5 py-0.5 rounded bg-slate-900 text-white text-[9px] font-bold">${ch.subLabel}</span>
+            </div>
+          </div>
+        `;
+      }
+      return `
+        <div class="${sizeClasses} rounded-full bg-white border-2 border-white/20 group-hover:border-pink-500 shadow-lg flex flex-col items-center justify-center p-2 text-center overflow-hidden">
+          <span class="text-xs sm:text-sm ${ch.badgeColor} leading-tight">${ch.shortLabel}</span>
+          <span class="mt-1 px-1.5 py-0.5 rounded bg-slate-900 text-white text-[9px] font-bold">${ch.subLabel}</span>
+        </div>
+      `;
+    }
+
+    // ==========================================================
+    // RENDER EVERYTHING DYNAMICALLY FROM channels.json
+    // ==========================================================
+    function renderAllFromChannelsJson() {
+      renderCategoryNavTabs();
+      renderHeroFromChannels();
+      renderLiveTvCircles();
+      renderContentRowsFromChannels();
+      renderDiscoverGrid(document.getElementById('channelSearchInput')?.value || '');
+      renderMyList();
+      renderPlayerHorizontalPopup();
+    }
+
+    function renderCategoryNavTabs() {
+      const nav = document.getElementById('topCategoryNav');
+      const uniqueCats = [];
+      CHANNELS.forEach(ch => {
+        const c = (ch.category || 'Live TV').trim();
+        if (c && !uniqueCats.some(existing => existing.toLowerCase() === c.toLowerCase())) {
+          uniqueCats.push(c);
+        }
+      });
+
+      const tabsHtml = [
+        `<button data-cat="all" class="cat-tab ${state.currentCategory === 'all' ? 'text-pink-400 font-bold border-b-2 border-pink-500' : 'text-slate-300 hover:text-white'} pb-1 whitespace-nowrap transition">Live TV (${CHANNELS.length})</button>`,
+        ...uniqueCats.map(cat => {
+          const isActive = state.currentCategory.toLowerCase() === cat.toLowerCase();
+          return `<button data-cat="${cat}" class="cat-tab ${isActive ? 'text-pink-400 font-bold border-b-2 border-pink-500' : 'text-slate-300 hover:text-white'} pb-1 whitespace-nowrap transition">${cat}</button>`;
+        })
+      ];
+      nav.innerHTML = tabsHtml.join('');
+    }
+
+    function renderHeroFromChannels() {
+      const ch0 = CHANNELS[0] || DEFAULT_CHANNELS_JSON[0];
+      const ch1 = CHANNELS[1] || ch0;
+
+      // Update Slide 2 & Slide 3 dynamically from channels.json
+      document.getElementById('heroSlide2Title').textContent = ch0.name;
+      document.getElementById('heroSlide2Sub').textContent = `${ch0.category} • Live on CS Tv`;
+      document.getElementById('heroSlide2Card').innerHTML = `
+        <div class="flex flex-col items-center">
+          <div class="w-14 h-14 rounded-full bg-white text-slate-900 flex items-center justify-center font-extrabold text-xs border-2 border-pink-500 overflow-hidden p-1">
+            ${ch0.logo ? `<img src="${ch0.logo}" alt="${ch0.name}" class="w-full h-full object-contain" />` : `<span>${ch0.shortLabel}</span>`}
+          </div>
+          <span class="text-xs font-bold mt-1.5 text-white max-w-[120px] truncate">${ch0.name}</span>
+        </div>
+        <div class="text-center">
+          <span class="text-xs font-extrabold px-2.5 py-1 rounded bg-rose-600 text-white">LIVE</span>
+          <p class="text-[10px] text-slate-300 mt-1">${ch0.category}</p>
+        </div>
+      `;
+
+      document.getElementById('heroSlide3Title').textContent = ch1.name;
+      document.getElementById('heroSlide3Sub').textContent = `${ch1.category} • Full HD Streaming`;
+      document.getElementById('heroSlide3Card').innerHTML = `
+        <div class="flex flex-col items-center">
+          <div class="w-14 h-14 rounded-full bg-white text-slate-900 flex items-center justify-center font-extrabold text-xs border-2 border-emerald-400 overflow-hidden p-1">
+            ${ch1.logo ? `<img src="${ch1.logo}" alt="${ch1.name}" class="w-full h-full object-contain" />` : `<span>${ch1.shortLabel}</span>`}
+          </div>
+          <span class="text-xs font-bold mt-1.5 text-white max-w-[120px] truncate">${ch1.name}</span>
+        </div>
+        <div class="text-center">
+          <span class="text-xs font-extrabold px-2.5 py-1 rounded bg-amber-500 text-black">HD</span>
+          <p class="text-[10px] text-slate-300 mt-1">${ch1.category}</p>
+        </div>
+      `;
+    }
+
     function renderLiveTvCircles() {
       const track = document.getElementById('liveTvCirclesTrack');
+      const badge = document.getElementById('totalChannelsBadge');
       const filtered = state.currentCategory === 'all'
         ? CHANNELS
-        : CHANNELS.filter(c => c.category.toLowerCase() === state.currentCategory.toLowerCase());
+        : CHANNELS.filter(c => (c.category || '').toLowerCase() === state.currentCategory.toLowerCase());
+
+      if (badge) badge.textContent = `${filtered.length}`;
 
       track.innerHTML = filtered.map(ch => `
         <button data-play-channel="${ch.id}" class="channel-ring relative flex-shrink-0 flex flex-col items-center group snap-start-item focus:outline-none">
@@ -886,74 +1006,92 @@
               <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5z"/></svg>
             </span>
           ` : ''}
-          <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full ${ch.ringBg} border-2 border-white/20 group-hover:border-pink-500 shadow-lg flex flex-col items-center justify-center p-2 text-center overflow-hidden">
-            <span class="text-xs sm:text-sm ${ch.badgeColor} leading-tight">${ch.shortLabel}</span>
-            <span class="mt-1 px-1.5 py-0.5 rounded bg-slate-900 text-white text-[9px] font-bold">${ch.subLabel}</span>
-          </div>
-          <span class="text-[11px] text-slate-300 font-medium mt-1.5 max-w-[84px] truncate">${ch.name}</span>
+          ${getChannelCircleAvatarHtml(ch, 'w-20 h-20 sm:w-24 sm:h-24')}
+          <span class="text-[11px] text-slate-300 font-medium mt-1.5 max-w-[88px] truncate">${ch.name}</span>
         </button>
       `).join('');
     }
 
-    function renderMatchRows() {
-      const eplTrack = document.getElementById('eplRowTrack');
-      eplTrack.innerHTML = EPL_MATCHES.map(m => `
-        <button data-play-channel="${m.channelId}" class="flex-shrink-0 w-64 sm:w-72 rounded-2xl bg-gradient-to-r ${m.bgGradient} border border-white/15 p-3.5 text-left snap-start-item hover:border-pink-500/60 active:scale-95 transition relative overflow-hidden group">
+    // Builds horizontal scrolling cards for every channel & category in channels.json
+    function buildChannelCardHtml(ch, idx) {
+      const grad = ch.cardGradient || CARD_GRADIENTS[idx % CARD_GRADIENTS.length];
+      return `
+        <button data-play-channel="${ch.id}" class="flex-shrink-0 w-60 sm:w-68 rounded-2xl bg-gradient-to-r ${grad} border border-white/15 p-3.5 text-left snap-start-item hover:border-pink-500/60 active:scale-95 transition relative overflow-hidden group">
           <div class="flex items-center justify-between text-[10px] text-slate-300 font-bold mb-2">
-            <span class="flex items-center gap-1 text-rose-400"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 live-dot"></span> PREMIER LEAGUE</span>
-            <span>HD</span>
+            <span class="flex items-center gap-1 text-rose-400"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 live-dot"></span> ${ch.category.toUpperCase()}</span>
+            <span>LIVE HD</span>
           </div>
-          <div class="flex items-center justify-between my-2">
-            <div class="text-xs font-extrabold text-white bg-blue-600/40 px-2 py-1 rounded">${m.teamA}</div>
-            <span class="text-[11px] font-black text-pink-400">VS</span>
-            <div class="text-xs font-extrabold text-white bg-rose-600/40 px-2 py-1 rounded">${m.teamB}</div>
-          </div>
-          <div class="mt-2 flex items-center justify-between text-[11px] text-slate-200 font-semibold">
-            <span>${m.time}</span>
-            <span class="text-pink-400 group-hover:translate-x-0.5 transition">▶ Watch</span>
-          </div>
-        </button>
-      `).join('');
-
-      const saffTrack = document.getElementById('saffRowTrack');
-      saffTrack.innerHTML = SAFF_MATCHES.map(m => `
-        <button data-play-channel="${m.channelId}" class="flex-shrink-0 w-64 sm:w-72 rounded-2xl bg-gradient-to-r ${m.bgGradient} border border-white/15 p-3.5 text-left snap-start-item hover:border-pink-500/60 active:scale-95 transition relative overflow-hidden group">
-          <div class="flex items-center justify-between text-[10px] text-emerald-300 font-bold mb-2">
-            <span>SAFF 2026</span>
-            <span>LIVE STREAM</span>
-          </div>
-          <div class="flex items-center justify-between my-2">
-            <div class="text-xs font-extrabold text-white bg-emerald-600/40 px-2 py-1 rounded">${m.teamA}</div>
-            <span class="text-[11px] font-black text-amber-400">VS</span>
-            <div class="text-xs font-extrabold text-white bg-amber-600/40 px-2 py-1 rounded">${m.teamB}</div>
+          <div class="flex items-center gap-3 my-2">
+            <div class="w-12 h-12 rounded-xl bg-white flex-shrink-0 flex items-center justify-center p-1 overflow-hidden shadow">
+              ${ch.logo
+                ? `<img src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" /><span style="display:none" class="text-[10px] ${ch.badgeColor}">${ch.shortLabel}</span>`
+                : `<span class="text-[11px] ${ch.badgeColor}">${ch.shortLabel}</span>`
+              }
+            </div>
+            <div class="overflow-hidden">
+              <h4 class="font-extrabold text-sm text-white truncate">${ch.name}</h4>
+              <p class="text-[11px] text-slate-300 truncate">${ch.ticker}</p>
+            </div>
           </div>
           <div class="mt-2 flex items-center justify-between text-[11px] text-slate-200 font-semibold">
-            <span>${m.time}</span>
-            <span class="text-pink-400 group-hover:translate-x-0.5 transition">▶ Watch</span>
+            <span>CS Tv Stream</span>
+            <span class="text-pink-400 group-hover:translate-x-0.5 transition">▶ Watch Now</span>
           </div>
         </button>
-      `).join('');
+      `;
+    }
 
-      const dramaTrack = document.getElementById('dramaRowTrack');
-      dramaTrack.innerHTML = DRAMA_MOVIES.map(d => `
-        <button data-play-channel="${d.channelId}" class="flex-shrink-0 w-56 sm:w-64 rounded-2xl bg-gradient-to-br ${d.bgGradient} border border-white/15 p-4 text-left snap-start-item hover:border-pink-500/60 active:scale-95 transition">
-          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-pink-500/30 text-pink-200">${d.tag}</span>
-          <h4 class="font-bold text-sm sm:text-base text-white mt-2">${d.title}</h4>
-          <p class="text-xs text-slate-300 mt-1">Tap to stream now ›</p>
-        </button>
-      `).join('');
+    function renderContentRowsFromChannels() {
+      // Group channels by category from channels.json
+      const groups = {};
+      CHANNELS.forEach(ch => {
+        const cat = ch.category || 'Live TV';
+        if (!groups[cat]) groups[cat] = [];
+        groups[cat].push(ch);
+      });
+
+      const catNames = Object.keys(groups);
+
+      // Populate the 3 main horizontal tracks directly from channels.json groups
+      const group1 = groups[catNames[0]] || CHANNELS;
+      const group2 = groups[catNames[1]] || CHANNELS;
+      const group3 = groups[catNames[2]] || CHANNELS;
+
+      document.getElementById('row1Title').textContent = catNames[0] ? `${catNames[0]} Channels` : 'Featured Live Channels';
+      document.getElementById('eplRowTrack').innerHTML = group1.map((ch, i) => buildChannelCardHtml(ch, i)).join('');
+
+      document.getElementById('row2Title').textContent = catNames[1] ? `${catNames[1]} Channels` : 'Popular on CS Tv';
+      document.getElementById('saffRowTrack').innerHTML = group2.map((ch, i) => buildChannelCardHtml(ch, i + 2)).join('');
+
+      document.getElementById('row3Title').textContent = catNames[2] ? `${catNames[2]} Channels` : 'All CS Tv Streams';
+      document.getElementById('dramaRowTrack').innerHTML = group3.map((ch, i) => buildChannelCardHtml(ch, i + 4)).join('');
+
+      // If channels.json has more than 3 categories, render additional horizontal rows automatically!
+      const extraContainer = document.getElementById('dynamicCategorySections');
+      if (catNames.length > 3) {
+        extraContainer.innerHTML = catNames.slice(3).map((catName, gIdx) => `
+          <div class="px-4">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-base sm:text-lg font-bold tracking-tight text-white">${catName}</h3>
+              <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
+            </div>
+            <div class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1">
+              ${groups[catName].map((ch, i) => buildChannelCardHtml(ch, gIdx + i)).join('')}
+            </div>
+          </div>
+        `).join('');
+      } else {
+        extraContainer.innerHTML = '';
+      }
     }
 
     function renderDiscoverGrid(query = '') {
       const grid = document.getElementById('discoverGrid');
       const q = query.trim().toLowerCase();
-      const list = CHANNELS.filter(c => !q || c.name.toLowerCase().includes(q) || c.category.toLowerCase().includes(q));
+      const list = CHANNELS.filter(c => !q || c.name.toLowerCase().includes(q) || (c.category || '').toLowerCase().includes(q));
       grid.innerHTML = list.map(ch => `
         <button data-play-channel="${ch.id}" class="p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 flex flex-col items-center text-center group transition">
-          <div class="w-16 h-16 rounded-full bg-white flex flex-col items-center justify-center p-1.5 shadow">
-            <span class="text-xs ${ch.badgeColor}">${ch.shortLabel}</span>
-            <span class="text-[8px] font-bold bg-slate-900 text-white px-1 rounded mt-0.5">${ch.subLabel}</span>
-          </div>
+          ${getChannelCircleAvatarHtml(ch, 'w-16 h-16')}
           <span class="text-xs font-bold text-white mt-2 line-clamp-1">${ch.name}</span>
           <span class="text-[10px] text-slate-400">${ch.category}</span>
         </button>
@@ -967,16 +1105,18 @@
       badge.textContent = `${savedChannels.length} Channels`;
 
       if (savedChannels.length === 0) {
-        grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400 text-sm">No saved channels yet. Tap ☆ Save inside the video player!</div>`;
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400 text-sm">No saved channels yet. Tap ☆ Save inside the CS Tv video player!</div>`;
         return;
       }
 
       grid.innerHTML = savedChannels.map(ch => `
         <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-2">
-          <button data-play-channel="${ch.id}" class="flex items-center gap-3 text-left flex-1">
-            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-xs ${ch.badgeColor}">${ch.shortLabel}</div>
-            <div>
-              <p class="font-bold text-xs sm:text-sm text-white">${ch.name}</p>
+          <button data-play-channel="${ch.id}" class="flex items-center gap-3 text-left flex-1 overflow-hidden">
+            <div class="w-12 h-12 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-xs ${ch.badgeColor} overflow-hidden p-1">
+              ${ch.logo ? `<img src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" />` : ch.shortLabel}
+            </div>
+            <div class="overflow-hidden">
+              <p class="font-bold text-xs sm:text-sm text-white truncate">${ch.name}</p>
               <p class="text-[10px] text-pink-400">▶ Tap to Play Live</p>
             </div>
           </button>
@@ -985,24 +1125,70 @@
       `).join('');
     }
 
-    // Renders the Horizontal Popup Channel Switcher inside the Video Player
+    // Renders the Horizontal Popup Channel Switcher inside the Video Player (100% from channels.json)
     function renderPlayerHorizontalPopup() {
       const track = document.getElementById('playerPopupTrack');
-      const activeCh = CHANNELS[state.currentChannelIndex];
+      const activeCh = CHANNELS[state.currentChannelIndex] || CHANNELS[0];
+      if (!activeCh) return;
+
       track.innerHTML = CHANNELS.map((ch, idx) => {
         const isCurrent = ch.id === activeCh.id;
         return `
-          <button data-popup-channel-index="${idx}" class="flex-shrink-0 w-36 p-2.5 rounded-xl border ${isCurrent ? 'border-pink-500 bg-pink-500/20' : 'border-white/10 bg-white/5 hover:bg-white/10'} flex items-center gap-2.5 text-left snap-start-item transition active:scale-95">
-            <div class="w-10 h-10 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-[10px] ${ch.badgeColor}">
-              ${ch.shortLabel}
+          <button data-popup-channel-index="${idx}" class="flex-shrink-0 w-40 p-2.5 rounded-xl border ${isCurrent ? 'border-pink-500 bg-pink-500/20' : 'border-white/10 bg-white/5 hover:bg-white/10'} flex items-center gap-2.5 text-left snap-start-item transition active:scale-95">
+            <div class="w-10 h-10 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-[10px] ${ch.badgeColor} overflow-hidden p-1">
+              ${ch.logo
+                ? `<img src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" /><span style="display:none">${ch.shortLabel}</span>`
+                : `<span>${ch.shortLabel}</span>`
+              }
             </div>
             <div class="overflow-hidden">
               <p class="text-xs font-bold text-white truncate">${ch.name}</p>
-              <p class="text-[10px] ${isCurrent ? 'text-pink-300 font-bold' : 'text-slate-400'}">${isCurrent ? '● Playing' : ch.category}</p>
+              <p class="text-[10px] ${isCurrent ? 'text-pink-300 font-bold' : 'text-slate-400'} truncate">${isCurrent ? '● Playing' : ch.category}</p>
             </div>
           </button>
         `;
       }).join('');
+    }
+
+    // ==========================================================
+    // 5-SECOND AUTO-HIDE LOGIC FOR PLAYER HORIZONTAL POPUP & UI
+    // ==========================================================
+    let overlayHideTimer = null;
+    let overlayCountdownInterval = null;
+    let remainingSeconds = 5;
+
+    function showPlayerOverlaysAndStart5sTimer() {
+      const popupDrawer = document.getElementById('playerHorizontalPopup');
+      const centerControls = document.getElementById('playerCenterControls');
+      const timerBadge = document.getElementById('autoHideTimerBadge');
+
+      popupDrawer.classList.remove('hidden', 'auto-hide-hidden');
+      centerControls.classList.remove('center-controls-hidden');
+
+      clearTimeout(overlayHideTimer);
+      clearInterval(overlayCountdownInterval);
+      remainingSeconds = 5;
+      if (timerBadge) timerBadge.textContent = `Auto-hide in ${remainingSeconds}s`;
+
+      overlayCountdownInterval = setInterval(() => {
+        remainingSeconds -= 1;
+        if (remainingSeconds > 0 && timerBadge) {
+          timerBadge.textContent = `Auto-hide in ${remainingSeconds}s`;
+        }
+      }, 1000);
+
+      overlayHideTimer = setTimeout(() => {
+        clearInterval(overlayCountdownInterval);
+        popupDrawer.classList.add('auto-hide-hidden');
+        centerControls.classList.add('center-controls-hidden');
+      }, 5000);
+    }
+
+    function hidePlayerPopupImmediately() {
+      clearTimeout(overlayHideTimer);
+      clearInterval(overlayCountdownInterval);
+      document.getElementById('playerHorizontalPopup').classList.add('auto-hide-hidden');
+      document.getElementById('playerCenterControls').classList.add('center-controls-hidden');
     }
 
     // ==========================================
@@ -1024,7 +1210,6 @@
         canvas.height = 450;
         tick += 1;
 
-        // Animated Stadium / Studio Background
         const grad = ctx.createLinearGradient(0, 0, 800, 450);
         grad.addColorStop(0, '#0f071e');
         grad.addColorStop(0.5, channel.themeColor || '#831843');
@@ -1032,7 +1217,6 @@
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, 800, 450);
 
-        // Moving Broadcast Signal Waves
         ctx.strokeStyle = 'rgba(255,255,255,0.08)';
         ctx.lineWidth = 2;
         for (let i = 0; i < 6; i++) {
@@ -1043,7 +1227,7 @@
           ctx.stroke();
         }
 
-        // Live Channel Watermark Top Right
+        // CS Tv Watermark Top Right
         ctx.fillStyle = 'rgba(0,0,0,0.55)';
         ctx.fillRect(610, 24, 165, 42);
         ctx.fillStyle = '#ff1f8e';
@@ -1052,9 +1236,9 @@
         ctx.fill();
         ctx.fillStyle = '#ffffff';
         ctx.font = 'bold 15px Inter, sans-serif';
-        ctx.fillText(channel.shortLabel + ' HD', 645, 50);
+        ctx.fillText('CS Tv • HD', 645, 50);
 
-        // Center Scoreboard / Live Feed Graphic
+        // Center Channel Name
         ctx.fillStyle = 'rgba(255,255,255,0.95)';
         ctx.font = 'bold 34px Inter, Hind Siliguri, sans-serif';
         ctx.textAlign = 'center';
@@ -1064,7 +1248,7 @@
         ctx.font = '600 18px Inter, sans-serif';
         ctx.fillText(`${channel.category} • ${state.quality} Live Feed`, 400, 238);
 
-        // Bottom Breaking News / Match Ticker Bar
+        // Bottom Ticker Bar
         ctx.fillStyle = 'rgba(15, 7, 30, 0.9)';
         ctx.fillRect(0, 390, 800, 60);
         ctx.fillStyle = '#ff1f8e';
@@ -1072,12 +1256,12 @@
         ctx.fillStyle = '#ffffff';
         ctx.font = 'bold 16px Inter, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText('LIVE TV', 65, 425);
+        ctx.fillText('CS Tv LIVE', 65, 425);
 
         ctx.textAlign = 'left';
         ctx.font = '500 16px Inter, Hind Siliguri, sans-serif';
         const scrollX = 800 - ((tick * 2.2) % 1200);
-        ctx.fillText(channel.ticker, Math.max(145, scrollX), 425);
+        ctx.fillText(channel.ticker || channel.name, Math.max(145, scrollX), 425);
 
         if (state.isPlaying) {
           fallbackAnimId = requestAnimationFrame(drawFrame);
@@ -1088,16 +1272,19 @@
     }
 
     function openPlayerByChannelId(channelId, customUrl = null) {
-      const idx = CHANNELS.findIndex(c => c.id === channelId);
+      const idx = CHANNELS.findIndex(c => String(c.id) === String(channelId));
       if (idx !== -1) state.currentChannelIndex = idx;
       loadCurrentChannelInPlayer(customUrl);
       const modal = document.getElementById('playerModal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
+      showPlayerOverlaysAndStart5sTimer();
     }
 
     function loadCurrentChannelInPlayer(customUrl = null) {
-      const ch = CHANNELS[state.currentChannelIndex];
+      const ch = CHANNELS[state.currentChannelIndex] || CHANNELS[0];
+      if (!ch) return;
+
       state.isPlaying = true;
       updatePlayPauseIcon();
 
@@ -1110,11 +1297,26 @@
       document.getElementById('playerFavText').textContent = isFav ? 'Saved' : 'Save';
 
       renderPlayerHorizontalPopup();
+      showPlayerOverlaysAndStart5sTimer();
 
       const video = document.getElementById('liveVideoEl');
+      const iframe = document.getElementById('liveIframeEl');
       const streamSrc = customUrl || ch.streamUrl;
 
-      // Always run the animated broadcast canvas underneath or as fallback
+      // Reset iframe & video visibility
+      if (ch.iframeUrl && !customUrl) {
+        video.pause();
+        video.classList.add('hidden');
+        document.getElementById('fallbackBroadcastCanvas').classList.add('hidden');
+        iframe.src = ch.iframeUrl;
+        iframe.classList.remove('hidden');
+        return;
+      }
+
+      iframe.src = '';
+      iframe.classList.add('hidden');
+      video.classList.remove('hidden');
+
       startFallbackBroadcastCanvas(ch);
 
       try {
@@ -1122,7 +1324,7 @@
           hlsInstance.destroy();
           hlsInstance = null;
         }
-        if (window.Hls && Hls.isSupported()) {
+        if (streamSrc && streamSrc.includes('.m3u8') && window.Hls && Hls.isSupported()) {
           hlsInstance = new Hls();
           hlsInstance.loadSource(streamSrc);
           hlsInstance.attachMedia(video);
@@ -1134,12 +1336,16 @@
           hlsInstance.on(Hls.Events.ERROR, () => {
             document.getElementById('fallbackBroadcastCanvas').classList.remove('hidden');
           });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        } else if (streamSrc) {
           video.src = streamSrc;
-          video.play().catch(() => {});
+          video.play().then(() => {
+            document.getElementById('fallbackBroadcastCanvas').classList.add('hidden');
+          }).catch(() => {
+            document.getElementById('fallbackBroadcastCanvas').classList.remove('hidden');
+          });
         }
       } catch (e) {
-        // Fallback canvas is already active
+        // Fallback canvas stays active
       }
     }
 
@@ -1165,8 +1371,8 @@
 
       if (state.userPhone) {
         signInTopText.textContent = state.userPhone.slice(-4);
-        settingsUserName.textContent = 'Verified Subscriber';
-        settingsUserPhone.textContent = `${state.userPhone} • Active on Android & Web`;
+        settingsUserName.textContent = 'CS Tv Verified User';
+        settingsUserPhone.textContent = `${state.userPhone} • Logged In`;
         settingsAvatar.textContent = '✓';
         settingsAuthActionBtn.textContent = 'Sign Out';
       } else {
@@ -1179,6 +1385,7 @@
 
       subscribeTopText.textContent = state.isSubscribed ? 'VIP Active' : 'Subscribe';
       document.getElementById('settingQualitySelect').value = state.quality;
+      document.getElementById('customJsonUrlInput').value = state.jsonUrl || './channels.json';
     }
 
     // ==========================================
@@ -1241,11 +1448,10 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       loadSavedState();
-      renderLiveTvCircles();
-      renderMatchRows();
-      renderDiscoverGrid();
-      renderMyList();
       syncAuthAndSettingsUI();
+
+      // Automatically load channels.json from the same GitHub directory!
+      fetchChannelsFromJson(state.jsonUrl || './channels.json', false);
 
       // Auto-slide Hero Banner every 4.5s
       setInterval(() => {
@@ -1268,17 +1474,14 @@
       document.getElementById('brandLogoBtn').addEventListener('click', () => switchMainView('home'));
       document.getElementById('viewAllChannelsBtn').addEventListener('click', () => switchMainView('discover'));
 
-      // Category Filter Tabs
-      document.querySelectorAll('.cat-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-          state.currentCategory = tab.dataset.cat;
-          document.querySelectorAll('.cat-tab').forEach(t => {
-            t.className = 'cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition';
-          });
-          tab.className = 'cat-tab text-pink-400 font-bold border-b-2 border-pink-500 pb-1 whitespace-nowrap transition';
-          switchMainView('home');
-          renderLiveTvCircles();
-        });
+      // Delegated Category Filter Tabs
+      document.getElementById('topCategoryNav').addEventListener('click', (e) => {
+        const tab = e.target.closest('.cat-tab');
+        if (!tab) return;
+        state.currentCategory = tab.dataset.cat;
+        renderCategoryNavTabs();
+        switchMainView('home');
+        renderLiveTvCircles();
       });
 
       // Bottom Nav Buttons
@@ -1286,7 +1489,7 @@
         btn.addEventListener('click', () => switchMainView(btn.dataset.nav));
       });
 
-      // Delegated Click for Playing Any Channel or Removing Favorite
+      // Delegated Click for Playing Any Channel, Hero Watch Button, or Removing Favorite
       document.body.addEventListener('click', (e) => {
         const playBtn = e.target.closest('[data-play-channel]');
         if (playBtn) {
@@ -1294,11 +1497,20 @@
           return;
         }
 
+        const playIdxBtn = e.target.closest('[data-play-index]');
+        if (playIdxBtn) {
+          const idx = parseInt(playIdxBtn.dataset.playIndex, 10) || 0;
+          state.currentChannelIndex = idx < CHANNELS.length ? idx : 0;
+          openPlayerByChannelId(CHANNELS[state.currentChannelIndex].id);
+          return;
+        }
+
         const popupItem = e.target.closest('[data-popup-channel-index]');
         if (popupItem) {
+          e.stopPropagation();
           state.currentChannelIndex = parseInt(popupItem.dataset.popupChannelIndex, 10);
           loadCurrentChannelInPlayer();
-          showToast(`Switched to ${CHANNELS[state.currentChannelIndex].name}`);
+          showToast(`Playing: ${CHANNELS[state.currentChannelIndex].name}`);
           return;
         }
 
@@ -1317,6 +1529,35 @@
         renderDiscoverGrid(e.target.value);
       });
 
+      // Reload / Custom channels.json URL in Settings
+      document.getElementById('reloadJsonBtn').addEventListener('click', () => {
+        fetchChannelsFromJson(state.jsonUrl || './channels.json', true);
+      });
+      document.getElementById('loadCustomJsonUrlBtn').addEventListener('click', () => {
+        const val = document.getElementById('customJsonUrlInput').value.trim() || './channels.json';
+        state.jsonUrl = val;
+        saveState();
+        fetchChannelsFromJson(val, true);
+      });
+
+      // Player Viewport Tap: Show overlays and restart 5-second auto-hide timer
+      const playerViewport = document.getElementById('playerViewport');
+      playerViewport.addEventListener('click', () => {
+        showPlayerOverlaysAndStart5sTimer();
+      });
+
+      // Keep Horizontal Popup visible while scrolling/touching, then auto-hide 5s after touch ends
+      const popupTrack = document.getElementById('playerPopupTrack');
+      const popupDrawer = document.getElementById('playerHorizontalPopup');
+      ['touchstart', 'touchmove', 'scroll', 'mousemove', 'pointerdown'].forEach(evtName => {
+        popupDrawer.addEventListener(evtName, () => {
+          showPlayerOverlaysAndStart5sTimer();
+        }, { passive: true });
+        popupTrack.addEventListener(evtName, () => {
+          showPlayerOverlaysAndStart5sTimer();
+        }, { passive: true });
+      });
+
       // Player Controls: Close, Prev, Next, Play/Pause, Popup Toggle
       document.getElementById('closePlayerBtn').addEventListener('click', () => {
         const modal = document.getElementById('playerModal');
@@ -1324,6 +1565,9 @@
         modal.classList.remove('flex');
         const video = document.getElementById('liveVideoEl');
         video.pause();
+        document.getElementById('liveIframeEl').src = '';
+        clearTimeout(overlayHideTimer);
+        clearInterval(overlayCountdownInterval);
         if (fallbackAnimId) cancelAnimationFrame(fallbackAnimId);
       });
 
@@ -1345,6 +1589,7 @@
         e.stopPropagation();
         state.isPlaying = !state.isPlaying;
         updatePlayPauseIcon();
+        showPlayerOverlaysAndStart5sTimer();
         const video = document.getElementById('liveVideoEl');
         if (state.isPlaying) {
           video.play().catch(() => {});
@@ -1355,22 +1600,29 @@
         }
       });
 
-      // Toggle Horizontal Popup Drawer inside Player
-      const popupDrawer = document.getElementById('playerHorizontalPopup');
-      function togglePlayerPopup() {
-        popupDrawer.classList.toggle('hidden');
-      }
-      document.getElementById('toggleChannelPopupBtn').addEventListener('click', togglePlayerPopup);
-      document.getElementById('showPopupBottomBtn').addEventListener('click', () => {
-        popupDrawer.classList.remove('hidden');
+      document.getElementById('toggleChannelPopupBtn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (popupDrawer.classList.contains('auto-hide-hidden') || popupDrawer.classList.contains('hidden')) {
+          showPlayerOverlaysAndStart5sTimer();
+        } else {
+          hidePlayerPopupImmediately();
+        }
       });
-      document.getElementById('hidePopupDrawerBtn').addEventListener('click', () => {
-        popupDrawer.classList.add('hidden');
+
+      document.getElementById('showPopupBottomBtn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        showPlayerOverlaysAndStart5sTimer();
+      });
+
+      document.getElementById('hidePopupDrawerBtn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        hidePlayerPopupImmediately();
       });
 
       // Favorite Save inside Player
       document.getElementById('playerFavBtn').addEventListener('click', () => {
         const ch = CHANNELS[state.currentChannelIndex];
+        if (!ch) return;
         if (state.favorites.includes(ch.id)) {
           state.favorites = state.favorites.filter(id => id !== ch.id);
           showToast('Removed from My List');
@@ -1464,7 +1716,7 @@
           saveState();
           syncAuthAndSettingsUI();
           closeLoginModal();
-          showToast(`Signed in as ${state.userPhone}`);
+          showToast(`Signed in to CS Tv as ${state.userPhone}`);
         } else {
           showToast('Invalid OTP code, try again');
         }
@@ -1536,7 +1788,7 @@
         const url = document.getElementById('customM3u8Input').value.trim() || 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
         customModal.classList.add('hidden');
         customModal.classList.remove('flex');
-        openPlayerByChannelId('ch-sony1', url);
+        openPlayerByChannelId(CHANNELS[0]?.id || 'ch-epl1', url);
       });
 
       document.getElementById('clearCacheBtn').addEventListener('click', () => {
