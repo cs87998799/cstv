@@ -72,6 +72,31 @@ body.directMode #status{position:absolute;bottom:4px;left:12px;z-index:3;text-sh
  .logo{height:80px}.player{padding:6px}
  .overlay{padding:6px}.overlay button,.overlay select{font-size:11px;padding:7px}
 }
+
+/* CSTV Premium animations */
+.live {
+  animation: cstvPulse 1.8s infinite;
+}
+
+@keyframes cstvPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .72; }
+}
+
+.channel {
+  transition: transform .22s ease, border-color .22s ease,
+              box-shadow .22s ease;
+}
+
+.channel:hover {
+  transform: translateY(-4px) scale(1.015);
+  border-color: #e50914;
+  box-shadow: 0 8px 24px #e5091430;
+}
+
+.channel:active {
+  transform: scale(.98);
+}
 </style>
 </head>
 <body>
