@@ -5,363 +5,321 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#09090d">
-<title>CSTV —Your Live TV</title>
+<title>CSTV — Live TV</title>
 
 <style>
-:root {
-  --bg:#09090d;
-  --panel:#15151d;
-  --panel2:#20202a;
-  --red:#e50914;
-  --text:#fff;
-  --muted:#a3a3b2;
-  --line:#292933;
-  --sidebar:220px;
+:root{
+  --bg:#09090d;--panel:#15151d;--panel2:#22222d;
+  --red:#e50914;--text:#fff;--muted:#a3a3b2;
+  --line:#2c2c37;--sidebar:215px;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:20px}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
 button,input{font:inherit}
-button,a,input{outline-offset:4px}
-button:focus-visible,a:focus-visible,input:focus-visible{
-  outline:2px solid white;
-}
+button,a{outline-offset:3px}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid white}
 button{cursor:pointer}
 a{color:inherit;text-decoration:none}
-.app{min-height:100vh}
+button:disabled{opacity:.55;cursor:wait}
 
-/* SIDEBAR */
 .sidebar{
   position:fixed;inset:0 auto 0 0;width:var(--sidebar);
   background:#0d0d13;border-right:1px solid var(--line);
-  padding:24px 15px;z-index:50;
-  display:flex;flex-direction:column;
+  padding:23px 14px;z-index:50;display:flex;flex-direction:column;
 }
 .brand{
-  display:flex;align-items:center;gap:11px;
-  font-size:27px;font-weight:900;letter-spacing:1px;
-  color:var(--red);padding:0 10px 30px;
+  display:flex;align-items:center;gap:10px;padding:0 9px 30px;
+  color:var(--red);font-size:27px;font-weight:900;letter-spacing:1px;
 }
 .brand-icon{
-  width:39px;height:39px;background:var(--red);
-  color:#fff;border-radius:11px;display:grid;place-items:center;
-  font-size:20px;
+  width:38px;height:38px;background:var(--red);color:white;
+  border-radius:10px;display:grid;place-items:center;font-size:19px;
 }
-.nav-label{
-  font-size:10px;letter-spacing:2px;color:#777786;
-  font-weight:bold;padding:0 12px 10px;
-}
-.nav{display:grid;gap:7px}
+.nav-label{font-size:10px;letter-spacing:2px;color:#777786;padding:0 12px 10px}
+.nav{display:grid;gap:6px}
 .nav a{
-  display:flex;align-items:center;gap:14px;
-  padding:13px 12px;border-radius:9px;
-  color:#b9b9c6;font-size:14px;font-weight:600;
-  transition:background .15s,color .15s;
+  display:flex;align-items:center;gap:13px;padding:13px 12px;
+  border-radius:8px;color:#bcbcc8;font-size:14px;font-weight:600;
 }
-.nav a .ico{width:23px;text-align:center;font-size:19px}
-.nav a:hover,.nav a.active{
-  color:white;background:#2b1117;
-}
+.nav .ico{width:23px;text-align:center;font-size:19px}
+.nav a:hover,.nav a.active{color:white;background:#2b1117}
 .nav a.active{box-shadow:inset 3px 0 var(--red)}
 .sidebar-bottom{margin-top:auto}
 .connection{
-  border:1px solid var(--line);background:#14141b;
-  border-radius:10px;padding:13px;font-size:12px;color:var(--muted);
-  line-height:1.7;
+  background:#15151d;border:1px solid var(--line);
+  border-radius:9px;padding:12px;font-size:12px;
+  color:var(--muted);line-height:1.8;overflow-wrap:anywhere;
 }
-.dot{display:inline-block;width:7px;height:7px;
-  background:#777;border-radius:50%;margin-right:7px}
-.dot.ok{background:#28d982}
-.dot.bad{background:#ff626a}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#888;margin-right:7px}
+.dot.ok{background:#29d981}.dot.bad{background:#ff555f}
 
-/* MAIN */
 .main{margin-left:var(--sidebar);min-width:0}
 .topbar{
-  height:72px;position:sticky;top:0;z-index:30;
-  display:flex;align-items:center;gap:15px;
-  padding:0 30px;background:rgba(9,9,13,.94);
-  border-bottom:1px solid #ffffff0b;backdrop-filter:blur(12px);
+  height:70px;position:sticky;top:0;z-index:30;
+  display:flex;align-items:center;gap:13px;padding:0 28px;
+  background:#09090df2;border-bottom:1px solid #ffffff0b;
+  backdrop-filter:blur(12px);
 }
-.top-title{font-size:15px;font-weight:800;white-space:nowrap}
+.top-title{font-size:15px;font-weight:800}
+.mobile-brand{display:none}
 .search{
-  margin-left:auto;width:min(320px,45%);
-  background:#17171f;border:1px solid #30303b;
-  border-radius:9px;display:flex;align-items:center;
-  padding:0 13px;gap:9px;
+  margin-left:auto;width:min(330px,48%);display:flex;align-items:center;
+  gap:9px;padding:0 12px;background:#17171f;border:1px solid #30303b;
+  border-radius:8px;color:#aaa;
 }
-.search span{color:var(--muted)}
-.search input{
-  width:100%;min-width:0;padding:12px 0;
-  border:0;background:transparent;color:white;outline:none;
+.search input{width:100%;min-width:0;padding:12px 0;background:transparent;color:white;border:0;outline:none}
+.search input::placeholder{color:#888896}
+.refresh,.secondary,.close-btn{
+  border:1px solid #383843;background:#22222c;color:white;
+  border-radius:7px;padding:10px 13px;
 }
-.search input::placeholder{color:#858593}
-.refresh{
-  border:1px solid #383843;background:#1a1a23;
-  color:white;border-radius:8px;padding:10px 13px;
-}
-.refresh:hover{background:var(--red)}
+.refresh:hover,.secondary:hover,.close-btn:hover{background:var(--red)}
 
-/* HERO */
 .hero{
-  min-height:370px;position:relative;overflow:hidden;
-  display:flex;align-items:center;padding:45px;
+  min-height:365px;display:flex;align-items:center;position:relative;
+  overflow:hidden;padding:40px;
   background:
-    linear-gradient(90deg,#09090df7 0%,#09090dc9 43%,#09090d20 100%),
-    linear-gradient(0deg,var(--bg),transparent 55%),
-    radial-gradient(ellipse at 78% 42%,#9d2532 0%,#4b1929 27%,#201522 57%,#09090d 85%);
+  linear-gradient(90deg,#09090df7 0%,#09090dce 43%,#09090d20 100%),
+  linear-gradient(0deg,var(--bg),transparent 55%),
+  radial-gradient(ellipse at 78% 40%,#972331,#48192a 28%,#201522 58%,#09090d 85%);
 }
 .hero:before{
-  content:"";position:absolute;width:270px;height:270px;
-  right:10%;top:12%;border-radius:50%;
-  border:1px solid #ffffff20;
-  box-shadow:0 0 0 32px #ffffff05,0 0 0 68px #ffffff04;
+  content:"";position:absolute;right:9%;top:12%;width:250px;height:250px;
+  border:1px solid #ffffff20;border-radius:50%;
+  box-shadow:0 0 0 35px #ffffff05,0 0 0 72px #ffffff04;
 }
 .hero-content{position:relative;z-index:2;max-width:590px}
-.eyebrow{
-  font-size:12px;color:#ff737c;font-weight:900;
-  letter-spacing:3px;text-transform:uppercase;
-}
-.hero h1{
-  margin:15px 0;font-size:clamp(39px,5vw,70px);
-  line-height:1.02;letter-spacing:-2px;font-weight:900;
-}
+.eyebrow{font-size:11px;letter-spacing:3px;font-weight:900;color:#ff747d}
+.hero h1{font-size:clamp(40px,5vw,68px);line-height:1.02;letter-spacing:-2px;margin:15px 0;font-weight:900}
 .hero h1 span{color:var(--red)}
-.hero p{color:#d0cfd8;line-height:1.7;font-size:15px;max-width:460px}
-.hero-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:23px}
-.primary,.secondary{
-  border:0;border-radius:7px;padding:13px 19px;font-weight:800;
-}
-.primary{background:var(--red);color:white}
-.primary:hover{background:#ff2430}
-.secondary{background:#ffffff20;color:white;border:1px solid #ffffff20}
-.secondary:hover{background:#ffffff30}
+.hero p{font-size:14px;line-height:1.8;color:#d0cfd9;max-width:470px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.primary{background:var(--red);color:white;border:0;border-radius:7px;padding:13px 19px;font-weight:800}
+.primary:hover{background:#ff2732}
 
-/* CONTENT */
-.content{padding:12px 30px 55px}
+.content{padding:10px 28px 45px}
 .notice{
-  display:none;background:#241419;border:1px solid #603039;
-  border-radius:9px;padding:13px;margin:12px 0;color:#ffd9dc;
-  font-size:13px;
+  display:none;margin:15px 0;padding:12px 14px;
+  background:#28151a;border:1px solid #633039;
+  color:#ffdadd;border-radius:8px;font-size:13px;
 }
-.player-box{
-  display:none;margin:22px 0 30px;background:#111117;
-  border:1px solid #30303b;border-radius:12px;padding:14px;
-  scroll-margin-top:85px;
-}
-.player-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.player-head strong{font-size:16px;flex:1;overflow-wrap:anywhere}
-.live-label{font-size:10px;background:var(--red);padding:5px 7px;border-radius:4px;font-weight:bold}
-.close-btn{border:0;background:#282832;color:white;padding:9px 12px;border-radius:6px}
-#player{display:block;width:100%;max-height:65vh;background:black;border-radius:8px}
-.section{margin:30px 0}
-.section-head{display:flex;align-items:center;gap:11px;margin-bottom:7px}
+.section{margin:28px 0 34px}
+.section-head{display:flex;align-items:center;gap:10px;margin-bottom:7px}
 .section h2{font-size:22px;margin:0;font-weight:850}
-.count{font-size:11px;background:#252530;color:#c6c6d2;border-radius:20px;padding:5px 9px}
-.section-sub{color:var(--muted);font-size:13px;margin:0 0 17px}
-.category-list{
-  display:flex;gap:9px;overflow-x:auto;padding:3px 2px 13px;
-  scrollbar-width:thin;
-}
+.count{font-size:11px;background:#252530;color:#ccc;border-radius:20px;padding:5px 9px}
+.section-sub{font-size:13px;color:var(--muted);margin:0 0 16px}
+.category-list{display:flex;gap:8px;overflow-x:auto;padding:3px 2px 12px}
 .category-btn{
-  flex:none;border:1px solid #33333e;background:#17171f;
-  color:#d5d5df;border-radius:7px;padding:9px 15px;
+  flex:none;border:1px solid #343440;background:#17171f;color:#ddd;
+  border-radius:7px;padding:9px 14px;
 }
 .category-btn.active,.category-btn:hover{background:var(--red);border-color:var(--red);color:white}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
 .channel-card{
-  min-width:0;overflow:hidden;background:#15151d;
-  border:1px solid #2b2b35;border-radius:10px;cursor:pointer;
-  transition:transform .16s,border-color .16s;
+  min-width:0;overflow:hidden;background:var(--panel);border:1px solid #2b2b36;
+  border-radius:10px;cursor:pointer;transition:transform .16s,border-color .16s;
 }
-.channel-card:hover,.channel-card:focus-visible{
-  transform:translateY(-3px);border-color:#a13a45;
-}
+.channel-card:hover,.channel-card:focus-visible{transform:translateY(-3px);border-color:#b23b45}
 .card-art{
-  height:115px;position:relative;display:grid;place-items:center;
-  overflow:hidden;background:
-  radial-gradient(circle at 70% 20%,#68242e,#29202d 47%,#14141d);
+  height:112px;position:relative;display:grid;place-items:center;overflow:hidden;
+  background:radial-gradient(circle at 70% 20%,#68242e,#29202d 48%,#14141d);
 }
-.card-art img{width:68px;height:68px;object-fit:contain;position:relative;z-index:1}
+.card-art img{width:67px;height:67px;object-fit:contain;position:relative;z-index:1}
 .fallback-logo{
-  font-size:24px;font-weight:900;background:var(--red);
-  padding:11px;border-radius:10px;max-width:85%;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  max-width:85%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-size:23px;font-weight:900;background:var(--red);padding:11px;border-radius:9px;
 }
 .live-pill{
-  position:absolute;top:9px;left:9px;z-index:2;
-  background:var(--red);border-radius:4px;padding:4px 6px;
-  font-size:9px;font-weight:900;letter-spacing:1px;
+  position:absolute;top:9px;left:9px;z-index:2;background:var(--red);
+  border-radius:4px;padding:4px 6px;font-size:9px;font-weight:900;
 }
-.card-info{padding:12px}
+.card-info{padding:11px}
 .card-title{font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card-category{font-size:11px;color:var(--muted);margin-top:6px}
-.card-bottom{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:13px}
-.watch-text{font-size:10px;color:#a4a4b3}
+.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:12px}
+.watch-text{font-size:10px;color:#9999a8}
 .card-play{border:0;border-radius:5px;background:#30303b;color:white;padding:7px 10px;font-size:11px;font-weight:800}
 .card-play:hover{background:var(--red)}
-.empty{
-  grid-column:1/-1;padding:28px 14px;border:1px dashed #393944;
-  color:var(--muted);text-align:center;border-radius:10px;
-}
-footer{border-top:1px solid var(--line);padding:22px 30px;color:#777784;font-size:11px}
+.empty{grid-column:1/-1;padding:27px 12px;border:1px dashed #393944;border-radius:10px;color:var(--muted);text-align:center}
 
-/* MOBILE */
-.mobile-brand,.bottom-nav{display:none}
+/* VIDEO PLAYER */
+.player-box{
+  display:none;margin:20px 0 28px;padding:14px;background:#111117;
+  border:1px solid #33333e;border-radius:12px;scroll-margin-top:80px;
+}
+.player-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.player-head strong{flex:1;min-width:0;overflow-wrap:anywhere;font-size:16px}
+.live-label{background:var(--red);font-size:10px;font-weight:900;padding:5px 7px;border-radius:4px}
+#player{display:block;width:100%;max-height:65vh;aspect-ratio:16/9;background:#000;border-radius:8px}
+.player-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:13px}
+.player-actions button{
+  background:#252530;color:white;border:1px solid #3b3b47;
+  border-radius:7px;padding:11px 13px;font-size:12px;font-weight:800;
+}
+.player-actions button:hover,.player-actions button:focus{background:var(--red)}
+.volume-row{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:12px;color:#ddd}
+#volumeSlider{flex:1;min-width:50px;accent-color:var(--red)}
+#volumeValue{min-width:36px;text-align:right}
+.player-tip{font-size:11px;color:#898997;margin:10px 0 0;line-height:1.6}
+
+footer{border-top:1px solid var(--line);padding:20px 28px;color:#777784;font-size:11px}
+.bottom-nav{display:none}
 
 @media(max-width:760px){
   :root{--sidebar:0px}
   .sidebar{display:none}
-  .main{margin-left:0;padding-bottom:70px}
-  .topbar{height:61px;padding:0 14px;gap:10px}
-  .mobile-brand{display:flex;align-items:center;gap:8px;font-weight:900;color:var(--red);font-size:21px}
-  .mobile-brand .brand-icon{width:31px;height:31px;font-size:15px;border-radius:8px}
+  .main{margin-left:0;padding-bottom:75px}
+  .topbar{height:60px;padding:0 12px;gap:9px}
+  .mobile-brand{display:flex;align-items:center;gap:7px;color:var(--red);font-weight:900;font-size:20px}
+  .mobile-brand .brand-icon{width:30px;height:30px;font-size:14px}
   .top-title{display:none}
   .search{width:auto;flex:1}
-  .search input{font-size:13px;padding:10px 0}
+  .search input{font-size:12px;padding:10px 0}
   .refresh{padding:9px 10px}
-  .hero{min-height:310px;padding:28px 20px}
-  .hero:before{right:-100px;top:10%;width:220px;height:220px}
-  .hero h1{font-size:clamp(38px,10vw,54px)}
+  .hero{min-height:300px;padding:25px 18px}
+  .hero:before{right:-105px;top:10%;width:215px;height:215px}
+  .hero h1{font-size:clamp(37px,10vw,53px)}
   .hero p{font-size:13px}
-  .content{padding:8px 14px 35px}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .card-art{height:100px}
-  .card-art img{width:55px;height:55px}
-  .card-info{padding:10px}
+  .content{padding:8px 13px 30px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .card-art{height:94px}
+  .card-art img{width:53px;height:53px}
+  .card-info{padding:9px}
   .card-title{font-size:12px}
   .watch-text{display:none}
-  .card-play{padding:7px 8px}
+  .card-play{padding:8px}
   .section h2{font-size:19px}
   .player-box{padding:9px}
-  .player-head strong{font-size:14px}
-  footer{padding:18px 14px}
+  .player-head strong{font-size:13px}
+  .player-actions{gap:7px}
+  .player-actions button{flex:1 1 28%;padding:12px 5px;font-size:11px}
+  .volume-row{gap:7px}
+  footer{padding:18px 13px}
   .bottom-nav{
-    position:fixed;bottom:0;left:0;right:0;z-index:100;
+    position:fixed;left:0;right:0;bottom:0;z-index:100;
     display:flex;justify-content:space-around;align-items:center;
-    padding:9px 4px calc(9px + env(safe-area-inset-bottom));
-    background:#101016f5;border-top:1px solid #30303b;
+    padding:8px 3px calc(8px + env(safe-area-inset-bottom));
+    background:#101016f7;border-top:1px solid #30303b;
   }
-  .bottom-nav a{
-    display:flex;flex-direction:column;align-items:center;gap:4px;
-    color:#a6a6b4;font-size:10px;min-width:50px;
-  }
+  .bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:#aaaab7;font-size:10px;min-width:48px}
   .bottom-nav .ico{font-size:20px}
   .bottom-nav a.active{color:#ff4b55}
 }
 @media(max-width:360px){
-  .hero{min-height:285px}
-  .hero h1{font-size:35px}
   .grid{gap:7px}
-  .card-art{height:86px}
-  .card-bottom{margin-top:9px}
+  .card-art{height:82px}
+  .hero h1{font-size:35px}
 }
 @media(min-width:761px) and (max-width:1000px){
-  :root{--sidebar:185px}
-  .hero{padding:30px;min-height:330px}
-  .content{padding-left:20px;padding-right:20px}
-  .grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px}
+  :root{--sidebar:180px}
+  .hero{padding:28px;min-height:325px}
+  .content{padding-left:19px;padding-right:19px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px}
 }
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
-}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 
 <body>
 <div class="app">
 
-  <aside class="sidebar">
-    <a class="brand" href="#home">
-      <span class="brand-icon">▶</span><span>CSTV</span>
-    </a>
-
-    <div class="nav-label">MENU</div>
-    <nav class="nav">
-      <a href="#home" class="active"><span class="ico">⌂</span>Home</a>
-      <a href="#channels-section" data-filter="All"><span class="ico">▣</span>Live TV</a>
-      <a href="#channels-section" data-filter="Sports"><span class="ico">⚽</span>Sports</a>
-      <a href="#channels-section" data-filter="Movies"><span class="ico">▤</span>Movies</a>
-      <a href="#search" id="searchNav"><span class="ico">⌕</span>Search</a>
-      <a href="#settings"><span class="ico">⚙</span>Settings</a>
-    </nav>
-
-    <div class="sidebar-bottom">
-      <div class="connection">
-        <div><span class="dot" id="sideDot"></span><span id="sideStatus">Connecting...</span></div>
-        <div id="sideCount">Loading channels</div>
-        <div style="margin-top:7px;color:#777784">Stream Your World</div>
-      </div>
-    </div>
-  </aside>
-
-  <div class="main">
-    <header class="topbar">
-      <a class="mobile-brand" href="#home">
-        <span class="brand-icon">▶</span>CSTV
-      </a>
-      <div class="top-title" id="pageTitle">Discover</div>
-      <label class="search">
-        <span>⌕</span>
-        <input id="search" type="search" placeholder="Search channels..." aria-label="Search channels">
-      </label>
-      <button class="refresh" id="refreshBtn" type="button" title="Refresh channel list">↻</button>
-    </header>
-
-    <section class="hero" id="home">
-      <div class="hero-content">
-        <div class="eyebrow">YOUR ENTERTAINMENT HUB</div>
-        <h1>STREAM YOUR<br><span>WORLD.</span></h1>
-        <p>তোমার পছন্দের Live TV, Sports এবং আরও অনেক কিছু—এক জায়গায়। পছন্দের চ্যানেল বেছে নাও, উপভোগ করো।</p>
-        <div class="hero-actions">
-          <button class="primary" id="browseBtn">▶ &nbsp; Watch Live</button>
-          <button class="secondary" id="heroRefresh">↻ &nbsp; Refresh</button>
-        </div>
-      </div>
-    </section>
-
-    <main class="content">
-      <div class="notice" id="notice" role="status"></div>
-
-      <section class="player-box" id="playerBox" aria-label="Video player">
-        <div class="player-head">
-          <span class="live-label">LIVE</span>
-          <strong id="playingName">Now Playing</strong>
-          <button class="close-btn" id="closePlayer">✕</button>
-        </div>
-        <video id="player" controls autoplay playsinline></video>
-      </section>
-
-      <section class="section" id="channels-section">
-        <div class="section-head">
-          <h2 id="sectionTitle">Live Channels</h2>
-          <span class="count" id="channelCount">Loading...</span>
-        </div>
-        <p class="section-sub" id="sectionSub">তোমার পছন্দের চ্যানেল বেছে নাও</p>
-        <div class="category-list" id="categories"></div>
-        <div class="grid" id="channels">
-          <div class="empty">Loading channels...</div>
-        </div>
-      </section>
-
-      <section class="section" id="settings">
-        <div class="section-head"><h2>Settings</h2></div>
-        <p class="section-sub">CSTV channel list</p>
-        <button class="secondary" id="settingsRefresh">↻ Refresh channel list</button>
-      </section>
-    </main>
-
-    <footer>© CSTV · Stream Your World</footer>
-  </div>
-
-  <nav class="bottom-nav" aria-label="Mobile navigation">
+<aside class="sidebar">
+  <a class="brand" href="#home"><span class="brand-icon">▶</span>CSTV</a>
+  <div class="nav-label">MAIN MENU</div>
+  <nav class="nav">
     <a href="#home" class="active"><span class="ico">⌂</span>Home</a>
     <a href="#channels-section" data-filter="All"><span class="ico">▣</span>Live TV</a>
     <a href="#channels-section" data-filter="Sports"><span class="ico">⚽</span>Sports</a>
-    <a href="#search" id="mobileSearch"><span class="ico">⌕</span>Search</a>
+    <a href="#channels-section" data-filter="Movies"><span class="ico">▤</span>Movies</a>
+    <a href="#search" id="searchNav"><span class="ico">⌕</span>Search</a>
+    <a href="#settings"><span class="ico">⚙</span>Settings</a>
   </nav>
+  <div class="sidebar-bottom">
+    <div class="connection">
+      <div><span class="dot" id="sideDot"></span><span id="sideStatus">Connecting...</span></div>
+      <div id="sideCount">Loading channels</div>
+      <div style="color:#777;margin-top:5px">Stream Your World</div>
+    </div>
+  </div>
+</aside>
+
+<div class="main">
+  <header class="topbar">
+    <a class="mobile-brand" href="#home"><span class="brand-icon">▶</span>CSTV</a>
+    <div class="top-title" id="pageTitle">Discover</div>
+    <label class="search"><span>⌕</span>
+      <input id="search" type="search" placeholder="Search channels..." aria-label="Search channels">
+    </label>
+    <button class="refresh" id="refreshBtn" type="button" title="Refresh channels">↻</button>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="eyebrow">YOUR ENTERTAINMENT HUB</div>
+      <h1>STREAM YOUR<br><span>WORLD.</span></h1>
+      <p>তোমার পছন্দের Live TV, Cricket ও Football—সব এক জায়গায়। চ্যানেল বেছে নাও, উপভোগ করো।</p>
+      <div class="hero-actions">
+        <button class="primary" id="browseBtn">▶ &nbsp; Watch Live</button>
+        <button class="secondary" id="heroRefresh">↻ &nbsp; Refresh</button>
+      </div>
+    </div>
+  </section>
+
+  <main class="content">
+    <div class="notice" id="notice" role="status"></div>
+
+    <section class="player-box" id="playerBox" aria-label="Video player">
+      <div class="player-head">
+        <span class="live-label">● LIVE</span>
+        <strong id="playingName">Now Playing</strong>
+        <button class="close-btn" id="closePlayer" type="button">✕ Close</button>
+      </div>
+
+      <video id="player" controls autoplay playsinline></video>
+
+      <div class="player-actions">
+        <button id="prevChannel" type="button">⏮ Previous</button>
+        <button id="togglePlay" type="button">⏸ Pause</button>
+        <button id="mutePlayer" type="button">🔊 Mute</button>
+        <button id="nextChannel" type="button">Next ⏭</button>
+        <button id="fullScreen" type="button">⛶ Fullscreen</button>
+      </div>
+
+      <div class="volume-row">
+        <span>🔉 Volume</span>
+        <input id="volumeSlider" type="range" min="0" max="100" value="100" aria-label="Volume">
+        <span id="volumeValue">100%</span>
+      </div>
+      <p class="player-tip">Live stream-এ progress/seek control সবসময় কাজ নাও করতে পারে। স্ট্রিমের ধরন ও ব্রাউজারের সমর্থনের ওপর playback নির্ভর করে।</p>
+    </section>
+
+    <section class="section" id="channels-section">
+      <div class="section-head">
+        <h2 id="sectionTitle">Live Channels</h2>
+        <span class="count" id="channelCount">Loading...</span>
+      </div>
+      <p class="section-sub">তোমার পছন্দের চ্যানেল বেছে নাও</p>
+      <div class="category-list" id="categories"></div>
+      <div class="grid" id="channels"><div class="empty">Loading channels...</div></div>
+    </section>
+
+    <section class="section" id="settings">
+      <div class="section-head"><h2>Settings</h2></div>
+      <p class="section-sub">CSTV channel list refresh করো</p>
+      <button class="secondary" id="settingsRefresh" type="button">↻ Refresh Channel List</button>
+    </section>
+  </main>
+
+  <footer>© CSTV · Stream Your World</footer>
+</div>
+
+<nav class="bottom-nav" aria-label="Mobile navigation">
+  <a href="#home" class="active"><span class="ico">⌂</span>Home</a>
+  <a href="#channels-section" data-filter="All"><span class="ico">▣</span>Live TV</a>
+  <a href="#channels-section" data-filter="Sports"><span class="ico">⚽</span>Sports</a>
+  <a href="#search" id="mobileSearch"><span class="ico">⌕</span>Search</a>
+</nav>
 </div>
 
 <script>
@@ -369,84 +327,82 @@ footer{border-top:1px solid var(--line);padding:22px 30px;color:#777784;font-siz
 
 let channels = [];
 let activeCategory = "All";
+let currentChannelIndex = -1;
+let loadRequest = 0;
 
-/* Existing CSTV auto-updating playlist source */
 const playlistURL = "https://cs87998799.github.io/cstv/channels.json";
-
 const $ = id => document.getElementById(id);
 const searchInput = $("search");
+const player = $("player");
 
-function safeText(value) {
+function safeText(value){
   return String(value == null ? "" : value);
 }
 
-function showNotice(message) {
+function showNotice(message){
   $("notice").textContent = message;
   $("notice").style.display = "block";
 }
 
-async function loadChannels() {
+function clearNotice(){
+  $("notice").style.display = "none";
+}
+
+async function loadChannels(){
+  const requestId = ++loadRequest;
   $("refreshBtn").disabled = true;
   $("sideStatus").textContent = "Updating...";
 
-  try {
-    const response = await fetch(
-      playlistURL + "?t=" + Date.now(),
-      {cache:"no-store"}
-    );
-
-    if (!response.ok) throw new Error("HTTP " + response.status);
+  try{
+    const response = await fetch(playlistURL + "?t=" + Date.now(), {
+      cache:"no-store"
+    });
+    if(!response.ok) throw new Error("HTTP " + response.status);
 
     const data = await response.json();
-    if (!data || !Array.isArray(data.channels)) {
+    if(!data || !Array.isArray(data.channels)){
       throw new Error("Invalid channel list");
     }
+    if(requestId !== loadRequest) return;
 
     channels = data.channels;
     $("sideStatus").textContent = "Channel list ready";
     $("sideDot").className = "dot ok";
     $("sideCount").textContent = channels.length + " channels";
-    $("notice").style.display = "none";
-
+    clearNotice();
     renderCategories();
     render();
-  } catch (error) {
+  }catch(error){
+    if(requestId !== loadRequest) return;
     $("sideStatus").textContent = "Offline";
     $("sideDot").className = "dot bad";
     showNotice("চ্যানেল লিস্ট লোড হয়নি। ইন্টারনেট চেক করে Refresh চাপো।");
-
-    if (!channels.length) {
+    if(!channels.length){
       $("channels").replaceChildren();
       const empty = document.createElement("div");
       empty.className = "empty";
       empty.textContent = "Channel list could not be loaded.";
       $("channels").appendChild(empty);
     }
-  } finally {
-    $("refreshBtn").disabled = false;
+  }finally{
+    if(requestId === loadRequest) $("refreshBtn").disabled = false;
   }
 }
 
-function getCategories() {
-  return [
-    "All",
-    ...new Set(
-      channels
-        .map(c => safeText(c.category).trim())
-        .filter(Boolean)
-    )
-  ];
+function getCategories(){
+  return ["All", ...new Set(
+    channels.map(c => safeText(c.category).trim()).filter(Boolean)
+  )];
 }
 
-function renderCategories() {
+function renderCategories(){
   const root = $("categories");
   root.replaceChildren();
 
   getCategories().forEach(category => {
     const button = document.createElement("button");
     button.type = "button";
-    button.className =
-      "category-btn" + (category === activeCategory ? " active" : "");
+    button.className = "category-btn" + (category === activeCategory ? " active" : "");
     button.textContent = category;
     button.setAttribute("aria-pressed", String(category === activeCategory));
 
@@ -455,37 +411,34 @@ function renderCategories() {
       renderCategories();
       render();
     });
-
     root.appendChild(button);
   });
 }
 
-function render() {
+function render(){
   const query = searchInput.value.trim().toLowerCase();
 
   const list = channels.filter(channel => {
     const name = safeText(channel.name).toLowerCase();
     const category = safeText(channel.category).toLowerCase();
-
-    return (
-      (name.includes(query) || category.includes(query)) &&
-      (activeCategory === "All" ||
-       safeText(channel.category).trim() === activeCategory)
-    );
+    const matchesQuery = name.includes(query) || category.includes(query);
+    const matchesCategory = activeCategory === "All" ||
+      safeText(channel.category).trim() === activeCategory;
+    return matchesQuery && matchesCategory;
   });
 
-  $("channelCount").textContent =
-    list.length + (list.length === 1 ? " channel" : " channels");
+  $("channelCount").textContent = list.length +
+    (list.length === 1 ? " channel" : " channels");
   $("sideCount").textContent = channels.length + " channels";
 
   const root = $("channels");
   root.replaceChildren();
 
-  if (!list.length) {
+  if(!list.length){
     const empty = document.createElement("div");
     empty.className = "empty";
     empty.textContent = channels.length
-      ? "কোনো চ্যানেল পাওয়া যায়নি। অন্য নামে Search করো।"
+      ? "কোনো চ্যানেল পাওয়া যায়নি। অন্য Search বা Category চেষ্টা করো।"
       : "Loading channels...";
     root.appendChild(empty);
     return;
@@ -507,18 +460,17 @@ function render() {
     pill.textContent = "● LIVE";
     art.appendChild(pill);
 
-    if (channel.logo) {
+    if(channel.logo){
       const img = document.createElement("img");
       img.src = channel.logo;
       img.alt = name + " logo";
       img.loading = "lazy";
-
       img.onerror = () => {
         img.remove();
         addFallback(art, name);
       };
       art.appendChild(img);
-    } else {
+    }else{
       addFallback(art, name);
     }
 
@@ -541,23 +493,23 @@ function render() {
     hint.textContent = "Watch now";
 
     const play = document.createElement("button");
-    play.type = "button";
     play.className = "card-play";
+    play.type = "button";
     play.textContent = "▶ Play";
     play.addEventListener("click", event => {
       event.stopPropagation();
-      playChannel(channel.url, name);
+      playChannel(channel);
     });
 
     bottom.append(hint, play);
     info.append(title, category, bottom);
     card.append(art, info);
 
-    card.addEventListener("click", () => playChannel(channel.url, name));
+    card.addEventListener("click", () => playChannel(channel));
     card.addEventListener("keydown", event => {
-      if (event.key === "Enter" || event.key === " ") {
+      if(event.key === "Enter" || event.key === " "){
         event.preventDefault();
-        playChannel(channel.url, name);
+        playChannel(channel);
       }
     });
 
@@ -565,69 +517,145 @@ function render() {
   });
 }
 
-function addFallback(container, name) {
+function addFallback(container, name){
   const logo = document.createElement("span");
   logo.className = "fallback-logo";
   logo.textContent = name.slice(0, 8);
   container.appendChild(logo);
 }
 
-/* Preserve the existing direct video playback behaviour */
-function playChannel(url, name) {
-  if (!url) {
+function updatePlayerButtons(){
+  $("togglePlay").textContent = player.paused ? "▶ Play" : "⏸ Pause";
+  $("mutePlayer").textContent = player.muted || player.volume === 0
+    ? "🔇 Unmute" : "🔊 Mute";
+  $("volumeSlider").value = player.muted ? 0 : Math.round(player.volume * 100);
+  $("volumeValue").textContent = $("volumeSlider").value + "%";
+}
+
+function playChannel(channel){
+  if(!channel || !channel.url){
     showNotice("এই চ্যানেলের Stream URL পাওয়া যায়নি।");
     return;
   }
 
-  const player = $("player");
+  currentChannelIndex = channels.indexOf(channel);
   $("playerBox").style.display = "block";
-  $("playingName").textContent = safeText(name);
-  $("notice").style.display = "none";
+  $("playingName").textContent = safeText(channel.name || "Channel");
+  clearNotice();
 
   player.pause();
   player.removeAttribute("src");
   player.load();
-  player.src = url;
+  player.src = channel.url;
+  player.muted = false;
+  player.volume = Number($("volumeSlider").value) / 100;
 
+  updatePlayerButtons();
   player.play().catch(() => {
-    showNotice(
-      "এই স্ট্রিমটি ব্রাউজারে সরাসরি নাও চলতে পারে। অন্য একটি চ্যানেল চেষ্টা করো।"
-    );
+    showNotice("স্ট্রিম চালু হয়নি। URL, ইন্টারনেট বা ব্রাউজারের সমর্থন পরীক্ষা করো।");
+    updatePlayerButtons();
   });
 
-  $("playerBox").scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
+  $("playerBox").scrollIntoView({behavior:"smooth", block:"start"});
 }
 
-function stopPlayer() {
-  const player = $("player");
+function changeChannel(step){
+  if(!channels.length){
+    showNotice("Channel list এখনও লোড হয়নি।");
+    return;
+  }
+
+  let index = currentChannelIndex;
+  if(index < 0) index = step > 0 ? -1 : 0;
+
+  for(let i = 0; i < channels.length; i++){
+    index = (index + step + channels.length) % channels.length;
+    if(channels[index] && channels[index].url){
+      playChannel(channels[index]);
+      return;
+    }
+  }
+  showNotice("কোনো চ্যানেলে Stream URL পাওয়া যায়নি।");
+}
+
+function stopPlayer(){
   player.pause();
   player.removeAttribute("src");
   player.load();
   $("playerBox").style.display = "none";
+  currentChannelIndex = -1;
 }
 
-function chooseCategory(category) {
-  activeCategory = category;
-  $("pageTitle").textContent =
-    category === "All" ? "Live TV" : category;
-  $("sectionTitle").textContent =
-    category === "All" ? "Live Channels" : category;
+$("prevChannel").addEventListener("click", () => changeChannel(-1));
+$("nextChannel").addEventListener("click", () => changeChannel(1));
+
+$("togglePlay").addEventListener("click", () => {
+  if(player.paused){
+    player.play().catch(() => showNotice("Playback চালু করা যায়নি।"));
+  }else{
+    player.pause();
+  }
+});
+
+$("mutePlayer").addEventListener("click", () => {
+  player.muted = !player.muted;
+  updatePlayerButtons();
+});
+
+$("volumeSlider").addEventListener("input", event => {
+  const value = Number(event.target.value);
+  player.volume = value / 100;
+  player.muted = value === 0;
+  updatePlayerButtons();
+});
+
+$("fullScreen").addEventListener("click", async () => {
+  try{
+    if(document.fullscreenElement){
+      await document.exitFullscreen();
+    }else if(player.requestFullscreen){
+      await player.requestFullscreen();
+    }else if(player.webkitEnterFullscreen){
+      player.webkitEnterFullscreen();
+    }else{
+      showNotice("এই ব্রাউজারে Fullscreen সমর্থিত নয়।");
+    }
+  }catch(error){
+    showNotice("Fullscreen চালু করা যায়নি।");
+  }
+});
+
+player.addEventListener("play", updatePlayerButtons);
+player.addEventListener("pause", updatePlayerButtons);
+player.addEventListener("volumechange", updatePlayerButtons);
+
+$("closePlayer").addEventListener("click", stopPlayer);
+$("refreshBtn").addEventListener("click", loadChannels);
+$("heroRefresh").addEventListener("click", loadChannels);
+$("settingsRefresh").addEventListener("click", loadChannels);
+
+$("browseBtn").addEventListener("click", () => {
+  $("channels-section").scrollIntoView({behavior:"smooth", block:"start"});
+});
+
+function chooseCategory(requested){
+  if(requested === "All"){
+    activeCategory = "All";
+  }else{
+    const match = getCategories().find(
+      category => category.toLowerCase() === requested.toLowerCase()
+    );
+    activeCategory = match || requested;
+  }
+
+  $("pageTitle").textContent = activeCategory === "All" ? "Live TV" : activeCategory;
+  $("sectionTitle").textContent = activeCategory === "All" ? "Live Channels" : activeCategory;
   renderCategories();
   render();
-
-  $("channels-section").scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
 }
 
 document.querySelectorAll("[data-filter]").forEach(link => {
-  link.addEventListener("click", () => {
-    chooseCategory(link.dataset.filter);
-  });
+  link.addEventListener("click", () => chooseCategory(link.dataset.filter));
 });
 
 document.querySelectorAll(".nav a, .bottom-nav a").forEach(link => {
@@ -638,29 +666,16 @@ document.querySelectorAll(".nav a, .bottom-nav a").forEach(link => {
   });
 });
 
-searchInput.addEventListener("input", render);
-
-function openSearch() {
+function openSearch(){
   searchInput.focus();
-  if (window.matchMedia("(max-width:760px)").matches) {
+  if(window.matchMedia("(max-width:760px)").matches){
     window.scrollTo({top:0, behavior:"smooth"});
   }
 }
 
 $("searchNav").addEventListener("click", openSearch);
 $("mobileSearch").addEventListener("click", openSearch);
-
-$("closePlayer").addEventListener("click", stopPlayer);
-$("refreshBtn").addEventListener("click", loadChannels);
-$("heroRefresh").addEventListener("click", loadChannels);
-$("settingsRefresh").addEventListener("click", loadChannels);
-
-$("browseBtn").addEventListener("click", () => {
-  $("channels-section").scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
-});
+searchInput.addEventListener("input", render);
 
 loadChannels();
 </script>
