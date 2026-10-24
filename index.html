@@ -30,7 +30,6 @@
     }
     .snap-x-mandatory {
       scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
     }
     .snap-center-item {
       scroll-snap-align: center;
@@ -68,22 +67,21 @@
       background: radial-gradient(circle at 50% 35%, #0e4f3c 0%, #07231e 48%, #0b0714 100%);
     }
     .channel-ring {
-      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
-      will-change: transform;
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
     }
     .channel-ring:active {
-      transform: scale(0.90);
+      transform: scale(0.92);
     }
     .channel-ring:hover {
-      transform: translateY(-4px) scale(1.06);
+      transform: translateY(-3px) scale(1.04);
     }
     .player-popup-drawer {
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
     }
     .auto-hide-hidden {
       opacity: 0 !important;
       pointer-events: none !important;
-      transform: translateY(20px);
+      transform: translateY(16px);
     }
     .center-controls-hidden {
       opacity: 0 !important;
@@ -97,15 +95,16 @@
     .splash-animate {
       animation: splashScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    /* Smooth Modern Glassmorphism */
-    .glass-panel {
-      background: rgba(18, 11, 34, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+    @keyframes spinLoader {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .custom-spinner {
+      animation: spinLoader 0.9s linear infinite;
     }
   </style>
 </head>
-<body class="min-h-screen bg-[#0b0714] text-white flex flex-col justify-between pb-24">
+<body class="min-h-screen bg-[#0b0714] text-white flex flex-col justify-between pb-20">
 
   <!-- SPLASH / WELCOME SCREEN -->
   <div id="splashScreen" class="fixed inset-0 z-50 bg-[#0b0714] flex flex-col items-center justify-center transition-opacity duration-500">
@@ -116,10 +115,10 @@
         </svg>
       </div>
       <h1 class="text-3xl sm:text-4xl font-extrabold tracking-wider bg-gradient-to-r from-pink-400 via-fuchsia-300 to-white bg-clip-text text-transparent">CS Tv</h1>
-      <p class="text-xs sm:text-sm text-slate-300 mt-2 font-medium">Ultimate Live TV & Sports Streaming</p>
+      <p class="text-xs sm:text-sm text-slate-300 mt-2 font-medium">Welcome to Live TV & Sports Streaming</p>
       <div class="mt-6 flex items-center gap-1.5">
         <span class="w-2 h-2 rounded-full bg-pink-500 live-dot"></span>
-        <span class="text-[11px] text-pink-400 font-semibold tracking-wider">LOADING CHANNELS...</span>
+        <span class="text-[11px] text-pink-400 font-semibold tracking-wider">LOADING STREAM...</span>
       </div>
     </div>
   </div>
@@ -153,13 +152,13 @@
       </div>
     </div>
 
-    <!-- Dynamic Horizontal Category Bar -->
     <nav id="topCategoryNav" class="max-w-5xl mx-auto px-4 py-2 flex items-center gap-6 overflow-x-auto no-scrollbar text-sm font-medium">
       <button data-cat="all" class="cat-tab text-pink-400 font-bold border-b-2 border-pink-500 pb-1 whitespace-nowrap transition">Live TV</button>
       <button data-cat="Sports" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">Sports</button>
       <button data-cat="Drama" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">Drama</button>
       <button data-cat="Movies" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">Movies</button>
       <button data-cat="News" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">News</button>
+      <button data-cat="Web Series" class="cat-tab text-slate-300 hover:text-white pb-1 whitespace-nowrap transition">Web Series</button>
     </nav>
   </header>
 
@@ -172,19 +171,32 @@
       <!-- HERO SLIDER -->
       <div class="relative overflow-hidden select-none">
         <div id="heroTrack" class="flex overflow-x-auto snap-x-mandatory no-scrollbar scroll-smooth">
+          
           <!-- Slide 1 -->
           <div class="min-w-full snap-center-item hero-bg-1 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
             <div class="max-w-md mx-auto flex flex-col items-center">
               <h2 class="text-3xl sm:text-4xl font-extrabold text-amber-400 drop-shadow-[0_2px_10px_rgba(251,191,36,0.6)] tracking-tight">১০০০+</h2>
               <p class="text-2xl sm:text-3xl font-extrabold text-white mt-0.5 drop-shadow">লাইভ চ্যানেল ও কনটেন্ট</p>
+              <p class="text-xl sm:text-2xl font-extrabold text-amber-300 mt-0.5">নতুন যোগ হলো!</p>
               <div class="mt-3 px-5 py-2 rounded-xl border-2 border-pink-400/90 bg-purple-950/60 neon-box">
-                <p class="text-xs sm:text-sm font-semibold text-white">এখন আরো স্মুথ স্ট্রিমিং <span class="text-pink-400 font-bold">CS Tv -তে</span></p>
+                <p class="text-xs sm:text-sm font-semibold text-white">এখন আরো বেশি দেখুন <span class="text-pink-400 font-bold">CS Tv -তে</span></p>
               </div>
-              <button data-play-index="0" class="hero-watch-btn mt-5 toffee-gradient text-white text-xs font-bold px-5 py-2.5 rounded-full shadow-lg flex items-center gap-1.5 active:scale-95 transition">
-                <span>▶ এখনই দেখুন</span>
-              </button>
+              <div class="mt-5 w-48 h-40 sm:w-56 sm:h-44 rounded-2xl bg-gradient-to-b from-pink-500/30 via-purple-600/20 to-transparent border border-pink-500/30 flex flex-col items-center justify-center p-3 relative overflow-hidden">
+                <div id="heroMontageGrid" class="grid grid-cols-3 gap-1.5 w-full opacity-90 transform -rotate-6 scale-105">
+                  <div class="h-10 rounded bg-gradient-to-br from-rose-500 to-orange-500 flex items-center justify-center text-[10px] font-bold">LIVE</div>
+                  <div class="h-10 rounded bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-[10px] font-bold">SPORTS</div>
+                  <div class="h-10 rounded bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-[10px] font-bold">CRICKET</div>
+                  <div class="h-10 rounded bg-gradient-to-br from-amber-500 to-red-600 flex items-center justify-center text-[10px] font-bold">DRAMA</div>
+                  <div class="h-10 rounded bg-gradient-to-br from-fuchsia-500 to-purple-800 flex items-center justify-center text-[10px] font-bold">MOVIES</div>
+                  <div class="h-10 rounded bg-gradient-to-br from-cyan-500 to-blue-700 flex items-center justify-center text-[10px] font-bold">NEWS</div>
+                </div>
+                <button data-play-index="0" class="hero-watch-btn mt-3 toffee-gradient text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
+                  <span>▶ এখনই দেখুন</span>
+                </button>
+              </div>
             </div>
           </div>
+
           <!-- Slide 2 -->
           <div class="min-w-full snap-center-item hero-bg-2 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
             <div class="max-w-md mx-auto flex flex-col items-center">
@@ -192,21 +204,40 @@
                 <span class="w-2 h-2 rounded-full bg-white live-dot"></span> CS Tv LIVE STREAM
               </span>
               <h2 id="heroSlide2Title" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Live Sports & TV</h2>
-              <button data-play-index="0" class="hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg active:scale-95 transition">
+              <p id="heroSlide2Sub" class="text-xs sm:text-sm text-sky-200 mt-1">Streaming directly from channels.json</p>
+              <div id="heroSlide2Card" class="mt-4 w-64 h-36 rounded-2xl bg-gradient-to-r from-blue-900/80 via-slate-900 to-rose-900/80 border border-sky-400/30 flex items-center justify-around p-4 shadow-xl"></div>
+              <button data-play-index="0" class="hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
                 ▶ Watch Live Stream
               </button>
             </div>
           </div>
+
+          <!-- Slide 3 -->
+          <div class="min-w-full snap-center-item hero-bg-4 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
+            <div class="max-w-md mx-auto flex flex-col items-center">
+              <span class="px-3 py-0.5 rounded-full bg-emerald-600 text-white text-[11px] font-bold tracking-wider uppercase">CS Tv EXCLUSIVE</span>
+              <h2 id="heroSlide3Title" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Full HD Channels</h2>
+              <p id="heroSlide3Sub" class="text-xs sm:text-sm text-emerald-200 mt-1">Zero Buffering • Non-Stop Entertainment</p>
+              <div id="heroSlide3Card" class="mt-4 w-64 h-36 rounded-2xl bg-gradient-to-r from-emerald-900/80 via-slate-900 to-amber-900/80 border border-emerald-400/30 flex items-center justify-around p-4 shadow-xl"></div>
+              <button data-play-index="1" class="hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
+                ▶ Watch Channel Now
+              </button>
+            </div>
+          </div>
+
         </div>
+
         <button id="heroPrevBtn" aria-label="Previous Slide" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/15">‹</button>
         <button id="heroNextBtn" aria-label="Next Slide" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/15">›</button>
+
         <div id="heroDots" class="flex items-center justify-center gap-2 mt-1">
           <button data-slide="0" class="hero-dot w-5 h-2 rounded-full bg-white transition-all"></button>
           <button data-slide="1" class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-all"></button>
+          <button data-slide="2" class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-all"></button>
         </div>
       </div>
 
-      <!-- HORIZONTAL LIVE TV CHANNELS (SUPER SMOOTH SWIPE) -->
+      <!-- LIVE TV CIRCULAR HORIZONTAL SLIDER -->
       <div class="px-4">
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2">
@@ -218,10 +249,7 @@
             <span>›</span>
           </button>
         </div>
-        <!-- Optimized wrapper for buttery smooth horizontal mobile swiping -->
-        <div class="relative">
-          <div id="liveTvCirclesTrack" class="flex items-center gap-4 overflow-x-auto no-scrollbar snap-x-mandatory py-3 px-1 scroll-smooth"></div>
-        </div>
+        <div id="liveTvCirclesTrack" class="flex items-center gap-4 overflow-x-auto no-scrollbar snap-x-mandatory py-2"></div>
       </div>
 
       <!-- DYNAMIC CATEGORY SECTIONS -->
@@ -233,7 +261,7 @@
           <h3 id="row1Title" class="text-base sm:text-lg font-bold tracking-tight text-white">Featured Sports & Live</h3>
           <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
         </div>
-        <div id="eplRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1 scroll-smooth"></div>
+        <div id="eplRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1"></div>
       </div>
 
       <div class="px-4">
@@ -241,7 +269,7 @@
           <h3 id="row2Title" class="text-base sm:text-lg font-bold tracking-tight text-white">News & Information</h3>
           <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
         </div>
-        <div id="saffRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1 scroll-smooth"></div>
+        <div id="saffRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1"></div>
       </div>
 
       <div class="px-4">
@@ -249,7 +277,7 @@
           <h3 id="row3Title" class="text-base sm:text-lg font-bold tracking-tight text-white">Entertainment, Drama & Movies</h3>
           <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
         </div>
-        <div id="dramaRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1 scroll-smooth"></div>
+        <div id="dramaRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1"></div>
       </div>
 
     </section>
@@ -295,11 +323,11 @@
             <p class="font-bold text-sm text-white">GitHub `channels.json` Data Source</p>
             <p id="jsonSourceUrlText" class="text-xs text-slate-300">Auto-loads `./channels.json`</p>
           </div>
-          <button id="reloadJsonBtn" class="px-3 py-1.5 rounded-lg toffee-gradient text-xs font-bold shadow">↻ Reload</button>
+          <button id="reloadJsonBtn" class="px-3 py-1.5 rounded-lg toffee-gradient text-xs font-bold shadow">↻ Reload JSON</button>
         </div>
         <div class="flex items-center gap-2">
           <input id="customJsonUrlInput" type="text" value="./channels.json" class="flex-1 bg-black/40 border border-white/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-pink-500" />
-          <button id="loadCustomJsonUrlBtn" class="px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-xs font-bold">Load</button>
+          <button id="loadCustomJsonUrlBtn" class="px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-xs font-bold">Load URL</button>
         </div>
       </div>
 
@@ -307,7 +335,7 @@
         <div class="p-4 flex items-center justify-between">
           <div>
             <p class="font-semibold text-sm">Default Video Quality</p>
-            <p class="text-xs text-slate-400">Choose preferred resolution</p>
+            <p class="text-xs text-slate-400">Choose preferred stream resolution</p>
           </div>
           <select id="settingQualitySelect" class="bg-[#181028] border border-white/20 rounded-lg px-3 py-1.5 text-xs font-semibold text-white focus:outline-none">
             <option value="Auto">Auto (Recommended)</option>
@@ -316,15 +344,22 @@
             <option value="480p">480p Data Saver</option>
           </select>
         </div>
+        <div class="p-4 flex items-center justify-between">
+          <div>
+            <p class="font-semibold text-sm">Clear Watch History & Cache</p>
+            <p class="text-xs text-slate-400">Reset saved preferences & recent channels</p>
+          </div>
+          <button id="clearCacheBtn" class="px-3 py-1.5 rounded-lg bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 text-xs font-semibold">Clear Data</button>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ADVANCED MODERN LIVE TV PLAYER MODAL -->
+  <!-- ADVANCED STRONG LIVE TV PLAYER MODAL -->
   <div id="playerModal" class="fixed inset-0 z-50 bg-black/95 hidden flex-col justify-between">
     
-    <!-- Player Top Bar -->
+    <!-- Top Bar -->
     <div id="playerTopBar" class="flex items-center justify-between px-4 py-3 bg-gradient-to-b from-black/90 to-transparent z-20 transition-opacity duration-300">
       <div class="flex items-center gap-3">
         <button id="closePlayerBtn" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-lg font-bold">←</button>
@@ -350,12 +385,18 @@
       </div>
     </div>
 
-    <!-- Center Video Viewport with Modern UI Overlay -->
+    <!-- Center Video Viewport with Strong Player UI -->
     <div id="playerViewport" class="relative flex-1 flex items-center justify-center bg-black overflow-hidden cursor-pointer">
       <video id="liveVideoEl" class="w-full h-full max-h-[78vh] object-contain" autoplay playsinline></video>
       <iframe id="liveIframeEl" class="hidden w-full h-full max-h-[78vh] border-0" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>
 
-      <!-- Modern Center Play/Pause & Channel Switcher Controls -->
+      <!-- Buffer / Loading Spinner Overlay -->
+      <div id="playerLoaderSpinner" class="absolute inset-0 flex flex-col items-center justify-center bg-black/50 pointer-events-none hidden z-10">
+        <div class="w-12 h-12 rounded-full border-4 border-pink-500 border-t-transparent custom-spinner"></div>
+        <p class="text-xs font-semibold text-pink-300 mt-2 tracking-wider">CONNECTING STREAM...</p>
+      </div>
+
+      <!-- Strong Center Overlay Controls (Prev | Play/Pause | Next) -->
       <div id="playerCenterControls" class="absolute inset-0 flex items-center justify-center gap-8 sm:gap-14 bg-black/30 transition-opacity duration-300">
         <button id="playerPrevChannelBtn" title="Previous Channel" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/65 hover:bg-pink-600/90 border border-white/25 text-white flex flex-col items-center justify-center active:scale-90 transition shadow-xl">
           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
@@ -373,7 +414,7 @@
       </div>
 
       <!-- HORIZONTAL CHANNEL POPUP OVERLAY INSIDE PLAYER -->
-      <div id="playerHorizontalPopup" class="player-popup-drawer absolute bottom-3 left-3 right-3 glass-panel border border-pink-500/30 rounded-2xl p-3 z-30 shadow-2xl">
+      <div id="playerHorizontalPopup" class="player-popup-drawer absolute bottom-3 left-3 right-3 bg-[#120b22]/95 backdrop-blur-xl border border-pink-500/30 rounded-2xl p-3 z-30 shadow-2xl">
         <div class="flex items-center justify-between mb-2 px-1">
           <div class="flex items-center gap-2">
             <span class="text-xs font-bold text-pink-400 uppercase tracking-wider">CS Tv Channels</span>
@@ -381,15 +422,22 @@
           </div>
           <button id="hidePopupDrawerBtn" class="text-xs text-slate-300 hover:text-white px-2 py-0.5 rounded bg-white/10">Hide ✕</button>
         </div>
-        <div id="playerPopupTrack" class="flex items-center gap-3 overflow-x-auto no-scrollbar snap-x-mandatory py-1 scroll-smooth"></div>
+        <div id="playerPopupTrack" class="flex items-center gap-3 overflow-x-auto no-scrollbar snap-x-mandatory py-1"></div>
       </div>
     </div>
 
-    <!-- Bottom Player Status & Controls Bar -->
+    <!-- Bottom Player Status & Strong Controls Bar -->
     <div class="px-4 py-3 bg-[#0b0714] border-t border-white/10 flex items-center justify-between gap-3 z-20">
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2.5">
         <button id="playerMuteBtn" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-xs font-semibold">🔊 Sound On</button>
-        <span id="playerQualityBadge" class="text-xs px-2.5 py-1 rounded bg-pink-500/20 text-pink-300 font-semibold">1080p HD</span>
+        <div class="relative">
+          <select id="playerQualitySelect" class="bg-white/10 border border-white/15 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-pink-300 focus:outline-none">
+            <option value="Auto" class="bg-[#120b22]">Auto HD</option>
+            <option value="1080p" class="bg-[#120b22]">1080p</option>
+            <option value="720p" class="bg-[#120b22]">720p</option>
+            <option value="480p" class="bg-[#120b22]">480p</option>
+          </select>
+        </div>
       </div>
       <div class="flex items-center gap-2">
         <button id="showPopupBottomBtn" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold">▲ Channel List</button>
@@ -405,13 +453,35 @@
       <div class="flex items-center justify-between">
         <div>
           <h3 class="text-lg font-extrabold text-white">Sign In to CS Tv</h3>
-          <p class="text-xs text-slate-400">Enter your mobile number</p>
+          <p class="text-xs text-slate-400">Enter your mobile number to receive OTP</p>
         </div>
         <button id="closeLoginModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
       </div>
+
       <div id="loginStepPhone" class="space-y-4">
-        <input id="phoneInput" type="tel" maxlength="11" placeholder="01712345678" class="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-pink-500" />
-        <button id="sendOtpBtn" class="w-full py-3 rounded-xl toffee-gradient font-bold text-sm text-white shadow-lg shadow-pink-600/30">Send OTP Code</button>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Mobile Number (Bangladesh)</label>
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-2.5 rounded-xl bg-white/10 border border-white/15 text-sm font-bold text-white">+880</span>
+            <input id="phoneInput" type="tel" maxlength="11" placeholder="1712345678" class="flex-1 bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-pink-500" />
+          </div>
+        </div>
+        <button id="sendOtpBtn" class="w-full py-3 rounded-xl toffee-gradient font-bold text-sm text-white shadow-lg shadow-pink-600/30 active:scale-95 transition">Send OTP Code</button>
+      </div>
+
+      <div id="loginStepOtp" class="hidden space-y-4">
+        <div class="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-xs text-emerald-200">
+          OTP sent successfully! <br/>
+          <span>CS Tv OTP Code: <strong id="generatedOtpDisplay" class="text-white underline">4829</strong></span>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Enter 4-Digit OTP</label>
+          <input id="otpInput" type="text" maxlength="4" placeholder="4829" class="w-full text-center tracking-[0.5em] font-extrabold text-lg bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-pink-500" />
+        </div>
+        <div class="flex items-center justify-between gap-2">
+          <button id="backToPhoneStepBtn" class="px-4 py-2.5 rounded-xl bg-white/10 text-xs font-semibold text-slate-300">← Change Number</button>
+          <button id="verifyOtpBtn" class="flex-1 py-2.5 rounded-xl toffee-gradient font-bold text-sm text-white shadow-lg">Verify & Login</button>
+        </div>
       </div>
     </div>
   </div>
@@ -421,13 +491,18 @@
     <div class="w-full max-w-sm rounded-3xl bg-[#160e29] border border-pink-500/30 p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between">
         <span class="px-3 py-1 rounded-full toffee-gradient text-xs font-bold">👑 CS Tv VIP PASS</span>
-        <button id="closeSubscribeModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 flex items-center justify-center">✕</button>
+        <button id="closeSubscribeModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
       </div>
       <h3 class="text-xl font-extrabold">Unlock All CS Tv Live Sports & VIP Channels</h3>
-      <button data-plan="Monthly VIP (৳99)" class="sub-plan-btn w-full p-3.5 rounded-2xl bg-pink-500/15 border-2 border-pink-500 flex items-center justify-between text-left">
-        <span class="font-bold text-sm text-white">30 Days VIP Pass</span>
-        <span class="text-lg font-extrabold text-white">৳99</span>
-      </button>
+      <div class="space-y-2.5 pt-1">
+        <button data-plan="Monthly VIP (৳99)" class="sub-plan-btn w-full p-3.5 rounded-2xl bg-pink-500/15 border-2 border-pink-500 flex items-center justify-between text-left">
+          <div>
+            <p class="font-bold text-sm text-white">30 Days CS Tv VIP</p>
+            <p class="text-xs text-pink-300">bKash / Nagad / Card</p>
+          </div>
+          <span class="text-lg font-extrabold text-white">৳99</span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -472,7 +547,7 @@
         premium: true,
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#e11d48',
-        ticker: 'CS Tv LIVE: Ipswich Town vs Nottingham Forest'
+        ticker: 'CS Tv LIVE: Ipswich Town vs Nottingham Forest • Premier League'
       },
       {
         id: 'ch-somoy',
@@ -484,7 +559,7 @@
         premium: false,
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#b91c1c',
-        ticker: 'সময় সংবাদ লাইভ: দেশ ও আন্তর্জাতিক সর্বশেষ খবর'
+        ticker: 'সময় সংবাদ লাইভ: দেশ ও আন্তর্জাতিক সর্বশেষ খবর দেখুন CS Tv-তে'
       },
       {
         id: 'ch-zeebangla',
@@ -496,7 +571,7 @@
         premium: true,
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#ea580c',
-        ticker: 'জি বাংলা এইচডি: জনপ্রিয় সিরিয়াল ও নাটক'
+        ticker: 'জি বাংলা এইচডি: জনপ্রিয় সিরিয়াল ও নাটক সরাসরি CS Tv-তে'
       },
       {
         id: 'ch-sony1',
@@ -508,7 +583,7 @@
         premium: true,
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#312e81',
-        ticker: 'SONY SPORTS TEN 1 HD: Live Broadcast'
+        ticker: 'SONY SPORTS TEN 1 HD: UEFA & Premier League Official Broadcast'
       },
       {
         id: 'ch-tsports',
@@ -520,7 +595,7 @@
         premium: true,
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#047857',
-        ticker: 'T SPORTS HD: Live Cricket & Sports'
+        ticker: 'T SPORTS HD: SAFF Championship 2026 & Bangladesh Cricket Live'
       },
       {
         id: 'ch-jamuna',
@@ -532,13 +607,44 @@
         premium: false,
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#1e40af',
-        ticker: 'যমুনা টেলিভিশন ২৪ ঘণ্টা সরাসরি সম্প্রচার'
+        ticker: 'যমুনা টেলিভিশন ২৪ ঘণ্টা সরাসরি সম্প্রচার CS Tv-তে'
+      },
+      {
+        id: 'ch-starjalsha',
+        name: 'Star Jalsha Movies',
+        shortLabel: 'জলসা',
+        subLabel: 'MOVIES HD',
+        category: 'Movies',
+        logo: '',
+        premium: true,
+        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        themeColor: '#be185d',
+        ticker: 'Star Jalsha Movies: Superhit Bengali Blockbuster Cinema'
+      },
+      {
+        id: 'ch-cstv-series',
+        name: 'CS Tv Originals',
+        shortLabel: 'CS Tv',
+        subLabel: 'WEB SERIES',
+        category: 'Web Series',
+        logo: '',
+        premium: false,
+        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        themeColor: '#6b21a8',
+        ticker: 'CS Tv Exclusive Web Series • New Episodes Streaming Now'
       }
     ];
 
     let CHANNELS = [...DEFAULT_CHANNELS_JSON];
-    const BADGE_COLORS = ['text-rose-600 font-extrabold', 'text-red-700 font-bold', 'text-orange-600 font-extrabold', 'text-indigo-900 font-extrabold', 'text-emerald-700 font-extrabold', 'text-blue-800 font-bold'];
-    const CARD_GRADIENTS = ['from-blue-900 via-slate-900 to-red-900', 'from-rose-950 via-slate-900 to-sky-900', 'from-emerald-950 via-slate-900 to-blue-950'];
+
+    const BADGE_COLORS = [
+      'text-rose-600 font-extrabold', 'text-red-700 font-bold', 'text-orange-600 font-extrabold',
+      'text-indigo-900 font-extrabold', 'text-emerald-700 font-extrabold', 'text-blue-800 font-bold'
+    ];
+    const CARD_GRADIENTS = [
+      'from-blue-900 via-slate-900 to-red-900', 'from-rose-950 via-slate-900 to-sky-900',
+      'from-emerald-950 via-slate-900 to-blue-950', 'from-fuchsia-900 via-purple-950 to-slate-900'
+    ];
 
     function normalizeChannelsJson(rawJson) {
       let arr = Array.isArray(rawJson) ? rawJson : (rawJson?.channels || rawJson?.data || []);
@@ -584,7 +690,7 @@
       favorites: [],
       userPhone: null,
       isSubscribed: false,
-      quality: '1080p',
+      quality: 'Auto',
       heroSlideIndex: 0,
       jsonUrl: './channels.json'
     };
@@ -606,7 +712,7 @@
 
     function renderCategoryTabs() {
       const nav = document.getElementById('topCategoryNav');
-      const cats = ['all', 'Sports', 'Drama', 'Movies', 'News'];
+      const cats = ['all', 'Sports', 'Drama', 'Movies', 'News', 'Web Series'];
       nav.innerHTML = cats.map(cat => {
         const isActive = state.currentCategory.toLowerCase() === cat.toLowerCase();
         const label = cat === 'all' ? `Live TV (${CHANNELS.length})` : cat;
@@ -701,15 +807,38 @@
       showPlayerOverlaysAndStart5sTimer();
 
       const video = document.getElementById('liveVideoEl');
-      if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
+      const spinner = document.getElementById('playerLoaderSpinner');
+      spinner.classList.remove('hidden');
+
+      if (hlsInstance) { 
+        hlsInstance.destroy(); 
+        hlsInstance = null; 
+      }
+
       if (window.Hls && Hls.isSupported()) {
-        hlsInstance = new Hls();
+        hlsInstance = new Hls({
+          maxBufferLength: 30,
+          liveSyncDurationCount: 3,
+          xhrSetup: (xhr) => { xhr.withCredentials = false; }
+        });
         hlsInstance.loadSource(ch.streamUrl);
         hlsInstance.attachMedia(video);
-        hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(()=>{}));
+        hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
+          video.play().then(() => spinner.classList.add('hidden')).catch(() => spinner.classList.add('hidden'));
+        });
+        hlsInstance.on(Hls.Events.ERROR, (event, data) => {
+          if (data.fatal) {
+            spinner.classList.add('hidden');
+            showToast('Stream buffering/error. Retrying next channel...');
+            setTimeout(() => {
+              state.currentChannelIndex = (state.currentChannelIndex + 1) % CHANNELS.length;
+              loadCurrentChannelInPlayer();
+            }, 2000);
+          }
+        });
       } else {
         video.src = ch.streamUrl;
-        video.play().catch(()=>{});
+        video.play().then(() => spinner.classList.add('hidden')).catch(() => spinner.classList.add('hidden'));
       }
     }
 
@@ -762,6 +891,38 @@
         e.stopPropagation();
         state.currentChannelIndex = (state.currentChannelIndex + 1) % CHANNELS.length;
         loadCurrentChannelInPlayer();
+      });
+
+      document.getElementById('playerPlayPauseBtn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        const video = document.getElementById('liveVideoEl');
+        if (video.paused) {
+          video.play();
+          state.isPlaying = true;
+        } else {
+          video.pause();
+          state.isPlaying = false;
+        }
+      });
+
+      document.getElementById('playerMuteBtn').addEventListener('click', () => {
+        state.isMuted = !state.isMuted;
+        document.getElementById('liveVideoEl').muted = state.isMuted;
+        document.getElementById('playerMuteBtn').textContent = state.isMuted ? '🔇 Muted' : '🔊 Sound On';
+      });
+
+      document.getElementById('playerFullscreenBtn').addEventListener('click', () => {
+        const modal = document.getElementById('playerModal');
+        if (!document.fullscreenElement) {
+          modal.requestFullscreen?.().catch(()=>{});
+        } else {
+          document.exitFullscreen?.().catch(()=>{});
+        }
+      });
+
+      document.getElementById('playerQualitySelect').addEventListener('change', (e) => {
+        state.quality = e.target.value;
+        showToast(`Quality set to ${state.quality}`);
       });
     });
   </script>
