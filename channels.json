@@ -1,1606 +1,2302 @@
 {
   "channels": [
     {
-      "name": "ATN BANGLA HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/24589.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/gJ6dvBTt/ATN-Bangla.png"
-    },
-    {
-      "name": "CHANNEL I HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/363.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/4NFVJ7Qs/Channel-i.jpg"
-    },
-    {
-      "name": "EKUSHEY TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/378.ts",
-      "category": "BD | Bangla",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kyvM84CkMDuYtmZ9W-vSw5pVtV4YTpMMnZrpcZLs0kvYV.png"
-    },
-    {
-      "name": "NTV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/369.ts",
-      "category": "BD | Bangla",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kykatOQqXFN8BlJdItjUV6Y073MO6Sm9YE7m7zBwyVg_m.jpg"
-    },
-    {
-      "name": "RTV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/370.ts",
-      "category": "BD | Bangla",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kysg95gHDrzDiuetuE9aflDLTbMLrYaE7Y3vmJng0LigT.jpg"
-    },
-    {
-      "name": "BOISHAKHAI TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/384.ts",
-      "category": "BD | Bangla",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kyn01JSVflao1VUPt-ulGy1zelC0_8y8KKWpbuzX0PYfB.jpg"
-    },
-    {
-      "name": "BANGLA VISION HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/368.ts",
-      "category": "BD | Bangla",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1mDEhLlkKGh9TAaQfSBVFMdCwO_LbKMWtqg&s"
+      "name": "Skym3u Official - Visit Skym3u.dev",
+      "url": "https://vods2.aynaott.com/gseriesDrama/tracks-v1a1/mono.ts.m3u8",
+      "category": "SkyM3U Promo",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
       "name": "MY TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/16935.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/7Yqhmm12/My-TV.jpg"
-    },
-    {
-      "name": "MOHONA TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/396.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/Njz0Gt3T/Mohona-TV.jpg"
-    },
-    {
-      "name": "MAASRANGA TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/376.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/90CmgQ9X/MAASRANGA-TV-HD.jpg"
-    },
-    {
-      "name": "CHANNEL 9 HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/382.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/vTFJ3qpW/Channel-9.jpg"
-    },
-    {
-      "name": "GAZI TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/374.ts",
-      "category": "BD | Bangla",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5sCg4TdPqqZINuezCDRkkZE86sBLjqTKkeg&s"
-    },
-    {
-      "name": "ASIAN TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/387.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/vB9jg7cV/Asian-TV.png"
-    },
-    {
-      "name": "DESH TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/4712.ts",
-      "category": "BD | Bangla",
-      "logo": "https://media.licdn.com/dms/image/v2/D4E0BAQE23s4aBeHpDA/company-logo_200_200/B4EZVlKBRBG0AI-/0/1741158881326/desh_television_logo?e=2147483647&v=beta&t=bEqlmrhDYOY9Z3IKZblLKYsylWLjJPkpYc0V9yEwRcc"
-    },
-    {
-      "name": "SATV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/375.ts",
-      "category": "BD | Bangla",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoJQ0fFYPuzuhY3zSLQzTLS4jw5heQKtd79Q&s"
-    },
-    {
-      "name": "BIJOY TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/397.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/N02CS888/Bijoy-TV.jpg"
-    },
-    {
-      "name": "DEEPTO TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/372.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/9fKT3XjM/Deepto-TV.jpg"
-    },
-    {
-      "name": "NAGORIK TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/955.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/Y0RdYdkv/Nagorik-TV.jpg"
-    },
-    {
-      "name": "DURONTO TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/395.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/brwXhQdC/Duronto-TV.jpg"
-    },
-    {
-      "name": "ANANDA TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/393.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/x8pK9hnS/Ananda-TV.jpg"
-    },
-    {
-      "name": "NEXUS TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/388.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/DwJcwvWn/Nexus-TV.jpg"
-    },
-    {
-      "name": "EKHON TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/386.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/132JGnx0/Ekhon-TV.png"
-    },
-    {
-      "name": "GLOBAL TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/385.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/fyh9LHyy/Global-TV.png"
-    },
-    {
-      "name": "MOVIE BANGLA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/391.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/GhKyLxCp/Movie-Bangla-TV.png"
-    },
-    {
-      "name": "BANGLA TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/394.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/hvd8xxTG/Bangla-TV.jpg"
-    },
-    {
-      "name": "MADANI TV BANGLA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/620.ts",
-      "category": "BD | Bangla",
-      "logo": "https://yt3.googleusercontent.com/Z6LKipH0hOTZM50gV-_zi2H3GSshWUEU20Lag3fIT3i0cZsJD_coQaNOEqsxVLVJ3Pc6w3Of=s900-c-k-c0x00ffffff-no-rj"
-    },
-    {
-      "name": "DEEN TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/18672.ts",
-      "category": "BD | Bangla",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnzAFof8QTZ9QN5dn4Qz57QP-N90K-WPwxdAT-eOIWKKfM6GWBXOE-firA6Mw8wisot_U&usqp=CAU"
-    },
-    {
-      "name": "CHANNEL S HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/93526.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/hvd8xxTG/Bangla-TV.jpg"
-    },
-    {
-      "name": "GREEN TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/144334.ts",
-      "category": "BD | Bangla",
-      "logo": "https://i.postimg.cc/yYnmx0xy/Green-TV.png"
-    },
-    {
-      "name": "BTV CTG",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/188373.ts",
-      "category": "BD | Bangla",
-      "logo": "https://s3.aynaott.com/storage/00da8a07fb26b2fb79359ee535e4c7bc"
-    },
-    {
-      "name": "BTV NATIONAL HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/357.ts",
-      "category": "BD | Bangla",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kymzku8QrBronz_mr_APICjcZ_e_c96EVbZsK2Q2Ymq73.png"
-    },
-    {
-      "name": "Anondo TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180657.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "ATN Bangla",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180658.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "BANGLA VISION",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180659.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "GREEN TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180663.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "PEACE TV BANGLA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180666.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "RAJDHANI TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180667.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "RTV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180668.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "RUPASHI BANGLA TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180669.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "T SPORTS HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180670.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "ATN MUSIC",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180689.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "NEWS 24",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180690.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "DBC NEWS",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180691.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "DESH TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180692.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "EKATTOR TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180693.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "EKHON TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180694.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "INDEPENDENT TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180695.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "JAMUNA TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180696.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "MAASRANGA TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180697.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "MY TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180698.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "NEXUS TELEVISION",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180699.ts",
-      "category": "BD | Bangladesh",
-      "logo": "null"
-    },
-    {
-      "name": "JAMUNA TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/69473.ts",
-      "category": "BD | News",
-      "logo": "https://i.postimg.cc/3x4pW8tp/Jamuna-Tv.jpg"
-    },
-    {
-      "name": "JAMUNA TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/18816.ts",
-      "category": "BD | News",
-      "logo": "https://i.postimg.cc/3x4pW8tp/Jamuna-Tv.jpg"
-    },
-    {
-      "name": "SOMOY TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/365.ts",
-      "category": "BD | News",
-      "logo": "https://i.postimg.cc/JzfXkfgw/Somoy-TV.jpg"
-    },
-    {
-      "name": "INDEPENDENT",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/105506.ts",
-      "category": "BD | News",
-      "logo": "https://i.postimg.cc/W4YbmZbm/Independent-TV.jpg"
-    },
-    {
-      "name": "EKATTOR TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/364.ts",
-      "category": "BD | News",
-      "logo": "https://i.postimg.cc/15Yw9nrq/Ekattur.jpg"
-    },
-    {
-      "name": "CHANNEL 24 HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/18817.ts",
-      "category": "BD | News",
-      "logo": "https://i.postimg.cc/GhSGc8xr/Channel-24.jpg"
-    },
-    {
-      "name": "ATN NEWS HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/362.ts",
-      "category": "BD | News",
-      "logo": "https://i.postimg.cc/c4JfyMwS/ATN-NEWS.png"
-    },
-    {
-      "name": "NEWS 24 HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/16884.ts",
-      "category": "BD | News",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kyhIXR1xo3qKTc564dwNOPdlWG2bEqirealTtqSxensdk.png"
-    },
-    {
-      "name": "DBC NEWS HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/16883.ts",
-      "category": "BD | News",
-      "logo": "https://yt3.googleusercontent.com/i5T0QE8rWWQFpgr-XMpxJOdJmjt9XK5CWCiHFHgdQTP_wVSGjs3HpE3uMmE_GaZkT7e_S_HGFQE=s900-c-k-c0x00ffffff-no-rj"
-    },
-    {
-      "name": "STAR NEWS HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/175336.ts",
-      "category": "BD | News",
-      "logo": "https://i.postimg.cc/Pq5my0YR/Star-News.png"
-    },
-    {
-      "name": "BTV NEWS",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/358.ts",
-      "category": "BD | News",
-      "logo": "https://media.prothomalo.com/prothomalo-bangla/2024-12-31/l11hxpwd/btv.JPG?w=1200&h=675&auto=format%2Ccompress&fit=max"
-    },
-    {
-      "name": "STAR PLUS",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/143845.ts",
-      "category": "IND | Entertainment",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kyhD7gwlFN-HwicSPC3T-TO9Md4ORhtxPpNqXvQd6a4bT.jpg"
-    },
-    {
-      "name": "STAR PLUS HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/473.ts",
-      "category": "IND | Entertainment",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kyhD7gwlFN-HwicSPC3T-TO9Md4ORhtxPpNqXvQd6a4bT.jpg"
-    },
-    {
-      "name": "STAR BHARAT HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/479.ts",
-      "category": "IND | Entertainment",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kyr-5RqcLz-XhBUozYKOpgcnb5k9-g04es519fpwwskRT.jpg"
-    },
-    {
-      "name": "SONY TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/141784.ts",
-      "category": "IND | Entertainment",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kyihgMyAdOXQhKUi2UTsGAdTa-HzK0YUvrTPBLcHVvhg82e2POzMTNO7VzSHOgtyMYw.jpg"
-    },
-    {
-      "name": "SONY SAB HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/141830.ts",
-      "category": "IND | Entertainment",
-      "logo": "http://dvltv.cc:80/images/v8MS-17zGoHIyTBXGPTsUN7vbW730P7Mw0sNZ07m7O0Y7EfsfWra_Hen4j2S8KC12jaOMdVfH8s6eVwei4Igzw.png"
-    },
-    {
-      "name": "ZEE TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/161658.ts",
-      "category": "IND | Entertainment",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kypvG7sEvWvjXqBFmkhMTjGhDwkz8B9SnHCG05BesZ97J.jpg"
-    },
-    {
-      "name": "COLORS HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/41284.ts",
-      "category": "IND | Entertainment",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kytFuxqpkYFmjCx-Y32pId7iLtuLMXYGCZBhY1pCYums3.jpg"
-    },
-    {
-      "name": "&TV HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/161665.ts",
-      "category": "IND | Entertainment",
-      "logo": "http://dvltv.cc:80/images/2WvPLplYlWaTLek95Onp6ERXCv5ahO7aCWtsXbL3qVpKc8TXwJCWBUM7ZXQNvER1Voaj4CFriXstnmhXcZ6onpxkIfd14H7i5jCjOVKQADM.jpg"
-    },
-    {
-      "name": "DD NATIONAL",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/487.ts",
-      "category": "IND | Entertainment",
-      "logo": "http://dvltv.cc:80/images/juv6yrxQMQv-SRQ2nfWHcGG_g8sWjGoOVOKOOV9ro1WeavXlk1RScvwsjzg4ekesz_SeMuzb6N_mdF0RJHRqGg.png"
-    },
-    {
-      "name": "DANGAL TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/491.ts",
-      "category": "IND | Entertainment",
-      "logo": "http://dvltv.cc:80/images/0k_5PA7E1R_vsrOs-zCJVDudK_tsJkySI77_3zGQScfYRNv3v-GWm6pP4cf4vHvq1uHwOq2t25SytQrDuRscEA.png"
-    },
-    {
-      "name": "DANGAL 2",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/490.ts",
-      "category": "IND | Entertainment",
-      "logo": "https://www.lyngsat.com/logo/tv/dd/dangal-2-in.png"
-    },
-    {
-      "name": "ISHAARA TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/489.ts",
-      "category": "IND | Entertainment",
-      "logo": "https://i.postimg.cc/13nKd3wt/ishra-tv.png"
-    },
-    {
-      "name": "NAZARA TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/706.ts",
-      "category": "IND | Entertainment",
-      "logo": "https://i.postimg.cc/N08HQ9Bj/NAZARA-TV.png"
-    },
-    {
-      "name": "Fimachi",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/3037.ts",
-      "category": "IND | Entertainment",
-      "logo": "https://imgur.com/F0EIgi3.png"
-    },
-    {
-      "name": "DABANGG",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/3828.ts",
-      "category": "IND | Entertainment",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Dabangg-TV_logo.jpg/640px-Dabangg-TV_logo.jpg"
-    },
-    {
-      "name": "CANADA ONE",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/18597.ts",
-      "category": "IND | Entertainment",
-      "logo": "https://yt3.googleusercontent.com/ytc/AIf8zZSPO7k32sTGiEiGtpKbK9T8FU3ZHJrPa4ZiUKzNsA=s900-c-k-c0x00ffffff-no-rj"
-    },
-    {
-      "name": "ABP NEWS",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/18663.ts",
-      "category": "IND | Entertainment",
-      "logo": "http://dvltv.cc:80/images/COkEO-FWL6Un57bQno1oDDZsiBeWCSjxPVZv0hLJ3dSAar7tj4MVnuhcxnJTCSFb-bKPPHY6kr51G54nOT36ag.png"
-    },
-    {
-      "name": "DD NEWS",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/41712.ts",
-      "category": "IND | Entertainment",
-      "logo": "https://www.lyngsat.com/logo/tv/dd/dd-news-in.png"
-    },
-    {
-      "name": "EPIC",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/3036.ts",
-      "category": "IND | Entertainment",
-      "logo": "https://www.indiantelevision.com/sites/default/files/styles/smartcrop_800x800/public/images/tv-images/2019/06/18/epic.jpg"
-    },
-    {
-      "name": "Hindi Big Boss 24X7 2026",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/189230.ts",
-      "category": "IND | Entertainment",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDPZQ-vlfnoZsMQPBLBMXYbSU9SKYpk1sdbg650L3yiH3swl_UXro1itA&s=10"
-    },
-    {
-      "name": "STAR JALSHA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/449.ts",
-      "category": "IND | Kolkata",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kypOWqWjN0IGB5IzPjMixf7k2gteJAzl8JzAq31QR14CU.jpg"
-    },
-    {
-      "name": "JALSHA MOVIES*",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/450.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://i.postimg.cc/Qdy7FvsL/01-(38).jpg"
-    },
-    {
-      "name": "ZEE BANGLA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/2329.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://yt3.googleusercontent.com/jIRlgQxlU-9mFVpBHZHjCApv8rArI8Lj0hB_HxKveD8SpbQ6k2fA6kSuZixOV92Ty4sh7-Vhvw=s900-c-k-c0x00ffffff-no-rj"
-    },
-    {
-      "name": "ZEE BANGLA HD*",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/451.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://yt3.googleusercontent.com/jIRlgQxlU-9mFVpBHZHjCApv8rArI8Lj0hB_HxKveD8SpbQ6k2fA6kSuZixOV92Ty4sh7-Vhvw=s900-c-k-c0x00ffffff-no-rj"
-    },
-    {
-      "name": "ZEE BANGLA SONAR",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/18982.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://s3.aynaott.com/storage/1f25888b68626ed736acf35824905916"
-    },
-    {
-      "name": "COLORS BANGLA HD*",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/453.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://i.postimg.cc/ry0Nv63c/Colors-Bangla.jpg"
-    },
-    {
-      "name": "COLORS BANGLA CINEMA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/454.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://i.postimg.cc/DfJPtVHT/Color-Bangla-Cinema.jpg"
-    },
-    {
-      "name": "IN: ENTER 10 BANGLA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/94406.ts",
-      "category": "IND | Kolkata",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kyhPy-tbyaEZSUknGO0SlDnaKumh9LaOQI0SwoUMd-5thU6-_SYCu-xwjcXrJ1QKH_A.png"
-    },
-    {
-      "name": "SONY AATH",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/161685.ts",
-      "category": "IND | Kolkata",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kylbrECzXwmonXLa4Z_Ctkddkt3e7iTTNwcxLnxRzBFbP.jpg"
-    },
-    {
-      "name": "RUPOSHI BANGLA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/7433.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoxy9j9zGi_SVsVx52hQULmbTcKoB8DPi6Gg&usqp=CAU"
-    },
-    {
-      "name": "AAKASH AATH",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/2881.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlujCvoavxKjesmkkoiYHvTRs-0skEzrrXcsplbI3_KlV4ES7WBXIBzYY&s=10"
-    },
-    {
-      "name": "SANGEET BANGLA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/460.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://yt3.googleusercontent.com/FGx9xqm5eU1DZXDk4ZDRQDK9fyhvZ2LR6gKXhZcJeFunvG9SwT8SB01SxbiD3GDL8MqMKxWXHQ=s900-c-k-c0x00ffffff-no-rj"
-    },
-    {
-      "name": "DD BANGLA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/466.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCGce1AcFJOJjRlkAQ_xHcDjP3DR5zkqfOEODy_3sCxZCZ-s5rIdKjQK7j&s=10"
-    },
-    {
-      "name": "BANGLA PLUS HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/2330.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQshDlozqT2hxQaCWgBf6Fv4aXNjPXKrp9YeA&s"
-    },
-    {
-      "name": "NEWS 18 BANGLA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/462.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://i.ytimg.com/vi/802Sj7cqfls/sddefault.jpg"
-    },
-    {
-      "name": "ABP ANANDA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/1623.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://feeds.abplive.com/onecms/images/uploaded-images/2024/01/03/a7a105a5aea78d7f063886a48d22045f1704284190505616_original.jpeg"
-    },
-    {
-      "name": "R PLUS GOLD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/3664.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEqtnqPJ3ELtDpyyNJCWYyOz--NgOs7kQADM5g7XW44v7N9oyXPGQXraY&s=10"
-    },
-    {
-      "name": "TV 9 BANGLA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/463.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://yt3.googleusercontent.com/d8QNkJ7Jby9hVSTm67-E4nfbI-7CTgP262NPVGfYpoTZaxLw7uAOPxs5dJtARjEFQijsRsuiFQ=s900-c-k-c0x00ffffff-no-rj"
-    },
-    {
-      "name": "BANGLA JAGO",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/461.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://yt3.googleusercontent.com/Fyw6UxdtJLxV-q-_ejEaE5MTXZXc4G_tOHcljLpam5em13cpJ_jdh9TAMa5bwcRwWO5DaJI8zg=s900-c-k-c0x00ffffff-no-rj"
-    },
-    {
-      "name": "ZEE 24 GHANTA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/1232.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://yt3.googleusercontent.com/ou3JhDnH8ChdzRKooH5hGjTRGKpr9dGhi7lv7QW2zgmrnme0HbPKc8qI3yu8ZdI6NZna-CdJFw=s900-c-k-c0x00ffffff-no-rj"
-    },
-    {
-      "name": "REPUBLIC BANGLA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/18665.ts",
-      "category": "IND | Kolkata",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3qUuSmC90CGfMYW2naH4j4e1bRn8K2wsR5g&usqp=CAU"
-    },
-    {
-      "name": "SONY MAX HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/18826.ts",
-      "category": "IND | Movies",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuGgXCY9Hxo52WGZi1E4yLVTv7sx_N2CwJIA&usqp=CAU"
-    },
-    {
-      "name": "STAR GOLD HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/495.ts",
-      "category": "IND | Movies",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kyqbU9JWkJ2nJ6ev_wk3Iw2IsztmMqbREZN5gP7tET8Y1.jpg"
-    },
-    {
-      "name": "STAR GOLD 2",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/633.ts",
-      "category": "IND | Movies",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kysMCsVACj2Aieh2FqKtnevK2ttwJe7TRRJHWAuXfsaqe.jpg"
-    },
-    {
-      "name": "STAR GOLD ROMANCE",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/2172.ts",
-      "category": "IND | Movies",
-      "logo": "https://i.postimg.cc/0yTSwT36/Star-Gold-Romance.png"
-    },
-    {
-      "name": "STAR GOLD THRILLS",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/498.ts",
-      "category": "IND | Movies",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kygaKwAnsYYzzgP8J5U53Kjee6Ibg9i7-Bku3gmVaP6N3Yf7efi9ErGgoLXlubWjoeA.png"
-    },
-    {
-      "name": "COLORS CINEPLEX HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/515.ts",
-      "category": "IND | Movies",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kypfxR2fVzg57czYn4w_c6YSKnGDcHLcSrXCtDeUA3htofnXx5wj0fxzmdKlt2l5wCw.jpg"
-    },
-    {
-      "name": "COLORS CINEPLEX BOLLYWOOD*",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/691.ts",
-      "category": "IND | Movies",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpr31wcZrjxrkAXiW87FMFf8CL752-Xj9YHQwYUBeXYL8Ty12H9XjPWJ4d&s=10"
-    },
-    {
-      "name": "COLORS CINEPLEX SUPERHIT",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/1703.ts",
-      "category": "IND | Movies",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcse3rTIksBAXCqPOET3EBm5OX3YgPe-FL0xZmEAElhwAf1XX-df6IIAJi&s=10"
-    },
-    {
-      "name": "ZEE CINEMA HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/161673.ts",
-      "category": "IND | Movies",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kyqoQdw8vv8HqXW2HA6WvbVSd1VPkhSAIR4ZdbsuYTg_1.jpg"
-    },
-    {
-      "name": "BOLLYWOOD CLASSIC HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/488.ts",
-      "category": "IND | Movies",
-      "logo": "https://images.squarespace-cdn.com/content/v1/63f66748474ef363a52a0c2a/cb43444c-32cc-4b78-b747-980a59481418/IMG_6219.JPG"
-    },
-    {
-      "name": "BHOJPURI CINEMA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/2319.ts",
-      "category": "IND | Movies",
-      "logo": "http://dvltv.cc:80/images/_kCfWxJ7xY1epHYDdSJ0VqXyRtgRG3I0xqlnqUKeDynLGyx6aG0xf_pWF3_EkDthVlWCGp-1oprpdgMxEA0QWg.png"
-    },
-    {
-      "name": "ZING",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/520.ts",
-      "category": "IND | Movies",
-      "logo": "https://logowik.com/content/uploads/images/4104-zing-tv-new.webp"
-    },
-    {
-      "name": "MBC BOLLYWOOD HD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/507.ts",
-      "category": "IND | Movies",
-      "logo": "http://dvltv.cc:80/images/QCqX5p5x3Y181Q8jwb82JAadNY5rNFfNo_BIO8sfm8XmnYWGEtKTKWYANU6eTwYo.png"
-    },
-    {
-      "name": "9XM",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/525.ts",
-      "category": "IND | Music",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kyuGjPrxRcDJiFh7KSNuHrdGn8cHZDAiNShFTv-oqcmrw.jpg"
-    },
-    {
-      "name": "9X JALWA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/519.ts",
-      "category": "IND | Music",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kynC_vArOWQvk9xGvsOLC5ubuE7IhqICm16jgBG7E5lRd.png"
-    },
-    {
-      "name": "EPIC MUSIC",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/521.ts",
-      "category": "IND | Music",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kyglNFvKZNnzZDwQNjJUtxbYdb_u4W9odGT2xYniZmG4p.jpg"
-    },
-    {
-      "name": "MTV HD +",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/683.ts",
-      "category": "IND | Music",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-khORoQYR_abfGGbojAj0-2RXctDvQ_2KxXBdvpOT1IMcEfjHhCGvaG8&s=10"
-    },
-    {
-      "name": "ZOOM",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/518.ts",
-      "category": "IND | Music",
-      "logo": "https://i.postimg.cc/HxH7SQd3/Zoom-Music.png"
-    },
-    {
-      "name": "MUSIC INDIA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/18342.ts",
-      "category": "IND | Music",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4KgUcxbg3Tc3DR956JhsXvJtZHJrwGQyOOA&usqp=CAU"
-    },
-    {
-      "name": "PK:  JOO MUSIC",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/94408.ts",
-      "category": "IND | Music",
-      "logo": "https://play-lh.googleusercontent.com/zooER-oa-NqGzAR4HjEUGYBOfAcWvyoWGGIjZn3peR6xveFznWN6LvXCP_5A5zoB7gdE"
-    },
-    {
-      "name": "ISAI ARUVI TV",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/6168.ts",
-      "category": "IND | Music",
-      "logo": "http://dvltv.cc:80/images/juv6yrxQMQv-SRQ2nfWHcGG_g8sWjGoOVOKOOV9ro1W-2WuxhuylXKc2L5ir9BEcmbJIhb4q_Yb-TMFEx0JaDg.png"
-    },
-    {
-      "name": "B4U MUSIC",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/161681.ts",
-      "category": "IND | Music",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kyr22f16SRgpesQoe2avUgSwf5tJUS7KRtr99DSVUyQ31dTN-3jYTX3hhm4mKfQZixQ.jpg"
-    },
-    {
-      "name": "9X JHAKAAS",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/18830.ts",
-      "category": "IND | Music",
-      "logo": "http://dvltv.cc:80/images/hzBbmMrmtIEGXqMnUe7kyvfU1OSoiEjDmZpTZrT89ZhbmscW1oMof74SPtVsJ_ns.png"
-    },
-    {
-      "name": "GOLDMINES",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180746.ts",
-      "category": "INDIA MOVIES",
-      "logo": "null"
-    },
-    {
-      "name": "GOLDMINES 2",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180747.ts",
-      "category": "INDIA MOVIES",
-      "logo": "null"
-    },
-    {
-      "name": "GOLDMINES BOLLYWOOD",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180748.ts",
-      "category": "INDIA MOVIES",
-      "logo": "null"
-    },
-    {
-      "name": "GOLDMINES MOVIES",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180749.ts",
-      "category": "INDIA MOVIES",
-      "logo": "null"
-    },
-    {
-      "name": "HI DOST",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/180750.ts",
-      "category": "INDIA MOVIES",
-      "logo": "null"
-    },
-    {
-      "name": "TRACE URBAN",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/517.ts",
-      "category": "Music",
-      "logo": "http://dvltv.cc:80/images/QCqX5p5x3Y181Q8jwb82JJDehtUDbCk-vSiipsy_eTrpI12vw9-LVnKUrlZOBXlD.png"
-    },
-    {
-      "name": "TRACE LATINA",
-      "url": "http://dvltv.cc/live/iptvmax017/iptvmax0178/532.ts",
-      "category": "Music",
-      "logo": "http://dvltv.cc:80/images/QCqX5p5x3Y181Q8jwb82JLXY-nnQYdBggS9WFmc5ChQnmcKaSf2R_VDwovjDE3_M.png"
-    },
-    {
-      "name": "T SPORTS",
-      "url": "http://103.141.70.136:8080/hls/w5e-eriMVcc1ztmQWBs0rHO_UwR9zN02rvFwk0yV5q_1G0dTmmE1kPsKAgPxAg3cTm9JPB7o9QdmBpsGHF3TMjJhD0Z7iou3na8OQnSiTiITCZBuol2gVwKoWcIxQBAL",
-      "category": "SPORTS",
-      "logo": "https://static.wikia.nocookie.net/etv-gspn-bangla/images/6/6e/T_Sports_HD_logo_2021.png"
-    },
-    {
-      "name": "Ten Cricket",
-      "url": "https://drk6xq0vhn.gpcdn.net/live/ten_cricket_hd_abr/live/ten_cricket_hd_720/chunks.m3u8",
-      "category": "SPORTS",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/ra2x_pQBrjBfS2_RWG9l/posters/795170c2-ec78-457e-9fa0-54a23d23361c.webp"
-    },
-    {
-      "name": "Willow HD",
-      "url": "https://warm-caverns-48629-92fab798385f.herokuapp.com/https://d36r8jifhgsk5j.cloudfront.net/Willow_TV540p.m3u8",
-      "category": "SPORTS",
-      "logo": "https://abusaeeidx.github.io/Tv-Channel-Logo/CricHD/runded/38-by-xfireflix.png"
-    },
-    {
-      "name": "Bein Sports",
-      "url": "https://tvsen6.aynaott.com/beinsports/index.m3u8",
-      "category": "SPORTS",
-      "logo": "https://i.postimg.cc/yNQfGnnb/RLr-MBlm.png"
-    },
-    {
-      "name": "Bein Sports xtra",
-      "url": "https://bein-esp-xumo.amagi.tv/playlistR720P.m3u8",
-      "category": "SPORTS",
-      "logo": "https://i.postimg.cc/yNQfGnnb/RLr-MBlm.png"
-    },
-    {
-      "name": "PTV Sports HD",
-      "url": "https://flussonic.defineatoz.com/PTV/index.m3u8",
-      "category": "SPORTS",
-      "logo": "https://web.aynaott.com/storage/019dd92f-107c-7056-9e79-e5233f6e51d9/uploads/images/2026-07-20/images_5704c544bcbe25521134b299a0298be7_playmist_ptv_sports_400x400.jpg"
-    },
-    {
-      "name": "Somoy TV",
-      "url": "https://drk6xq0vhn.gpcdn.net/live/somoy_tv_abr/live/somoy_tv_720/chunks.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/Xi_Ga5oBNnOkwJLWkhKP/posters/ef2899d5-1ae0-4fee-aee5-45f9b0b3ba80.png"
-    },
-    {
-      "name": "ATN Bangla",
-      "url": "https://tvsen5.aynaott.com/atnbangla/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://web.aynaott.com/storage/019dd92f-107c-7056-9e79-e5233f6e51d9/uploads/images/2026-06-24/3a36a406fcc9616cd0b32514bb29eb36.jpg"
-    },
-    {
-      "name": "ATN News",
-      "url": "https://tvsen6.aynaott.com/da6WMXAk/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1739962961772.png"
-    },
-    {
-      "name": "Channel I",
-      "url": "https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://s3.aynaott.com/storage/28931315743beff50fc2c1312b1f8261"
-    },
-    {
-      "name": "NTV",
-      "url": "https://tvsen5.aynaott.com/xV4jEKf3D9zc/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1735560841094.png"
-    },
-    {
-      "name": "RTV",
-      "url": "http://tvsen5.aynascope.net/RtvHD/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://web.aynaott.com/storage/019dd92f-107c-7056-9e79-e5233f6e51d9/uploads/images/2026-07-02/images_d6c5ece652161d2d88ed547f00343687_playmist_rtv_400x400.jpg"
-    },
-    {
-      "name": "Bangla Vision",
-      "url": "https://tvsen5.aynaott.com/tgUzpPc9r6xw/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1735561344354.png"
-    },
-    {
-      "name": "BOISHAKHI TV",
-      "url": "https://tvsen6.aynaott.com/1d3uG9VCgrR9DRtWZM57/tracks-v1a1/mono.ts.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://static.wikia.nocookie.net/etv-gspn-bangla/images/0/08/Boishakhi_TV_HD_logo_2022.png"
-    },
-    {
-      "name": "Ekushay TV",
-      "url": "https://tvsen5.aynaott.com/SyQuXz8sC3TB/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://s4.gifyu.com/images/image534fa27d7683f33d.png"
-    },
-    {
-      "name": "Maasranga TV",
-      "url": "http://116.204.149.16/maasranga/tracks-v1a1/mono.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1773680325498.png"
-    },
-    {
-      "name": "Channel 1 News",
-      "url": "https://stream.ottplus.live/live/channel_1_hd_abr/live/channel_1_hd_720/chunks.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://i.postimg.cc/Zqgx8hm1/20260430-184013.png"
-    },
-    {
-      "name": "Ekattor TV",
-      "url": "https://tvsen6.aynaott.com/EWDrV5QskgarZEUBb3pU/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1739963327549.png"
-    },
-    {
-      "name": "Independent TV",
-      "url": "https://drk6xq0vhn.gpcdn.net/live/independent_tv_abr/live/independent_tv_720/chunks.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/ES_cZZsBNnOkwJLW1Oz1/posters/b872b8f5-cb6b-45a1-a1cd-7609df51d614.png"
-    },
-    {
-      "name": "News 24",
-      "url": "https://tvsen6.aynaott.com/cdgr3tw6WoG7JyRnLbi0/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://i.postimg.cc/wThf5qQt/20240822_230921.png"
-    },
-    {
-      "name": "Channel 24 HD",
-      "url": "https://drk6xq0vhn.gpcdn.net/live/channel_24_abr/live/channel_24_720/chunks.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1735556516924.png"
-    },
-    {
-      "name": "Jamuna TV",
-      "url": "https://tvsen6.aynaott.com/KGdZEdA7qQ43dmPkgk1j/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/PiL635oBEef-9-uV2uCe/posters/36f380e0-6c71-4b27-a73b-2afb3ce7e982.png"
-    },
-    {
-      "name": "GAZI TV",
-      "url": "https://app.ncare.live/live-orgin/gazibdz.stream/live-orgin/gazibdz.stream/chunks.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://raw.githubusercontent.com/AsimDipto/Logo-box/refs/heads/main/Bangladesh/gtv-hd-bd.png"
-    },
-    {
-      "name": "Mohona TV",
-      "url": "https://tvsen6.aynaott.com/AkyX5dunzju4cpo26dr7/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://i.imgur.com/ENyPcL0.png"
-    },
-    {
-      "name": "MY TV",
-      "url": "https://tvsen6.aynaott.com/XMpHaEf0ANBhv8w6NWR7/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://otapp.store/uploads/tv_image/sm/my-tv.png"
-    },
-    {
-      "name": "SATV",
-      "url": "https://tvsen6.aynaott.com/rELXiuUXqbgzPb06Npom/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://otapp.store/uploads/tv_image/sm/sa-tv.png"
-    },
-    {
-      "name": "Deshe Bideshe",
-      "url": "https://dbcanada.sonarbanglatv.com/deshebideshe/dbtv/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://pbs.twimg.com/profile_images/739539785304281088/zMwNO936_400x400.jpg"
-    },
-    {
-      "name": "Desh TV",
-      "url": "https://tvsen6.aynaott.com/ryFkXfd1a4CQ7mMdc820/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://otapp.store/uploads/tv_image/sm/desh-tv.png"
-    },
-    {
-      "name": "Deshi TV",
-      "url": "https://deshitv.deshitv24.net/live/myStream/playlist.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://www.deshitv.com/images//bangla_logo/DeshTV24-BanglaLogo.png"
-    },
-    {
-      "name": "Bijoy TV",
-      "url": "https://stream.ottplus.live/live/bijoy_tv_abr/live/bijoy_tv_720/chunks.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/bns4l5sBcqxnFHJBVZ32/posters/feaf9f3d-cc3b-4a3d-81a3-2cb703e561eb.png"
-    },
-    {
-      "name": "Asian TV",
-      "url": "https://tvsen6.aynaott.com/pKb5k6NnzxsKpWUs6E8M/tracks-v1a1/mono.ts.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/MyK__poBEef-9-uVmf5l/posters/1eadef5b-28e7-4dc2-b42f-c67a3357c9a0.png"
-    },
-    {
-      "name": "Probashi TV",
-      "url": "http://158.69.24.53:8080/probashi_tv/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzayWMQexbfPV-jTx3ZNoq-XOmlHKSX1SCjg&s"
-    },
-    {
-      "name": "Channel 9 HD",
-      "url": "http://premiumtvs.space/live/YqXTywueEV/damp2purchase/434.ts",
-      "category": "BANGLADESH",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1770188008067.png"
-    },
-    {
-      "name": "Nagorik TV",
-      "url": "https://box.bbaria.net/Nagorik_TV/tracks-v1a1/mono.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://otapp.store/uploads/tv_image/sm/nagorik-tv.png"
-    },
-    {
-      "name": "Anando TV",
-      "url": "https://tvsen6.aynaott.com/LeUAm4F1iixYns3s3Non/tracks-v1a1/mono.ts.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/wCM3l5sBEef-9-uVXFvD/posters/d80f7aee-5bd7-4edc-97eb-ead0e3ebbe09.png"
-    },
-    {
-      "name": "Deepto TV",
-      "url": "https://byphdgllyk.gpcdn.net/hls/deeptotv/0_1/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1742713000749.png"
-    },
-    {
-      "name": "Duronto TV",
-      "url": "http://198.195.239.50:8095/duranta/tracks-v1a1/mono.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://i.postimg.cc/zBCLNtGZ/Duronto.jpg"
-    },
-    {
-      "name": "SRK TV",
-      "url": "https://srknowapp.ncare.live/srktvhlswodrm/srktv.stream/playlist.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1746005940155.png"
-    },
-    {
-      "name": "Bangla TV",
-      "url": "https://tvsen6.aynaott.com/39ee93nUbCCmm5LsyD4t/tracks-v1a1/mono.ts.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/JiK-_poBEef-9-uVZv6L/posters/757a328e-70d6-45de-b093-0a843c69ade7.png"
-    },
-    {
-      "name": "DBC News HD",
-      "url": "https://tvsen6.aynaott.com/pF66Tkz0qFwP2aMMqHyt/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1770186306600.png"
-    },
-    {
-      "name": "AKHON TV",
-      "url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/globaltv.stream/tracks-v1a1/mono.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://www.jagobd.com/wp-content/uploads/2024/08/ekhontv.jpg"
-    },
-    {
-      "name": "Nexus TV",
-      "url": "http://premiumtvs.space/live/YqXTywueEV/damp2purchase/411.ts",
-      "category": "BANGLADESH",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/FHz5PJwBcqxnFHJBdAqW/posters/419869ac-8ddf-4909-86c1-b69f0a3adf13.png"
-    },
-    {
-      "name": "Global TV",
-      "url": "http://116.204.149.16/globaltv/tracks-v1a1/mono.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/0y_tDJsBNnOkwJLWNrdE/posters/2ff058e1-630f-4657-8dc6-b677e65642c5.png"
-    },
-    {
-      "name": "Green TV",
-      "url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/greentv.stream/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://i.postimg.cc/ry4QcVbh/20240822-231240.png"
-    },
-    {
-      "name": "Channel S",
-      "url": "https://app.ncare.live/live-orgin/channels.stream/live-orgin/channels.stream/chunks.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/WyPuDJsBEef-9-uVUA_z/posters/ea20055c-a824-443c-8083-ce8e2da8b922.png"
-    },
-    {
-      "name": "Star News",
-      "url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/starnewsbd.stream/playlist.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1770189826301.png"
-    },
-    {
-      "name": "Channel 16",
-      "url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/channel16bd.stream/tracks-v1a1/mono.m3u8",
-      "category": "BANGLA MUSIC",
-      "logo": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGN4JrZ3Ur3BHiD2tQhsQq3WQ5DXpv7HATFyNDT6o-rSNwAZaeQieMBdfPoGPio5UPipGV2ZBb8rLmyYJe5vySfQjEmTE5MLc_6q8CKfXuzb4eRQREjPiyL5tkncb1Xt5pVMJa6t77CT98JvAFozg95IH_9qofXJ2s1ubKCbJ-_JsuRVb458aBztLImQ/s1080/1000015295.png"
-    },
-    {
-      "name": "MUSIC BANGLA",
-      "url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/musicbangla2025.stream/playlist.m3u8",
-      "category": "BANGLA MUSIC",
-      "logo": "https://static.wikia.nocookie.net/logopedia/images/7/75/Music_Bangla_new.jpeg"
-    },
-    {
-      "name": "NEWS 21 BANGLA",
-      "url": "http://103.190.133.68:1935/news21live/live/playlist.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://news21bangla.tv/wp-content/uploads/2025/07/Screenshot_23.png"
-    },
-    {
-      "name": "Rajdhani TV",
-      "url": "https://stream.shariarsuvo.com/hls5/rajdhanicable.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/KECGB54BuUSiBsg_dHyj/posters/58af9c58-ed80-458c-af13-cf381680cec6.png"
-    },
-    {
-      "name": "Drama 24",
-      "url": "https://vods2.aynaott.com/gseriesDrama/tracks-v1a1/mono.ts.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://raw.githubusercontent.com/BadhanStrom/img/refs/heads/main/G-Series_Logo.png"
-    },
-    {
-      "name": "Movie Bangla",
-      "url": "https://stream.ottplus.live/live/movie_bangla_abr/index.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/CXz4PJwBcqxnFHJBPwrG/posters/2f913e34-3a6c-45e6-9f1f-97bf129a2ff5.png"
-    },
-    {
-      "name": "Ruposhi Bangla",
-      "url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/ruposhibangla.stream/playlist.m3u8",
-      "category": "BANGLADESH",
-      "logo": "http://data.jaagobd.com/media/channel_logos/rb.png"
-    },
-    {
-      "name": "JonmoBhumi TV",
-      "url": "https://jtvs.ncare.live/Gznr84Woj7UEye3OPVeWq2ForboWAgdV/jonmobhumitv.stream/tracks-v1a1/mono.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://raw.githubusercontent.com/BadhanStrom/img/refs/heads/main/jhonmobhumitv.png"
-    },
-    {
-      "name": "ME TV",
-      "url": "https://iptvbd.live/metv1080/1080.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://www.metvbd.com/media/common/logo-fb.png"
-    },
-    {
-      "name": "TBN 24",
-      "url": "https://www.tbn24.com/live-tv-stream/20201_0.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://www.tbn24.com/logo.png"
-    },
-    {
-      "name": "Jago News 24",
-      "url": "https://app.ncare.live/live-orgin/jagonews24.stream/playlist.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://www.jagobd.com/wp-content/uploads/2024/08/jagonews.jpg"
-    },
-    {
-      "name": "NRB HD",
-      "url": "https://app.ncare.live/live-orgin/nrb-eu.stream/playlist.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRctL8rD_FYfZ1rHUDhs_Q3rJwRYGSDbMX0-XHpHFXLjeTC2D9iYwo8Gq3J&s=10"
-    },
-    {
-      "name": "Ayna TV",
-      "url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/ayna.stream/tracks-v1a1/mono.m3u8",
-      "category": "BANGLADESH",
-      "logo": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgBhxAik9rvkpRV33kdDl-2drT2X3Y2cU_-lrjlMpmIxzBAGCN50afZnqx8vvxgmbaTVZmYITeOyTW1Fg_CAItfNfgRwsrTcxaB1pecb0Z74oky6LcgXFGIAOz8w8IijqMpMo4dUJ8aMsAF4A0x9Xwt57UCZYxhtEpRfOdqTzmfwVjICILOqg9QPbOFww/s1080/1000021053.png"
-    },
-    {
-      "name": "Islamic TV",
-      "url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/islamictvbd.stream/index.m3u8",
-      "category": "ISLAMIC",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1772728412891.png"
-    },
-    {
-      "name": "Peace TV Bangla",
-      "url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/peacetvban.stream/index.m3u8",
-      "category": "ISLAMIC",
-      "logo": "https://i.ibb.co/Gfw89mC/20240804-033102.png"
-    },
-    {
-      "name": "Saudi Quran",
-      "url": "http://bigenterprise.live:8080/live/00612533/17905940/1172576.ts",
-      "category": "ISLAMIC",
-      "logo": "https://yt3.ggpht.com/ytc/AMLnZu_Gxy8ywjMY6_YPX-1uYtUGA56FOfDoBsH62-ekNA=s900-c-k-c0x00ffffff-no-rj"
-    },
-    {
-      "name": "Saudi Sunnah HD",
-      "url": "http://m.live.net.sa:1935/live/sunnah/media_w1138845165_11618.ts",
-      "category": "ISLAMIC",
-      "logo": "https://otapp.store/uploads/tv_image/sm/madina-live-tv-sunnah-tv.png"
-    },
-    {
-      "name": "SONY AATH kids",
-      "url": "https://live20.bozztv.com/giatvplayout7/giatv-209611/index.m3u8",
-      "category": "KIDS",
-      "logo": "https://static.wikia.nocookie.net/logopedia/images/0/00/SONY_AATH.png"
-    },
-    {
-      "name": "Nick Bangla",
-      "url": "http://198.195.239.50:8095/nick/tracks-v1a1/mono.m3u8",
-      "category": "KIDS",
-      "logo": "https://otapp.store/uploads/tv_image/sm/nick-bangla.png"
-    },
-    {
-      "name": "Discovery Kids",
-      "url": "https://stream.ottplus.live/live/discovery_kids_abr/index.m3u8",
-      "category": "KIDS",
-      "logo": "https://i.postimg.cc/wTvMLMp2/20240823_021706.png"
-    },
-    {
-      "name": "Pogo",
-      "url": "https://stream.ottplus.live/live/pogo_sd_abr/index.m3u8",
-      "category": "KIDS",
-      "logo": "https://assets-prod.services.toffeelive.com/ny6W-JQBv9knK3AHujXC/posters/7e7c2afe-a663-4c09-983a-2d0fa0f1ca9a.webp"
-    },
-    {
-      "name": "Motu Patlu",
-      "url": "https://live20.bozztv.com/giatvplayout7/giatv-209622/tracks-v1a1/mono.ts.m3u8",
-      "category": "KIDS",
-      "logo": "https://i.postimg.cc/WbKqj0w3/1000086946.jpg"
-    },
-    {
-      "name": "Gopal Bhar TV",
-      "url": "https://live20.bozztv.com/giatvplayout7/giatv-209611/tracks-v1a1/mono.ts.m3u8",
-      "category": "KIDS",
-      "logo": "https://i.postimg.cc/T10jC1zQ/1000086945.jpg"
-    },
-    {
-      "name": "Tom & Jerry TV",
-      "url": "https://live20.bozztv.com/giatvplayout7/giatv-208314/tracks-v1a1/mono.ts.m3u8",
-      "category": "KIDS",
-      "logo": "https://gia.tv/streams/pptv/208314.jpg"
-    },
-    {
-      "name": "Doraemon TV",
-      "url": "https://live20.bozztv.com/giatvplayout7/giatv-209902/tracks-v1a1/mono.ts.m3u8",
-      "category": "KIDS",
-      "logo": "https://static.wikia.nocookie.net/logopedia/images/e/e4/Doraemon2005.svg"
-    },
-    {
-      "name": "DISNEY CHANNEL [IN]",
-      "url": "http://rgkkw.live:80/live/1Aoen7elp5/IgMJ60tmAa/19741.ts",
-      "category": "KIDS",
-      "logo": "http://picons.cmshulk.com/picons/disneych.png"
-    },
-    {
-      "name": "Mr Bean Animated",
-      "url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/playlist.m3u8",
-      "category": "KIDS",
-      "logo": "https://bugsfreeweb.github.io/LiveTVCollector/BugsfreeLogo/default-logo.png"
-    },
-    {
-      "name": "Cartoon Network",
-      "url": "https://s3.ideationtec.live/Cartoon_Network/Cartoon_Network.m3u8",
-      "category": "KIDS",
-      "logo": "https://s3.aynaott.com/storage/a89142109d049ae325fd1681b50bfffb"
-    },
-    {
-      "name": "Star Movies HD",
-      "url": "http://rgkkw.live/live/1Aoen7elp5/IgMJ60tmAa/98842.ts",
-      "category": "ENGLISH MOVIES",
-      "logo": "https://i.ibb.co/Ns62bY2/2021-04-22-10-24-01.png"
-    },
-    {
-      "name": "EN | HBO Movies",
-      "url": "http://190.93.191.4:9898/play/a07o/85518027.m3u8",
-      "category": "ENGLISH MOVIES",
-      "logo": "https://static.wikia.nocookie.net/logopedia/images/7/7c/HBO_Movies_2025.svg"
-    },
-    {
-      "name": "Action Hollywood Movies",
-      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/playlist/amg01076-lightningintern-actionhollywood-samsungnz/playlist.m3u8",
-      "category": "ENGLISH MOVIES",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw1zW8RLLNCQm6UHcIIJZlscOB5vhs7BF2I7SfTthYGv3LtHeRSut2-Ag&s=10"
-    },
-    {
-      "name": "STAR PLUS",
-      "url": "http://202.70.146.135:8000/play/a009/index.m3u8",
-      "category": "HINDI",
-      "logo": "https://i.postimg.cc/8k3QXzvt/20240823_022853.png"
-    },
-    {
-      "name": "Sony Sab",
-      "url": "https://da86m1sqpm3o0.cloudfront.net/28072023/smil:starjalsha.smil/chunklist_b1928000.m3u8",
-      "category": "HINDI",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/ES55-JQBv9knK3AHNDWC/posters/13411be9-62b9-4a99-a062-b6e91dfb1099.webp"
-    },
-    {
-      "name": "Sony entertainment tv",
-      "url": "http://rgkkw.live:80/live/1Aoen7elp5/IgMJ60tmAa/144.ts",
-      "category": "HINDI",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/2S5t-JQBv9knK3AHJTTW/posters/ae74f943-77c9-4395-a16c-8ed84b439080.webp"
-    },
-    {
-      "name": "Star Jalsha HD",
-      "url": "https://da86m1sqpm3o0.cloudfront.net/28072023/smil:starjalsha.smil/chunklist_b1928000.m3u8",
-      "category": "INDIAN BANGLA",
-      "logo": "https://i.postimg.cc/0ykfppN3/20240822-231405.png"
+      "url": "http://103.141.70.136:8080/auth/ab-N0TdzXT5BWgk3HWS0D-Qq8xGP5qmsox5dszU4cVPCWcm1Azy3SZcXWi7NLpx669gu1mOFcySaAhXHQfPLHuJbo5RRtmSvSUGYhvnqKZ3J6zfdYZzQKDQ7mMy5UTGYyqh58fFyDSVS8E8Lep4_FBVU_ZfHJwZhsLDff8fAePHADte2SAy8RRkbcxs7-HiC1ITQZkCM_eNVxeLzH_bOCXa4q5Pr7LIQbK-PgxWXOt5dc8QcCnYjGtCUSIapOuuL2lE25B65oVeVnEBO_g2hlwISJQU-VgLoRb321cd4FhQGCjoDy96ru1Pbq5XJkC2sPy8xUO4Y34gJ_1jNoTM7L0ucXD1ns76LTEibA1Kn1iQ8i3QCE4LsDIdFeIclKcIzT3YZXT5vSu_oF3ka5GvMYRAza6d_cr7pab1TXpbXLpRks38lzLh_UNKHBa0IhtqtSXC2AkSqhRTfd4FJjwrEpwilSmLZXT7i3Ul38eJJeR22RzKfZKleVSUfKVxxPup4W6C9ROKKpYm1MHbKgr7VwstoS92UoCnvzNUEuG010dNyTL6YXaQ16Wu8r8Kzxu2J4ynZEjV941h499F36fG8jQ#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
       "name": "Jalsha Movies HD",
-      "url": "https://box.bbaria.net:8083/Jalsha_Movie/tracks-v1a1/mono.m3u8",
-      "category": "INDIAN BANGLA",
-      "logo": "https://static.wikia.nocookie.net/logopedia/images/0/04/Jalsha_Movies_HD.png"
+      "url": "http://103.141.70.136:8080/auth/8IH102PxojqRs0BdASDWwH0cAczoNoT-X_Jyq6WX4JUKSpscyUcKC_x99ynn8YCkP5JZRiwZGNqX8U_fooyOSfziqKtBNJdWoOt8jYarNhuViEpdkplIid4jgVyGVZTSjREOTa6g48iyGL0YIx_zQseeEpTMepT65Rog3-X_kQ41E04VGV2co8QhxfMLxPQlluoyAObkQjK1MIcg3OKCMPFSUDoBlW5GeEzOvIP49PeUlKqakVZboIqaHOidv7XX7x8F19tsvce9XX_eD6bTY6qfGr-OSik3jDaQhXBoSpWOG3xRqje8_ZeVnjJmQtlHxgfLZ4E_oiN5PTzp23zo9DLmbmVuKTh4_8bSBAwFv2OqfOzdoFl6IbZ_6VOWYdliHm1tnv7rLTBpzerrbIpplG2Kt0XadSS9uva4HBbzhuNVxA6lRVVaVuuFsm88qIflIOdbCS-EHEFnLFM097JzJbqgCxeQone1iSgd1eze_Gn-6DTHTR0T5Aolc0Qhb_RWOPdt3QRut9J4StcwNRFEy7yFfvUIiUY6WSjXMWDGj_WF3NR1Px-b2qrt1ZHPvmU1kKxdF5RtBYUA_xyx_i_1nA#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "SONY AATH HD",
-      "url": "http://premiumtvs.space:80/live/PeH5kPWFfG/infamous7funny/4083.ts",
-      "category": "INDIAN BANGLA",
-      "logo": "https://static.wikia.nocookie.net/logopedia/images/0/00/SONY_AATH.png"
+      "name": "JAMUNA TV",
+      "url": "http://103.141.70.136:8080/auth/q15nhFdPRFK8irq9_IChUfGGtzySRUxfp45CTIUuz45uHfVIKNe3eXXsQYvVHCGViNaZRPAwb6fExHqPO8PtAF_ZXwgSz_DD1kQ4XlMxUdfb-MKYxLhuwhhQpOyq92A8aEogGAATENPBNAfDQTLLkG7OakLbVNNHtXtkL38Py_EXj-RsJtgwCWk2EAMKgy76ObMLp_2vr9Vi1DVsQ_HjCTWK4dRg_STsAMilCw8e9ICvCBiCKUElLqogKctIX6fEtKCSKeLgqNfx9suMeQ8gxvF2UroauHWJkV8lGLO3X5D_LSBMqdW4SuPDL0K4a0q0QunTuptSKfbZyPVaMg5As70-TJkAQ0vGAHOxe_9oYcIlCTqWoQmm5BsaN5Xd30CCzpRUSr2gj1G5FlitYQm5OR4SVUD-vVhWG3R3ZYilrT_NmQ2hVHnSKR3GMKxFdy-RmHhqEUEDCdQfvZYxxFTeu-0r-z_p78Ezh9CMna6xhnsH1Gm3jJpTQUWwU65I1SuOu1XilgYhDu_7dynjTjlFMTZkyZJg3IBzW1lAC8wv3xR6cybZTdhEUSFS-UAn_kLcSSHcFgZUzrvA4BBikxWCCg#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/u-Z-H27dB85ZdEzlsaHZfmLiK07y6e7xTEO_eIzg1ZoiLkG4NI_eFNMdpo72FX2-YS0gZWtKSNIBs47dS-UycLCugItNaHivFxxkVk07-yDpouZ6PSz2LsnsMNjPJIc2TQuVWga7qj2a0Le1a3meAJ6YRFH0q-dxIroM8rhZ_kmuC6N-xE4msOHNcuS_Qh0wTogAeaXQwVSVsi-Tx0E2la89_WEMKl5pJ6MQXuEB86QTyTaKdeQ796i5UrnlHC5XdKKo9EmaxNyDCmb_oAF8_6M70VD0InsMzTngDjeuWFHo6OMjcxSNGQxLvfuQcb7UbNoD0345CgpxczRt2BZAWus4WtxMQ0z1BEbJ1UGKBhkbBCWbWhk0MDLigKIBWJKCoGXi2b3KP5-zn9aPzO57GJKb3TjKDoHzvbcz6Pn_8hM3cGXEJWYCvMlg_vhGhe8tNOd-NVN2te7HH_LCDGZyAnUyPQXVlpLNwIU9rFqa5cvw0gd9FS8QjNvtl04YgZHnkOvS9XoajEIikkinBYctFG52m_CRJ7a3Q8ezv_PewRONO9pIB8u_YbVTQPYVGZbOyKYBtVypliN8Rwql0Plx3A#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "42.STAR SPORTS 1 HD",
+      "url": "http://103.141.70.136:8080/auth/WSTkdR9rkB5MFxfgmy3QTr6BjQ2oAg2AlGbQ06TIZBJXfDJ0QstetJNSz7DseNFyiZl7RKdAh5ZJxHQFuovIVR3bxTej9GPM3V6UeZsNXWfW3ZxKICssm1BzI8piEM_1D4qJtoOyIO0BkluAkeTasP6NKKULDOH_dizjNY0o4wChBvbqnCFIBwBnZ00afehu1nkYDxr8Hh7SJO6iyqHtSe1jebiYkJA2xctwcR5_miFf_fivbaZ9EQfQ_NvI8DADI9ZbfH9LafwctTrjDQOx2FBGYsiGBY1zRYD_THuPtIooPzQ6C9p7qWorR4TtNKUdeQvT8_xgZdUpOXjEiMwDonTHs6VyMMbA-gkxAugsbdjvwnt93Xoa1TnmbVtOmloScJfiCWN2s-Rjf51VFYXzhMdaE-sVtDkpl-09AJ7kjT9LxcjC-fqcunJeMxfw5bIMwrwR6S51aefn3ja_5_KjdjGMsc1-svO_fBRk_djKHOVyqtpJ6LQ5PExfcS-y0SwXOlaOyVFFbhxsqZT2KGf7M8--6BT4XOrnzwlr6PckI4ad10qsIGInieO9ZfO01wG5ILRJc4ySddrrHP2IVYDAQA#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "ATN BANGLA",
+      "url": "http://103.141.70.136:8080/auth/nw_DesfY_QEU4tsPQoJ2m-I-n5UJqD0KvoW5PiFe_62gd_sgwiZY32aA0GJsO1qdV8kMy8u17ArEcvZAbsqA0Ezr4S418kkevltVCXaC_LXWHTb74V70Kx447au6CaBaKw57R2bzx77XnnbKp_OUxiQqXkvU52dGIj0qVfjnTc3519FE2_nndZyqtCNHg-1K3HtH35wHc0kAtDTWnN8CXL378IQuitgrnww8RlghSG7_j5796D7ZuC4sn-cNOVHzT_X2CBkKBTGl7iQxXVWOpRk0x0SzGQovfaPOtv5sJSIznIuO6tPhYgfun1kcLUneVpDMe0rO_ATL6m_u1G0p1wSv5NyQlYYqGuPqjkDLOJPbygti-Z71UwvNllLYpNQGapYT8CeYfQ2JZY_0IZH4LpofAcXGMqQafRfmfJDs6IrFbFbfsshA9aawjr0pc3qD8YBfeyy1X7kFbJ-FIg36jSMVa-I02WjLjhjqQ4JRnvIf3n5ryC0v_KMgGhy81VLvpSlZW_A38Dv8PWEi6GZjHOA213NzJVcFV4LcyKKPVTEGYPh-LEzSf5-m3J9E5gYFDOu3wmKkUgt8JTbZ3sPLJQ#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Channel 9 [Backup 1]",
+      "url": "http://103.141.70.136:8080/auth/egENFXAABLJfSQM3xEtuxnpt9TnpjzEE9Ts0Q4XUKZoVADzw_MZj5ii1qtmVpa5eL_tPWi3YR_z6xIj-kmvxp0zNeyOG1o0JcwEuFgYWGMPpPxst88LnQ319k8rJZqVTFgM2EF-lJ7zCg61NbxpjNLozY4vaoe_yDv5ckS3Hx8Yx-h3cHiAiQpmLbLppyEgVl5PHBNeFyYSccHz38yjV4SIU0d4jgRn54gX2lcfXwf45X3C2lRUh2BV_gtsiPMh6ucZe6_X8Xl_dhM-XXuOD05X84DkusGatewGe6kT_NEfozp5TPTZPUOKvQQPzEpL8pc7Lnu-X2dyZVqy5TTMyWeJxEZq8nzVYMWTAMlih4-2PB-fyaJbpzxhYPcrfwDJiHFEpsXrEcTm26-_ZtWp4ATA9b8GLDlK6ema4VqBu8jsEDqYcV8HVP9axoEZUflKNCE1FBfAFeGTsPdyvTs82IMyPuMSodB7ypbNgL_FgeMnwxT81EbpFZ6JGJnJBAZ_aS7O8V9MInET1tUPkHfgrBq-4bBYI7tff73e44cSmDsdA-D-g1TjzePGecLucej8OBQJWl8A-3rkQKbbXi0Btpg#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/JZyvIPNMKOFdpivd4eh4ZE5GmKXq1FyfHUci2KN108K02s5SH5dVQ1ljVLBWPsNih95m9cD9Pm8CCCZnGrtci4YzFyDgEI7B_oMLb4w0AKWs-dVrD86eMwD-O4HX4W3lNfquUALK1JjcgcYsMvoTjap3Bgm-2Q-OLbuaXhmtridwJZetJc79xo6t67ksksbKq9YU8cWD0lcZzvDgcp3aZbIey6anGGf32POrxg0LtDa25jtZPVbh69kHr8Z3tr2osjRA4t1KupoCnqrGZ5sTS2wQwQMIET0e4j-6SVkpRDrIh1mbEPEuC1F7GHL5j9j0zDjJ-ZIf1fyMec0ulWVm1aQxn0KufVqoSsYhQcw_IOfxHwavVCV8LSOEvt_lYBQ5aI-w4XgXS8pe4m-qQqW7jslz1-3OCHrEsZ6-UCJflmYRnC4R3HNxPi2ftrktkm3E70Umu4bXxhU4fCWPnwHyex_AlUaJtR_G9x4YHsCoYALFjbLf3ElMwWa3brhwX-BLBETrxARY8Sxt2YnpUwT7FZBVdTOn7lxfCOmfHRkSa75ybobvhSl1yOPODEhjlcJ4G7pva0eJr2XktZjskUk0bA#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "বিটিভি",
+      "url": "http://103.141.70.136:8080/auth/juaElsFzRAN_qe6Cv4SIQyXpdlrLaWuUJnCGXbsPA4Se4NQpaP31_VfytMZGAQHB-R5M1cR_FkWYsORI_CigxFrLYjFDqEBqkxorO0z2j2uJc9oUBj8STqezHAUph_Dh3C8YE3vKOwkBm1X0DsCmwQQWyao7fhe50w-9emIQxk1o8uoITZ0Pcvx82Wf3jQdcS29O6sBZsr_SUSwAmdTcWzxMcTtIJc1yS2Ok3mu3w8m5hG4uW8bZ0Z7CrSCEAH_CaorazwDbjXDAESL-jBCxwuNnP_xZbSMhw_BDxOF4leQUQSLkZJhD62avvODJOv3XH2_aY-Sf9zATpeG4Sm_0sTMZVAYaRlrSSPD4jCcGeETl9B0YkQoxhkKDgVxFduzOWn3rqAErTgrGVXHk6JASspAZfDzqsfl8L_s6JNX8Ix9sU2ifNwdAwQcrH8TqFLde1Mm4MohIVjj-n34MxkNy7pn8Dmf68t_kJTbVreyvPEwi0biSsGhnzC9slN8WJ2BVa2PISS-NmXG81sIxJnpwJXc5vIjqI5WLVfJnd0jOObenJMqrS4hxEQLd-kR-yDjUaPMJ4l3MtlaEu3zRiFiGNg#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/P26pBsC5tMqDZ7WuV9BKT9hWSq-W9u0nfPSjztAbl7ghL5uD8hJF88RYxGzoWyrdqj4zd4UHekYSH7TaUw995tJi2Bmvhve4QnzDu1tfEj8olHj-rGgDik6esIAYFt-Q7FHgMvie36e_bjw0GIjgYG8zc5V0V78Y5r5QAGWUD8r8cG7Vbw5q_pmdkgdqifoyJM6T-aIzxuwKzJ86_KIXfPQ8rhfdmQ9bGO4HpCAU0fhXklsd6925Z1qEBnzf5CkWg0iCJNYyrJe5vrXU5CCtjkM4s-iPmLck1PTIgocBMFioQPwmxqCDJ0NcN3fT92xidBEl_yYMjDFVAZfxplECqbVwQa2UhPLNz9K83M-dbpBuV0PvZorLqJ-lNW6ij_bjmgRlLiaek26a30iIhWwMrL-UfYJ4f1XII4EaUs6o5LpbJQnwNAt4m8qvEme1AGaeS-TNJzhznxGLE5uaBqCIz6t1lM2tWW_wgyPIcqaN-FPRsFujYqhT2L6ppLgZ82yv5g_pf7FHa3zOcam5VqbkDZaD2LHhBG_5XXNaB9AvKv2Y5hB62Vqnmk8JMkIF9GbNgyglpwb39jQ1b3YXTVtEfQ#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "BTV News",
+      "url": "http://103.141.70.136:8080/auth/Fqdy7PJcbS7tuBeFJt8K8MPv12vRt7eAGtVt0TbFuxF0V7vOy3i39u8Sn9Oe3EzDv5vg5cdT0VNIb4ghBjlfYhYATS2mPBbQEle6HyLNbo2-snjaUnOP9plsE8YcGx4F391CX5FzTVqOsJCCx1Svai4753Wnj5Vhfwho8Qp4LjMB9Wx7LoaiF4Z8aeaCowUFnDBiSKvKtMlqBkbjHbDitXvNJwkZlP-UQ_CQWrRkBB86DHFw-PFNDkzatJQUv9BYh-GNkOgtzGVVxG0HmaVWBf1pvSeVJRWw9mT6E12hZnWouK5qJ7fp-6hCluIY14qNWusZ1-97C_HSDg55oAb4akeuMcZHHwxmvwazh4UWqYA2SiGdMXlYRLb25N5DPfBcye3m1PpCl6I1B8645NqCy2rquN1_BzwtWMFJ79Blts-00cku8hlg7aFAAIL4UKm1-liQaoAJrGcqaAYeA5F9UXTYF3FHqikTpW7_a-Vftsl9V-ef0OToEqlKSWTMGZsgZiNJn6-nTpZRYRT7J_7jB8VuhNfUdJfhM54cNTa-hxGuvInGBwXCDgfi9ITMCpzINIdoaTVNw92M0IHzAfdHNA#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/V4DHec5U8cu9rGMPW5Tei3GeOet-3s4NTvaTgryT9Q63AUFFmmlaqo-8IasykryYye9Bumaj2iIlYCrpwuGZwBG2Jh7eKss6EvJdyCottnRRDGIDgYEFHbwPxjewbuF2s5IfZEsNE1lQyjxArnYmIbpk4pHjU25xJxWAHGyR4r_Er7h1aaOs0tFddDbt7Fj4futBOuKCqvEm1FSboWz0XXLkmdIJg61Pkf3612-f6vpScwgyh7ZuFkxiG9VzXQ6GAPKdckytavfhc8WfgCUjlpCaPU3bdnI-YCgfqFcUAtJV5riLs0Ahr_Dpd1LxoPNQyOyfSCYnXxlLVWJMKYlT-tRwCaSAUjpz2MxUhFl5ubI4_Z_OJKP61P-X0Lzrbu3b-xFkZzoSxKQvgJzVdxXmIqI5J93C_vWpQoQN-J5Hjis6VUjpxO774brc6sRcQt_GFUCxwMtLllcVKnlVkV8TVcul5vCgI7HzhyTTEENaN0q7_XEyw4nDOBp3h65L4gtwtC4Zw_Od5v2Rp394K7FlHPSh1qDGuGddTzwy-fFOlbO2cafRaWIhDohRCrkmfaKJ0PUbm8vkC7AvK9eudq4u5g#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Star Plus",
+      "url": "http://103.141.70.136:8080/auth/TQv2ayFZDA9ddF1E-QiP01gT3SpMtK62yrxj47Xz9o9fGiMSJ4zSCRJC8i9mu3JrTpdwIQZcnkj4FX6T_Kah3749pX7IUN4REbewavwu9yK-oOWHRe9GKkzvT13K1Irm3ys-O4wF0KukHnbRRwjwx9MJv66jKOjgk7ihtnhvSKBSo-MgaVard-mZ-80RTfbudfnCoK_16Uzv_BjBi9sV7jxSV0OJIhCmnOSp7dR_aiCePObiFvmb39pWvWs1eAfuRyKCkw8LzJc_BkbToFp2ffGImURzVXkRWg2BhByy8vg4bFqHe6o1GaZtKI8HjXr0rslMtg61RB-BNRG4yawV5KXfoR2FVOtZz66O2qJBey8jQ4c56WGecHyzUKjBssFVQ7HGflgwo3T13guXYPI4YAOEzhCCM5-D6GR9A5QLPagJSUqt8ewSY2KUwwQA-9L7WFANwx2xBGWoBL1jhD4uCCdEkE9W2qG9Bn1eEvyOb84E50ITEnNbwzxdwYP_sOO6S_avgIk7wlejGsk4xEp98bibcVWQiMPUNeQFURk1tC1xGPaIgeWHoKCFWZvvaAceUtAJJvW8SM3iW7GRxa7KHQ#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "BANGLA VISION",
+      "url": "http://103.141.70.136:8080/auth/yps76BvM85cKiFz_shI-r7hofQbDg690XUZK9bXqhFzTA7Yor7yCqCi6x5GWmd1jsxck9bzOwbk_ardh2iebtwfA47kO1EwXTrkH66Zxr9XveJu2mYkASV1CdP80CzQ_sGYk2Y-euPp2RoAMqv3KYqQdxWHK6XKi6o1JwE5wxTsUzbj6D-XIdhYoi9hAYTHQPExLteMpuYL2-Ymf0C3vSpamBs2hldLuOmzwKQqGfs8ri9JaWbN0pcuB_o4xD6x6hxm-xXWf8b8fEUj5KdaQLOI97OZoFW9gbLNLJcADoi2JnZERJqVt0KfIQAfeioUTbHAGKhCtDTGojnFsfGmu1eUYO1coqofXQAugX2j_JGqDSQKCEZSKLE3ZnE1vMxxqFQaw2a9ARNoJhos-4MtxjqDtEWH7DeOWVtw9-PlfFSKU3X85z6xgWTBQssJbrQHmwmFFJdxK44b9fvVnyoX8TvGKGAmv-hsG5rKkrfG82n0Ftfec_-HWj-ag21JnnCi1yQSwLYwkQAGU6q4hN5oL-V7H9cD7VT3vUdMJpReE7T1wS3YEzMyqSKCLOWqb7NsYzm9vR2DPSpCAuDrISIZeEQ#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/djiRAUGZkxP6y3ERSl776oMuKP847o5xzp-PaDdn0vrAvfiErBdDwk6vlolUV-heOiIr3jl6A9pX4dfcGTMbKcrCM1hGde8lTIvXq7D15m9-cFdFpFxlr1XVmNH2GTB8HX_TzWVPBOKgUk95iksGfMLAmr7yFYwVuZrSGYVsLUhgNzTAyI0Bfdb2Niljwd3T_zc50fIuLjohwFkCUzCfIWc35j4kW6XdCEYBVDXSHzseCSUPfvke4cYPrkJzugH0_GHm3bfbWG81WniiT6BmAeNvBz02RCQ09RhD7-jIgCe9hxvVHMqqa2wX0duoHgQq5O24P7FmuRfl2ymNh_hF6wsJDQYgOeZR3PPb0hvFM8R1KojlKFONeeVfPZmM5BAdRTzJefqoLAk8H2HAl8A8H7BE3X_vDmbRz7y5-Xm5Jf2Y0WRK0ZJq6fYcamqbR2Iu9fOawZakbAySrX075ki_ZP7JzJlABAtzuo7jnl95zd7B-yOzLbUnO2iblpvIVv9-5fUDFjsvbG5iqif9Ak9qun4QzaLLOgd-_T2KJa0xh9Ph-NktFWATas8XaIhOx255QQOBvDip8bXEeXJ8_rQKPw#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/XUBjF_lzz9gTCFsGbwGroBMEVzobFqohx4-IUNXjZ08tPWMZAgtL_UwA4FB95Mfn16p0yTeldTxFwmVZmlFA8jr-IrLOp2uATrZ5MsVIDeebYAnzh0_YsT1T4gswA2ehHsjBoIWyRdc2x8efYilUSz_8Am4IDNAbkthOgzZWYbGni3gFqi8uSpEtGUksEwaE2OEBB-v_yk2Q47Z5rfSEOsGqVuw7GTM4JCD9xKzDhLkfDhCLftqOEA8zbOjMXmubVq5EGzow3w8m03iZo3PtoevbGTjYDsVwV1mb_aawLIrto8a6MM_0p_RMGRt8IKoOyAjlmGY4_zR479Vkypz5d5Bhh58R2Bkuq9xm2_a-O50H86nGyMkrDZjBa7I9FVlZAvrS4cI2HPDgvv98GNuW-z4Ec8LkqMzxy7HKkfqAqPrTrEZkhbFTL5T8h33vp2vVnKBgioSDsUXFZb5mE3lIzNzZTqCd0V_jK0eHcsaHYcPT3A8e3ddEUVVMjhq6XbrUbV3lA4tk14ItLJ7_omgSWKBpFgq30QvsYZscnkspwb_3TRiEHg914Bwu418mgS-JrDZ6RXnb03ckJB-rlb2trg#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/HgSWOiP-YC9T8BtrW63GZpJOSpFXv_PpE0R_3EhFB3Tci4S1VRU8tqSptPsfcsNBGj0t1-7co4GqybeDKQDaaucBtk_33Pw1Qvenfy1vPkSqRrVYv5lyDVTtSu8-QbxSoBvwcQ5BHB3gY1LKe-KhTi5xJ9D0rNith2n0Yt0HJZZT6k7EEMrsKa3oOq1QrwRVqNSsPtE2dKeuzNuSPoTVl0pHsKlQYZdOOMm8NxpH13vqOUO8PmbolrQOfGRPb4fUWR6VrfdmWxQwrYvdiEfaI0q2kWhMsbkIsjZDnB1S7EmZG4Tz9cCoqHwsogXf_FQeyDLdfn3Qxv-R6HdWJhBLHy9-fB1v6oFKCrbBFQldZCszKQWPe9Wq9uHKhpBd7DvkU5CwofC0FntZ9W-zNZyUGYMPX5DU8xuOfU5bUSdOcyygpnYVcx4NGX1C3aRAJeqCVIGQfjqcRzub_ObgowSDTdk8lmAP0ln6VUD2k5EEGFVW3MMhGGxRwzd16GZolcJz4ghRQ5voq9ssN34M0TGfikKrmnfqdHWMwA0mGCQbIf4iGNYIRd4juvv-_IjH-YAZdfxnu3ppBSlnH8lu8Fe54w#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "সংসদ বাংলাদেশ",
+      "url": "http://103.141.70.136:8080/auth/x2_R2GqN2DNYuA_q2Lbch3oDK5wKQ8-0yIGLFCRqntQXSKapwW9Kwwz-jv5e_JTck6fSLIAd8F0LbvLC_yFklVWxvPLItIJ1MJbvEYTbh-UVI4EWlPtuobvf6Bg2RdXxKS6UQvxTh-zUPRh3jAYI81cWTm_ZaUG7RfgnmcZu5PZIJDdz7pc7WgOPQZCBHVVzP43FuxexkQwNmObVnMM9-_z2c7R_lCs4pqAzSNebcPkaEHuCHMTT5r3icVVcINOApujPdELOFQf4_-DNtn-b-7LFzRc97cjuhi-JF5rUyCS2I7KdCwj7xQEDHC7XSPktVrgLzOkOcY40en8rPSEsQWRDzc-ez5h4MpL-AYmHYE-Pa09xGwzKo7wKl-z1h7ag3buHSsCAhU8gZo0MY7KlRujCsM5EpNsAMKUfKVT2vRzzjDFqMaR209zlSxQCkz7UfEFZ5xemassf1qxmVNfbmfkE7zVaZFMz5UHM-63szzqqaVO65GdWtvXL-I3b607rjtgbrLaq-y4bqMZ4AdfSUCcbMGkQWcTXppuiyc7xuHrkSKZGNdVXemJ4WSCJVLiYR10MiqdQd-CsHqXPHI0vFg#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/N78eg-bllFXFgoayGGZq1dzt-Ztvn0ZH0FnIkdEZ5IQWf7CLp2zfHbE-8qJo0HIC_39osiuy-vLVMt2weOM5L-jKxAgwRCm3p2RU-o6P39TlSg-hxhZEE8CV-wsnl49ymSG6WOemQJ7xhaE4uOSNWLbC7iXScY-V-cuWsnJvm39rVs-TYvOx2WrLXXpz_VO13SgaX8kzWBjkjVhMPhSsghc10sF-Bxrfr2F5e-iGmzqP8SywW4qcJtb8HXLVobUqs1e0HemWyxH1FobbccVKUM3__HCuUMWSbblXnr37ac-2zIagScqyYQTvs6XPyhardLN9NtBN8A4ozaXn0mlWA7Bw8Lnyz0fDepye84t24TOTOh22qSh5wrIhFLTH2GZBMgf18hKM6Co2w9ZnlyaP2QpusKK45HMxqaVH1iHTGm2XlxURfz5FrtuFsm3_jCszqGPULqb5Cm-I7B_dijlIVDfkgCpjK40xxaGcnx20Cnl1BZ3gHUbfivK9WDl0wr8l0XhtdF_EyuKcHc0DaNxCo27nLDgc_P9Kiyu9HV_YrPku1e31GnB-iHhKyKbxzQV-HRUM_1vXyc7A1slJgs2Jmw#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "STAR SPORTS S1 HD",
+      "url": "http://103.141.70.136:8080/auth/e8sLf7hLuKISVpN_Awqn76d2HBtpGo-3z7WVT5oUROFRnpP9-xj9zotEl2Jr7R7mjN_Qi8g_9Y7RDNXwX5OFh5Ag7CtVdM8hhq0YKq15yYUs6GbcUUar6k6tbkAbBpBgVMaMhW0l3Zv_4TKpPgY3R4OvldVn_N5pT-Pr1IJPMhAuSbuZIn5CB7U686Y96I0aTRNsy-uHy9DmRoutGqUlT7xLUEHjCiBTZtO7uW5Zb-PoUGXtpL4E0SsZFoH_I0cReXUVTvR-vFRClyuPJbwX4ZZO_9as8sZ4rsjxLoe5rQjtixYF053yjv5KM7FBu9Y1EXWxjaqJG4lcYWk00oJyd6_duYUef7XNQ-tV60p6OyruEgvxBUBelGrh_9GUcwrKp46QKAI2wWZ-iW__udXN3BoRIhxAtSN08AIYrG72IMC8aXzg2bM3PqpYynPunboKas846y93NdO42tHmvpJvnHrco2RwvG-z7NYlIIHEQ8wEZ9aXRL_IDEvHa0A1xUqrFubQo-DCjEVMZFA-58IQPiKkcQV-SVIMB1uAXlQqgLuKNVqiSc1ZeF4jZxGjEf-y4Fz9KecYVcMBQXbfD8cXXA#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "BOISHAKHI TV",
+      "url": "http://103.141.70.136:8080/auth/YyA6KCPL4T7MNbp-5VkaJAxFW0PO-JjpMqnv_3OXZ3gbU_q60I0SIWKv0XicnHKmkbPWjNFODd5V8ujsonRo9tKUQelh9YTaYphr1jVbcs7ODNyqMgDv08v8tX9LZSHrtceLJbXinjaTsyxe9SrYE-IP8wjmAQA0VF5UNPCx_vnz9-HKD-0KhjOkHh03s-ek7qQrRxNQIrGygYMcMdIJ0mNiLJom_MRzVsuyQDPyfIsxQIB3huW_ZQDHIp_gcqb2ALx5-qraATklKVGdibidB08jRt8ZFyp-rkpHdqdhmD2z7mVsm17cfKrZuTuRzvJAJ6NoHu3C-d38MS_kGbIm424_Thq1HCYm-BLYt8kkOw-7bmheS8-X2wDj8LUPEAGHsOlEQoCRUo1yXKiFrf2t_EBbST-kZusGKhGvVMAPqFZ9OGUoId50hvS61Oq3mIsWWnGV9J1aFBf0JtZvCG3X-aClmMekrI9pTduUYARwAShGaNBRXZN3Cjnec9eiM61NjOKAXy7E1HkwP-Kuq_N-zcBv_6ApM2TWkVIdNAsdyXJLZwzezF1DeDJWTbQTbIAaCCe1aF0oP7u-Yx3lScso2g#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/ayqxsK7U_bZhHjRlJvziARG0Q4UR9RTqtPqqOns4chgVcS1E49D0SDAFeFOFEVher9hKN-tp0C06HdRq_czSDkWbN1Kbe_UVM8pW_1vCgnghFPbLcj3Q2KS67VVXRUmSsc4X3GVkShlJZPIZKQc5rpQTAx-YTycQCG0IEktyPx5hqvesQDrLG1uY1liho3Vur-D2O0FwZS0lal6V6ewF-4UVklJExTCz2zuOJM_qw6nuk4FbTmdRk-hMZBduYWwuCadAMEdLuLJjr5onrnrXdP70bmoQlyUaQJVeAv1DoUzlygdDOfFFTbspbpxJX7kiRGorS89n4k0OGUgIDJaqUSum9ZJyiwsUk-A6XNoNuu8ftFQmkhC8waglt-s1xGb_IkVkQjphPmD5rJPQjrDYlHfIVJxgyHODJ6Ai8rkdeL0zmMzHSySKU3BAupit_vYSO6x112k7ivA7LnUrs7KsAiyL8a1vemgu15XDB3DeaLyUpgYyDA8D9EeBvhVgsGsXCFTLLRHvFBBdBXOQdv7VBILu90ZHI8lAuNwqGJyK6e5-BmoFR7CzDSr3ZxqE4Pb1PJTGWpMIkntsYhaVvwEFfA#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/-JTuCwTTtBlWvGr5ZdPM_vXGFkGEnw_HihdJkJVjcJtLUVv2l0iAe0iB4aHxIQTwyTJsnQa3h-wHNi8eB79h2w5XHBNSZbiYUygM3mDH8oVu1QU1_GxCnCXV1Q2qdNtW1kHwymXBnT5A2Tjm5J7eHaW-xzcvTslSeX_VUBrLuyyz2hUTDNQH94OMP93B4Ij6diAz8rcZgnXbrn6cjpS2hk0OuXZyHWs9wNzrN2QtH3OX0oA7_VAwtErAqcCkH61xDoO6YC7isMyc_UcNLRxslvSbze5AnYv5_zT8yXKJPnMU6yiGwVf6lc0fa_8A3rBIQEHgtfK_BToHJbZ4pT4XjuVQVGzLvib_hMjH3RE31k69mwEh2W-3JAJfpeWSbBydHnTU30bTxLo37koZesjJMXGj0SBeo80cT8JS_BZOcgR_lupubx4CNAMLjAu1yi8t4bGjO6iZHI3q3GvZkcwx3iw5IK8bmlWfMJ_UjS6SOQlrBN-nq6_Rm9GfA-w-Op4S_wIhngSv5bEwbQQLiJb5MXSB7XVErmixn9gD95zRJFQXdWxD2jAvqyI9xYkkiFMoAEDHsm7eirSH-oFzq4to8g#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/DX_qQyXyK3V5HUYE-h3Vp3Emh3K_Y2jTRoG2vZmLUPN6GOyXUyDt_pyPCXwWDHYJLtjyiMUC7m1JwA2zWpefoDXlaEIIAUq-roXR3ykVfjmSsOtAuC3uVbJ-z2UKikjvazGpYK2MHDBlyHuImo2FyExLAdADe6L-9rGP7kM-YSF3Q1h0cP2LLFMl3GzMfZGcP1-pSiPpPoPHPAtzUp1QUuiWJgfcM8t9yngMgbqUtcAi96r7NYJaSdod4kVIfdrIphVVrLR6clOOZuedK2qNOu98tXzshlyIIgE2lJ5eCfCbUtvY0OZBoBmoxX_EG3FqYvuUduahEIF6QhDZ1ojiGTvmUZUeL1NA-24wtS5o0VcUEr759PpKgH-V5QZ4NyRwJUjBDqQ4ms8d13o83SggKu0pXcrqCSxo3LUlx4oa55xL4MXqM4rsM6dPjFX9MYBGmG8KBRdGbgw8Zl2ybYdX0cgtJsFVpqBxUiSgKiO3wC3EN_f-sOgOAS3auZQ6_-1J-oNoMIzFUcCjqtg0fP8c25uhxwi9xv6h8eEtjLa0jnnkVluybwI79B73dbEuB26at-YIiPRz4bpHlnIabzJEXg#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "EKATTOR TV",
+      "url": "http://103.141.70.136:8080/auth/E7DPTxamdN2XHQFBLob7GhbjYDo5GQg_v3_-z5RWNS8SRiGAaV0wo3lilkzc_8PDnGq99jinVI2B8bFLVm6IgnZXUthyp8fdvl1d_7RkMaF37LNo5_b48omRdvoleJnZGQEX5N_2olgGc_K3APBKPnvWZRz6zG7xP5XkMd2e9Fszzqbl7o8VkA6Kx2tSNFrEBxvbQdXnLLSXpmFQhklp8pm1bocC6GmvX7dbnvdjzEE-0IKV562-dcACTES3ZgzbmJ6uOaBRGektl613AevB4Lpf3F0JxrBVGK1GAwibtSwP3sOtd1gVHG1b48P7UDkUVid41xU8q1FFHJ_eoJEeM5QCYEJB6V-7OewhfhpqoJC1hN0oTFCirvWWDIMEP-yPX-19kcNjf5Zn6itBVauh7hqJ81fYCXVVKIwHA0mIZ6uv_4gX4kxz50YGODv60by-3r8dwr3OEQ718KrclOWeeQXenCAZtHMMGRMqStfmIu2T1IYXYybWWRZWs7VoUvRiZrkNmETTIggZunUmwGS5okEc0MmPP6jr5Xd4p4fDhglivg-GfTBk2nvwGHDoApHlH42EwhgrW7iIWwFD0B_-Rw#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "BTV CHATTAGRAM",
+      "url": "http://103.141.70.136:8080/auth/_BOCH35dvlbnZGpTddQlTTPFee2SBwWLlwZsbXkU5MsUIhvPeBabezxKuruXawX4gNDfxuvitkeZyIYbx_EFGCfGH1CAKC4p82elglBoztpfuIKsACj-rZo7fEtojSny-7sBluW7yanS9gfJXZ32O-jHGW3ZDidIAVYYfXNLaU60OYqgzPT2KjV66-ia903wNb-lmZeQK1bjqQwNkR3OLvV-AXxXslgEtKOXyBvpFbyPmQWdIImA38ulb5fiPQbU00wL9LumkFfd28VkCYhODtf4D9TO_PBU3WRM4j_RzTBsnN4DGbG676M_TqpTk3W7xw_Bav1PuLQ0HynEPfa-TO_ICktkuNiKexEK0jRdjX3aseaBXUG_2smoc5EQ4Kh-7mxnOZL13Kt18v5h4uEXVR0a7JjSElEctVfBv8rVI31Y3u_w6ZW1qvW4xTHDapYBne-tfcNw8ukzvpkYlV2O2Hy2vbY1OAEyETE8r83f23HAHTr6y4h7O9q3ytUitPFQ_BB2ou9bx9le5BKOBmiU1h466odsclNkrH5L_mLevfGbtiBu2UIZSqOgCnmNHTnSxKbtjg9hymZ1wsTWQkUDKw#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/FZeXlVNEX5s8Ym-_-nfhuZjEzuFEdYsDdt8cx07nUP_sJitoyXScoLRnFl5n4pTeqkknksTdbnd7FeA6e0P-7qKrLS4oPiNV4JShDa0foBIbxRbM3XUt8L9WWgd50K_O1mMQglMFxvMaSFT3i9Chf89QNM5-rHVeFqMzSTSY-6jqWf1oiRyA0oD5PVgRw97UCpqE7gS8zPW4gYPl1jEbhD0r_Gn9fwWAjnbVetJytmnYWEBWtMhhGclfwPPxyn6DV1vEpMMGEKn1fk-P9qPW4Er7IEN8AMLmdxeJyNVAmddeLNl-V5Af0VTF1xjuTyS5w2tkuoKh1DCqba8HyoFtXplP5J_d9t3oxusbbX1KhUnRyj2sDZM5D8g2Dtkxrq6eGamZsPeQOOtZhdm3eYnEMfiXFbih91run40GpcwALMJLAAtkazPlwVooy9epoUCAWX-qxYzfJGU9cmEkcIdQpJV5z5Q9Og0nXSy68XrYiK-wXdeoDk1O8R1ivYmmWV7bHaJYKrBjg9Elg4o9oe4pWlXFGU6tbERw3jWIWu7bhXiSFiVoRGjlKGpWighLFGan3VM2Eyf7muoqUC4pG_MF1g#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "DESH TV HD",
+      "url": "http://103.141.70.136:8080/auth/EBGGPGPCuofyQ38H-IPEyvAZUBN_-x71GuQ5mKomrvQJjkF5AhG8VsSbnWwqqKroFD8cOC0XTO0NjjuI4xmfJpJTriWqIMwra0ZViygeyE6NEcE66-8TOYnJe59mZ5F4gr7giP7Llx7UISMEdYRqUK2zxAO6Kg8UaYKypSpMfwx3ui2zuhVBeQxGHK1cgrrQQOSvWOVN3auCjaebmDhm6oPu1Gq7a5-xf2f1XcaRS70ViE68gTERUJsa2QuOaSwy6pFgwn6uM-jeUYtP4blqdRy-uoPcnh3vwso_gKPNmmjvDMNzWJGMhs68oIBcSCZ7sqi0ADaW_dqBquYak9jul7uGcWQRlCcc6BmPTENcmh191R3AD833j1L64N3obseM5MlEGMk-Oy1X2RzFGXvnfXFDLJpvI9apa580uSr2ct3oUk8VAOdly3vfrrjUR3Flpci93V_OXBWUXJzz9a9vNDpymkS3s-MZAKGhYbB9i71leQ8Nle4_EhfvNJiIC0OZDjl11kPFLSGyt0Cfcepp-g5R7ihnhi4LE8CGnTDKWMa516N07sdf4DjCZ8TIqWhyIszd3LzND-D_kT3jht8yWw#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/3snBtB5VNRqTCdkUMDFogODuq23nV_ikKjX2OAbYGH_tCkQEfLwTn_k-ZGwXrPDYbE88KTVp0YldWI7mHW2ieMsHZ92P-IqFYomcCQxIKnKgMUbeWkIqkW8Uebr6FLnDvkz0g2iq9aD8hCL-l-yY8Q5cGokiOkSfv5QCCcc0vpNCPT1qEf3bHg66jfrPoYS-qG46mcjxhJpx2wrUW-e1HFaEPLJuO2Ruwa5Gf9bkf1Ti0ictb4xa7NZkMzlOiY-VOgAkoujvHPgxHYkIBQyQcJ8tomPvBWEMA1BcEhpELDuAqui53o7l_mOz1jkiYP5nbLmk4rTrjOXlWhKw3Zfh4purMVkGD95DZjYhYMExmTnL75lWWJ41ntHbly0M9tqqPQr55EyyQWC866VBo3WBOnYKKMbXNoaFvCEobVcqHfDAhQzuL8PFxYMEQXcXVpAIbP81_xXvy51reG7jwRcZZI8mF-Tdo2pQblxNk0F4SkWtP4SbU_32C9GfNow4i29UX7baptsZ3FSLMrUDj1tCQQn5uwysCLxcnXqQmgT4VWLjpblJUQSOYBnOgJ46hr0Mc7HLHnQAa2yjrQif-HMuZQ#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "T SPORTS HD",
+      "url": "http://103.141.70.136:8080/auth/WHWVn-ucvSW1KhaKHqoaFGfsCMsaBFEOVNjiMVf_XUojW6I8a2qW7fMXRas3TVORavnzGSMmRVLPcLTRdONIr7fI645VhM5mAKABMDUgugfvS903mSIrbGcHFZoE_2WMCBQzMezaWX5vWGmaU1n5-u4Zcgl-qS9CG5NK28tJ6ml0v5yERUfwzqLV1SMSQg8QbhcBWVHLQy_6a9O2bmmATiFuRo0jlWcoROjJkjMj3RupgvnU9ZNcftzMntPcRVDjP9vzuLnXtYbd7q-MTNfdy3iSDnp75Od3nNikETg3J1OMc47di-0pfuLP_GwHTUuqBpN_YRzwJ-xD-UM_-_EShCC1IJPxdD34-YGYDg8hMgvMWVJirdHzFvNWNrUwHZ9_5Tp04AHKwAlP7XFJQp5Rp8QqPD4L5-HZnxpBWRmB61A4K6ulq-BgQMVn6MBLm09Hp6UCC9Zn9USd-Bl1aB896GYDY0ElQlyhCTA7sbEFUuNmi7-iICgs6vDy8ElRK0lYD0IEhunqKVoWruf363E6o1gbVeEwcEyHJ0C77X6NXOvBNbMpZ1WUs5z02ZkJtp738bVIpGN5OS3TODYldtkMAw#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "CHANNEL I",
+      "url": "http://103.141.70.136:8080/auth/K5WIw2JPO__c95NhgtRt0HF-CUWS1f3kIyia_n2Z8NN5lhmEsd-I6c24UFOGF9Gl1cO6-KE6FJh_Z_XRVEVPfISzVEfeo19NEu3DKPpIBFsWBWQmpamg54o9gW5CRond6KJZbRhG9dSqCA9jwzf3f1Za_IDpPM5-1azdhmbmuO141pXK8lTzvM4ezoYOYPSm_YiJzKNGmCwHiE84dpE15YQHXu1wvieeAxDQEPXOxQxl2p0nLO5PPLJTH5hugTROtFdeAa5c5NkLUCJzhdXgPMdrfVCMz-3CxD5dNDRsC2F04Nx9bPvVcGfrz0UP1gWHZkg2WeDHU_8d1-WC_j4EJYJTQ1HhG-Iw8I_KVv-FgOMMfqb0xZQlteYyzLJWk7M54ry8Aa2TGBAQsAUgMCTBsE5CFrmVe0nrgNw-vufM135_H-IMZ-jEeryMs3J4j7LrsWPUXO32_XA-8k0GT6fx0elVWACq4sbrjOv_OYbxbIOisBs572AXXWp5APB0VpLNGZq6K2RPKyupPfAmyEUQPBLT_K05QjP3gte_g4WVdnvjcYP5coGSrNXHmn7y64JdhNR5P8QU_bDuibJmPbLepQ#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "T Sports HD",
+      "url": "http://103.141.70.136:8080/auth/WHWVn-ucvSW1KhaKHqoaFGfsCMsaBFEOVNjiMVf_XUojW6I8a2qW7fMXRas3TVORavnzGSMmRVLPcLTRdONIr7fI645VhM5mAKABMDUgugfl_g5urOk_qRcY7TPtTJqbHl63X7U49beLGG7lmXqsBpIWZwkvLax2MhFCTdl-pizw6E__EMv3vMV4bEr_HQXgAgquolS2dpOMQHV7P8Kwljeoq1n3_bgfYdXZ61wqdWPH_bvo_-giUrM9mYUoqlplv8JF9wLbtdVKSe8SS9TRrafipFBFdrQhPpV79Q3ROr1An4GjcoX0nTm_9fb3l5wNBSSlAZFa4kbpu5VUps1IOa8V_Ja9Hfb9XkqKP33i5CRuYXFhiGMJoJZFKeGrpA-VEhNLYGlmVbDWMgwr1dOMiMe1FGhR0GTj5Q4QrJHsI5L16YeSTTlP-Af1ETMiL2CQlkzwS1zwWNIpFUsfD6zPRiRHd4v7hgrqdvUjfDbwIYofH0-esyRcieuezfqXR2dlI_7d8cq9TM_dER2W5ilimpT6nMgnUEPRvrCkcc9tsyi5LzRKPJP6fnV7zTHTG26ZByxiJ5UkV3mxfqpDy4eZ7A#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/onuFZkOR5LW-FYyLd_M6lPBvXHXK_ZF6T5M2GNRxzb_5RaRaGwQwQ_ujvN6x_9o0oUFwL0-JFAxf4LNF8BE2o-FNhZpf7m8bM3xoh5FhBVWa3nKU3GebAYcK-0gYdd9l-_f_5ohcaIaawNzIcA-RDD-0A_FwMCIkRn9RW2KhIJST1c4NE9l0ZxLq4pE4OtkVgWymT6p_m2C1MpEiXLnM6qkfDxC_XzpDd6urf8LzRmwc6qlIH7m1qRZhMw1ESrVkZcCbAFJtJcd4OfkICPJ0AzZfEGJnEU_IUKRd2hORu04Yq-9tBsbipMbRIK4L2WQN-1k3aantLHLM4ZT6kGlt7NO77nPC7-pncyOKOcUCeEkfdoLZ-6954Y1Zp69jPvqQO4gENHNTRnEShjWb2BBu9ewdkzW3p-xO1Zd2NnYeA8HGKY45kR5gFbOnhDksGndyrycqULMf2e4Ps_sMLOx3QgZfX8zL4Pv1B0ZBM1l-cMar3QusgIZ-QxAZGp-uINszaORVOpI0eMgQWivZOmna7grPV6215CzGw-pNO-WIOPo4vXqdje9MbcAIlXy4IUMITlNfDX26MDxhLNxFBN4GaQ#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/38ELbRs4K2BgFgx3Yo7DZJCBn_zhne_PGqOZpgGAwRY3AiwKG5NL2YSNtSHaMJ0gbs-raPUZuBpBfvUOGdoAls2YaxsMYUUrJt47PYmuHGLBfKmFuA4glKrFf6VI8ANN03l5SjSKzVA4bF5z-2HZIBicTjp1WGi9W35iqMN5kkAdn1eVT210fNvENPFVdL1gK4VyGSmE-ZdgHsPbWb4oBgZns5CpvI1EjuLkONSAWUW2QC1zc2_438pdJftC4xUSot1LU8iRNpd8uIQGAksVaTyAe5SaAk93yGsP-qtL8kzywiel3C4-ok6nbkz8Sf7uxbNwcy_UVYvIADca8pC7KdPIOUMH1IheQFv1-RImTAqCqBkA4Ooce-F8AF7eLKcj2GX4BwDgyW7GfEQyW33cF8QklvD-0fEkM7NMcYvllA8C5XXNnvfJgKMaHukBOZSqeTeY473Ehij8o58n_66_qPHHyQ_QEXAqcXXwcW0z9-6MF9NtWJhg56hInpC32a57tL9dK4OQsXeqCOoHJB3RESTlnfJ0uumSQm95ssC2hTOShje1817Y0iHXz7u6m4sS5f7S231ULCJRpVk5K3iIiw#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
       "name": "Colors Bangla Cinema",
-      "url": "https://jioplaylistdown.yecic62314.workers.dev/live.m3u8?id=1657",
-      "category": "INDIAN BANGLA",
-      "logo": "https://jiotv.catchup.cdn.jio.com/dare_images/images/Colors_Bangla_Cinema.png"
+      "url": "http://103.141.70.136:8080/auth/SB6kL9zEGF4UyrL516jn1aPv7X8hYKF3QF2Kg87uKvXsDoTJlLiJZySQ68uYwqdRvEgUqgMVGSaKk68-a_TYZb24YWVpK43wKEkXtsRHlvefrAL2D2ZwRP3PFKTlk8gWYSnh-aW4-kT7rzHloUXBi9JMi5cmBITFtcg_xw0RbxyJ6lEPwOg8n1BatgirzZ0VusYWiyrHGWDxxc4y5aSrprwj9luO8-b6_2n-hfbO1_vAwQUEZ0hO0T4MzwAwOQLllOqUfR8M8CyRK12oI8jc4wm682T1lKhmrfzhouToZkUXo0GiofgPLwiaKr3QvWkgvIU64FFmek9X_iYpi7-wnHBLp6dgdb-9Uak5h3oF3rD3K8crKoOLzI5KgGR-KDMBU5sE1u3tTQD6d6Zfk5ffpwfWAv80zjSOg-KhkegBeLRoPYphMljb0zIxsnn-UFOMXi8WoZILDuc8eEs0hbfnJ_SdRdxjlbu1ZZwuWizjnsuUP1j9dyiPxxQRukeP0Oadz-CBQYm7H0J0E9WfyKTfnvdw2No6fwhRyw_WTyulYNUMRb5axPGAQNyGmMlLWS3qRI5piTCVoIuaai9THRVjEg#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Zee Bangla HD",
-      "url": "http://flowutc.com/live/MAGTF8AV71/bUiJLEJKG5/78981.ts",
-      "category": "INDIAN BANGLA",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/kK2aX5UBrjBfS2_RBcKf/posters/ba5dd8dc-4f87-414a-b57f-c9ecdeda5253.png"
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/HawqRdDAoY5pQyqN8Ubn-tkerDW3lenAPWEzPYYrHhUPvETHt49PpdPOjQ2jvQGsi0TCoJKplVd0BP-bvonn7bnxPXgdsRwv9mqJ-keXabrRMYFAXFXSLcSP6A_WHNDlK1hnMe9V14w5qafSQjn0AiqGSZkSYwwqQpQZ5359fSFA6BuhAc7TiUzlCg1N501b8xNH0b1Qlkwi1tUZhL6aR2psDZODYIgY7YybAEa6A6JEGWouGbk0eL3Umaqe_PAem7aXOgfe8eqd4Bhltxy2AkzmXI5zbOUIxl9ZSXcsEscpGSwvpOtzwOxQDMjtz05jpBFT1lkK4cOgcABE6Avol6GCbsJeLFuDFpOUYM2IM_hrQE3HaB4syu3bS7YZ1px9s2NdlC6KKjIXXUe_l06H24R1eFk6SW64CFUeCNXrcQVqmSy5bo9OZ6dUkno3jaancAsEJF4DoCoSIgJK8Gl4E-FCnAbUTWqrDQlkt_h6qmf6fsr8_dMIRxlcR9MvVluZV2ZG_SzJGZGPphq-8mYOqXjey9xNMkHxtpjhX0OtBxfEb-Yytc5X63hW1AzKEu7PANIoU9YazAze8qK73xkGMA#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Colors Bangla",
-      "url": "http://flowutc.com/live/MAGTF8AV71/bUiJLEJKG5/76179.ts",
-      "category": "INDIAN BANGLA",
-      "logo": "https://i.postimg.cc/3w6F5VZ5/20240822-231514.png"
+      "name": "DISCOVERY HD",
+      "url": "http://103.141.70.136:8080/auth/HEHCD6nfVastkbI5auVnAjunF6JKcortehO2-LAGqzixI8Yl4ulnIPDZkjTJpXcIyt9wvvWIIfzsqp9GzLgQgsHeIP9UJEs454slc-U0RYf2FRHy3Yho21wli6PrXyo75fBEuT-QySVgqdTRTVEuQf44VrT5LlswcOM5cfdCS956Gdf5CyaJv7UElWxZo-bnuWdBot1t09kGENCNMD9o2C-OUWt9YscbWgDDOnVJH6kfkf6wWic_if-EyLoF-uEZWP_lrAEU7HojMPdzakXqFPMYLWJGdj3UC-pFfAU_DeT3afVwNJnuAY08UyJ1NYCYUM5UMhyzaxMW9-5xUCTGDKtO0tpNVqs0TS1cgHbSgqRQRmTutkP7jWYKIw96qQODb4aUwwOa26hggJyZqD_5EOE5nRzaMZRG2HwNfU_pPYgxRS9q5y0LXI4GisqKuEpKYMI5LVfcuI7TXfTVOGZgKj8Iwyv0o-nl0B3LyI2B38k58F13eSK22F0ixZhT8O4iF14zpfVYXdiFWfp3beB-78oFVd9YfEYQPascJwfjGPjm7hovNUG9j1V5ukWC81GWQiEkW3niAIbcIojbHldRiA#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Sun Bangla",
-      "url": "http://27.124.71.27/Sun_Bangla/index.m3u8",
-      "category": "INDIAN BANGLA",
-      "logo": "https://i.postimg.cc/y88mJsQC/20240823_020415.png"
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/NLJIyIc5mrqbZikNtNH0onWA1JbwD-ELgeWxJ-mqoZuO7mB4KgFfbINHQmPjfgRCaImBL25V9KWrKQmzxohi94bS9yCg_ZrL3rNoe_ZM3IyheZKmG5Dcxa_xGQuceYrsZv9tXsfqXQlPZRfg2ivGPQ8IXfPnRwRBejsvCoYupmALQbon7hurKGsn7Tq6HRCR36DxwOnctiV282oqv1T1UpGM-VhiKUb8OlIzdIpjm1ufKmsIsmT18C7KB-6OgR9Yqt921e2S1X-ZSIMsvlhJicKhj9gbUVFxr8Q1jyNdaM_CmrWb2u9V3e1CtsCMRAXNC8iOYpa5vnfjRKhRuc1IIR-51FaMMgtBZ-IjI0ZFZNZwvA_2-fd5tkrSZvlOIHZOeCtFruxGMTr3s5e7Sl7KziC5pSd9wSXotKoPpWGeNdhiKjRHZ1dnVYZlRwEeTkUvzMdu1BTfFrkOlbYGHgkiVnWRIgRZ92rTif7cDUDt1bfILjWqZvjFWEHN-V2BzPNiq1kUQkuHOj7s3MhiFb7AtsKxJbwByu5PjB37br9iKlQifos_cc0fxTrMJ6rYayjWofupdJ7nYHB_svi2SOLdEw#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "BIJOY TV",
+      "url": "http://103.141.70.136:8080/auth/0w7nmLBt6L59UE5LPlSIQmylqF55wTFtgVe9Q89qQRDeuk-8RtND1keUBJ7PM3TmOxqv_IPxYaXa5vrRhrhQAP-ejTdYE_UV9cgf0QBoNek0zPV1A0GUnHpSlp86kSiH7sIC2Wfwja8FlL0PJD8uZGJOgmt6MRpnAh4YScx61eE-Ahuh8RfXJx3AF-GH-8tLmgXoRRdduaSJWxf1LO4xgLwLsmWxwm0js8DREnUmelw_3sNilxtUv9MF6BR2G3qrh00bBRMsIs9aKjnNhCi00szVw9OpaVZntbISJVXnrwaZoz8-4yEj85siZZc5RilxlczBfef7JWPqpx2HDUuY76Py01mbC_H8XhbGa3kmUC7HN5G7NKaFRV4B4nrD-jkYkTXCU-CP2iTFW24NfmvMSGL8Zx2czgBPF3e0F2-KlxF8lTSCkzjNrbxermUVQoQy85HZbHcYMAmIN88NNo7qeoBLWARGeBSMov4zqGGsghvC8gXkiLrRCBCx-_dtZ3U7arrb_iIkDCGnc79bgj50GHD_UHEHcjrPKVvU4_SynMewGMkGiAPqs7EyhnCeUp6C3UDv1B_hv2A4otBOMqpQsQ#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "EKUSHEY TV",
+      "url": "http://103.141.70.136:8080/auth/BudLyWVKK_ktfoQByDlABGw6dD4HbK4IwRdPC7QF4uEQVyFEbyuFenJUzTnFSSZZ8rlKu_Kz1rm6xMfbmRlvkNBJ0yCsI1L9EJp8ns647gjsDvKHybIVgyMJISFlY7bQNiftYeKLAVjgbzRYij1oAsuKNLFujythSSgqdcYlEDptd04HFB6vQji_61XHwHa4akVe8MjEowoqy4HnxqV2avdxG6DxYIJAxJhVfiJjAU6PHAPdeYIkO-haliSyc3kQVxfIJ7IxvZJVMEmR8pQi_R8mPmB2_vJUbxdNaPsMigZYSECz1yayK8uYumCrdgEyGHgP0WJmA4MmLLu5fe1LY5cZ8iyRIaYg9OzvrIvS1EKsX9lFWx2kKCPVX8mF8_kzDjRJeWiJZl41UIuO94VyMbXHWP8d2XYb4ymGRG_GgWA1TiePAnN703yU2V8gu9D1KPweTdl-Jk7UC17e2wd7jKYFkjstuBWulAyPqe2RBcov63baAl0LqNa9usXXNqHG2CCY42plWzRfcfSprnOhy5ZqhRncXf33uAcbgC8Ddf3rVQKdRDIBouG-HutrNKe_bdDdLLw5akmYZvZY4Pyrfg#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/aiDtiqmOQnzcV5mt6OmBcBa8RQnkHKGwZw7pOiJRPcyYupL6AoHY2zBEK1M-vUrzs3M5ZTYa_dc2dOU11FUZuHEeqXyJRBQAPCsPqL3UsLh5xyaXNuG9CbWwtFr990oWdenQs23qzZH0fgvkG1nUgT3iGcEq15FBzLAjAL9688SW-xIW0rYlKSqmpeqEc9DdSBL6X1ceVUz7dCeMkyn98307renc4YLEu0aYNaWuVJUO-3kwdq_uq-_5dW7D0VD8ST0SC5zEd4eQafxFQ6Vnrr4LINGT6EdKAichANkpAyXHe-Z3e_uk4lI7lE7VRBdLHMDqBBk6lQMOj8f-dUOGh6HjKclMBj9oMQSQ1K6_BlhPm1VTcyANrw1VC3027AJVR-XBrtllPYlIMvFC6fpz9tMx-lUvEJ7AbwZmSAsMrdmP4crgyCmqJvee8B8XTkfez3mXEhEug7ODQbMv76qzhOkC6YoHzg-2WbWgVtz56gey6W635sRx7zCR6VNwq0_H2SswUa9mPkOJ1vvvgylri0PrWdSypULbVBUYU27XIF_tzWf-pJZAX2NcvkhmEtXcghlpKoiR-x73Yr18joakyw#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "DIPTO TV",
+      "url": "http://103.141.70.136:8080/auth/vmbIOEIO_lHEkYUafOcGGRlfK2Dw17dYrLEKDkZ67krScsFZOvs0JlFZJpmftq-HJqHb6RVHItJmOYTIHzhOxh7onQ45so4u3050dYWYjnHlSl01Jb7hyXIrzz6_71LW-AKT5fZDXO5vncxLU0jDM3dQ1U-CBD6JNFsGYF99Yg8KHgd81mBEBe21vN8F4gMcapfPRp7y_JxX1PA5rjcLow-U1CBgkjZlCvth09hF7_cwqSP8s-mpQyGwPgQD8nbQR_uz18hBZ3ykliYO6grTZHvvOrH8tcTR4v7KUhKO1SzJ9YoExkG-rE3nHYonsPGY-zPBgK3Yjo0hzVlGaWefn0ChOwmD17B-87k9h-KmzUPxPze0y3LVy7jMEtNg5LYc-B4nkwjWiaOPXKjBUAD9914O6NzLTf53OswkRNVvDBjrtOqiJM3uNm_6CISSGUT7Bsm5U4PuvcD5rGxy7cFkVMfK61CkqwN5quqKZG4KbNtDDpFYqxvd29Up3ZT3dFJZDgCfAu8DNslia62ULhG_hcVn92nFswg2Z3ZBu9Y8RQR6NeFkFWjfgY8WRd--JUP_chDMRvwL8bHf5ZXn3PLfOw#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/kUtoMsNMx1xHatN1ouZdy3vYhOiaftu9M7RQZxGaty1sPuto6mnF0oFsfTzAWYuRGMwyTTLC4HOXeNUZGcAIcvQIeIgzkeRQOxGecNKiLRkmk44yA568RuyCguhSPzkdzuHxWi6AzBQcDeQYB3-ZRRz_riFJcbLsHHYbgRI_b5no7JWvYlqdHoT0KhazUOq9-pZSXC_8EcXWfl-YNN9nYPEVEMmKHqQyGtYU0cOxrT7EZWBAE5Fbaw3VoXXQaJDEOCgKNSGkvS6_lQ1SHwyg177KZeQRjN0M9bkT4Ff4AVQvYK0AtjgE8cYKdDp7hqvYMzakYoH0Ft7gkKz28fWEBL9A2iWytO_f5Ddv_Zx05ncH-XGMgZ7BT-Qbm0uNKZBxhsCTTfFtP1gvrp4B94zendljaz-9IPbZlsWqLANxXwiOOoAFFfekqUxce_sBhJpYlI8Ni33vOCxfTy9Kvitq3gD2PADxkVjJL2af4zq1PIhte2G_WII-fUEbkCEdva_iHvTf84SgzkX2B_mkgMo9ryXyNFa790tSTgi8WoUejocwWxFqHr0q3Pjx8U9pbAfna_kqtZtIgYRo05bXeYFeOA#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/Q0FD0CO9daXMq7TizadpMhz_LmRUZEkKKp06JQjsA-rktTR0ZBSx9IGhJJlmzVUKkHTYk3_Pp_fn6MFWXce8N5KcTYKuLzl_z6RuB1aj0t26iERvRNwwBdSBM5QfalQyA92lJ-cd3I4nf3VxW6st-HxvwRlC0QnN9RksmvZF2YhPR37hbA4CGSYp7swJ-dCPEf3qW4DUxUUvFQ2Nr8_v_PTNE80qMqei5jHuxk_4UNoy7kOJ1Xys2tXh55ppp5lNLmd8Ald0Ou6jKXjdIxEq4xs1-Rmmr2b95QZM1NI4EriOmP5siU255BWvJV5pcT3kp1-QAZO5oxfLxvCwSMh-oJrSI8RaPRFo9soXV3BzWnT5uKe3NcAdIhEOpnDRY9s_8Q_TxbnrN1J3J6MuxD1r8a2Z0scJuYAeii_gpVd068Aygk8O3wPilA7rMs4B8Bck5zPg8s7-2PByJxW-skTj6jHwu3ahB10QJ6JDUt9EYWQMKI2SJxt_nYbUWS2Eb_8NNc_z49H6lxvqUQQ4pZgCb3Jhc0ycoC1xjsFAh3GbKPd6D3KKlDM89tLu2mzp15hfPAksFLVJ_3aUrdGb_6yA2A#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/Qwz6y5gt64hoEsANg7I2ixpCOiroKxyoJB_TMLVrVqpG8ZOfqFiCajG4DTLE4rFvd2SpB0fObmPY2SZwXi83gcqMRjSDK4pAUseAQ9dQBZT1YxQvpC-6uTigbcngYENyPxeJXFH8RjtkG26GZUPOZIJfIdBvMSrWNEBUvdcvRn7OHOFOiuQ6WSpv64ygE70ExBOj7jIBJzfUkJCOvGja_RCOTk_be1PedvfA-OMAh5E_0r1qPNjrUE0AXwA1R_UxHTeksCJyE1s4VW040J9zaZgkAQAnVUxXsuzA1SXg99E2kFMYaZ0H6MyWSzjFg9XTF1rbGxfOuAF8NHtFKFC-iT0KSjHrzP90vOjbmlYOUgLxyTvt7kfpZhItCo2TRKoaCU0etwkmowoYSdKhjt0cyZNSq3AP6Fd8f7IgXjK54zWLinSDEaIbHGpXzGk2AAsq1gHwIetK6-O4rSUTQt6qMm0MuCwo5g-KNj49NJZyguhV2Wx03lWHxI2xvp-RXS8Ad2aFvWoqXnzQrDrMmN0Zm4U7S4-YX_a_-CZELbP7c4YFWhB9z8Lr-VoSqEs6DthLg_BO1UjjbZZu7G23ei87gQ#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Channel 24",
+      "url": "http://103.141.70.136:8080/auth/5higoq898tknIXeWnolokctTTq4Z-qwTMHqvnOhdEcfPISz8w-aFDn23EDcIetYR3SdJJ87UMnftSuGif-sccJ39-C9DQ3JrxVEa1XS3R0NnqEaN_EQ5jx9NkizZSS1t73ch9fmWT7009zT64HM1jp54q0XYz9KnDm_zEJ_ediwWuF4TaUnte67nA0miIhvdN1RLl3eFc_PWTPAIcgk7IaMrn9qlCDWUzVKdKQ8tlez4lKYEcD1MgtYM642etsMl4Z5GNMjamv9DAdT8Zf5wT-PesMXYj1i8CUWcjvB0qac9lQ_IX5_zZR-8vO98cphGb-itmrXl1oV5AozJmrPfHbFwXocITf7nOlUfPn_dacMWqOQ_qouWELS6H-TqnqaHfkCgnpzxkswBQ0WJEckbxjtM0b-AECviZRKOS5zgKY7cENcPu3NEU3wdQhAbHHIvTXR5ayZ1L5kRavhLu64YqTRR5AA-cL6POfeG2Tci2-1q-rox7mmvPfLPSeH9cnxX_7KMHQRBL09YUKWVkVWWkvHSE1WpXCNDCH6Gw8XbbHvb10tgsBi7CKQSFACLXwe2JfVhT46KUMldegthd8rFVQ#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "ANANDA TV",
+      "url": "http://103.141.70.136:8080/auth/cQHOdPMCx-7Sw3dlmkB0I5b8hmkmX3Jdj27aCKAhq3haKLJeqCZL9F3L6W_0VzOH1hvycAZKJiQKhobhdwPn1LMYgEiYYqgegE26-M9u2YHH-HDWB3Ji_wB4MJQwg51-uzFyQvNe3NmaA0_VVBUOuNJ9i2v6oT-7qk1g4G9ihVIJHSQmBJcMjOnfI2DZOGrD10LOroKV0r7HIFVWPcDVckHKha3t42Fxpbl_exw91gP8CZP-Sf_njgT8kRwx3rhheDpydveKZzXaIKWbLKS9lTA4iBaOcLXl4iXVEe8FB0RmrJcOm5L8XrQqacGmJSmyITe5VvC2wFXJxgI-8ODc0DqqKNDHb4k3UIDlKSSvoNySnB09xm4BmKXYI1cFumge20cNipL49jE_2i8uRJqNWEKoFpoMzUVPP4_4qtSypm0uAvR3ix7R_yHrFfeY88DwphUbOjB3DgJ4laHWNBJ7zG2gQdT4paI7_AIPnXx3vZ6gxr5RxZ5PZe_j99xGqKa2kWRVv6QNvBRQhkqVBitVRIEXohYsJj4eiLXPci6hjnXOy3b5MqzF0B8xU61Y9A0Rs7Sl6FhnvodKhzPiSb6xnA#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "COLORS BANGLA CINEMA",
+      "url": "http://103.141.70.136:8080/auth/SB6kL9zEGF4UyrL516jn1aPv7X8hYKF3QF2Kg87uKvXsDoTJlLiJZySQ68uYwqdRvEgUqgMVGSaKk68-a_TYZb24YWVpK43wKEkXtsRHlvefrAL2D2ZwRP3PFKTlk8gWYSnh-aW4-kT7rzHloUXBi9JMi5cmBITFtcg_xw0RbxyJ6lEPwOg8n1BatgirzZ0VusYWiyrHGWDxxc4y5aSrprwj9luO8-b6_2n-hfbO1_vAwQUEZ0hO0T4MzwAwOQLllOqUfR8M8CyRK12oI8jc4wm682T1lKhmrfzhouToZkUXo0GiofgPLwiaKr3QvWkgvIU64FFmek9X_iYpi7-wnHBLp6dgdb-9Uak5h3oF3rD3K8crKoOLzI5KgGR-KDMBU5sE1u3tTQD6d6Zfk5ffpwfWAv80zjSOg-KhkegBeLRoPYphMljb0zIxsnn-UFOMXi8WoZILDuc8eEs0hbfnJ7Q7WZEr98i30JFY9hlYqvmKl2vTnY1fjzuJgR5F_pnTSL2qUEcJdtYSspEIm--yIsfFtQUQJ70JgOEn0w8rqYCOacJ9BgYwViQ7aJQ75B42c6tqfrp4EMqdkx29KYMY9w#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "INDEPENDENT TV",
+      "url": "http://103.141.70.136:8080/auth/xt42Jq5dny8XNA7KtRsl4tthivCM0QJrluxXOACrKUBzVc1lVQQ6GuHu3WYmaGc8y6tM5vaZnV4RXvkjcIptLA8WfmtESLV-HGAT4x3-CcbGWeLz2u8sPvREa-SqX-CY6i1MNB3ZvnNuycgfYkpAKfmSkmppvfx7CjAU5DqKzS4CuFaKThGHr8CqdRbjFL7RMaXXr0fYySowyvb8Z8fuzDaxGIAWUXIvSBWKu70Ts2PJWdwtuAnxsl39YjImZwq7FuMTYUn6tO_NPCjtDKee6UfdnqfvbVzmzrkl_w4HGrKHcblV3Aqyce3xtfR8qHwKy_HfPsXjxuKWqvyJRAP9yyNa8Hc04hDGkDAjgixBj1xf7F4YmiLUOk6BHMrwKi5fEdJ3_BE-E_VwaQXQPNg2NLv8O_y5MLw2tqVbIngsf6VKuBpK8IWYMQQUhwxrVfgtDYUn1LDXWZektYn05HUTt5oRcob6I9MdYAoU__hzWIkGOorBSieyievSolcLspXUdztL8zo6v7NBSMTQUzlDNzqFhgqMp-3Hu9wYc94EGYe5lfGOQ4zlYxtYCeJBQAsqxIE5NeFS0qsFiuGWL-WyJg#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "EKATTOR TV",
+      "url": "http://103.141.70.136:8080/auth/3hqC__SKf0Xao_ClwHUuwKAfHeXf8UhfYFfqlfixaroGuXNLbnBMDixroPdNr1nX_9K31tXvCZKNifE_KQ3nm50fAITZVxWOc8sY8RKYWpsCbwdx0mvp3VyYqhMF9p-YKN98feGWj2FW0h93cZfG5pcGaLecVtb1t5yhjVx9DurEll_4GJWhbrgRCA72LjlDt0xC4zx-rV3nA8xqZNGqu1AIc6Befgs-rbX_lJ02G4JuHn-KxTVf4EJHPVRjsXs8MBR_Hr1o0QzBBLQ6dt0hjHWg_Z-9OiDaeTjXXrTjItVm9XKzRwWKKTXEJ68jwDn--57tslz_Blf5zbZsTgjg2GxavNB84lBpiE4FL2eA4qMLwS2tT8qzaqRepfgKooe4A51y7acfTDSpU9LQRavPcHDrpjZKklBXcMS0VdHFNPHbt9-BIFmnjH-y_lnyi_0aFFTQuE6-mfp_qTd21ghXDm7GwTE6FzgDQ_sEiVJQ_H4T0SvtAiEwpuYJ62A0EMT4SLTbX3HZBRDY0-4joGFyjD1scP4lFaSiJkn3lfPOQ2Oe5AAPuBbJYbRwiayW5jvF03eaMqygJqW2FldgzP6BNg#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/MGmglcrAPlaOVitsxtrxPZMML5sEPq-owXOignQQpQS1BBUGXsfD_CKoTBzv5Awyp2bVb4vFCGXwscfJFVXfTaR5A8ucu9lBbmlfNGLyjuXD4Wn6DtaXA802GmzEHkcjdfE2U-FHSNgSkTCsG8EATpH497I0X3Iynco_NBQhokNKrI38i0xVFQHzKcnVrpxGpYNRRzkdZMqxmyiChRzW_yR1BqzlSvW6Kce91pNtYGHxGJbDP1DFW99vCqHuQ0ikvVArpgYlJPkbl8d4WcJXSwBzZaaEbDAnfwGk6RGy5l5ddZzreEKXZL9oS9GI29Z-wjZk8ddlyOLVl5Y5hmaajy0c-CIeDFk7loIqfJMdwj3frxnz3rJDvKGZ2rjAFRKdbn4JPkoJS82rfEQEqTrynrxLBH5HGe27kmyvdZfw-d4dqvP7pyNqY-MHYQqY5FW0TZ9Lon9OO1_Vjp_VwzrJ-wcbWCG3WiZe9w9iNGSUU6S9E2q44XjaL3UbXWgqZGEGuXgCaIIGXnJ7lI9t-JPVt8FgurxJ3_BYozrYdR004baSO8pLr708vQ2524iMn4yKdd-OdB34Wey-5kAhD7EXfg#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "BANGLA VISION",
+      "url": "http://103.141.70.136:8080/auth/qg9VWUdkWT-PwhsHUoMkOO2cVzqSWACoRlcBcc-yKVJYIDlI2xi2q1WGPNZN4DJLjEy4djAZPdtjrCzKSY_3RDM2DfkLFCwmovxUP4AOzuq3cxjRLbhjmzkTC7k4K60Kro3YyGmDQEtK_3ovoE2UXSL0WSS73UUL40XFnh8xUqEx33XjAJvBlODd7JNB97VEdsovPHxOe5chA4Mle2OxMC0Bm5tBvaFAGbApawf_k-XosHxStXIGltix1fzvIgj45uP1TNdxe-QqE9QppztUArugy5XmWcrBh16hQyezHXB22aWRbkHKUYVReXB58zECzKbJbQCYOiKuKcAtbvLCWoYHlaHewRjwukolQ50sE1Nr7cK8cOHMqiw7mO3y-TUeKSgRzvLAOeyjzC9Y6pgrLMGMQhcH16IpVJwaC3scr52z0HjBoM4TWoY0Ar7n_fM7KcBt1692TGNKIXbW1czPGIaUtNblMtcOUMppzjqWVEfyaSNrWBLFGWBBDQVWS12AwzGJso-xUDpA3WQjPUsCoyrWTgeMa_Fq1KIN24jJDdzQoDNkiwXuP4f-2gutIzY0TgkkZNokohEMRUyRJHc2AA#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MY TV HD",
+      "url": "http://103.141.70.136:8080/auth/a9rH3sGgDEZs5M9kf40aJgZR-whCz8AXb43dFoDexU2FOKm5efuUSm-0sdKdvpc7Z2wjfmFWMwG61ZGsr2hrUiLYirJiVknRC48N4tyN6vHc9LPbNhEjQWtIYZIaumLIGYcQ_RafNz2o0q1Mi1mAWscBxaNdafiWUDZ74LD3Tzy-VJMlpeEkEXEoL5VlteqQPKON3W2Q5ZWnS3A8g-XYlwKZ48M506NPmGMd4T-mcSgKCdABuwwvYaikXK1AtrKy32-eCKphVmhlNK96WT44u5Dn_tySdFtsmP-XW0NHps7bSzbNIPYrTJaYKyLd9OvqDR3iUtpsMgq9_x8wZ7QPW9ZudBcNajB4rLpepi4n6Apdps6wzeBNTMNTVO7R6WvmTZe7KOmdWpzGbYkXF49EsvHOnKoB2XwAo3CZT28A1s3CFuLW7B4BxbphU5dK2zrhA5WaoVG8DDUGxE3PlrnOWufFnVOTDR9E4r2oX-I6M5gVnPqxqrgzz9P7ku9ewcShBOxOSlodreMKAB_oflqBRldI3RQ7BmE8pGj_fUIA6kn5wUaZ9YJcorHlFxhBhi-CkZYU0CNX74GJhijPz1Iizw#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "A Sports HD",
+      "url": "https://tvsen6.aynaott.com/zv68oqPDu7MZZwmHhRxt/tracks-v1a1/mono.ts.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Willow Sports",
+      "url": "https://warm-caverns-48629-92fab798385f.herokuapp.com/https://d36r8jifhgsk5j.cloudfront.net/Willow_TV540p.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Star Sports 1 Hindi HD",
+      "url": "https://flussonic.defineatoz.com/Starsports1/tracks-v1a1/mono.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "DAZN LALIGA",
+      "url": "http://45.89.51.89:8080/live/20102023/123456789/243.ts?token=TxBbUEFZGgNDWw8ABVBWWg4DC1NUVVAGVAYFU1AIUQVRVlZQV1VcDgIbFRREQRFcVwtsWFNECwJVBEgUQEsAE2tbVxMIEwsIUwsBBhUZQU1fC1YTDVcGCVAGXAAAC1dNFkJaVRALGgtTAAkEFRlBXE4SVkNZB11vBVISX1ZdR1taR19dHhNXVz5dXFtWWwcbDEQCExtEWEMRFV5YQFQJTRZQWkVAUExcQwMbBQ4GVRsaRFBeQghFQhgVXhR3fEdNFldLRVdfS1AOVxsMFUEQGxpEWkJoFFRDFUUBV1hdF0MOEAMTHhNVWBlmWllZWwZaQg9cX0RECxJQFUgUWFcLCEBdQW5CWFwbWxsLBA8MWxtL#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "SKY SPORTS PREMIER LEAGUE",
+      "url": "http://2756d46c.akciatv.ru/iptv/7FRNF6CY9A9TG3/9289/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Star Sports SL 1",
+      "url": "https://flussonic.defineatoz.com/starsportsselect1/tracks-v1/mono.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Star Sports SL 2",
+      "url": "https://flussonic.defineatoz.com/starsportsselect2sw/tracks-v1a1/mono.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Sony Ten 1",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/ten_1_hd_720/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Sony Ten 2",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/ten_2_hd_720/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Sony Ten 5",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/ten_5_hd_720/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "REAL MADRID",
+      "url": "https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/bitrate_3.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "BARCELONA",
+      "url": "https://amg17560-fcb-amg17560c1-rakuten-uk-4891.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg17560-fcbarcelona-topbarcaenglish-rakutenuk/cb573f186577659098c93678d2f24182847b3dcb0e6c886470af4a9765d97800dbe8ae84ae5b910c4c9e1fc061017d360439cd1dd56c49c1da63b820743c4b21fdcde00080dd0d0cb1df11292ca36265299a7369cc350f7bd2ec5a2f803ebe764c53cb017c593f88f258a8764cc59e0a957f39e8fc8b307b24455a9c5a43e6a64cb7f6b45e458e3ea0e00141c32f16fa83439fd501e9d3d50f8310d376f94699c6f3dd821584e4ab599975824e6912422ff9bab4f2a3529bd5806035907067135005a6eba4f740388950501cd6cb8bee35b14395c912886e61ef5bd857d264c32b8b19b7ed4b97a8b9f44b5576f1970c2f74f6a5e8a1d3011e912abbaee0d6763cbef3177348802dfb2a39379df88445d1935bc6f873cbe4292e39c6905792d2e7d0b8fede1cee50a0adc391334641741742d70dd0fd43ef698c28e69e6962362b63a29552c883a32e136a5d898d5b945e5b8ed28587d0192888073f5ffb6bcd541566af65342e054c154ff0d8ef6ffa4ead7e0d4212e157af3cd0450aff/182/640x360_1442883/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "BTV CTG",
+      "url": "https://tvsen6.aynaott.com/TjGR1GcxKetHNVcMVxbq/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "SOMOY TV",
+      "url": "https://tvsen5.aynascope.net/somoytv/mono.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Bangla Vision",
+      "url": "https://tvsen5.aynaott.com/tgUzpPc9r6xw/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "ATN Bangla ᴴᴰ",
+      "url": "https://tvsen5.aynaott.com/P3y2URgG7LDe/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Channel I",
+      "url": "https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Channel 24 ᴴᴰ",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/channel_24_abr/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "DBC News",
+      "url": "https://tvsen6.aynaott.com/pF66Tkz0qFwP2aMMqHyt/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Ekattor TV ᴴᴰ",
+      "url": "https://tvsen6.aynaott.com/EWDrV5QskgarZEUBb3pU/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Independent TV",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/independent_tv_abr/live/independent_tv_720/chunks.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Jamuna TV",
+      "url": "https://tvsen6.aynaott.com/KGdZEdA7qQ43dmPkgk1j/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Maasranga TV",
+      "url": "https://mtv.sunplex.live/MAASRANGA/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Deepto TV",
+      "url": "https://byphdgllyk.gpcdn.net/hls/deeptotv/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Ekhon TV",
+      "url": "https://stream.ottplus.live/live/ekhon_tv_abr/live/ekhon_tv_hd_720/chunks.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Asian TV",
+      "url": "https://tvsen6.aynaott.com/pKb5k6NnzxsKpWUs6E8M/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Asian TV",
+      "url": "https://stream.ottplus.live/live/asian_tv_abr/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "News 24",
+      "url": "https://tvsen6.aynaott.com/cdgr3tw6WoG7JyRnLbi0/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "N TV",
+      "url": "https://tvsen5.aynaott.com/xV4jEKf3D9zc/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "SA TV",
+      "url": "https://tvsen6.aynaott.com/rELXiuUXqbgzPb06Npom/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Ananda TV",
+      "url": "https://tvsen6.aynaott.com/LeUAm4F1iixYns3s3Non/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Desh TV",
+      "url": "https://tvsen6.aynaott.com/ryFkXfd1a4CQ7mMdc820/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "G-Series",
+      "url": "https://vods2.aynaott.com/gseriesDrama/tracks-v1a1/mono.ts.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Mohona TV",
+      "url": "https://tvsen6.aynaott.com/AkyX5dunzju4cpo26dr7/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "SRK TV",
+      "url": "https://srknowapp.ncare.live/srktvhlswodrm/srktv.stream/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Boishakhi TV",
+      "url": "https://tvsen6.aynaott.com/1d3uG9VCgrR9DRtWZM57/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Thikana TV",
+      "url": "https://5dd3981940faa.streamlock.net/thikanatv/thikanatv/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "My TV",
+      "url": "https://tvsen6.aynaott.com/XMpHaEf0ANBhv8w6NWR7/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "RTV Live",
+      "url": "https://tvsen5.aynaott.com/RtvHD/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Global TV",
+      "url": "https://tvsen6.aynaott.com/y0q9eFAuquAtvTxRzUHq/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Bangla TV",
+      "url": "https://tvsen6.aynaott.com/39ee93nUbCCmm5LsyD4t/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Ekushey TV",
+      "url": "https://tvsen5.aynaott.com/SyQuXz8sC3TB/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Bijoy Tv",
+      "url": "https://tvsen6.aynaott.com/N8Xbo5vdwVU6sF43RsW0/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Nagorik",
+      "url": "https://box.bbaria.net/Nagorik_TV/tracks-v1a1/mono.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "G TV",
+      "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/gazibdz.stream/live-orgin/gazibdz.stream/chunks.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Azan TV",
+      "url": "https://dbcanada.sonarbanglatv.com/azantv/atv/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Madani Bangla Channel",
+      "url": "http://tvsen7.aynascope.net/MadaniTV/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Peace TV Bangla",
+      "url": "https://dzkyvlfyge.erbvr.com/PeaceTvBangla/tracks-v3a1/mono.m3u8?sid=A4Me7oyHr0SjomCT10L0hg#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Peace TV English",
+      "url": "https://dzkyvlfyge.erbvr.com/PeaceTvEnglish/index.m3u8?sid=UGY5ki4FmUa1czEr1ThK8Q#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Quran TV",
+      "url": "https://live.kwikmotion.com/sharjahtvquranlive/shqurantv.smil/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "ARY QTV",
+      "url": "https://aryqtvm.aryzap.com/v1/0183ea2a0eec0b8ed5941a38bc76/0183ea2a4e470b8ed5aa4d793457/ARYQTVH264_720p.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Bangla Waz",
+      "url": "https://live20.bozztv.com/giatvplayout7/giatv-209617/tracks-v1a1/mono.ts.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Motu Patlu",
+      "url": "https://live20.bozztv.com/giatvplayout7/giatv-209622/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Tom & Jerry TV",
+      "url": "https://live20.bozztv.com/giatvplayout7/giatv-208314/tracks-v1a1/mono.ts.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Doraemon TV",
+      "url": "https://live20.bozztv.com/giatvplayout7/giatv-209902/tracks-v1a1/mono.ts.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Oggy and the Cockroaches",
+      "url": "https://live20.bozztv.com/giatvplayout7/giatv-210728/tracks-v1a1/mono.ts.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Mr Bean Animated",
+      "url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Gopal Bhar TV",
+      "url": "https://live20.bozztv.com/giatvplayout7/giatv-209611/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Sony YAY",
+      "url": "https://stream.ottplus.live/live/sony_yay_abr/live/sony_yay_720/chunks.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "POGO",
+      "url": "https://stream.ottplus.live/live/pogo_sd_abr/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Disney Channel ᴴᴰ",
+      "url": "http://88.212.15.19/live/test_disney/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Cartoon Network HD+",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/cn_hd_abr/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "ZEE TV ᴴᴰ",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/zee_tv_hd_abr/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "SONY SAB ᴴᴰ",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/sub_hd_abr/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "& TV ᴴᴰ",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/and_tv_hd_abr/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "HUM TV MASALA ᴴᴰ",
+      "url": "http://38.101.217.46/HumMasala/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "HUM TV ᴴᴰ",
+      "url": "https://stream.ottplus.live/live/hum_tv_abr/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "GEO ENTERTAINMENT ᴴᴰ",
+      "url": "https://s3.ideationtec.live/GEO_Entertainment/GEO_Entertainment.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "BOL ENTERTAINMENT ᴴᴰ",
+      "url": "https://s2.ideationtec.live/BOL_Entertainment_HD/BOL_Entertainment_HD.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "EXPRESS ENTERTAINMENT ᴴᴰ",
+      "url": "https://s3.ideationtec.live/Express_Entertainment/Express_Entertainment.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "AAJ ENTERTAINMENT ᴴᴰ",
+      "url": "https://s2.ideationtec.live/AAJ_Entertainment/AAJ_Entertainment.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "HUM SITARY ᴴᴰ",
+      "url": "http://38.101.217.46/HumSitaray/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "SAB TV ᴴᴰ",
+      "url": "https://s1.ideationtec.live/SAB_Entertainment/SAB_Entertainment.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "STAR JALSHA",
+      "url": "http://103.151.60.162:2122/play/a00w/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "ZEE BANGLA ᴴᴰ",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/zee_bangla_720/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "SONY AATH ᴴᴰ",
+      "url": "https://stream.ottplus.live/live/sony_aath_abr/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "ENTER10 BANGLA",
+      "url": "https://live-bangla.akamaized.net/liveabr/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
       "name": "Sananda Tv",
-      "url": "http://live-stream.amarbanglatv.in:8080/hls/sanandatv/index.m3u8",
-      "category": "INDIAN BANGLA",
-      "logo": "https://i.postimg.cc/Kc7BJRCy/20240823-020704.png"
-    },
-    {
-      "name": "Discovery",
-      "url": "http://202.70.146.135:8000/play/a05z/index.m3u8",
-      "category": "DOCUMENTARY",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/KS6x-JQBv9knK3AHwDZy/posters/6594d216-aaca-4eee-b6f5-bbc6b80feb15.webp"
-    },
-    {
-      "name": "Discovery Bangla",
-      "url": "http://elitenova.net/live/MAGTF8AV71/bUiJLEJKG5/510485.ts",
-      "category": "DOCUMENTARY",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/KS6x-JQBv9knK3AHwDZy/posters/6594d216-aaca-4eee-b6f5-bbc6b80feb15.webp"
-    },
-    {
-      "name": "National Geography HD",
-      "url": "http://202.70.146.135:8000/play/a05o/index.m3u8",
-      "category": "DOCUMENTARY",
-      "logo": "https://web.aynaott.com/storage/019dd92f-107c-7056-9e79-e5233f6e51d9/uploads/images/2026-07-15/images_25b786047244481532eb505dfba85580_playmist_nat_geo_tv_400x400.jpg"
-    },
-    {
-      "name": "Love Natural",
-      "url": "http://27.124.71.27/Love_Nature/index.m3u8",
-      "category": "DOCUMENTARY",
-      "logo": "https://i.postimg.cc/MZR248Yw/20240823-024104.png"
-    },
-    {
-      "name": "Animal Planet",
-      "url": "http://27.124.71.27/Animal_Planet/index.m3u8",
-      "category": "DOCUMENTARY",
-      "logo": "https://i.postimg.cc/43NXkFx5/20240823_023458.png"
-    },
-    {
-      "name": "SANGEET BANGLA",
-      "url": "https://cdn-4.pishow.tv/live/1143/master.m3u8",
-      "category": "BANGLA MUSIC",
-      "logo": "https://otapp.store/uploads/tv_image/sm/sangeet-bangla.png"
-    },
-    {
-      "name": "Zoom",
-      "url": "https://d2esfk1pb9cdob.cloudfront.net/master.m3u8",
+      "url": "http://live-stream.amarbanglatv.in:8080/hls/sanandatv/index.m3u8#skym3u.dev",
       "category": "Other",
-      "logo": "https://otapp.store/uploads/tv_image/sm/zoom.png"
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Dhoom Music",
-      "url": "https://jioplaylistdown.yecic62314.workers.dev/live.m3u8?id=3006",
-      "category": "BANGLA MUSIC",
-      "logo": "https://otapp.store/uploads/tv_image/sm/dhoom-music-bangla.png"
-    },
-    {
-      "name": "TV9 Bangla",
-      "url": "https://dyjmyiv3bp2ez.cloudfront.net/pub-iotv9banaen8yq/liveabr/playlist.m3u8",
+      "name": "R Plus Gold",
+      "url": "https://vglivessai.akamaized.net/sg/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/cf883da3-f9f5-4c70-b0ef-b3ac2e2ad1e3/index.m3u8#skym3u.dev",
       "category": "Other",
-      "logo": "https://images.tv9bangla.com/wp-content/themes/tv9bangla/images/tv9-bangla-logo.svg"
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "ENT | Dangal TV",
-      "url": "https://live-dangal.akamaized.net/liveabr/pub-iodang10p4al/live_720p/chunks.m3u8",
-      "category": "HINDI",
-      "logo": "https://static.wikia.nocookie.net/logopedia/images/3/36/Dangalv2.png"
-    },
-    {
-      "name": "Sony Max",
-      "url": "https://stream.ottplus.bd/live/sony_max_sd_abr/live/sony_max_sd_720/chunks.m3u8",
-      "category": "HINDI MOVIE",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/Ay52-JQBv9knK3AHFDWt/posters/00afb30b-3c19-4c4c-abd8-891db94e4767.webp"
-    },
-    {
-      "name": "DANGAL2",
-      "url": "https://live-dangal2.akamaized.net/liveabr/playlist.m3u8",
+      "name": "ZEE BANGLA SONAR",
+      "url": "https://d1g8wgjurz8via.cloudfront.net/bpk-tv/ColorsHD/default/master2.m3u8#skym3u.dev",
       "category": "Other",
-      "logo": "https://static.wikia.nocookie.net/logopedia/images/a/ac/Dangal_2.png"
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "DD Bharati",
-      "url": "https://d2lk5u59tns74c.cloudfront.net/out/v1/67cec794d8b14f9ba21f73924ac65797/index.m3u8",
+      "name": "& PICTURE ᴴᴰ",
+      "url": "https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Andpictureshd/default/index.mpd#skym3u.dev",
       "category": "Other",
-      "logo": "https://static.wikia.nocookie.net/logopedia/images/d/db/DD_Bharati_english.png"
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "DD National HD",
-      "url": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/40492a64c1db4a1385ba1a397d357d3a/index.m3u8",
+      "name": "SONY MAX ᴴᴰ",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/sony_max_sd_abr/index.m3u8#skym3u.dev",
       "category": "Other",
-      "logo": "https://static.wikia.nocookie.net/logopedia/images/2/2a/Ddnational2023.png"
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Aaj Tak HD",
-      "url": "https://aajtaklive-amd.akamaized.net/hls/live/2014416/aajtak/aajtaklive/live_720p/chunks.m3u8",
+      "name": "SONY MAX 2 ᴴᴰ",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/max_2_abr/index.m3u8#skym3u.dev",
       "category": "Other",
-      "logo": "https://static.wikia.nocookie.net/logopedia/images/9/93/Aaj_Tak_HD_v2.png"
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Aap Ki Adalat",
-      "url": "https://amg01550-indiatv-indiatv-aapkiadalat-mi-xiaomi-n5tuk.amagi.tv/playlist/amg01550-indiatv-indiatv-aapkiadalat-mi-xiaomi/playlist.m3u8",
+      "name": "ZEE CINEMA ᴴᴰ",
+      "url": "https://stream.ottplus.live/live/zee_cinema_hd_abr/index.m3u8#skym3u.dev",
       "category": "Other",
-      "logo": "https://yt3.googleusercontent.com/-LKDkXmG8y-gkKDzES5aUI8SYFtDXR8F7351cCACb8OP0ap9MkI5moxwFLoAWNRjVEXKJmH3pQ=s72-c-k-c0x00ffffff-no-rj"
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Republic TV",
-      "url": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/2e31d831f08640ff92f65003bdc89991/index.m3u8",
+      "name": "ZEE BOLLYWOOD ᴴᴰ",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/zee_bollywood_abr/index.m3u8#skym3u.dev",
       "category": "Other",
-      "logo": "https://static.wikia.nocookie.net/logopedia/images/f/fe/Republic-logo2.svg"
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "ZEE BUSINESS",
-      "url": "https://dwby15d04agvq.cloudfront.net/index_1.m3u8",
+      "name": "Gold Mines Bollywood",
+      "url": "https://mumt03.tangotv.in/Dsly5z3HGOLDMINESBOLLYWOOD/index.m3u8#skym3u.dev",
       "category": "Other",
-      "logo": "https://static.wikia.nocookie.net/logopedia/images/0/07/Zee_Business_%282025%29.svg"
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "GOAL TV",
-      "url": "https://streams2.sofast.tv/sofastplayout/WiseM3U8_1/master.m3u8",
+      "name": "9XM ᴴᴰ",
+      "url": "https://9xjio.wiseplayout.com/9XM/HD720/HD720.m3u8#skym3u.dev",
       "category": "Other",
-      "logo": "https://i.imgur.com/zsj6tLX.jpeg"
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Fighters HD",
-      "url": "https://nomawnoijl.gpcdn.net/akash/fighter/playlist.m3u8",
+      "name": "ZOOM MUSIC ᴴᴰ",
+      "url": "https://d2esfk1pb9cdob.cloudfront.net/chunklist_1.m3u8#skym3u.dev",
       "category": "Other",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1770380942670.png"
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Crazy Ex HD",
-      "url": "https://nomawnoijl.gpcdn.net/akash/crazy_ex/playlist.m3u8",
-      "category": "SPORTS",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1778085745609.png"
+      "name": "MASTI ᴴᴰ",
+      "url": "https://live20.bozztv.com/giatvplayout7/giatv-209592/tracks-v1a1/mono.ts.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Delicious HD",
-      "url": "https://nomawnoijl.gpcdn.net/akash/delicious/playlist.m3u8",
-      "category": "DOCUMENTARY",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1778086478755.png"
+      "name": "B4U MUSIC ᴴᴰ",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/b4u_music_abr/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "history",
-      "url": "https://n18syndication.akamaized.net/bpk-tv/History_TV18_Hindi_NW18_MOB/output01/master.m3u8",
-      "category": "DOCUMENTARY",
-      "logo": "https://images.toffeelive.com/images/program/2429/logo/240x240/mobile_logo_009938001674474908.png"
+      "name": "PTC MUSIC ᴴᴰ",
+      "url": "https://d2lk5u59tns74c.cloudfront.net/out/v1/f913cf893c594f73b114216e74a2efbc/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Travel XP English",
-      "url": "https://travelxp-travelxp-1-eu.rakuten.wurl.tv/playlist.m3u8",
-      "category": "DOCUMENTARY",
-      "logo": "https://i.postimg.cc/Zn6Gyrqn/20240823-024051.png"
+      "name": "ANIMAL PLANET ᴴᴰ",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/animal_planet_hd/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Travel XP Bangla",
-      "url": "http://premiumtvs.space/live/YqXTywueEV/damp2purchase/20622.ts",
-      "category": "DOCUMENTARY",
-      "logo": "https://i.postimg.cc/Zn6Gyrqn/20240823-024051.png"
+      "name": "ANIMAL PLANET ᴴᴰ",
+      "url": "https://tiger-hub.vercel.app@vodzong.mjunoon.tv:8087/streamtest/Animal-Planet-158-3/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "TLC",
-      "url": "http://rgkkw.live:80/live/1Aoen7elp5/IgMJ60tmAa/36.ts",
-      "category": "DOCUMENTARY",
-      "logo": "https://assets-prod.services.toffeelive.com/7C6j-JQBv9knK3AHVzUA/posters/e8f84105-5efe-4e91-a0d4-18a0849cf2f2.webp"
+      "name": "Discover Pakistan",
+      "url": "https://livecdn.live247stream.com/discoverpakistan/web/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Al Jazeera HD",
-      "url": "https://live-hls-apps-aje-fa.getaj.net/AJE/index.m3u8",
-      "category": "NEWS INTERNASIONAL",
-      "logo": "https://tstatic.akash-go.com/cms-ui/images/custom-content/1777454219313.png"
+      "name": "Bachelor EP 105",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/105/S05E105.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "CNN",
-      "url": "https://turnerlive.warnermediacdn.com/hls/live/586495/cnngo/cnn_slate/VIDEO_0_3564000.m3u8",
-      "category": "NEWS INTERNASIONAL",
-      "logo": "https://assets-prod.services.toffeelive.com/VC6Q-JQBv9knK3AHhTXt/posters/63e79814-8fcf-4c3e-bb66-408b2a402613.webp"
+      "name": "Bachelor EP 106",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/106/S05E106.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "DW NEWS",
-      "url": "https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream02/streamPlaylist.m3u8",
-      "category": "NEWS INTERNASIONAL",
-      "logo": "https://otapp.store/uploads/tv_image/sm/dw-news.png"
+      "name": "Bachelor EP 107",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/107/S05E107.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "BBC World",
-      "url": "https://tvsen1.aynaott.com/shn6jGTk/index.m3u8",
-      "category": "NEWS INTERNASIONAL",
-      "logo": "https://web.aynaott.com/storage/019dd92f-107c-7056-9e79-e5233f6e51d9/uploads/images/2026-07-16/images_bea6d56aa19a59e2bc272736880a97f3_playmist_bbc_news_400x400.jpg"
+      "name": "Bachelor EP 108",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/108/S05E108.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Zee Anmol TV",
-      "url": "http://rgkkw.live:80/live/1Aoen7elp5/IgMJ60tmAa/203.ts",
-      "category": "HINDI MOVIE",
-      "logo": "https://assets-prod.services.toffeelive.com/7x0Jd5YBEef-9-uVv_Gy/posters/f630a176-73cc-48d7-94cf-69ba0d201b36.png"
+      "name": "Bachelor EP 109",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/109/S05E109.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Sony Max",
-      "url": "http://rgkkw.live:80/live/1Aoen7elp5/IgMJ60tmAa/151.ts",
-      "category": "HINDI MOVIE",
-      "logo": "https://assets-prod.services.toffeelive.com/f_png,w_300,q_85/Ay52-JQBv9knK3AHFDWt/posters/00afb30b-3c19-4c4c-abd8-891db94e4767.webp"
+      "name": "Bachelor EP 110",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/110/S05E110.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Goldmines Movies 2",
-      "url": "https://cdn-2.pishow.tv/live/1460/master.m3u8",
-      "category": "HINDI MOVIE",
-      "logo": "https://otapp.store/uploads/tv_image/sm/goldmines-movies.png"
+      "name": "Bachelor EP 111",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/111/S05E111.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "B4U Kadak",
-      "url": "https://cdn-2.pishow.tv/live/227/master.m3u8",
-      "category": "HINDI MOVIE",
-      "logo": "https://static.wikia.nocookie.net/logopedia/images/a/ab/B4U_Kadak.jpeg"
+      "name": "Bachelor EP 112",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/112/S05E112.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Goldmines Movies",
-      "url": "https://cdn-2.pishow.tv/live/1461/master.m3u8",
-      "category": "HINDI MOVIE",
-      "logo": "https://otapp.store/uploads/tv_image/sm/goldmines-movies.png"
+      "name": "Bachelor EP 113",
+      "url": "https://tv.kbhub.online/Bachelor-Point/Bachelor-EP-113.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Goldmines",
-      "url": "https://cdn-2.pishow.tv/live/1459/master.m3u8",
-      "category": "HINDI MOVIE",
-      "logo": "https://otapp.store/uploads/tv_image/sm/goldmines.link"
+      "name": "Bachelor EP 114",
+      "url": "https://tv.kbhub.online/Bachelor-Point/Bachelor-EP-114.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Zee Action",
-      "url": "http://rgkkw.live:80/live/1Aoen7elp5/IgMJ60tmAa/967.ts",
-      "category": "HINDI MOVIE",
-      "logo": "https://assets-prod.services.toffeelive.com/Pc3RD5YBtpl-Sbt7doxr/posters/d0f337ab-a7e6-4eed-bc7b-7d51fdc70a0f.png"
+      "name": "Bachelor EP 115",
+      "url": "https://tv.kbhub.online/Bachelor-Point/Bachelor-EP-115.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Big Magic",
-      "url": "http://rgkkw.live:80/live/1Aoen7elp5/IgMJ60tmAa/355253.ts",
-      "category": "HINDI",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWZvoj7sQem7dOoLMmPtCzKgSxaHVEJi6L6uBRFeJ33gfyFug_Yh96Z1U&s=10"
+      "name": "Bachelor EP 116",
+      "url": "https://tv.kbhub.online/Bachelor-Point/Bachelor-EP-116.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "B4U Movies",
-      "url": "https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/playlist.m3u8",
-      "category": "HINDI",
-      "logo": "https://otapp.store/uploads/tv_image/sm/b4u-movies.png"
+      "name": "Bachelor EP 117",
+      "url": "https://tv.kbhub.online/Bachelor-Point/Bachelor-EP-117.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "9XM",
-      "url": "https://jioplaylistdown.yecic62314.workers.dev/live.m3u8?id=587",
-      "category": "HINDI MUSIC",
-      "logo": "https://i.postimg.cc/SRKS6TwR/20240823_022008.png"
+      "name": "Bachelor EP 118",
+      "url": "https://tv.kbhub.online/Bachelor-Point/Bachelor-EP-118.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "E24",
-      "url": "https://jioplaylistdown.yecic62314.workers.dev/live.m3u8?id=591",
-      "category": "HINDI MUSIC",
-      "logo": "https://i.ibb.co/dbjnG3X/20240803-105403.png"
+      "name": "Bachelor EP 119",
+      "url": "https://tv.kbhub.online/Bachelor-Point/Bachelor-EP-119.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Music India",
-      "url": "https://jioplaylistdown.yecic62314.workers.dev/live.m3u8?id=250",
-      "category": "HINDI MUSIC",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKyMNNb_SRC2dnm7IW84llAJ9aO5Zb7V4jdjHaweOo58tzrc9pSsRv85-TZD1w4L57nc4&usqp=CAU"
+      "name": "Bachelor EP 120",
+      "url": "https://tv.kbhub.online/Bachelor-Point/Bachelor-EP-120.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Hindi Hits HD",
-      "url": "http://146.59.253.52:8080/hindihitshd/index.m3u8",
-      "category": "HINDI MUSIC",
-      "logo": "https://i.imgur.com/xgPKgJu.png"
+      "name": "Demon Slayer: Kimetsu no Yaiba Infinity Castle",
+      "url": "https://ftp.ctgfun.com/Others/Asian%20Movie/Demon%20Slayer-Kimetsu%20no%20Yaiba%20Infinity%20Castle%20(2025)%20Hindi%20English%20Japanese%20720p%20BluRay%20x264%20ESub%20%5BDDN%5D/Demon%20Slayer-Kimetsu%20no%20Yaiba%20Infinity%20Castle%20%282025%29%20Hindi%20English%20Japanese%20720p%20BluRay%20x264%20ESub%20%5BDDN%5D.mp4#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Music Mastii",
-      "url": "https://live20.bozztv.com/giatvplayout7/giatv-209592/tracks-v1a1/mono.ts.m3u8",
-      "category": "HINDI MUSIC",
-      "logo": "https://yt3.ggpht.com/ytc/AKedOLRD92lTNDFEe1iA-zJLoFb-mu28rBgjGIqs3qFS_w=s900-c-k-c0x00ffffff-no-rj"
+      "name": "Mirzapur: The Movie",
+      "url": "https://flixhub.net/stream/movie/mirzapur-the-movie#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "Baallee",
-      "url": "https://mcncdndigital.com/balleballetv/tracks-v1a1/mono.ts.m3u8",
-      "category": "HINDI MUSIC",
-      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj4QJIbm5AJUR2DxA4ChOekh2jveNwgRSfqjvBkoyomA&s=10"
+      "name": "Awarapan 2",
+      "url": "https://flixhub.net/stream/movie/awarapan-2#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     },
     {
-      "name": "And Pictures HD",
-      "url": "https://stream.ottplus.bd/live/and_picture_hd_abr/live/and_picture_hd_720/index.m3u8",
-      "category": "HINDI",
-      "logo": "https://web.aynaott.com/storage/019dd92f-107c-7056-9e79-e5233f6e51d9/uploads/images/2026-07-08/images_b29360e9b3bf9d3ce34bd67d06d7c004_playmist_and_pictures_hd_400x400.jpg"
+      "name": "Vettaiyan",
+      "url": "https://flixhub.net/stream/movie/vettaiyan#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Batwara 1947",
+      "url": "https://flixhub.net/stream/movie/batwara-1947#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Dhamaal 4",
+      "url": "https://flixhub.net/stream/movie/dhamaal-4#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Welcome to the Jungle",
+      "url": "https://flixhub.net/stream/movie/welcome-to-the-jungle#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Housefull 5",
+      "url": "https://flixhub.net/stream/movie/housefull-5#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Bhoot Bangla",
+      "url": "https://flixhub.net/stream/movie/bhooth-bangla#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Dhurandhar: The Revenge",
+      "url": "https://flixhub.net/stream/movie/dhurandhar-the-revenge#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Hai Jawani Toh Ishq Hona Hai",
+      "url": "https://flixhub.net/stream/movie/hai-jawani-toh-ishq-hona-hai#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Border 2",
+      "url": "https://flixhub.net/stream/movie/border-2#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Pati Patni Aur Woh Do",
+      "url": "https://flixhub.net/stream/movie/pati-patni-aur-woh-do#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Peddi",
+      "url": "https://flixhub.net/stream/movie/peddi#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "War 2",
+      "url": "https://flixhub.net/stream/movie/war-2#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Tu Meri Main Tera Main Tera Tu Meri",
+      "url": "https://flixhub.net/stream/movie/tu-meri-main-tera-main-tera-tu-meri#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Bhootnii",
+      "url": "https://flixhub.net/stream/movie/the-bhootnii#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Son of Sardaar 2",
+      "url": "https://flixhub.net/stream/movie/son-of-sardaar-2#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Sky Force",
+      "url": "https://flixhub.net/stream/movie/sky-force#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Sitaare Zameen Par",
+      "url": "https://flixhub.net/stream/movie/sitaare-zameen-par#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Sikandar",
+      "url": "https://flixhub.net/stream/movie/sikandar#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Saiyaara",
+      "url": "https://flixhub.net/stream/movie/saiyaara#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Kis Kisko Pyaar Karoon 2",
+      "url": "https://flixhub.net/stream/movie/kis-kisko-pyaar-karoon-2#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Akshardham: Operation Vajra Shakti",
+      "url": "https://flixhub.net/stream/movie/akshardham-operation-vajra-shakti#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Jolly LLB 3",
+      "url": "https://flixhub.net/stream/movie/jolly-llb-3#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Dilwale Dulhania Le Jayenge",
+      "url": "https://flixhub.net/stream/movie/dilwale-dulhania-le-jayenge#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Mohabbatein",
+      "url": "https://flixhub.net/stream/movie/mohabbatein#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Animal",
+      "url": "https://flixhub.net/stream/movie/animal#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Jawan",
+      "url": "https://flixhub.net/stream/movie/jawan#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "OMG 2",
+      "url": "https://flixhub.net/stream/movie/omg-2#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "12th Fail",
+      "url": "https://flixhub.net/stream/movie/12th-fail#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Pathaan",
+      "url": "https://flixhub.net/stream/movie/pathaan#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Sam Bhadaur",
+      "url": "https://flixhub.net/stream/movie/sam-bahadur#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Dhurandhar",
+      "url": "https://flixhub.net/stream/movie/dhurandhar#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Gustaakh Ishq",
+      "url": "https://flixhub.net/stream/movie/gustaakh-ishq#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Kabhi Khushi Kabhie Gham",
+      "url": "https://flixhub.net/stream/movie/kabhi-khushi-kabhie-gham#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Kal Ho Naa Ho",
+      "url": "https://flixhub.net/stream/movie/kal-ho-naa-ho#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Veer-Zaara",
+      "url": "https://flixhub.net/stream/movie/veer-zaara#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Aladin",
+      "url": "https://flixhub.net/stream/movie/aladin#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "3 Idiots",
+      "url": "https://flixhub.net/stream/movie/3-idiots#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Double Dhamaal",
+      "url": "https://flixhub.net/stream/movie/double-dhamaal#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Chennai Express",
+      "url": "https://flixhub.net/stream/movie/chennai-express#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "PK",
+      "url": "https://flixhub.net/stream/movie/pk#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Sultan",
+      "url": "https://flixhub.net/stream/movie/sultan#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Bajrangi Bhaijaan",
+      "url": "https://flixhub.net/stream/movie/bajrangi-bhaijaan#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Drishyam",
+      "url": "https://flixhub.net/stream/movie/drishyam#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Drishyam 2",
+      "url": "https://flixhub.net/stream/movie/drishyam-2-1#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Parched",
+      "url": "https://flixhub.net/stream/movie/parched#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Kabir Singh",
+      "url": "https://flixhub.net/stream/movie/kabir-singh#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Ginny Weds Sunny",
+      "url": "https://flixhub.net/stream/movie/ginny-weds-sunny#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Khuda Haafiz Chapter 2: Agni Pariksha",
+      "url": "https://flixhub.net/stream/movie/khuda-haafiz-chapter-2-agni-pariksha#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Spider-Man: Brand New Day",
+      "url": "https://flixhub.net/stream/movie/spider-man-brand-new-day#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Titanic",
+      "url": "https://flixhub.net/stream/movie/titanic#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Spider-Man",
+      "url": "https://flixhub.net/stream/movie/spider-man#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Treasure Planet",
+      "url": "https://flixhub.net/stream/movie/treasure-planet#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Pirates of the Caribbean: The Curse of the Black Pearl",
+      "url": "https://flixhub.net/stream/movie/pirates-of-the-caribbean-the-curse-of-the-black-pearl#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Chelsea FC - Season Review 2003/04",
+      "url": "https://flixhub.net/stream/movie/chelsea-fc-season-review-200304#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Troy",
+      "url": "https://flixhub.net/stream/movie/troy#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Batman Begins",
+      "url": "https://flixhub.net/stream/movie/batman-begins#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Pirates of the Caribbean: Dead Man's Chest",
+      "url": "https://flixhub.net/stream/movie/pirates-of-the-caribbean-dead-mans-chest#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Hitman",
+      "url": "https://flixhub.net/stream/movie/hitman#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Incredible Hulk",
+      "url": "https://flixhub.net/stream/movie/the-incredible-hulk#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Iron Man",
+      "url": "https://flixhub.net/stream/movie/iron-man#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Dark Knight",
+      "url": "https://flixhub.net/stream/movie/the-dark-knight#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Avatar",
+      "url": "https://flixhub.net/stream/movie/avatar#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Hobbit: An Unexpected Journey",
+      "url": "https://flixhub.net/stream/movie/the-hobbit-an-unexpected-journey#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Dark Knight Rises",
+      "url": "https://flixhub.net/stream/movie/the-dark-knight-rises#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Avengers: Age of Ultron",
+      "url": "https://flixhub.net/stream/movie/avengers-age-of-ultron#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Revenant",
+      "url": "https://flixhub.net/stream/movie/the-revenant#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Batman v Superman: Dawn of Justice",
+      "url": "https://flixhub.net/stream/movie/batman-v-superman-dawn-of-justice#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Captain Marvel",
+      "url": "https://flixhub.net/stream/movie/captain-marvel#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Jurassic World: Fallen Kingdom",
+      "url": "https://flixhub.net/stream/movie/jurassic-world-fallen-kingdom#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Avengers: Infinity War",
+      "url": "https://flixhub.net/stream/movie/avengers-infinity-war#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Avengers: Endgame",
+      "url": "https://flixhub.net/stream/movie/avengers-endgame#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Spider-Man: Far From Home",
+      "url": "https://flixhub.net/stream/movie/spider-man-far-from-home#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Spider-Man: Homecoming",
+      "url": "https://flixhub.net/stream/movie/spider-man-homecoming#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Amazing Spider-Man 2",
+      "url": "https://flixhub.net/stream/movie/the-amazing-spider-man-2#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Amazing Spider-Man",
+      "url": "https://flixhub.net/stream/movie/the-amazing-spider-man#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Spider-Man 3",
+      "url": "https://flixhub.net/stream/movie/spider-man-3#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Odyssey",
+      "url": "https://flixhub.net/stream/movie/the-odyssey#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Moana",
+      "url": "https://flixhub.net/stream/movie/moana-1#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Supergirl",
+      "url": "https://flixhub.net/stream/movie/supergirl#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Iron Man 2",
+      "url": "https://flixhub.net/stream/movie/iron-man-2#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Ghost Rider: Spirit of Vengeance",
+      "url": "https://flixhub.net/stream/movie/ghost-rider-spirit-of-vengeance#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Thor",
+      "url": "https://flixhub.net/stream/movie/thor#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Pirates of the Caribbean: On Stranger Tides",
+      "url": "https://flixhub.net/stream/movie/pirates-of-the-caribbean-on-stranger-tides#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Captain America: The First Avenger",
+      "url": "https://flixhub.net/stream/movie/captain-america-the-first-avenger#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Journey 2: The Mysterious Island",
+      "url": "https://flixhub.net/stream/movie/journey-2-the-mysterious-island#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Dictator",
+      "url": "https://flixhub.net/stream/movie/the-dictator#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Avengers",
+      "url": "https://flixhub.net/stream/movie/the-avengers#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Man of Steel",
+      "url": "https://flixhub.net/stream/movie/man-of-steel/hls/Man.of.Steel.2013.1080p.BluRay.Hindi.5.1-English.5.1.ESub.x264-HDHub4u.Tv.mp4#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Conjuring",
+      "url": "https://flixhub.net/stream/movie/the-conjuring#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Thor: The Dark World",
+      "url": "https://flixhub.net/stream/movie/thor-the-dark-world#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Iron Man 3",
+      "url": "https://flixhub.net/stream/movie/iron-man-3#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Hobbit: The Desolation of Smaug",
+      "url": "https://flixhub.net/stream/movie/the-hobbit-the-desolation-of-smaug#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Pacific Rim",
+      "url": "https://flixhub.net/stream/movie/pacific-rim#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Wolf of Wall Street",
+      "url": "https://flixhub.net/stream/movie/the-wolf-of-wall-street#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Maleficent",
+      "url": "https://flixhub.net/stream/movie/maleficent#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Fury",
+      "url": "https://flixhub.net/stream/movie/fury#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Gone Girl",
+      "url": "https://flixhub.net/stream/movie/gone-girl#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "X-Men: Days of Future Past",
+      "url": "https://flixhub.net/stream/movie/x-men-days-of-future-past#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "300: Rise of an Empire",
+      "url": "https://flixhub.net/stream/movie/300-rise-of-an-empire#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Edge of Tomorrow",
+      "url": "https://flixhub.net/stream/movie/edge-of-tomorrow#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Lucy",
+      "url": "https://flixhub.net/stream/movie/lucy#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Hobbit: The Battle of the Five Armies",
+      "url": "https://flixhub.net/stream/movie/the-hobbit-the-battle-of-the-five-armies#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Transcendence",
+      "url": "https://flixhub.net/stream/movie/transcendence#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Road Within",
+      "url": "https://flixhub.net/stream/movie/the-road-within#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Hunger Games: Mockingjay - Part 1",
+      "url": "https://flixhub.net/stream/movie/the-hunger-games-mockingjay-part-1#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "John Wick",
+      "url": "https://flixhub.net/stream/movie/john-wick#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Interstellar",
+      "url": "https://flixhub.net/stream/movie/interstellar#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Ant-Man",
+      "url": "https://flixhub.net/stream/movie/ant-man#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Maze Runner: The Scorch Trials",
+      "url": "https://flixhub.net/stream/movie/maze-runner-the-scorch-trials#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Hotel Transylvania 2",
+      "url": "https://flixhub.net/stream/movie/hotel-transylvania-2#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Doctor Strange",
+      "url": "https://flixhub.net/stream/movie/doctor-strange#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Passengers",
+      "url": "https://flixhub.net/stream/movie/passengers#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "X-Men: Apocalypse",
+      "url": "https://flixhub.net/stream/movie/x-men-apocalypse#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Captain America: Civil War",
+      "url": "https://flixhub.net/stream/movie/captain-america-civil-war#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Jungle Book",
+      "url": "https://flixhub.net/stream/movie/the-jungle-book#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Jason Bourne",
+      "url": "https://flixhub.net/stream/movie/jason-bourne#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Zootopia",
+      "url": "https://flixhub.net/stream/movie/zootopia#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Finding Dory",
+      "url": "https://flixhub.net/stream/movie/finding-dory#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Jumanji: Welcome to the Jungle",
+      "url": "https://flixhub.net/stream/movie/jumanji-welcome-to-the-jungle#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Guardians of the Galaxy Vol. 2",
+      "url": "https://flixhub.net/stream/movie/guardians-of-the-galaxy-vol-2#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Blade Runner 2049",
+      "url": "https://flixhub.net/stream/movie/blade-runner-2049#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Jungle",
+      "url": "https://flixhub.net/stream/movie/jungle#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Thor: Ragnarok",
+      "url": "https://flixhub.net/stream/movie/thor-ragnarok#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Pirates of the Caribbean: Dead Men Tell No Tales",
+      "url": "https://flixhub.net/stream/movie/pirates-of-the-caribbean-dead-men-tell-no-tales#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Ant-Man and the Wasp",
+      "url": "https://flixhub.net/stream/movie/ant-man-and-the-wasp#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Aquaman",
+      "url": "https://flixhub.net/stream/movie/aquaman#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "The Meg",
+      "url": "https://flixhub.net/stream/movie/the-meg#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Annihilation",
+      "url": "https://flixhub.net/stream/movie/annihilation#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Hotel Transylvania 3: Summer Vacation",
+      "url": "https://flixhub.net/stream/movie/hotel-transylvania-3-summer-vacation#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Jumanji: The Next Level",
+      "url": "https://flixhub.net/stream/movie/jumanji-the-next-level#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Godzilla: King of the Monsters",
+      "url": "https://flixhub.net/stream/movie/godzilla-king-of-the-monsters#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Once Upon a Time... in Hollywood",
+      "url": "https://flixhub.net/stream/movie/once-upon-a-time-in-hollywood#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Frozen II",
+      "url": "https://flixhub.net/stream/movie/frozen-ii#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "John Wick: Chapter 3 - Parabellum",
+      "url": "https://flixhub.net/stream/movie/john-wick-chapter-3-parabellum#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Greyhound",
+      "url": "https://flixhub.net/stream/movie/greyhound#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "ATN News [PAID]",
+      "url": "https://tvsen6.aynaott.com/da6WMXAk/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Accu Weather [PAID]",
+      "url": "https://amg00684-accuweather-accuweather-plex-jbd2s.amagi.tv/playlist/amg00684-accuweather-accuweather-plex/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Assam Talks [PAID]",
+      "url": "https://tvsen7.aynaott.com/AssamTalks/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "BBC News [PAID]",
+      "url": "https://tvsen1.aynaott.com/shn6jGTk/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Bloomberg TV [PAID]",
+      "url": "https://tvsen6.aynaott.com/bloombergtv/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "CMAC TV [PAID]",
+      "url": "https://reflect-vod-cmac.cablecast.tv/live-11/live/stream-2/live.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "CNN [PAID]",
+      "url": "https://tvsen6.aynaott.com/cnn/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Channel 52 [PAID]",
+      "url": "https://tvsen6.aynaott.com/channel52/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Channel 9 [PAID]",
+      "url": "https://tvsen6.aynaott.com/kajlsd57jnzxyo/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Cricket Gold [PAID]",
+      "url": "https://tvsen6.aynaott.com/M2W2UR49dmeKbZnmdRzN/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "DD Bangla [PAID]",
+      "url": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/7ff57cc9046b4c188b51a0d506f36e7f/index_3.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Dios Te Ve Kids [PAID]",
+      "url": "https://s.emisoras.tv:8081/diostevekids/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Drama 24 [PAID]",
+      "url": "https://vods2.aynaott.com/gseriesDrama/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Ekhon TV [PAID]",
+      "url": "https://tvsen6.aynaott.com/fbgZV3X17hwWcyfZ4pdb/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Hindi Movie Classic 24 [PAID]",
+      "url": "https://vods2.aynaott.com/hindimovies/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Independent TV [PAID]",
+      "url": "https://tvsen6.aynaott.com/Wef2Vj67njeYGDqQNFB9/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Khushboo [PAID]",
+      "url": "https://tvsen6.aynaott.com/mzwbzfZ4/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "MADANI TV [PAID]",
+      "url": "https://tvsen3.aynaott.com/z24qLsqV/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Maasranga TV [PAID]",
+      "url": "https://tvsen6.aynaott.com/maasrangatv/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "NEXUS TV [PAID]",
+      "url": "https://tvsen6.aynaott.com/Epm7WrFa/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "NTV Europe [PAID]",
+      "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/ntvuk00332211.stream/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "PBS Kids [PAID]",
+      "url": "https://2-fss-2.streamhoster.com/pl_140/amlst:200914-1298290/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "RTV [PAID]",
+      "url": "https://tvsen5.aynaott.com/ba47dHpDk3Se/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Sports First TV [PAID]",
+      "url": "https://d4ddgdmj1cvnm.cloudfront.net/scheduler/scheduleMaster/409.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Talk Sport [PAID]",
+      "url": "https://tvsen6.aynaott.com/talkSPORT/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "TheQ [PAID]",
+      "url": "https://tvsen6.aynaott.com/3PjZZahm/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Travel XP [PAID]",
+      "url": "https://27c980761ff9437d929e64647afe183a.mediatailor.us-east-1.amazonaws.com/v1/master/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-eu_TravelXP/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Wild TV [PAID]",
+      "url": "https://dfhsahpa45kk2.cloudfront.net/scheduler/scheduleMaster/476.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Wion [PAID]",
+      "url": "https://d7x8z4yuq42qn.cloudfront.net/index_7.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "World War TV [PAID]",
+      "url": "https://aenetworks-worldwartv-rakuten.amagi.tv/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "kolkata TV [PAID]",
+      "url": "https://tvsen6.aynaott.com/kolkatatv/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "115.Somoy TV",
+      "url": "http://198.195.239.50:8095/somoyTv/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "118.News 24 HD",
+      "url": "https://tvsen6.aynaott.com/cdgr3tw6WoG7JyRnLbi0/tracks-v1a1/mono.ts.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "121.DBC News",
+      "url": "https://tvsen6.aynaott.com/pF66Tkz0qFwP2aMMqHyt/tracks-v1a1/mono.ts.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "129.NTV",
+      "url": "https://tvsen5.aynaott.com/xV4jEKf3D9zc/tracks-v1a1/mono.ts.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "130.BanglaVision",
+      "url": "https://tvsen5.aynaott.com/tgUzpPc9r6xw/tracks-v1a1/mono.ts.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "133.Ekushey TV",
+      "url": "http://210.4.72.204/hls-live/livepkgr/_definst_/liveevent/livestream3.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "136.Channel I",
+      "url": "https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/tracks-v1a1/mono.ts.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "140.Jago News 24",
+      "url": "https://app.ncare.live/live-orgin/jagonews24.stream/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "#EXTVLCOPT:http-user-agent=oxoo/1.3.9.d (Linux;Android 7.1.2) ExoPlayerLib/2.14.1",
+      "url": "https://app.ncare.live/live-orgin/channels.stream/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "148.Green TV",
+      "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/greentv.stream/live-orgin/greentv.stream/chunks.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "160.Duronto Tv",
+      "url": "http://198.195.239.50:8095/duranta/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "#EXTVLCOPT:http-user-agent=oxoo/1.3.9.d (Linux;Android 7.1.2) ExoPlayerLib/2.14.1",
+      "url": "http://198.195.239.50:8095/sonic/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "180.Enter 10 Bangla",
+      "url": "https://live-bangla.akamaized.net/liveabr/pub-iobanglakp3sff/live_720p/chunks.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Premier Sports 2",
+      "url": "https://otte.live.fly.ww.aiv-cdn.net/syd-nitro/live/clients/dash/enc/bcj3iscpd6/out/v1/fcd137b391214f7cb99dd4d7be90ca87/cenc.mpd#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "ZOOM",
+      "url": "http://live.balajibroadband.com:3500/render.m3u8?auth=qymCHq_HaG_jpg2JHxeNRqNCEqOCsmJT3kfhGs8qmcX9ZpOgjjBNIOIhUhXuXKIodHXVPlObONisBROe1yhkL56iPYq1wibQA4QuRfDIN2YgLE0e9mWCHT0cgaU42_2j0vDKQFMx8nJD7d58Hyz4x9AZqsCBcBhPjvl49L4rKIuWVdP9IcyR4w4ZLt0W1mlT0S4NmbTWPJ_RL97pE5RtQZYp7WPqmN3z1bhbJgu0IDpl5jCq2G2fTLOJDPmJZIYoGAJ8ei2W5H99iaQoFiuRPihlB3zNHqosByzyzPgFcUzQQYc-oHlnyg5j77BTLU---oY6w1iGGWLtA56imQQ=&channel_key_id=592#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "9X Music",
+      "url": "http://live.balajibroadband.com:3500/render.m3u8?auth=xyrDPBni8wj9rLu40fYrbiNzekd-J2h4wWqTJfIbudylt7SbYMZEbtL-PsfhO2wdfWzRcJGuMgP6mG6NIYuJqb3SFfy8zeYbSEhyVLKwt4jNMZlVXCWNNJi85D3ImTDD7ZhIIHEZMZB0kykkSB9yk3FJfKXw-BTcxQH2VPcitgveMiIs77aRAeGjNoGyzpB5ZFQ3y_oS7mbdHhe2ScimsBL5Dtfi2rx9XfowPksovt1xd3EBPWYi-c0L1OnsGjqQOXEYukGZZc8T9dRFuAz9p3rmkOfeetNxg3A=&channel_key_id=587#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "#https://cdn-2.pishow.tv/live/226/master.m3u8",
+      "url": "http://live.balajibroadband.com:3500/render.m3u8?auth=wtI8vd1XltSdhOanQ6hvUOl1fhvb6GTXuT9bUIzpo3_lkHWSJr364wWu1urUdijbk9mQZbBqrcGonwyin9JmCJIrIVMbLtWgcYuGSo3yJZMxic7m8bXPh4NTs06HYngwGwvplhRLRUEk55J7JnrL1cwLUTohMz6uOr8kbY6teDVirDdn_oOy-Cr3g-qgeEIkljC8sQSS_P4NQz1qnGCU_RROgxQSrLytkoEBlgy2UT8SIyFBMQNtSTrTuq0YDLnBzPluslKuAJLCnp_Z6rHaPHEMR7DFy4SXBXbFCUSV3n1vi6NX7lG29ueqiGKg12H9HbqLT2XunDrAt4cD5Ix_ugn_v0b7pJAVbO7EkA==&channel_key_id=250#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "English Premier League",
+      "url": "http://2756d46c.akciatv.ru/iptv/7FRNF6CY9A9TG3/9334/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Star Jalsha HD",
+      "url": "https://da86m1sqpm3o0.cloudfront.net/28072023/smil:starjalsha.smil/chunklist_b1928000.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Ekushe ETV",
+      "url": "https://ekusheyserver.com/hls-live/livepkgr/_definst_/liveevent/livestream3.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Maasranga TV",
+      "url": "http://116.204.149.16/maasranga/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "BTV",
+      "url": "https://btv.hridoytv-channel.workers.dev/btv.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "BTV News",
+      "url": "https://btv.hridoytv-channel.workers.dev/news.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "SATV",
+      "url": "http://116.204.149.16/satv/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Ekhon TV",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/ekhon_tv_abr/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Deshi TV",
+      "url": "https://deshitv.deshitv24.net/live/myStream/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Me TV",
+      "url": "https://iptvbd.live/metv1080/1080.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Bijoy TV",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/bijoy_tv_abr/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Bangla TV",
+      "url": "http://103.190.133.68:1935/news21live/live/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Mohona TV",
+      "url": "https://tvsen6.aynaott.com/AkyX5dunzju4cpo26dr7/tracks-v1a1/mono.ts.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Movie Bangla",
+      "url": "http://alvetv.com/moviebanglatv/8080/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Duronto TV",
+      "url": "http://198.195.239.50:8095/duranta/tracks-v1a1/mono.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "ZooMoo",
+      "url": "https://amg01553-blueantmediaasi-zoomoonz-samsungnz-rdufn.amagi.tv/playlist/amg01553-blueantmediaasi-zoomoonz-samsungnz/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "ABC Kids",
+      "url": "https://abc-iview-mediapackagestreams-2.akamaized.net/out/v1/537787e477cb491b8cfd57eb8cc37da4/index.m3u8?hdnea=st=1791185326~exp=1791186226~acl=/*~hmac=39302ef4dd332028fead130131781030569d8c7d1e13fbb571f66d61e0fd7b32#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "CT art",
+      "url": "http://88.212.15.19/live/ct_art_avc_25p/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "History Hit",
+      "url": "https://lds-timeline-rakuten.amagi.tv/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Knowledge Network",
+      "url": "https://d1wal6k3d7ssin.cloudfront.net/out/v1/ea91db0906c847a4931b46a9ec36e77b/index.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "RT Documentary English",
+      "url": "https://rt-rtd.rttv.com/dvr/rtdoc/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "CGTN Documentary",
+      "url": "https://amg00405-rakutentv-cgtndocumentary-rakuten-0ql8j.amagi.tv/master.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Wild Earth",
+      "url": "https://wildearth-plex.amagi.tv/masterR1080p.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Get.Factual",
+      "url": "https://d1nhni5l2n8hjt.cloudfront.net/gf.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "INWILD (1080p)",
+      "url": "https://amg00861-terninternation-inwild-samsunguk-w5wic.amagi.tv/playlist/amg00861-terninternation-inwild-samsunguk/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "DW",
+      "url": "https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream02/streamPlaylist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "CNN USA",
+      "url": "https://amg01448-samsungin-cnnnow-samsungin-4npqg.amagi.tv/playlist/amg01448-samsungin-cnnnow-samsungin/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Russian Times",
+      "url": "https://rt-glb.rttv.com/dvr/rtnews/playlist_4500Kb.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Redbull TV",
+      "url": "https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master_3360.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "30A Darcizzle Offshore",
+      "url": "https://30a-tv.com/darcizzle.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Duck Hunting TV",
+      "url": "https://main.duckhunting.playout.vju.tv/duckhuntingtv/main.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Horse and Country",
+      "url": "https://hncfree-samsungau.amagi.tv/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
+    },
+    {
+      "name": "Waypoint TV",
+      "url": "https://waypoint-waypointtv-firetv.amagi.tv/playlist.m3u8#skym3u.dev",
+      "category": "Other",
+      "logo": "https://tinyurl.com/mr2dec8v"
     }
   ]
 }
