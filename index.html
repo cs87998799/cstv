@@ -1,248 +1,353 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khusbu TV - Live Streaming</title>
-    <!-- HLS.js for Strong Stream Playback -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <!-- Tailwind CSS for Styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Khusbu TV</title>
+    <!-- Video.js & HLS.js for universal video format & YouTube support -->
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@videojs/http-streaming@3.13.0/dist/videojs-http-streaming.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <style>
-        body { background-color: #0f172a; color: #f8fafc; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
-        .focus-ring:focus { outline: 3px solid #38bdf8; background-color: #1e293b; }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #0f172a; color: #f8fafc; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; height: 100vh; }
+        
+        #app { display: flex; height: 100vh; width: 100vw; position: relative; }
+        
+        /* Sidebar Styles */
+        .sidebar { width: 320px; background: #1e293b; border-right: 1px solid #334155; display: flex; flex-direction: column; z-index: 10; transition: transform 0.3s ease; }
+        .sidebar.hidden { transform: translateX(-100%); }
+        .brand { padding: 20px; font-size: 1.5rem; font-weight: bold; color: #38bdf8; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
+        
+        .search-box { padding: 12px; border-bottom: 1px solid #334155; }
+        .search-box input { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #475569; color: white; border-radius: 6px; outline: none; }
+        
+        .channel-list { flex: 1; overflow-y: auto; padding: 10px; }
+        .channel-item { display: flex; align-items: center; padding: 10px; margin-bottom: 8px; background: #0f172a; border-radius: 8px; cursor: pointer; transition: background 0.2s, border 0.2s; border: 2px solid transparent; }
+        .channel-item:hover, .channel-item.selected { background: #334155; border-color: #38bdf8; }
+        .channel-item img { width: 45px; height: 45px; border-radius: 6px; object-fit: cover; margin-right: 12px; background: #475569; }
+        .channel-info h4 { font-size: 0.95rem; margin-bottom: 4px; }
+        .channel-info p { font-size: 0.75rem; color: #94a3b8; }
+
+        /* Main Content Styles */
+        .main-content { flex: 1; display: flex; flex-direction: column; position: relative; background: #000; }
+        
+        .top-bar { position: absolute; top: 0; left: 0; right: 0; padding: 15px; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent); z-index: 5; transition: opacity 0.3s; }
+        .btn { background: rgba(30, 41, 59, 0.8); border: 1px solid #475569; color: white; padding: 8px 16px; border-radius: 6px; cursor: pointer; backdrop-filter: blur(5px); }
+        .btn:hover { background: #38bdf8; color: #000; border-color: #38bdf8; }
+
+        /* Video Container */
+        .video-container { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; }
+        video, #youtube-player { width: 100%; height: 100%; object-fit: contain; }
+        #youtube-player-container { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: none; }
+
+        /* Mini Channel Popup (Now Smaller & Shows Nearby Channels, Auto-hide 3s) */
+        .channel-popup {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid #475569;
+            padding: 8px 12px;
+            border-radius: 12px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .channel-popup.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+        .popup-item {
+            width: 75px;
+            text-align: center;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 6px;
+            background: #1e293b;
+            border: 1px solid transparent;
+            transition: 0.2s;
+        }
+        .popup-item.active { border-color: #38bdf8; background: #334155; }
+        .popup-item img { width: 35px; height: 35px; border-radius: 4px; object-fit: cover; }
+        .popup-item span { font-size: 0.7rem; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 2px; }
+
+        /* Settings Modal */
+        .modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 100; }
+        .modal.active { display: flex; }
+        .modal-content { background: #1e293b; border: 1px solid #475569; width: 450px; border-radius: 12px; padding: 24px; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .setting-group { margin-bottom: 16px; }
+        .setting-group label { display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 6px; }
+        .setting-group select, .setting-group input { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #475569; color: white; border-radius: 6px; }
     </style>
 </head>
-<body class="h-screen w-screen flex flex-col">
+<body>
 
-    <!-- 1. REAL-TIME LOGIN MODAL -->
-    <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
-        <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl w-96 shadow-2xl">
-            <h2 class="text-2xl font-bold text-sky-400 mb-2 text-center">Khusbu TV Login</h2>
-            <p class="text-xs text-slate-400 mb-6 text-center">রিয়েল-টাইম অথেন্টিকেশন সিস্টেম</p>
-            <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-1">ইমেইল / ইউজার আইডি</label>
-                    <input type="text" id="loginUser" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-sm focus-ring text-white" placeholder="admin@khusbutv.com">
-                </div>
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-1">পাসওয়ার্ড</label>
-                    <input type="password" id="loginPass" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-sm focus-ring text-white" placeholder="••••••••">
-                </div>
-                <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2.5 rounded-lg transition duration-200 focus-ring shadow-lg shadow-sky-600/30">লগইন করুন</button>
-            </form>
-            <div id="loginError" class="text-rose-500 text-xs mt-3 text-center hidden"></div>
+    <div id="app">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="brand">
+                <span>Khusbu TV</span>
+                <button class="btn" onclick="toggleSidebar()">✕</button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search channels..." oninput="filterChannels()">
+            </div>
+            <div class="channel-list" id="channelList">
+                <!-- Channels populated by JS -->
+            </div>
         </div>
-    </div>
 
-    <!-- MAIN APP CONTAINER -->
-    <div id="appContainer" class="flex-1 flex flex-col h-full hidden">
-        <!-- Top Navbar -->
-        <header class="bg-slate-900/80 border-b border-slate-800 px-6 py-3 flex justify-between items-center backdrop-blur">
-            <div class="flex items-center space-x-3">
-                <div class="bg-sky-600 text-white font-black px-3 py-1 rounded-lg text-lg tracking-wider shadow">KT</div>
-                <h1 class="text-lg font-bold tracking-wide text-white">Khusbu TV <span class="text-xs font-normal text-sky-400 bg-sky-950 px-2 py-0.5 rounded ml-2 border border-sky-800">Pro Stream</span></h1>
+        <!-- Main Player Area -->
+        <div class="main-content" id="mainContent" onclick="handleScreenClick()">
+            <div class="top-bar" id="topBar">
+                <button class="btn" onclick="toggleSidebar(); event.stopPropagation();">☰ Channels</button>
+                <h3 id="currentChannelTitle" style="font-size: 1rem;">Select a Channel</h3>
+                <button class="btn" onclick="openSettings(); event.stopPropagation();">⚙️ Settings</button>
             </div>
-            <div class="flex items-center space-x-4">
-                <span id="userDisplay" class="text-xs text-slate-300 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700"></span>
-                <button onclick="openSettings()" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-700 focus-ring transition">⚙️ সেটিংস</button>
-                <button onclick="handleLogout()" class="bg-rose-950/50 hover:bg-rose-900 text-rose-300 px-3 py-1.5 rounded-lg text-xs font-medium border border-rose-900/50 focus-ring transition">লগআউট</button>
-            </div>
-        </header>
 
-        <!-- Content Area: Dual Layout (Player + Channel List) -->
-        <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
-            
-            <!-- Video Player Section (16:9 Aspect Ratio Focus) -->
-            <div class="flex-1 bg-black flex flex-col justify-center items-center relative p-2 lg:p-4">
-                <div class="w-full max-w-5xl aspect-video bg-slate-950 rounded-xl overflow-hidden shadow-2xl relative border border-slate-800">
-                    <video id="videoPlayer" class="w-full h-full object-contain" controls autoplay playsinline></video>
-                    <!-- Stream Status Overlay -->
-                    <div id="streamStatus" class="absolute top-4 left-4 bg-black/60 backdrop-blur px-3 py-1 rounded-full text-xs text-emerald-400 flex items-center space-x-2 border border-emerald-500/30">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span id="currentPlayingName">চ্যানেল সিলেক্ট করুন</span>
-                    </div>
+            <div class="video-container">
+                <!-- Universal Video Player (Supports MP4, HLS, M3U8, etc.) -->
+                <video id="videoPlayer" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"></video>
+                <!-- YouTube Iframe Container -->
+                <div id="youtube-player-container">
+                    <div id="yt-player"></div>
                 </div>
             </div>
 
-            <!-- Channel Sidebar / D-Pad Navigable List -->
-            <div class="w-full lg:w-80 bg-slate-900 border-t lg:border-t-0 lg:border-l border-slate-800 flex flex-col h-48 lg:h-full">
-                <div class="p-3 border-b border-slate-800 bg-slate-950/50">
-                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">রিয়েল-টাইম চ্যানেল লিস্ট</h3>
-                </div>
-                <div id="channelList" class="flex-1 overflow-y-auto p-2 space-y-2">
-                    <!-- Dynamic Channels Will Be Inserted Here -->
-                </div>
+            <!-- Nearby Channels Popup (Small, Auto-hide 3s) -->
+            <div class="channel-popup" id="channelPopup" onclick="event.stopPropagation()">
+                <!-- Populated dynamically with current + neighboring channels -->
             </div>
         </div>
     </div>
 
-    <!-- 3. SETTINGS MODAL -->
-    <div id="settingsModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden">
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl w-full max-w-md shadow-2xl">
-            <h3 class="text-lg font-bold text-sky-400 mb-4">অ্যাপ্লিকেশন সেটিংস</h3>
-            <div class="space-y-4 text-sm">
-                <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-xl border border-slate-800">
-                    <div>
-                        <p class="font-medium text-white">অটো ফেইলওভার (Auto Switch)</p>
-                        <p class="text-xs text-slate-400">স্ট্রিম ফেইল করলে সাইলেন্টলি অন্য লিংকে শিফট করবে</p>
-                    </div>
-                    <input type="checkbox" id="settingAutoSwitch" checked class="w-4 h-4 accent-sky-500 rounded">
-                </div>
-                <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-xl border border-slate-800">
-                    <div>
-                        <p class="font-medium text-white">ল্যান্ডস্কেপ লরিয়েন্টেশন লক</p>
-                        <p class="text-xs text-slate-400">মোবাইলে স্বয়ংক্রিয়ভাবে ল্যান্ডস্কেপ মোড রাখবে</p>
-                    </div>
-                    <input type="checkbox" id="settingLandscape" checked class="w-4 h-4 accent-sky-500 rounded">
-                </div>
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Settings</h3>
+                <button class="btn" onclick="closeSettings()">✕</button>
             </div>
-            <div class="mt-6 flex justify-end space-x-3">
-                <button onclick="closeSettings()" class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-lg text-xs font-medium border border-slate-700 focus-ring">বাতিল</button>
-                <button onclick="saveSettings()" class="bg-sky-600 hover:bg-sky-500 px-4 py-2 rounded-lg text-xs font-medium text-white focus-ring">সেভ করুন</button>
+            <div class="setting-group">
+                <label>Video Aspect Ratio</label>
+                <select id="aspectRatioSetting" onchange="updateAspectRatio()">
+                    <option value="contain">Contain (16:9 Fit)</option>
+                    <option value="cover">Cover (Fill Screen)</option>
+                    <option value="fill">Fill (Stretch)</option>
+                </select>
+            </div>
+            <div class="setting-group">
+                <label>Default Volume</label>
+                <input type="range" id="volumeSetting" min="0" max="100" value="80" oninput="updateVolume()">
+            </div>
+            <div class="setting-group">
+                <label>Auto Stream Switch on Error</label>
+                <select id="autoSwitchSetting">
+                    <option value="true">Enabled (Silent Retry/Switch)</option>
+                    <option value="false">Disabled</option>
+                </select>
             </div>
         </div>
     </div>
 
-    <!-- APP LOGIC SCRIPT -->
     <script>
-        // স্যাম্পল চ্যানেল লিস্ট (আপনার মেইন স্ট্রিম লিংক বা M3U8 এখানে যুক্ত করতে পারেন)
+        // Sample Channels Data (Supports M3U8, MP4, and YouTube links)
         const channels = [
-            { id: 1, name: "Khusbu Bangla HD", url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", logo: "📺" },
-            { id: 2, name: "Rongeen TV", url: "https://cph-p2p-ms.akamaized.net/hls/live/2000341/test/master.m3u8", logo: "🎬" },
-            { id: 3, name: "Popular TV Live", url: "https://vid-auth.media.rakuten.tv/v1/master/playlist.m3u8", logo: "📡" }
+            { id: 1, name: "Big Buck Bunny (MP4)", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", logo: "https://via.placeholder.com/45", type: "video" },
+            { id: 2, name: "Tears of Steel (MP4)", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4", logo: "https://via.placeholder.com/45", type: "video" },
+            { id: 3, name: "NASA TV Live (YouTube)", url: "https://www.youtube.com/watch?v=21X5lGlDOfg", logo: "https://via.placeholder.com/45", type: "youtube" },
+            { id: 4, name: "Sintel (MP4)", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", logo: "https://via.placeholder.com/45", type: "video" },
+            { id: 5, name: "Elephants Dream (MP4)", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", logo: "https://via.placeholder.com/45", type: "video" }
         ];
 
-        let currentHls = null;
+        let currentIndex = 0;
+        let player = null;
+        let ytPlayer = null;
+        let popupTimer = null;
+        let settings = {
+            aspectRatio: 'contain',
+            volume: 0.8,
+            autoSwitch: true
+        };
 
-        // রিয়েল টাইম লগইন হ্যান্ডেলার
-        function handleLogin(e) {
-            e.preventDefault();
-            const user = document.getElementById('loginUser').value;
-            const pass = document.getElementById('loginPass').value;
+        window.addEventListener('DOMContentLoaded', () => {
+            player = videojs('videoPlayer', {
+                fluid: false,
+                autoplay: true,
+                controls: true
+            });
 
-            // রিয়েল-টাইম ব্যাকএন্ড বা লোকাল ভ্যালিডেশন সিমুলেশন
-            if (user && pass.length >= 4) {
-                localStorage.setItem('khusbu_user', user);
-                initApp(user);
-            } else {
-                const errDiv = document.getElementById('loginError');
-                errDiv.textContent = "দয়া করে সঠিক তথ্য দিন (পাসওয়ার্ড অন্তত ৪ অক্ষরের হতে হবে)।";
-                errDiv.classList.remove('hidden');
-            }
-        }
+            player.on('error', () => {
+                if(settings.autoSwitch) {
+                    console.warn("Stream error detected, switching to next channel...");
+                    setTimeout(nextChannel, 2000);
+                }
+            });
 
-        function initApp(username) {
-            document.getElementById('loginModal').classList.add('hidden');
-            document.getElementById('appContainer').classList.remove('hidden');
-            document.getElementById('userDisplay').textContent = `👤 ${username}`;
-            loadChannels();
-            // ডিফল্ট প্রথম চ্যানেল প্লে করা
-            if(channels.length > 0) playChannel(channels[0]);
-        }
+            renderChannels();
+            playChannel(0);
+        });
 
-        function handleLogout() {
-            localStorage.removeItem('khusbu_user');
-            location.reload();
-        }
-
-        // চ্যানেল লিস্ট রেন্ডার করা এবং রিমোট/ডিপ্যাড ফোকাস ফ্রেন্ডলি করা
-        function loadChannels() {
-            const listContainer = document.getElementById('channelList');
-            listContainer.innerHTML = '';
-            channels.forEach((ch, index) => {
-                const btn = document.createElement('button');
-                btn.className = `w-full text-left p-3 rounded-xl flex items-center space-x-3 transition bg-slate-800/40 hover:bg-slate-800 border border-slate-800/80 focus-ring`;
-                btn.innerHTML = `
-                    <span class="text-xl">${ch.logo}</span>
-                    <div class="flex-1 overflow-hidden">
-                        <p class="text-xs font-bold text-white truncate">${ch.name}</p>
-                        <p class="text-[10px] text-slate-400">লাইভ স্ট্রিম</p>
-                    </div>
-                `;
-                btn.onclick = () => playChannel(ch);
-                listContainer.appendChild(btn);
+        function renderChannels(filter = "") {
+            const list = document.getElementById('channelList');
+            list.innerHTML = "";
+            channels.forEach((ch, idx) => {
+                if(ch.name.toLowerCase().includes(filter.toLowerCase())) {
+                    const item = document.createElement('div');
+                    item.className = `channel-item ${idx === currentIndex ? 'selected' : ''}`;
+                    item.onclick = () => playChannel(idx);
+                    item.innerHTML = `
+                        <img src="${ch.logo}" alt="">
+                        <div class="channel-info">
+                            <h4>${ch.name}</h4>
+                            <p>${ch.type.toUpperCase()}</p>
+                        </div>
+                    `;
+                    list.appendChild(item);
+                }
             });
         }
 
-        // স্ট্রং প্লেয়ার ইঞ্জিন (HLS.js ইন্টিগ্রেশন ও অটো-ফেইলওভার লজিক)
-        function playChannel(ch) {
-            const video = document.getElementById('videoPlayer');
-            document.getElementById('currentPlayingName').textContent = ch.name;
-
-            if (currentHls) {
-                currentHls.destroy();
-            }
-
-            if (Hls.isSupported()) {
-                const hls = new Hls();
-                hls.loadSource(ch.url);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                    video.play().catch(e => console.log("Autoplay blocked:", e));
-                });
-                
-                // অটো-ফেইলওভার হ্যান্ডলিং (স্ট্রিম ফেইল করলে পরবর্তী লিংকে শিফট করার চেষ্টা)
-                hls.on(Hls.Events.ERROR, (event, data) => {
-                    if (data.fatal && document.getElementById('settingAutoSwitch').checked) {
-                        console.warn("Stream error detected, attempting recovery or failover...");
-                        switch (data.type) {
-                            case Hls.ErrorTypes.NETWORK_ERROR:
-                                hls.startLoad();
-                                break;
-                            case Hls.ErrorTypes.MEDIA_ERROR:
-                                hls.recoverMediaError();
-                                break;
-                            default:
-                                hls.destroy();
-                                break;
-                        }
-                    }
-                });
-                currentHls = hls;
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = ch.url;
-                video.addEventListener('loadedmetadata', () => {
-                    video.play();
-                });
-            }
+        function filterChannels() {
+            const query = document.getElementById('searchInput').value;
+            renderChannels(query);
         }
 
-        // সেটিংস ফাংশনালিটি
+        function playChannel(index) {
+            currentIndex = index;
+            const ch = channels[currentIndex];
+            document.getElementById('currentChannelTitle').innerText = ch.name;
+            
+            // Highlight in sidebar
+            document.querySelectorAll('.channel-item').forEach((el, i) => {
+                el.classList.toggle('selected', i === currentIndex);
+            });
+
+            const videoElement = document.getElementById('videoPlayer').parentElement;
+            const ytContainer = document.getElementById('youtube-player-container');
+
+            if (ch.type === 'youtube') {
+                videoElement.style.display = 'none';
+                ytContainer.style.display = 'block';
+                const ytId = extractYouTubeId(ch.url);
+                if(ytPlayer) {
+                    ytPlayer.loadVideoById(ytId);
+                } else {
+                    onYouTubeIframeAPIReady(ytId);
+                }
+            } else {
+                ytContainer.style.display = 'none';
+                videoElement.style.display = 'flex';
+                player.src({ src: ch.url, type: ch.url.includes('.m3u8') ? 'application/x-mpegURL' : 'video/mp4' });
+                player.play().catch(e => console.log("Autoplay prevented:", e));
+            }
+
+            showPopupWithNearby();
+        }
+
+        function extractYouTubeId(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        function onYouTubeIframeAPIReady(videoId) {
+            ytPlayer = new YT.Player('yt-player', {
+                height: '100%',
+                width: '100%',
+                videoId: videoId,
+                playerVars: { 'autoplay': 1, 'controls': 1 },
+            });
+        }
+
+        // Show Current + Nearby Channels in a compact popup, auto-hide in 3s
+        function showPopupWithNearby() {
+            const popup = document.getElementById('channelPopup');
+            popup.innerHTML = "";
+
+            // Determine nearby indices (Previous, Current, Next)
+            let prevIndex = (currentIndex - 1 + channels.length) % channels.length;
+            let nextIndex = (currentIndex + 1) % channels.length;
+            
+            const indicesToShow = [prevIndex, currentIndex, nextIndex];
+
+            indicesToShow.forEach(idx => {
+                const ch = channels[idx];
+                const div = document.createElement('div');
+                div.className = `popup-item ${idx === currentIndex ? 'active' : ''}`;
+                div.onclick = () => playChannel(idx);
+                div.innerHTML = `
+                    <img src="${ch.logo}" alt="">
+                    <span>${ch.name}</span>
+                `;
+                popup.appendChild(div);
+            });
+
+            popup.classList.add('visible');
+
+            clearTimeout(popupTimer);
+            popupTimer = setTimeout(() => {
+                popup.classList.remove('visible');
+            }, 3000); // 3 Seconds Auto-Hide
+        }
+
+        function handleScreenClick() {
+            const popup = document.getElementById('channelPopup');
+            popup.classList.add('visible');
+            clearTimeout(popupTimer);
+            popupTimer = setTimeout(() => {
+                popup.classList.remove('visible');
+            }, 3000);
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('hidden');
+        }
+
+        // Settings Logic
         function openSettings() {
-            document.getElementById('settingsModal').classList.remove('hidden');
+            document.getElementById('settingsModal').classList.add('active');
         }
 
         function closeSettings() {
-            document.getElementById('settingsModal').classList.add('hidden');
+            document.getElementById('settingsModal').classList.remove('active');
         }
 
-        function saveSettings() {
-            const autoSwitch = document.getElementById('settingAutoSwitch').checked;
-            const landscape = document.getElementById('settingLandscape').checked;
-            
-            localStorage.setItem('setting_autoswitch', autoSwitch);
-            localStorage.setItem('setting_landscape', landscape);
-
-            // ল্যান্ডস্কেপ লক এনফোর্স করা (সমর্থিত ডিভাইসে)
-            if (landscape && screen.orientation && screen.orientation.lock) {
-                screen.orientation.lock('landscape').catch(err => console.log("Orientation lock not supported"));
-            }
-
-            closeSettings();
+        function updateAspectRatio() {
+            const val = document.getElementById('aspectRatioSetting').value;
+            settings.aspectRatio = val;
+            const vEl = document.getElementById('videoPlayer');
+            vEl.style.objectFit = val;
         }
 
-        // পেজ লোড হলে চেক করা ইউজার অলরেডি লগইন করা আছে কিনা
-        window.onload = () => {
-            const savedUser = localStorage.getItem('khusbu_user');
-            if (savedUser) {
-                initApp(savedUser);
+        function updateVolume() {
+            const val = document.getElementById('volumeSetting').value;
+            settings.volume = val / 100;
+            player.volume(settings.volume);
+        }
+
+        // Keyboard navigation support for TV D-pad/Remote Arrow Keys
+        window.addEventListener('keydown', (e) => {
+            if(e.key === 'ArrowUp') {
+                let newIdx = (currentIndex - 1 + channels.length) % channels.length;
+                playChannel(newIdx);
+            } else if(e.key === 'ArrowDown') {
+                let newIdx = (currentIndex + 1) % channels.length;
+                playChannel(newIdx);
+            } else if(e.key === 'ArrowLeft') {
+                toggleSidebar();
             }
-        };
+        });
     </script>
 </body>
 </html>
