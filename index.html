@@ -151,6 +151,8 @@
     .cs-menu-item:hover { background: rgba(255,255,255,.08); }
     .cs-menu-item.active { background: rgba(236,72,153,.2); color: #fff; }
     .cs-center-btn { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .yt-mode #playerPipBtn, .yt-mode #playerQualityBtn { display: none !important; }
+    #ytHost iframe { width: 100%; height: 100%; border: 0; pointer-events: none; }
     .iframe-mode .vid-only { display: none !important; }
     .iframe-mode #playerPlayPauseBtn { display: none; }
     @keyframes csFlash { 0% { opacity: 0; transform: scale(.8); } 25% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.05); } }
@@ -487,6 +489,7 @@
     <div id="playerViewport" class="absolute inset-0 bg-black flex items-center justify-center cursor-pointer">
       <video id="liveVideoEl" class="w-full h-full object-contain" autoplay playsinline webkit-playsinline></video>
       <iframe id="liveIframeEl" class="hidden w-full h-full border-0" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <div id="ytHost" class="hidden w-full h-full" style="pointer-events:none"></div>
       <div id="playerSpinner" class="hidden absolute pointer-events-none"><div class="cs-spinner"></div></div>
       <div id="playerSkipFlash" class="hidden absolute top-1/2 -translate-y-1/2 px-4 py-3 rounded-full bg-black/60 text-white text-sm font-extrabold pointer-events-none"></div>
     </div>
@@ -827,6 +830,33 @@
       'from-cyan-900 via-slate-900 to-indigo-950'
     ];
 
+    // Logo link thik kore: github blob -> raw, // -> https, http -> https (https site e)
+    function normalizeLogoUrl(raw) {
+      let u = String(raw == null ? '' : raw).trim();
+      if (!u) return '';
+      if (/^data:/i.test(u)) return u;
+      if (u.startsWith('//')) u = 'https:' + u;
+      const gh = u.match(/^https?:\/\/github\.com\/([^\/]+)\/([^\/]+)\/blob\/(.+)$/i);
+      if (gh) u = `https://raw.githubusercontent.com/${gh[1]}/${gh[2]}/${gh[3].split('?')[0]}`;
+      if (location.protocol === 'https:' && /^http:\/\//i.test(u)) u = 'https://' + u.slice(7);
+      return u;
+    }
+
+    // Logo load na holey proxy diye ekbar try, tarpor text label fallback
+    function logoFail(img, mode) {
+      try {
+        if (!img.dataset.retry && /^https?:/i.test(img.src) && !/wsrv\.nl/.test(img.src)) {
+          img.dataset.retry = '1';
+          img.src = 'https://wsrv.nl/?url=' + encodeURIComponent(img.src) + '&w=256&output=png';
+          return;
+        }
+      } catch (e) {}
+      if (mode === 'remove') { img.remove(); return; }
+      img.style.display = 'none';
+      if (img.nextElementSibling) img.nextElementSibling.style.display = mode;
+    }
+    window.logoFail = logoFail;
+
     function normalizeChannelsJson(rawJson, offset = 0) {
       let arr = [];
       if (Array.isArray(rawJson)) {
@@ -848,7 +878,7 @@
         const idx = i0 + offset;
         const name = item.name || item.title || item.channel_name || item.tvg_name || `Channel ${idx + 1}`;
         const category = item.category || item.group || item.group_title || item.genre || item.type || 'Live TV';
-        const logo = item.logo || item.image || item.icon || item.tvg_logo || item.thumb || item.poster || '';
+        const logo = normalizeLogoUrl(item.logo || item.logo_url || item.logoUrl || item.logoURL || item.tvg_logo || item['tvg-logo'] || item.tvg_logo_url || item.image || item.image_url || item.icon || item.icon_url || item.thumb || item.thumbnail || item.poster || '');
         const streamUrl = item.url || item.streamUrl || item.stream_url || item.link || item.m3u8 || item.youtube || item.yt || item.file || item.src || item.source || 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
         const iframeUrl = item.iframe || item.embed || item.embedUrl || '';
         const words = name.trim().split(/\s+/);
@@ -1000,7 +1030,7 @@
       if (ch.logo) {
         return `
           <div class="${sizeClasses} rounded-full bg-white border-2 border-white/20 group-hover:border-pink-500 shadow-lg flex items-center justify-center p-2 text-center overflow-hidden relative">
-            <img src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <img referrerpolicy="no-referrer" src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="logoFail(this,'flex')" />
             <div style="display:none" class="flex-col items-center justify-center w-full h-full">
               <span class="text-xs sm:text-sm ${ch.badgeColor} leading-tight">${ch.shortLabel}</span>
               <span class="mt-1 px-1.5 py-0.5 rounded bg-slate-900 text-white text-[9px] font-bold">${ch.subLabel}</span>
@@ -1069,7 +1099,7 @@
       document.getElementById('heroSlide2Card').innerHTML = `
         <div class="flex flex-col items-center">
           <div class="w-14 h-14 rounded-full bg-white text-slate-900 flex items-center justify-center font-extrabold text-xs border-2 border-pink-500 overflow-hidden p-1">
-            ${ch0.logo ? `<img src="${ch0.logo}" alt="${ch0.name}" class="w-full h-full object-contain" />` : `<span>${ch0.shortLabel}</span>`}
+            ${ch0.logo ? `<img referrerpolicy="no-referrer" onerror="logoFail(this,'remove')" src="${ch0.logo}" alt="${ch0.name}" class="w-full h-full object-contain" />` : `<span>${ch0.shortLabel}</span>`}
           </div>
           <span class="text-xs font-bold mt-1.5 text-white max-w-[120px] truncate">${ch0.name}</span>
         </div>
@@ -1084,7 +1114,7 @@
       document.getElementById('heroSlide3Card').innerHTML = `
         <div class="flex flex-col items-center">
           <div class="w-14 h-14 rounded-full bg-white text-slate-900 flex items-center justify-center font-extrabold text-xs border-2 border-emerald-400 overflow-hidden p-1">
-            ${ch1.logo ? `<img src="${ch1.logo}" alt="${ch1.name}" class="w-full h-full object-contain" />` : `<span>${ch1.shortLabel}</span>`}
+            ${ch1.logo ? `<img referrerpolicy="no-referrer" onerror="logoFail(this,'remove')" src="${ch1.logo}" alt="${ch1.name}" class="w-full h-full object-contain" />` : `<span>${ch1.shortLabel}</span>`}
           </div>
           <span class="text-xs font-bold mt-1.5 text-white max-w-[120px] truncate">${ch1.name}</span>
         </div>
@@ -1128,7 +1158,7 @@
           <div class="flex items-center gap-3 my-2">
             <div class="w-12 h-12 rounded-xl bg-white flex-shrink-0 flex items-center justify-center p-1 overflow-hidden shadow">
               ${ch.logo
-                ? `<img src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" /><span style="display:none" class="text-[10px] ${ch.badgeColor}">${ch.shortLabel}</span>`
+                ? `<img referrerpolicy="no-referrer" src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="logoFail(this,'block')" /><span style="display:none" class="text-[10px] ${ch.badgeColor}">${ch.shortLabel}</span>`
                 : `<span class="text-[11px] ${ch.badgeColor}">${ch.shortLabel}</span>`
               }
             </div>
@@ -1224,7 +1254,7 @@
         <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-2">
           <button data-play-channel="${ch.id}" class="flex items-center gap-3 text-left flex-1 overflow-hidden">
             <div class="w-12 h-12 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-xs ${ch.badgeColor} overflow-hidden p-1">
-              ${ch.logo ? `<img src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" />` : ch.shortLabel}
+              ${ch.logo ? `<img referrerpolicy="no-referrer" onerror="logoFail(this,'remove')" src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" />` : ch.shortLabel}
             </div>
             <div class="overflow-hidden">
               <p class="font-bold text-xs sm:text-sm text-white truncate">${ch.name}</p>
@@ -1259,7 +1289,7 @@
           <button data-popup-channel-index="${idx}" ${isCurrent ? 'data-current="1"' : ''} class="flex-shrink-0 w-[7.5rem] p-1.5 rounded-lg border ${isCurrent ? 'border-pink-500 bg-pink-500/20' : 'border-white/10 bg-white/5 hover:bg-white/10'} flex items-center gap-1.5 text-left snap-start-item transition active:scale-95">
             <div class="w-7 h-7 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-[8px] ${ch.badgeColor} overflow-hidden p-0.5">
               ${ch.logo
-                ? `<img src="${appEsc(ch.logo)}" alt="" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" /><span style="display:none">${appEsc(ch.shortLabel)}</span>`
+                ? `<img referrerpolicy="no-referrer" src="${appEsc(ch.logo)}" alt="" class="w-full h-full object-contain" onerror="logoFail(this,'block')" /><span style="display:none">${appEsc(ch.shortLabel)}</span>`
                 : `<span>${appEsc(ch.shortLabel)}</span>`
               }
             </div>
@@ -1398,7 +1428,161 @@
       return _scriptCache[key];
     }
 
+    // ---------- YouTube (nijer player e, YouTube UI chhara) ----------
+    let ytPlayer = null, ytMode = false, ytTimer = null, ytLive = false;
+    let _ytApiPromise = null;
+    function loadYtApi() {
+      if (window.YT && YT.Player) return Promise.resolve();
+      if (_ytApiPromise) return _ytApiPromise;
+      _ytApiPromise = new Promise((resolve, reject) => {
+        const prev = window.onYouTubeIframeAPIReady;
+        window.onYouTubeIframeAPIReady = () => { try { if (prev) prev(); } catch (e) {} resolve(); };
+        const el = document.createElement('script');
+        el.src = 'https://www.youtube.com/iframe_api';
+        el.onerror = () => { _ytApiPromise = null; reject(new Error('yt api')); };
+        document.head.appendChild(el);
+        setTimeout(() => { if (!(window.YT && YT.Player)) { _ytApiPromise = null; reject(new Error('yt api timeout')); } }, 15000);
+      });
+      return _ytApiPromise;
+    }
+
+    function isYtEmbed(u) {
+      try { const x = new URL(u); return /(^|\.)youtube(-nocookie)?\.com$/.test(x.hostname) && x.pathname.startsWith('/embed/'); } catch (e) { return false; }
+    }
+
+    function destroyYt() {
+      clearInterval(ytTimer); ytTimer = null;
+      if (ytPlayer) { try { ytPlayer.destroy(); } catch (e) {} ytPlayer = null; }
+      const h = document.getElementById('ytHost');
+      if (h) { h.innerHTML = ''; h.classList.add('hidden'); }
+      ytMode = false; ytLive = false;
+      const m = document.getElementById('playerModal');
+      if (m) m.classList.remove('yt-mode');
+    }
+
+    function getMediaTime() {
+      if (ytMode && ytPlayer && ytPlayer.getCurrentTime) { try { return ytPlayer.getCurrentTime() || 0; } catch (e) { return 0; } }
+      return $p('liveVideoEl').currentTime;
+    }
+    function setMediaTime(t) {
+      if (ytMode && ytPlayer && ytPlayer.seekTo) { try { ytPlayer.seekTo(t, true); } catch (e) {} return; }
+      $p('liveVideoEl').currentTime = t;
+    }
+
+    function ytTick() {
+      if (!ytMode || !ytPlayer || !ytPlayer.getCurrentTime) return;
+      try {
+        const dur = ytPlayer.getDuration() || 0;
+        const cur = ytPlayer.getCurrentTime() || 0;
+        const data = ytPlayer.getVideoData ? ytPlayer.getVideoData() : null;
+        ytLive = !!(data && data.isLive) || dur === 0;
+        const seek = $p('playerSeek'), label = $p('playerTimeLabel'), lb = $p('playerLiveBtn');
+        if (!seekDragging) {
+          if (ytLive) {
+            seek.disabled = true; seek.value = 1000;
+            label.textContent = 'LIVE';
+            lb.classList.remove('hidden'); lb.classList.add('is-live'); lb.textContent = 'LIVE';
+          } else {
+            seek.disabled = !(dur > 0);
+            seek.value = dur > 0 ? (cur / dur) * 1000 : 0;
+            label.textContent = `${fmtTime(cur)} / ${fmtTime(dur)}`;
+            lb.classList.add('hidden');
+          }
+          seek.style.setProperty('--p', (seek.value / 10) + '%');
+        }
+        // volume / mute
+        const muted = ytPlayer.isMuted(), vol = (ytPlayer.getVolume() || 0) / 100;
+        state.isMuted = muted || vol === 0;
+        $p('playerMuteBtn').textContent = state.isMuted ? '🔇' : (vol < 0.5 ? '🔉' : '🔊');
+        const vi = $p('playerVolume');
+        vi.value = muted ? 0 : vol;
+        vi.style.setProperty('--p', (vi.value * 100) + '%');
+        // speed label
+        const r = ytPlayer.getPlaybackRate();
+        $p('playerSpeedLabel').textContent = (r === 1 ? '1' : String(r)) + 'x';
+        const st = ytPlayer.getPlayerState();
+        state.isPlaying = (st === 1 || st === 3);
+        updatePlayPauseIcon();
+      } catch (e) {}
+    }
+
+    function loadYouTubeOwnPlayer(token, embedUrl) {
+      const video = $p('liveVideoEl'), modal = $p('playerModal');
+      try { video.pause(); video.removeAttribute('src'); video.load(); } catch (e) {}
+      video.classList.add('hidden');
+      $p('liveIframeEl').src = '';
+      $p('liveIframeEl').classList.add('hidden');
+      playerIframeMode = true;
+      ytMode = true; ytLive = false;
+      modal.classList.remove('iframe-mode');
+      modal.classList.add('yt-mode');
+
+      const host = $p('ytHost');
+      host.innerHTML = '';
+      host.classList.remove('hidden');
+      setSpinner(true);
+      applyAspect();
+
+      const u = new URL(embedUrl);
+      const q = u.searchParams;
+      q.set('autoplay', '1'); q.set('controls', '0'); q.set('disablekb', '1'); q.set('fs', '0');
+      q.set('modestbranding', '1'); q.set('rel', '0'); q.set('iv_load_policy', '3');
+      q.set('playsinline', '1'); q.set('cc_load_policy', '0'); q.set('enablejsapi', '1');
+      if (/^https?:$/.test(location.protocol)) q.set('origin', location.origin);
+      const ifr = document.createElement('iframe');
+      ifr.id = 'ytFrame';
+      ifr.src = u.href;
+      ifr.allow = 'autoplay; encrypted-media; picture-in-picture';
+      ifr.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+      host.appendChild(ifr);
+
+      streamCheckTimer = setTimeout(() => {
+        if (token !== loadToken || !ytMode) return;
+        setSpinner(false);
+        state.isPlaying = false;
+        updatePlayPauseIcon();
+        setPlayerStatus('Play ▶ button chapun', 3500);
+      }, 12000);
+
+      loadYtApi().then(() => {
+        if (token !== loadToken || !ytMode) return;
+        ytPlayer = new YT.Player(ifr, {
+          events: {
+            onReady: () => {
+              if (token !== loadToken) return;
+              clearInterval(ytTimer);
+              ytTimer = setInterval(ytTick, 500);
+              try { ytPlayer.playVideo(); } catch (e) {}
+              ytTick();
+            },
+            onStateChange: (e) => {
+              if (token !== loadToken) return;
+              const st = e.data;
+              if (st === 1) {
+                clearStreamCheck(); setSpinner(false); setPlayerStatus(null);
+                failStreak = 0; state.isPlaying = true; updatePlayPauseIcon();
+              } else if (st === 2) {
+                state.isPlaying = false; updatePlayPauseIcon();
+                if (playerIsOpen()) showPlayerOverlaysAndStart5sTimer();
+              } else if (st === 3) {
+                setSpinner(true);
+              } else if (st === 0) {
+                state.isPlaying = false; updatePlayPauseIcon();
+                if (state.autoplay && !currentIsCustom && !ytLive) changeChannel(1);
+              }
+              ytTick();
+            },
+            onError: (e) => {
+              if (token !== loadToken) return;
+              handleStreamFailure(token, 'yt-error-' + (e && e.data));
+            }
+          }
+        });
+      }).catch(() => handleStreamFailure(token, 'yt-api'));
+    }
+
     function destroyHls() {
+      destroyYt();
       clearTimeout(engineTimer);
       engineTimer = null;
       if (hlsInstance) {
@@ -1602,7 +1786,7 @@
       if (!vp) return;
       const mode = ASPECTS.some(a => a.k === state.aspect) ? state.aspect : 'fit';
       const cw = vp.clientWidth, ch = vp.clientHeight;
-      [$p('liveVideoEl'), $p('liveIframeEl')].forEach(el => {
+      [$p('liveVideoEl'), $p('liveIframeEl'), $p('ytHost')].forEach(el => {
         const isVideo = el.tagName === 'VIDEO';
         el.style.transform = '';
         el.style.objectFit = '';
@@ -1642,7 +1826,8 @@
       let title = '', items = [];
       if (type === 'speed') {
         title = 'Playback Speed';
-        const cur = $p('liveVideoEl').playbackRate;
+        let cur = $p('liveVideoEl').playbackRate;
+        if (ytMode && ytPlayer) { try { cur = ytPlayer.getPlaybackRate(); } catch (e) {} }
         items = [0.5, 0.75, 1, 1.25, 1.5, 2].map(s => ({ val: String(s), label: s === 1 ? 'Normal (1x)' : `${s}x`, active: Math.abs(cur - s) < 0.01 }));
       } else if (type === 'aspect') {
         title = 'Screen Ratio';
@@ -1675,6 +1860,11 @@
     }
 
     function getSeekInfo() {
+      if (ytMode && ytPlayer) {
+        let dur = 0;
+        try { dur = ytPlayer.getDuration() || 0; } catch (e) {}
+        return { live: ytLive, start: 0, end: dur, win: dur };
+      }
       const v = $p('liveVideoEl');
       let live = !isFinite(v.duration);
       try {
@@ -1694,6 +1884,7 @@
     }
 
     function updateSeekUI() {
+      if (ytMode) { ytTick(); return; }
       if (playerIframeMode || seekDragging) return;
       const v = $p('liveVideoEl');
       const seek = $p('playerSeek'), label = $p('playerTimeLabel'), lb = $p('playerLiveBtn');
@@ -1721,9 +1912,9 @@
       const v = $p('liveVideoEl');
       const { live, start, end, win } = getSeekInfo();
       if (live && win <= 20) { setPlayerStatus('Ei live stream e seek kora jabe na', 1600); return; }
-      let t = v.currentTime + sec;
+      let t = getMediaTime() + sec;
       t = Math.min(Math.max(t, start), live ? Math.max(start, end - 0.5) : end);
-      v.currentTime = t;
+      setMediaTime(t);
       const fl = $p('playerSkipFlash');
       fl.textContent = sec < 0 ? `⏪ ${Math.abs(sec)}s` : `${sec}s ⏩`;
       fl.style.left = sec < 0 ? '14%' : 'auto';
@@ -1735,6 +1926,7 @@
     }
 
     function goLive() {
+      if (ytMode && ytPlayer) { try { ytPlayer.seekTo(ytPlayer.getDuration(), true); ytPlayer.playVideo(); } catch (e) {} return; }
       const v = $p('liveVideoEl');
       const { end } = getSeekInfo();
       const lp = hlsInstance ? hlsInstance.liveSyncPosition : null;
@@ -1806,6 +1998,11 @@
 
       // Iframe / embed channel (YouTube, Vimeo, Dailymotion, embed page)
       const embedUrl = (!customUrl && ch.iframeUrl) ? ch.iframeUrl : toEmbedUrl(streamSrc);
+      if (embedUrl && isYtEmbed(embedUrl)) {
+        $p('playerChannelSub').textContent = `${ch.category} • YouTube`;
+        loadYouTubeOwnPlayer(token, embedUrl);
+        return;
+      }
       if (embedUrl) {
         playerIframeMode = true;
         modal.classList.add('iframe-mode');
@@ -2031,6 +2228,7 @@
     }
 
     function syncVolumeUI() {
+      if (ytMode) return;
       const v = $p('liveVideoEl');
       state.isMuted = v.muted || v.volume === 0;
       $p('playerMuteBtn').textContent = state.isMuted ? '🔇' : (v.volume < 0.5 ? '🔉' : '🔊');
@@ -2060,7 +2258,7 @@
       let lastTap = 0, tapTimer = null;
       viewport.addEventListener('click', (e) => {
         closePlayerMenu();
-        if (playerIframeMode) { showPlayerOverlaysAndStart5sTimer(); return; }
+        if (playerIframeMode && !ytMode) { showPlayerOverlaysAndStart5sTimer(); return; }
         const now = Date.now();
         const rect = viewport.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width;
@@ -2092,7 +2290,9 @@
 
       $p('playerPlayPauseBtn').addEventListener('click', (e) => {
         e.stopPropagation();
-        if (video.paused) video.play().catch(() => {}); else video.pause();
+        if (ytMode && ytPlayer) {
+          try { (ytPlayer.getPlayerState() === 1 || ytPlayer.getPlayerState() === 3) ? ytPlayer.pauseVideo() : ytPlayer.playVideo(); } catch (e) {}
+        } else if (video.paused) video.play().catch(() => {}); else video.pause();
         showPlayerOverlaysAndStart5sTimer();
       });
 
@@ -2122,11 +2322,13 @@
 
       // Volume / mute
       $p('playerMuteBtn').addEventListener('click', () => {
+        if (ytMode && ytPlayer) { try { ytPlayer.isMuted() ? ytPlayer.unMute() : ytPlayer.mute(); } catch (e) {} ytTick(); return; }
         video.muted = !video.muted;
         if (!video.muted && video.volume === 0) video.volume = 0.6;
       });
       $p('playerVolume').addEventListener('input', (e) => {
         const val = parseFloat(e.target.value);
+        if (ytMode && ytPlayer) { try { ytPlayer.setVolume(Math.round(val * 100)); val === 0 ? ytPlayer.mute() : ytPlayer.unMute(); } catch (er) {} ytTick(); return; }
         video.volume = val;
         video.muted = val === 0;
       });
@@ -2147,7 +2349,7 @@
       });
       seek.addEventListener('change', () => {
         const { start, win } = getSeekInfo();
-        video.currentTime = start + (seek.value / 1000) * win;
+        setMediaTime(start + (seek.value / 1000) * win);
         seekDragging = false;
         updateSeekUI();
       });
@@ -2170,8 +2372,8 @@
         const val = item.dataset.menuVal;
         if (type === 'speed') {
           const r = parseFloat(val);
-          video.defaultPlaybackRate = r;
-          video.playbackRate = r;
+          if (ytMode && ytPlayer) { try { ytPlayer.setPlaybackRate(r); } catch (e) {} ytTick(); }
+          else { video.defaultPlaybackRate = r; video.playbackRate = r; }
         } else if (type === 'aspect') {
           state.aspect = val;
           saveState();
@@ -2239,8 +2441,8 @@
         if (e.target && e.target.classList && e.target.classList.contains('cs-range')) return;
         if (e.key === 'ArrowLeft') { e.preventDefault(); changeChannel(-1); }
         else if (e.key === 'ArrowRight') { e.preventDefault(); changeChannel(1); }
-        else if (e.key === ' ' || e.key.toLowerCase() === 'k') { e.preventDefault(); if (!playerIframeMode) { video.paused ? video.play().catch(() => {}) : video.pause(); } }
-        else if (e.key.toLowerCase() === 'm') { video.muted = !video.muted; }
+        else if (e.key === ' ' || e.key.toLowerCase() === 'k') { e.preventDefault(); if (ytMode && ytPlayer) { try { (ytPlayer.getPlayerState() === 1) ? ytPlayer.pauseVideo() : ytPlayer.playVideo(); } catch (er) {} } else if (!playerIframeMode) { video.paused ? video.play().catch(() => {}) : video.pause(); } }
+        else if (e.key.toLowerCase() === 'm') { if (ytMode && ytPlayer) { try { ytPlayer.isMuted() ? ytPlayer.unMute() : ytPlayer.mute(); } catch (er) {} } else video.muted = !video.muted; }
         else if (e.key.toLowerCase() === 'f') { togglePlayerFullscreen(); }
         else if (e.key.toLowerCase() === 'p') { togglePip(); }
         else if (e.key.toLowerCase() === 'j') { skipBy(-10); }
@@ -2262,7 +2464,7 @@
 
     function appLogoHtml(ch) {
       if (ch.logo) {
-        return `<img src="${appEsc(ch.logo)}" alt="" loading="lazy" onerror="this.remove();" />` +
+        return `<img referrerpolicy="no-referrer" src="${appEsc(ch.logo)}" alt="" loading="lazy" onerror="logoFail(this,'remove')" />` +
                `<span style="position:absolute;color:${appEsc(ch.themeColor || '#be185d')};font-size:13px;z-index:0">${appEsc(ch.shortLabel)}</span>`;
       }
       return `<span style="color:${appEsc(ch.themeColor || '#be185d')};font-size:15px;padding:4px">${appEsc(ch.shortLabel)}</span>`;
