@@ -562,6 +562,7 @@
           <button id="playerFwdBtn" class="cs-btn vid-only" title="Forward 10s">10 ⟳</button>
         </div>
         <div class="flex items-center gap-1.5">
+          <button id="playerAspectBtn" class="cs-btn" title="Screen Ratio">▭ <span id="playerAspectLabel" class="hidden sm:inline">Fit</span></button>
           <button id="playerSpeedBtn" class="cs-btn vid-only" title="Speed"><span id="playerSpeedLabel">1x</span></button>
           <button id="playerQualityBtn" class="cs-btn vid-only" title="Quality">⚙ <span id="playerQualityBadge">Auto</span></button>
           <button id="playerPipBtn" class="cs-btn vid-only" title="Picture in Picture">
@@ -914,6 +915,7 @@
       dataSaver: false,
       notifications: true,
       heroSlideIndex: 0,
+      aspect: 'fit',
       jsonUrl: './channels.json'
     };
 
@@ -927,6 +929,7 @@
           if (typeof parsed.isSubscribed === 'boolean') state.isSubscribed = parsed.isSubscribed;
           if (parsed.quality) state.quality = parsed.quality;
           if (parsed.jsonUrl) state.jsonUrl = parsed.jsonUrl;
+          if (parsed.aspect) state.aspect = parsed.aspect;
           if (typeof parsed.autoplay === 'boolean') state.autoplay = parsed.autoplay;
           if (typeof parsed.dataSaver === 'boolean') state.dataSaver = parsed.dataSaver;
           if (typeof parsed.notifications === 'boolean') state.notifications = parsed.notifications;
@@ -942,6 +945,7 @@
           isSubscribed: state.isSubscribed,
           quality: state.quality,
           jsonUrl: state.jsonUrl,
+          aspect: state.aspect,
           autoplay: state.autoplay,
           dataSaver: state.dataSaver,
           notifications: state.notifications
@@ -1550,6 +1554,48 @@
     }
     window.cstvApplyQuality = applyQuality;
 
+    // ---------- Screen ratio ----------
+    const ASPECTS = [
+      { k: 'fit', l: 'Fit (Original)', s: 'Fit' },
+      { k: 'fill', l: 'Stretch (Full Screen)', s: 'Full' },
+      { k: 'zoom', l: 'Zoom (Crop)', s: 'Zoom' },
+      { k: '16:9', l: '16:9', s: '16:9' },
+      { k: '4:3', l: '4:3', s: '4:3' },
+      { k: '21:9', l: '21:9 (Cinema)', s: '21:9' }
+    ];
+
+    function applyAspect() {
+      const vp = $p('playerViewport');
+      if (!vp) return;
+      const mode = ASPECTS.some(a => a.k === state.aspect) ? state.aspect : 'fit';
+      const cw = vp.clientWidth, ch = vp.clientHeight;
+      [$p('liveVideoEl'), $p('liveIframeEl')].forEach(el => {
+        const isVideo = el.tagName === 'VIDEO';
+        el.style.transform = '';
+        el.style.objectFit = '';
+        el.style.width = '100%';
+        el.style.height = '100%';
+        if (mode === 'fit') return;
+        if (mode === 'fill') { if (isVideo) el.style.objectFit = 'fill'; return; }
+        if (mode === 'zoom') {
+          if (isVideo) el.style.objectFit = 'cover';
+          else el.style.transform = 'scale(1.25)';
+          return;
+        }
+        if (!cw || !ch) return;
+        const [a, b] = mode.split(':').map(Number);
+        const r = a / b;
+        let w, h;
+        if (cw / ch > r) { h = ch; w = ch * r; } else { w = cw; h = cw / r; }
+        el.style.width = Math.round(w) + 'px';
+        el.style.height = Math.round(h) + 'px';
+        if (isVideo) el.style.objectFit = 'fill';
+      });
+      const cur = ASPECTS.find(a => a.k === mode);
+      const lb = $p('playerAspectLabel');
+      if (lb && cur) lb.textContent = cur.s;
+    }
+
     // ---------- Menus ----------
     function closePlayerMenu() {
       const m = $p('playerMenu');
@@ -1565,6 +1611,9 @@
         title = 'Playback Speed';
         const cur = $p('liveVideoEl').playbackRate;
         items = [0.5, 0.75, 1, 1.25, 1.5, 2].map(s => ({ val: String(s), label: s === 1 ? 'Normal (1x)' : `${s}x`, active: Math.abs(cur - s) < 0.01 }));
+      } else if (type === 'aspect') {
+        title = 'Screen Ratio';
+        items = ASPECTS.map(a => ({ val: a.k, label: a.l, active: (state.aspect || 'fit') === a.k }));
       } else {
         title = 'Video Quality';
         const hs = levelHeights();
@@ -1731,6 +1780,7 @@
         video.classList.add('hidden');
         iframe.src = embedUrl;
         iframe.classList.remove('hidden');
+        applyAspect();
         setSpinner(false);
         $p('playerChannelSub').textContent = `${ch.category} • Live`;
         updatePlayPauseIcon();
@@ -1742,6 +1792,7 @@
       iframe.src = '';
       iframe.classList.add('hidden');
       video.classList.remove('hidden');
+      applyAspect();
       setSpinner(true);
       updatePlayPauseIcon();
       updateSeekUI();
@@ -1996,7 +2047,7 @@
 
       // Close menu when tapping elsewhere
       modal.addEventListener('click', (e) => {
-        if (!e.target.closest('#playerMenu') && !e.target.closest('#playerSpeedBtn') && !e.target.closest('#playerQualityBtn')) closePlayerMenu();
+        if (!e.target.closest('#playerMenu') && !e.target.closest('#playerSpeedBtn') && !e.target.closest('#playerQualityBtn') && !e.target.closest('#playerAspectBtn')) closePlayerMenu();
       });
 
       $p('closePlayerBtn').addEventListener('click', () => {
@@ -2072,6 +2123,13 @@
       // Speed / Quality menus
       $p('playerSpeedBtn').addEventListener('click', (e) => { e.stopPropagation(); openPlayerMenu('speed'); });
       $p('playerQualityBtn').addEventListener('click', (e) => { e.stopPropagation(); openPlayerMenu('quality'); });
+      $p('playerAspectBtn').addEventListener('click', (e) => { e.stopPropagation(); openPlayerMenu('aspect'); });
+
+      // Ratio sob somoy viewport size onujayi thakbe (rotate / fullscreen / app inline)
+      if (window.ResizeObserver) new ResizeObserver(() => applyAspect()).observe(viewport);
+      window.addEventListener('resize', applyAspect);
+      window.addEventListener('orientationchange', () => setTimeout(applyAspect, 250));
+      applyAspect();
       $p('playerMenu').addEventListener('click', (e) => {
         e.stopPropagation();
         const item = e.target.closest('[data-menu-val]');
@@ -2082,6 +2140,11 @@
           const r = parseFloat(val);
           video.defaultPlaybackRate = r;
           video.playbackRate = r;
+        } else if (type === 'aspect') {
+          state.aspect = val;
+          saveState();
+          applyAspect();
+          setPlayerStatus('Screen ratio: ' + (ASPECTS.find(a => a.k === val) || {}).l, 1400);
         } else {
           applyQuality(val);
           if (['Auto', '1080p', '720p', '480p'].includes(val)) {
@@ -2776,6 +2839,8 @@
         // Saved channel, setting, recent data sob reset
         state.favorites = [];
         state.quality = '1080p';
+        state.aspect = 'fit';
+        if (typeof applyAspect === 'function') applyAspect();
         state.autoplay = true;
         state.dataSaver = false;
         state.notifications = true;
