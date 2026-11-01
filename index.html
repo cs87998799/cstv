@@ -175,7 +175,6 @@
     #playerModal.app-inline.app-fs { position: fixed !important; inset: 0 !important; width: 100vw; height: 100vh; height: 100dvh; aspect-ratio: auto; z-index: 9999 !important; }
     #playerModal.app-inline:not(.app-fs) #playerTopBar,
     #playerModal.app-inline:not(.app-fs) #playerHorizontalPopup,
-    #playerModal.app-inline:not(.app-fs) #showPopupBottomBtn,
     #playerModal.app-inline:not(.app-fs) #playerPrevChannelBtn,
     #playerModal.app-inline:not(.app-fs) #playerNextChannelBtn,
     #playerModal.app-inline:not(.app-fs) #playerBackBtn,
@@ -407,7 +406,7 @@
         <div class="flex items-center justify-between">
           <div>
             <p class="font-bold text-sm text-white">GitHub `channels.json` Data Source</p>
-            <p id="jsonSourceUrlText" class="text-xs text-slate-300">Auto-loads `./channels.json` from your GitHub folder</p>
+            <p id="jsonSourceUrlText" class="text-xs text-slate-300">Auto-loads channels.json + channels(1).json + channels(2).json</p>
           </div>
           <button id="reloadJsonBtn" class="px-3 py-1.5 rounded-lg toffee-gradient text-xs font-bold shadow">↻ Reload JSON</button>
         </div>
@@ -568,7 +567,6 @@
           <button id="playerPipBtn" class="cs-btn vid-only" title="Picture in Picture">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19 11h-8v6h8v-6zm4 8V4.98C23 3.88 22.1 3 21 3H3c-1.1 0-2 .88-2 1.98V19c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2zm-2 .02H3V4.97h18v14.05z"/></svg>
           </button>
-          <button id="showPopupBottomBtn" class="cs-btn" title="Channel List">☰</button>
           <button id="playerFullscreenBtn" class="cs-btn" title="Fullscreen">⛶</button>
         </div>
       </div>
@@ -829,7 +827,7 @@
       'from-cyan-900 via-slate-900 to-indigo-950'
     ];
 
-    function normalizeChannelsJson(rawJson) {
+    function normalizeChannelsJson(rawJson, offset = 0) {
       let arr = [];
       if (Array.isArray(rawJson)) {
         arr = rawJson;
@@ -846,7 +844,8 @@
 
       if (!Array.isArray(arr) || arr.length === 0) return null;
 
-      return arr.map((item, idx) => {
+      return arr.map((item, i0) => {
+        const idx = i0 + offset;
         const name = item.name || item.title || item.channel_name || item.tvg_name || `Channel ${idx + 1}`;
         const category = item.category || item.group || item.group_title || item.genre || item.type || 'Live TV';
         const logo = item.logo || item.image || item.icon || item.tvg_logo || item.thumb || item.poster || '';
@@ -874,29 +873,63 @@
       });
     }
 
+    // channels.json + channels(1).json + channels(2).json -- 3 file theke channel load hobe
+    function buildJsonSources(url) {
+      url = (url || './channels.json').trim();
+      const m = url.match(/^(.*?)channels(?:\(\d+\))?\.json(\?.*)?$/i);
+      if (!m) return [url];
+      const base = m[1], q = m[2] || '';
+      return [`${base}channels.json${q}`, `${base}channels(1).json${q}`, `${base}channels(2).json${q}`];
+    }
+
     async function fetchChannelsFromJson(jsonPath = './channels.json', showFeedback = false) {
       const statusLabel = document.getElementById('jsonStatusLabel');
       const sourceText = document.getElementById('jsonSourceUrlText');
-      try {
-        const response = await fetch(jsonPath, { cache: 'no-store' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        const normalized = normalizeChannelsJson(data);
-        if (normalized && normalized.length > 0) {
-          CHANNELS = normalized;
-          statusLabel.textContent = `● Loaded ${CHANNELS.length} channels`;
-          statusLabel.className = 'text-[9px] text-emerald-400 font-semibold tracking-tight';
-          if (sourceText) sourceText.textContent = `Loaded ${CHANNELS.length} channels from ${jsonPath}`;
-          if (showFeedback) showToast(`Loaded ${CHANNELS.length} channels from channels.json!`);
-          renderAllFromChannelsJson();
-          return true;
-        }
-      } catch (err) {
-        statusLabel.textContent = `● Ready (${CHANNELS.length} channels)`;
-        if (showFeedback) {
-          showToast('Using built-in channels.json fallback');
-        }
+      const sources = buildJsonSources(jsonPath);
+
+      const results = await Promise.all(sources.map(async (src) => {
+        try {
+          const response = await fetch(src, { cache: 'no-store' });
+          if (!response.ok) return null;
+          const data = await response.json();
+          return { src, data };
+        } catch (err) { return null; }
+      }));
+
+      const merged = [];
+      const seenKeys = new Set();
+      const seenIds = new Set();
+      let filesLoaded = 0;
+      results.forEach(r => {
+        if (!r) return;
+        const list = normalizeChannelsJson(r.data, merged.length);
+        if (!list || !list.length) return;
+        filesLoaded++;
+        list.forEach(ch => {
+          const key = (ch.name + '|' + (ch.iframeUrl || ch.streamUrl)).toLowerCase();
+          if (seenKeys.has(key)) return; // same channel duplicate hole skip
+          seenKeys.add(key);
+          let id = ch.id, n = 2;
+          while (seenIds.has(id)) id = `${ch.id}-${n++}`;
+          seenIds.add(id);
+          ch.id = id;
+          merged.push(ch);
+        });
+      });
+
+      if (merged.length > 0) {
+        CHANNELS = merged;
+        if (state.currentChannelIndex >= CHANNELS.length) state.currentChannelIndex = 0;
+        statusLabel.textContent = `● Loaded ${CHANNELS.length} channels (${filesLoaded} file)`;
+        statusLabel.className = 'text-[9px] text-emerald-400 font-semibold tracking-tight';
+        if (sourceText) sourceText.textContent = `Loaded ${CHANNELS.length} channels from ${filesLoaded} file (channels.json, channels(1).json, channels(2).json)`;
+        if (showFeedback) showToast(`Loaded ${CHANNELS.length} channels from ${filesLoaded} file!`);
+        renderAllFromChannelsJson();
+        return true;
       }
+
+      statusLabel.textContent = `● Ready (${CHANNELS.length} channels)`;
+      if (showFeedback) showToast('Using built-in channels fallback');
       renderAllFromChannelsJson();
       return false;
     }
@@ -2068,7 +2101,6 @@
         if (popupDrawer.classList.contains('auto-hide-hidden') || popupDrawer.classList.contains('hidden')) showPlayerOverlaysAndStart5sTimer();
         else hidePlayerPopupImmediately();
       });
-      $p('showPopupBottomBtn').addEventListener('click', (e) => { e.stopPropagation(); showPlayerOverlaysAndStart5sTimer(); });
       $p('hidePopupDrawerBtn').addEventListener('click', (e) => { e.stopPropagation(); hidePlayerPopupImmediately(); });
 
       $p('playerFavBtn').addEventListener('click', (e) => {
