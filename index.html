@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>CS Tv - Live TV & Sports Streaming</title>
+  <title>Khusbu TV - Live TV & Sports Streaming</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
@@ -126,7 +126,7 @@
     .splash-animate {
       animation: splashScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    /* ===== CS Tv Player v3 ===== */
+    /* ===== Khusbu TV Player v3 ===== */
     .ov-fade { transition: opacity .3s ease, transform .3s ease; }
     .ov-hidden { opacity: 0 !important; pointer-events: none !important; }
     .cs-spinner { width: 54px; height: 54px; border-radius: 50%; border: 4px solid rgba(255,255,255,.15); border-top-color: #ec4899; animation: csSpin .8s linear infinite; }
@@ -158,7 +158,7 @@
     /* ===== App UI (WebView / installed app) ===== */
     #appUI { display: none; position: fixed; inset: 0; flex-direction: column; background: #000; color: #fff; z-index: 10; }
     html.app-mode body { background: #000; padding-bottom: 0 !important; display: block; min-height: 0; }
-    html.app-mode body > *:not(#appUI):not(#toastBox):not(#splashScreen):not(script) { display: none !important; }
+    html.app-mode body > *:not(#appUI):not(#toastBox):not(#splashScreen):not(#phoneLoginModal):not(#customStreamModal):not(#subscribeModal):not(script) { display: none !important; }
     html.app-mode #appUI { display: flex; }
     #appCatBar, #appGrid { -webkit-overflow-scrolling: touch; }
     .app-chip { padding: 11px 22px; border-radius: 999px; background: #2b2b2b; color: #e5e5e5; font-size: 16px; font-weight: 500; white-space: nowrap; flex-shrink: 0; transition: background .15s, transform .15s; }
@@ -195,7 +195,7 @@
           <path d="M4 6.5C4 5.12 5.12 4 6.5 4h11C18.88 4 20 5.12 20 6.5v11c0 1.38-1.12 2.5-2.5 2.5h-11C5.12 20 4 18.88 4 17.5v-11zm6 2.5v6l5-3-5-3z"/>
         </svg>
       </div>
-      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-wider bg-gradient-to-r from-pink-400 via-fuchsia-300 to-white bg-clip-text text-transparent">CS Tv</h1>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-wider bg-gradient-to-r from-pink-400 via-fuchsia-300 to-white bg-clip-text text-transparent">Khusbu TV</h1>
       <p class="text-xs sm:text-sm text-slate-300 mt-2 font-medium">Welcome to Live TV & Sports Streaming</p>
       <div class="mt-6 flex items-center gap-1.5">
         <span class="w-2 h-2 rounded-full bg-pink-500 live-dot"></span>
@@ -204,10 +204,10 @@
     </div>
   </div>
 
-  <!-- TOP STICKY NAVBAR (CS Tv Branding) -->
+  <!-- TOP STICKY NAVBAR (Khusbu TV Branding) -->
   <header class="sticky top-0 z-30 bg-[#0b0714]/95 backdrop-blur-md border-b border-white/5">
     <div class="max-w-5xl mx-auto px-4 pt-3 pb-2 flex items-center justify-between gap-2">
-      <!-- Brand Logo: CS Tv -->
+      <!-- Brand Logo: Khusbu TV -->
       <button id="brandLogoBtn" class="flex items-center gap-2 focus:outline-none group">
         <div class="w-9 h-9 rounded-xl toffee-gradient flex items-center justify-center shadow-lg shadow-pink-500/25 group-active:scale-95 transition">
           <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
@@ -215,7 +215,7 @@
           </svg>
         </div>
         <div class="flex flex-col text-left">
-          <span class="font-extrabold tracking-wider text-lg leading-none bg-gradient-to-r from-pink-400 via-fuchsia-300 to-white bg-clip-text text-transparent">CS Tv</span>
+          <span class="font-extrabold tracking-wider text-lg leading-none bg-gradient-to-r from-pink-400 via-fuchsia-300 to-white bg-clip-text text-transparent">Khusbu TV</span>
           <span id="jsonStatusLabel" class="text-[9px] text-emerald-400 font-semibold tracking-tight">● channels.json ready</span>
         </div>
       </button>
@@ -263,7 +263,7 @@
               <p class="text-2xl sm:text-3xl font-extrabold text-white mt-0.5 drop-shadow">লাইভ চ্যানেল ও কনটেন্ট</p>
               <p class="text-xl sm:text-2xl font-extrabold text-amber-300 mt-0.5">নতুন যোগ হলো!</p>
               <div class="mt-3 px-5 py-2 rounded-xl border-2 border-pink-400/90 bg-purple-950/60 neon-box">
-                <p class="text-xs sm:text-sm font-semibold text-white">এখন আরো বেশি দেখুন <span class="text-pink-400 font-bold">CS Tv -তে</span></p>
+                <p class="text-xs sm:text-sm font-semibold text-white">এখন আরো বেশি দেখুন <span class="text-pink-400 font-bold">Khusbu TV -তে</span></p>
               </div>
               <div class="mt-5 w-48 h-40 sm:w-56 sm:h-44 rounded-2xl bg-gradient-to-b from-pink-500/30 via-purple-600/20 to-transparent border border-pink-500/30 flex flex-col items-center justify-center p-3 relative overflow-hidden">
                 <div id="heroMontageGrid" class="grid grid-cols-3 gap-1.5 w-full opacity-90 transform -rotate-6 scale-105">
@@ -285,7 +285,7 @@
           <div class="min-w-full snap-center-item hero-bg-2 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
             <div class="max-w-md mx-auto flex flex-col items-center">
               <span class="px-3 py-0.5 rounded-full bg-red-600 text-white text-[11px] font-bold tracking-wider uppercase flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-white live-dot"></span> CS Tv LIVE STREAM
+                <span class="w-2 h-2 rounded-full bg-white live-dot"></span> Khusbu TV LIVE STREAM
               </span>
               <h2 id="heroSlide2Title" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Live Sports & TV</h2>
               <p id="heroSlide2Sub" class="text-xs sm:text-sm text-sky-200 mt-1">Streaming directly from channels.json</p>
@@ -299,7 +299,7 @@
           <!-- Slide 3 -->
           <div class="min-w-full snap-center-item hero-bg-4 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
             <div class="max-w-md mx-auto flex flex-col items-center">
-              <span class="px-3 py-0.5 rounded-full bg-emerald-600 text-white text-[11px] font-bold tracking-wider uppercase">CS Tv EXCLUSIVE</span>
+              <span class="px-3 py-0.5 rounded-full bg-emerald-600 text-white text-[11px] font-bold tracking-wider uppercase">Khusbu TV EXCLUSIVE</span>
               <h2 id="heroSlide3Title" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Full HD Channels</h2>
               <p id="heroSlide3Sub" class="text-xs sm:text-sm text-emerald-200 mt-1">Zero Buffering • Non-Stop Entertainment</p>
               <div id="heroSlide3Card" class="mt-4 w-64 h-36 rounded-2xl bg-gradient-to-r from-emerald-900/80 via-slate-900 to-amber-900/80 border border-emerald-400/30 flex items-center justify-around p-4 shadow-xl"></div>
@@ -371,9 +371,9 @@
     <!-- DISCOVER VIEW -->
     <section id="viewDiscover" class="hidden px-4 py-4 space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <h2 class="text-xl font-bold">Discover CS Tv Channels</h2>
+        <h2 class="text-xl font-bold">Discover Khusbu TV Channels</h2>
         <div class="relative flex-1 max-w-sm">
-          <input id="channelSearchInput" type="text" placeholder="Search any channel from channels.json..." class="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-pink-500" />
+          <input id="channelSearchInput" type="text" placeholder="🔍 Channel search korun..." class="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-pink-500" />
         </div>
       </div>
       <div id="discoverGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 pt-2"></div>
@@ -390,7 +390,7 @@
 
     <!-- SETTINGS VIEW -->
     <section id="viewSettings" class="hidden px-4 py-4 space-y-5">
-      <h2 class="text-xl font-bold">CS Tv Account & App Settings</h2>
+      <h2 class="text-xl font-bold">Khusbu TV Account & App Settings</h2>
 
       <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-4">
         <div class="flex items-center gap-3.5">
@@ -454,7 +454,7 @@
         <div class="p-4 flex items-center justify-between">
           <div>
             <p class="font-semibold text-sm">Live Match Notifications</p>
-            <p class="text-xs text-slate-400">Instant match & channel alerts on CS Tv</p>
+            <p class="text-xs text-slate-400">Instant match & channel alerts on Khusbu TV</p>
           </div>
           <button id="toggleNotifyBtn" role="switch" aria-checked="true" class="w-11 h-6 rounded-full bg-pink-600 relative transition">
             <span class="dot w-4 h-4 rounded-full bg-white absolute top-1 right-1 transition-all"></span>
@@ -463,8 +463,8 @@
 
         <div class="p-4 flex items-center justify-between">
           <div>
-            <p class="font-semibold text-sm">Custom M3U8 Stream Test</p>
-            <p class="text-xs text-slate-400">Play your own IPTV .m3u8 link in player</p>
+            <p class="font-semibold text-sm">Custom Stream Test</p>
+            <p class="text-xs text-slate-400">Play any link: m3u8, mp4, mpd, flv, YouTube...</p>
           </div>
           <button id="openCustomStreamModalBtn" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold">Test URL</button>
         </div>
@@ -487,7 +487,7 @@
     <!-- Video viewport -->
     <div id="playerViewport" class="absolute inset-0 bg-black flex items-center justify-center cursor-pointer">
       <video id="liveVideoEl" class="w-full h-full object-contain" autoplay playsinline webkit-playsinline></video>
-      <iframe id="liveIframeEl" class="hidden w-full h-full border-0" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>
+      <iframe id="liveIframeEl" class="hidden w-full h-full border-0" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       <div id="playerSpinner" class="hidden absolute pointer-events-none"><div class="cs-spinner"></div></div>
       <div id="playerSkipFlash" class="hidden absolute top-1/2 -translate-y-1/2 px-4 py-3 rounded-full bg-black/60 text-white text-sm font-extrabold pointer-events-none"></div>
     </div>
@@ -501,7 +501,7 @@
         <div class="min-w-0">
           <div class="flex items-center gap-2 min-w-0">
             <span class="px-2 py-0.5 rounded bg-red-600 text-[10px] font-extrabold uppercase flex items-center gap-1 flex-shrink-0">
-              <span class="w-1.5 h-1.5 rounded-full bg-white live-dot"></span> CS Tv LIVE
+              <span class="w-1.5 h-1.5 rounded-full bg-white live-dot"></span> Khusbu TV LIVE
             </span>
             <h3 id="playerChannelTitle" class="font-bold text-sm sm:text-base truncate">Channel Name</h3>
           </div>
@@ -533,15 +533,15 @@
     </div>
 
     <!-- Channel popup -->
-    <div id="playerHorizontalPopup" data-no-tap class="player-popup-drawer absolute left-3 right-3 bg-[#120b22]/95 backdrop-blur-xl border border-pink-500/30 rounded-2xl p-3 z-30 shadow-2xl" style="bottom:calc(118px + env(safe-area-inset-bottom))">
-      <div class="flex items-center justify-between mb-2 px-1">
-        <div class="flex items-center gap-2">
-          <span class="text-xs font-bold text-pink-400 uppercase tracking-wider">CS Tv Channels</span>
-          <span id="autoHideTimerBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-slate-300">Auto-hide in 5s</span>
+    <div id="playerHorizontalPopup" data-no-tap class="player-popup-drawer absolute left-3 right-3 max-w-[420px] mx-auto bg-[#120b22]/95 backdrop-blur-xl border border-pink-500/30 rounded-xl p-1.5 z-30 shadow-2xl" style="bottom:calc(96px + env(safe-area-inset-bottom))">
+      <div class="flex items-center justify-between mb-1 px-1">
+        <div class="flex items-center gap-1.5">
+          <span class="text-[10px] font-bold text-pink-400 uppercase tracking-wider">Nearby Channels</span>
+          <span id="autoHideTimerBadge" class="text-[9px] px-1.5 py-0.5 rounded-full bg-white/10 text-slate-300">Auto-hide in 3s</span>
         </div>
-        <button id="hidePopupDrawerBtn" class="text-xs text-slate-300 hover:text-white px-2 py-0.5 rounded bg-white/10">Hide ✕</button>
+        <button id="hidePopupDrawerBtn" class="text-[10px] text-slate-300 hover:text-white px-1.5 py-0.5 rounded bg-white/10">✕</button>
       </div>
-      <div id="playerPopupTrack" class="flex items-center gap-3 overflow-x-auto no-scrollbar snap-x-mandatory py-1"></div>
+      <div id="playerPopupTrack" class="relative flex items-center gap-2 overflow-x-auto no-scrollbar snap-x-mandatory py-0.5"></div>
     </div>
 
     <!-- Quality / Speed menu -->
@@ -589,6 +589,10 @@
       </button>
     </div>
 
+    <div class="flex items-center gap-2 px-4 pb-3 flex-shrink-0">
+      <input id="appSearchInput" type="text" placeholder="🔍 Channel search korun..." class="flex-1 min-w-0 bg-[#2b2b2b] rounded-full px-4 py-2.5 text-sm text-white placeholder-slate-400 focus:outline-none" style="user-select:text" />
+      <button id="appSettingsBtn" class="w-11 h-11 rounded-full bg-[#2b2b2b] text-white text-xl flex items-center justify-center flex-shrink-0" title="Settings">⚙</button>
+    </div>
     <div id="appCatBar" class="flex gap-3 overflow-x-auto no-scrollbar px-4 pb-4 flex-shrink-0"></div>
     <div id="appGrid" class="flex-1 overflow-y-auto"></div>
   </div>
@@ -598,7 +602,7 @@
     <div class="w-full max-w-sm rounded-3xl bg-[#160e29] border border-pink-500/30 p-6 shadow-2xl space-y-5">
       <div class="flex items-center justify-between">
         <div>
-          <h3 class="text-lg font-extrabold text-white">Sign In to CS Tv</h3>
+          <h3 class="text-lg font-extrabold text-white">Sign In to Khusbu TV</h3>
           <p class="text-xs text-slate-400">Enter your mobile number to receive OTP</p>
         </div>
         <button id="closeLoginModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
@@ -618,7 +622,7 @@
       <div id="loginStepOtp" class="hidden space-y-4">
         <div class="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-xs text-emerald-200">
           OTP sent to <span id="otpSentPhoneLabel" class="font-bold">+88017...</span>! <br/>
-          <span>CS Tv OTP Code: <strong id="generatedOtpDisplay" class="text-white underline">4829</strong></span>
+          <span>Khusbu TV OTP Code: <strong id="generatedOtpDisplay" class="text-white underline">4829</strong></span>
         </div>
         <div>
           <label class="block text-xs font-semibold text-slate-300 mb-1.5">Enter 4-Digit OTP</label>
@@ -636,15 +640,15 @@
   <div id="subscribeModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="w-full max-w-sm rounded-3xl bg-[#160e29] border border-pink-500/30 p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between">
-        <span class="px-3 py-1 rounded-full toffee-gradient text-xs font-bold">👑 CS Tv VIP PASS</span>
+        <span class="px-3 py-1 rounded-full toffee-gradient text-xs font-bold">👑 Khusbu TV VIP PASS</span>
         <button id="closeSubscribeModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
       </div>
-      <h3 class="text-xl font-extrabold">Unlock All CS Tv Live Sports & VIP Channels</h3>
+      <h3 class="text-xl font-extrabold">Unlock All Khusbu TV Live Sports & VIP Channels</h3>
       <p class="text-xs text-slate-300">Watch all premium channels from channels.json in Full HD ad-free.</p>
       <div class="space-y-2.5 pt-1">
         <button data-plan="Monthly VIP (৳99)" class="sub-plan-btn w-full p-3.5 rounded-2xl bg-pink-500/15 border-2 border-pink-500 flex items-center justify-between text-left">
           <div>
-            <p class="font-bold text-sm text-white">30 Days CS Tv VIP</p>
+            <p class="font-bold text-sm text-white">30 Days Khusbu TV VIP</p>
             <p class="text-xs text-pink-300">bKash / Nagad / Mobile Balance</p>
           </div>
           <span class="text-lg font-extrabold text-white">৳99</span>
@@ -664,11 +668,12 @@
   <div id="customStreamModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="w-full max-w-sm rounded-3xl bg-[#160e29] border border-white/20 p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between">
-        <h3 class="text-base font-bold">Play Custom .m3u8 Link</h3>
+        <h3 class="text-base font-bold">Play Any Video Link</h3>
         <button id="closeCustomStreamModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 flex items-center justify-center">✕</button>
       </div>
-      <input id="customM3u8Input" type="url" placeholder="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" class="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500" />
-      <button id="playCustomM3u8Btn" class="w-full py-2.5 rounded-xl toffee-gradient text-xs font-bold">Play Live Stream</button>
+      <input id="customM3u8Input" type="url" placeholder=".m3u8 / .mpd / .mp4 / .flv / .ts / YouTube link" class="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500" />
+      <p class="text-[10px] text-slate-400 leading-relaxed">Supported: m3u8 (HLS), mpd (DASH), mp4, webm, mkv, flv, ts, mp3 ar YouTube / Vimeo / Dailymotion link.</p>
+      <button id="playCustomM3u8Btn" class="w-full py-2.5 rounded-xl toffee-gradient text-xs font-bold">Play Now</button>
     </div>
   </div>
 
@@ -713,7 +718,7 @@
         premium: true,
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#e11d48',
-        ticker: 'CS Tv LIVE: Ipswich Town vs Nottingham Forest • Premier League'
+        ticker: 'Khusbu TV LIVE: Ipswich Town vs Nottingham Forest • Premier League'
       },
       {
         id: 'ch-somoy',
@@ -725,7 +730,7 @@
         premium: false,
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#b91c1c',
-        ticker: 'সময় সংবাদ লাইভ: দেশ ও আন্তর্জাতিক সর্বশেষ খবর দেখুন CS Tv-তে'
+        ticker: 'সময় সংবাদ লাইভ: দেশ ও আন্তর্জাতিক সর্বশেষ খবর দেখুন Khusbu TV-তে'
       },
       {
         id: 'ch-zeebangla',
@@ -737,7 +742,7 @@
         premium: true,
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#ea580c',
-        ticker: 'জি বাংলা এইচডি: জনপ্রিয় সিরিয়াল ও নাটক সরাসরি CS Tv-তে'
+        ticker: 'জি বাংলা এইচডি: জনপ্রিয় সিরিয়াল ও নাটক সরাসরি Khusbu TV-তে'
       },
       {
         id: 'ch-sony1',
@@ -773,7 +778,7 @@
         premium: false,
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#1e40af',
-        ticker: 'যমুনা টেলিভিশন ২৪ ঘণ্টা সরাসরি সম্প্রচার CS Tv-তে'
+        ticker: 'যমুনা টেলিভিশন ২৪ ঘণ্টা সরাসরি সম্প্রচার Khusbu TV-তে'
       },
       {
         id: 'ch-starjalsha',
@@ -789,15 +794,15 @@
       },
       {
         id: 'ch-cstv-series',
-        name: 'CS Tv Originals',
-        shortLabel: 'CS Tv',
+        name: 'Khusbu TV Originals',
+        shortLabel: 'Khusbu TV',
         subLabel: 'WEB SERIES',
         category: 'Web Series',
         logo: '',
         premium: false,
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
         themeColor: '#6b21a8',
-        ticker: 'CS Tv Exclusive Web Series • New Episodes Streaming Now'
+        ticker: 'Khusbu TV Exclusive Web Series • New Episodes Streaming Now'
       }
     ];
 
@@ -844,7 +849,7 @@
         const name = item.name || item.title || item.channel_name || item.tvg_name || `Channel ${idx + 1}`;
         const category = item.category || item.group || item.group_title || item.genre || item.type || 'Live TV';
         const logo = item.logo || item.image || item.icon || item.tvg_logo || item.thumb || item.poster || '';
-        const streamUrl = item.url || item.streamUrl || item.stream_url || item.link || item.m3u8 || item.file || item.src || item.source || 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+        const streamUrl = item.url || item.streamUrl || item.stream_url || item.link || item.m3u8 || item.youtube || item.yt || item.file || item.src || item.source || 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
         const iframeUrl = item.iframe || item.embed || item.embedUrl || '';
         const words = name.trim().split(/\s+/);
         const shortLabel = item.shortLabel || (words.length >= 2 ? (words[0] + ' ' + words[1]).slice(0, 10) : name.slice(0, 8));
@@ -863,7 +868,7 @@
           badgeColor: BADGE_COLORS[idx % BADGE_COLORS.length],
           cardGradient: CARD_GRADIENTS[idx % CARD_GRADIENTS.length],
           themeColor: item.themeColor || '#831843',
-          ticker: item.ticker || item.description || `${name} • ${category} Live Stream on CS Tv`
+          ticker: item.ticker || item.description || `${name} • ${category} Live Stream on Khusbu TV`
         };
       });
     }
@@ -922,6 +927,9 @@
           if (typeof parsed.isSubscribed === 'boolean') state.isSubscribed = parsed.isSubscribed;
           if (parsed.quality) state.quality = parsed.quality;
           if (parsed.jsonUrl) state.jsonUrl = parsed.jsonUrl;
+          if (typeof parsed.autoplay === 'boolean') state.autoplay = parsed.autoplay;
+          if (typeof parsed.dataSaver === 'boolean') state.dataSaver = parsed.dataSaver;
+          if (typeof parsed.notifications === 'boolean') state.notifications = parsed.notifications;
         }
       } catch (err) {}
     }
@@ -933,7 +941,10 @@
           userPhone: state.userPhone,
           isSubscribed: state.isSubscribed,
           quality: state.quality,
-          jsonUrl: state.jsonUrl
+          jsonUrl: state.jsonUrl,
+          autoplay: state.autoplay,
+          dataSaver: state.dataSaver,
+          notifications: state.notifications
         }));
       } catch (err) {}
     }
@@ -968,7 +979,20 @@
       `;
     }
 
+    function notifyLiveOnce() {
+      if (window.__liveNotified || !state.notifications || !CHANNELS.length) return;
+      window.__liveNotified = true;
+      const sport = CHANNELS.find(c => /sport/i.test(c.category || '')) || null;
+      if (!sport) return;
+      setTimeout(() => {
+        if (!state.notifications) return;
+        showToast(`🔴 Live now: ${sport.name}`);
+        if (window.sendBrowserNotification) sendBrowserNotification('Khusbu TV • Live Now', sport.name);
+      }, 2600);
+    }
+
     function renderAllFromChannelsJson() {
+      notifyLiveOnce();
       renderCategoryNavTabs();
       renderHeroFromChannels();
       renderLiveTvCircles();
@@ -1004,7 +1028,7 @@
       const ch1 = CHANNELS[1] || ch0;
 
       document.getElementById('heroSlide2Title').textContent = ch0.name;
-      document.getElementById('heroSlide2Sub').textContent = `${ch0.category} • Live on CS Tv`;
+      document.getElementById('heroSlide2Sub').textContent = `${ch0.category} • Live on Khusbu TV`;
       document.getElementById('heroSlide2Card').innerHTML = `
         <div class="flex flex-col items-center">
           <div class="w-14 h-14 rounded-full bg-white text-slate-900 flex items-center justify-center font-extrabold text-xs border-2 border-pink-500 overflow-hidden p-1">
@@ -1077,7 +1101,7 @@
             </div>
           </div>
           <div class="mt-2 flex items-center justify-between text-[11px] text-slate-200 font-semibold">
-            <span>CS Tv Stream</span>
+            <span>Khusbu TV Stream</span>
             <span class="text-pink-400 group-hover:translate-x-0.5 transition">▶ Watch Now</span>
           </div>
         </button>
@@ -1101,10 +1125,10 @@
       document.getElementById('row1Title').textContent = catNames[0] ? `${catNames[0]} Channels` : 'Featured Live Channels';
       document.getElementById('eplRowTrack').innerHTML = group1.map((ch, i) => buildChannelCardHtml(ch, i)).join('');
 
-      document.getElementById('row2Title').textContent = catNames[1] ? `${catNames[1]} Channels` : 'Popular on CS Tv';
+      document.getElementById('row2Title').textContent = catNames[1] ? `${catNames[1]} Channels` : 'Popular on Khusbu TV';
       document.getElementById('saffRowTrack').innerHTML = group2.map((ch, i) => buildChannelCardHtml(ch, i + 2)).join('');
 
-      document.getElementById('row3Title').textContent = catNames[2] ? `${catNames[2]} Channels` : 'All CS Tv Streams';
+      document.getElementById('row3Title').textContent = catNames[2] ? `${catNames[2]} Channels` : 'All Khusbu TV Streams';
       document.getElementById('dramaRowTrack').innerHTML = group3.map((ch, i) => buildChannelCardHtml(ch, i + 4)).join('');
 
       const extraContainer = document.getElementById('dynamicCategorySections');
@@ -1125,10 +1149,20 @@
       }
     }
 
+    function channelMatchesQuery(c, q) {
+      q = String(q || '').trim().toLowerCase();
+      if (!q) return true;
+      return [c.name, c.category, c.shortLabel, c.subLabel].some(v => String(v || '').toLowerCase().includes(q));
+    }
+
     function renderDiscoverGrid(query = '') {
       const grid = document.getElementById('discoverGrid');
       const q = query.trim().toLowerCase();
-      const list = CHANNELS.filter(c => !q || c.name.toLowerCase().includes(q) || (c.category || '').toLowerCase().includes(q));
+      const list = CHANNELS.filter(c => !q || channelMatchesQuery(c, q));
+      if (!list.length) {
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400 text-sm">Kono channel paoa jayni</div>`;
+        return;
+      }
       grid.innerHTML = list.map(ch => `
         <button data-play-channel="${ch.id}" class="p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 flex flex-col items-center text-center group transition">
           ${getChannelCircleAvatarHtml(ch, 'w-16 h-16')}
@@ -1145,7 +1179,7 @@
       badge.textContent = `${savedChannels.length} Channels`;
 
       if (savedChannels.length === 0) {
-        grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400 text-sm">No saved channels yet. Tap ☆ Save inside the CS Tv video player!</div>`;
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400 text-sm">No saved channels yet. Tap ☆ Save inside the Khusbu TV video player!</div>`;
         return;
       }
 
@@ -1167,34 +1201,55 @@
 
     function renderPlayerHorizontalPopup() {
       const track = document.getElementById('playerPopupTrack');
-      const activeCh = CHANNELS[state.currentChannelIndex] || CHANNELS[0];
-      if (!activeCh) return;
+      const n = CHANNELS.length;
+      if (!track || !n) return;
+      const cur = Math.min(Math.max(state.currentChannelIndex, 0), n - 1);
+      const activeCh = CHANNELS[cur];
 
-      track.innerHTML = CHANNELS.map((ch, idx) => {
+      // Running channel er age-pore (±3) channel gulo dekhabe
+      const RADIUS = 3;
+      let indices = [];
+      if (n <= RADIUS * 2 + 1) {
+        indices = CHANNELS.map((_, i) => i);
+      } else {
+        for (let d = -RADIUS; d <= RADIUS; d++) indices.push((cur + d + n) % n);
+      }
+
+      track.innerHTML = indices.map((idx) => {
+        const ch = CHANNELS[idx];
         const isCurrent = ch.id === activeCh.id;
         return `
-          <button data-popup-channel-index="${idx}" class="flex-shrink-0 w-40 p-2.5 rounded-xl border ${isCurrent ? 'border-pink-500 bg-pink-500/20' : 'border-white/10 bg-white/5 hover:bg-white/10'} flex items-center gap-2.5 text-left snap-start-item transition active:scale-95">
-            <div class="w-10 h-10 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-[10px] ${ch.badgeColor} overflow-hidden p-1">
+          <button data-popup-channel-index="${idx}" ${isCurrent ? 'data-current="1"' : ''} class="flex-shrink-0 w-[7.5rem] p-1.5 rounded-lg border ${isCurrent ? 'border-pink-500 bg-pink-500/20' : 'border-white/10 bg-white/5 hover:bg-white/10'} flex items-center gap-1.5 text-left snap-start-item transition active:scale-95">
+            <div class="w-7 h-7 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-[8px] ${ch.badgeColor} overflow-hidden p-0.5">
               ${ch.logo
-                ? `<img src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" /><span style="display:none">${ch.shortLabel}</span>`
-                : `<span>${ch.shortLabel}</span>`
+                ? `<img src="${appEsc(ch.logo)}" alt="" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" /><span style="display:none">${appEsc(ch.shortLabel)}</span>`
+                : `<span>${appEsc(ch.shortLabel)}</span>`
               }
             </div>
-            <div class="overflow-hidden">
-              <p class="text-xs font-bold text-white truncate">${ch.name}</p>
-              <p class="text-[10px] ${isCurrent ? 'text-pink-300 font-bold' : 'text-slate-400'} truncate">${isCurrent ? '● Playing' : ch.category}</p>
+            <div class="overflow-hidden min-w-0">
+              <p class="text-[10px] font-bold text-white truncate leading-tight">${appEsc(ch.name)}</p>
+              <p class="text-[9px] ${isCurrent ? 'text-pink-300 font-bold' : 'text-slate-400'} truncate leading-tight">${isCurrent ? '● Playing' : appEsc(ch.category)}</p>
             </div>
           </button>
         `;
       }).join('');
+
+      // Running channel ke majhkhane anbe
+      const curEl = track.querySelector('[data-current="1"]');
+      if (curEl) {
+        const center = () => { track.scrollLeft = curEl.offsetLeft - (track.clientWidth - curEl.offsetWidth) / 2; };
+        center();
+        requestAnimationFrame(center);
+      }
     }
 
-    // ================= CS Tv Player v3 =================
+    // ================= Khusbu TV Player v3 =================
     const $p = (id) => document.getElementById(id);
     const IS_APP = !!window.__CSTV_APP__;
     let overlayHideTimer = null;
     let overlayCountdownInterval = null;
-    let remainingSeconds = 5;
+    const AUTO_HIDE_SECONDS = 3;
+    let remainingSeconds = AUTO_HIDE_SECONDS;
 
     let hlsInstance = null;
     let streamCheckTimer = null;
@@ -1233,7 +1288,7 @@
 
       clearTimeout(overlayHideTimer);
       clearInterval(overlayCountdownInterval);
-      remainingSeconds = 5;
+      remainingSeconds = AUTO_HIDE_SECONDS;
       if (timerBadge) timerBadge.textContent = `Auto-hide in ${remainingSeconds}s`;
 
       overlayCountdownInterval = setInterval(() => {
@@ -1251,7 +1306,7 @@
         if (menuOpen || seekDragging || (!playerIframeMode && video.paused)) return;
         popupDrawer.classList.add('auto-hide-hidden');
         setOverlaysVisible(false);
-      }, 5000);
+      }, AUTO_HIDE_SECONDS * 1000);
     }
 
     function hidePlayerPopupImmediately() {
@@ -1282,12 +1337,111 @@
       stallTimer = null;
     }
 
+    let dashInstance = null;
+    let tsInstance = null;
+    let engineChain = [];
+    let engineIdx = 0;
+    let engineSrc = '';
+    let engineHint = 'auto';
+    let engineTimer = null;
+    const SCRIPT_URLS = {
+      dash: 'https://cdn.jsdelivr.net/npm/dashjs@4.7.4/dist/dash.all.min.js',
+      mpegts: 'https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.js'
+    };
+    const _scriptCache = {};
+    function loadScriptOnce(key) {
+      if (_scriptCache[key]) return _scriptCache[key];
+      _scriptCache[key] = new Promise((resolve, reject) => {
+        const el = document.createElement('script');
+        el.src = SCRIPT_URLS[key];
+        el.onload = resolve;
+        el.onerror = () => { delete _scriptCache[key]; reject(new Error('script load failed')); };
+        document.head.appendChild(el);
+      });
+      return _scriptCache[key];
+    }
+
     function destroyHls() {
+      clearTimeout(engineTimer);
+      engineTimer = null;
       if (hlsInstance) {
         try { hlsInstance.destroy(); } catch (e) {}
         hlsInstance = null;
       }
+      if (dashInstance) {
+        try { dashInstance.reset(); } catch (e) {}
+        dashInstance = null;
+      }
+      if (tsInstance) {
+        try { tsInstance.pause(); tsInstance.unload(); tsInstance.detachMediaElement(); tsInstance.destroy(); } catch (e) {}
+        tsInstance = null;
+      }
       curLevelIdx = -1;
+    }
+
+    // ---------- Source detection (YouTube / iframe / HLS / DASH / FLV / TS / MP4 ...) ----------
+    function toEmbedUrl(raw) {
+      if (!raw) return null;
+      let u;
+      try { u = new URL(raw, location.href); } catch (e) { return null; }
+      const host = u.hostname.replace(/^www\./, '').replace(/^m\./, '');
+      const path = u.pathname.split('/').filter(Boolean);
+
+      // YouTube
+      if (host === 'youtu.be' || host === 'youtube.com' || host === 'music.youtube.com' || host === 'youtube-nocookie.com') {
+        const q = 'autoplay=1&playsinline=1&rel=0&modestbranding=1';
+        let id = null;
+        if (host === 'youtu.be') id = path[0];
+        else if (path[0] === 'watch') id = u.searchParams.get('v');
+        else if (['embed', 'live', 'shorts', 'v'].includes(path[0])) id = path[1];
+        if (id && id !== 'live_stream' && /^[\w-]{11}$/.test(id)) {
+          const list = u.searchParams.get('list');
+          return `https://www.youtube.com/embed/${id}?${q}${list ? '&list=' + encodeURIComponent(list) : ''}`;
+        }
+        if (path[0] === 'channel' && /^UC[\w-]{20,}$/.test(path[1] || '')) {
+          return `https://www.youtube.com/embed/live_stream?channel=${path[1]}&${q}`;
+        }
+        if (path[0] === 'embed' && path[1] === 'live_stream' && u.searchParams.get('channel')) {
+          return `https://www.youtube.com/embed/live_stream?channel=${u.searchParams.get('channel')}&${q}`;
+        }
+        if (path[0] === 'playlist' && u.searchParams.get('list')) {
+          return `https://www.youtube.com/embed/videoseries?list=${encodeURIComponent(u.searchParams.get('list'))}&${q}`;
+        }
+        return null;
+      }
+      // Vimeo
+      if (host === 'vimeo.com' && /^\d+$/.test(path[0] || '')) return `https://player.vimeo.com/video/${path[0]}?autoplay=1`;
+      if (host === 'player.vimeo.com') return u.href;
+      // Dailymotion
+      if (host === 'dailymotion.com' && path[0] === 'video') return `https://www.dailymotion.com/embed/video/${path[1]}?autoplay=1`;
+      if (host === 'dai.ly') return `https://www.dailymotion.com/embed/video/${path[0]}?autoplay=1`;
+      // Normal web page / embed page
+      const lowPath = u.pathname.toLowerCase();
+      if (/\.(html?|php|aspx?)$/.test(lowPath) || /\/embed\b/.test(lowPath)) return u.href;
+      return null;
+    }
+
+    function detectStreamType(src) {
+      let path = '';
+      try { path = new URL(src, location.href).pathname.toLowerCase(); } catch (e) { path = String(src || '').toLowerCase().split('?')[0]; }
+      if (/\.m3u8?$/.test(path) || /m3u8/.test(String(src).toLowerCase())) return 'hls';
+      if (/\.mpd$/.test(path)) return 'dash';
+      if (/\.flv$/.test(path)) return 'flv';
+      if (/\.(ts|m2ts|mts)$/.test(path)) return 'ts';
+      if (/\.(mp4|m4v|webm|mkv|mov|ogv|ogg|oga|mp3|aac|m4a|wav|opus|3gp|weba)$/.test(path)) return 'native';
+      return 'auto';
+    }
+
+    function buildEngineChain(type) {
+      const hlsOk = !!(window.Hls && Hls.isSupported());
+      switch (type) {
+        case 'hls': return hlsOk ? ['hls', 'native'] : ['native'];
+        case 'dash': return ['dash', 'native'];
+        case 'flv':
+        case 'ts': return ['mpegts', 'native'];
+        case 'native': return ['native', 'mpegts'];
+        default: return hlsOk ? ['native', 'hls', 'mpegts'] : ['native', 'mpegts'];
+      }
     }
 
     // ---------- Auto next channel on failure ----------
@@ -1300,6 +1454,10 @@
 
       if (currentIsCustom) {
         setPlayerStatus('Custom stream chalche na — link ta check korun');
+        return;
+      }
+      if (!state.autoplay) {
+        setPlayerStatus(`${ch ? ch.name : 'Channel'} chalche na • Auto-Play OFF, onno channel select korun`);
         return;
       }
       failStreak++;
@@ -1382,7 +1540,11 @@
     function applyQuality(q) {
       qSel = q;
       if (hlsInstance) {
-        try { hlsInstance.currentLevel = pickLevelIndex(q); } catch (e) {}
+        try {
+          hlsInstance.currentLevel = pickLevelIndex(q);
+          // Data Saver ON thakle Auto mode e 480p er upore jabe na
+          hlsInstance.autoLevelCapping = (q === 'Auto' && state.dataSaver) ? pickLevelIndex('480p') : -1;
+        } catch (e) {}
       }
       updateQualityLabel();
     }
@@ -1541,7 +1703,7 @@
       qSel = state.quality || 'Auto';
 
       state.isPlaying = true;
-      $p('playerChannelTitle').textContent = customUrl ? 'Custom M3U8 Stream' : ch.name;
+      $p('playerChannelTitle').textContent = customUrl ? 'Custom Stream' : ch.name;
       $p('playerChannelSub').textContent = `${ch.category} • ${qSel} Stream`;
       $p('playerQualityBadge').textContent = qSel;
       setPlayerStatus(null);
@@ -1560,13 +1722,14 @@
       const modal = $p('playerModal');
       const streamSrc = customUrl || ch.streamUrl;
 
-      // Iframe / embed channel
-      if (ch.iframeUrl && !customUrl) {
+      // Iframe / embed channel (YouTube, Vimeo, Dailymotion, embed page)
+      const embedUrl = (!customUrl && ch.iframeUrl) ? ch.iframeUrl : toEmbedUrl(streamSrc);
+      if (embedUrl) {
         playerIframeMode = true;
         modal.classList.add('iframe-mode');
         try { video.pause(); video.removeAttribute('src'); video.load(); } catch (e) {}
         video.classList.add('hidden');
-        iframe.src = ch.iframeUrl;
+        iframe.src = embedUrl;
         iframe.classList.remove('hidden');
         setSpinner(false);
         $p('playerChannelSub').textContent = `${ch.category} • Live`;
@@ -1583,10 +1746,22 @@
       updatePlayPauseIcon();
       updateSeekUI();
 
-      // Startup timeout -> auto next channel
-      streamCheckTimer = setTimeout(() => handleStreamFailure(token, 'timeout'), 12000);
+      if (!streamSrc) { handleStreamFailure(token, 'no-url'); return; }
 
-      const tryPlay = () => video.play().catch((err) => {
+      engineSrc = streamSrc;
+      engineHint = detectStreamType(streamSrc);
+      engineChain = buildEngineChain(engineHint);
+      engineIdx = 0;
+
+      // Startup timeout -> auto next channel
+      streamCheckTimer = setTimeout(() => handleStreamFailure(token, 'timeout'), 12000 + (engineChain.length - 1) * 6000);
+
+      runEngine(token);
+    }
+
+    function tryPlayVideo() {
+      const video = $p('liveVideoEl');
+      return video.play().catch((err) => {
         if (err && err.name === 'NotAllowedError') {
           if (IS_APP && !video.muted) {
             video.muted = true;
@@ -1596,21 +1771,47 @@
           setSpinner(false); state.isPlaying = false; updatePlayPauseIcon();
         }
       });
+    }
+
+    // Ek engine fail korle porer engine e jabe, shesh hole next channel
+    function failEngine(token, reason) {
+      if (token !== loadToken || !playerIsOpen() || playerIframeMode) return;
+      if (engineIdx + 1 < engineChain.length) {
+        engineIdx++;
+        destroyHls();
+        const video = $p('liveVideoEl');
+        try { video.pause(); video.removeAttribute('src'); video.load(); } catch (e) {}
+        runEngine(token);
+      } else {
+        handleStreamFailure(token, reason);
+      }
+    }
+
+    function runEngine(token) {
+      if (token !== loadToken) return;
+      const video = $p('liveVideoEl');
+      const engine = engineChain[engineIdx];
+      const streamSrc = engineSrc;
+      const isLast = engineIdx >= engineChain.length - 1;
+
+      clearTimeout(engineTimer);
+      engineTimer = null;
+      if (!isLast) engineTimer = setTimeout(() => failEngine(token, 'engine-timeout'), 6000);
 
       try {
-        const isHls = !!streamSrc && streamSrc.toLowerCase().includes('.m3u8');
-        if (isHls && window.Hls && Hls.isSupported()) {
+        if (engine === 'hls') {
+          const saver = !!state.dataSaver;
           const hls = new Hls({
             enableWorker: true,
             lowLatencyMode: false,
             backBufferLength: 60,
-            maxBufferLength: 30,
-            maxMaxBufferLength: 60,
+            maxBufferLength: saver ? 12 : 30,
+            maxMaxBufferLength: saver ? 20 : 60,
             maxBufferHole: 0.5,
             liveSyncDurationCount: 3,
             liveMaxLatencyDurationCount: 10,
             startFragPrefetch: true,
-            abrEwmaDefaultEstimate: 2000000,
+            abrEwmaDefaultEstimate: saver ? 600000 : 2000000,
             manifestLoadingMaxRetry: 2,
             manifestLoadingRetryDelay: 700,
             levelLoadingMaxRetry: 3,
@@ -1626,7 +1827,7 @@
           hls.on(Hls.Events.MANIFEST_PARSED, () => {
             if (hlsInstance !== hls) return;
             applyQuality(qSel);
-            tryPlay();
+            tryPlayVideo();
           });
           hls.on(Hls.Events.LEVEL_SWITCHED, (e, d) => {
             if (hlsInstance !== hls) return;
@@ -1647,19 +1848,39 @@
               if (mediaRetry === 0) { mediaRetry++; try { hls.recoverMediaError(); } catch (er) {} return; }
               if (mediaRetry === 1) { mediaRetry++; try { hls.swapAudioCodec(); hls.recoverMediaError(); } catch (er) {} return; }
             }
-            handleStreamFailure(token, data.details || 'fatal');
+            failEngine(token, data.details || 'fatal');
           });
-        } else if (isHls && video.canPlayType('application/vnd.apple.mpegurl')) {
-          video.src = streamSrc;
-          tryPlay();
-        } else if (streamSrc) {
-          video.src = streamSrc;
-          tryPlay();
+        } else if (engine === 'dash') {
+          loadScriptOnce('dash').then(() => {
+            if (token !== loadToken || engineChain[engineIdx] !== 'dash') return;
+            const player = dashjs.MediaPlayer().create();
+            dashInstance = player;
+            player.updateSettings({ streaming: { abr: { autoSwitchBitrate: { video: true } } } });
+            player.on(dashjs.MediaPlayer.events.ERROR, () => { if (dashInstance === player) failEngine(token, 'dash-error'); });
+            player.initialize(video, streamSrc, true);
+          }).catch(() => failEngine(token, 'dash-load'));
+        } else if (engine === 'mpegts') {
+          loadScriptOnce('mpegts').then(() => {
+            if (token !== loadToken || engineChain[engineIdx] !== 'mpegts') return;
+            if (!window.mpegts || !mpegts.isSupported()) { failEngine(token, 'mpegts-unsupported'); return; }
+            const tsType = engineHint === 'flv' ? 'flv' : 'mpegts';
+            const player = mpegts.createPlayer(
+              { type: tsType, isLive: true, url: streamSrc },
+              { enableWorker: true, liveBufferLatencyChasing: true, lazyLoad: false }
+            );
+            tsInstance = player;
+            player.attachMediaElement(video);
+            player.on(mpegts.Events.ERROR, () => { if (tsInstance === player) failEngine(token, 'mpegts-error'); });
+            player.load();
+            try { const pr = player.play(); if (pr && pr.catch) pr.catch(() => {}); } catch (e) {}
+          }).catch(() => failEngine(token, 'mpegts-load'));
         } else {
-          handleStreamFailure(token, 'no-url');
+          // native: mp4 / webm / mkv / ogg / mp3 / Safari HLS ...
+          video.src = streamSrc;
+          tryPlayVideo();
         }
       } catch (e) {
-        handleStreamFailure(token, 'exception');
+        failEngine(token, 'exception');
       }
     }
 
@@ -1887,6 +2108,7 @@
       video.addEventListener('play', () => { state.isPlaying = true; updatePlayPauseIcon(); showPlayerOverlaysAndStart5sTimer(); });
       video.addEventListener('pause', () => { state.isPlaying = false; updatePlayPauseIcon(); if (playerIsOpen()) showPlayerOverlaysAndStart5sTimer(); });
       video.addEventListener('playing', () => {
+        clearTimeout(engineTimer); engineTimer = null;
         clearStreamCheck();
         setSpinner(false);
         setPlayerStatus(null);
@@ -1907,9 +2129,9 @@
         $p('playerSpeedLabel').textContent = (r === 1 ? '1' : String(r)) + 'x';
       });
       video.addEventListener('error', () => {
-        if (!playerIsOpen() || playerIframeMode || hlsInstance) return;
+        if (!playerIsOpen() || playerIframeMode || hlsInstance || dashInstance || tsInstance) return;
         if (!video.getAttribute('src')) return;
-        handleStreamFailure(loadToken, 'media-error');
+        failEngine(loadToken, 'media-error');
       });
       video.addEventListener('ended', () => {
         if (!playerIsOpen() || playerIframeMode) return;
@@ -1934,6 +2156,7 @@
     // ================= App UI (WebView / installed app) =================
     let appInited = false;
     let appCat = 'all';
+    let appQuery = '';
     let appCurrentId = null;
     let appLongPress = false;
     let appLastQ = null;
@@ -1967,13 +2190,14 @@
       const activeId = (CHANNELS[state.currentChannelIndex] || {}).id;
       const list = [];
       CHANNELS.forEach((ch, idx) => {
+        if (!channelMatchesQuery(ch, appQuery)) return;
         if (appCat === 'all') list.push({ ch, idx });
         else if (appCat === 'fav') { if (state.favorites.includes(ch.id)) list.push({ ch, idx }); }
         else if ((ch.category || 'Live TV').trim().toLowerCase() === appCat.toLowerCase()) list.push({ ch, idx });
       });
       if (!list.length) {
         grid.style.display = 'block';
-        grid.innerHTML = `<div style="padding:48px 24px;text-align:center;color:#9ca3af;font-size:14px;line-height:1.6">${appCat === 'fav' ? 'Ekhono kono favorite nei.<br>Channel e long-press kore ba ☆ chape save korun.' : 'Ei category te kono channel nei.'}</div>`;
+        grid.innerHTML = `<div style="padding:48px 24px;text-align:center;color:#9ca3af;font-size:14px;line-height:1.6">${appQuery ? 'Kono channel paoa jayni.' : appCat === 'fav' ? 'Ekhono kono favorite nei.<br>Channel e long-press kore ba ☆ chape save korun.' : 'Ei category te kono channel nei.'}</div>`;
         return;
       }
       grid.style.display = '';
@@ -2078,6 +2302,24 @@
       modal.classList.remove('hidden');
       modal.classList.add('flex', 'app-inline');
 
+      $p('appSearchInput').addEventListener('input', (e) => {
+        appQuery = e.target.value;
+        renderAppGrid();
+      });
+
+      // Settings panel (app mode e Settings page)
+      const panel = document.createElement('div');
+      panel.id = 'appSettingsPanel';
+      panel.style.cssText = 'display:none;position:fixed;inset:0;z-index:40;background:#0b0714;overflow-y:auto;-webkit-overflow-scrolling:touch;';
+      panel.innerHTML = '<div style="position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:12px;padding:max(12px, env(safe-area-inset-top)) 16px 12px;background:#0b0714;border-bottom:1px solid rgba(255,255,255,.08)"><button id="appSettingsClose" style="width:36px;height:36px;border-radius:999px;background:#2b2b2b;color:#fff;font-size:18px">←</button><span style="font-weight:800;font-size:16px">Settings</span></div><div id="appSettingsBody" style="padding:16px 0 32px"></div>';
+      $p('appUI').appendChild(panel);
+      const settingsView = $p('viewSettings');
+      settingsView.classList.remove('hidden');
+      $p('appSettingsBody').appendChild(settingsView);
+      $p('appSettingsBtn').addEventListener('click', () => { panel.style.display = 'block'; syncAuthAndSettingsUI(); });
+      $p('appSettingsClose').addEventListener('click', () => { panel.style.display = 'none'; });
+      window.addEventListener('popstate', () => { panel.style.display = 'none'; });
+
       $p('appCatBar').addEventListener('click', (e) => {
         const b = e.target.closest('[data-app-cat]');
         if (!b) return;
@@ -2143,7 +2385,7 @@
 
       if (state.userPhone) {
         signInTopText.textContent = state.userPhone.slice(-4);
-        settingsUserName.textContent = 'CS Tv Verified User';
+        settingsUserName.textContent = 'Khusbu TV Verified User';
         settingsUserPhone.textContent = `${state.userPhone} • Logged In`;
         settingsAvatar.textContent = '✓';
         settingsAuthActionBtn.textContent = 'Sign Out';
@@ -2417,7 +2659,7 @@
           saveState();
           syncAuthAndSettingsUI();
           closeLoginModal();
-          showToast(`Signed in to CS Tv as ${state.userPhone}`);
+          showToast(`Signed in to Khusbu TV as ${state.userPhone}`);
         } else {
           showToast('Invalid OTP code, try again');
         }
@@ -2450,25 +2692,68 @@
         if (window.cstvApplyQuality) cstvApplyQuality(state.quality);
       });
 
-      function setupSwitch(btnId, stateKey, label) {
+      function paintSwitch(btn, on) {
+        const dot = btn.querySelector('.dot');
+        btn.setAttribute('aria-checked', on ? 'true' : 'false');
+        if (on) {
+          btn.className = 'w-11 h-6 rounded-full bg-pink-600 relative transition';
+          dot.className = 'dot w-4 h-4 rounded-full bg-white absolute top-1 right-1 transition-all';
+        } else {
+          btn.className = 'w-11 h-6 rounded-full bg-slate-700 relative transition';
+          dot.className = 'dot w-4 h-4 rounded-full bg-white absolute top-1 left-1 transition-all';
+        }
+      }
+
+      function syncSettingsControls() {
+        const sel = document.getElementById('settingQualitySelect');
+        if (sel) sel.value = ['Auto', '1080p', '720p', '480p'].includes(state.quality) ? state.quality : 'Auto';
+        paintSwitch(document.getElementById('toggleAutoplayBtn'), state.autoplay);
+        paintSwitch(document.getElementById('toggleDataSaverBtn'), state.dataSaver);
+        paintSwitch(document.getElementById('toggleNotifyBtn'), state.notifications);
+        const urlInput = document.getElementById('customJsonUrlInput');
+        if (urlInput) urlInput.value = state.jsonUrl || './channels.json';
+      }
+      window.syncSettingsControls = syncSettingsControls;
+      syncSettingsControls();
+
+      function sendBrowserNotification(title, body) {
+        try {
+          if ('Notification' in window && Notification.permission === 'granted') {
+            new Notification(title, { body });
+            return true;
+          }
+        } catch (e) {}
+        return false;
+      }
+      window.sendBrowserNotification = sendBrowserNotification;
+
+      function setupSwitch(btnId, stateKey, label, onChange) {
         const btn = document.getElementById(btnId);
         btn.addEventListener('click', () => {
           state[stateKey] = !state[stateKey];
-          const dot = btn.querySelector('.dot');
-          if (state[stateKey]) {
-            btn.className = 'w-11 h-6 rounded-full bg-pink-600 relative transition';
-            dot.className = 'dot w-4 h-4 rounded-full bg-white absolute top-1 right-1 transition-all';
-          } else {
-            btn.className = 'w-11 h-6 rounded-full bg-slate-700 relative transition';
-            dot.className = 'dot w-4 h-4 rounded-second bg-white absolute top-1 left-1 transition-all';
-          }
+          paintSwitch(btn, state[stateKey]);
+          saveState();
           showToast(`${label}: ${state[stateKey] ? 'ON' : 'OFF'}`);
+          if (onChange) onChange(state[stateKey]);
         });
       }
 
       setupSwitch('toggleAutoplayBtn', 'autoplay', 'Auto-Play Next Channel');
-      setupSwitch('toggleDataSaverBtn', 'dataSaver', 'Data Saver Mode');
-      setupSwitch('toggleNotifyBtn', 'notifications', 'Live Match Notifications');
+      setupSwitch('toggleDataSaverBtn', 'dataSaver', 'Data Saver Mode', () => {
+        if (window.cstvApplyQuality) cstvApplyQuality(qSel);
+      });
+      setupSwitch('toggleNotifyBtn', 'notifications', 'Live Match Notifications', async (on) => {
+        if (!on) return;
+        if (!('Notification' in window)) return;
+        try {
+          if (Notification.permission === 'default') await Notification.requestPermission();
+          if (Notification.permission === 'granted') {
+            sendBrowserNotification('Khusbu TV', 'Live match & channel alerts chalu hoyeche ✅');
+          } else {
+            showToast('Browser notification permission block kora ache');
+          }
+        } catch (e) {}
+      });
 
       const customModal = document.getElementById('customStreamModal');
       document.getElementById('openCustomStreamModalBtn').addEventListener('click', () => {
@@ -2481,15 +2766,29 @@
       });
       document.getElementById('playCustomM3u8Btn').addEventListener('click', () => {
         const url = document.getElementById('customM3u8Input').value.trim() || 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+        state.currentChannelIndex = Math.min(state.currentChannelIndex, CHANNELS.length - 1);
         customModal.classList.add('hidden');
         customModal.classList.remove('flex');
         openPlayerByChannelId(CHANNELS[0]?.id || 'ch-epl1', url);
       });
 
       document.getElementById('clearCacheBtn').addEventListener('click', () => {
+        // Saved channel, setting, recent data sob reset
         state.favorites = [];
+        state.quality = '1080p';
+        state.autoplay = true;
+        state.dataSaver = false;
+        state.notifications = true;
+        state.jsonUrl = './channels.json';
+        try {
+          localStorage.removeItem('cstv_live_state_v2');
+        } catch (e) {}
+        try { if ('caches' in window) caches.keys().then(keys => keys.forEach(k => caches.delete(k))); } catch (e) {}
         saveState();
+        syncSettingsControls();
         renderMyList();
+        if (typeof renderAppGrid === 'function' && IS_APP) renderAppGrid();
+        if (window.cstvApplyQuality) cstvApplyQuality(state.quality);
         showToast('Watch history & cache cleared!');
       });
     });
