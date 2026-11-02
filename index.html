@@ -12,15 +12,15 @@
     /* UI mode: website => classic UI | app (WebView / installed PWA) => app UI.
        Manual override: ?mode=app  |  ?mode=web  |  ?mode=auto (reset) */
     (function () {
-      var app = false, saved = null;
+      var app = false, saved = null, tv = false;
       try {
         var q = new URLSearchParams(location.search).get('mode');
-        if (q === 'app' || q === 'web') localStorage.setItem('cstv_ui_mode', q);
+        if (q === 'app' || q === 'web' || q === 'tv') localStorage.setItem('cstv_ui_mode', q);
         else if (q === 'auto') localStorage.removeItem('cstv_ui_mode');
         saved = localStorage.getItem('cstv_ui_mode');
       } catch (e) {}
       if (saved) {
-        app = (saved === 'app');
+        app = (saved === 'app' || saved === 'tv'); tv = (saved === 'tv');
       } else {
         try {
           var ua = navigator.userAgent || '';
@@ -34,8 +34,15 @@
             (document.referrer || '').indexOf('android-app://') === 0;
         } catch (e) {}
       }
+      if (!saved) {
+        try {
+          if (/Android ?TV|AndroidTV|SMART-?TV|SmartTV|GoogleTV|BRAVIA|Tizen|Web0S|WebOS|HbbTV|NetCast|AFT[A-Z]{1,3}\b|MiTV|; TV\b|AppleTV/i.test(navigator.userAgent || '')) { tv = true; app = true; }
+        } catch (e) {}
+      }
+      window.__CSTV_TV__ = tv;
       window.__CSTV_APP__ = app;
       if (app) document.documentElement.classList.add('app-mode');
+      if (tv) document.documentElement.classList.add('tv-mode');
     })();
   </script>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js"></script>
@@ -166,13 +173,15 @@
     .app-chip { padding: 11px 22px; border-radius: 999px; background: #2b2b2b; color: #e5e5e5; font-size: 16px; font-weight: 500; white-space: nowrap; flex-shrink: 0; transition: background .15s, transform .15s; }
     .app-chip:active { transform: scale(.95); }
     .app-chip.active { background: #5b1de8; color: #fff; }
-    #appGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 4px 16px 24px; align-content: start; }
-    .app-card { background: #2b2b2b; border: 3px solid transparent; border-radius: 18px; padding: 12px 8px 10px; display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; transition: transform .15s, border-color .15s; }
+    #appGrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; padding: 4px 10px 20px; align-content: start; }
+    .app-card { background: #2b2b2b; border: 2px solid transparent; border-radius: 10px; padding: 5px 3px 6px; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; transition: transform .15s, border-color .15s; }
     .app-card:active { transform: scale(.95); }
     .app-card.active { border-color: #5b1de8; }
     .app-card-logo { width: 100%; aspect-ratio: 1 / 1; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 2px; font-weight: 800; text-align: center; }
     .app-card-logo img { width: 100%; height: 100%; object-fit: contain; }
-    .app-card-name { font-size: 14px; font-weight: 700; color: #fff; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .app-card-name { font-size: 9px; line-height: 1.15; font-weight: 600; color: #fff; max-width: 100%; width: 100%; text-align: center; white-space: normal; overflow: visible; word-break: break-word; overflow-wrap: anywhere; }
+    .app-card-num { color: #f472b6; font-weight: 800; }
+    .app-card-logo span { font-size: 10px !important; }
     #playerModal.app-inline { position: relative !important; inset: auto !important; width: 100%; aspect-ratio: 16 / 9; display: flex !important; z-index: auto !important; }
     #playerModal.app-inline.app-fs { position: fixed !important; inset: 0 !important; width: 100vw; height: 100vh; height: 100dvh; aspect-ratio: auto; z-index: 9999 !important; }
     #playerModal.app-inline:not(.app-fs) #playerTopBar,
@@ -184,6 +193,47 @@
     #playerModal.app-inline:not(.app-fs) #playerControlBar { padding-top: 22px; padding-bottom: 6px; }
     #playerModal.app-inline:not(.app-fs) #playerMenu { bottom: 62px; max-height: 140px; overflow-y: auto; }
     #playerModal.app-inline:not(.app-fs) #playerStatusMsg { top: 10px !important; }
+
+    /* ===== TV MODE (remote control) ===== */
+    html.tv-mode body { background:#000; }
+    html.tv-mode #appUI { display: block; }
+    html.tv-mode #appPlayerSlot { position: fixed; inset: 0; padding: 0 !important; z-index: 1; background: #000; }
+    html.tv-mode #playerModal.app-inline { position: absolute !important; inset: 0 !important; width: 100%; height: 100%; aspect-ratio: auto; }
+    html.tv-mode #playerTopBar, html.tv-mode #playerControlBar, html.tv-mode #playerCenterControls,
+    html.tv-mode #playerHorizontalPopup, html.tv-mode #playerMenu { display: none !important; }
+    #tvDrawer { position: fixed; top: 0; right: 0; bottom: 0; width: 56vw; z-index: 5; display: flex; flex-direction: column;
+      padding: 2.2vw 2.2vw 1.4vw 6vw; background: linear-gradient(to left, rgba(8,4,16,.98) 72%, rgba(8,4,16,0));
+      transform: translateX(105%); transition: transform .25s ease; }
+    #tvDrawer.open { transform: none; }
+    #tvDrawer #appGrid { min-height: 0; flex: 1; overflow-y: auto; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .9vw; padding: .5vw .5vw 1.5vw; }
+    #tvDrawer #appCatBar { padding: .3vw .3vw 1vw; gap: .8vw; }
+    #tvDrawer .app-chip { padding: .55vw 1.4vw; font-size: 1.2vw; }
+    #tvDrawer .app-card { border-radius: 1vw; padding: .7vw .4vw .6vw; gap: .5vw; border-width: .2vw; }
+    #tvDrawer .app-card-name { font-size: 1vw; }
+    #tvDrawer .app-card-logo span { font-size: 1.1vw !important; }
+    .tv-title { font-size: 1.7vw; font-weight: 800; margin-bottom: .7vw; }
+    .tv-title small { font-size: .95vw; font-weight: 500; color: #9ca3af; margin-left: 1vw; }
+    .tv-focus { outline: .26vw solid #ec4899; outline-offset: .1vw; transform: scale(1.07); background: #3b2a5c !important; box-shadow: 0 0 2vw rgba(236,72,153,.65); position: relative; z-index: 2; }
+    .app-chip.tv-focus { background: #ec4899 !important; color: #fff; }
+    #tvOsd { position: fixed; left: 3vw; right: 3vw; bottom: 3vw; z-index: 4; display: flex; align-items: center; gap: 1.6vw;
+      padding: 1.1vw 1.8vw; border-radius: 1.4vw; background: rgba(12,6,24,.9); border: 1px solid rgba(236,72,153,.45);
+      opacity: 0; transform: translateY(2vw); transition: opacity .25s, transform .25s; pointer-events: none; }
+    #tvOsd.show { opacity: 1; transform: none; }
+    #tvOsdNum { font-size: 4vw; font-weight: 800; color: #f472b6; min-width: 7vw; text-align: center; }
+    #tvOsdLogo { width: 5.5vw; height: 5.5vw; background: #fff; border-radius: .6vw; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; font-weight: 800; text-align: center; }
+    #tvOsdLogo img { width: 100%; height: 100%; object-fit: contain; }
+    #tvOsdName { font-size: 2.4vw; font-weight: 800; }
+    #tvOsdInfo { font-size: 1.2vw; color: #a78bfa; margin-top: .3vw; }
+    #tvVol { position: fixed; top: 3vw; left: 50%; transform: translateX(-50%); z-index: 6; display: flex; align-items: center; gap: 1.2vw;
+      padding: 1vw 1.8vw; min-width: 30vw; border-radius: 1.2vw; background: rgba(12,6,24,.92); border: 1px solid rgba(236,72,153,.45);
+      opacity: 0; transition: opacity .2s; pointer-events: none; }
+    #tvVol.show { opacity: 1; }
+    #tvVolIcon { font-size: 2.2vw; }
+    #tvVolBar { flex: 1; height: .8vw; border-radius: 9vw; background: rgba(255,255,255,.2); overflow: hidden; }
+    #tvVolFill { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #ff1f8e, #a81eff); }
+    #tvVolPct { font-size: 1.6vw; font-weight: 800; min-width: 4.5vw; text-align: right; }
+    #tvNumEntry { position: fixed; top: 3vw; right: 4vw; z-index: 6; font-size: 7vw; font-weight: 800; color: #fff; text-shadow: 0 .2vw 1vw #000; opacity: 0; pointer-events: none; }
+    #tvNumEntry.show { opacity: 1; }
   </style>
 </head>
 <body class="min-h-screen bg-[#0b0714] text-white flex flex-col justify-between pb-20">
@@ -2501,7 +2551,7 @@
       grid.innerHTML = list.map(({ ch, idx }) =>
         `<button data-app-ch="${idx}" class="app-card ${ch.id === activeId ? 'active' : ''}">
            <div class="app-card-logo" style="position:relative">${appLogoHtml(ch)}</div>
-           <div class="app-card-name">${appNum(idx)} - ${appEsc(ch.name)}</div>
+           <div class="app-card-name"><b class="app-card-num">${appNum(idx)}</b> ${appEsc(ch.name)}</div>
          </button>`
       ).join('');
     }
@@ -2670,6 +2720,209 @@
 
       appInited = true;
       appOnChannelsReady();
+    }
+
+
+    // ================= TV MODE (remote control) =================
+    function initTvMode() {
+      const ui = $p('appUI');
+      const video = $p('liveVideoEl');
+      $p('appChLogo').parentElement.style.display = 'none';
+      $p('appSearchInput').parentElement.style.display = 'none';
+
+      const drawer = document.createElement('div');
+      drawer.id = 'tvDrawer';
+      drawer.innerHTML = '<div class="tv-title">📺 Channel List <small>◀ ▶ ▲ ▼ move • OK play • BACK close</small></div>';
+      drawer.appendChild($p('appCatBar'));
+      drawer.appendChild($p('appGrid'));
+      ui.appendChild(drawer);
+
+      const osd = document.createElement('div');
+      osd.id = 'tvOsd';
+      osd.innerHTML = '<div id="tvOsdNum"></div><div id="tvOsdLogo"></div><div><div id="tvOsdName"></div><div id="tvOsdInfo"></div></div>';
+      ui.appendChild(osd);
+      const volBox = document.createElement('div');
+      volBox.id = 'tvVol';
+      volBox.innerHTML = '<span id="tvVolIcon">🔊</span><span id="tvVolBar"><i id="tvVolFill"></i></span><b id="tvVolPct">0%</b>';
+      ui.appendChild(volBox);
+      const numBox = document.createElement('div');
+      numBox.id = 'tvNumEntry';
+      ui.appendChild(numBox);
+
+      let osdTimer = null, volTimer = null, numTimer = null, numStr = '', lastIdx = -1;
+      let zone = 'grid', gIdx = 0, cIdx = 0;
+
+      // ---- OSD (channel banner) ----
+      function showOsd() {
+        const ch = CHANNELS[state.currentChannelIndex];
+        if (!ch) return;
+        $p('tvOsdNum').textContent = appNum(state.currentChannelIndex);
+        $p('tvOsdLogo').innerHTML = appLogoHtml(ch);
+        $p('tvOsdName').textContent = ch.name;
+        $p('tvOsdInfo').textContent = $p('appStreamInfo').textContent;
+        osd.classList.add('show');
+        clearTimeout(osdTimer);
+        osdTimer = setTimeout(() => osd.classList.remove('show'), 4500);
+      }
+      setInterval(() => { if (osd.classList.contains('show')) $p('tvOsdInfo').textContent = $p('appStreamInfo').textContent; }, 1000);
+
+      // ---- Volume ----
+      function getVol() {
+        try {
+          if (ytMode && ytPlayer) return ytPlayer.isMuted() ? 0 : ytPlayer.getVolume() / 100;
+        } catch (e) {}
+        return video.muted ? 0 : video.volume;
+      }
+      function setVol(v) {
+        v = Math.max(0, Math.min(1, Math.round(v * 100) / 100));
+        try {
+          if (ytMode && ytPlayer) { ytPlayer.setVolume(Math.round(v * 100)); v === 0 ? ytPlayer.mute() : ytPlayer.unMute(); }
+          else { video.volume = v; video.muted = (v === 0); }
+        } catch (e) {}
+        showVol(v);
+      }
+      function toggleMute() {
+        try {
+          if (ytMode && ytPlayer) { ytPlayer.isMuted() ? ytPlayer.unMute() : ytPlayer.mute(); }
+          else { video.muted = !video.muted; if (!video.muted && video.volume === 0) video.volume = 0.6; }
+        } catch (e) {}
+        setTimeout(() => showVol(getVol()), 30);
+      }
+      function showVol(v) {
+        $p('tvVolIcon').textContent = v === 0 ? '🔇' : (v < 0.5 ? '🔉' : '🔊');
+        $p('tvVolFill').style.width = Math.round(v * 100) + '%';
+        $p('tvVolPct').textContent = v === 0 ? 'Mute' : Math.round(v * 100) + '%';
+        volBox.classList.add('show');
+        clearTimeout(volTimer);
+        volTimer = setTimeout(() => volBox.classList.remove('show'), 1800);
+      }
+
+      // ---- Channel change ----
+      function goChannel(idx) {
+        if (idx < 0 || idx >= CHANNELS.length) return;
+        if (idx !== state.currentChannelIndex) lastIdx = state.currentChannelIndex;
+        playAppChannel(idx);
+        showOsd();
+      }
+      function step(d) {
+        const n = CHANNELS.length;
+        if (!n) return;
+        goChannel((state.currentChannelIndex + d + n) % n);
+      }
+      function commitNum() {
+        clearTimeout(numTimer);
+        const n = parseInt(numStr, 10);
+        numStr = '';
+        numBox.classList.remove('show');
+        if (!n) return;
+        if (n >= 1 && n <= CHANNELS.length) goChannel(n - 1);
+        else showToast('Channel ' + n + ' nei');
+      }
+      function addDigit(d) {
+        const maxLen = String(CHANNELS.length).length;
+        if (numStr.length >= maxLen) numStr = '';
+        numStr += d;
+        numBox.textContent = numStr;
+        numBox.classList.add('show');
+        clearTimeout(numTimer);
+        numTimer = setTimeout(commitNum, numStr.length >= maxLen ? 400 : 1800);
+      }
+
+      // ---- Channel list drawer (D-pad) ----
+      const cards = () => Array.from(document.querySelectorAll('#appGrid .app-card'));
+      const chips = () => Array.from(document.querySelectorAll('#appCatBar .app-chip'));
+      const colCount = () => Math.max(1, getComputedStyle($p('appGrid')).gridTemplateColumns.split(' ').length);
+      function paintFocus() {
+        document.querySelectorAll('#tvDrawer .tv-focus').forEach(el => el.classList.remove('tv-focus'));
+        const list = zone === 'grid' ? cards() : chips();
+        let i = zone === 'grid' ? gIdx : cIdx;
+        if (!list.length) return;
+        i = Math.max(0, Math.min(list.length - 1, i));
+        if (zone === 'grid') gIdx = i; else cIdx = i;
+        list[i].classList.add('tv-focus');
+        list[i].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      }
+      function openDrawer() {
+        drawer.classList.add('open');
+        osd.classList.remove('show');
+        zone = 'grid';
+        const list = cards();
+        const a = list.findIndex(el => el.classList.contains('active'));
+        gIdx = a >= 0 ? a : 0;
+        const ci = chips().findIndex(el => el.classList.contains('active'));
+        cIdx = ci >= 0 ? ci : 0;
+        paintFocus();
+      }
+      function closeDrawer() { drawer.classList.remove('open'); }
+      const isOpen = () => drawer.classList.contains('open');
+
+      function drawerKey(k, c) {
+        const cols = colCount();
+        const list = cards();
+        if (zone === 'cats') {
+          const n = chips().length;
+          if (k === 'ArrowRight') { cIdx = Math.min(n - 1, cIdx + 1); paintFocus(); }
+          else if (k === 'ArrowLeft') { cIdx = Math.max(0, cIdx - 1); paintFocus(); }
+          else if (k === 'ArrowDown') { zone = 'grid'; paintFocus(); }
+          else if (isOk(k, c)) {
+            const b = chips()[cIdx];
+            if (b) { appCat = b.dataset.appCat; renderAppCats(); renderAppGrid(); gIdx = 0; paintFocus(); }
+          } else return false;
+          return true;
+        }
+        if (k === 'ArrowRight') { gIdx = Math.min(list.length - 1, gIdx + 1); paintFocus(); }
+        else if (k === 'ArrowLeft') { gIdx = Math.max(0, gIdx - 1); paintFocus(); }
+        else if (k === 'ArrowDown') {
+          const lastRow = Math.floor((list.length - 1) / cols) * cols;
+          if (gIdx < lastRow) gIdx = Math.min(gIdx + cols, list.length - 1);
+          paintFocus();
+        }
+        else if (k === 'ArrowUp') {
+          if (gIdx - cols >= 0) { gIdx -= cols; paintFocus(); }
+          else { zone = 'cats'; paintFocus(); }
+        }
+        else if (k === 'PageDown' || k === 'ChannelDown' || c === 428) { gIdx = Math.min(list.length - 1, gIdx + cols * 3); paintFocus(); }
+        else if (k === 'PageUp' || k === 'ChannelUp' || c === 427) { gIdx = Math.max(0, gIdx - cols * 3); paintFocus(); }
+        else if (isOk(k, c)) {
+          const el = list[gIdx];
+          if (el) { closeDrawer(); goChannel(parseInt(el.dataset.appCh, 10)); }
+        } else return false;
+        return true;
+      }
+
+      const isOk = (k, c) => k === 'Enter' || k === 'Select' || k === 'OK' || c === 13 || c === 23 || c === 66;
+      const isBack = (k, c) => k === 'Escape' || k === 'Backspace' || k === 'GoBack' || k === 'BrowserBack' || c === 4 || c === 27 || c === 8 || c === 10009 || c === 461;
+
+      window.addEventListener('keydown', (e) => {
+        const k = e.key, c = e.keyCode;
+        let handled = true;
+        if (/^[0-9]$/.test(k)) { addDigit(k); }
+        else if (k === 'AudioVolumeUp' || k === 'VolumeUp' || c === 447) setVol(getVol() + 0.05);
+        else if (k === 'AudioVolumeDown' || k === 'VolumeDown' || c === 448) setVol(getVol() - 0.05);
+        else if (k === 'AudioVolumeMute' || k === 'VolumeMute' || k === 'MediaMute' || c === 449 || k === 'm' || k === 'M') toggleMute();
+        else if (isOpen()) {
+          if (isBack(k, c)) closeDrawer();
+          else handled = drawerKey(k, c);
+        } else {
+          if (k === 'ArrowUp' || k === 'ChannelUp' || k === 'PageUp' || c === 427) step(1);
+          else if (k === 'ArrowDown' || k === 'ChannelDown' || k === 'PageDown' || c === 428) step(-1);
+          else if (k === 'ArrowRight') setVol(getVol() + 0.05);
+          else if (k === 'ArrowLeft') setVol(getVol() - 0.05);
+          else if (isOk(k, c)) { if (numStr) commitNum(); else openDrawer(); }
+          else if (k === 'MediaPlayPause' || c === 179) { video.paused ? video.play().catch(() => {}) : video.pause(); }
+          else if (k === 'MediaLast' || k === 'r' || k === 'R') { if (lastIdx >= 0) goChannel(lastIdx); }
+          else if (k === 'i' || k === 'I' || k === 'Info' || k === 'Guide' || c === 457) showOsd();
+          else handled = false;
+        }
+        if (handled) { e.preventDefault(); e.stopImmediatePropagation(); }
+      }, true);
+
+      // mouse / air-mouse support
+      $p('appGrid').addEventListener('click', (e) => { if (e.target.closest('[data-app-ch]')) { closeDrawer(); showOsd(); } });
+      $p('appPlayerSlot').addEventListener('click', () => { isOpen() ? closeDrawer() : openDrawer(); });
+
+      showToast('TV Mode • ▲▼ Channel  ◀▶ Volume  OK = List  0-9 = Channel No.');
+      setTimeout(showOsd, 1200);
     }
 
     function syncAuthAndSettingsUI() {
@@ -2894,6 +3147,7 @@
 
       initPlayerControls();
       if (IS_APP) initAppMode();
+      if (window.__CSTV_TV__) initTvMode();
 
       const loginModal = document.getElementById('phoneLoginModal');
       function openLoginModal() {
