@@ -235,6 +235,34 @@
     #tvNumEntry { position: fixed; top: 3vw; right: 4vw; z-index: 6; font-size: 7vw; font-weight: 800; color: #fff; text-shadow: 0 .2vw 1vw #000; opacity: 0; pointer-events: none; }
     #tvNumEntry.show { opacity: 1; }
   </style>
+
+  <style>
+    /* ===== Home polish ===== */
+    body { background-image: radial-gradient(120% 60% at 50% -10%, rgba(168,30,255,.22), transparent 60%); background-repeat: no-repeat; }
+    .hero-num { font-family: 'Hind Siliguri','Inter',sans-serif; font-weight: 700; font-size: clamp(76px, 26vw, 128px); line-height: .95; letter-spacing: -.02em;
+      background: linear-gradient(180deg, #fff3c4 0%, #fbbf24 55%, #f472b6 120%); -webkit-background-clip: text; background-clip: text; color: transparent;
+      filter: drop-shadow(0 6px 28px rgba(251,191,36,.35)); }
+    #heroTrack > div:first-child::before { content: ""; position: absolute; width: 340px; height: 340px; top: -90px; left: 50%; margin-left: -170px; border-radius: 50%;
+      background: conic-gradient(from 0deg, rgba(255,31,142,.0), rgba(255,31,142,.35), rgba(168,30,255,.0), rgba(251,191,36,.25), rgba(255,31,142,.0)); filter: blur(34px); animation: heroSpin 18s linear infinite; pointer-events: none; }
+    @keyframes heroSpin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { #heroTrack > div:first-child::before { animation: none; } }
+    #heroTrack > div { min-height: 430px; justify-content: center; }
+    #heroMontageGrid > div { border-radius: 10px; box-shadow: 0 6px 14px rgba(0,0,0,.35); letter-spacing: .04em; }
+    .hero-watch-btn { padding: 10px 22px !important; font-size: 13px !important; box-shadow: 0 10px 26px rgba(236,72,153,.45) !important; }
+    .home-stats { display: grid; grid-template-columns: repeat(3, 1fr); border-radius: 18px; overflow: hidden; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .home-stats > div { padding: 12px 6px; text-align: center; }
+    .home-stats > div + div { border-left: 1px solid rgba(255,255,255,.08); }
+    .home-stats b { display: block; font-family: 'Hind Siliguri','Inter',sans-serif; font-size: 20px; line-height: 1.1; color: #fbbf24; }
+    .home-stats span { display: block; font-size: 10.5px; color: #cbd5e1; margin-top: 2px; }
+    #viewHome h3 { display: flex; align-items: center; gap: 8px; }
+    #viewHome h3::before { content: ""; width: 4px; height: 18px; border-radius: 4px; background: linear-gradient(180deg, #ff1f8e, #a81eff); }
+    #liveTvCirclesTrack { padding: 8px 2px 10px; }
+    #liveTvCirclesTrack .channel-ring:hover > :not(span):first-of-type, #liveTvCirclesTrack .channel-ring:hover > div { box-shadow: 0 0 0 2px #ec4899, 0 8px 24px rgba(236,72,153,.45); }
+    #eplRowTrack > button, #saffRowTrack > button, #dramaRowTrack > button, #dynamicCategorySections button[data-play-channel] { border-radius: 20px; box-shadow: 0 10px 24px rgba(0,0,0,.35); }
+    #topCategoryNav .cat-tab { padding: 6px 14px; border-radius: 999px; border: 0 !important; background: rgba(255,255,255,.06); }
+    #topCategoryNav .cat-tab.text-pink-400 { background: linear-gradient(90deg, #ff1f8e, #a81eff); color: #fff; }
+    #topCategoryNav { gap: 8px; }
+  </style>
 </head>
 <body class="min-h-screen bg-[#0b0714] text-white flex flex-col justify-between pb-20">
 
@@ -310,9 +338,9 @@
           <!-- Slide 1 -->
           <div class="min-w-full snap-center-item hero-bg-1 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
             <div class="max-w-md mx-auto flex flex-col items-center">
-              <h2 class="text-3xl sm:text-4xl font-extrabold text-amber-400 drop-shadow-[0_2px_10px_rgba(251,191,36,0.6)] tracking-tight">১০০০+</h2>
-              <p class="text-2xl sm:text-3xl font-extrabold text-white mt-0.5 drop-shadow">লাইভ চ্যানেল ও কনটেন্ট</p>
-              <p class="text-xl sm:text-2xl font-extrabold text-amber-300 mt-0.5">নতুন যোগ হলো!</p>
+              <h2 class="hero-num">২০০+</h2>
+              <p class="text-2xl sm:text-3xl font-extrabold text-white mt-1 drop-shadow">লাইভ চ্যানেল</p>
+              <p class="text-base sm:text-lg font-bold text-amber-300 mt-1">এক জায়গায়, সারাক্ষণ লাইভ</p>
               <div class="mt-3 px-5 py-2 rounded-xl border-2 border-pink-400/90 bg-purple-950/60 neon-box">
                 <p class="text-xs sm:text-sm font-semibold text-white">এখন আরো বেশি দেখুন <span class="text-pink-400 font-bold">Khusbu TV -তে</span></p>
               </div>
@@ -371,6 +399,15 @@
           <button data-slide="0" class="hero-dot w-5 h-2 rounded-full bg-white transition-all"></button>
           <button data-slide="1" class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-all"></button>
           <button data-slide="2" class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-all"></button>
+        </div>
+      </div>
+
+      <!-- QUICK STATS -->
+      <div class="px-4 -mt-2">
+        <div class="home-stats">
+          <div><b>২০০+</b><span>লাইভ চ্যানেল</span></div>
+          <div><b>HD</b><span>ক্লিয়ার কোয়ালিটি</span></div>
+          <div><b>২৪/৭</b><span>নন-স্টপ লাইভ</span></div>
         </div>
       </div>
 
@@ -2238,6 +2275,7 @@
       const fs = isPlayerFs();
       $p('playerModal').classList.toggle('app-fs', fs);
       $p('playerFullscreenBtn').textContent = fs ? '⤢' : '⛶';
+      if (window.__applyPlayerBrightness) window.__applyPlayerBrightness();
     }
     async function togglePlayerFullscreen() {
       const modal = $p('playerModal');
@@ -2303,6 +2341,80 @@
       $p('playerControlBar').addEventListener('pointerdown', () => {
         if (!seekDragging && $p('playerMenu').classList.contains('hidden')) showPlayerOverlaysAndStart5sTimer();
       }, { passive: true });
+
+      // Fullscreen swipe: left half up/down = brightness, right half up/down = volume
+      (function initSwipeGestures() {
+        const osd = document.createElement('div');
+        osd.id = 'swipeOsd';
+        osd.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:35;display:none;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;background:rgba(12,6,24,.82);border:1px solid rgba(236,72,153,.45);color:#fff;font:700 14px Inter,sans-serif;pointer-events:none;';
+        osd.innerHTML = '<span id="swipeOsdIcon" style="font-size:20px"></span><span style="width:120px;height:6px;border-radius:9px;background:rgba(255,255,255,.25);overflow:hidden"><i id="swipeOsdFill" style="display:block;height:100%;width:0;background:linear-gradient(90deg,#ff1f8e,#a81eff)"></i></span><span id="swipeOsdPct" style="min-width:38px;text-align:right"></span>';
+        modal.appendChild(osd);
+        let osdTimer = null;
+        const showOsd = (icon, frac, label) => {
+          $p('swipeOsdIcon').textContent = icon;
+          $p('swipeOsdFill').style.width = Math.round(frac * 100) + '%';
+          $p('swipeOsdPct').textContent = label;
+          osd.style.display = 'flex';
+          clearTimeout(osdTimer);
+          osdTimer = setTimeout(() => { osd.style.display = 'none'; }, 900);
+        };
+
+        // Brightness: 0.25x (dim) .. 1.5x (boost). Web pages cannot change system brightness, so the video is dimmed/boosted with a CSS filter.
+        let bright = 1;
+        try { const b = parseFloat(localStorage.getItem('cstv_bright')); if (b >= .25 && b <= 1.5) bright = b; } catch (e) {}
+        const applyBrightness = () => {
+          const f = isPlayerFs() && bright !== 1 ? `brightness(${bright})` : '';
+          video.style.filter = f; $p('ytHost').style.filter = f;
+        };
+        window.__applyPlayerBrightness = applyBrightness;
+        const setBright = (b) => {
+          bright = Math.min(1.5, Math.max(.25, b));
+          try { localStorage.setItem('cstv_bright', String(bright)); } catch (e) {}
+          applyBrightness();
+          try { if (window.Android && typeof window.Android.setBrightness === 'function') window.Android.setBrightness(Math.min(1, bright)); } catch (e) {}
+          showOsd('☀', (bright - .25) / 1.25, Math.round(bright * 100) + '%');
+        };
+        const getVol = () => (ytMode && ytPlayer) ? ((ytPlayer.isMuted() ? 0 : ytPlayer.getVolume()) / 100) : (video.muted ? 0 : video.volume);
+        const setVol = (v) => {
+          v = Math.min(1, Math.max(0, v));
+          if (ytMode && ytPlayer) { try { ytPlayer.setVolume(Math.round(v * 100)); v === 0 ? ytPlayer.mute() : ytPlayer.unMute(); } catch (e) {} }
+          else { video.volume = v; video.muted = (v === 0); }
+          showOsd(v === 0 ? '🔇' : (v < .5 ? '🔉' : '🔊'), v, Math.round(v * 100) + '%');
+        };
+
+        let g = null;
+        window.__swipeSuppressClick = false;
+        viewport.addEventListener('touchstart', (e) => {
+          if (e.touches.length !== 1 || !isPlayerFs() || (playerIframeMode && !ytMode)) { g = null; return; }
+          const t = e.touches[0], r = viewport.getBoundingClientRect();
+          g = { x: t.clientX, y: t.clientY, h: r.height, side: (t.clientX - r.left) < r.width / 2 ? 'L' : 'R', on: false, base: null };
+        }, { passive: true });
+        viewport.addEventListener('touchmove', (e) => {
+          if (!g) return;
+          const t = e.touches[0], dx = t.clientX - g.x, dy = t.clientY - g.y;
+          if (!g.on) {
+            if (Math.abs(dy) < 12 || Math.abs(dy) < Math.abs(dx) * 1.3) return;
+            g.on = true;
+            g.base = g.side === 'L' ? bright : getVol();
+          }
+          e.preventDefault();
+          const delta = -dy / (g.h * 0.75);
+          if (g.side === 'L') setBright(g.base + delta * 1.25);
+          else setVol(g.base + delta);
+        }, { passive: false });
+        const endG = () => {
+          if (g && g.on) { window.__swipeSuppressClick = true; setTimeout(() => { window.__swipeSuppressClick = false; }, 350); }
+          g = null;
+        };
+        viewport.addEventListener('touchend', endG, { passive: true });
+        viewport.addEventListener('touchcancel', endG, { passive: true });
+        // swallow the click that follows a swipe so overlays don't toggle
+        viewport.addEventListener('click', (e) => {
+          if (window.__swipeSuppressClick) { e.stopImmediatePropagation(); e.preventDefault(); window.__swipeSuppressClick = false; }
+        }, true);
+        viewport.style.touchAction = 'none';
+        applyBrightness();
+      })();
 
       // Tap: toggle overlays | double tap left/right: seek -/+10s
       let lastTap = 0, tapTimer = null;
