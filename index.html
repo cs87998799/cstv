@@ -263,6 +263,53 @@
     #topCategoryNav .cat-tab.text-pink-400 { background: linear-gradient(90deg, #ff1f8e, #a81eff); color: #fff; }
     #topCategoryNav { gap: 8px; }
   </style>
+  <style>
+    /* ===== Round 2 polish ===== */
+    :focus-visible { outline: 2px solid #f472b6; outline-offset: 2px; }
+    html { scroll-behavior: smooth; }
+    #headerSearchBtn { background: rgba(255,255,255,.08); }
+    header { padding-top: env(safe-area-inset-top); }
+    /* hero slides 2 & 3 */
+    #heroSlide2Card, #heroSlide3Card { width: min(300px, 80vw); height: 150px; border-radius: 24px; box-shadow: 0 18px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.12); backdrop-filter: blur(8px); }
+    #heroSlide2Card img, #heroSlide3Card img { filter: drop-shadow(0 4px 10px rgba(0,0,0,.4)); }
+    #heroTrack h2 { text-wrap: balance; }
+    #heroDots { padding: 10px 0 2px; }
+    #heroPrevBtn, #heroNextBtn { backdrop-filter: blur(6px); opacity: .85; }
+    @media (hover: none) { #heroPrevBtn, #heroNextBtn { display: none; } }
+    /* skeleton while channels load */
+    #liveTvCirclesTrack:empty { height: 108px; border-radius: 20px;
+      background: linear-gradient(100deg, rgba(255,255,255,.04) 30%, rgba(255,255,255,.12) 50%, rgba(255,255,255,.04) 70%); background-size: 200% 100%; animation: skel 1.4s linear infinite; }
+    @keyframes skel { to { background-position: -200% 0; } }
+    /* empty states */
+    .empty-state { padding: 56px 16px; text-align: center; border: 1px dashed rgba(255,255,255,.15); border-radius: 22px; background: rgba(255,255,255,.03); }
+    .empty-ico { width: 56px; height: 56px; margin: 0 auto 12px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; color: #f472b6; background: rgba(236,72,153,.15); }
+    /* bottom nav */
+    nav.fixed.bottom-0 { padding-bottom: env(safe-area-inset-bottom); border-top-left-radius: 22px; border-top-right-radius: 22px; box-shadow: 0 -10px 30px rgba(0,0,0,.4); }
+    .bottom-nav-btn { min-width: 64px; padding: 4px 8px; transition: transform .15s, color .15s; }
+    .bottom-nav-btn:active { transform: scale(.92); }
+    /* discover / settings cards */
+    #discoverGrid .channel-ring { padding: 6px 2px; border-radius: 16px; }
+    #channelSearchInput { border-radius: 999px; padding-left: 16px; }
+    #viewSettings > div { border-radius: 20px; }
+    #toastBox > * { border-radius: 999px; box-shadow: 0 12px 30px rgba(0,0,0,.5); }
+    ::selection { background: #ec4899; color: #fff; }
+  </style>
+  <style>
+    /* developer-only controls: visible with ?admin=1 (saved on this device), hide with ?admin=0 */
+    .admin-only { display: none !important; }
+    html.is-admin .admin-only { display: flex !important; }
+    html.is-admin #adminSourceCard { display: block !important; }
+  </style>
+<script>
+  (function () {
+    try {
+      var q = new URLSearchParams(location.search).get('admin');
+      if (q === '1') localStorage.setItem('cstv_admin', '1');
+      else if (q === '0') localStorage.removeItem('cstv_admin');
+      if (localStorage.getItem('cstv_admin') === '1') document.documentElement.classList.add('is-admin');
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body class="min-h-screen bg-[#0b0714] text-white flex flex-col justify-between pb-20">
 
@@ -295,12 +342,15 @@
         </div>
         <div class="flex flex-col text-left">
           <span class="font-extrabold tracking-wider text-lg leading-none bg-gradient-to-r from-pink-400 via-fuchsia-300 to-white bg-clip-text text-transparent">Khusbu TV</span>
-          <span id="jsonStatusLabel" class="text-[9px] text-emerald-400 font-semibold tracking-tight">● channels.json ready</span>
+          <span id="jsonStatusLabel" class="text-[9px] text-emerald-400 font-semibold tracking-tight">● লাইভ</span>
         </div>
       </button>
 
       <!-- Right Actions: Subscribe + Sign In / User Profile -->
       <div class="flex items-center gap-2.5">
+        <button id="headerSearchBtn" aria-label="Search" class="w-9 h-9 rounded-full bg-white/8 border border-white/15 text-white flex items-center justify-center active:scale-95 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
         <button id="subscribeTopBtn" class="toffee-gradient text-white text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-md shadow-pink-600/30 active:scale-95 transition">
           <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
@@ -367,7 +417,7 @@
                 <span class="w-2 h-2 rounded-full bg-white live-dot"></span> Khusbu TV LIVE STREAM
               </span>
               <h2 id="heroSlide2Title" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Live Sports & TV</h2>
-              <p id="heroSlide2Sub" class="text-xs sm:text-sm text-sky-200 mt-1">Streaming directly from channels.json</p>
+              <p id="heroSlide2Sub" class="text-xs sm:text-sm text-sky-200 mt-1">২৪ ঘণ্টা সরাসরি সম্প্রচার</p>
               <div id="heroSlide2Card" class="mt-4 w-64 h-36 rounded-2xl bg-gradient-to-r from-blue-900/80 via-slate-900 to-rose-900/80 border border-sky-400/30 flex items-center justify-around p-4 shadow-xl"></div>
               <button data-play-index="0" class="hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
                 ▶ Watch Live Stream
@@ -459,9 +509,9 @@
     <!-- DISCOVER VIEW -->
     <section id="viewDiscover" class="hidden px-4 py-4 space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <h2 class="text-xl font-bold">Discover Khusbu TV Channels</h2>
+        <h2 class="text-xl font-bold">সব চ্যানেল</h2>
         <div class="relative flex-1 max-w-sm">
-          <input id="channelSearchInput" type="text" placeholder="🔍 Channel search korun..." class="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-pink-500" />
+          <input id="channelSearchInput" type="text" placeholder="🔍 চ্যানেল খুঁজুন..." class="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-pink-500" />
         </div>
       </div>
       <div id="discoverGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 pt-2"></div>
@@ -491,10 +541,10 @@
         <button id="settingsAuthActionBtn" class="px-4 py-2 rounded-xl toffee-gradient text-xs font-bold shadow">Sign In</button>
       </div>
 
-      <div class="p-4 rounded-2xl bg-pink-500/10 border border-pink-500/30 space-y-3">
+      <div id="adminSourceCard" class="admin-only p-4 rounded-2xl bg-pink-500/10 border border-pink-500/30 space-y-3">
         <div class="flex items-center justify-between">
           <div>
-            <p class="font-bold text-sm text-white">GitHub `channels.json` Data Source</p>
+            <p class="font-bold text-sm text-white">চ্যানেল লিস্ট সোর্স (Advanced)</p>
             <p id="jsonSourceUrlText" class="text-xs text-slate-300">Auto-loads channels.json + channels(1).json + channels(2).json</p>
           </div>
           <button id="reloadJsonBtn" class="px-3 py-1.5 rounded-lg toffee-gradient text-xs font-bold shadow">↻ Reload JSON</button>
@@ -549,7 +599,7 @@
           </button>
         </div>
 
-        <div class="p-4 flex items-center justify-between">
+        <div class="admin-only p-4 flex items-center justify-between">
           <div>
             <p class="font-semibold text-sm">Custom Stream Test</p>
             <p class="text-xs text-slate-400">Play any link: m3u8, mp4, mpd, flv, YouTube...</p>
@@ -679,7 +729,7 @@
     </div>
 
     <div class="flex items-center gap-2 px-4 pb-3 flex-shrink-0">
-      <input id="appSearchInput" type="text" placeholder="🔍 Channel search korun..." class="flex-1 min-w-0 bg-[#2b2b2b] rounded-full px-4 py-2.5 text-sm text-white placeholder-slate-400 focus:outline-none" style="user-select:text" />
+      <input id="appSearchInput" type="text" placeholder="🔍 চ্যানেল খুঁজুন..." class="flex-1 min-w-0 bg-[#2b2b2b] rounded-full px-4 py-2.5 text-sm text-white placeholder-slate-400 focus:outline-none" style="user-select:text" />
       <button id="appSettingsBtn" class="w-11 h-11 rounded-full bg-[#2b2b2b] text-white text-xl flex items-center justify-center flex-shrink-0" title="Settings">⚙</button>
     </div>
     <div id="appCatBar" class="flex gap-3 overflow-x-auto no-scrollbar px-4 pb-4 flex-shrink-0"></div>
@@ -692,7 +742,7 @@
       <div class="flex items-center justify-between">
         <div>
           <h3 class="text-lg font-extrabold text-white">Sign In to Khusbu TV</h3>
-          <p class="text-xs text-slate-400">Enter your mobile number to receive OTP</p>
+          <p class="text-xs text-slate-400">আপনার মোবাইল নম্বর দিয়ে সাইন ইন করুন</p>
         </div>
         <button id="closeLoginModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
       </div>
@@ -711,11 +761,11 @@
       <div id="loginStepOtp" class="hidden space-y-4">
         <div class="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-xs text-emerald-200">
           OTP sent to <span id="otpSentPhoneLabel" class="font-bold">+88017...</span>! <br/>
-          <span>Khusbu TV OTP Code: <strong id="generatedOtpDisplay" class="text-white underline">4829</strong></span>
+          <span>SMS-এ পাঠানো ৪ সংখ্যার কোডটি নিচে লিখুন।</span>
         </div>
         <div>
           <label class="block text-xs font-semibold text-slate-300 mb-1.5">Enter 4-Digit OTP</label>
-          <input id="otpInput" type="text" maxlength="4" placeholder="4829" class="w-full text-center tracking-[0.5em] font-extrabold text-lg bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-pink-500" />
+          <input id="otpInput" type="text" maxlength="4" placeholder="• • • •" inputmode="numeric" autocomplete="one-time-code" class="w-full text-center tracking-[0.5em] font-extrabold text-lg bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-pink-500" />
         </div>
         <div class="flex items-center justify-between gap-2">
           <button id="backToPhoneStepBtn" class="px-4 py-2.5 rounded-xl bg-white/10 text-xs font-semibold text-slate-300">← Change Number</button>
@@ -733,7 +783,7 @@
         <button id="closeSubscribeModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
       </div>
       <h3 class="text-xl font-extrabold">Unlock All Khusbu TV Live Sports & VIP Channels</h3>
-      <p class="text-xs text-slate-300">Watch all premium channels from channels.json in Full HD ad-free.</p>
+      <p class="text-xs text-slate-300">সব প্রিমিয়াম চ্যানেল দেখুন Full HD-তে, বিজ্ঞাপন ছাড়া।</p>
       <div class="space-y-2.5 pt-1">
         <button data-plan="Monthly VIP (৳99)" class="sub-plan-btn w-full p-3.5 rounded-2xl bg-pink-500/15 border-2 border-pink-500 flex items-center justify-between text-left">
           <div>
@@ -1037,7 +1087,7 @@
       if (merged.length > 0) {
         CHANNELS = merged;
         if (state.currentChannelIndex >= CHANNELS.length) state.currentChannelIndex = 0;
-        statusLabel.textContent = `● Loaded ${CHANNELS.length} channels (${filesLoaded} file)`;
+        statusLabel.textContent = `● ${CHANNELS.length} চ্যানেল লাইভ`;
         statusLabel.className = 'text-[9px] text-emerald-400 font-semibold tracking-tight';
         if (sourceText) sourceText.textContent = `Loaded ${CHANNELS.length} channels from ${filesLoaded} file (channels.json, channels(1).json, channels(2).json)`;
         if (showFeedback) showToast(`Loaded ${CHANNELS.length} channels from ${filesLoaded} file!`);
@@ -1045,7 +1095,7 @@
         return true;
       }
 
-      statusLabel.textContent = `● Ready (${CHANNELS.length} channels)`;
+      statusLabel.textContent = `● ${CHANNELS.length} চ্যানেল রেডি`;
       if (showFeedback) showToast('Using built-in channels fallback');
       renderAllFromChannelsJson();
       return false;
@@ -1059,7 +1109,6 @@
       favorites: [],
       userPhone: null,
       isSubscribed: false,
-      generatedOtp: '4829',
       quality: '1080p',
       autoplay: true,
       dataSaver: false,
@@ -1333,7 +1382,7 @@
       badge.textContent = `${savedChannels.length} Channels`;
 
       if (savedChannels.length === 0) {
-        grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400 text-sm">No saved channels yet. Tap ☆ Save inside the Khusbu TV video player!</div>`;
+        grid.innerHTML = `<div class="empty-state col-span-full"><div class="empty-ico">☆</div><p class="font-bold text-white">এখনো কিছু সেভ করা নেই</p><p class="text-xs text-slate-400 mt-1">প্লেয়ারে ☆ Save চাপলে প্রিয় চ্যানেল এখানে জমা হবে</p></div>`;
         return;
       }
 
@@ -3294,19 +3343,38 @@
 
       document.getElementById('closeLoginModalBtn').addEventListener('click', closeLoginModal);
 
-      document.getElementById('sendOtpBtn').addEventListener('click', () => {
-        const rawPhone = document.getElementById('phoneInput').value.replace(/\D/g, '');
-        if (rawPhone.length < 9) {
-          showToast('Please enter a valid BD phone number');
-          return;
-        }
-        state.generatedOtp = String(Math.floor(1000 + Math.random() * 9000));
-        document.getElementById('otpSentPhoneLabel').textContent = `+880${rawPhone}`;
-        document.getElementById('generatedOtpDisplay').textContent = state.generatedOtp;
-        document.getElementById('otpInput').value = state.generatedOtp;
-        document.getElementById('loginStepPhone').classList.add('hidden');
-        document.getElementById('loginStepOtp').classList.remove('hidden');
-        showToast(`OTP Code Sent: ${state.generatedOtp}`);
+      // Real SMS login: set window.KHUSBU_OTP_API = { send: 'https://your-server/otp/send', verify: 'https://your-server/otp/verify' } (POST JSON).
+      // send -> {phone}; verify -> {phone, code} and must answer {ok:true}. Without it, the number is simply saved on this device (no fake code).
+      const OTP_API = window.KHUSBU_OTP_API || null;
+      const getPhone = () => document.getElementById('phoneInput').value.replace(/\D/g, '').replace(/^0+/, '');
+      const finishLogin = (rawPhone) => {
+        state.userPhone = `+880${rawPhone}`;
+        saveState();
+        syncAuthAndSettingsUI();
+        closeLoginModal();
+        showToast(`Khusbu TV-তে সাইন ইন হয়েছে: ${state.userPhone}`);
+      };
+      const postJson = async (url, body) => {
+        const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (!r.ok) throw new Error('http ' + r.status);
+        return r.json().catch(() => ({ ok: true }));
+      };
+
+      document.getElementById('sendOtpBtn').addEventListener('click', async () => {
+        const rawPhone = getPhone();
+        if (rawPhone.length !== 10) { showToast('সঠিক মোবাইল নম্বর দিন (যেমন 1712345678)'); return; }
+        if (!OTP_API || !OTP_API.send) { finishLogin(rawPhone); return; }
+        const btn = document.getElementById('sendOtpBtn');
+        btn.disabled = true; btn.textContent = 'পাঠানো হচ্ছে...';
+        try {
+          await postJson(OTP_API.send, { phone: `+880${rawPhone}` });
+          document.getElementById('otpSentPhoneLabel').textContent = `+880${rawPhone}`;
+          document.getElementById('otpInput').value = '';
+          document.getElementById('loginStepPhone').classList.add('hidden');
+          document.getElementById('loginStepOtp').classList.remove('hidden');
+          document.getElementById('otpInput').focus();
+        } catch (e) { showToast('কোড পাঠানো যায়নি, একটু পরে আবার চেষ্টা করুন'); }
+        btn.disabled = false; btn.textContent = 'Send OTP Code';
       });
 
       document.getElementById('backToPhoneStepBtn').addEventListener('click', () => {
@@ -3314,18 +3382,14 @@
         document.getElementById('loginStepPhone').classList.remove('hidden');
       });
 
-      document.getElementById('verifyOtpBtn').addEventListener('click', () => {
-        const entered = document.getElementById('otpInput5').value.trim();
-        const rawPhone = document.getElementById('phoneInput').value.replace(/\D/g, '');
-        if (entered === state.generatedOtp || entered.length === 4) {
-          state.userPhone = `+880${rawPhone}`;
-          saveState();
-          syncAuthAndSettingsUI();
-          closeLoginModal();
-          showToast(`Signed in to Khusbu TV as ${state.userPhone}`);
-        } else {
-          showToast('Invalid OTP code, try again');
-        }
+      document.getElementById('verifyOtpBtn').addEventListener('click', async () => {
+        const code = document.getElementById('otpInput').value.trim();
+        const rawPhone = getPhone();
+        if (!/^\d{4}$/.test(code)) { showToast('৪ সংখ্যার কোড দিন'); return; }
+        try {
+          const res = await postJson(OTP_API.verify, { phone: `+880${rawPhone}`, code });
+          if (res && res.ok !== false) finishLogin(rawPhone); else showToast('কোডটি ভুল, আবার চেষ্টা করুন');
+        } catch (e) { showToast('ভেরিফাই করা যায়নি, আবার চেষ্টা করুন'); }
       });
 
       const subModal = document.getElementById('subscribeModal');
@@ -3458,5 +3522,38 @@
       });
     });
   </script>
+<script>
+  (function () {
+    var track = document.getElementById('heroTrack'); if (!track) return;
+    var timer = null, userTouch = false;
+    function idx() { return Math.round(track.scrollLeft / Math.max(1, track.clientWidth)); }
+    function paint(i) {
+      document.querySelectorAll('.hero-dot').forEach(function (d, k) {
+        d.className = 'hero-dot ' + (k === i ? 'w-5' : 'w-2 ') + ' h-2 rounded-full ' + (k === i ? 'bg-white' : 'bg-white/40') + ' transition-all';
+      });
+    }
+    var st;
+    track.addEventListener('scroll', function () { clearTimeout(st); st = setTimeout(function () { var i = idx(); try { state.heroSlideIndex = i; } catch (e) {} paint(i); }, 80); }, { passive: true });
+    function start() {
+      stop();
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      timer = setInterval(function () {
+        if (userTouch || document.hidden) return;
+        var home = document.getElementById('viewHome');
+        if (home && home.classList.contains('hidden')) return;
+        scrollToHeroSlide(idx() + 1);
+      }, 5000);
+    }
+    function stop() { if (timer) clearInterval(timer); }
+    track.addEventListener('touchstart', function () { userTouch = true; }, { passive: true });
+    track.addEventListener('touchend', function () { setTimeout(function () { userTouch = false; }, 4000); }, { passive: true });
+    start();
+    var sb = document.getElementById('headerSearchBtn');
+    if (sb) sb.addEventListener('click', function () {
+      var b = document.querySelector('.bottom-nav-btn[data-nav="discover"]'); if (b) b.click();
+      setTimeout(function () { var i = document.getElementById('channelSearchInput'); if (i) i.focus(); }, 150);
+    });
+  })();
+</script>
 </body>
 </html>
