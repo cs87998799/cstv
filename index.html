@@ -242,12 +242,6 @@
     .hero-num { font-family: 'Hind Siliguri','Inter',sans-serif; font-weight: 700; font-size: clamp(76px, 26vw, 128px); line-height: .95; letter-spacing: -.02em;
       background: linear-gradient(180deg, #fff3c4 0%, #fbbf24 55%, #f472b6 120%); -webkit-background-clip: text; background-clip: text; color: transparent;
       filter: drop-shadow(0 6px 28px rgba(251,191,36,.35)); }
-    #heroTrack > div:first-child::before { content: ""; position: absolute; width: 340px; height: 340px; top: -90px; left: 50%; margin-left: -170px; border-radius: 50%;
-      background: conic-gradient(from 0deg, rgba(255,31,142,.0), rgba(255,31,142,.35), rgba(168,30,255,.0), rgba(251,191,36,.25), rgba(255,31,142,.0)); filter: blur(34px); animation: heroSpin 18s linear infinite; pointer-events: none; }
-    @keyframes heroSpin { to { transform: rotate(360deg); } }
-    @media (prefers-reduced-motion: reduce) { #heroTrack > div:first-child::before { animation: none; } }
-    #heroTrack > div { min-height: 430px; justify-content: center; }
-    #heroMontageGrid > div { border-radius: 10px; box-shadow: 0 6px 14px rgba(0,0,0,.35); letter-spacing: .04em; }
     .hero-watch-btn { padding: 10px 22px !important; font-size: 13px !important; box-shadow: 0 10px 26px rgba(236,72,153,.45) !important; }
     .home-stats { display: grid; grid-template-columns: repeat(3, 1fr); border-radius: 18px; overflow: hidden; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
     .home-stats > div { padding: 12px 6px; text-align: center; }
@@ -270,11 +264,6 @@
     #headerSearchBtn { background: rgba(255,255,255,.08); }
     header { padding-top: env(safe-area-inset-top); }
     /* hero slides 2 & 3 */
-    #heroSlide2Card, #heroSlide3Card { width: min(300px, 80vw); height: 150px; border-radius: 24px; box-shadow: 0 18px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.12); backdrop-filter: blur(8px); }
-    #heroSlide2Card img, #heroSlide3Card img { filter: drop-shadow(0 4px 10px rgba(0,0,0,.4)); }
-    #heroTrack h2 { text-wrap: balance; }
-    #heroDots { padding: 10px 0 2px; }
-    #heroPrevBtn, #heroNextBtn { backdrop-filter: blur(6px); opacity: .85; }
     @media (hover: none) { #heroPrevBtn, #heroNextBtn { display: none; } }
     /* skeleton while channels load */
     #liveTvCirclesTrack:empty { height: 108px; border-radius: 20px;
@@ -310,6 +299,81 @@
     } catch (e) {}
   })();
 </script>
+
+  <style>
+    /* ===== HERO BANNER v2 ===== */
+    #heroWrap { position: relative; overflow: hidden; user-select: none; }
+    #heroTrack { scrollbar-width: none; }
+    .hs { position: relative; min-width: 100%; min-height: 470px; overflow: hidden; isolation: isolate;
+      display: flex; align-items: center; justify-content: center; padding: 28px 18px 40px; text-align: center;
+      background: radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--c1) 55%, #0b0714) 0%, #0b0714 70%);
+      --c1: #a81eff; --c2: #ff1f8e; --c3: #fbbf24; }
+    .hs::after { content: ""; position: absolute; inset: auto 0 0 0; height: 90px; z-index: 1; pointer-events: none;
+      background: linear-gradient(to top, #0b0714, transparent); }
+    .hs-aurora { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
+    .hs-aurora i { position: absolute; width: 320px; height: 320px; border-radius: 50%; filter: blur(70px); opacity: .55; will-change: transform; }
+    .hs-aurora i:nth-child(1) { background: var(--c1); top: -90px; left: -80px; animation: hsDrift1 14s ease-in-out infinite alternate; }
+    .hs-aurora i:nth-child(2) { background: var(--c2); bottom: -110px; right: -90px; animation: hsDrift2 17s ease-in-out infinite alternate; }
+    .hs-aurora i:nth-child(3) { background: var(--c3); width: 180px; height: 180px; top: 38%; left: 55%; opacity: .25; animation: hsDrift1 20s ease-in-out infinite alternate-reverse; }
+    @keyframes hsDrift1 { to { transform: translate(70px, 60px) scale(1.2); } }
+    @keyframes hsDrift2 { to { transform: translate(-80px, -50px) scale(1.15); } }
+    .hs-grid { position: absolute; inset: 0; z-index: -1; opacity: .5;
+      background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 34px 34px; -webkit-mask-image: radial-gradient(70% 60% at 50% 40%, #000 20%, transparent 75%); mask-image: radial-gradient(70% 60% at 50% 40%, #000 20%, transparent 75%); }
+    .hs-ghost { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); z-index: -1; white-space: nowrap; max-width: 140%;
+      font-family: 'Inter','Hind Siliguri',sans-serif; font-weight: 900; font-size: clamp(70px, 24vw, 130px); letter-spacing: -.04em; line-height: 1; text-transform: uppercase;
+      color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.09); overflow: hidden; text-overflow: clip; }
+    .hs-count { position: absolute; top: 16px; right: 18px; font-weight: 800; font-size: 13px; color: rgba(255,255,255,.9); letter-spacing: .08em;
+      padding: 5px 11px; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .hs-count small { opacity: .55; font-weight: 600; }
+    .hs-body { position: relative; z-index: 2; width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; }
+    .hs-live { display: inline-flex; align-items: center; gap: 7px; padding: 5px 13px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #fff;
+      background: linear-gradient(90deg, #ef4444, #be123c); box-shadow: 0 6px 20px rgba(239,68,68,.45); }
+    .hs-live i { width: 7px; height: 7px; border-radius: 50%; background: #fff; animation: liveDot 1.4s infinite; }
+    /* logo disc */
+    .hs-disc { position: relative; width: 170px; height: 170px; margin: 22px 0 18px; display: flex; align-items: center; justify-content: center; }
+    .hs-disc::before { content: ""; position: absolute; inset: -14px; border-radius: 50%; background: conic-gradient(from 0deg, var(--c1), var(--c2), var(--c3), var(--c1));
+      filter: blur(22px); opacity: .75; animation: hsSpin 9s linear infinite; }
+    .hs-disc::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; padding: 3px;
+      background: conic-gradient(from 180deg, var(--c1), transparent 30%, var(--c2) 55%, transparent 80%, var(--c3));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: hsSpin 6s linear infinite reverse; }
+    @keyframes hsSpin { to { transform: rotate(360deg); } }
+    .hs-logo { position: relative; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle at 30% 25%, #fff, #e8e6f2); display: flex; align-items: center; justify-content: center;
+      overflow: hidden; box-shadow: 0 20px 45px rgba(0,0,0,.55), inset 0 -8px 18px rgba(0,0,0,.08); animation: hsFloat 5s ease-in-out infinite; }
+    .hs-logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 20px; }
+    .hs-logo span { font-weight: 900; font-size: 22px; line-height: 1.1; padding: 12px; color: #1e1b4b; text-transform: uppercase; letter-spacing: -.01em; word-break: break-word; }
+    @keyframes hsFloat { 50% { transform: translateY(-8px); } }
+    .hs-title { font-size: clamp(26px, 8vw, 36px); font-weight: 900; line-height: 1.12; letter-spacing: -.01em; margin: 0; max-width: 100%; text-wrap: balance;
+      background: linear-gradient(180deg, #fff 30%, color-mix(in srgb, var(--c3) 70%, #fff) 130%); -webkit-background-clip: text; background-clip: text; color: transparent;
+      filter: drop-shadow(0 4px 18px rgba(0,0,0,.45)); }
+    .hs-meta { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 12px; }
+    .hs-chip { font-size: 11.5px; font-weight: 700; padding: 5px 12px; border-radius: 999px; color: #fff; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .hs-chip.hd { background: linear-gradient(90deg, #f59e0b, #fbbf24); color: #1c1305; border-color: transparent; }
+    .hs-btn { position: relative; overflow: hidden; margin-top: 22px; padding: 13px 30px; border-radius: 999px; font-weight: 800; font-size: 14px; color: #fff; border: 0; cursor: pointer;
+      background: linear-gradient(90deg, var(--c2), var(--c1)); box-shadow: 0 14px 34px color-mix(in srgb, var(--c2) 55%, transparent), inset 0 1px 0 rgba(255,255,255,.35);
+      display: inline-flex; align-items: center; gap: 9px; transition: transform .2s; }
+    .hs-btn:active { transform: scale(.95); }
+    .hs-btn::after { content: ""; position: absolute; top: 0; bottom: 0; width: 40%; left: -60%; transform: skewX(-20deg);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent); animation: hsShine 3.2s ease-in-out infinite; }
+    @keyframes hsShine { 0%, 55% { left: -60%; } 100% { left: 140%; } }
+    .hs-btn .play { width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.95); color: var(--c1); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; padding-left: 2px; }
+    /* intro slide */
+    .hs-intro .hero-num { margin: 0; }
+    .hs-pill { margin-top: 14px; padding: 9px 20px; border-radius: 16px; border: 1.5px solid rgba(244,114,182,.85); background: rgba(46,16,80,.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 0 26px rgba(236,72,153,.35), inset 0 0 18px rgba(236,72,153,.12); font-size: 13px; font-weight: 600; color: #fff; }
+    .hs-cats { margin-top: 22px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; max-width: 330px; }
+    .hs-cats div { padding: 11px 4px; border-radius: 14px; font-size: 11px; font-weight: 800; letter-spacing: .08em; color: #fff; box-shadow: 0 10px 22px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.3);
+      animation: hsFloat 5s ease-in-out infinite; }
+    .hs-cats div:nth-child(even) { animation-delay: -2.2s; }
+    .hs-cats div:nth-child(3n) { animation-delay: -1.1s; }
+    /* dots */
+    #heroDots { position: absolute; left: 0; right: 0; bottom: 10px; z-index: 5; display: flex; justify-content: center; gap: 6px; padding: 0; margin: 0; }
+    .hero-dot { width: 7px; height: 7px; border-radius: 999px; background: rgba(255,255,255,.35); border: 0; padding: 0; transition: width .3s, background .3s; }
+    .hero-dot.on { width: 26px; background: linear-gradient(90deg, #ff1f8e, #fbbf24); box-shadow: 0 0 12px rgba(255,31,142,.7); }
+    #heroPrevBtn, #heroNextBtn { z-index: 6; width: 38px; height: 38px; font-size: 20px; line-height: 1; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    @media (hover: none) { #heroPrevBtn, #heroNextBtn { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .hs *, .hs::before, .hs::after { animation: none !important; } }
+  </style>
 </head>
 <body class="min-h-screen bg-[#0b0714] text-white flex flex-col justify-between pb-20">
 
@@ -382,74 +446,39 @@
     <section id="viewHome" class="space-y-6 pb-6">
 
       <!-- HERO SLIDER -->
-      <div class="relative overflow-hidden select-none">
+      <div id="heroWrap">
         <div id="heroTrack" class="flex overflow-x-auto snap-x-mandatory no-scrollbar scroll-smooth">
-          
-          <!-- Slide 1 -->
-          <div class="min-w-full snap-center-item hero-bg-1 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
-            <div class="max-w-md mx-auto flex flex-col items-center">
-              <h2 class="hero-num">২০০+</h2>
+
+          <!-- Slide 0: brand intro -->
+          <div class="hs hs-intro snap-center-item" style="--c1:#a81eff;--c2:#ff1f8e;--c3:#fbbf24">
+            <div class="hs-aurora"><i></i><i></i><i></i></div>
+            <div class="hs-grid"></div>
+            <div class="hs-count" id="heroCount0">01<small>/01</small></div>
+            <div class="hs-body">
+              <span class="hs-live"><i></i>KHUSBU TV</span>
+              <h2 class="hero-num" style="margin-top:14px">২০০+</h2>
               <p class="text-2xl sm:text-3xl font-extrabold text-white mt-1 drop-shadow">লাইভ চ্যানেল</p>
               <p class="text-base sm:text-lg font-bold text-amber-300 mt-1">এক জায়গায়, সারাক্ষণ লাইভ</p>
-              <div class="mt-3 px-5 py-2 rounded-xl border-2 border-pink-400/90 bg-purple-950/60 neon-box">
-                <p class="text-xs sm:text-sm font-semibold text-white">এখন আরো বেশি দেখুন <span class="text-pink-400 font-bold">Khusbu TV -তে</span></p>
+              <div class="hs-pill">এখন আরো বেশি দেখুন <span class="text-pink-400 font-bold">Khusbu TV -তে</span></div>
+              <div class="hs-cats">
+                <div style="background:linear-gradient(135deg,#f43f5e,#f97316)">LIVE</div>
+                <div style="background:linear-gradient(135deg,#2563eb,#4338ca)">SPORTS</div>
+                <div style="background:linear-gradient(135deg,#10b981,#0f766e)">CRICKET</div>
+                <div style="background:linear-gradient(135deg,#f59e0b,#dc2626)">DRAMA</div>
+                <div style="background:linear-gradient(135deg,#d946ef,#6b21a8)">MOVIES</div>
+                <div style="background:linear-gradient(135deg,#06b6d4,#1d4ed8)">NEWS</div>
               </div>
-              <div class="mt-5 w-48 h-40 sm:w-56 sm:h-44 rounded-2xl bg-gradient-to-b from-pink-500/30 via-purple-600/20 to-transparent border border-pink-500/30 flex flex-col items-center justify-center p-3 relative overflow-hidden">
-                <div id="heroMontageGrid" class="grid grid-cols-3 gap-1.5 w-full opacity-90 transform -rotate-6 scale-105">
-                  <div class="h-10 rounded bg-gradient-to-br from-rose-500 to-orange-500 flex items-center justify-center text-[10px] font-bold">LIVE</div>
-                  <div class="h-10 rounded bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-[10px] font-bold">SPORTS</div>
-                  <div class="h-10 rounded bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-[10px] font-bold">CRICKET</div>
-                  <div class="h-10 rounded bg-gradient-to-br from-amber-500 to-red-600 flex items-center justify-center text-[10px] font-bold">DRAMA</div>
-                  <div class="h-10 rounded bg-gradient-to-br from-fuchsia-500 to-purple-800 flex items-center justify-center text-[10px] font-bold">MOVIES</div>
-                  <div class="h-10 rounded bg-gradient-to-br from-cyan-500 to-blue-700 flex items-center justify-center text-[10px] font-bold">NEWS</div>
-                </div>
-                <button data-play-index="0" class="hero-watch-btn mt-3 toffee-gradient text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
-                  <span>▶ এখনই দেখুন</span>
-                </button>
-              </div>
+              <button data-play-index="0" class="hs-btn"><span class="play">▶</span> এখনই দেখুন</button>
             </div>
           </div>
 
-          <!-- Slide 2 -->
-          <div class="min-w-full snap-center-item hero-bg-2 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
-            <div class="max-w-md mx-auto flex flex-col items-center">
-              <span class="px-3 py-0.5 rounded-full bg-red-600 text-white text-[11px] font-bold tracking-wider uppercase flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-white live-dot"></span> Khusbu TV LIVE STREAM
-              </span>
-              <h2 id="heroSlide2Title" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Live Sports & TV</h2>
-              <p id="heroSlide2Sub" class="text-xs sm:text-sm text-sky-200 mt-1">২৪ ঘণ্টা সরাসরি সম্প্রচার</p>
-              <div id="heroSlide2Card" class="mt-4 w-64 h-36 rounded-2xl bg-gradient-to-r from-blue-900/80 via-slate-900 to-rose-900/80 border border-sky-400/30 flex items-center justify-around p-4 shadow-xl"></div>
-              <button data-play-index="0" class="hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
-                ▶ Watch Live Stream
-              </button>
-            </div>
-          </div>
-
-          <!-- Slide 3 -->
-          <div class="min-w-full snap-center-item hero-bg-4 px-4 pt-6 pb-8 flex flex-col items-center text-center relative">
-            <div class="max-w-md mx-auto flex flex-col items-center">
-              <span class="px-3 py-0.5 rounded-full bg-emerald-600 text-white text-[11px] font-bold tracking-wider uppercase">Khusbu TV EXCLUSIVE</span>
-              <h2 id="heroSlide3Title" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Full HD Channels</h2>
-              <p id="heroSlide3Sub" class="text-xs sm:text-sm text-emerald-200 mt-1">Zero Buffering • Non-Stop Entertainment</p>
-              <div id="heroSlide3Card" class="mt-4 w-64 h-36 rounded-2xl bg-gradient-to-r from-emerald-900/80 via-slate-900 to-amber-900/80 border border-emerald-400/30 flex items-center justify-around p-4 shadow-xl"></div>
-              <button data-play-index="1" class="hero-watch-btn mt-4 toffee-gradient text-white text-xs font-bold px-5 py-2 rounded-full shadow-lg">
-                ▶ Watch Channel Now
-              </button>
-            </div>
-          </div>
-
+          <!-- Channel slides are generated by renderHeroFromChannels() -->
         </div>
 
-        <!-- Slide Arrows -->
-        <button id="heroPrevBtn" aria-label="Previous Slide" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/15">‹</button>
-        <button id="heroNextBtn" aria-label="Next Slide" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/15">›</button>
+        <button id="heroPrevBtn" aria-label="Previous Slide" class="absolute left-2 top-1/2 -translate-y-1/2 rounded-full text-white flex items-center justify-center">‹</button>
+        <button id="heroNextBtn" aria-label="Next Slide" class="absolute right-2 top-1/2 -translate-y-1/2 rounded-full text-white flex items-center justify-center">›</button>
 
-        <!-- Slider Dots -->
-        <div id="heroDots" class="flex items-center justify-center gap-2 mt-1">
-          <button data-slide="0" class="hero-dot w-5 h-2 rounded-full bg-white transition-all"></button>
-          <button data-slide="1" class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-all"></button>
-          <button data-slide="2" class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-all"></button>
-        </div>
+        <div id="heroDots"><button data-slide="0" class="hero-dot on" aria-label="Slide 1"></button></div>
       </div>
 
       <!-- QUICK STATS -->
@@ -1227,39 +1256,75 @@
     }
 
     function renderHeroFromChannels() {
-      const ch0 = CHANNELS[0] || DEFAULT_CHANNELS_JSON[0];
-      const ch1 = CHANNELS[1] || ch0;
+      const track = document.getElementById('heroTrack');
+      const dotsBox = document.getElementById('heroDots');
+      if (!track || !dotsBox) return;
+      const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+      const PALETTES = [
+        ['#ff1f8e', '#a81eff', '#fbbf24'],
+        ['#0ea5e9', '#6366f1', '#22d3ee'],
+        ['#10b981', '#0d9488', '#fde047'],
+        ['#f97316', '#e11d48', '#fcd34d'],
+        ['#8b5cf6', '#ec4899', '#67e8f9'],
+        ['#14b8a6', '#2563eb', '#a3e635'],
+        ['#ef4444', '#f59e0b', '#fb7185'],
+        ['#3b82f6', '#a855f7', '#f0abfc']
+      ];
+      const pool = (CHANNELS && CHANNELS.length ? CHANNELS : DEFAULT_CHANNELS_JSON);
+      const withLogo = pool.filter(c => c.logo);
+      const rest = pool.filter(c => !c.logo);
+      const picks = withLogo.concat(rest).slice(0, 8);
 
-      document.getElementById('heroSlide2Title').textContent = ch0.name;
-      document.getElementById('heroSlide2Sub').textContent = `${ch0.category} • Live on Khusbu TV`;
-      document.getElementById('heroSlide2Card').innerHTML = `
-        <div class="flex flex-col items-center">
-          <div class="w-14 h-14 rounded-full bg-white text-slate-900 flex items-center justify-center font-extrabold text-xs border-2 border-pink-500 overflow-hidden p-1">
-            ${ch0.logo ? `<img referrerpolicy="no-referrer" onerror="logoFail(this,'remove')" src="${ch0.logo}" alt="${ch0.name}" class="w-full h-full object-contain" />` : `<span>${ch0.shortLabel}</span>`}
-          </div>
-          <span class="text-xs font-bold mt-1.5 text-white max-w-[120px] truncate">${ch0.name}</span>
-        </div>
-        <div class="text-center">
-          <span class="text-xs font-extrabold px-2.5 py-1 rounded bg-rose-600 text-white">LIVE</span>
-          <p class="text-[10px] text-slate-300 mt-1">${ch0.category}</p>
-        </div>
-      `;
+      track.querySelectorAll('.hs-ch').forEach(el => el.remove());
+      const total = picks.length + 1;
+      const c0 = document.getElementById('heroCount0');
+      if (c0) c0.innerHTML = `01<small>/${String(total).padStart(2, '0')}</small>`;
 
-      document.getElementById('heroSlide3Title').textContent = ch1.name;
-      document.getElementById('heroSlide3Sub').textContent = `${ch1.category} • Full HD Streaming`;
-      document.getElementById('heroSlide3Card').innerHTML = `
-        <div class="flex flex-col items-center">
-          <div class="w-14 h-14 rounded-full bg-white text-slate-900 flex items-center justify-center font-extrabold text-xs border-2 border-emerald-400 overflow-hidden p-1">
-            ${ch1.logo ? `<img referrerpolicy="no-referrer" onerror="logoFail(this,'remove')" src="${ch1.logo}" alt="${ch1.name}" class="w-full h-full object-contain" />` : `<span>${ch1.shortLabel}</span>`}
-          </div>
-          <span class="text-xs font-bold mt-1.5 text-white max-w-[120px] truncate">${ch1.name}</span>
-        </div>
-        <div class="text-center">
-          <span class="text-xs font-extrabold px-2.5 py-1 rounded bg-amber-500 text-black">HD</span>
-          <p class="text-[10px] text-slate-300 mt-1">${ch1.category}</p>
-        </div>
-      `;
+      picks.forEach((ch, i) => {
+        const p = PALETTES[i % PALETTES.length];
+        const el = document.createElement('div');
+        el.className = 'hs hs-ch snap-center-item';
+        el.style.cssText = `--c1:${p[0]};--c2:${p[1]};--c3:${p[2]}`;
+        const label = esc(ch.shortLabel || (ch.name || '').slice(0, 8));
+        const isHD = /hd|sport|premium/i.test((ch.subLabel || '') + ' ' + (ch.category || '')) || ch.premium;
+        el.innerHTML = `
+          <div class="hs-aurora"><i></i><i></i><i></i></div>
+          <div class="hs-grid"></div>
+          <div class="hs-ghost">${esc(ch.name)}</div>
+          <div class="hs-count">${String(i + 2).padStart(2, '0')}<small>/${String(total).padStart(2, '0')}</small></div>
+          <div class="hs-body">
+            <span class="hs-live"><i></i>LIVE NOW</span>
+            <div class="hs-disc">
+              <div class="hs-logo">
+                <span>${label}</span>
+                ${ch.logo ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" onerror="logoFail(this,'remove')" src="${esc(ch.logo)}" alt="${esc(ch.name)}" />` : ''}
+              </div>
+            </div>
+            <h2 class="hs-title">${esc(ch.name)}</h2>
+            <div class="hs-meta">
+              <span class="hs-chip">${esc(ch.category || 'Live TV')}</span>
+              <span class="hs-chip ${isHD ? 'hd' : ''}">${isHD ? 'FULL HD' : 'LIVE STREAM'}</span>
+            </div>
+            <button data-play-channel="${esc(ch.id)}" class="hs-btn"><span class="play">▶</span> Watch Now</button>
+          </div>`;
+        track.appendChild(el);
+      });
+
+      dotsBox.innerHTML = '';
+      for (let k = 0; k < total; k++) {
+        const b = document.createElement('button');
+        b.className = 'hero-dot' + (k === 0 ? ' on' : '');
+        b.dataset.slide = k;
+        b.setAttribute('aria-label', 'Slide ' + (k + 1));
+        b.addEventListener('click', () => scrollToHeroSlide(k));
+        dotsBox.appendChild(b);
+      }
+      state.heroSlideIndex = 0;
+      track.scrollLeft = 0;
     }
+    window.heroPaint = function (i) {
+      document.querySelectorAll('#heroDots .hero-dot').forEach((d, k) => { d.className = 'hero-dot' + (k === i ? ' on' : ''); });
+    };
 
     function renderLiveTvCircles() {
       const track = document.getElementById('liveTvCirclesTrack');
@@ -3153,19 +3218,13 @@
 
     function scrollToHeroSlide(index) {
       const track = document.getElementById('heroTrack');
-      const total = 3;
+      const total = Math.max(1, track.children.length);
       state.heroSlideIndex = (index + total) % total;
       track.scrollTo({
         left: track.clientWidth * state.heroSlideIndex,
         behavior: 'smooth'
       });
-      document.querySelectorAll('.hero-dot').forEach((dot, idx) => {
-        if (idx === state.heroSlideIndex) {
-          dot.className = 'hero-dot w-5 h-2 rounded-full bg-white transition-all';
-        } else {
-          dot.className = 'hero-dot w-2 h-2 rounded-full bg-white/40 transition-all';
-        }
-      });
+      if (window.heroPaint) window.heroPaint(state.heroSlideIndex);
     }
 
     // Double Back Press Exit Logic & 2 Seconds Splash Screen Timer
@@ -3236,11 +3295,6 @@
       });
       document.getElementById('heroNextBtn').addEventListener('click', () => {
         scrollToHeroSlide(state.heroSlideIndex + 1);
-      });
-      document.querySelectorAll('.hero-dot').forEach(dot => {
-        dot.addEventListener('click', () => {
-          scrollToHeroSlide(parseInt(dot.dataset.slide, 10));
-        });
       });
 
       document.getElementById('brandLogoBtn').addEventListener('click', () => switchMainView('home'));
@@ -3527,11 +3581,7 @@
     var track = document.getElementById('heroTrack'); if (!track) return;
     var timer = null, userTouch = false;
     function idx() { return Math.round(track.scrollLeft / Math.max(1, track.clientWidth)); }
-    function paint(i) {
-      document.querySelectorAll('.hero-dot').forEach(function (d, k) {
-        d.className = 'hero-dot ' + (k === i ? 'w-5' : 'w-2 ') + ' h-2 rounded-full ' + (k === i ? 'bg-white' : 'bg-white/40') + ' transition-all';
-      });
-    }
+    function paint(i) { if (window.heroPaint) window.heroPaint(i); }
     var st;
     track.addEventListener('scroll', function () { clearTimeout(st); st = setTimeout(function () { var i = idx(); try { state.heroSlideIndex = i; } catch (e) {} paint(i); }, 80); }, { passive: true });
     function start() {
