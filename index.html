@@ -500,6 +500,50 @@
     .lt-grp button u { text-decoration: none; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.16); display: flex; align-items: center; justify-content: center; font-size: 18px; }
     @media (max-height: 520px) { .lt-stage { display: none; } }
   </style>
+  <style>
+    /* ===== LIGHT & SMOOTH OVERRIDES ===== */
+    .hs { min-height: 440px; contain: layout paint; }
+    .hs-aurora i { animation: none !important; filter: blur(46px); will-change: auto; }
+    .hs-rays, .hs-grid, .hs-spark, .hs-ghost { display: none !important; }
+    .hs-disc::before, .hs-disc::after { animation: none !important; }
+    .hs-disc::before { filter: blur(20px); opacity: .6; }
+    .hs-logo { animation: none !important; box-shadow: 0 14px 30px rgba(0,0,0,.5); }
+    .hs-title { animation: none !important; background: none; -webkit-background-clip: initial; background-clip: initial; color: #fff; filter: none; text-shadow: 0 2px 12px rgba(0,0,0,.55); }
+    .hs-btn::after { animation: none !important; display: none; }
+    .hs-cats div { animation: none !important; }
+    .hs-count, .hs-chip, .hs-pill, #heroPrevBtn, #heroNextBtn { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: rgba(255,255,255,.12) !important; box-shadow: none !important; }
+    .hs-body > * { transform: translateY(10px); transition: opacity .35s ease-out, transform .35s ease-out; }
+    .hs.in .hs-body > * { transform: none; }
+    .hs.in .hs-body > *:nth-child(n) { transition-delay: 0s; }
+    .hs.in .hs-body > *:nth-child(2) { transition-delay: .04s; } .hs.in .hs-body > *:nth-child(3) { transition-delay: .08s; }
+    .hs.in .hs-body > *:nth-child(4) { transition-delay: .12s; } .hs.in .hs-body > *:nth-child(5) { transition-delay: .16s; }
+    #heroTrack { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+    .hs-live i { animation-duration: 2s; }
+    /* live event = 16:9 poster card (logo/thumbnail) */
+    .hs-m3u-logo .hs-disc { width: min(82vw, 330px); height: auto; aspect-ratio: 16 / 9; margin: 16px 0 14px; }
+    .hs-m3u-logo .hs-disc::before, .hs-m3u-logo .hs-disc::after { display: none; }
+    .hs-m3u-logo .hs-logo { width: 100%; height: 100%; border-radius: 16px; background: #150c26; }
+    .hs-m3u-logo .hs-logo::after { border-radius: 16px; }
+    .hs-m3u-logo .hs-logo img { object-fit: cover; padding: 0; }
+    .hs-m3u-logo .hs-title { font-size: clamp(20px, 6vw, 28px); }
+    .hs-poster { opacity: .38; filter: none; }
+    /* smooth long lists */
+    #viewHome button[data-play-channel], .lt-card { content-visibility: auto; contain-intrinsic-size: 120px 160px; }
+    /* ===== LITE: APK-style, chhoto logo, smooth ===== */
+    html.lite #liteApp, html.lite .lt-card { backface-visibility: hidden; }
+    html.lite #ltList { gap: 10px; padding: 4px 12px; }
+    html.lite .lt-card { padding: 6px 6px 8px; border-radius: 14px; contain: layout paint style; }
+    html.lite .lt-card .th { aspect-ratio: 16 / 9; border-radius: 9px; background: #16161d; }
+    html.lite .lt-card .th img { padding: 20px 26%; }
+    html.lite .lt-card .th img[data-wide="1"] { padding: 0; object-fit: cover; }
+    html.lite .lt-card p { font-size: 13px; margin: 6px 2px 0; min-height: 2.4em; }
+    html.lite .lt-stage { max-height: 26vh; }
+    html.lite .lt-stage .disc { width: 54px; height: 54px; font-size: 11px; }
+    html.lite .lt-stage .disc img { padding: 6px; }
+    html.lite #ltChips button { height: 42px; padding: 0 20px; font-size: 14px; }
+    html.lite #ltSearch { height: 46px; font-size: 14px; }
+    html.lite .lt-gear { width: 46px; height: 46px; }
+  </style>
 </head>
 <body class="min-h-screen bg-[#0b0714] text-white flex flex-col justify-between pb-20">
 
@@ -630,10 +674,7 @@
           <!-- Slide 0: brand intro -->
           <div class="hs hs-intro in snap-center-item" style="--c1:#a81eff;--c2:#ff1f8e;--c3:#fbbf24">
             <div class="hs-aurora"><i></i><i></i><i></i></div>
-            <div class="hs-rays"></div>
-            <div class="hs-grid"></div>
-            <div class="hs-spark"></div>
-            <div class="hs-count" id="heroCount0">01<small>/01</small></div>
+                  <div class="hs-count" id="heroCount0">01<small>/01</small></div>
             <div class="hs-body">
               <span class="hs-live"><i></i>SARAH TV</span>
               <h2 class="hero-num" style="margin-top:14px">২০০+</h2>
@@ -1250,39 +1291,72 @@
     }
 
 
-    // ===== SonyLiv M3U auto loader (channels always shown FIRST) =====
+    // ===== M3U auto loader (SonyLIV / FanCode / Toffee / Dev TV) — protita source = ekta category =====
     const M3U_SOURCES = [
-      // Order matters: SonyLIV first, then FanCode, then Toffee.
-      { url: 'https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv_playlist.m3u', prefix: 'sony', sourceName: 'SonyLIV' },
-      { url: 'https://raw.githubusercontent.com/doctor-8trange/zyphx8/refs/heads/main/data/fancode.m3u', prefix: 'fan', sourceName: 'FanCode' },
-      { url: 'https://tv9.workerbot-tv9.workers.dev/toffee.m3u', prefix: 'toffee', sourceName: 'Toffee' }
+      { urls: ['https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv_playlist.m3u'], prefix: 'sony', sourceName: 'SonyLIV', liveEvents: true },
+      { urls: ['https://raw.githubusercontent.com/doctor-8trange/zyphx8/refs/heads/main/data/fancode.m3u'], prefix: 'fan', sourceName: 'FanCode', liveEvents: true },
+      { urls: ['https://tv9.workerbot-tv9.workers.dev/toffee.m3u'], prefix: 'toffee', sourceName: 'Toffee', liveEvents: false },
+      { urls: ['https://s.devm3u.top/3xTiwk', 'https://m3u.devm3u.top/?f=.m3u8&p=4545&s=5&u=admin'], prefix: 'dev', sourceName: 'Dev TV', liveEvents: false }
     ];
     const M3U_REFRESH_MS = 5 * 60 * 1000; // token expire hoy tai 5 min por por refresh
 
-    // Stream proxy (Cloudflare Worker). Fancode er Referer/User-Agent lage, browser eta pathate pare na.
-    // Worker URL ekhane boshan ba site er link e ?proxy=https://your-worker.workers.dev joure din (browser e save thake).
+    // ---- Stream proxy (Cloudflare Worker) ----
+    // Fancode / Toffee / Tapmad er Referer, User-Agent, Cookie lage. Browser eigulo pathate pare na, tai worker lage.
+    // Worker URL ekhane boshan, ba site er link e ?proxy=https://your-worker.workers.dev joure ekbar kholen (save thake).
     let STREAM_PROXY = '';
     try {
       const q = new URLSearchParams(location.search).get('proxy');
       if (q !== null) localStorage.setItem('sarah_stream_proxy', q);
       STREAM_PROXY = (localStorage.getItem('sarah_stream_proxy') || STREAM_PROXY || '').trim().replace(/\/+$/, '');
     } catch (e) {}
-    function proxify(url, headers) {
-      if (!STREAM_PROXY) return url;
-      let u = STREAM_PROXY + '?url=' + encodeURIComponent(url);
-      if (headers && headers.referer) u += '&referer=' + encodeURIComponent(headers.referer);
-      if (headers && headers.ua) u += '&ua=' + encodeURIComponent(headers.ua);
-      return u;
+    function b64u(str) {
+      return btoa(unescape(encodeURIComponent(str))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
     }
+    // Path-mode: relative segment/URL gulo auto proxy er moddhe thake (HLS + DASH duto-i kaj kore)
+    function proxify(url, h) {
+      if (!STREAM_PROXY) return url;
+      let u; try { u = new URL(url); } catch (e) { return url; }
+      h = h || {};
+      const tok = b64u(JSON.stringify({ o: u.origin, r: h.referer || '', u: h.ua || '', c: h.cookie || '', og: h.origin || '' }));
+      return `${STREAM_PROXY}/s/${tok}${u.pathname}${u.search}`;
+    }
+    const hexToB64u = (hex) => {
+      try {
+        const bytes = hex.match(/.{2}/g).map(x => parseInt(x, 16));
+        return btoa(String.fromCharCode.apply(null, bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+      } catch (e) { return ''; }
+    };
     let M3U_CHANNELS = [];
 
     function parseM3U(text, prefix = 'm3u', offset = 0) {
       const lines = String(text || '').split(/\r?\n/);
+      const source = M3U_SOURCES.find(src => src.prefix === prefix) || {};
+      const sourceName = source.sourceName || prefix.toUpperCase();
       const out = [];
-      let meta = null;
+      let meta = null, pend = { hdr: {}, drm: null };
       const attr = (str, key) => {
         const m = str.match(new RegExp(key + '="([^"]*)"', 'i'));
         return m ? m[1].trim() : '';
+      };
+      const setHdr = (h, k, v) => {
+        k = String(k || '').toLowerCase().trim(); v = String(v == null ? '' : v).trim();
+        if (!v) return;
+        try { if (/%[0-9a-f]{2}/i.test(v)) v = decodeURIComponent(v); } catch (e) {}
+        if (k === 'referer' || k === 'referrer' || k === 'http-referrer' || k === 'http-referer') h.referer = v;
+        else if (k === 'user-agent' || k === 'http-user-agent' || k === 'useragent') h.ua = v;
+        else if (k === 'cookie' || k === 'http-cookie') h.cookie = v;
+        else if (k === 'origin' || k === 'http-origin') h.origin = v;
+      };
+      const parseDrm = (val) => {
+        val = String(val || '').trim();
+        let m = val.match(/^([0-9a-f]{32}):([0-9a-f]{32})$/i);
+        if (m) { const kid = hexToB64u(m[1]), key = hexToB64u(m[2]); return kid && key ? { [kid]: key } : null; }
+        try {
+          const j = JSON.parse(val);
+          const arr = j.keys || [];
+          if (arr.length) { const o = {}; arr.forEach(k => { if (k.kid && k.k) o[k.kid] = k.k; }); return Object.keys(o).length ? o : null; }
+        } catch (e) {}
+        return null;
       };
       for (let raw of lines) {
         const line = raw.trim();
@@ -1300,61 +1374,93 @@
             group: attr(line, 'group-title'),
             name: attr(line, 'tvg-name') || title
           };
+        } else if (/^#EXTVLCOPT:/i.test(line)) {
+          const kv = line.slice(11); const e = kv.indexOf('=');
+          if (e > 0) setHdr(pend.hdr, kv.slice(0, e), kv.slice(e + 1));
+        } else if (/^#EXTHTTP:/i.test(line)) {
+          try { const j = JSON.parse(line.slice(9)); Object.keys(j).forEach(k => setHdr(pend.hdr, k, j[k])); } catch (e) {}
+        } else if (/^#KODIPROP:/i.test(line)) {
+          const kv = line.slice(10); const e = kv.indexOf('=');
+          if (e > 0) {
+            const k = kv.slice(0, e).toLowerCase(), v = kv.slice(e + 1);
+            if (k.endsWith('license_key')) { const d = parseDrm(v); if (d) pend.drm = d; }
+            else if (k.endsWith('stream_headers') || k.endsWith('manifest_headers')) {
+              v.split('&').forEach(x => { const q = x.indexOf('='); if (q > 0) setHdr(pend.hdr, x.slice(0, q), x.slice(q + 1)); });
+            }
+          }
         } else if (line[0] !== '#' && /^https?:\/\//i.test(line)) {
           const i = out.length + offset;
-          // Kodi style: url|User-Agent=...&Referer=...
-          let streamLine = line, hdr = {};
+          // Kodi style: url|User-Agent=...&Referer=...&Cookie=...
+          let streamLine = line;
+          const hdr = Object.assign({}, pend.hdr);
           const pi = line.indexOf('|');
           if (pi > 0) {
             streamLine = line.slice(0, pi);
-            line.slice(pi + 1).split('&').forEach(kv => {
+            line.slice(pi + 1).split(/&(?=(?:user-agent|referer|referrer|cookie|origin)=)/i).forEach(kv => {
               const e = kv.indexOf('=');
-              if (e < 0) return;
-              const k = kv.slice(0, e).toLowerCase(), v = kv.slice(e + 1);
-              if (k === 'referer' || k === 'referrer') hdr.referer = v;
-              else if (k === 'user-agent') hdr.ua = v;
+              if (e > 0) setHdr(hdr, kv.slice(0, e), kv.slice(e + 1));
             });
           }
-          const name = (meta && meta.name) || `SonyLiv ${i + 1}`;
-          const source = M3U_SOURCES.find(src => src.prefix === prefix);
-          const sourceName = source ? source.sourceName : prefix.toUpperCase();
-          const category = (meta && meta.group) || sourceName;
+          const name = (meta && meta.name) || `${sourceName} ${i + 1}`;
           const short = name.split('|')[0].trim();
           const vs = short.match(/^(.+?)\s+vs\s+(.+?)(?:\s+-|$)/i);
+          const group = (meta && meta.group) || sourceName;
           out.push({
             id: prefix + '-' + ((meta && meta.id) || i),
             name: short,
             shortLabel: vs ? (vs[1].slice(0, 6) + ' v ' + vs[2].slice(0, 6)) : short.slice(0, 10),
-            subLabel: category.toUpperCase().slice(0, 10),
-            category,
+            subLabel: group.toUpperCase().slice(0, 10),
+            category: sourceName,            // 4 source = 4 category
+            groupTitle: group,
             logo: normalizeLogoUrl(meta && meta.logo),
             streamUrl: proxify(streamLine, hdr),
-            needsHeaders: !!(hdr.referer || hdr.ua),
+            needsHeaders: !!(hdr.referer || hdr.ua || hdr.cookie || hdr.origin),
+            drm: pend.drm || null,
             iframeUrl: '',
             premium: false,
             fromM3U: true,
+            liveEvent: !!source.liveEvents,
             sourceName,
             badgeColor: BADGE_COLORS[i % BADGE_COLORS.length],
             cardGradient: CARD_GRADIENTS[i % CARD_GRADIENTS.length],
             themeColor: '#e11d48',
             ticker: `🔴 LIVE: ${name} • ${sourceName} • Sarah TV`
           });
-          meta = null;
+          meta = null; pend = { hdr: {}, drm: null };
         }
       }
       return out;
     }
 
+    // Playlist nijei CORS block korle: direct -> own proxy -> public CORS proxy
+    async function fetchPlaylistText(url) {
+      const tries = [url];
+      if (STREAM_PROXY) tries.push(`${STREAM_PROXY}/?url=${encodeURIComponent(url)}`);
+      tries.push('https://corsproxy.io/?' + encodeURIComponent(url));
+      tries.push('https://api.allorigins.win/raw?url=' + encodeURIComponent(url));
+      for (const t of tries) {
+        try {
+          const ctl = new AbortController();
+          const tm = setTimeout(() => ctl.abort(), 12000);
+          const r = await fetch(t + (t === url ? (url.includes('?') ? '&' : '?') + 't=' + Date.now() : ''), { cache: 'no-store', signal: ctl.signal });
+          clearTimeout(tm);
+          if (!r.ok) continue;
+          const txt = await r.text();
+          if (/#EXTM3U|#EXTINF/i.test(txt)) return txt;
+        } catch (e) {}
+      }
+      return '';
+    }
+
     async function fetchM3UChannels() {
       const lists = await Promise.all(M3U_SOURCES.map(async (src) => {
-        try {
-          const r = await fetch(src.url + '?t=' + Date.now(), { cache: 'no-store' });
-          if (!r.ok) return [];
-          return parseM3U(await r.text(), src.prefix);
-        } catch (e) { return []; }
+        for (const u of src.urls) {
+          const txt = await fetchPlaylistText(u);
+          if (txt) { const l = parseM3U(txt, src.prefix); if (l.length) return l; }
+        }
+        return [];
       }));
-      // Source priority is preserved: SonyLIV -> FanCode -> Toffee.
-      return [].concat(...lists);
+      return [].concat(...lists); // order: SonyLIV -> FanCode -> Toffee -> Dev TV
     }
 
     function mergeM3UFirst(others) {
@@ -1580,10 +1686,11 @@
         ['#4f8bff', '#c04bff', '#ffa8f0']
       ];
       const pool = (CHANNELS && CHANNELS.length ? CHANNELS : DEFAULT_CHANNELS_JSON);
-      const m3uFirst = pool.filter(c => c.fromM3U);
-      const withLogo = pool.filter(c => !c.fromM3U && c.logo);
-      const rest = pool.filter(c => !c.fromM3U && !c.logo);
-      const picks = m3uFirst.concat(withLogo, rest).slice(0, Math.max(8, m3uFirst.length));
+      // Banner e shudhu LIVE EVENT (SonyLIV + FanCode match). Event na thakle purono fallback.
+      const liveEvents = pool.filter(c => c.liveEvent);
+      const picks = liveEvents.length
+        ? liveEvents.slice(0, 12)
+        : pool.filter(c => !c.fromM3U && c.logo).concat(pool.filter(c => !c.fromM3U && !c.logo)).slice(0, 8);
 
       track.querySelectorAll('.hs-ch').forEach(el => el.remove());
       const total = picks.length + 1;
@@ -1593,24 +1700,23 @@
       picks.forEach((ch, i) => {
         const p = PALETTES[i % PALETTES.length];
         const el = document.createElement('div');
-        el.className = 'hs hs-ch snap-center-item' + (ch.fromM3U ? ' hs-m3u-logo' : '');
+        el.className = 'hs hs-ch snap-center-item' + (ch.liveEvent ? ' hs-m3u-logo' : '');
         el.style.cssText = `--c1:${p[0]};--c2:${p[1]};--c3:${p[2]}`;
         const label = esc(ch.shortLabel || (ch.name || '').slice(0, 8));
         const isHD = /hd|sport|premium/i.test((ch.subLabel || '') + ' ' + (ch.category || '')) || ch.premium;
         el.innerHTML = `
-          <div class="hs-aurora"><i></i><i></i><i></i></div>
-          ${ch.fromM3U && ch.logo ? `<div class="hs-poster" style="background-image:url('${esc(ch.logo)}')"></div>` : ''}
+          <div class="hs-aurora"><i></i><i></i></div>
+          ${ch.liveEvent && ch.logo ? `<div class="hs-poster" style="background-image:url('${esc(ch.logo)}')"></div>` : ''}
           <div class="hs-rays"></div>
           <div class="hs-grid"></div>
           <div class="hs-spark"></div>
-          <div class="hs-ghost">${esc(ch.name)}</div>
           <div class="hs-count">${String(i + 2).padStart(2, '0')}<small>/${String(total).padStart(2, '0')}</small></div>
           <div class="hs-body">
             <span class="hs-live"><i></i>LIVE NOW</span>
             <div class="hs-disc">
               <div class="hs-logo">
                 <span>${label}</span>
-                ${ch.logo ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" onerror="logoFail(this,'remove')" src="${esc(ch.logo)}" alt="${esc(ch.name)}" />` : ''}
+                ${ch.logo ? `<img referrerpolicy="no-referrer" decoding="async" loading="${i < 2 ? 'eager' : 'lazy'}" onerror="logoFail(this,'remove')" src="${esc(ch.logo)}" alt="${esc(ch.name)}" />` : ''}
               </div>
             </div>
             <h2 class="hs-title">${esc(ch.name)}</h2>
@@ -1641,7 +1747,7 @@
       const track = document.getElementById('heroTrack');
       track.querySelectorAll('.hs-spark').forEach(box => {
         if (box.childElementCount) return;
-        for (let n = 0; n < 16; n++) {
+        for (let n = 0; n < 0; n++) {
           const b = document.createElement('b');
           b.style.left = (Math.random() * 96 + 2) + '%';
           b.style.top = (Math.random() * 90 + 5) + '%';
@@ -2704,6 +2810,7 @@
             const player = dashjs.MediaPlayer().create();
             dashInstance = player;
             player.updateSettings({ streaming: { abr: { autoSwitchBitrate: { video: true } } } });
+            if (ch && ch.drm) { try { player.setProtectionData({ 'org.w3.clearkey': { clearkeys: ch.drm } }); } catch (e) {} }
             player.on(dashjs.MediaPlayer.events.ERROR, () => { if (dashInstance === player) failEngine(token, 'dash-error'); });
             player.initialize(video, streamSrc, true);
           }).catch(() => failEngine(token, 'dash-load'));
@@ -3992,7 +4099,7 @@
 </script>
 <script>
 (function () {
-  var L = { tab: 'all', cat: 'all', q: '', n: 60, playing: null };
+  var L = { tab: 'all', cat: 'all', q: '', n: 30, playing: null };
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (v) { return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   function ld(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } }
@@ -4011,7 +4118,7 @@
     if (L.q) { var q = L.q.toLowerCase(); b = b.filter(function (c) { return (c.name + ' ' + (c.category || '')).toLowerCase().indexOf(q) > -1; }); }
     return b;
   }
-  function img(c) { return c.logo ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="logoFail(this,\'remove\')" src="' + esc(c.logo) + '" alt="">' : ''; }
+  function img(c) { return c.logo ? '<img' + (c.liveEvent ? ' data-wide="1"' : '') + ' loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="logoFail(this,\'remove\')" src="' + esc(c.logo) + '" alt="">' : ''; }
   function card(c) {
     var fav = state.favorites.indexOf(c.id) > -1, pl = String(L.playing) === String(c.id);
     return '<div class="lt-card' + (pl ? ' playing' : '') + '" data-ltplay="' + esc(c.id) + '"><div class="th">' + esc(c.shortLabel || (c.name || '').slice(0, 8)) + img(c) +
@@ -4067,7 +4174,7 @@
       else { try { navigator.clipboard.writeText(d.url); if (window.showToast) showToast('লিংক কপি হয়েছে'); } catch (e) {} }
       return;
     } else if (a === 'full') { var b = $('liteBtn'); if (b) b.click(); return; }
-    L.n = 60; render(); window.scrollTo(0, 0);
+    L.n = 30; render(); window.scrollTo(0, 0);
   }
   window.__ltBack = function () {
     if (!document.documentElement.classList.contains('lite')) return false;
@@ -4082,13 +4189,13 @@
       if (i > -1) state.favorites.splice(i, 1); else state.favorites.push(key);
       saveState(); render(); return; }
     var p = t.closest('[data-ltplay]'); if (p) { openPlayerByChannelId(p.dataset.ltplay); return; }
-    var c = t.closest('[data-lchip]'); if (c) { var k = c.dataset.lchip; L.n = 60;
+    var c = t.closest('[data-lchip]'); if (c) { var k = c.dataset.lchip; L.n = 30;
       if (k === 'all') { L.tab = 'all'; L.cat = 'all'; } else if (k === 'fav' || k === 'recent' || k === 'pop') L.tab = k; else { L.tab = 'all'; L.cat = k.slice(2); }
       render(); return; }
     if (t.closest('[data-ltclose]')) { drawer(false); return; }
     var g = t.closest('[data-ltgo]'); if (g) { go(g.dataset.ltgo); return; }
     if (t.closest('#ltMenu')) { drawer(true); return; }
-    if (t.closest('#ltMore')) { L.n += 60; render(); return; }
+    if (t.closest('#ltMore')) { L.n += 30; render(); return; }
     if (t.closest('#ltGear')) { L.tab = L.tab === 'settings' ? 'all' : 'settings'; render(); return; }
     if (t.closest('#ltFull')) { var b = $('liteBtn'); if (b) b.click(); return; }
     if (t.closest('#ltClear')) { state.favorites = []; saveState(); render(); if (window.showToast) showToast('সেভ করা চ্যানেল মুছে গেছে'); return; }
@@ -4098,7 +4205,7 @@
     if (e.target.id === 'ltAuto') { state.autoplay = e.target.checked; saveState(); }
     if (e.target.id === 'ltData') { state.dataSaver = e.target.checked; saveState(); }
   });
-  $('ltSearch').addEventListener('input', function (e) { L.q = e.target.value.trim(); L.n = 60; if (L.tab === 'settings') L.tab = 'all'; render(); });
+  $('ltSearch').addEventListener('input', function (e) { L.q = e.target.value.trim(); L.n = 30; if (L.tab === 'settings') L.tab = 'all'; render(); });
   var lb = $('liteBtn'); if (lb) lb.addEventListener('click', function () { setTimeout(render, 0); });
   var orig = window.renderAllFromChannelsJson;
   if (typeof orig === 'function') window.renderAllFromChannelsJson = function () { var r = orig.apply(this, arguments); render(); return r; };
