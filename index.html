@@ -1252,8 +1252,10 @@
 
     // ===== SonyLiv M3U auto loader (channels always shown FIRST) =====
     const M3U_SOURCES = [
-      { url: 'https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv_playlist.m3u', prefix: 'sony' },
-      { url: 'https://raw.githubusercontent.com/doctor-8trange/zyphx8/refs/heads/main/data/fancode.m3u', prefix: 'fan' }
+      // Order matters: SonyLIV first, then FanCode, then Toffee.
+      { url: 'https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv_playlist.m3u', prefix: 'sony', sourceName: 'SonyLIV' },
+      { url: 'https://raw.githubusercontent.com/doctor-8trange/zyphx8/refs/heads/main/data/fancode.m3u', prefix: 'fan', sourceName: 'FanCode' },
+      { url: 'https://tv9.workerbot-tv9.workers.dev/toffee.m3u', prefix: 'toffee', sourceName: 'Toffee' }
     ];
     const M3U_REFRESH_MS = 5 * 60 * 1000; // token expire hoy tai 5 min por por refresh
 
@@ -1314,8 +1316,9 @@
             });
           }
           const name = (meta && meta.name) || `SonyLiv ${i + 1}`;
-          const category = (meta && meta.group) || 'Sports';
-          const src0 = prefix;
+          const source = M3U_SOURCES.find(src => src.prefix === prefix);
+          const sourceName = source ? source.sourceName : prefix.toUpperCase();
+          const category = (meta && meta.group) || sourceName;
           const short = name.split('|')[0].trim();
           const vs = short.match(/^(.+?)\s+vs\s+(.+?)(?:\s+-|$)/i);
           out.push({
@@ -1330,10 +1333,11 @@
             iframeUrl: '',
             premium: false,
             fromM3U: true,
+            sourceName,
             badgeColor: BADGE_COLORS[i % BADGE_COLORS.length],
             cardGradient: CARD_GRADIENTS[i % CARD_GRADIENTS.length],
             themeColor: '#e11d48',
-            ticker: `🔴 LIVE: ${name} • Sarah TV`
+            ticker: `🔴 LIVE: ${name} • ${sourceName} • Sarah TV`
           });
           meta = null;
         }
@@ -1349,7 +1353,7 @@
           return parseM3U(await r.text(), src.prefix);
         } catch (e) { return []; }
       }));
-      // ek source theke onno source er channel mix na kore, serial e boshbe (Sony age, tarpor Fancode)
+      // Source priority is preserved: SonyLIV -> FanCode -> Toffee.
       return [].concat(...lists);
     }
 
@@ -1423,7 +1427,7 @@
         if (state.currentChannelIndex >= CHANNELS.length) state.currentChannelIndex = 0;
         statusLabel.textContent = `● ${CHANNELS.length} চ্যানেল লাইভ`;
         statusLabel.className = 'text-[9px] text-emerald-400 font-semibold tracking-tight';
-        if (sourceText) sourceText.textContent = `Loaded ${CHANNELS.length} channels from ${filesLoaded} file (channels.json, channels(1).json, channels(2).json)`;
+        if (sourceText) sourceText.textContent = `Loaded ${CHANNELS.length} channels • SonyLIV → FanCode → Toffee first, followed by your JSON channels`;
         if (showFeedback) showToast(`Loaded ${CHANNELS.length} channels from ${filesLoaded} file!`);
         renderAllFromChannelsJson();
         return true;
@@ -1612,6 +1616,7 @@
             <h2 class="hs-title">${esc(ch.name)}</h2>
             <div class="hs-meta">
               <span class="hs-chip">${esc(ch.category || 'Live TV')}</span>
+              ${ch.sourceName ? `<span class="hs-chip">${esc(ch.sourceName)}</span>` : ''}
               <span class="hs-chip ${isHD ? 'hd' : ''}">${isHD ? 'FULL HD' : 'LIVE STREAM'}</span>
             </div>
             <button data-play-channel="${esc(ch.id)}" class="hs-btn"><span class="play">▶</span> Watch Now</button>
