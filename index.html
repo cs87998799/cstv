@@ -431,64 +431,71 @@
     .lb .full { background: rgba(255,255,255,.08); color: #fff; border: 1px solid rgba(255,255,255,.15); }
   </style>
   <style>
-    /* ===== LITE APP v2 (dark app style) ===== */
+    /* ===== LITE APP v3 (APK-style home) ===== */
     #liteApp { display: none; }
     html.lite header, html.lite main, html.lite nav.fixed.bottom-0 { display: none !important; }
     html.lite #liteApp { display: block; }
-    html.lite body { background: #0e1016 !important; color: #fff; }
-    #liteApp { min-height: 100vh; padding-bottom: 96px; max-width: 640px; margin: 0 auto; color: #fff; font-family: 'Inter','Hind Siliguri',system-ui,sans-serif; }
-    .lt-head { position: sticky; top: 0; z-index: 20; background: #0e1016; }
-    .lt-top { display: flex; align-items: center; gap: 12px; padding: calc(10px + env(safe-area-inset-top)) 16px 10px; }
-    .lt-brand { width: 40px; height: 40px; border-radius: 11px; background: #e11d2e; display: flex; align-items: center; justify-content: center; flex: none; }
-    .lt-top h1 { flex: 1; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -.02em; white-space: nowrap; }
-    .lt-top h1 sup { font-size: 9px; font-weight: 800; color: #fff; background: #e11d2e; border-radius: 4px; padding: 2px 5px; margin-left: 6px; vertical-align: middle; letter-spacing: .08em; }
-    .lt-ic { width: 40px; height: 40px; border: 0; background: transparent; color: #fff; display: flex; align-items: center; justify-content: center; }
+    html.lite body { background: #0f0f14 !important; color: #fff; }
+    #liteApp { min-height: 100vh; padding-bottom: 28px; max-width: 640px; margin: 0 auto; color: #fff; font-family: 'Inter','Hind Siliguri',system-ui,sans-serif; }
+    .lt-head { position: sticky; top: 0; z-index: 20; background: #0f0f14; }
+    .lt-bar { display: flex; align-items: center; gap: 6px; padding: env(safe-area-inset-top) 8px 0 6px; height: calc(56px + env(safe-area-inset-top)); background: #343678; }
+    .lt-bar h1 { margin: 0; font-size: 20px; font-weight: 700; flex: 1; }
+    .lt-bar h1 sup { font-size: 9px; font-weight: 800; background: #00d8f6; color: #04202a; border-radius: 4px; padding: 2px 5px; margin-left: 6px; vertical-align: middle; letter-spacing: .08em; }
+    .lt-ic { width: 44px; height: 44px; border: 0; background: transparent; color: #fff; display: flex; align-items: center; justify-content: center; }
     .lt-ic svg { width: 26px; height: 26px; }
-    #ltSearchWrap { display: none; padding: 0 16px 10px; }
-    #ltSearchWrap.on { display: block; }
-    #ltSearch { width: 100%; padding: 12px 16px; border-radius: 14px; border: 1px solid #2a2f3b; background: #171a22; color: #fff; font-size: 15px; outline: none; }
-    #ltSearch:focus { border-color: #e11d2e; }
-    .lt-stage { position: relative; aspect-ratio: 16 / 9; max-height: 34vh; width: 100%; overflow: hidden; background: radial-gradient(90% 120% at 50% 0%, #2a1018 0%, #0a0b10 70%); display: flex; align-items: center; justify-content: center; }
-    .lt-stage .bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(225,29,46,.25), rgba(79,70,229,.2)); }
-    .lt-stage .disc { position: relative; width: 84px; height: 84px; border-radius: 50%; background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #e11d2e; font-size: 14px; text-align: center; }
-    .lt-stage .disc img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 10px; background: #fff; }
-    .lt-stage .meta { position: absolute; left: 14px; bottom: 12px; right: 80px; }
-    .lt-stage .meta strong { display: block; font-size: 17px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .lt-stage .meta span { font-size: 12px; color: #aab2c0; }
-    .lt-stage .live { position: absolute; left: 12px; top: 12px; background: #e11d2e; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 999px; letter-spacing: .05em; }
-    .lt-stage .play { position: absolute; right: 14px; bottom: 12px; width: 52px; height: 52px; border-radius: 50%; border: 0; background: #e11d2e; color: #fff; font-size: 18px; padding-left: 3px; }
-    #ltPills { display: flex; gap: 10px; overflow-x: auto; padding: 12px 16px; scrollbar-width: none; background: #0e1016; }
-    #ltPills::-webkit-scrollbar, #ltChips::-webkit-scrollbar { display: none; }
-    #ltPills button { flex: none; display: flex; align-items: center; gap: 9px; padding: 9px 16px; border-radius: 999px; border: 0; font-size: 15px; font-weight: 600; background: #1b1f29; color: #aab2c0; }
-    #ltPills button b { font-weight: 700; font-size: 12px; min-width: 24px; padding: 3px 8px; border-radius: 999px; background: #2a2f3b; color: #aab2c0; text-align: center; }
-    #ltPills button.on { background: #e11d2e; color: #fff; }
-    #ltPills button.on b { background: rgba(255,255,255,.22); color: #fff; }
-    #ltChips { display: flex; gap: 8px; overflow-x: auto; padding: 2px 16px 12px; scrollbar-width: none; }
-    #ltChips button { flex: none; padding: 6px 13px; border-radius: 10px; border: 1px solid #2a2f3b; background: transparent; color: #aab2c0; font-size: 12.5px; font-weight: 600; }
-    #ltChips button.on { border-color: #e11d2e; color: #fff; background: rgba(225,29,46,.18); }
-    #ltList { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 12px; }
-    .lt-card { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 28px 6px 12px; min-height: 164px; border-radius: 18px; background: #171a22; border: 1.5px solid #262b36; }
-    .lt-card:active { background: #1d212c; }
-    .lt-card.playing { border-color: #e11d2e; background: #231319; }
-    .lt-card .badge { position: absolute; left: 8px; top: 8px; background: #e11d2e; font-size: 9.5px; font-weight: 800; padding: 3px 8px; border-radius: 999px; letter-spacing: .04em; }
-    .lt-fav { position: absolute; right: 6px; top: 4px; width: 34px; height: 34px; border: 0; background: transparent; font-size: 21px; color: #aab2c0; }
+    .lt-stage { position: relative; aspect-ratio: 16 / 9; max-height: 32vh; width: 100%; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .lt-stage .disc { position: relative; width: 78px; height: 78px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; font-weight: 800; color: #343678; font-size: 13px; text-align: center; }
+    .lt-stage .disc img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 9px; background: #fff; }
+    .lt-stage .live { position: absolute; left: 12px; top: 10px; background: #e11d2e; font-size: 10.5px; font-weight: 800; padding: 3px 9px; border-radius: 999px; }
+    .lt-stage .play { position: absolute; inset: 0; margin: auto; width: 58px; height: 58px; top: auto; bottom: 14px; right: 14px; left: auto; border-radius: 50%; border: 0; background: rgba(99,102,241,.95); color: #fff; font-size: 18px; padding-left: 3px; }
+    .lt-info { display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: #0f0f14; }
+    .lt-info .t { flex: 1; min-width: 0; }
+    .lt-info strong { display: block; font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .lt-info span { font-size: 13px; font-weight: 600; color: #6366f1; }
+    .lt-info button { width: 42px; height: 42px; border: 0; background: transparent; color: #fff; font-size: 26px; display: flex; align-items: center; justify-content: center; }
+    .lt-info button.on { color: #eab308; }
+    .lt-info button svg { width: 26px; height: 26px; }
+    .lt-sr { display: flex; gap: 12px; align-items: center; padding: 12px 16px 6px; }
+    #ltSearch { flex: 1; min-width: 0; height: 54px; padding: 0 22px; border-radius: 999px; border: 0; background: #1f1f25; color: #fff; font-size: 15px; outline: none; }
+    #ltSearch::placeholder { color: #7b7b86; }
+    .lt-gear { flex: none; width: 54px; height: 54px; border-radius: 50%; border: 0; background: #1f1f25; color: #cfd0d6; display: flex; align-items: center; justify-content: center; }
+    .lt-gear svg { width: 24px; height: 24px; }
+    #ltChips { display: flex; gap: 10px; overflow-x: auto; padding: 8px 16px 12px; scrollbar-width: none; }
+    #ltChips::-webkit-scrollbar { display: none; }
+    #ltChips button { flex: none; height: 52px; padding: 0 26px; border-radius: 999px; border: 0; font-size: 17px; font-weight: 500; background: #1f1f25; color: #9a9aa6; white-space: nowrap; }
+    #ltChips button.on { background: #6366f1; color: #fff; }
+    #ltList { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 4px 14px; }
+    .lt-card { position: relative; padding: 8px 8px 10px; border-radius: 16px; background: #1c1c22; border: 1.5px solid #26262e; }
+    .lt-card:active { background: #24242c; }
+    .lt-card.playing { border-color: #6366f1; }
+    .lt-card .th { position: relative; aspect-ratio: 16 / 10; border-radius: 10px; overflow: hidden; background: radial-gradient(circle at 50% 40%, #4a1738, #16101c 75%); display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800; color: #fff; text-align: center; padding: 6px; line-height: 1.1; }
+    .lt-card .th img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 12px; }
+    .lt-card .badge { position: absolute; left: 6px; top: 6px; background: #e11d2e; font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 999px; }
+    .lt-fav { position: absolute; right: 2px; top: 0; width: 34px; height: 34px; border: 0; background: transparent; font-size: 20px; color: #e5e5ea; text-shadow: 0 1px 3px #000 !important; }
     .lt-fav.on { color: #ef4458; }
-    .lt-logo { position: relative; width: 56px; height: 56px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; font-size: 10px; font-weight: 800; color: #e11d2e; line-height: 1.05; padding: 4px; }
-    .lt-logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 7px; background: #fff; }
-    .lt-card strong { margin-top: 10px; font-size: 13.5px; font-weight: 700; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; max-width: 100%; }
-    .lt-card span.c { margin-top: 3px; font-size: 11.5px; color: #8e97a6; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .lt-card em { margin-top: auto; padding-top: 6px; font-style: normal; }
-    .lt-card em i { font-style: normal; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 7px; background: #262b36; color: #aab2c0; border: 1px solid #323847; }
-    .lt-more { grid-column: 1 / -1; padding: 12px; border-radius: 14px; border: 1px solid #2a2f3b; background: #171a22; color: #fff; font-weight: 700; font-size: 14px; }
-    .lt-empty { grid-column: 1 / -1; text-align: center; color: #8e97a6; padding: 48px 20px; font-size: 14px; line-height: 1.7; }
-    .lt-set { margin: 8px 16px 0; background: #171a22; border: 1px solid #262b36; border-radius: 16px; overflow: hidden; }
-    .lt-set label, .lt-set button { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 16px; font-size: 15px; font-weight: 600; background: transparent; border: 0; border-bottom: 1px solid #262b36; text-align: left; color: #fff; }
-    .lt-set input { width: 22px; height: 22px; accent-color: #e11d2e; }
-    .lt-set small { display: block; font-weight: 400; color: #8e97a6; font-size: 12px; margin-top: 2px; }
-    .lt-note { padding: 14px 20px; font-size: 12.5px; color: #8e97a6; }
+    .lt-card p { margin: 8px 4px 0; font-size: 15px; font-weight: 700; color: #cfd0d6; line-height: 1.25; text-align: center; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.5em; }
+    .lt-card p b { color: #b94b8c; margin-right: 6px; }
+    .lt-more { grid-column: 1 / -1; padding: 13px; border-radius: 14px; border: 0; background: #1f1f25; color: #fff; font-weight: 700; font-size: 14px; }
+    .lt-empty { grid-column: 1 / -1; text-align: center; color: #8e8e99; padding: 48px 20px; font-size: 14px; line-height: 1.7; }
+    .lt-set { margin: 8px 16px 0; background: #1c1c22; border-radius: 16px; overflow: hidden; }
+    .lt-set label, .lt-set button { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 16px; font-size: 15px; font-weight: 600; background: transparent; border: 0; border-bottom: 1px solid #26262e; text-align: left; color: #fff; }
+    .lt-set input { width: 22px; height: 22px; accent-color: #6366f1; }
+    .lt-set small { display: block; font-weight: 400; color: #8e8e99; font-size: 12px; margin-top: 2px; }
+    .lt-note { padding: 14px 20px; font-size: 12.5px; color: #8e8e99; }
+    /* drawer */
+    #ltDrawer { position: fixed; inset: 0; z-index: 40; display: none; }
+    #ltDrawer.on { display: flex; }
+    .lt-scrim { position: absolute; inset: 0; background: rgba(0,0,0,.55); }
+    #ltDrawer aside { position: relative; width: 78%; max-width: 320px; height: 100%; overflow-y: auto; padding: calc(24px + env(safe-area-inset-top)) 16px 24px; background: linear-gradient(180deg, #7c80f5, #5558cf); }
+    .lt-me { display: flex; align-items: center; gap: 14px; padding: 18px; border-radius: 22px; background: rgba(255,255,255,.14); }
+    .lt-me i { width: 56px; height: 56px; border-radius: 16px; background: #00d8f6; color: #04202a; font-style: normal; font-size: 26px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .lt-me b { display: block; font-size: 18px; } .lt-me span { font-size: 12.5px; opacity: .8; }
+    .lt-sec { margin: 20px 6px 8px; font-size: 12px; font-weight: 700; letter-spacing: .22em; opacity: .75; }
+    .lt-grp { border-radius: 22px; background: rgba(255,255,255,.12); padding: 6px; }
+    .lt-grp button { display: flex; align-items: center; gap: 14px; width: 100%; padding: 13px 12px; border: 0; background: transparent; color: #fff; font-size: 16px; font-weight: 600; border-radius: 16px; text-align: left; }
+    .lt-grp button:active { background: rgba(255,255,255,.16); }
+    .lt-grp button u { text-decoration: none; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.16); display: flex; align-items: center; justify-content: center; font-size: 18px; }
     @media (max-height: 520px) { .lt-stage { display: none; } }
-    #ltFab { position: fixed; right: 18px; bottom: calc(22px + env(safe-area-inset-bottom)); z-index: 30; width: 62px; height: 62px; border-radius: 50%; border: 0; background: #e11d2e; color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 22px rgba(225,29,46,.45) !important; }
-    #ltFab svg { width: 28px; height: 28px; }
   </style>
 </head>
 <body class="min-h-screen bg-[#0b0714] text-white flex flex-col justify-between pb-20">
@@ -513,20 +520,40 @@
   <!-- TOP STICKY NAVBAR (Sarah TV Branding) -->
   <div id="liteApp">
     <div class="lt-head">
-      <div class="lt-top">
-        <div class="lt-brand"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8 3l4 4 4-4"/><path d="M10.5 11.5v4l3.5-2z" fill="#fff"/></svg></div>
-        <h1 id="ltTitle">Sarah TV<sup>LITE</sup></h1>
-        <button class="lt-ic" id="ltSearchBtn" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
-        <button class="lt-ic" id="ltGear" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+      <div class="lt-bar">
+        <button class="lt-ic" id="ltMenu" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+        <h1>Sarah TV<sup>LITE</sup></h1>
       </div>
-      <div id="ltSearchWrap"><input id="ltSearch" type="search" placeholder="চ্যানেল খুঁজুন…" autocomplete="off"></div>
       <div id="ltStage"></div>
-      <div id="ltPills"></div>
+      <div id="ltInfo" class="lt-info"></div>
+    </div>
+    <div class="lt-sr">
+      <input id="ltSearch" type="search" placeholder="চ্যানেল খুঁজুন…" autocomplete="off">
+      <button class="lt-gear" id="ltGear" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></button>
     </div>
     <div id="ltChips"></div>
     <div id="ltList"></div>
     <div id="ltSettings" style="display:none"></div>
-    <button id="ltFab" aria-label="Random channel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z" fill="currentColor"/></svg></button>
+    <div id="ltDrawer">
+      <div class="lt-scrim" data-ltclose></div>
+      <aside>
+        <div class="lt-me"><i>S</i><div><b>Sarah TV</b><span>Lite মোড</span></div></div>
+        <div class="lt-sec">QUICK ACTIONS</div>
+        <div class="lt-grp">
+          <button data-ltgo="home"><u>🏠</u>Home</button>
+          <button data-ltgo="fav"><u>★</u>Favorites</button>
+          <button data-ltgo="recent"><u>🕘</u>Recent</button>
+          <button data-ltgo="pop"><u>🔥</u>Popular</button>
+          <button data-ltgo="random"><u>🎲</u>Random Channel</button>
+        </div>
+        <div class="lt-sec">UTILITY</div>
+        <div class="lt-grp">
+          <button data-ltgo="settings"><u>⚙</u>Settings</button>
+          <button data-ltgo="share"><u>↗</u>Share App</button>
+          <button data-ltgo="full"><u>🌟</u>Full Version</button>
+        </div>
+      </aside>
+    </div>
   </div>
 
   <header class="sticky top-0 z-30 bg-[#0b0714]/95 backdrop-blur-md border-b border-white/5">
@@ -3809,6 +3836,7 @@
   function sv(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
   var recent = ld('sarah_lite_recent', []), plays = ld('sarah_lite_plays', {});
   function byId(id) { for (var i = 0; i < CHANNELS.length; i++) if (String(CHANNELS[i].id) === String(id)) return CHANNELS[i]; return null; }
+  function num(c) { var i = CHANNELS.indexOf(c) + 1; return i < 10 ? '0' + i : '' + i; }
   function quality(c) { var t = ((c.name || '') + ' ' + (c.subLabel || '') + ' ' + (c.category || '')).toLowerCase();
     return /fhd|full ?hd|1080/.test(t) ? 'FHD' : /\bhd\b/.test(t) ? 'HD' : /\bsd\b/.test(t) ? 'SD' : 'LIVE'; }
   function popular() { return CHANNELS.slice().sort(function (a, b) { return ((plays[b.id] || 0) - (plays[a.id] || 0)) || ((b.logo ? 1 : 0) - (a.logo ? 1 : 0)); }).slice(0, 80); }
@@ -3820,26 +3848,29 @@
     if (L.q) { var q = L.q.toLowerCase(); b = b.filter(function (c) { return (c.name + ' ' + (c.category || '')).toLowerCase().indexOf(q) > -1; }); }
     return b;
   }
-  function logo(c, cls) { return '<div class="' + cls + '">' + esc(c.shortLabel || (c.name || '').slice(0, 6)) +
-    (c.logo ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="logoFail(this,\'remove\')" src="' + esc(c.logo) + '" alt="">' : '') + '</div>'; }
+  function img(c) { return c.logo ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="logoFail(this,\'remove\')" src="' + esc(c.logo) + '" alt="">' : ''; }
   function card(c) {
     var fav = state.favorites.indexOf(c.id) > -1, pl = String(L.playing) === String(c.id);
-    return '<div class="lt-card' + (pl ? ' playing' : '') + '" data-ltplay="' + esc(c.id) + '">' + (pl ? '<span class="badge">● LIVE</span>' : '') +
-      '<button class="lt-fav' + (fav ? ' on' : '') + '" data-ltfav="' + esc(c.id) + '" aria-label="Save">' + (fav ? '♥' : '♡') + '</button>' +
-      logo(c, 'lt-logo') + '<strong>' + esc(c.name) + '</strong><span class="c">' + esc(c.category || 'Live TV') + '</span><em><i>' + quality(c) + '</i></em></div>';
+    return '<div class="lt-card' + (pl ? ' playing' : '') + '" data-ltplay="' + esc(c.id) + '"><div class="th">' + esc(c.shortLabel || (c.name || '').slice(0, 8)) + img(c) +
+      (pl ? '<span class="badge">● LIVE</span>' : '') + '<button class="lt-fav' + (fav ? ' on' : '') + '" data-ltfav="' + esc(c.id) + '" aria-label="Save">' + (fav ? '♥' : '♡') + '</button></div>' +
+      '<p><b>' + num(c) + '</b>' + esc(c.name) + '</p></div>';
   }
   function stage() {
-    var c = byId(L.playing) || recents()[0] || CHANNELS[0]; if (!c) { $('ltStage').innerHTML = ''; return; }
-    $('ltStage').innerHTML = '<div class="lt-stage" data-ltplay="' + esc(c.id) + '"><div class="bg"></div><span class="live">● LIVE</span>' + logo(c, 'disc') +
-      '<div class="meta"><strong>' + esc(c.name) + '</strong><span>' + esc(c.category || 'Live TV') + ' · ' + quality(c) + '</span></div><button class="play" aria-label="Play">▶</button></div>';
+    var c = byId(L.playing) || recents()[0] || CHANNELS[0];
+    if (!c) { $('ltStage').innerHTML = ''; $('ltInfo').innerHTML = ''; return; }
+    var fav = state.favorites.indexOf(c.id) > -1;
+    $('ltStage').innerHTML = '<div class="lt-stage" data-ltplay="' + esc(c.id) + '"><span class="live">● LIVE</span><div class="disc">' + esc(c.shortLabel || (c.name || '').slice(0, 6)) + img(c) + '</div><button class="play" aria-label="Play">▶</button></div>';
+    $('ltInfo').innerHTML = '<div class="t"><strong>' + esc(c.name) + '</strong><span>' + quality(c) + ' | ' + esc(c.category || 'Live TV') + '</span></div>' +
+      '<button class="' + (fav ? 'on' : '') + '" data-ltfav="' + esc(c.id) + '" aria-label="Save">' + (fav ? '★' : '☆') + '</button>' +
+      '<button data-ltplay="' + esc(c.id) + '" aria-label="Fullscreen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>';
   }
+  function chipOn(k) { return k === 'all' ? (L.tab === 'all' && L.cat === 'all') : (k === 'fav' || k === 'recent' || k === 'pop') ? L.tab === k : (L.tab === 'all' && 'c:' + L.cat.toLowerCase() === k.toLowerCase()); }
   function render() {
     if (!$('ltList')) return;
-    var set = L.tab === 'settings';
-    stage();
-    var P = [['all', 'All', CHANNELS.length], ['fav', 'Favorites', favs().length], ['recent', 'Recent', recents().length], ['pop', 'Popular', popular().length]];
-    $('ltPills').innerHTML = P.map(function (x) { return '<button data-ltab="' + x[0] + '" class="' + (L.tab === x[0] ? 'on' : '') + '">' + x[1] + '<b>' + x[2] + '</b></button>'; }).join('');
-    $('ltChips').style.display = L.tab === 'all' && !set ? 'flex' : 'none';
+    var set = L.tab === 'settings'; stage();
+    var cats = []; CHANNELS.forEach(function (c) { var k = c.category; if (k && cats.indexOf(k) < 0) cats.push(k); });
+    var chips = [['all', 'সব'], ['fav', '★ ফেভারিট'], ['recent', 'রিসেন্ট'], ['pop', 'পপুলার']].concat(cats.map(function (k) { return ['c:' + k, k]; }));
+    $('ltChips').innerHTML = chips.map(function (x) { return '<button data-lchip="' + esc(x[0]) + '" class="' + (!set && chipOn(x[0]) ? 'on' : '') + '">' + esc(x[1]) + '</button>'; }).join('');
     $('ltList').style.display = set ? 'none' : 'grid';
     $('ltSettings').style.display = set ? 'block' : 'none';
     if (set) {
@@ -3851,11 +3882,6 @@
         '<button id="ltFull">ফুল ভার্সনে যান<span>🌟</span></button></div><p class="lt-note">মোট চ্যানেল: ' + CHANNELS.length + '</p>';
       return;
     }
-    if (L.tab === 'all') {
-      var cats = []; CHANNELS.forEach(function (c) { var k = c.category; if (k && cats.indexOf(k) < 0) cats.push(k); });
-      $('ltChips').innerHTML = '<button data-ltcat="all" class="' + (L.cat === 'all' ? 'on' : '') + '">সব</button>' +
-        cats.map(function (k) { return '<button data-ltcat="' + esc(k) + '" class="' + (L.cat.toLowerCase() === k.toLowerCase() ? 'on' : '') + '">' + esc(k) + '</button>'; }).join('');
-    }
     var all = items(), part = all.slice(0, L.n);
     $('ltList').innerHTML = all.length ? part.map(card).join('') + (all.length > L.n ? '<button class="lt-more" id="ltMore">আরও দেখুন</button>' : '')
       : '<div class="lt-empty">' + (L.tab === 'fav' ? '♡ এখনো কিছু সেভ করা হয়নি।<br>যেকোনো চ্যানেলের হার্ট চাপুন।' : L.tab === 'recent' ? 'এখনো কিছু দেখা হয়নি।' : 'কোনো চ্যানেল পাওয়া যায়নি।') + '</div>';
@@ -3866,19 +3892,41 @@
   }
   var op = window.openPlayerByChannelId;
   if (typeof op === 'function') window.openPlayerByChannelId = function (id) { try { played(id); } catch (e) {} var r = op.apply(this, arguments); setTimeout(render, 0); return r; };
+  function drawer(on) { $('ltDrawer').classList.toggle('on', on); }
+  function go(a) {
+    drawer(false);
+    if (a === 'home') { L.tab = 'all'; L.cat = 'all'; L.q = ''; $('ltSearch').value = ''; }
+    else if (a === 'fav' || a === 'recent' || a === 'pop' || a === 'settings') L.tab = a;
+    else if (a === 'random') { if (CHANNELS.length) openPlayerByChannelId(CHANNELS[Math.floor(Math.random() * CHANNELS.length)].id); return; }
+    else if (a === 'share') {
+      var d = { title: 'Sarah TV', text: 'Sarah TV দেখুন', url: location.href.split('#')[0] };
+      if (navigator.share) navigator.share(d).catch(function () {});
+      else { try { navigator.clipboard.writeText(d.url); if (window.showToast) showToast('লিংক কপি হয়েছে'); } catch (e) {} }
+      return;
+    } else if (a === 'full') { var b = $('liteBtn'); if (b) b.click(); return; }
+    L.n = 60; render(); window.scrollTo(0, 0);
+  }
+  window.__ltBack = function () {
+    if (!document.documentElement.classList.contains('lite')) return false;
+    if ($('ltDrawer').classList.contains('on')) { drawer(false); return true; }
+    if (L.tab !== 'all' || L.cat !== 'all' || L.q) { go('home'); return true; }
+    return false;
+  };
   var app = $('liteApp');
   app.addEventListener('click', function (e) {
     var t = e.target, f = t.closest('[data-ltfav]');
-    if (f) { var id = f.dataset.ltfav, ch = byId(id), key = ch ? ch.id : id, i = state.favorites.indexOf(key);
+    if (f) { var ch = byId(f.dataset.ltfav), key = ch ? ch.id : f.dataset.ltfav, i = state.favorites.indexOf(key);
       if (i > -1) state.favorites.splice(i, 1); else state.favorites.push(key);
       saveState(); render(); return; }
     var p = t.closest('[data-ltplay]'); if (p) { openPlayerByChannelId(p.dataset.ltplay); return; }
-    var c = t.closest('[data-ltcat]'); if (c) { L.cat = c.dataset.ltcat; L.n = 60; render(); return; }
-    var tb = t.closest('[data-ltab]'); if (tb) { L.tab = tb.dataset.ltab; L.n = 60; render(); return; }
+    var c = t.closest('[data-lchip]'); if (c) { var k = c.dataset.lchip; L.n = 60;
+      if (k === 'all') { L.tab = 'all'; L.cat = 'all'; } else if (k === 'fav' || k === 'recent' || k === 'pop') L.tab = k; else { L.tab = 'all'; L.cat = k.slice(2); }
+      render(); return; }
+    if (t.closest('[data-ltclose]')) { drawer(false); return; }
+    var g = t.closest('[data-ltgo]'); if (g) { go(g.dataset.ltgo); return; }
+    if (t.closest('#ltMenu')) { drawer(true); return; }
     if (t.closest('#ltMore')) { L.n += 60; render(); return; }
-    if (t.closest('#ltSearchBtn')) { var w = $('ltSearchWrap'); w.classList.toggle('on'); if (w.classList.contains('on')) $('ltSearch').focus(); return; }
-    if (t.closest('#ltGear')) { L.tab = L.tab === 'settings' ? 'all' : 'settings'; render(); window.scrollTo(0, 0); return; }
-    if (t.closest('#ltFab')) { var a = CHANNELS; if (a.length) openPlayerByChannelId(a[Math.floor(Math.random() * a.length)].id); return; }
+    if (t.closest('#ltGear')) { L.tab = L.tab === 'settings' ? 'all' : 'settings'; render(); return; }
     if (t.closest('#ltFull')) { var b = $('liteBtn'); if (b) b.click(); return; }
     if (t.closest('#ltClear')) { state.favorites = []; saveState(); render(); if (window.showToast) showToast('সেভ করা চ্যানেল মুছে গেছে'); return; }
     if (t.closest('#ltClearR')) { recent = []; plays = {}; sv('sarah_lite_recent', recent); sv('sarah_lite_plays', plays); render(); }
@@ -3888,14 +3936,6 @@
     if (e.target.id === 'ltData') { state.dataSaver = e.target.checked; saveState(); }
   });
   $('ltSearch').addEventListener('input', function (e) { L.q = e.target.value.trim(); L.n = 60; if (L.tab === 'settings') L.tab = 'all'; render(); });
-  window.__ltBack = function () {
-    if (!document.documentElement.classList.contains('lite')) return false;
-    var w = $('ltSearchWrap');
-    if (L.tab !== 'all' || L.cat !== 'all' || L.q || w.classList.contains('on')) {
-      L.tab = 'all'; L.cat = 'all'; L.q = ''; L.n = 60; $('ltSearch').value = ''; w.classList.remove('on'); render(); return true;
-    }
-    return false;
-  };
   var lb = $('liteBtn'); if (lb) lb.addEventListener('click', function () { setTimeout(render, 0); });
   var orig = window.renderAllFromChannelsJson;
   if (typeof orig === 'function') window.renderAllFromChannelsJson = function () { var r = orig.apply(this, arguments); render(); return r; };
