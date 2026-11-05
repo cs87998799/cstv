@@ -2195,8 +2195,14 @@
 
     function buildEngineChain(type) {
       const hlsOk = !!(window.Hls && Hls.isSupported());
+      const video = $p('liveVideoEl');
+      const nativeHlsOk = !!(video && video.canPlayType &&
+        (video.canPlayType('application/vnd.apple.mpegurl') ||
+         video.canPlayType('application/x-mpegURL')));
       switch (type) {
-        case 'hls': return hlsOk ? ['hls', 'native'] : ['native'];
+        // Android/Chrome generally needs HLS.js; only use native HLS if advertised.
+        case 'hls':
+          return hlsOk ? (nativeHlsOk ? ['hls', 'native'] : ['hls']) : ['native'];
         case 'dash': return ['dash', 'native'];
         case 'flv':
         case 'ts': return ['mpegts', 'native'];
@@ -2535,6 +2541,9 @@
       const iframe = $p('liveIframeEl');
       const modal = $p('playerModal');
       const streamSrc = customUrl || ch.streamUrl;
+      if (!customUrl && ch.needsHeaders && !STREAM_PROXY) {
+        setPlayerStatus('এই চ্যানেলের জন্য Referer/User-Agent দরকার • Proxy ছাড়া চালু নাও হতে পারে', 6500);
+      }
 
       // Iframe / embed channel (YouTube, Vimeo, Dailymotion, embed page)
       const embedUrl = (!customUrl && ch.iframeUrl) ? ch.iframeUrl : toEmbedUrl(streamSrc);
@@ -2574,8 +2583,9 @@
       engineChain = buildEngineChain(engineHint);
       engineIdx = 0;
 
-      // Startup timeout -> auto next channel
-      streamCheckTimer = setTimeout(() => handleStreamFailure(token, 'timeout'), 12000 + (engineChain.length - 1) * 6000);
+      // Give live manifests and segments enough time before declaring startup failure.
+      const startupBudget = engineChain.includes('hls') ? 32000 : 22000;
+      streamCheckTimer = setTimeout(() => handleStreamFailure(token, 'startup-timeout'), startupBudget);
 
       runEngine(token);
     }
@@ -2617,7 +2627,10 @@
 
       clearTimeout(engineTimer);
       engineTimer = null;
-      if (!isLast) engineTimer = setTimeout(() => failEngine(token, 'engine-timeout'), 6000);
+      if (!isLast) {
+        const engineWait = engine === 'hls' ? 18000 : 12000;
+        engineTimer = setTimeout(() => failEngine(token, 'engine-timeout'), engineWait);
+      }
 
       try {
         if (engine === 'hls') {
@@ -2633,13 +2646,20 @@
             liveMaxLatencyDurationCount: 10,
             startFragPrefetch: true,
             abrEwmaDefaultEstimate: saver ? 600000 : 2000000,
-            manifestLoadingMaxRetry: 2,
-            manifestLoadingRetryDelay: 700,
-            levelLoadingMaxRetry: 3,
-            levelLoadingRetryDelay: 700,
-            fragLoadingMaxRetry: 4,
-            fragLoadingRetryDelay: 600,
-            xhrSetup: function (xhr) { xhr.withCredentials = false; }
+            manifestLoadingMaxRetry: 4,
+            manifestLoadingRetryDelay: 1000,
+            manifestLoadingTimeOut: 20000,
+            levelLoadingMaxRetry: 4,
+            levelLoadingRetryDelay: 1000,
+            levelLoadingTimeOut: 20000,
+            fragLoadingMaxRetry: 5,
+            fragLoadingRetryDelay: 800,
+            fragLoadingTimeOut: 30000,
+            xhrSetup: function (xhr) {
+              // Browser security rules still apply; this does not bypass CORS.
+              xhr.withCredentials = false;
+              xhr.timeout = 30000;
+            }
           });
           hlsInstance = hls;
           hls.loadSource(streamSrc);
@@ -2668,6 +2688,13 @@
             } else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) {
               if (mediaRetry === 0) { mediaRetry++; try { hls.recoverMediaError(); } catch (er) {} return; }
               if (mediaRetry === 1) { mediaRetry++; try { hls.swapAudioCodec(); hls.recoverMediaError(); } catch (er) {} return; }
+            }
+            const detail = String(data.details || 'fatal').toLowerCase();
+            if (detail.includes('manifestload') || detail.includes('levelload') ||
+                detail.includes('fragload') || detail.includes('keyload')) {
+              setPlayerStatus('স্ট্রিম সার্ভার থেকে ভিডিও ডেটা পাওয়া যাচ্ছে না • লিংক/CORS/অ্যাক্সেস সমস্যা হতে পারে', 5000);
+            } else if (detail.includes('buffer') || detail.includes('codec')) {
+              setPlayerStatus('ভিডিও ফরম্যাট বা codec সমর্থিত নয়', 4500);
             }
             failEngine(token, data.details || 'fatal');
           });
