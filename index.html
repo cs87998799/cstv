@@ -1252,12 +1252,29 @@
 
     // ===== SonyLiv M3U auto loader (channels always shown FIRST) =====
     const M3U_SOURCES = [
-      'https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv_playlist.m3u'
+      { url: 'https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv_playlist.m3u', prefix: 'sony' },
+      { url: 'https://raw.githubusercontent.com/doctor-8trange/zyphx8/refs/heads/main/data/fancode.m3u', prefix: 'fan' }
     ];
     const M3U_REFRESH_MS = 5 * 60 * 1000; // token expire hoy tai 5 min por por refresh
+
+    // Stream proxy (Cloudflare Worker). Fancode er Referer/User-Agent lage, browser eta pathate pare na.
+    // Worker URL ekhane boshan ba site er link e ?proxy=https://your-worker.workers.dev joure din (browser e save thake).
+    let STREAM_PROXY = '';
+    try {
+      const q = new URLSearchParams(location.search).get('proxy');
+      if (q !== null) localStorage.setItem('sarah_stream_proxy', q);
+      STREAM_PROXY = (localStorage.getItem('sarah_stream_proxy') || STREAM_PROXY || '').trim().replace(/\/+$/, '');
+    } catch (e) {}
+    function proxify(url, headers) {
+      if (!STREAM_PROXY) return url;
+      let u = STREAM_PROXY + '?url=' + encodeURIComponent(url);
+      if (headers && headers.referer) u += '&referer=' + encodeURIComponent(headers.referer);
+      if (headers && headers.ua) u += '&ua=' + encodeURIComponent(headers.ua);
+      return u;
+    }
     let M3U_CHANNELS = [];
 
-    function parseM3U(text, offset = 0) {
+    function parseM3U(text, prefix = 'm3u', offset = 0) {
       const lines = String(text || '').split(/\r?\n/);
       const out = [];
       let meta = null;
@@ -1283,18 +1300,33 @@
           };
         } else if (line[0] !== '#' && /^https?:\/\//i.test(line)) {
           const i = out.length + offset;
+          // Kodi style: url|User-Agent=...&Referer=...
+          let streamLine = line, hdr = {};
+          const pi = line.indexOf('|');
+          if (pi > 0) {
+            streamLine = line.slice(0, pi);
+            line.slice(pi + 1).split('&').forEach(kv => {
+              const e = kv.indexOf('=');
+              if (e < 0) return;
+              const k = kv.slice(0, e).toLowerCase(), v = kv.slice(e + 1);
+              if (k === 'referer' || k === 'referrer') hdr.referer = v;
+              else if (k === 'user-agent') hdr.ua = v;
+            });
+          }
           const name = (meta && meta.name) || `SonyLiv ${i + 1}`;
           const category = (meta && meta.group) || 'Sports';
+          const src0 = prefix;
           const short = name.split('|')[0].trim();
           const vs = short.match(/^(.+?)\s+vs\s+(.+?)(?:\s+-|$)/i);
           out.push({
-            id: 'sony-' + ((meta && meta.id) || i),
+            id: prefix + '-' + ((meta && meta.id) || i),
             name: short,
             shortLabel: vs ? (vs[1].slice(0, 6) + ' v ' + vs[2].slice(0, 6)) : short.slice(0, 10),
             subLabel: category.toUpperCase().slice(0, 10),
             category,
             logo: normalizeLogoUrl(meta && meta.logo),
-            streamUrl: line,
+            streamUrl: proxify(streamLine, hdr),
+            needsHeaders: !!(hdr.referer || hdr.ua),
             iframeUrl: '',
             premium: false,
             fromM3U: true,
@@ -1310,15 +1342,15 @@
     }
 
     async function fetchM3UChannels() {
-      for (const src of M3U_SOURCES) {
+      const lists = await Promise.all(M3U_SOURCES.map(async (src) => {
         try {
-          const r = await fetch(src + (src.includes('?') ? '&' : '?') + 't=' + Date.now(), { cache: 'no-store' });
-          if (!r.ok) continue;
-          const list = parseM3U(await r.text());
-          if (list.length) return list;
-        } catch (e) {}
-      }
-      return [];
+          const r = await fetch(src.url + '?t=' + Date.now(), { cache: 'no-store' });
+          if (!r.ok) return [];
+          return parseM3U(await r.text(), src.prefix);
+        } catch (e) { return []; }
+      }));
+      // ek source theke onno source er channel mix na kore, serial e boshbe (Sony age, tarpor Fancode)
+      return [].concat(...lists);
     }
 
     function mergeM3UFirst(others) {
