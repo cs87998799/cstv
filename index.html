@@ -431,44 +431,63 @@
     .lb .full { background: rgba(255,255,255,.08); color: #fff; border: 1px solid rgba(255,255,255,.15); }
   </style>
   <style>
-    /* ===== LITE APP (separate interface) ===== */
+    /* ===== LITE APP v2 (dark app style) ===== */
     #liteApp { display: none; }
     html.lite header, html.lite main, html.lite nav.fixed.bottom-0 { display: none !important; }
     html.lite #liteApp { display: block; }
-    html.lite body { background: #f4f6f8 !important; color: #111827; padding-bottom: 0; }
-    #liteApp { min-height: 100vh; padding: 0 0 76px; font-family: 'Hind Siliguri','Inter',system-ui,sans-serif; color: #111827; max-width: 640px; margin: 0 auto; }
-    .lt-top { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; padding: calc(12px + env(safe-area-inset-top)) 16px 12px; background: #fff; border-bottom: 1px solid #e5e7eb; }
-    .lt-top b { font-size: 19px; font-weight: 800; letter-spacing: -.01em; }
-    .lt-top b em { font-style: normal; color: #0d9488; }
-    .lt-top button { font-size: 12px; font-weight: 700; padding: 7px 12px; border-radius: 8px; border: 1px solid #d1d5db; background: #fff; color: #374151; }
-    #ltSearchWrap { padding: 12px 16px 4px; }
-    #ltSearch { width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #d1d5db; background: #fff; color: #111827; font-size: 14px; outline: none; }
-    #ltSearch:focus { border-color: #0d9488; }
-    #ltChips { display: flex; gap: 8px; overflow-x: auto; padding: 10px 16px; scrollbar-width: none; }
-    #ltChips::-webkit-scrollbar { display: none; }
-    #ltChips button { flex: none; padding: 7px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; background: #e5e7eb; color: #374151; border: 0; }
-    #ltChips button.on { background: #0d9488; color: #fff; }
-    .lt-count { padding: 4px 16px 6px; font-size: 12px; color: #6b7280; }
-    .lt-row { display: flex; align-items: center; gap: 12px; margin: 0 16px 8px; padding: 10px 12px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; }
-    .lt-row:active { background: #f0fdfa; }
-    .lt-logo { position: relative; flex: none; width: 46px; height: 46px; border-radius: 10px; background: #f3f4f6; display: flex; align-items: center; justify-content: center; overflow: hidden; font-size: 11px; font-weight: 800; color: #0d9488; text-align: center; line-height: 1.1; }
-    .lt-logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 5px; background: #fff; }
-    .lt-info { flex: 1; min-width: 0; }
-    .lt-info strong { display: block; font-size: 14.5px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .lt-info span { font-size: 12px; color: #6b7280; display: flex; align-items: center; gap: 6px; }
-    .lt-info span i { width: 6px; height: 6px; border-radius: 50%; background: #ef4444; }
-    .lt-fav { flex: none; width: 36px; height: 36px; border: 0; background: transparent; font-size: 20px; color: #9ca3af; }
-    .lt-fav.on { color: #f59e0b; }
-    .lt-more { display: block; margin: 8px auto 0; padding: 10px 22px; border-radius: 10px; border: 1px solid #0d9488; background: #fff; color: #0d9488; font-weight: 700; font-size: 13px; }
-    .lt-empty { text-align: center; color: #6b7280; padding: 48px 20px; font-size: 14px; }
-    .lt-set { margin: 14px 16px 0; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
-    .lt-set label, .lt-set button { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 15px 14px; font-size: 14px; font-weight: 600; background: #fff; border: 0; border-bottom: 1px solid #f3f4f6; text-align: left; color: #111827; }
-    .lt-set input { width: 20px; height: 20px; accent-color: #0d9488; }
-    .lt-set small { display: block; font-weight: 400; color: #6b7280; font-size: 12px; margin-top: 2px; }
-    .lt-tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; display: flex; background: #fff; border-top: 1px solid #e5e7eb; padding-bottom: env(safe-area-inset-bottom); }
-    .lt-tabs button { flex: 1; padding: 10px 0 9px; font-size: 11.5px; font-weight: 600; color: #6b7280; background: transparent; border: 0; display: flex; flex-direction: column; align-items: center; gap: 2px; }
-    .lt-tabs button span { font-size: 20px; line-height: 1.1; }
-    .lt-tabs button.on { color: #0d9488; }
+    html.lite body { background: #0e1016 !important; color: #fff; }
+    #liteApp { min-height: 100vh; padding-bottom: 96px; max-width: 640px; margin: 0 auto; color: #fff; font-family: 'Inter','Hind Siliguri',system-ui,sans-serif; }
+    .lt-head { position: sticky; top: 0; z-index: 20; background: #0e1016; }
+    .lt-top { display: flex; align-items: center; gap: 12px; padding: calc(10px + env(safe-area-inset-top)) 16px 10px; }
+    .lt-brand { width: 40px; height: 40px; border-radius: 11px; background: #e11d2e; display: flex; align-items: center; justify-content: center; flex: none; }
+    .lt-top h1 { flex: 1; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -.02em; white-space: nowrap; }
+    .lt-top h1 sup { font-size: 9px; font-weight: 800; color: #fff; background: #e11d2e; border-radius: 4px; padding: 2px 5px; margin-left: 6px; vertical-align: middle; letter-spacing: .08em; }
+    .lt-ic { width: 40px; height: 40px; border: 0; background: transparent; color: #fff; display: flex; align-items: center; justify-content: center; }
+    .lt-ic svg { width: 26px; height: 26px; }
+    #ltSearchWrap { display: none; padding: 0 16px 10px; }
+    #ltSearchWrap.on { display: block; }
+    #ltSearch { width: 100%; padding: 12px 16px; border-radius: 14px; border: 1px solid #2a2f3b; background: #171a22; color: #fff; font-size: 15px; outline: none; }
+    #ltSearch:focus { border-color: #e11d2e; }
+    .lt-stage { position: relative; aspect-ratio: 16 / 9; max-height: 34vh; width: 100%; overflow: hidden; background: radial-gradient(90% 120% at 50% 0%, #2a1018 0%, #0a0b10 70%); display: flex; align-items: center; justify-content: center; }
+    .lt-stage .bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(225,29,46,.25), rgba(79,70,229,.2)); }
+    .lt-stage .disc { position: relative; width: 84px; height: 84px; border-radius: 50%; background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #e11d2e; font-size: 14px; text-align: center; }
+    .lt-stage .disc img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 10px; background: #fff; }
+    .lt-stage .meta { position: absolute; left: 14px; bottom: 12px; right: 80px; }
+    .lt-stage .meta strong { display: block; font-size: 17px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .lt-stage .meta span { font-size: 12px; color: #aab2c0; }
+    .lt-stage .live { position: absolute; left: 12px; top: 12px; background: #e11d2e; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 999px; letter-spacing: .05em; }
+    .lt-stage .play { position: absolute; right: 14px; bottom: 12px; width: 52px; height: 52px; border-radius: 50%; border: 0; background: #e11d2e; color: #fff; font-size: 18px; padding-left: 3px; }
+    #ltPills { display: flex; gap: 10px; overflow-x: auto; padding: 12px 16px; scrollbar-width: none; background: #0e1016; }
+    #ltPills::-webkit-scrollbar, #ltChips::-webkit-scrollbar { display: none; }
+    #ltPills button { flex: none; display: flex; align-items: center; gap: 9px; padding: 9px 16px; border-radius: 999px; border: 0; font-size: 15px; font-weight: 600; background: #1b1f29; color: #aab2c0; }
+    #ltPills button b { font-weight: 700; font-size: 12px; min-width: 24px; padding: 3px 8px; border-radius: 999px; background: #2a2f3b; color: #aab2c0; text-align: center; }
+    #ltPills button.on { background: #e11d2e; color: #fff; }
+    #ltPills button.on b { background: rgba(255,255,255,.22); color: #fff; }
+    #ltChips { display: flex; gap: 8px; overflow-x: auto; padding: 2px 16px 12px; scrollbar-width: none; }
+    #ltChips button { flex: none; padding: 6px 13px; border-radius: 10px; border: 1px solid #2a2f3b; background: transparent; color: #aab2c0; font-size: 12.5px; font-weight: 600; }
+    #ltChips button.on { border-color: #e11d2e; color: #fff; background: rgba(225,29,46,.18); }
+    #ltList { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 12px; }
+    .lt-card { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 28px 6px 12px; min-height: 164px; border-radius: 18px; background: #171a22; border: 1.5px solid #262b36; }
+    .lt-card:active { background: #1d212c; }
+    .lt-card.playing { border-color: #e11d2e; background: #231319; }
+    .lt-card .badge { position: absolute; left: 8px; top: 8px; background: #e11d2e; font-size: 9.5px; font-weight: 800; padding: 3px 8px; border-radius: 999px; letter-spacing: .04em; }
+    .lt-fav { position: absolute; right: 6px; top: 4px; width: 34px; height: 34px; border: 0; background: transparent; font-size: 21px; color: #aab2c0; }
+    .lt-fav.on { color: #ef4458; }
+    .lt-logo { position: relative; width: 56px; height: 56px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; font-size: 10px; font-weight: 800; color: #e11d2e; line-height: 1.05; padding: 4px; }
+    .lt-logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 7px; background: #fff; }
+    .lt-card strong { margin-top: 10px; font-size: 13.5px; font-weight: 700; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; max-width: 100%; }
+    .lt-card span.c { margin-top: 3px; font-size: 11.5px; color: #8e97a6; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .lt-card em { margin-top: auto; padding-top: 6px; font-style: normal; }
+    .lt-card em i { font-style: normal; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 7px; background: #262b36; color: #aab2c0; border: 1px solid #323847; }
+    .lt-more { grid-column: 1 / -1; padding: 12px; border-radius: 14px; border: 1px solid #2a2f3b; background: #171a22; color: #fff; font-weight: 700; font-size: 14px; }
+    .lt-empty { grid-column: 1 / -1; text-align: center; color: #8e97a6; padding: 48px 20px; font-size: 14px; line-height: 1.7; }
+    .lt-set { margin: 8px 16px 0; background: #171a22; border: 1px solid #262b36; border-radius: 16px; overflow: hidden; }
+    .lt-set label, .lt-set button { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 16px; font-size: 15px; font-weight: 600; background: transparent; border: 0; border-bottom: 1px solid #262b36; text-align: left; color: #fff; }
+    .lt-set input { width: 22px; height: 22px; accent-color: #e11d2e; }
+    .lt-set small { display: block; font-weight: 400; color: #8e97a6; font-size: 12px; margin-top: 2px; }
+    .lt-note { padding: 14px 20px; font-size: 12.5px; color: #8e97a6; }
+    #ltFab { position: fixed; right: 18px; bottom: calc(22px + env(safe-area-inset-bottom)); z-index: 30; width: 62px; height: 62px; border-radius: 50%; border: 0; background: #e11d2e; color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 22px rgba(225,29,46,.45) !important; }
+    #ltFab svg { width: 28px; height: 28px; }
   </style>
 </head>
 <body class="min-h-screen bg-[#0b0714] text-white flex flex-col justify-between pb-20">
@@ -492,17 +511,21 @@
 
   <!-- TOP STICKY NAVBAR (Khusbu TV Branding) -->
   <div id="liteApp">
-    <div class="lt-top"><b>⚡ Khusbu <em>Lite</em></b><button id="ltFull">ফুল ভার্সন</button></div>
-    <div id="ltSearchWrap"><input id="ltSearch" type="search" placeholder="চ্যানেল খুঁজুন…" autocomplete="off"></div>
+    <div class="lt-head">
+      <div class="lt-top">
+        <div class="lt-brand"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8 3l4 4 4-4"/><path d="M10.5 11.5v4l3.5-2z" fill="#fff"/></svg></div>
+        <h1 id="ltTitle">Khusbu TV<sup>LITE</sup></h1>
+        <button class="lt-ic" id="ltSearchBtn" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+        <button class="lt-ic" id="ltGear" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+      </div>
+      <div id="ltSearchWrap"><input id="ltSearch" type="search" placeholder="চ্যানেল খুঁজুন…" autocomplete="off"></div>
+      <div id="ltStage"></div>
+      <div id="ltPills"></div>
+    </div>
     <div id="ltChips"></div>
-    <div id="ltCount" class="lt-count"></div>
     <div id="ltList"></div>
     <div id="ltSettings" style="display:none"></div>
-    <div class="lt-tabs">
-      <button data-lt="home" class="on"><span>📺</span>চ্যানেল</button>
-      <button data-lt="saved"><span>★</span>সেভড</button>
-      <button data-lt="settings"><span>⚙️</span>সেটিংস</button>
-    </div>
+    <button id="ltFab" aria-label="Random channel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z" fill="currentColor"/></svg></button>
   </div>
 
   <header class="sticky top-0 z-30 bg-[#0b0714]/95 backdrop-blur-md border-b border-white/5">
@@ -3777,68 +3800,92 @@
 </script>
 <script>
 (function () {
-  var L = { tab: 'home', cat: 'all', q: '', n: 60 };
+  var L = { tab: 'all', cat: 'all', q: '', n: 60, playing: null };
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (v) { return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  function ld(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } }
+  function sv(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  var recent = ld('khusbu_lite_recent', []), plays = ld('khusbu_lite_plays', {});
+  function byId(id) { for (var i = 0; i < CHANNELS.length; i++) if (String(CHANNELS[i].id) === String(id)) return CHANNELS[i]; return null; }
+  function quality(c) { var t = ((c.name || '') + ' ' + (c.subLabel || '') + ' ' + (c.category || '')).toLowerCase();
+    return /fhd|full ?hd|1080/.test(t) ? 'FHD' : /\bhd\b/.test(t) ? 'HD' : /\bsd\b/.test(t) ? 'SD' : 'LIVE'; }
+  function popular() { return CHANNELS.filter(function (c) { return c.logo; }).sort(function (a, b) { return (plays[b.id] || 0) - (plays[a.id] || 0); }).slice(0, 80); }
+  function recents() { return recent.map(byId).filter(Boolean); }
+  function favs() { return CHANNELS.filter(function (c) { return state.favorites.indexOf(c.id) > -1; }); }
   function items() {
-    var b = L.tab === 'saved' ? CHANNELS.filter(function (c) { return state.favorites.indexOf(c.id) > -1; }) : CHANNELS;
-    if (L.tab === 'home' && L.cat !== 'all') b = b.filter(function (c) { return (c.category || '').toLowerCase() === L.cat.toLowerCase(); });
+    var b = L.tab === 'fav' ? favs() : L.tab === 'recent' ? recents() : L.tab === 'pop' ? popular() : CHANNELS;
+    if (L.tab === 'all' && L.cat !== 'all') b = b.filter(function (c) { return (c.category || '').toLowerCase() === L.cat.toLowerCase(); });
     if (L.q) { var q = L.q.toLowerCase(); b = b.filter(function (c) { return (c.name + ' ' + (c.category || '')).toLowerCase().indexOf(q) > -1; }); }
     return b;
   }
-  function row(c) {
-    var fav = state.favorites.indexOf(c.id) > -1;
-    return '<div class="lt-row" data-ltplay="' + esc(c.id) + '"><div class="lt-logo">' + esc(c.shortLabel || (c.name || '').slice(0, 6)) +
-      (c.logo ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="logoFail(this,\'remove\')" src="' + esc(c.logo) + '" alt="">' : '') +
-      '</div><div class="lt-info"><strong>' + esc(c.name) + '</strong><span><i></i>লাইভ · ' + esc(c.category || 'Live TV') + '</span></div>' +
-      '<button class="lt-fav' + (fav ? ' on' : '') + '" data-ltfav="' + esc(c.id) + '" aria-label="Save">' + (fav ? '★' : '☆') + '</button></div>';
+  function logo(c, cls) { return '<div class="' + cls + '">' + esc(c.shortLabel || (c.name || '').slice(0, 6)) +
+    (c.logo ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="logoFail(this,\'remove\')" src="' + esc(c.logo) + '" alt="">' : '') + '</div>'; }
+  function card(c) {
+    var fav = state.favorites.indexOf(c.id) > -1, pl = String(L.playing) === String(c.id);
+    return '<div class="lt-card' + (pl ? ' playing' : '') + '" data-ltplay="' + esc(c.id) + '">' + (pl ? '<span class="badge">● LIVE</span>' : '') +
+      '<button class="lt-fav' + (fav ? ' on' : '') + '" data-ltfav="' + esc(c.id) + '" aria-label="Save">' + (fav ? '♥' : '♡') + '</button>' +
+      logo(c, 'lt-logo') + '<strong>' + esc(c.name) + '</strong><span class="c">' + esc(c.category || 'Live TV') + '</span><em><i>' + quality(c) + '</i></em></div>';
+  }
+  function stage() {
+    var c = byId(L.playing) || recents()[0] || CHANNELS[0]; if (!c) { $('ltStage').innerHTML = ''; return; }
+    $('ltStage').innerHTML = '<div class="lt-stage" data-ltplay="' + esc(c.id) + '"><div class="bg"></div><span class="live">● LIVE</span>' + logo(c, 'disc') +
+      '<div class="meta"><strong>' + esc(c.name) + '</strong><span>' + esc(c.category || 'Live TV') + ' · ' + quality(c) + '</span></div><button class="play" aria-label="Play">▶</button></div>';
   }
   function render() {
     if (!$('ltList')) return;
-    document.querySelectorAll('.lt-tabs button').forEach(function (b) { b.classList.toggle('on', b.dataset.lt === L.tab); });
-    var isSet = L.tab === 'settings';
-    $('ltSearchWrap').style.display = isSet ? 'none' : '';
-    $('ltChips').style.display = L.tab === 'home' ? '' : 'none';
-    $('ltCount').style.display = isSet ? 'none' : '';
-    $('ltList').style.display = isSet ? 'none' : '';
-    $('ltSettings').style.display = isSet ? '' : 'none';
-    if (isSet) {
+    var set = L.tab === 'settings';
+    stage();
+    var P = [['all', 'All', CHANNELS.length], ['fav', 'Favorites', favs().length], ['recent', 'Recent', recents().length], ['pop', 'Popular', popular().length]];
+    $('ltPills').innerHTML = P.map(function (x) { return '<button data-ltab="' + x[0] + '" class="' + (L.tab === x[0] ? 'on' : '') + '">' + x[1] + '<b>' + x[2] + '</b></button>'; }).join('');
+    $('ltChips').style.display = L.tab === 'all' && !set ? 'flex' : 'none';
+    $('ltList').style.display = set ? 'none' : 'grid';
+    $('ltSettings').style.display = set ? 'block' : 'none';
+    if (set) {
       $('ltSettings').innerHTML = '<div class="lt-set">' +
         '<label>অটো-প্লে নেক্সট<input type="checkbox" id="ltAuto"' + (state.autoplay ? ' checked' : '') + '></label>' +
         '<label><div>ডেটা সেভার<small>কম কোয়ালিটিতে চালিয়ে ডেটা বাঁচায়</small></div><input type="checkbox" id="ltData"' + (state.dataSaver ? ' checked' : '') + '></label>' +
         '<button id="ltClear">সেভ করা চ্যানেল মুছুন<span>🗑</span></button>' +
-        '<button id="ltFull2">ফুল ভার্সনে যান<span>🌟</span></button></div>' +
-        '<p class="lt-count" style="margin-top:12px">মোট চ্যানেল: ' + CHANNELS.length + '</p>';
+        '<button id="ltClearR">রিসেন্ট মুছুন<span>🕘</span></button>' +
+        '<button id="ltFull">ফুল ভার্সনে যান<span>🌟</span></button></div><p class="lt-note">মোট চ্যানেল: ' + CHANNELS.length + '</p>';
       return;
     }
-    if (L.tab === 'home') {
+    if (L.tab === 'all') {
       var cats = []; CHANNELS.forEach(function (c) { var k = c.category; if (k && cats.indexOf(k) < 0) cats.push(k); });
       $('ltChips').innerHTML = '<button data-ltcat="all" class="' + (L.cat === 'all' ? 'on' : '') + '">সব</button>' +
         cats.map(function (k) { return '<button data-ltcat="' + esc(k) + '" class="' + (L.cat.toLowerCase() === k.toLowerCase() ? 'on' : '') + '">' + esc(k) + '</button>'; }).join('');
     }
     var all = items(), part = all.slice(0, L.n);
-    $('ltCount').textContent = all.length + ' টি চ্যানেল';
-    $('ltList').innerHTML = all.length ? part.map(row).join('') + (all.length > L.n ? '<button class="lt-more" id="ltMore">আরও দেখুন</button>' : '')
-      : '<div class="lt-empty">' + (L.tab === 'saved' ? '★ এখনো কিছু সেভ করা হয়নি।<br>যেকোনো চ্যানেলের তারা চাপুন।' : 'কোনো চ্যানেল পাওয়া যায়নি।') + '</div>';
+    $('ltList').innerHTML = all.length ? part.map(card).join('') + (all.length > L.n ? '<button class="lt-more" id="ltMore">আরও দেখুন</button>' : '')
+      : '<div class="lt-empty">' + (L.tab === 'fav' ? '♡ এখনো কিছু সেভ করা হয়নি।<br>যেকোনো চ্যানেলের হার্ট চাপুন।' : L.tab === 'recent' ? 'এখনো কিছু দেখা হয়নি।' : 'কোনো চ্যানেল পাওয়া যায়নি।') + '</div>';
   }
+  function played(id) {
+    L.playing = id; recent = [id].concat(recent.filter(function (x) { return String(x) !== String(id); })).slice(0, 30);
+    plays[id] = (plays[id] || 0) + 1; sv('khusbu_lite_recent', recent); sv('khusbu_lite_plays', plays);
+  }
+  var op = window.openPlayerByChannelId;
+  if (typeof op === 'function') window.openPlayerByChannelId = function (id) { try { played(id); } catch (e) {} var r = op.apply(this, arguments); setTimeout(render, 0); return r; };
   var app = $('liteApp');
   app.addEventListener('click', function (e) {
     var t = e.target, f = t.closest('[data-ltfav]');
-    if (f) { var id = f.dataset.ltfav, i = state.favorites.indexOf(id);
-      if (i > -1) state.favorites.splice(i, 1); else state.favorites.push(id);
+    if (f) { var id = f.dataset.ltfav, ch = byId(id), key = ch ? ch.id : id, i = state.favorites.indexOf(key);
+      if (i > -1) state.favorites.splice(i, 1); else state.favorites.push(key);
       saveState(); render(); return; }
     var p = t.closest('[data-ltplay]'); if (p) { openPlayerByChannelId(p.dataset.ltplay); return; }
     var c = t.closest('[data-ltcat]'); if (c) { L.cat = c.dataset.ltcat; L.n = 60; render(); return; }
-    var tb = t.closest('[data-lt]'); if (tb) { L.tab = tb.dataset.lt; L.n = 60; render(); window.scrollTo(0, 0); return; }
+    var tb = t.closest('[data-ltab]'); if (tb) { L.tab = tb.dataset.ltab; L.n = 60; render(); return; }
     if (t.closest('#ltMore')) { L.n += 60; render(); return; }
-    if (t.closest('#ltFull') || t.closest('#ltFull2')) { var b = $('liteBtn'); if (b) b.click(); return; }
-    if (t.closest('#ltClear')) { state.favorites = []; saveState(); render(); if (window.showToast) showToast('সেভ করা চ্যানেল মুছে গেছে'); }
+    if (t.closest('#ltSearchBtn')) { var w = $('ltSearchWrap'); w.classList.toggle('on'); if (w.classList.contains('on')) $('ltSearch').focus(); return; }
+    if (t.closest('#ltGear')) { L.tab = L.tab === 'settings' ? 'all' : 'settings'; render(); window.scrollTo(0, 0); return; }
+    if (t.closest('#ltFab')) { var a = CHANNELS; if (a.length) openPlayerByChannelId(a[Math.floor(Math.random() * a.length)].id); return; }
+    if (t.closest('#ltFull')) { var b = $('liteBtn'); if (b) b.click(); return; }
+    if (t.closest('#ltClear')) { state.favorites = []; saveState(); render(); if (window.showToast) showToast('সেভ করা চ্যানেল মুছে গেছে'); return; }
+    if (t.closest('#ltClearR')) { recent = []; plays = {}; sv('khusbu_lite_recent', recent); sv('khusbu_lite_plays', plays); render(); }
   });
   app.addEventListener('change', function (e) {
     if (e.target.id === 'ltAuto') { state.autoplay = e.target.checked; saveState(); }
     if (e.target.id === 'ltData') { state.dataSaver = e.target.checked; saveState(); }
   });
-  $('ltSearch').addEventListener('input', function (e) { L.q = e.target.value.trim(); L.n = 60; render(); });
+  $('ltSearch').addEventListener('input', function (e) { L.q = e.target.value.trim(); L.n = 60; if (L.tab === 'settings') L.tab = 'all'; render(); });
   var lb = $('liteBtn'); if (lb) lb.addEventListener('click', function () { setTimeout(render, 0); });
   var orig = window.renderAllFromChannelsJson;
   if (typeof orig === 'function') window.renderAllFromChannelsJson = function () { var r = orig.apply(this, arguments); render(); return r; };
