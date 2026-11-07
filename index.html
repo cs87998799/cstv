@@ -623,8 +623,12 @@
         </div>
       </button>
 
-      <!-- Right Actions: Subscribe + Sign In / User Profile -->
-      <div class="flex items-center gap-2.5">
+      <!-- Right Actions: Live Events + Search + Subscribe + Sign In -->
+      <div class="flex items-center gap-2">
+        <a href="./live.html" class="toffee-gradient text-white text-xs font-extrabold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md active:scale-95 transition">
+          <span class="w-2 h-2 rounded-full bg-white live-dot"></span>
+          <span>Live Events</span>
+        </a>
         <button id="headerSearchBtn" aria-label="Search" class="w-9 h-9 rounded-full bg-white/8 border border-white/15 text-white flex items-center justify-center active:scale-95 transition">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"/><path d="M21 21l-4.35-4.35"/></svg>
         </button>
@@ -916,16 +920,16 @@
       </button>
     </div>
 
-    <!-- Channel popup -->
-    <div id="playerHorizontalPopup" data-no-tap class="player-popup-drawer absolute left-3 right-3 max-w-[420px] mx-auto bg-[#1c1c1e]/95 backdrop-blur-xl border border-pink-500/30 rounded-xl p-1.5 z-30 shadow-2xl" style="bottom:calc(96px + env(safe-area-inset-bottom))">
-      <div class="flex items-center justify-between mb-1 px-1">
+    <!-- Channel popup (Compact, Lower & Shows More Channels) -->
+    <div id="playerHorizontalPopup" data-no-tap class="player-popup-drawer absolute left-2 right-2 max-w-4xl mx-auto bg-[#121216]/90 backdrop-blur-xl border border-pink-500/35 rounded-xl px-2 py-1 z-30 shadow-2xl" style="bottom:calc(68px + env(safe-area-inset-bottom))">
+      <div class="flex items-center justify-between mb-0.5 px-1">
         <div class="flex items-center gap-1.5">
-          <span class="text-[10px] font-bold text-pink-400 uppercase tracking-wider">Nearby Channels</span>
-          <span id="autoHideTimerBadge" class="text-[9px] px-1.5 py-0.5 rounded-full bg-white/10 text-slate-300">Auto-hide in 3s</span>
+          <span class="text-[9px] font-extrabold text-pink-400 uppercase tracking-wider">Nearby Channels</span>
+          <span id="autoHideTimerBadge" class="text-[8px] px-1.5 py-0.2 rounded-full bg-white/10 text-slate-300">Auto-hide in 3s</span>
         </div>
-        <button id="hidePopupDrawerBtn" class="text-[10px] text-slate-300 hover:text-white px-1.5 py-0.5 rounded bg-white/10">✕</button>
+        <button id="hidePopupDrawerBtn" class="text-[9px] text-slate-300 hover:text-white px-1.5 py-0.2 rounded bg-white/10 leading-none">✕</button>
       </div>
-      <div id="playerPopupTrack" class="relative flex items-center gap-2 overflow-x-auto no-scrollbar snap-x-mandatory py-0.5"></div>
+      <div id="playerPopupTrack" class="relative flex items-center gap-1.5 overflow-x-auto no-scrollbar snap-x-mandatory py-0.5"></div>
     </div>
 
     <!-- Quality / Speed menu -->
@@ -1077,6 +1081,11 @@
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
         <span>Discover</span>
       </button>
+      <a href="./live.html" class="flex flex-col items-center gap-1 text-pink-400 hover:text-white font-bold text-xs relative active:scale-95 transition">
+        <span class="w-2 h-2 rounded-full bg-rose-500 live-dot absolute -top-0.5 right-2"></span>
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <span>Live Events</span>
+      </a>
       <button data-nav="mylist" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
         <span id="navIndicatorMylist" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
@@ -1100,7 +1109,7 @@
         category: 'Sports',
         logo: '',
         premium: true,
-        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
         themeColor: '#1c1c1e',
         ticker: 'Sarah TV LIVE: Ipswich Town vs Nottingham Forest • Premier League'
       },
@@ -1112,7 +1121,7 @@
         category: 'News',
         logo: '',
         premium: false,
-        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
         themeColor: '#b91c1c',
         ticker: 'সময় সংবাদ লাইভ: দেশ ও আন্তর্জাতিক সর্বশেষ খবর দেখুন Sarah TV-তে'
       },
@@ -1124,7 +1133,7 @@
         category: 'Drama',
         logo: '',
         premium: true,
-        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
         themeColor: '#ea580c',
         ticker: 'জি বাংলা এইচডি: জনপ্রিয় সিরিয়াল ও নাটক সরাসরি Sarah TV-তে'
       },
@@ -1136,7 +1145,7 @@
         category: 'Sports',
         logo: '',
         premium: true,
-        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
         themeColor: '#312e81',
         ticker: 'SONY SPORTS TEN 1 HD: UEFA & Premier League Official Broadcast'
       },
@@ -1148,7 +1157,7 @@
         category: 'Sports',
         logo: '',
         premium: true,
-        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
         themeColor: '#047857',
         ticker: 'T SPORTS HD: SAFF Championship 2026 & Bangladesh Cricket Live'
       },
@@ -1160,7 +1169,7 @@
         category: 'News',
         logo: '',
         premium: false,
-        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
         themeColor: '#1e40af',
         ticker: 'যমুনা টেলিভিশন ২৪ ঘণ্টা সরাসরি সম্প্রচার Sarah TV-তে'
       },
@@ -1172,7 +1181,7 @@
         category: 'Movies',
         logo: '',
         premium: true,
-        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
         themeColor: '#636366',
         ticker: 'Star Jalsha Movies: Superhit Bengali Blockbuster Cinema'
       },
@@ -1184,7 +1193,7 @@
         category: 'Web Series',
         logo: '',
         premium: false,
-        streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
         themeColor: '#6b21a8',
         ticker: 'Sarah TV Exclusive Web Series • New Episodes Streaming Now'
       }
@@ -1237,17 +1246,87 @@
     }
     window.logoFail = logoFail;
 
+    function extractAllStreamsFromObject(item, hdrOut) {
+      const urls = [];
+      const iframes = [];
+      const STREAM_KEY_RE = /^(adfree_url|adfree_stream|dai_url|pub_url|video_url|stream_url|streamUrl|stream_link|stream|m3u8|m3u8_url|hls|hls_url|playback_url|playbackUrl|manifest|manifest_url|mpd|mpd_url|dash|dash_url|url|link|file|source|src)$/i;
+      const IMAGE_EXT_RE = /\.(jpg|jpeg|png|webp|gif|svg|ico|bmp|avif)(\?.*)?$/i;
+      const STREAM_HINT_RE = /(\.m3u8|\.mpd|\.ts|\.mp4|\.flv|hls|dash|manifest|live|stream|master|index|playlist|akamaized|cloudfront|fancode|sonyliv|willow|prime|llnwd|cdn|token|hdntl|hdnea)/i;
+
+      function scanVal(val, keyName = '') {
+        if (!val) return;
+        if (typeof val === 'string') {
+          let s = val.trim();
+          if (!s) return;
+          // Handle Kodi pipe syntax: url|User-Agent=...&Referer=...&Cookie=...
+          const pi = s.indexOf('|');
+          if (pi > 0 && /^https?:\/\//i.test(s)) {
+            const base = s.slice(0, pi).trim();
+            const paramStr = s.slice(pi + 1);
+            paramStr.split('&').forEach(kv => {
+              const eq = kv.indexOf('=');
+              if (eq < 0) return;
+              const k = kv.slice(0, eq).trim().toLowerCase();
+              const v = kv.slice(eq + 1).trim();
+              if (k === 'referer' || k === 'referrer' || k === 'http-referer') hdrOut.referer = v;
+              else if (k === 'user-agent' || k === 'http-user-agent') hdrOut.ua = v;
+              else if (k === 'cookie') hdrOut.cookie = v;
+            });
+            s = base;
+          }
+          if (!/^https?:\/\//i.test(s)) return;
+          if (IMAGE_EXT_RE.test(s)) return;
+          if (/^(iframe|embed|embedUrl|embed_url|player_url)$/i.test(keyName)) {
+            if (!iframes.includes(s)) iframes.push(s);
+            return;
+          }
+          if (STREAM_KEY_RE.test(keyName) || STREAM_HINT_RE.test(s)) {
+            if (!urls.includes(s)) urls.push(s);
+          }
+        } else if (Array.isArray(val)) {
+          val.forEach(v => scanVal(v, keyName));
+        } else if (typeof val === 'object') {
+          // Check if object is a headers map
+          Object.keys(val).forEach(k => {
+            const v = val[k];
+            if (typeof v === 'string') {
+              if (/^(referer|referrer|http-referer)$/i.test(k)) hdrOut.referer = v.trim();
+              else if (/^(user-agent|useragent|ua|http-user-agent)$/i.test(k)) hdrOut.ua = v.trim();
+              else if (/^(cookie|cookies)$/i.test(k)) hdrOut.cookie = v.trim();
+            }
+          });
+          // Priority order for stream keys inside nested objects
+          const priorityKeys = ['adfree_url', 'adfree_stream', 'dai_url', 'pub_url', 'video_url', 'stream_url', 'streamUrl', 'stream_link', 'm3u8', 'm3u8_url', 'hls', 'hls_url', 'playback_url', 'playbackUrl', 'manifest', 'mpd', 'url', 'link', 'stream', 'file', 'source', 'src', 'iframe', 'embed', 'embedUrl'];
+          priorityKeys.forEach(pk => {
+            if (val[pk] !== undefined) scanVal(val[pk], pk);
+          });
+          Object.keys(val).forEach(k => {
+            if (!priorityKeys.includes(k) && !/^(logo|image|poster|banner|thumb|thumbnail|icon|team_1_flag|team_2_flag|flag)$/i.test(k)) {
+              scanVal(val[k], k);
+            }
+          });
+        }
+      }
+
+      scanVal(item, '');
+      return { urls, iframes };
+    }
+
     function normalizeChannelsJson(rawJson, offset = 0, defaultCategory = 'Live TV', sourceName = '', prefix = 'json', fallbackLogo = '', isEvent = false) {
       let arr = [];
       if (Array.isArray(rawJson)) {
         arr = rawJson;
       } else if (rawJson && typeof rawJson === 'object') {
-        for (const k of ['events', 'matches', 'sports', 'playlist', 'channels', 'data', 'items', 'streams', 'list', 'result', 'feed']) {
+        const listKeys = ['live_matches', 'matches', 'events', 'sports', 'playlist', 'channels', 'data', 'items', 'streams', 'list', 'result', 'feed', 'upcoming_matches'];
+        listKeys.forEach(k => {
           if (Array.isArray(rawJson[k])) {
-            arr = rawJson[k];
-            break;
+            rawJson[k].forEach(item => {
+              if (item && typeof item === 'object') {
+                arr.push({ ...item, _parentGroup: k });
+              }
+            });
           }
-        }
+        });
         if (!arr.length) {
           Object.keys(rawJson).forEach(k => {
             if (Array.isArray(rawJson[k])) {
@@ -1266,64 +1345,118 @@
       return arr.map((item, i0) => {
         if (!item || typeof item !== 'object') return null;
         const idx = i0 + offset;
-        const name = cleanTxt(item.name || item.title || item.event || item.event_name || item.match || item.match_name || item.channel || item.channel_name || item.tvg_name || `${sourceName || 'Channel'} ${idx + 1}`);
-        let category = cleanTxt(item.category || item.group || item.group_title || item.genre || item.sport || item.type || defaultCategory || 'Live TV');
-        if (/^(undefined|uncategori[sz]ed|general)$/i.test(category)) category = defaultCategory || 'Live TV';
 
-        let logo = normalizeLogoUrl(item.logo || item.logo_url || item.logoUrl || item.logoURL || item.image || item.image_url || item.imageUrl || item.poster || item.banner || item.thumb || item.thumbnail || item.icon || item.icon_url || item.tvg_logo || item['tvg-logo'] || fallbackLogo || '');
+        // Extract title / match name accurately (avoiding "Unknown 49")
+        const team1 = cleanTxt(item.team_1 || item.team1 || item.home_team || item.teamA || '');
+        const team2 = cleanTxt(item.team_2 || item.team2 || item.away_team || item.teamB || '');
+        const teamMatch = (team1 && team2) ? `${team1} vs ${team2}` : '';
 
-        let streamUrl = item.url || item.streamUrl || item.stream_url || item.stream || item.link || item.m3u8 || item.playback_url || item.playbackUrl || item.source || item.src || item.file || item.youtube || item.yt || item.hls || item.mpd || 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
-        
-        // Extract headers (Referer, User-Agent) if present
-        let hdr = {};
-        if (item.headers && typeof item.headers === 'object') {
-          Object.keys(item.headers).forEach(k => {
-            if (/referer/i.test(k)) hdr.referer = item.headers[k];
-            if (/user-agent/i.test(k)) hdr.ua = item.headers[k];
-          });
-        } else {
-          if (item.referer || item.referrer) hdr.referer = item.referer || item.referrer;
-          if (item.userAgent || item['User-Agent'] || item.ua) hdr.ua = item.userAgent || item['User-Agent'] || item.ua;
+        let rawName = cleanTxt(
+          item.match_name ||
+          item.event_name ||
+          item.title ||
+          item.name ||
+          item.event ||
+          item.match ||
+          teamMatch ||
+          item.channel_name ||
+          item.channel ||
+          item.broadcast_channel ||
+          item.tvg_name ||
+          ''
+        );
+        if (!rawName || /^unknown\s*\d*$/i.test(rawName)) {
+          rawName = teamMatch || cleanTxt(item.tournament || item.league || item.series || item.broadcast_channel || `${sourceName || defaultCategory || 'Live Match'} #${idx + 1}`);
         }
+        const name = rawName;
 
-        // Apply proxy if headers present
-        if (streamUrl && (hdr.referer || hdr.ua)) {
-          streamUrl = proxify(streamUrl, hdr);
+        let rawCat = cleanTxt(
+          item.event_category ||
+          item.sport ||
+          item.category ||
+          item.group ||
+          item.group_title ||
+          item.genre ||
+          item.tournament ||
+          defaultCategory ||
+          'Live TV'
+        );
+        if (!rawCat || /^(undefined|unknown|uncategori[sz]ed|general|live_matches|matches|events)$/i.test(rawCat)) {
+          rawCat = isEvent ? 'Live Events' : (defaultCategory || 'Live TV');
         }
+        const category = rawCat;
 
-        const iframeUrl = item.iframe || item.embed || item.embedUrl || '';
+        // Extract Logo / Poster Image (note: in SonyLiv/FanCode JSONs, "src" is often a .jpg/.png image!)
+        const IMAGE_EXT = /\.(jpg|jpeg|png|webp|gif|svg|bmp|avif)(\?.*)?$/i;
+        let logoCandidate = item.logo || item.logo_url || item.logoUrl || item.logoURL || item.image || item.image_url || item.imageUrl || item.poster || item.banner || item.thumb || item.thumbnail || item.icon || item.icon_url || item.tvg_logo || item['tvg-logo'] || '';
+        if (!logoCandidate && typeof item.src === 'string' && IMAGE_EXT.test(item.src)) {
+          logoCandidate = item.src;
+        }
+        const logo = normalizeLogoUrl(logoCandidate || fallbackLogo || '');
+
+        // Deep scan for all valid stream URLs & headers
+        const hdr = {};
+        const extracted = extractAllStreamsFromObject(item, hdr);
+
         let servers = [];
+        extracted.urls.forEach((u, sIdx) => {
+          const finalUrl = (hdr.referer || hdr.ua) ? proxify(u, hdr) : u;
+          servers.push({ name: `Server ${sIdx + 1}`, url: finalUrl, iframe: '' });
+        });
+        extracted.iframes.forEach((f, fIdx) => {
+          servers.push({ name: `Embed ${fIdx + 1}`, url: '', iframe: f });
+        });
+
+        // Also check explicit item.servers if any weren't caught
         if (Array.isArray(item.servers)) {
-          item.servers.forEach(sv => {
+          item.servers.forEach((sv) => {
             if (!sv) return;
-            let u = typeof sv === 'string' ? sv : (sv.url || sv.streamUrl || sv.link || sv.src || '');
-            let f = typeof sv === 'object' ? (sv.iframe || sv.embed || '') : '';
+            let u = typeof sv === 'string' ? sv : (sv.url || sv.streamUrl || sv.stream_url || sv.link || '');
+            let f = typeof sv === 'object' ? (sv.iframe || sv.embed || sv.embedUrl || '') : '';
+            if (u && IMAGE_EXT.test(u)) u = '';
             if (u && (hdr.referer || hdr.ua)) u = proxify(u, hdr);
-            if (u || f) servers.push({ url: u, iframe: f });
+            if ((u || f) && !servers.some(existing => existing.url === u && existing.iframe === f)) {
+              servers.push({ name: sv.name || `Server ${servers.length + 1}`, url: u, iframe: f });
+            }
           });
         }
-        if (!servers.length) servers = [{ url: streamUrl, iframe: iframeUrl }];
+
+        // Skip upcoming items that have NO stream URL and NO iframe URL at all
+        if (!servers.length) return null;
+
+        const streamUrl = servers[0].url || '';
+        const iframeUrl = servers[0].iframe || '';
 
         const words = name.trim().split(/\s+/);
-        const vs = name.match(/^(.+?)\s+vs\s+(.+?)(?:\s+-|$)/i);
-        const shortLabel = item.shortLabel || (vs ? (vs[1].slice(0, 6) + ' v ' + vs[2].slice(0, 6)) : (words.length >= 2 ? (words[0] + ' ' + words[1]).slice(0, 10) : name.slice(0, 8)));
-        const subLabel = item.subLabel || item.quality || category.toUpperCase().slice(0, 10);
+        const vs = name.match(/^(.+?)\s+vs\s+(.+?)(?:\s+-|\s*\[|\s*\(|$)/i);
+        const shortLabel = item.shortLabel || (vs ? (vs[1].trim().slice(0, 6) + ' v ' + vs[2].trim().slice(0, 6)) : (words.length >= 2 ? (words[0] + ' ' + words[1]).slice(0, 10) : name.slice(0, 8)));
+        const subLabel = item.subLabel || item.quality || (isEvent ? 'LIVE EVENT' : category.toUpperCase().slice(0, 10));
 
-        const timeInfo = item.startTime || item.time || item.date || item.status || '';
-        const ticker = item.ticker || item.description || (timeInfo ? `🔴 ${timeInfo} • ${name} • ${sourceName || category}` : `🔴 LIVE: ${name} • ${sourceName || category} • Sarah TV`);
+        const timeInfo = cleanTxt(item.startTime || item.time || item.date || item.status || '');
+        const tournamentInfo = cleanTxt(item.event_name || item.tournament || item.broadcast_channel || '');
+        const ticker = cleanTxt(item.ticker || item.description || [timeInfo ? `🔴 ${timeInfo}` : '🔴 LIVE', name, tournamentInfo, sourceName || category].filter(Boolean).join(' • '));
+
+        const eventFlag = Boolean(
+          isEvent ||
+          item.isEvent ||
+          item._parentGroup === 'live_matches' ||
+          item._parentGroup === 'matches' ||
+          item._parentGroup === 'events' ||
+          /\bvs\b|match|event|test|odi|t20|league|trophy|cup/i.test(name + ' ' + category)
+        );
 
         return {
-          id: String(item.id || `${prefix}-${idx}`),
+          id: String(item.id || item.match_id || item.contentId || `${prefix}-${idx}`),
           name,
           shortLabel,
           subLabel,
           category,
           logo,
-          streamUrl: servers[0].url || streamUrl,
-          iframeUrl: servers[0].iframe || iframeUrl,
+          streamUrl,
+          iframeUrl,
           servers,
           needsHeaders: Boolean(hdr.referer || hdr.ua),
-          isEvent: Boolean(isEvent || item.isEvent || /event|match|vs/i.test(name)),
+          isEvent: eventFlag,
           sourceName: sourceName || category,
           fromRemoteJson: true,
           premium: Boolean(item.premium || item.vip || item.isPremium),
@@ -1459,6 +1592,7 @@
             iframeUrl: '',
             premium: false,
             fromM3U: true,
+            isEvent: Boolean(prefix === 'fan' || prefix === 'sony' || /\bvs\b|match|event|live|cricket|football|sports/i.test(short + ' ' + category)),
             sourceName,
             badgeColor: BADGE_COLORS[i % BADGE_COLORS.length],
             cardGradient: CARD_GRADIENTS[i % CARD_GRADIENTS.length],
@@ -1533,6 +1667,7 @@
         base.iframeUrl = servers[0].iframe;
         if (!base.logo) { const l = ordered.find(m => m.logo); if (l) base.logo = l.logo; }
         base.fromM3U = ordered.every(m => m.fromM3U);
+        base.isEvent = ordered.some(m => m.isEvent);
         base.name = cleanTxt(base.name).replace(/\s[-–—]\s*\d+\s*$/, '') || 'Channel';
         base.category = cleanTxt(base.category) || 'Live TV';
         base.shortLabel = cleanTxt(base.shortLabel) || base.name.slice(0, 8);
@@ -1821,39 +1956,69 @@
       const dotsBox = document.getElementById('heroDots');
       if (!track || !dotsBox) return;
       const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
-      const HUES = [212, 268, 340, 24, 152, 48, 192, 300];
+      const HUES = [340, 268, 212, 152, 24, 300, 192, 48];
       const bn = (n) => String(n).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
-      const pool = (CHANNELS && CHANNELS.length ? CHANNELS : DEFAULT_CHANNELS_JSON);
+      const pool = (CHANNELS && CHANNELS.length ? CHANNELS : []);
 
-      const withLogo = pool.filter(c => c.logo);
-      const live = withLogo.filter(c => c.fromM3U && /sport|match|cricket|football|live/i.test((c.category || '') + ' ' + (c.name || '')));
-      const seen = new Set(), picks = [];
-      live.concat(withLogo, pool).forEach(c => { if (picks.length < 7 && !seen.has(c.id)) { seen.add(c.id); picks.push(c); } });
-
-      const sub = document.getElementById('heroIntroSub');
-      if (sub) sub.textContent = `${bn(pool.length)}টি লাইভ চ্যানেল, এক জায়গায়`;
+      // Update total channel count in stats
       const st = document.getElementById('statCount');
       if (st) st.textContent = bn(pool.length);
 
-      track.querySelectorAll('.hs-ch').forEach(el => el.remove());
-      const total = picks.length + 1;
+      // Filter strictly for LIVE EVENTS (from Willow, Prime Video, SonyLIV, FanCode, or any match/event)
+      let eventPicks = pool.filter(c =>
+        c.isEvent ||
+        c.fromRemoteJson ||
+        /live events|willow|prime|sonyliv|fancode/i.test((c.sourceName || '') + ' ' + (c.category || '')) ||
+        /\bvs\b|match|odi|t20|test|league|cup|trophy|live/i.test(c.name || '')
+      );
+
+      if (!eventPicks.length) {
+        eventPicks = pool.filter(c => /sport|cricket|football/i.test((c.category || '') + ' ' + (c.name || '')));
+      }
+      if (!eventPicks.length) {
+        eventPicks = pool.slice(0, 8);
+      }
+
+      const picks = eventPicks.slice(0, 12);
+
+      // Clear ALL slides in heroTrack (including static intro slide) so ONLY live events show!
+      track.innerHTML = '';
+
+      if (!picks.length) {
+        track.innerHTML = `
+          <div class="hs in snap-center-item" style="--h:340">
+            <div class="hs-art brand"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="hs-body">
+              <span class="hs-live"><i></i>LIVE EVENTS</span>
+              <h2 class="hs-title">Live Sports & Events</h2>
+              <p class="hs-sub">লাইভ ইভেন্ট লোড হচ্ছে...</p>
+              <div class="hs-actions">
+                <a href="./live.html" class="hs-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Live Events Page</a>
+              </div>
+            </div>
+          </div>`;
+        dotsBox.innerHTML = '<button data-slide="0" class="hero-dot on" aria-label="Slide 1"></button>';
+        return;
+      }
 
       picks.forEach((ch, i) => {
         const el = document.createElement('div');
-        el.className = 'hs hs-ch snap-center-item';
+        el.className = 'hs hs-ch snap-center-item' + (i === 0 ? ' in' : '');
         el.style.setProperty('--h', HUES[i % HUES.length]);
         const label = esc(ch.shortLabel || (ch.name || '').slice(0, 8));
         const n = ch.servers ? ch.servers.length : 1;
-        const meta = [ch.category || 'Live TV', ch.sourceName, n > 1 ? `${bn(n)}টি সার্ভার` : ''].filter(Boolean).map(esc).join('  ·  ');
+        const badgeText = (ch.sourceName || ch.category || 'LIVE EVENT').toUpperCase();
+        const meta = [ch.category || 'Live Event', ch.sourceName, n > 1 ? `${bn(n)}টি সার্ভার` : 'HD Stream'].filter(Boolean).map(esc).join('  ·  ');
         const saved = state.favorites.includes(ch.id);
         el.innerHTML = `
           <div class="hs-art"><span>${label}</span>${ch.logo ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async" onerror="logoFail(this,'remove')" src="${esc(ch.logo)}" alt="" />` : ''}</div>
           <div class="hs-body">
-            <span class="hs-live"><i></i>LIVE</span>
+            <span class="hs-live"><i></i>LIVE EVENT • ${esc(badgeText)}</span>
             <h2 class="hs-title">${esc(ch.name)}</h2>
             <p class="hs-sub">${meta}</p>
             <div class="hs-actions">
               <button data-play-channel="${esc(ch.id)}" class="hs-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch Live</button>
+              <a href="./live.html" class="px-4 h-[46px] rounded-full bg-white/15 hover:bg-white/25 border border-white/25 text-white font-bold text-xs flex items-center gap-1.5 backdrop-blur-md transition">🔴 All Events</a>
               <button data-hero-fav="${esc(ch.id)}" class="hs-ghost" aria-label="My List">${saved ? '✓' : '+'}</button>
             </div>
           </div>`;
@@ -1861,7 +2026,7 @@
       });
 
       dotsBox.innerHTML = '';
-      for (let k = 0; k < total; k++) {
+      for (let k = 0; k < picks.length; k++) {
         const b = document.createElement('button');
         b.className = 'hero-dot' + (k === 0 ? ' on' : '');
         b.dataset.slide = k;
@@ -2068,8 +2233,8 @@
       const cur = Math.min(Math.max(state.currentChannelIndex, 0), n - 1);
       const activeCh = CHANNELS[cur];
 
-      // Running channel er age-pore (±3) channel gulo dekhabe
-      const RADIUS = 3;
+      // Show up to 25 nearby channels (±12 around current channel, or all if <= 25)
+      const RADIUS = 12;
       let indices = [];
       if (n <= RADIUS * 2 + 1) {
         indices = CHANNELS.map((_, i) => i);
@@ -2081,22 +2246,22 @@
         const ch = CHANNELS[idx];
         const isCurrent = ch.id === activeCh.id;
         return `
-          <button data-popup-channel-index="${idx}" ${isCurrent ? 'data-current="1"' : ''} class="flex-shrink-0 w-[7.5rem] p-1.5 rounded-lg border ${isCurrent ? 'border-pink-500 bg-pink-500/20' : 'border-white/10 bg-white/5 hover:bg-white/10'} flex items-center gap-1.5 text-left snap-start-item transition active:scale-95">
-            <div class="w-7 h-7 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-[8px] ${ch.badgeColor} overflow-hidden p-0.5">
+          <button data-popup-channel-index="${idx}" ${isCurrent ? 'data-current="1"' : ''} class="flex-shrink-0 w-[5.4rem] sm:w-[6rem] px-1.5 py-1 rounded-lg border ${isCurrent ? 'border-pink-500 bg-pink-500/25 shadow-sm shadow-pink-500/30' : 'border-white/10 bg-white/5 hover:bg-white/10'} flex items-center gap-1 text-left snap-start-item transition active:scale-95">
+            <div class="w-5 h-5 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-[7px] ${ch.badgeColor} overflow-hidden p-0.5">
               ${ch.logo
                 ? `<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${appEsc(ch.logo)}" alt="" class="w-full h-full object-contain" onerror="logoFail(this,'block')" /><span style="display:none">${appEsc(ch.shortLabel)}</span>`
                 : `<span>${appEsc(ch.shortLabel)}</span>`
               }
             </div>
-            <div class="overflow-hidden min-w-0">
-              <p class="text-[10px] font-bold text-white truncate leading-tight">${appEsc(ch.name)}</p>
-              <p class="text-[9px] ${isCurrent ? 'text-pink-300 font-bold' : 'text-slate-400'} truncate leading-tight">${isCurrent ? '● Playing' : appEsc(ch.category)}</p>
+            <div class="overflow-hidden min-w-0 flex-1">
+              <p class="text-[8.5px] font-bold text-white truncate leading-tight">${appEsc(ch.name)}</p>
+              <p class="text-[7.5px] ${isCurrent ? 'text-pink-300 font-bold' : 'text-slate-400'} truncate leading-tight">${isCurrent ? '● Playing' : appEsc(ch.category)}</p>
             </div>
           </button>
         `;
       }).join('');
 
-      // Running channel ke majhkhane anbe
+      // Center the currently playing channel in the track
       const curEl = track.querySelector('[data-current="1"]');
       if (curEl) {
         const center = () => { track.scrollLeft = curEl.offsetLeft - (track.clientWidth - curEl.offsetWidth) / 2; };
@@ -4318,7 +4483,7 @@
         customModal.classList.remove('flex');
       });
       document.getElementById('playCustomM3u8Btn').addEventListener('click', () => {
-        const url = document.getElementById('customM3u8Input').value.trim() || 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+        const url = document.getElementById('customM3u8Input').value.trim() || '';
         state.currentChannelIndex = Math.min(state.currentChannelIndex, CHANNELS.length - 1);
         customModal.classList.add('hidden');
         customModal.classList.remove('flex');

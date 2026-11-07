@@ -107,7 +107,7 @@
           <span>↻</span> <span>রিফ্রেশ</span>
         </button>
         <a href="./index.html" class="px-3.5 py-1.5 rounded-full btn-gradient text-xs font-bold text-white transition active:scale-95">
-          TV Home
+          ← TV Home
         </a>
       </div>
     </div>
@@ -158,6 +158,7 @@
       <button data-cat="all" class="cat-pill active">সব ইভেন্ট (<span id="totalEventsCount">0</span>)</button>
       <button data-cat="willow" class="cat-pill">🏏 Willow Sports</button>
       <button data-cat="prime" class="cat-pill">📺 Prime Video</button>
+      <button data-cat="sony" class="cat-pill">🏆 SonyLIV</button>
       <button data-cat="cricket" class="cat-pill">Cricket</button>
       <button data-cat="football" class="cat-pill">Football</button>
     </div>
@@ -172,7 +173,7 @@
       <div class="flex items-center justify-between">
         <h3 id="sectionHeading" class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
           <span class="w-2.5 h-2.5 rounded-full bg-pink-500 live-dot"></span>
-          <span>লাইভ স্পোর্টস ও আপকামিং ম্যাচ</span>
+          <span>লাইভ স্পোর্টস ও ম্যাচ তালিকা</span>
         </h3>
         <span id="loadedStatusBadge" class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold">লোড হচ্ছে...</span>
       </div>
@@ -190,15 +191,19 @@
         name: 'Willow Sports',
         key: 'willow',
         badge: 'Willow TV',
-        color: 'from-amber-600 to-rose-600',
         url: 'https://raw.githubusercontent.com/srhady/willow-event/refs/heads/main/live_sports.json'
       },
       {
         name: 'Prime Video Sports',
         key: 'prime',
         badge: 'Prime Video',
-        color: 'from-sky-600 to-indigo-600',
         url: 'https://raw.githubusercontent.com/srhady/willow-event/refs/heads/main/primevideo_sports.json'
+      },
+      {
+        name: 'SonyLIV Sports',
+        key: 'sony',
+        badge: 'SonyLIV',
+        url: 'https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv_playlist.json'
       }
     ];
 
@@ -211,12 +216,56 @@
       return String(str == null ? '' : str).trim();
     }
 
-    function normalizeLogo(raw, sourceKey) {
+    function extractAllStreamsFromObject(item) {
+      const urls = [];
+      const iframes = [];
+      const STREAM_KEY_RE = /^(adfree_url|adfree_stream|dai_url|pub_url|video_url|stream_url|streamUrl|stream_link|stream|m3u8|m3u8_url|hls|hls_url|playback_url|playbackUrl|manifest|manifest_url|mpd|mpd_url|dash|dash_url|url|link|file|source|src)$/i;
+      const IMAGE_EXT_RE = /\.(jpg|jpeg|png|webp|gif|svg|ico|bmp|avif)(\?.*)?$/i;
+      const STREAM_HINT_RE = /(\.m3u8|\.mpd|\.ts|\.mp4|\.flv|hls|dash|manifest|live|stream|master|index|playlist|akamaized|cloudfront|fancode|sonyliv|willow|prime|llnwd|cdn|token|hdntl|hdnea)/i;
+
+      function scanVal(val, keyName = '') {
+        if (!val) return;
+        if (typeof val === 'string') {
+          let s = val.trim();
+          if (!s) return;
+          const pi = s.indexOf('|');
+          if (pi > 0 && /^https?:\/\//i.test(s)) s = s.slice(0, pi).trim();
+          if (!/^https?:\/\//i.test(s)) return;
+          if (IMAGE_EXT_RE.test(s)) return;
+          if (/^(iframe|embed|embedUrl|embed_url|player_url)$/i.test(keyName)) {
+            if (!iframes.includes(s)) iframes.push(s);
+            return;
+          }
+          if (STREAM_KEY_RE.test(keyName) || STREAM_HINT_RE.test(s)) {
+            if (!urls.includes(s)) urls.push(s);
+          }
+        } else if (Array.isArray(val)) {
+          val.forEach(v => scanVal(v, keyName));
+        } else if (typeof val === 'object') {
+          const priorityKeys = ['adfree_url', 'adfree_stream', 'dai_url', 'pub_url', 'video_url', 'stream_url', 'streamUrl', 'stream_link', 'm3u8', 'm3u8_url', 'hls', 'hls_url', 'playback_url', 'playbackUrl', 'manifest', 'mpd', 'url', 'link', 'stream', 'file', 'source', 'src', 'iframe', 'embed', 'embedUrl'];
+          priorityKeys.forEach(pk => {
+            if (val[pk] !== undefined) scanVal(val[pk], pk);
+          });
+          Object.keys(val).forEach(k => {
+            if (!priorityKeys.includes(k) && !/^(logo|image|poster|banner|thumb|thumbnail|icon|team_1_flag|team_2_flag|flag)$/i.test(k)) {
+              scanVal(val[k], k);
+            }
+          });
+        }
+      }
+      scanVal(item, '');
+      return { urls, iframes };
+    }
+
+    function normalizeLogo(item, sourceKey) {
+      const IMAGE_EXT = /\.(jpg|jpeg|png|webp|gif|svg|bmp|avif)(\?.*)?$/i;
+      let raw = item.logo || item.logo_url || item.logoUrl || item.image || item.image_url || item.imageUrl || item.poster || item.banner || item.thumb || item.thumbnail || item.icon || item.tvg_logo || '';
+      if (!raw && typeof item.src === 'string' && IMAGE_EXT.test(item.src)) raw = item.src;
       let u = cleanTxt(raw);
       if (!u) {
-        return sourceKey === 'prime'
-          ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Prime_Video.png/240px-Prime_Video.png'
-          : 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Willow_TV_logo.svg/240px-Willow_TV_logo.svg.png';
+        if (sourceKey === 'prime') return 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Prime_Video.png/240px-Prime_Video.png';
+        if (sourceKey === 'sony') return 'https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv.png';
+        return 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Willow_TV_logo.svg/240px-Willow_TV_logo.svg.png';
       }
       if (u.startsWith('//')) u = 'https:' + u;
       return u;
@@ -226,9 +275,14 @@
       let arr = [];
       if (Array.isArray(data)) arr = data;
       else if (data && typeof data === 'object') {
-        for (const k of ['events', 'matches', 'sports', 'playlist', 'channels', 'data', 'items', 'streams', 'list']) {
-          if (Array.isArray(data[k])) { arr = data[k]; break; }
-        }
+        const listKeys = ['live_matches', 'matches', 'events', 'sports', 'playlist', 'channels', 'data', 'items', 'streams', 'list', 'result', 'feed'];
+        listKeys.forEach(k => {
+          if (Array.isArray(data[k])) {
+            data[k].forEach(item => {
+              if (item && typeof item === 'object') arr.push(item);
+            });
+          }
+        });
         if (!arr.length) {
           Object.keys(data).forEach(k => {
             if (Array.isArray(data[k])) {
@@ -242,38 +296,44 @@
 
       return arr.map((item, idx) => {
         if (!item || typeof item !== 'object') return null;
-        const name = cleanTxt(item.title || item.name || item.event || item.match || item.channel || `Live Match ${idx + 1}`);
-        const streamUrl = cleanTxt(item.url || item.stream_url || item.streamUrl || item.link || item.m3u8 || item.playback_url || item.playbackUrl || item.source || item.src || '');
-        const iframeUrl = cleanTxt(item.iframe || item.embed || item.embedUrl || '');
-        const time = cleanTxt(item.startTime || item.time || item.date || item.status || 'LIVE NOW');
-        const sport = cleanTxt(item.sport || item.category || item.genre || (/cricket/i.test(name) ? 'Cricket' : /football|soccer|epl/i.test(name) ? 'Football' : 'Sports'));
-        const logo = normalizeLogo(item.image || item.imageUrl || item.poster || item.logo || item.banner, source.key);
+        const team1 = cleanTxt(item.team_1 || item.team1 || item.home_team || '');
+        const team2 = cleanTxt(item.team_2 || item.team2 || item.away_team || '');
+        const teamMatch = (team1 && team2) ? `${team1} vs ${team2}` : '';
 
-        let servers = [];
-        if (Array.isArray(item.servers)) {
-          item.servers.forEach((sv, sIdx) => {
-            const u = typeof sv === 'string' ? sv : (sv.url || sv.stream_url || sv.link || '');
-            const f = typeof sv === 'object' ? (sv.iframe || sv.embed || '') : '';
-            if (u || f) servers.push({ name: sv.name || `Server ${sIdx + 1}`, url: u, iframe: f });
-          });
+        let name = cleanTxt(item.match_name || item.event_name || item.title || item.name || item.event || item.match || teamMatch || item.channel_name || item.broadcast_channel || '');
+        if (!name || /^unknown\s*\d*$/i.test(name)) {
+          name = teamMatch || cleanTxt(item.tournament || item.league || `${source.badge} Match #${idx + 1}`);
         }
-        if (!servers.length) servers = [{ name: 'Server 1', url: streamUrl, iframe: iframeUrl }];
+
+        const time = cleanTxt(item.startTime || item.time || item.date || item.status || 'LIVE NOW');
+        const sport = cleanTxt(item.event_category || item.sport || item.category || item.genre || (/cricket/i.test(name) ? 'Cricket' : /football|soccer|epl|isl|ucl/i.test(name) ? 'Football' : 'Sports'));
+        const logo = normalizeLogo(item, source.key);
+
+        const extracted = extractAllStreamsFromObject(item);
+        let servers = [];
+        extracted.urls.forEach((u, sIdx) => {
+          servers.push({ name: `Server ${sIdx + 1}`, url: u, iframe: '' });
+        });
+        extracted.iframes.forEach((f, fIdx) => {
+          servers.push({ name: `Embed ${fIdx + 1}`, url: '', iframe: f });
+        });
+
+        if (!servers.length) return null;
 
         return {
-          id: `${source.key}-${idx}-${name.replace(/\s+/g, '-').slice(0, 20)}`,
+          id: `${source.key}-${idx}`,
           name,
           time,
           sport,
           logo,
-          streamUrl: servers[0].url || streamUrl,
-          iframeUrl: servers[0].iframe || iframeUrl,
+          streamUrl: servers[0].url || '',
+          iframeUrl: servers[0].iframe || '',
           servers,
           sourceName: source.name,
           sourceBadge: source.badge,
-          sourceKey: source.key,
-          sourceColor: source.color
+          sourceKey: source.key
         };
-      }).filter(item => item && (item.streamUrl || item.iframeUrl));
+      }).filter(Boolean);
     }
 
     async function loadEventsFromSources() {
@@ -288,7 +348,6 @@
           const json = await res.json();
           return parseEventList(json, src);
         } catch (e) {
-          console.error('Error fetching source:', src.name, e);
           return [];
         }
       }));
@@ -296,7 +355,7 @@
       ALL_EVENTS = [].concat(...results);
       document.getElementById('totalEventsCount').textContent = ALL_EVENTS.length;
 
-      statusBadge.textContent = `${ALL_EVENTS.length}টি লাইভ ম্যাচ রেডি`;
+      statusBadge.textContent = `${ALL_EVENTS.length}টি লাইভ ইভেন্ট রেডি`;
       statusBadge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold';
 
       renderEventsGrid();
@@ -312,10 +371,12 @@
         list = list.filter(e => e.sourceKey === 'willow');
       } else if (currentCategory === 'prime') {
         list = list.filter(e => e.sourceKey === 'prime');
+      } else if (currentCategory === 'sony') {
+        list = list.filter(e => e.sourceKey === 'sony');
       } else if (currentCategory === 'cricket') {
         list = list.filter(e => /cricket/i.test(e.sport + ' ' + e.name));
       } else if (currentCategory === 'football') {
-        list = list.filter(e => /football|soccer|epl/i.test(e.sport + ' ' + e.name));
+        list = list.filter(e => /football|soccer|epl|isl|ucl/i.test(e.sport + ' ' + e.name));
       }
 
       if (q) {
@@ -326,7 +387,7 @@
         grid.innerHTML = `
           <div class="col-span-full py-16 text-center text-slate-400 space-y-2">
             <div class="w-12 h-12 mx-auto rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xl">🏏</div>
-            <p class="font-semibold text-white">কোনো ম্যাচ পাওয়া যায়নি</p>
+            <p class="font-semibold text-white">কোনো লাইভ ম্যাচ পাওয়া যায়নি</p>
             <p class="text-xs text-slate-400">ফিল্টার পরিবর্তন করে দেখুন বা রিফ্রেশ চাপুন।</p>
           </div>
         `;
@@ -397,7 +458,6 @@
       const iframe = document.getElementById('liveIframe');
       const spinner = document.getElementById('playerSpinner');
 
-      // Scroll smoothly to player
       document.getElementById('playerSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
       if (hlsInstance) {
@@ -422,8 +482,8 @@
 
       spinner.classList.remove('hidden');
 
-      if (Hls.isSupported() && (streamUrl.includes('.m3u8') || streamUrl.includes('m3u8'))) {
-        const hls = new Hls({ enableWorker: true, lowLatencyMode: true });
+      if (Hls.isSupported() && (streamUrl.includes('.m3u8') || streamUrl.includes('m3u8') || streamUrl.includes('hls'))) {
+        const hls = new Hls({ enableWorker: true, lowLatencyMode: false });
         hlsInstance = hls;
         hls.loadSource(streamUrl);
         hls.attachMedia(video);
@@ -431,8 +491,14 @@
           spinner.classList.add('hidden');
           video.play().catch(() => {});
         });
-        hls.on(Hls.Events.ERROR, () => {
-          spinner.classList.add('hidden');
+        hls.on(Hls.Events.ERROR, (e, data) => {
+          if (data.fatal) {
+            spinner.classList.add('hidden');
+            // Auto try next server if available
+            if (ev.servers && serverIdx + 1 < ev.servers.length) {
+              playEvent(ev, serverIdx + 1);
+            }
+          }
         });
       } else {
         video.src = streamUrl;
@@ -486,7 +552,6 @@
         }
       });
 
-      // Auto refresh every 3 minutes
       setInterval(loadEventsFromSources, 3 * 60 * 1000);
     });
   </script>
