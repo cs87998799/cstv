@@ -1617,16 +1617,8 @@
     const REMOTE_JSON_SOURCES = [];
     let REMOTE_JSON_CHANNELS = [];
 
-    // ===== 🔰 SM IPTV Active All Playlists 🔰 =====
+    // ===== 🔰 Active M3U Playlists (SonyLiv, Both Toffee, Ayna OTT, Tapmad, Jago BD, SM Combined) 🔰 =====
     const M3U_SOURCES = [
-      // 🏆 Upcoming & Live Sports Data
-      {
-        url: 'https://raw.githubusercontent.com/sm-monirulislam/Upcoming-and-Live-Sports-Data/refs/heads/main/Sports_data.m3u',
-        prefix: 'sm-sports',
-        sourceName: 'Live Sports',
-        defaultCategory: 'Live Events',
-        isEvent: true
-      },
       // 🏏 SonyLiv Playlist
       {
         url: 'https://raw.githubusercontent.com/sm-monirulislam/SonyLiv_Event_Playlist/refs/heads/main/sonyLiv.m3u',
@@ -1635,11 +1627,18 @@
         defaultCategory: 'SonyLIV',
         isEvent: true
       },
-      // 🌐 Toffee Playlist
+      // 🌐 Toffee Playlist 1 (SM Auto-Update)
       {
         url: 'https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update/refs/heads/main/toffee_playlist.m3u',
         prefix: 'sm-toffee',
         sourceName: 'Toffee',
+        defaultCategory: 'Toffee'
+      },
+      // 🌐 Toffee Playlist 2 (Workerbot)
+      {
+        url: 'https://tv9.workerbot-tv9.workers.dev/toffee.m3u',
+        prefix: 'toffee-wb',
+        sourceName: 'Toffee 2',
         defaultCategory: 'Toffee'
       },
       // 📡 Ayna OTT Playlist
@@ -1654,7 +1653,8 @@
         url: 'https://raw.githubusercontent.com/sm-monirulislam/Tapmad_Auto_Update_Playlist/refs/heads/main/tapmad_sm.m3u',
         prefix: 'sm-tapmad',
         sourceName: 'Tapmad',
-        defaultCategory: 'Sports'
+        defaultCategory: 'Sports',
+        isEvent: true
       },
       // 📡 Jago BD Playlist
       {
@@ -1671,13 +1671,6 @@
         sourceName: 'SM IPTV',
         defaultCategory: 'Live TV',
         clean: true
-      },
-      // 🎬 Movie Combined Playlist
-      {
-        url: 'https://raw.githubusercontent.com/sm-monirulislam/SM-Movie-Hup-Auto-Update/refs/heads/main/Movie_Combined.m3u',
-        prefix: 'sm-movies',
-        sourceName: 'Movies',
-        defaultCategory: 'Movies'
       }
     ];
     const FETCH_TIMEOUT_MS = 14000; // ekta source atke gele baki gulo jeno na atke
