@@ -80,6 +80,7 @@
     })();
   </script>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/shaka-player@4.11.15/dist/shaka-player.compiled.min.js"></script>
   <style>
     * {
       -webkit-tap-highlight-color: transparent;
@@ -896,10 +897,14 @@
           <p id="playerChannelSub" class="text-xs text-slate-300 truncate">Live • Auto Stream</p>
         </div>
       </div>
-      <div class="flex items-center gap-2 flex-shrink-0">
+      <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+        <button id="openNsPlayerTopBtn" title="Play in Network Stream Player App" class="cs-btn !bg-emerald-600/90 hover:!bg-emerald-500 !border-emerald-400/50 text-white shadow-lg">
+          <span>📲</span>
+          <span class="hidden sm:inline">NS Player</span>
+        </button>
         <button id="playerFavBtn" class="cs-btn">
           <span id="playerFavIcon">☆</span>
-          <span id="playerFavText">Save</span>
+          <span id="playerFavText" class="hidden sm:inline">Save</span>
         </button>
         <button id="toggleChannelPopupBtn" class="cs-btn toffee-gradient !border-0 shadow-lg">📺 Channels</button>
       </div>
@@ -950,6 +955,7 @@
           <button id="playerFwdBtn" class="cs-btn vid-only" title="Forward 10s">10 ⟳</button>
         </div>
         <div class="flex items-center gap-1.5">
+          <button id="playerExtAppBtn" class="cs-btn !bg-pink-600/40 hover:!bg-pink-600/70 !border-pink-400/50" title="External Player (NS Player / VLC / MX)">📲 <span class="hidden sm:inline">External</span></button>
           <button id="playerAspectBtn" class="cs-btn" title="Screen Ratio">▭ <span id="playerAspectLabel" class="hidden sm:inline">Fit</span></button>
           <button id="playerSpeedBtn" class="cs-btn vid-only" title="Speed"><span id="playerSpeedLabel">1x</span></button>
           <button id="playerQualityBtn" class="cs-btn vid-only" title="Quality">⚙ <span id="playerQualityBadge">Auto</span></button>
@@ -961,6 +967,8 @@
       </div>
     </div>
 
+    <!-- Hidden Android Intent Launcher for Network Stream Player -->
+    <div id="nsIntentHolder" class="hidden" style="width:0;height:0;overflow:hidden"></div>
   </div>
 
   <!-- APP UI (shown only in app mode) -->
@@ -1246,7 +1254,89 @@
     }
     window.logoFail = logoFail;
 
-    function extractAllStreamsFromObject(item, hdrOut) {
+    function extractDrmFromObject(item) {
+      const drm = { clearKeys: {}, licenseUrl: '', scheme: '' };
+      if (!item || typeof item !== 'object') return drm;
+
+      function addKeyPair(kid, key) {
+        kid = String(kid || '').replace(/[^a-fA-F0-9]/g, '').toLowerCase();
+        key = String(key || '').replace(/[^a-fA-F0-9]/g, '').toLowerCase();
+        if (kid.length >= 16 && key.length >= 16) {
+          drm.clearKeys[kid] = key;
+          drm.scheme = 'clearkey';
+        }
+      }
+
+      function parseLicenseStr(val) {
+        if (!val) return;
+        if (typeof val === 'string') {
+          const s = val.trim();
+          if (/^https?:\/\//i.test(s)) {
+            drm.licenseUrl = s;
+            if (!drm.scheme) drm.scheme = 'widevine';
+            return;
+          }
+          // Try JSON string
+          if (s.startsWith('{')) {
+            try {
+              const obj = JSON.parse(s);
+              parseLicenseObj(obj);
+              return;
+            } catch (e) {}
+          }
+          // Try kid:key or multiple comma/pipe separated kid:key pairs
+          s.split(/[,;|\s]+/).forEach(pair => {
+            const parts = pair.split(':');
+            if (parts.length === 2) addKeyPair(parts[0], parts[1]);
+          });
+        } else if (typeof val === 'object') {
+          parseLicenseObj(val);
+        }
+      }
+
+      function parseLicenseObj(obj) {
+        if (!obj || typeof obj !== 'object') return;
+        if (Array.isArray(obj)) {
+          obj.forEach(el => parseLicenseStr(el));
+          return;
+        }
+        if (obj.kid && obj.key) { addKeyPair(obj.kid, obj.key); return; }
+        if (obj.keyId && obj.key) { addKeyPair(obj.keyId, obj.key); return; }
+        if (obj.key_id && obj.key) { addKeyPair(obj.key_id, obj.key); return; }
+        if (obj.clearKeys && typeof obj.clearKeys === 'object') {
+          Object.keys(obj.clearKeys).forEach(k => addKeyPair(k, obj.clearKeys[k]));
+        }
+        Object.keys(obj).forEach(k => {
+          if (/^[a-fA-F0-9]{32}$/.test(k) && typeof obj[k] === 'string' && /^[a-fA-F0-9]{32}$/.test(obj[k])) {
+            addKeyPair(k, obj[k]);
+          }
+        });
+      }
+
+      // Check direct fields on item
+      const licFields = [
+        item.drmLicense, item.drm_license, item.license_key, item.licenseKey,
+        item.clearkey, item.clearKey, item.clear_key, item.clearKeys,
+        item.drm_key, item.drmKey, item.key, item.keys, item.license
+      ];
+      licFields.forEach(f => { if (f) parseLicenseStr(f); });
+
+      if (item.keyId || item.kid || item.key_id) {
+        addKeyPair(item.keyId || item.kid || item.key_id, item.key || item.keyValue || item.key_value);
+      }
+      if (item.drm && typeof item.drm === 'object') {
+        parseLicenseObj(item.drm);
+        if (item.drm.licenseUrl || item.drm.license_url || item.drm.serverURL) {
+          drm.licenseUrl = item.drm.licenseUrl || item.drm.license_url || item.drm.serverURL;
+        }
+      }
+      if (item.kodiprop && typeof item.kodiprop === 'object') {
+        parseLicenseStr(item.kodiprop['inputstream.adaptive.license_key']);
+      }
+      return drm;
+    }
+
+    function extractAllStreamsFromObject(item, hdrOut, drmOut) {
       const urls = [];
       const iframes = [];
       const STREAM_KEY_RE = /^(adfree_url|adfree_stream|dai_url|pub_url|video_url|stream_url|streamUrl|stream_link|stream|m3u8|m3u8_url|hls|hls_url|playback_url|playbackUrl|manifest|manifest_url|mpd|mpd_url|dash|dash_url|url|link|file|source|src)$/i;
@@ -1258,7 +1348,7 @@
         if (typeof val === 'string') {
           let s = val.trim();
           if (!s) return;
-          // Handle Kodi pipe syntax: url|User-Agent=...&Referer=...&Cookie=...
+          // Handle Kodi / NS Player pipe syntax: url|User-Agent=...&Referer=...&Cookie=...&drmScheme=clearkey&drmLicense=kid:key
           const pi = s.indexOf('|');
           if (pi > 0 && /^https?:\/\//i.test(s)) {
             const base = s.slice(0, pi).trim();
@@ -1267,10 +1357,29 @@
               const eq = kv.indexOf('=');
               if (eq < 0) return;
               const k = kv.slice(0, eq).trim().toLowerCase();
-              const v = kv.slice(eq + 1).trim();
+              const v = decodeURIComponent(kv.slice(eq + 1).trim());
               if (k === 'referer' || k === 'referrer' || k === 'http-referer') hdrOut.referer = v;
               else if (k === 'user-agent' || k === 'http-user-agent') hdrOut.ua = v;
-              else if (k === 'cookie') hdrOut.cookie = v;
+              else if (k === 'cookie' || k === 'cookies') {
+                hdrOut.cookie = v;
+                // If cookie contains hdnea or hdntl token, also store as token query param
+                if (/hdnea|hdntl/i.test(v)) hdrOut.token = v;
+              }
+              else if (k === 'drmscheme' || k === 'drm_scheme') {
+                if (drmOut) drmOut.scheme = v.toLowerCase();
+              }
+              else if (k === 'drmlicense' || k === 'drm_license' || k === 'license_key' || k === 'clearkey') {
+                if (drmOut) {
+                  const parts = v.split(':');
+                  if (parts.length === 2) {
+                    const kid = parts[0].replace(/[^a-fA-F0-9]/g, '').toLowerCase();
+                    const key = parts[1].replace(/[^a-fA-F0-9]/g, '').toLowerCase();
+                    if (kid && key) { drmOut.clearKeys[kid] = key; drmOut.scheme = 'clearkey'; }
+                  } else if (/^https?:\/\//i.test(v)) {
+                    drmOut.licenseUrl = v;
+                  }
+                }
+              }
             });
             s = base;
           }
@@ -1286,17 +1395,18 @@
         } else if (Array.isArray(val)) {
           val.forEach(v => scanVal(v, keyName));
         } else if (typeof val === 'object') {
-          // Check if object is a headers map
           Object.keys(val).forEach(k => {
             const v = val[k];
             if (typeof v === 'string') {
-              if (/^(referer|referrer|http-referer)$/i.test(k)) hdrOut.referer = v.trim();
+              if (/^(referer|referrer|http-referer|origin)$/i.test(k)) hdrOut.referer = v.trim();
               else if (/^(user-agent|useragent|ua|http-user-agent)$/i.test(k)) hdrOut.ua = v.trim();
-              else if (/^(cookie|cookies)$/i.test(k)) hdrOut.cookie = v.trim();
+              else if (/^(cookie|cookies|hdnea|hdntl|token)$/i.test(k)) {
+                hdrOut.cookie = v.trim();
+                if (/hdnea|hdntl|=/i.test(v)) hdrOut.token = v.trim();
+              }
             }
           });
-          // Priority order for stream keys inside nested objects
-          const priorityKeys = ['adfree_url', 'adfree_stream', 'dai_url', 'pub_url', 'video_url', 'stream_url', 'streamUrl', 'stream_link', 'm3u8', 'm3u8_url', 'hls', 'hls_url', 'playback_url', 'playbackUrl', 'manifest', 'mpd', 'url', 'link', 'stream', 'file', 'source', 'src', 'iframe', 'embed', 'embedUrl'];
+          const priorityKeys = ['adfree_url', 'adfree_stream', 'dai_url', 'pub_url', 'video_url', 'stream_url', 'streamUrl', 'stream_link', 'm3u8', 'm3u8_url', 'hls', 'hls_url', 'playback_url', 'playbackUrl', 'manifest', 'mpd', 'mpd_url', 'dash', 'dash_url', 'url', 'link', 'stream', 'file', 'source', 'src', 'iframe', 'embed', 'embedUrl'];
           priorityKeys.forEach(pk => {
             if (val[pk] !== undefined) scanVal(val[pk], pk);
           });
@@ -1309,10 +1419,30 @@
       }
 
       scanVal(item, '');
+
+      // If hdrOut.token has hdnea=... or hdntl=... and stream URL doesn't have it in query string, append it!
+      if (hdrOut.token) {
+        const cleanTok = hdrOut.token.replace(/^cookie:\s*/i, '').trim();
+        for (let i = 0; i < urls.length; i++) {
+          if (!urls[i].includes('hdnea=') && !urls[i].includes('hdntl=') && (cleanTok.includes('hdnea=') || cleanTok.includes('hdntl='))) {
+            urls[i] += (urls[i].includes('?') ? '&' : '?') + cleanTok.split(';')[0].trim();
+          }
+        }
+      }
+
       return { urls, iframes };
     }
 
     function normalizeChannelsJson(rawJson, offset = 0, defaultCategory = 'Live TV', sourceName = '', prefix = 'json', fallbackLogo = '', isEvent = false) {
+      // If a .json file actually contains raw M3U text, parse as M3U!
+      if (typeof rawJson === 'string') {
+        const trimmed = rawJson.trim();
+        if (trimmed.startsWith('#EXTM3U') || trimmed.includes('#EXTINF')) {
+          return parseM3U(trimmed, prefix, offset);
+        }
+        try { rawJson = JSON.parse(trimmed); } catch (e) { return null; }
+      }
+
       let arr = [];
       if (Array.isArray(rawJson)) {
         arr = rawJson;
@@ -1346,7 +1476,6 @@
         if (!item || typeof item !== 'object') return null;
         const idx = i0 + offset;
 
-        // Extract title / match name accurately (avoiding "Unknown 49")
         const team1 = cleanTxt(item.team_1 || item.team1 || item.home_team || item.teamA || '');
         const team2 = cleanTxt(item.team_2 || item.team2 || item.away_team || item.teamB || '');
         const teamMatch = (team1 && team2) ? `${team1} vs ${team2}` : '';
@@ -1386,7 +1515,6 @@
         }
         const category = rawCat;
 
-        // Extract Logo / Poster Image (note: in SonyLiv/FanCode JSONs, "src" is often a .jpg/.png image!)
         const IMAGE_EXT = /\.(jpg|jpeg|png|webp|gif|svg|bmp|avif)(\?.*)?$/i;
         let logoCandidate = item.logo || item.logo_url || item.logoUrl || item.logoURL || item.image || item.image_url || item.imageUrl || item.poster || item.banner || item.thumb || item.thumbnail || item.icon || item.icon_url || item.tvg_logo || item['tvg-logo'] || '';
         if (!logoCandidate && typeof item.src === 'string' && IMAGE_EXT.test(item.src)) {
@@ -1394,34 +1522,49 @@
         }
         const logo = normalizeLogoUrl(logoCandidate || fallbackLogo || '');
 
-        // Deep scan for all valid stream URLs & headers
+        // Extract DRM & Streams
+        const drm = extractDrmFromObject(item);
         const hdr = {};
-        const extracted = extractAllStreamsFromObject(item, hdr);
+        const extracted = extractAllStreamsFromObject(item, hdr, drm);
 
         let servers = [];
         extracted.urls.forEach((u, sIdx) => {
           const finalUrl = (hdr.referer || hdr.ua) ? proxify(u, hdr) : u;
-          servers.push({ name: `Server ${sIdx + 1}`, url: finalUrl, iframe: '' });
+          servers.push({
+            name: `Server ${sIdx + 1}`,
+            url: finalUrl,
+            rawUrl: u,
+            iframe: '',
+            drm: (drm && (Object.keys(drm.clearKeys).length || drm.licenseUrl)) ? drm : null,
+            hdr: (hdr.referer || hdr.ua || hdr.cookie) ? Object.assign({}, hdr) : null
+          });
         });
         extracted.iframes.forEach((f, fIdx) => {
-          servers.push({ name: `Embed ${fIdx + 1}`, url: '', iframe: f });
+          servers.push({ name: `Embed ${fIdx + 1}`, url: '', rawUrl: f, iframe: f, drm: null, hdr: null });
         });
 
-        // Also check explicit item.servers if any weren't caught
         if (Array.isArray(item.servers)) {
           item.servers.forEach((sv) => {
             if (!sv) return;
             let u = typeof sv === 'string' ? sv : (sv.url || sv.streamUrl || sv.stream_url || sv.link || '');
             let f = typeof sv === 'object' ? (sv.iframe || sv.embed || sv.embedUrl || '') : '';
             if (u && IMAGE_EXT.test(u)) u = '';
-            if (u && (hdr.referer || hdr.ua)) u = proxify(u, hdr);
-            if ((u || f) && !servers.some(existing => existing.url === u && existing.iframe === f)) {
-              servers.push({ name: sv.name || `Server ${servers.length + 1}`, url: u, iframe: f });
+            const svDrm = typeof sv === 'object' ? extractDrmFromObject(sv) : null;
+            const finalDrm = (svDrm && (Object.keys(svDrm.clearKeys).length || svDrm.licenseUrl)) ? svDrm : ((drm && (Object.keys(drm.clearKeys).length || drm.licenseUrl)) ? drm : null);
+            const finalUrl = (u && (hdr.referer || hdr.ua)) ? proxify(u, hdr) : u;
+            if ((finalUrl || f) && !servers.some(existing => existing.url === finalUrl && existing.iframe === f)) {
+              servers.push({
+                name: sv.name || `Server ${servers.length + 1}`,
+                url: finalUrl,
+                rawUrl: u,
+                iframe: f,
+                drm: finalDrm,
+                hdr: (hdr.referer || hdr.ua || hdr.cookie) ? Object.assign({}, hdr) : null
+              });
             }
           });
         }
 
-        // Skip upcoming items that have NO stream URL and NO iframe URL at all
         if (!servers.length) return null;
 
         const streamUrl = servers[0].url || '';
@@ -1455,6 +1598,8 @@
           streamUrl,
           iframeUrl,
           servers,
+          drm: servers[0].drm || null,
+          hdr: servers[0].hdr || null,
           needsHeaders: Boolean(hdr.referer || hdr.ua),
           isEvent: eventFlag,
           sourceName: sourceName || category,
@@ -1468,40 +1613,74 @@
       }).filter(Boolean);
     }
 
-    // ===== Remote JSON Sources (SonyLiv + Live Sports Events) =====
-    const REMOTE_JSON_SOURCES = [
+    // ===== Remote JSON Sources (Cleared as requested; all SM IPTV M3U Playlists are in M3U_SOURCES below) =====
+    const REMOTE_JSON_SOURCES = [];
+    let REMOTE_JSON_CHANNELS = [];
+
+    // ===== 🔰 SM IPTV Active All Playlists 🔰 =====
+    const M3U_SOURCES = [
+      // 🏆 Upcoming & Live Sports Data
       {
-        url: 'https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv_playlist.json',
-        prefix: 'sony',
-        sourceName: 'SonyLIV',
-        defaultCategory: 'SonyLIV',
-        fallbackLogo: 'https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv.png'
-      },
-      {
-        url: 'https://raw.githubusercontent.com/srhady/willow-event/refs/heads/main/live_sports.json',
-        prefix: 'live-sports',
+        url: 'https://raw.githubusercontent.com/sm-monirulislam/Upcoming-and-Live-Sports-Data/refs/heads/main/Sports_data.m3u',
+        prefix: 'sm-sports',
         sourceName: 'Live Sports',
         defaultCategory: 'Live Events',
         isEvent: true
       },
+      // 🏏 SonyLiv Playlist
       {
-        url: 'https://raw.githubusercontent.com/srhady/willow-event/refs/heads/main/primevideo_sports.json',
-        prefix: 'prime-sports',
-        sourceName: 'Prime Video Sports',
-        defaultCategory: 'Live Events',
+        url: 'https://raw.githubusercontent.com/sm-monirulislam/SonyLiv_Event_Playlist/refs/heads/main/sonyLiv.m3u',
+        prefix: 'sm-sonyliv',
+        sourceName: 'SonyLIV',
+        defaultCategory: 'SonyLIV',
         isEvent: true
+      },
+      // 🌐 Toffee Playlist
+      {
+        url: 'https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update/refs/heads/main/toffee_playlist.m3u',
+        prefix: 'sm-toffee',
+        sourceName: 'Toffee',
+        defaultCategory: 'Toffee'
+      },
+      // 📡 Ayna OTT Playlist
+      {
+        url: 'https://raw.githubusercontent.com/sm-monirulislam/AynaOTT_Auto_Update_Playlist/refs/heads/main/aynaott.m3u',
+        prefix: 'sm-ayna',
+        sourceName: 'Ayna OTT',
+        defaultCategory: 'Ayna OTT'
+      },
+      // 📡 Tapmad Playlist
+      {
+        url: 'https://raw.githubusercontent.com/sm-monirulislam/Tapmad_Auto_Update_Playlist/refs/heads/main/tapmad_sm.m3u',
+        prefix: 'sm-tapmad',
+        sourceName: 'Tapmad',
+        defaultCategory: 'Sports'
+      },
+      // 📡 Jago BD Playlist
+      {
+        url: 'https://raw.githubusercontent.com/sm-monirulislam/jago_bd_auto_update_playlist-/refs/heads/main/jago_bd.m3u',
+        prefix: 'sm-jagobd',
+        sourceName: 'Jago BD',
+        defaultCategory: 'Bangla TV',
+        clean: true
+      },
+      // 📺 Combined Main Playlist
+      {
+        url: 'https://raw.githubusercontent.com/sm-monirulislam/SM-IPTV/refs/heads/main/Combined_Live_TV.m3u',
+        prefix: 'sm-combined',
+        sourceName: 'SM IPTV',
+        defaultCategory: 'Live TV',
+        clean: true
+      },
+      // 🎬 Movie Combined Playlist
+      {
+        url: 'https://raw.githubusercontent.com/sm-monirulislam/SM-Movie-Hup-Auto-Update/refs/heads/main/Movie_Combined.m3u',
+        prefix: 'sm-movies',
+        sourceName: 'Movies',
+        defaultCategory: 'Movies'
       }
     ];
-
-    let REMOTE_JSON_CHANNELS = [];
-
-    // ===== M3U Sources (FanCode, Toffee, BD Streams - SonyLiv is now in JSON playlists) =====
-    const M3U_SOURCES = [
-      { url: 'https://raw.githubusercontent.com/doctor-8trange/zyphx8/refs/heads/main/data/fancode.m3u', prefix: 'fan', sourceName: 'FanCode' },
-      { url: 'https://tv9.workerbot-tv9.workers.dev/toffee.m3u', prefix: 'toffee', sourceName: 'Toffee' },
-      { url: 'https://iptv-org.github.io/iptv/countries/bd.m3u', prefix: 'bd', sourceName: 'Bangladesh', clean: true }
-    ];
-    const FETCH_TIMEOUT_MS = 9000; // ekta source atke gele baki gulo jeno na atke
+    const FETCH_TIMEOUT_MS = 14000; // ekta source atke gele baki gulo jeno na atke
     const M3U_REFRESH_MS = 5 * 60 * 1000; // token expire hoy tai 5 min por por refresh
 
     // Stream proxy (Cloudflare Worker). Fancode er Referer/User-Agent lage, browser eta pathate pare na.
@@ -1545,13 +1724,55 @@
             group: attr(line, 'group-title'),
             name: attr(line, 'tvg-name') || title
           };
+        } else if (/^#KODIPROP:/i.test(line)) {
+          const m = line.match(/^#KODIPROP:\s*([^=]+)=(.*)$/i);
+          if (m) {
+            meta = meta || {};
+            meta.drm = meta.drm || { clearKeys: {}, licenseUrl: '', scheme: '' };
+            const k = m[1].trim().toLowerCase(), v = m[2].trim();
+            if (k.includes('license_type') && v.toLowerCase().includes('clearkey')) meta.drm.scheme = 'clearkey';
+            else if (k.includes('license_key')) {
+              if (/^https?:\/\//i.test(v)) meta.drm.licenseUrl = v;
+              else if (v.startsWith('{')) {
+                try {
+                  const o = JSON.parse(v);
+                  if (o.keys && Array.isArray(o.keys)) {
+                    o.keys.forEach(kp => { if (kp.kid && kp.k) meta.drm.clearKeys[kp.kid] = kp.k; });
+                  } else {
+                    Object.keys(o).forEach(kid => { if (typeof o[kid] === 'string') meta.drm.clearKeys[kid.toLowerCase()] = o[kid].toLowerCase(); });
+                  }
+                } catch (e) {}
+              } else {
+                v.split(',').forEach(pair => {
+                  const pts = pair.split(':');
+                  if (pts.length === 2) meta.drm.clearKeys[pts[0].trim().toLowerCase()] = pts[1].trim().toLowerCase();
+                });
+              }
+            }
+          }
+        } else if (/^#EXTHTTP:/i.test(line)) {
+          const m = line.match(/^#EXTHTTP:\s*(\{.*\})$/i);
+          if (m) {
+            meta = meta || {};
+            meta.hdr = meta.hdr || {};
+            try {
+              const o = JSON.parse(m[1]);
+              Object.keys(o).forEach(hk => {
+                if (/referer/i.test(hk)) meta.hdr.referer = o[hk];
+                else if (/user-agent/i.test(hk)) meta.hdr.ua = o[hk];
+                else if (/cookie/i.test(hk)) meta.hdr.cookie = o[hk];
+              });
+            } catch (e) {}
+          }
         } else if (/^#EXTVLCOPT:/i.test(line)) {
           const m = line.match(/^#EXTVLCOPT:\s*([^=]+)=(.*)$/i);
-          if (m && meta) {
+          if (m) {
+            meta = meta || {};
             const k = m[1].trim().toLowerCase(), v = m[2].trim();
             meta.hdr = meta.hdr || {};
             if (k === 'http-referrer' || k === 'http-referer') meta.hdr.referer = v;
             else if (k === 'http-user-agent') meta.hdr.ua = v;
+            else if (k === 'http-cookie') meta.hdr.cookie = v;
           }
         } else if (line[0] !== '#' && /^https?:\/\//i.test(line)) {
           const i = out.length + offset;
@@ -1568,17 +1789,49 @@
               else if (k === 'user-agent') hdr.ua = v;
             });
           }
+          if (pi > 0) {
+            line.slice(pi + 1).split('&').forEach(kv => {
+              const e = kv.indexOf('=');
+              if (e < 0) return;
+              const k = kv.slice(0, e).trim().toLowerCase(), v = decodeURIComponent(kv.slice(e + 1).trim());
+              if (k === 'cookie' || k === 'cookies') hdr.cookie = v;
+              else if (k === 'origin') hdr.origin = v;
+              else if (k === 'drmlicense' || k === 'license_key' || k === 'clearkey') {
+                meta = meta || {};
+                meta.drm = meta.drm || { clearKeys: {}, licenseUrl: '', scheme: '' };
+                const pts = v.split(':');
+                if (pts.length === 2) {
+                  meta.drm.clearKeys[pts[0].replace(/[^a-fA-F0-9]/g, '').toLowerCase()] = pts[1].replace(/[^a-fA-F0-9]/g, '').toLowerCase();
+                  meta.drm.scheme = 'clearkey';
+                } else if (/^https?:\/\//i.test(v)) {
+                  meta.drm.licenseUrl = v;
+                }
+              }
+            });
+          }
+          // If cookie contains hdnea= or hdntl= token and streamLine doesn't have it, attach it to URL query string for browser playback
+          if (hdr.cookie && (/hdnea=|hdntl=/i.test(hdr.cookie)) && !streamLine.includes('hdnea=') && !streamLine.includes('hdntl=')) {
+            const cleanCookieTok = hdr.cookie.replace(/^cookie:\s*/i, '').split(';')[0].trim();
+            streamLine += (streamLine.includes('?') ? '&' : '?') + cleanCookieTok;
+          }
+
           let name = (meta && meta.name) || `Channel ${i + 1}`;
           const source = M3U_SOURCES.find(src => src.prefix === prefix);
           const sourceName = source ? source.sourceName : prefix.toUpperCase();
-          // iptv-org: "ATN Bangla (576p) [Not 24/7]" -> "ATN Bangla"
-          if (source && source.clean) name = name.replace(/\s*[\(\[][^\)\]]*[\)\]]/g, ' ').replace(/\s+/g, ' ').trim() || name;
-          let category = (meta && meta.group) || sourceName;
-          if (/^(undefined|uncategori[sz]ed|general)$/i.test(category)) category = sourceName;
+          const defaultCat = (source && source.defaultCategory) || sourceName;
+          if (source && source.clean) name = name.replace(/\s*\((?:1080p|720p|576p|480p|360p|Not 24\/7|Geo-blocked)\)/gi, ' ').replace(/\s*\[(?:Not 24\/7|Geo-blocked)\]/gi, ' ').replace(/\s+/g, ' ').trim() || name;
+          let category = (meta && meta.group) || defaultCat;
+          if (/^(undefined|uncategori[sz]ed|general)$/i.test(category)) category = defaultCat;
           const short = name.split('|')[0].trim();
-          // https site e http stream blocked hoy, tai https try kora hobe
-          if (location.protocol === 'https:' && /^http:\/\//i.test(streamLine) && !STREAM_PROXY) streamLine = 'https://' + streamLine.slice(7);
           const vs = short.match(/^(.+?)\s+vs\s+(.+?)(?:\s+-|$)/i);
+          const activeDrm = (meta && meta.drm && (Object.keys(meta.drm.clearKeys).length || meta.drm.licenseUrl)) ? meta.drm : null;
+          const activeHdr = (hdr.referer || hdr.ua || hdr.cookie) ? Object.assign({}, hdr) : null;
+          const eventFlag = Boolean(
+            (source && source.isEvent) ||
+            prefix === 'sm-sports' ||
+            prefix === 'sm-sonyliv' ||
+            /\bvs\b|match|event|t20|odi|test|isl|epl|ucl|la liga|serie a|bundesliga/i.test(short + ' ' + category)
+          );
           out.push({
             id: prefix + '-' + ((meta && meta.id) || i),
             name: short,
@@ -1587,12 +1840,22 @@
             category,
             logo: normalizeLogoUrl(meta && meta.logo),
             streamUrl: proxify(streamLine, hdr),
-            servers: [{ url: proxify(streamLine, hdr), iframe: '' }],
-            needsHeaders: !!(hdr.referer || hdr.ua),
+            servers: [{
+              name: sourceName ? `${sourceName}` : 'Server 1',
+              url: proxify(streamLine, hdr),
+              rawUrl: streamLine,
+              iframe: '',
+              drm: activeDrm,
+              hdr: activeHdr,
+              sourceName
+            }],
+            drm: activeDrm,
+            hdr: activeHdr,
+            needsHeaders: !!(hdr.referer || hdr.ua || hdr.cookie),
             iframeUrl: '',
             premium: false,
             fromM3U: true,
-            isEvent: Boolean(prefix === 'fan' || prefix === 'sony' || /\bvs\b|match|event|live|cricket|football|sports/i.test(short + ' ' + category)),
+            isEvent: eventFlag,
             sourceName,
             badgeColor: BADGE_COLORS[i % BADGE_COLORS.length],
             cardGradient: CARD_GRADIENTS[i % CARD_GRADIENTS.length],
@@ -1631,7 +1894,7 @@
       return String(n || '').toLowerCase()
         .replace(/\(.*?\)|\[.*?\]/g, ' ')
         .replace(/\s[-–—]\s*\d+\s*$/, '')
-        .replace(/\b(hd|sd|fhd|uhd|4k|live|1080p|720p|576p|480p|360p|240p)\b/g, ' ')
+        .replace(/\b(hd|sd|fhd|uhd|4k|live|tv|channel|bd|bangla|1080p|720p|576p|480p|360p|240p|hevc|h264)\b/g, ' ')
         .replace(/&/g, 'and')
         .replace(/[^a-z0-9\u0980-\u09ff]+/g, '');
     }
@@ -1647,20 +1910,29 @@
       });
       const usedIds = new Set();
       return groups.map(members => {
-        // curated JSON age, tarpor M3U
-        const ordered = members.filter(m => !m.fromM3U).concat(members.filter(m => m.fromM3U));
+        // Keep playlist order (M3U playlists first in priority order, then local JSON fallback)
+        const ordered = members.slice();
         const base = Object.assign({}, ordered[0]);
         const servers = [], seen = new Set();
         ordered.forEach(m => {
-          (m.servers && m.servers.length ? m.servers : [{ url: m.streamUrl, iframe: m.iframeUrl }]).forEach(sv => {
-            const k = sv.url || sv.iframe;
+          (m.servers && m.servers.length ? m.servers : [{ url: m.streamUrl, rawUrl: m.streamUrl, iframe: m.iframeUrl, drm: m.drm, hdr: m.hdr, sourceName: m.sourceName }]).forEach(sv => {
+            const k = (sv.rawUrl || sv.url || sv.iframe || '').trim();
             if (!k || seen.has(k)) return;
             seen.add(k);
-            servers.push({ url: sv.url || '', iframe: sv.iframe || '' });
+            servers.push({
+              url: sv.url || '',
+              rawUrl: sv.rawUrl || sv.url || '',
+              iframe: sv.iframe || '',
+              drm: sv.drm || m.drm || null,
+              hdr: sv.hdr || m.hdr || null,
+              sourceName: sv.sourceName || m.sourceName || ''
+            });
           });
         });
-        if (!servers.length) servers.push({ url: base.streamUrl || '', iframe: base.iframeUrl || '' });
-        servers.forEach((sv, i) => { sv.name = 'Server ' + (i + 1); });
+        if (!servers.length) servers.push({ url: base.streamUrl || '', rawUrl: base.streamUrl || '', iframe: base.iframeUrl || '' });
+        servers.forEach((sv, i) => {
+          sv.name = sv.sourceName ? `Server ${i + 1} (${sv.sourceName})` : `Server ${i + 1}`;
+        });
         base.servers = servers;
         base.srv = 0;
         base.streamUrl = servers[0].url;
@@ -1688,8 +1960,8 @@
         try {
           const r = await fetchTimeout(src.url + '?t=' + Date.now(), { cache: 'no-store' });
           if (!r.ok) return [];
-          const data = await r.json();
-          return normalizeChannelsJson(data, 0, src.defaultCategory, src.sourceName, src.prefix, src.fallbackLogo, src.isEvent) || [];
+          const rawText = await r.text();
+          return normalizeChannelsJson(rawText, 0, src.defaultCategory, src.sourceName, src.prefix, src.fallbackLogo, src.isEvent) || [];
         } catch (e) {
           return [];
         }
@@ -2542,10 +2814,15 @@
       }).catch(() => handleStreamFailure(token, 'yt-api'));
     }
 
+    let shakaInstance = null;
     function destroyHls() {
       destroyYt();
       clearTimeout(engineTimer);
       engineTimer = null;
+      if (shakaInstance) {
+        try { shakaInstance.destroy(); } catch (e) {}
+        shakaInstance = null;
+      }
       if (hlsInstance) {
         try { hlsInstance.destroy(); } catch (e) {}
         hlsInstance = null;
@@ -2603,11 +2880,15 @@
       return null;
     }
 
-    function detectStreamType(src) {
+    function detectStreamType(src, srvObj) {
+      if (srvObj && srvObj.drm && (Object.keys(srvObj.drm.clearKeys || {}).length || srvObj.drm.licenseUrl)) {
+        return 'drm';
+      }
       let path = '';
-      try { path = new URL(src, location.href).pathname.toLowerCase(); } catch (e) { path = String(src || '').toLowerCase().split('?')[0]; }
-      if (/\.m3u8?$/.test(path) || /m3u8/.test(String(src).toLowerCase())) return 'hls';
-      if (/\.mpd$/.test(path)) return 'dash';
+      const raw = String(src || '').toLowerCase();
+      try { path = new URL(src, location.href).pathname.toLowerCase(); } catch (e) { path = raw.split('?')[0]; }
+      if (/\.mpd$/.test(path) || /\.mpd/i.test(raw) || /dash/i.test(path)) return 'dash';
+      if (/\.m3u8?$/.test(path) || /m3u8|hls|sonydaime|akamaized|sonyliv/i.test(raw)) return 'hls';
       if (/\.flv$/.test(path)) return 'flv';
       if (/\.(ts|m2ts|mts)$/.test(path)) return 'ts';
       if (/\.(mp4|m4v|webm|mkv|mov|ogv|ogg|oga|mp3|aac|m4a|wav|opus|3gp|weba)$/.test(path)) return 'native';
@@ -2616,13 +2897,15 @@
 
     function buildEngineChain(type) {
       const hlsOk = !!(window.Hls && Hls.isSupported());
+      const shakaOk = !!(window.shaka && shaka.Player && shaka.Player.isBrowserSupported && shaka.Player.isBrowserSupported());
       switch (type) {
-        case 'hls': return hlsOk ? ['hls', 'native'] : ['native'];
-        case 'dash': return ['dash', 'native'];
+        case 'drm': return shakaOk ? ['shaka', 'dash', 'hls', 'native'] : ['dash', 'hls', 'native'];
+        case 'hls': return hlsOk ? (shakaOk ? ['hls', 'shaka', 'native'] : ['hls', 'native']) : (shakaOk ? ['shaka', 'native'] : ['native']);
+        case 'dash': return shakaOk ? ['shaka', 'dash', 'native'] : ['dash', 'native'];
         case 'flv':
         case 'ts': return ['mpegts', 'native'];
         case 'native': return ['native', 'mpegts'];
-        default: return hlsOk ? ['native', 'hls', 'mpegts'] : ['native', 'mpegts'];
+        default: return hlsOk ? (shakaOk ? ['hls', 'shaka', 'native', 'mpegts'] : ['hls', 'native', 'mpegts']) : ['native', 'mpegts'];
       }
     }
 
@@ -2653,8 +2936,24 @@
         return;
       }
       if (ch && ch.servers && ch.servers.length > 1) { ch.srv = 0; ch.streamUrl = ch.servers[0].url; ch.iframeUrl = ch.servers[0].iframe; }
-      if (!state.autoplay) {
-        setPlayerStatus(`${ch ? ch.name : 'চ্যানেল'} চলছে না • অটো-প্লে বন্ধ, অন্য চ্যানেল বেছে নিন`);
+      // Show direct Network Stream Player option in status message when a protected channel (like SonyLIV) is blocked by browser CORS/DRM
+      const isSonyOrProtected = ch && (/sony|willow|prime/i.test((ch.sourceName || '') + ' ' + (ch.category || '') + ' ' + (ch.name || '')) || ch.drm || ch.needsHeaders);
+      if (isSonyOrProtected || !state.autoplay) {
+        const statusEl = $p('playerStatusMsg');
+        if (statusEl) {
+          clearTimeout(statusEl._t);
+          statusEl.style.pointerEvents = 'auto';
+          statusEl.innerHTML = `
+            <div class="flex flex-col sm:flex-row items-center gap-2 py-1">
+              <span>${appEsc(ch ? ch.name : 'এই চ্যানেলটি')} ব্রাউজারে ব্লক হচ্ছে • অ্যাপে দেখুন:</span>
+              <div class="flex items-center gap-1.5">
+                <button onclick="openInNetworkStreamPlayer('ns')" class="px-3 py-1 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-[11px] shadow">📲 NS Player</button>
+                <button onclick="openInNetworkStreamPlayer('vlc')" class="px-2.5 py-1 rounded-full bg-amber-600 hover:bg-amber-500 text-white font-bold text-[11px]">VLC</button>
+                <button onclick="openInNetworkStreamPlayer('mx')" class="px-2.5 py-1 rounded-full bg-sky-600 hover:bg-sky-500 text-white font-bold text-[11px]">MX</button>
+              </div>
+            </div>`;
+          statusEl.classList.remove('hidden');
+        }
         return;
       }
       failStreak++;
@@ -2805,6 +3104,14 @@
         let cur = $p('liveVideoEl').playbackRate;
         if (ytMode && ytPlayer) { try { cur = ytPlayer.getPlaybackRate(); } catch (e) {} }
         items = [0.5, 0.75, 1, 1.25, 1.5, 2].map(s => ({ val: String(s), label: s === 1 ? 'Normal (1x)' : `${s}x`, active: Math.abs(cur - s) < 0.01 }));
+      } else if (type === 'extplayer') {
+        title = 'External Network Player';
+        items = [
+          { val: 'ns', label: '📲 Network Stream (NS) Player', active: true },
+          { val: 'vlc', label: '🟠 VLC Media Player', active: false },
+          { val: 'mx', label: '🔵 MX Player', active: false },
+          { val: 'copy', label: '📋 Copy Stream Link', active: false }
+        ];
       } else if (type === 'aspect') {
         title = 'Screen Ratio';
         items = ASPECTS.map(a => ({ val: a.k, label: a.l, active: (state.aspect || 'fit') === a.k }));
@@ -2970,6 +3277,83 @@
     }
     window.switchServer = switchServer;
 
+    // ---------- External Network Stream Player (NS Player / VLC / MX) Launcher ----------
+    function buildNsPlayerIntentUrl(appType = 'ns') {
+      const ch = CHANNELS[state.currentChannelIndex] || CHANNELS[0];
+      if (!ch) return '';
+      const curSrv = activeServer(ch);
+      let rawUrl = curSrv.rawUrl || curSrv.url || ch.streamUrl || '';
+      if (!rawUrl) return '';
+
+      // Append pipe parameters for NS Player (com.genuine.leone) if DRM or headers exist
+      const pipeParams = [];
+      const drm = curSrv.drm || ch.drm;
+      const hdr = curSrv.hdr || ch.hdr;
+      if (drm && drm.clearKeys && Object.keys(drm.clearKeys).length) {
+        const firstKid = Object.keys(drm.clearKeys)[0];
+        const firstKey = drm.clearKeys[firstKid];
+        pipeParams.push('drmScheme=clearkey');
+        pipeParams.push(`drmLicense=${firstKid}:${firstKey}`);
+      } else if (drm && drm.licenseUrl) {
+        pipeParams.push(`drmScheme=${drm.scheme || 'widevine'}`);
+        pipeParams.push(`drmLicense=${drm.licenseUrl}`);
+      }
+      if (hdr) {
+        if (hdr.ua) pipeParams.push(`User-Agent=${hdr.ua}`);
+        if (hdr.referer) pipeParams.push(`Referer=${hdr.referer}`);
+        if (hdr.cookie) pipeParams.push(`Cookie=${hdr.cookie}`);
+      }
+
+      const schemeMatch = rawUrl.match(/^(https?):\/\/(.*)$/i);
+      const scheme = schemeMatch ? schemeMatch[1].toLowerCase() : 'https';
+      const urlNoScheme = schemeMatch ? schemeMatch[2] : rawUrl;
+      const fullTarget = pipeParams.length ? `${urlNoScheme}|${pipeParams.join('&')}` : urlNoScheme;
+      const safeTitle = encodeURIComponent(ch.name || 'Sarah TV Live');
+
+      if (appType === 'vlc') {
+        return `intent://${urlNoScheme}#Intent;scheme=${scheme};type=video/*;package=org.videolan.vlc;S.title=${safeTitle};end`;
+      }
+      if (appType === 'mx') {
+        return `intent://${urlNoScheme}#Intent;scheme=${scheme};type=video/*;package=com.mxtech.videoplayer.ad;S.title=${safeTitle};end`;
+      }
+      // Default: Network Stream (Video) Player (com.genuine.leone)
+      return `intent://${fullTarget}#Intent;scheme=${scheme};type=video/*;package=com.genuine.leone;S.browser_fallback_url=market://details?id=com.genuine.leone;S.title=${safeTitle};end`;
+    }
+
+    function openInNetworkStreamPlayer(appType = 'ns') {
+      const ch = CHANNELS[state.currentChannelIndex] || CHANNELS[0];
+      if (!ch) return;
+      const curSrv = activeServer(ch);
+      const rawUrl = curSrv.rawUrl || curSrv.url || ch.streamUrl || '';
+      if (!rawUrl) {
+        showToast('এই চ্যানেলে কোনো স্ট্রিম লিংক নেই');
+        return;
+      }
+      const isAndroid = /Android/i.test(navigator.userAgent || '');
+      if (isAndroid) {
+        const intentUrl = buildNsPlayerIntentUrl(appType);
+        showToast(appType === 'vlc' ? 'VLC Player-এ ওপেন হচ্ছে…' : appType === 'mx' ? 'MX Player-এ ওপেন হচ্ছে…' : 'Network Stream Player-এ ওপেন হচ্ছে…');
+        try {
+          const holder = $p('nsIntentHolder');
+          if (holder) {
+            holder.innerHTML = `<iframe src="${intentUrl}" height="0" width="0" style="border:none;"></iframe>`;
+          }
+          setTimeout(() => { window.location.href = intentUrl; }, 120);
+        } catch (e) {
+          window.location.href = intentUrl;
+        }
+      } else {
+        // Desktop / iOS: copy stream URL or open m3u8 directly
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(rawUrl).then(() => {
+            showToast('স্ট্রিম লিংক কপি হয়েছে! Network Stream / VLC প্লেয়ারে পেস্ট করুন।');
+          }).catch(() => {});
+        }
+        window.open(rawUrl, '_blank');
+      }
+    }
+    window.openInNetworkStreamPlayer = openInNetworkStreamPlayer;
+
     function loadCurrentChannelInPlayer(customUrl = null, isSrvRetry = false) {
       const ch = CHANNELS[state.currentChannelIndex] || CHANNELS[0];
       if (!ch) return;
@@ -3039,7 +3423,7 @@
       if (!streamSrc) { handleStreamFailure(token, 'no-url'); return; }
 
       engineSrc = streamSrc;
-      engineHint = detectStreamType(streamSrc);
+      engineHint = detectStreamType(streamSrc, curSrv);
       engineChain = buildEngineChain(engineHint);
       engineIdx = 0;
 
@@ -3077,19 +3461,93 @@
       }
     }
 
+    function extractQueryToken(urlStr) {
+      try {
+        const qIdx = String(urlStr || '').indexOf('?');
+        if (qIdx < 0) return '';
+        const qs = String(urlStr).slice(qIdx + 1);
+        if (/hdntl=|hdnea=|token=|hmac=| sig=|Signature=|Policy=|Key-Pair-Id=/i.test(qs)) {
+          return qs;
+        }
+      } catch (e) {}
+      return '';
+    }
+
+    function appendTokenToSubUrl(targetUrl, masterToken) {
+      if (!masterToken || !targetUrl) return targetUrl;
+      if (targetUrl.includes('hdntl=') || targetUrl.includes('hdnea=') || targetUrl.includes('Signature=')) return targetUrl;
+      return targetUrl + (targetUrl.includes('?') ? '&' : '?') + masterToken;
+    }
+
     function runEngine(token) {
       if (token !== loadToken) return;
       const video = $p('liveVideoEl');
       const engine = engineChain[engineIdx];
       const streamSrc = engineSrc;
+      const ch = CHANNELS[state.currentChannelIndex] || {};
+      const curSrv = activeServer(ch) || {};
+      const activeDrm = curSrv.drm || ch.drm || null;
+      const masterToken = extractQueryToken(streamSrc);
       const isLast = engineIdx >= engineChain.length - 1;
 
       clearTimeout(engineTimer);
       engineTimer = null;
-      if (!isLast) engineTimer = setTimeout(() => failEngine(token, 'engine-timeout'), 6000);
+      if (!isLast) engineTimer = setTimeout(() => failEngine(token, 'engine-timeout'), 8500);
 
       try {
-        if (engine === 'hls') {
+        if (engine === 'shaka') {
+          if (!(window.shaka && shaka.Player)) { failEngine(token, 'no-shaka'); return; }
+          try { if (shaka.polyfill && shaka.polyfill.installAll) shaka.polyfill.installAll(); } catch (e) {}
+          const player = new shaka.Player(video);
+          shakaInstance = player;
+
+          const shakaCfg = {
+            streaming: {
+              bufferingGoal: state.dataSaver ? 10 : 24,
+              rebufferingGoal: 2,
+              lowLatencyMode: false,
+              retryParameters: { maxAttempts: 3, baseDelay: 600, backoffFactor: 1.5 }
+            }
+          };
+          if (activeDrm) {
+            shakaCfg.drm = {};
+            if (activeDrm.clearKeys && Object.keys(activeDrm.clearKeys).length) {
+              shakaCfg.drm.clearKeys = activeDrm.clearKeys;
+            }
+            if (activeDrm.licenseUrl) {
+              shakaCfg.drm.servers = {
+                'com.widevine.alpha': activeDrm.licenseUrl,
+                'com.microsoft.playready': activeDrm.licenseUrl
+              };
+            }
+          }
+          player.configure(shakaCfg);
+
+          // Forward SonyLiv / Akamai / FanCode hdntl & hdnea tokens to child playlists & segments
+          const netEng = player.getNetworkingEngine();
+          if (netEng && masterToken) {
+            netEng.registerRequestFilter((type, request) => {
+              if (request && Array.isArray(request.uris)) {
+                request.uris = request.uris.map(u => appendTokenToSubUrl(u, masterToken));
+              }
+            });
+          }
+
+          player.addEventListener('error', (ev) => {
+            if (shakaInstance !== player) return;
+            if (ev && ev.detail && ev.detail.severity === 2) {
+              failEngine(token, 'shaka-fatal');
+            }
+          });
+
+          player.load(streamSrc).then(() => {
+            if (token !== loadToken || shakaInstance !== player) return;
+            clearTimeout(engineTimer);
+            tryPlayVideo();
+          }).catch(() => {
+            if (shakaInstance === player) failEngine(token, 'shaka-load-fail');
+          });
+        } else if (engine === 'hls') {
           const saver = !!state.dataSaver;
           const hls = new Hls({
             enableWorker: true,
@@ -3102,13 +3560,22 @@
             liveMaxLatencyDurationCount: 10,
             startFragPrefetch: true,
             abrEwmaDefaultEstimate: saver ? 600000 : 2000000,
-            manifestLoadingMaxRetry: 2,
+            manifestLoadingMaxRetry: 3,
             manifestLoadingRetryDelay: 700,
             levelLoadingMaxRetry: 3,
             levelLoadingRetryDelay: 700,
             fragLoadingMaxRetry: 4,
             fragLoadingRetryDelay: 600,
-            xhrSetup: function (xhr) { xhr.withCredentials = false; }
+            xhrSetup: function (xhr, url) {
+              xhr.withCredentials = false;
+              // Forward Akamai hdntl / hdnea query tokens to child variant playlists and segments if missing
+              if (masterToken && url && !url.includes('hdntl=') && !url.includes('hdnea=') && !url.includes('Signature=')) {
+                try {
+                  const tokenizedUrl = appendTokenToSubUrl(url, masterToken);
+                  xhr.open('GET', tokenizedUrl, true);
+                } catch (e) {}
+              }
+            }
           });
           hlsInstance = hls;
           hls.loadSource(streamSrc);
@@ -3116,6 +3583,7 @@
 
           hls.on(Hls.Events.MANIFEST_PARSED, () => {
             if (hlsInstance !== hls) return;
+            clearTimeout(engineTimer);
             applyQuality(qSel);
             tryPlayVideo();
           });
@@ -3128,7 +3596,7 @@
             if (hlsInstance !== hls || !data.fatal) return;
             if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
               const manifestFail = /manifest/i.test(data.details || '');
-              if (!manifestFail && netRetry < 3) {
+              if (!manifestFail && netRetry < 2) {
                 netRetry++;
                 setPlayerStatus('নেটওয়ার্ক ধীর • আবার সংযোগ করা হচ্ছে…', 2500);
                 setTimeout(() => { if (hlsInstance === hls) { try { hls.startLoad(); } catch (er) {} } }, 800 * netRetry);
@@ -3146,6 +3614,9 @@
             const player = dashjs.MediaPlayer().create();
             dashInstance = player;
             player.updateSettings({ streaming: { abr: { autoSwitchBitrate: { video: true } } } });
+            if (activeDrm && activeDrm.clearKeys && Object.keys(activeDrm.clearKeys).length) {
+              player.setProtectionData({ 'org.w3.clearkey': { 'clearkeys': activeDrm.clearKeys } });
+            }
             player.on(dashjs.MediaPlayer.events.ERROR, () => { if (dashInstance === player) failEngine(token, 'dash-error'); });
             player.initialize(video, streamSrc, true);
           }).catch(() => failEngine(token, 'dash-load'));
@@ -3165,7 +3636,6 @@
             try { const pr = player.play(); if (pr && pr.catch) pr.catch(() => {}); } catch (e) {}
           }).catch(() => failEngine(token, 'mpegts-load'));
         } else {
-          // native: mp4 / webm / mkv / ogg / mp3 / Safari HLS ...
           video.src = streamSrc;
           tryPlayVideo();
         }
@@ -3362,9 +3832,21 @@
 
       // Close menu when tapping elsewhere
       modal.addEventListener('click', (e) => {
-        if (!e.target.closest('#playerMenu') && !e.target.closest('#playerSpeedBtn') && !e.target.closest('#playerQualityBtn') && !e.target.closest('#playerAspectBtn')) closePlayerMenu();
+        if (!e.target.closest('#playerMenu') && !e.target.closest('#playerSpeedBtn') && !e.target.closest('#playerQualityBtn') && !e.target.closest('#playerAspectBtn') && !e.target.closest('#playerExtAppBtn')) closePlayerMenu();
       });
 
+      if ($p('openNsPlayerTopBtn')) {
+        $p('openNsPlayerTopBtn').addEventListener('click', (e) => {
+          e.stopPropagation();
+          openInNetworkStreamPlayer('ns');
+        });
+      }
+      if ($p('playerExtAppBtn')) {
+        $p('playerExtAppBtn').addEventListener('click', (e) => {
+          e.stopPropagation();
+          openPlayerMenu('extplayer');
+        });
+      }
       $p('closePlayerBtn').addEventListener('click', () => {
         if (IS_APP) { if (isPlayerFs()) togglePlayerFullscreen(); }
         else closePlayer();
@@ -3458,6 +3940,19 @@
           const r = parseFloat(val);
           if (ytMode && ytPlayer) { try { ytPlayer.setPlaybackRate(r); } catch (e) {} ytTick(); }
           else { video.defaultPlaybackRate = r; video.playbackRate = r; }
+        } else if (type === 'extplayer') {
+          closePlayerMenu();
+          if (val === 'copy') {
+            const ch = CHANNELS[state.currentChannelIndex] || {};
+            const srv = activeServer(ch) || {};
+            const u = srv.rawUrl || srv.url || ch.streamUrl || '';
+            if (u && navigator.clipboard) {
+              navigator.clipboard.writeText(u).then(() => showToast('স্ট্রিম লিংক কপি হয়েছে!')).catch(() => {});
+            }
+          } else {
+            openInNetworkStreamPlayer(val);
+          }
+          return;
         } else if (type === 'aspect') {
           state.aspect = val;
           saveState();
@@ -3510,7 +4005,7 @@
         $p('playerSpeedLabel').textContent = (r === 1 ? '1' : String(r)) + 'x';
       });
       video.addEventListener('error', () => {
-        if (!playerIsOpen() || playerIframeMode || hlsInstance || dashInstance || tsInstance) return;
+        if (!playerIsOpen() || playerIframeMode || shakaInstance || hlsInstance || dashInstance || tsInstance) return;
         if (!video.getAttribute('src')) return;
         failEngine(loadToken, 'media-error');
       });
