@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="bn" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Sarah TV - Live Sports & Events</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js"></script>
+  <style>
+    * { -webkit-tap-highlight-color: transparent; user-select: none; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', 'Hind Siliguri', sans-serif;
+      background-color: #000000;
+      color: #f8fafc;
+      overflow-x: hidden;
+      background-image: radial-gradient(120% 60% at 50% -10%, rgba(255, 42, 109, 0.22), rgba(147, 51, 234, 0.12) 45%, transparent 70%);
+      background-repeat: no-repeat;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    @keyframes liveDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+    .live-dot { animation: liveDot 1.4s infinite; }
+    .brand-mark {
+      background: linear-gradient(135deg, #ff2a6d 0%, #be185d 50%, #7c3aed 100%);
+      box-shadow: 0 8px 24px rgba(255, 42, 109, 0.45);
+    }
+    .brand-title {
+      background: linear-gradient(135deg, #ffffff 0%, #ff6b9d 35%, #c084fc 70%, #60a5fa 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .btn-gradient {
+      background: linear-gradient(135deg, #ff2a6d 0%, #e11d48 40%, #9333ea 100%);
+      box-shadow: 0 4px 18px rgba(255, 42, 109, 0.45);
+    }
+    .btn-gradient:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-gradient:active { transform: scale(0.96); }
+    .cat-pill {
+      padding: 7px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #cbd5e1;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cat-pill:hover { background: rgba(255, 255, 255, 0.18); color: #fff; }
+    .cat-pill.active {
+      background: linear-gradient(135deg, #ff2a6d 0%, #e11d48 40%, #9333ea 100%);
+      color: #ffffff;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 4px 18px rgba(255, 42, 109, 0.5);
+    }
+    .event-card {
+      background: #141417;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .event-card:hover {
+      border-color: rgba(255, 42, 109, 0.55);
+      background: #1c1c22;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 42, 109, 0.2);
+    }
+    .event-card.playing {
+      border-color: #ff2a6d;
+      box-shadow: 0 0 24px rgba(255, 42, 109, 0.45);
+    }
+    .cs-spinner {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 4px solid rgba(255,255,255,.15);
+      border-top-color: #ff2a6d;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body class="min-h-screen pb-14">
+
+  <!-- TOP HEADER -->
+  <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <a href="./index.html" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-xl brand-mark flex items-center justify-center group-active:scale-95 transition">
+          <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M4 6.5C4 5.12 5.12 4 6.5 4h11C18.88 4 20 5.12 20 6.5v11c0 1.38-1.12 2.5-2.5 2.5h-11C5.12 20 4 18.88 4 17.5v-11zm6 2.5v6l5-3-5-3z"/>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-extrabold tracking-wider text-lg leading-none brand-title">Sarah TV</span>
+          <span class="text-[10px] text-pink-400 font-semibold tracking-tight">🔴 Live Sports & Events</span>
+        </div>
+      </a>
+      <div class="flex items-center gap-2">
+        <button id="refreshEventsBtn" class="px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-semibold text-white flex items-center gap-1.5 transition active:scale-95">
+          <span>↻</span> <span>রিফ্রেশ</span>
+        </button>
+        <a href="./index.html" class="px-3.5 py-1.5 rounded-full btn-gradient text-xs font-bold text-white transition active:scale-95">
+          TV Home
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 pt-4 space-y-5">
+
+    <!-- EMBEDDED PLAYER CONTAINER -->
+    <div id="playerSection" class="w-full rounded-2xl overflow-hidden bg-black border border-white/15 shadow-2xl relative aspect-video flex items-center justify-center">
+      <video id="liveVideo" class="w-full h-full object-contain" autoplay playsinline webkit-playsinline controls></video>
+      <iframe id="liveIframe" class="hidden w-full h-full border-0" allow="autoplay; fullscreen; encrypted-media"></iframe>
+      
+      <!-- Player Overlay Info -->
+      <div id="playerOverlay" class="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10 transition opacity-90">
+        <div class="flex items-center gap-2 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15">
+          <span class="w-2 h-2 rounded-full bg-rose-500 live-dot"></span>
+          <span id="playingEventTitle" class="text-xs font-bold text-white truncate max-w-[200px] sm:max-w-sm">ম্যাচ বেছে নিন</span>
+          <span id="playingEventSource" class="text-[10px] px-2 py-0.5 rounded-full bg-pink-500/30 text-pink-300 font-semibold">LIVE</span>
+        </div>
+        <button id="toggleFullscreenBtn" class="pointer-events-auto w-8 h-8 rounded-full bg-black/70 hover:bg-black/90 border border-white/20 text-white flex items-center justify-center text-sm">
+          ⛶
+        </button>
+      </div>
+
+      <!-- Spinner -->
+      <div id="playerSpinner" class="hidden absolute pointer-events-none z-20">
+        <div class="cs-spinner"></div>
+      </div>
+
+      <!-- Initial Banner Placeholder -->
+      <div id="playerPlaceholder" class="absolute inset-0 bg-gradient-to-b from-[#181820] to-[#0c0c10] flex flex-col items-center justify-center p-6 text-center z-10">
+        <div class="w-16 h-16 rounded-full btn-gradient flex items-center justify-center mb-3 shadow-xl">
+          <svg class="w-8 h-8 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <h2 class="text-lg sm:text-xl font-extrabold text-white">Live Sports Streaming</h2>
+        <p class="text-xs text-slate-400 mt-1 max-w-md">নিচের যেকোনো লাইভ ম্যাচ বা ইভেন্টে ক্লিক করলেই এখানে সরাসরি ফুল স্ক্রিনে দেখতে পাবেন।</p>
+      </div>
+    </div>
+
+    <!-- SERVER SELECTOR (IF MULTIPLE SERVERS) -->
+    <div id="serverBar" class="hidden flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+      <span class="text-xs text-slate-400 font-bold whitespace-nowrap">সার্ভার:</span>
+      <div id="serverList" class="flex gap-2"></div>
+    </div>
+
+    <!-- CATEGORY PILLS BAR -->
+    <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1" id="catBar">
+      <button data-cat="all" class="cat-pill active">সব ইভেন্ট (<span id="totalEventsCount">0</span>)</button>
+      <button data-cat="willow" class="cat-pill">🏏 Willow Sports</button>
+      <button data-cat="prime" class="cat-pill">📺 Prime Video</button>
+      <button data-cat="cricket" class="cat-pill">Cricket</button>
+      <button data-cat="football" class="cat-pill">Football</button>
+    </div>
+
+    <!-- SEARCH INPUT -->
+    <div class="relative">
+      <input id="searchEventsInput" type="text" placeholder="🔍 ম্যাচ বা ইভেন্টের নাম খুঁজুন..." class="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-pink-500 transition" />
+    </div>
+
+    <!-- EVENTS LIST GRID -->
+    <div class="space-y-3">
+      <div class="flex items-center justify-between">
+        <h3 id="sectionHeading" class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-pink-500 live-dot"></span>
+          <span>লাইভ স্পোর্টস ও আপকামিং ম্যাচ</span>
+        </h3>
+        <span id="loadedStatusBadge" class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold">লোড হচ্ছে...</span>
+      </div>
+
+      <div id="eventsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+        <!-- Event cards generated via JS -->
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const EVENT_SOURCES = [
+      {
+        name: 'Willow Sports',
+        key: 'willow',
+        badge: 'Willow TV',
+        color: 'from-amber-600 to-rose-600',
+        url: 'https://raw.githubusercontent.com/srhady/willow-event/refs/heads/main/live_sports.json'
+      },
+      {
+        name: 'Prime Video Sports',
+        key: 'prime',
+        badge: 'Prime Video',
+        color: 'from-sky-600 to-indigo-600',
+        url: 'https://raw.githubusercontent.com/srhady/willow-event/refs/heads/main/primevideo_sports.json'
+      }
+    ];
+
+    let ALL_EVENTS = [];
+    let currentCategory = 'all';
+    let activeEventId = null;
+    let hlsInstance = null;
+
+    function cleanTxt(str) {
+      return String(str == null ? '' : str).trim();
+    }
+
+    function normalizeLogo(raw, sourceKey) {
+      let u = cleanTxt(raw);
+      if (!u) {
+        return sourceKey === 'prime'
+          ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Prime_Video.png/240px-Prime_Video.png'
+          : 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Willow_TV_logo.svg/240px-Willow_TV_logo.svg.png';
+      }
+      if (u.startsWith('//')) u = 'https:' + u;
+      return u;
+    }
+
+    function parseEventList(data, source) {
+      let arr = [];
+      if (Array.isArray(data)) arr = data;
+      else if (data && typeof data === 'object') {
+        for (const k of ['events', 'matches', 'sports', 'playlist', 'channels', 'data', 'items', 'streams', 'list']) {
+          if (Array.isArray(data[k])) { arr = data[k]; break; }
+        }
+        if (!arr.length) {
+          Object.keys(data).forEach(k => {
+            if (Array.isArray(data[k])) {
+              data[k].forEach(item => {
+                if (item && typeof item === 'object') arr.push({ ...item, category: item.category || k });
+              });
+            }
+          });
+        }
+      }
+
+      return arr.map((item, idx) => {
+        if (!item || typeof item !== 'object') return null;
+        const name = cleanTxt(item.title || item.name || item.event || item.match || item.channel || `Live Match ${idx + 1}`);
+        const streamUrl = cleanTxt(item.url || item.stream_url || item.streamUrl || item.link || item.m3u8 || item.playback_url || item.playbackUrl || item.source || item.src || '');
+        const iframeUrl = cleanTxt(item.iframe || item.embed || item.embedUrl || '');
+        const time = cleanTxt(item.startTime || item.time || item.date || item.status || 'LIVE NOW');
+        const sport = cleanTxt(item.sport || item.category || item.genre || (/cricket/i.test(name) ? 'Cricket' : /football|soccer|epl/i.test(name) ? 'Football' : 'Sports'));
+        const logo = normalizeLogo(item.image || item.imageUrl || item.poster || item.logo || item.banner, source.key);
+
+        let servers = [];
+        if (Array.isArray(item.servers)) {
+          item.servers.forEach((sv, sIdx) => {
+            const u = typeof sv === 'string' ? sv : (sv.url || sv.stream_url || sv.link || '');
+            const f = typeof sv === 'object' ? (sv.iframe || sv.embed || '') : '';
+            if (u || f) servers.push({ name: sv.name || `Server ${sIdx + 1}`, url: u, iframe: f });
+          });
+        }
+        if (!servers.length) servers = [{ name: 'Server 1', url: streamUrl, iframe: iframeUrl }];
+
+        return {
+          id: `${source.key}-${idx}-${name.replace(/\s+/g, '-').slice(0, 20)}`,
+          name,
+          time,
+          sport,
+          logo,
+          streamUrl: servers[0].url || streamUrl,
+          iframeUrl: servers[0].iframe || iframeUrl,
+          servers,
+          sourceName: source.name,
+          sourceBadge: source.badge,
+          sourceKey: source.key,
+          sourceColor: source.color
+        };
+      }).filter(item => item && (item.streamUrl || item.iframeUrl));
+    }
+
+    async function loadEventsFromSources() {
+      const statusBadge = document.getElementById('loadedStatusBadge');
+      statusBadge.textContent = 'লোড হচ্ছে...';
+      statusBadge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-semibold';
+
+      const results = await Promise.all(EVENT_SOURCES.map(async (src) => {
+        try {
+          const res = await fetch(src.url + '?t=' + Date.now(), { cache: 'no-store' });
+          if (!res.ok) return [];
+          const json = await res.json();
+          return parseEventList(json, src);
+        } catch (e) {
+          console.error('Error fetching source:', src.name, e);
+          return [];
+        }
+      }));
+
+      ALL_EVENTS = [].concat(...results);
+      document.getElementById('totalEventsCount').textContent = ALL_EVENTS.length;
+
+      statusBadge.textContent = `${ALL_EVENTS.length}টি লাইভ ম্যাচ রেডি`;
+      statusBadge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold';
+
+      renderEventsGrid();
+    }
+
+    function renderEventsGrid() {
+      const grid = document.getElementById('eventsGrid');
+      const q = cleanTxt(document.getElementById('searchEventsInput').value).toLowerCase();
+
+      let list = ALL_EVENTS;
+
+      if (currentCategory === 'willow') {
+        list = list.filter(e => e.sourceKey === 'willow');
+      } else if (currentCategory === 'prime') {
+        list = list.filter(e => e.sourceKey === 'prime');
+      } else if (currentCategory === 'cricket') {
+        list = list.filter(e => /cricket/i.test(e.sport + ' ' + e.name));
+      } else if (currentCategory === 'football') {
+        list = list.filter(e => /football|soccer|epl/i.test(e.sport + ' ' + e.name));
+      }
+
+      if (q) {
+        list = list.filter(e => e.name.toLowerCase().includes(q) || e.sport.toLowerCase().includes(q) || e.time.toLowerCase().includes(q));
+      }
+
+      if (!list.length) {
+        grid.innerHTML = `
+          <div class="col-span-full py-16 text-center text-slate-400 space-y-2">
+            <div class="w-12 h-12 mx-auto rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xl">🏏</div>
+            <p class="font-semibold text-white">কোনো ম্যাচ পাওয়া যায়নি</p>
+            <p class="text-xs text-slate-400">ফিল্টার পরিবর্তন করে দেখুন বা রিফ্রেশ চাপুন।</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = list.map(ev => {
+        const isPlaying = activeEventId === ev.id;
+        return `
+          <button data-event-id="${ev.id}" class="event-card text-left p-4 flex flex-col justify-between gap-3 group active:scale-[0.98] ${isPlaying ? 'playing' : ''}">
+            <div class="flex items-start justify-between gap-2.5">
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white/10 border border-white/15 text-pink-300 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-rose-500 live-dot"></span>
+                <span>${ev.sourceBadge}</span>
+              </span>
+              <span class="text-[11px] font-semibold text-slate-400 truncate max-w-[130px]">${ev.sport}</span>
+            </div>
+
+            <div class="flex items-center gap-3.5 my-1">
+              <div class="w-12 h-12 rounded-xl bg-white flex-shrink-0 flex items-center justify-center p-1.5 overflow-hidden shadow">
+                <img src="${ev.logo}" alt="" class="w-full h-full object-contain" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Willow_TV_logo.svg/240px-Willow_TV_logo.svg.png'" />
+              </div>
+              <div class="overflow-hidden min-w-0">
+                <h4 class="font-extrabold text-sm sm:text-base text-white truncate group-hover:text-pink-400 transition">${ev.name}</h4>
+                <p class="text-xs text-slate-300 font-medium truncate mt-0.5">⏰ ${ev.time}</p>
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-bold">
+              <span class="text-slate-400">${ev.servers.length > 1 ? ev.servers.length + 'টি সার্ভার' : 'HD লাইভ'}</span>
+              <span class="text-pink-400 flex items-center gap-1 group-hover:translate-x-1 transition">
+                <span>▶ এখনই দেখুন</span>
+              </span>
+            </div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function playEvent(ev, serverIdx = 0) {
+      if (!ev) return;
+      activeEventId = ev.id;
+      renderEventsGrid();
+
+      const placeholder = document.getElementById('playerPlaceholder');
+      if (placeholder) placeholder.style.display = 'none';
+
+      const titleEl = document.getElementById('playingEventTitle');
+      const badgeEl = document.getElementById('playingEventSource');
+      titleEl.textContent = ev.name;
+      badgeEl.textContent = ev.sourceBadge;
+
+      const serverBar = document.getElementById('serverBar');
+      const serverList = document.getElementById('serverList');
+      if (ev.servers && ev.servers.length > 1) {
+        serverBar.classList.remove('hidden');
+        serverList.innerHTML = ev.servers.map((s, idx) => `
+          <button data-server-idx="${idx}" class="px-3 py-1 rounded-full text-xs font-bold transition ${idx === serverIdx ? 'btn-gradient text-white' : 'bg-white/10 text-slate-300 hover:bg-white/20'}">
+            ${s.name}
+          </button>
+        `).join('');
+      } else {
+        serverBar.classList.add('hidden');
+      }
+
+      const activeServer = (ev.servers && ev.servers[serverIdx]) || { url: ev.streamUrl, iframe: ev.iframeUrl };
+      const video = document.getElementById('liveVideo');
+      const iframe = document.getElementById('liveIframe');
+      const spinner = document.getElementById('playerSpinner');
+
+      // Scroll smoothly to player
+      document.getElementById('playerSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      if (hlsInstance) {
+        hlsInstance.destroy();
+        hlsInstance = null;
+      }
+
+      if (activeServer.iframe) {
+        video.classList.add('hidden');
+        try { video.pause(); video.src = ''; } catch (e) {}
+        iframe.classList.remove('hidden');
+        iframe.src = activeServer.iframe;
+        return;
+      }
+
+      iframe.classList.add('hidden');
+      iframe.src = '';
+      video.classList.remove('hidden');
+
+      const streamUrl = activeServer.url || ev.streamUrl;
+      if (!streamUrl) return;
+
+      spinner.classList.remove('hidden');
+
+      if (Hls.isSupported() && (streamUrl.includes('.m3u8') || streamUrl.includes('m3u8'))) {
+        const hls = new Hls({ enableWorker: true, lowLatencyMode: true });
+        hlsInstance = hls;
+        hls.loadSource(streamUrl);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          spinner.classList.add('hidden');
+          video.play().catch(() => {});
+        });
+        hls.on(Hls.Events.ERROR, () => {
+          spinner.classList.add('hidden');
+        });
+      } else {
+        video.src = streamUrl;
+        video.onloadeddata = () => spinner.classList.add('hidden');
+        video.play().catch(() => {});
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadEventsFromSources();
+
+      document.getElementById('refreshEventsBtn').addEventListener('click', () => {
+        loadEventsFromSources();
+      });
+
+      document.getElementById('searchEventsInput').addEventListener('input', () => {
+        renderEventsGrid();
+      });
+
+      document.getElementById('catBar').addEventListener('click', (e) => {
+        const btn = e.target.closest('.cat-pill');
+        if (!btn) return;
+        document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        renderEventsGrid();
+      });
+
+      document.getElementById('eventsGrid').addEventListener('click', (e) => {
+        const card = e.target.closest('[data-event-id]');
+        if (!card) return;
+        const ev = ALL_EVENTS.find(item => item.id === card.dataset.eventId);
+        if (ev) playEvent(ev, 0);
+      });
+
+      document.getElementById('serverList').addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-server-idx]');
+        if (!btn) return;
+        const sIdx = parseInt(btn.dataset.serverIdx, 10);
+        const ev = ALL_EVENTS.find(item => item.id === activeEventId);
+        if (ev) playEvent(ev, sIdx);
+      });
+
+      document.getElementById('toggleFullscreenBtn').addEventListener('click', () => {
+        const pSec = document.getElementById('playerSection');
+        if (!document.fullscreenElement) {
+          if (pSec.requestFullscreen) pSec.requestFullscreen();
+          else if (pSec.webkitRequestFullscreen) pSec.webkitRequestFullscreen();
+        } else {
+          if (document.exitFullscreen) document.exitFullscreen();
+        }
+      });
+
+      // Auto refresh every 3 minutes
+      setInterval(loadEventsFromSources, 3 * 60 * 1000);
+    });
+  </script>
+</body>
+</html>
