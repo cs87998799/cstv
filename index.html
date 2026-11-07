@@ -9,11 +9,34 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script>
-    if (window.tailwind) tailwind.config = { theme: { extend: { colors: {
-      pink: { 300: '#e5e5ea', 400: '#d1d1d6', 500: '#ffffff', 600: '#8e8e93', 700: '#636366' },
-      fuchsia: { 300: '#f2f2f7', 900: '#2c2c2e' },
-      purple: { 800: '#48484a', 950: '#1c1c1e' }
-    } } } };
+    if (window.tailwind) tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            pink: {
+              300: '#f9a8d4',
+              400: '#f472b6',
+              500: '#ff2a6d',
+              600: '#e11d48',
+              700: '#be123c'
+            },
+            fuchsia: {
+              300: '#f0abfc',
+              400: '#e879f9',
+              500: '#d946ef',
+              600: '#c026d3',
+              900: '#701a75'
+            },
+            purple: {
+              500: '#a855f7',
+              600: '#9333ea',
+              800: '#581c87',
+              950: '#2e1065'
+            }
+          }
+        }
+      }
+    };
   </script>
   <script>
     /* Layout: Settings > Layout theke Phone / TV / Auto.
@@ -359,53 +382,208 @@
       .hs-title { font-size: 52px; }
     }
     @media (prefers-reduced-motion: reduce) { .hs *, .hs-live i { animation: none !important; transition: none !important; } .hs-body > *, .hs-art { opacity: 1; transform: none; } }
-  </style>
-  <style>
-    /* ===== Apple TV palette: black • graphite • white, accent = white / system green (switch) ===== */
-    body { background: #000; }
-    .toffee-gradient { background: #f5f5f7 !important; color: #000 !important; }
-    .toffee-gradient svg { color: #000 !important; }
-    html.app-mode body, html.tv-mode body { background: #000; }
-    #viewHome h3::before { background: #f5f5f7 !important; }
-    #topCategoryNav .cat-tab.text-pink-400 { background: #f5f5f7 !important; color: #000 !important; }
-    #totalChannelsBadge, #savedCountBadge { background: rgba(255,255,255,.12) !important; color: #d1d1d6 !important; }
-    button[role=switch].bg-pink-600 { background: #30d158 !important; }
-    .app-chip { background: #2c2c2e; color: #d1d1d6; }
-    .app-chip.active { background: #f5f5f7 !important; color: #000 !important; }
-    .app-card { background: #1c1c1e; }
-    .app-card.active { border-color: #fff; }
-    .app-card-name { color: #f5f5f7; }
-    .app-card-num { color: #8e8e93; }
-    #appStreamInfo { color: #98989d !important; }
-    .cs-range::-webkit-slider-runnable-track { background: linear-gradient(to right, #fff var(--p,0%), rgba(255,255,255,.25) var(--p,0%)); }
-    .cs-range::-webkit-slider-thumb { box-shadow: 0 0 0 3px rgba(255,255,255,.35); }
-    .cs-range::-moz-range-progress { background: #fff; }
-    .cs-spinner { border-top-color: #fff; }
-    .cs-menu { background: rgba(28,28,30,.97); border-color: rgba(255,255,255,.16); }
-    .cs-menu-title { color: #98989d; }
-    .cs-menu-item.active { background: rgba(255,255,255,.16); }
-    .tv-focus { outline-color: #fff; background: #3a3a3c !important; box-shadow: 0 0 2vw rgba(255,255,255,.28); }
-    .app-chip.tv-focus { background: #fff !important; color: #000 !important; }
-    #tvVolFill { background: #fff; }
-    #tvOsdNum { color: #fff; }
-    #tvOsdInfo { color: #98989d; }
-    /* brand mark */
-    .brand-mark { background: linear-gradient(160deg, #ffffff 0%, #c7c7cc 100%) !important; color: #000; box-shadow: 0 8px 24px rgba(255,255,255,.12) !important; }
-    .brand-mark svg { color: #000 !important; }
+  </style>  <style>
+    /* ===== Sarah TV Ultra-Vibrant Live Streaming Palette ===== */
+    body {
+      background: #000000;
+      background-image: radial-gradient(120% 60% at 50% -10%, rgba(255, 42, 109, 0.22), rgba(147, 51, 234, 0.12) 45%, transparent 70%);
+      background-repeat: no-repeat;
+    }
+    .brand-mark {
+      background: linear-gradient(135deg, #ff2a6d 0%, #be185d 50%, #7c3aed 100%) !important;
+      color: #ffffff !important;
+      box-shadow: 0 8px 26px rgba(255, 42, 109, 0.45) !important;
+    }
+    .brand-mark svg {
+      color: #ffffff !important;
+    }
+    .toffee-gradient {
+      background: linear-gradient(135deg, #ff2a6d 0%, #e11d48 40%, #9333ea 100%) !important;
+      color: #ffffff !important;
+      box-shadow: 0 6px 22px rgba(255, 42, 109, 0.4) !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    }
+    .toffee-gradient svg {
+      color: #ffffff !important;
+    }
+    .toffee-gradient:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+    #viewHome h3::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #ff2a6d 0%, #9333ea 100%) !important;
+      box-shadow: 0 0 10px rgba(255, 42, 109, 0.6);
+    }
+    /* Top Category Navigation Pills */
+    #topCategoryNav {
+      gap: 10px;
+      padding-top: 10px;
+      padding-bottom: 12px;
+    }
+    #topCategoryNav .cat-tab {
+      padding: 7px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #e2e8f0;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #topCategoryNav .cat-tab:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+    }
+    #topCategoryNav .cat-tab:active {
+      transform: scale(0.96);
+    }
+    #topCategoryNav .cat-tab.active-cat,
+    #topCategoryNav .cat-tab.text-pink-400 {
+      background: linear-gradient(135deg, #ff2a6d 0%, #e11d48 40%, #9333ea 100%) !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      border: 1px solid rgba(255, 255, 255, 0.4) !important;
+      box-shadow: 0 4px 18px rgba(255, 42, 109, 0.5) !important;
+      transform: scale(1.02);
+    }
+    #totalChannelsBadge, #savedCountBadge {
+      background: rgba(255, 42, 109, 0.2) !important;
+      color: #ff6b9d !important;
+      border: 1px solid rgba(255, 42, 109, 0.35) !important;
+    }
+    button[role=switch].bg-pink-600 {
+      background: linear-gradient(135deg, #ff2a6d, #9333ea) !important;
+      box-shadow: 0 0 12px rgba(255, 42, 109, 0.5);
+    }
+    .app-chip {
+      background: #1f1f23;
+      color: #d1d5db;
+    }
+    .app-chip.active {
+      background: linear-gradient(135deg, #ff2a6d 0%, #9333ea 100%) !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 14px rgba(255, 42, 109, 0.4);
+    }
+    .app-card {
+      background: #161619;
+      border: 2px solid transparent;
+    }
+    .app-card.active {
+      border-color: #ff2a6d;
+      box-shadow: 0 0 16px rgba(255, 42, 109, 0.45);
+    }
+    .app-card-name { color: #f8fafc; }
+    .app-card-num { color: #ff6b9d; }
+    #appStreamInfo { color: #a1a1aa !important; }
+    .cs-range::-webkit-slider-runnable-track {
+      background: linear-gradient(to right, #ff2a6d var(--p,0%), rgba(255,255,255,.2) var(--p,0%));
+    }
+    .cs-range::-webkit-slider-thumb {
+      box-shadow: 0 0 0 3px rgba(255, 42, 109, 0.6);
+    }
+    .cs-range::-moz-range-progress { background: #ff2a6d; }
+    .cs-spinner { border-top-color: #ff2a6d; }
+    .cs-menu {
+      background: rgba(22, 22, 26, 0.98);
+      border-color: rgba(255, 42, 109, 0.3);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 24px rgba(255, 42, 109, 0.25);
+    }
+    .cs-menu-title { color: #ff6b9d; }
+    .cs-menu-item.active {
+      background: linear-gradient(135deg, rgba(255, 42, 109, 0.3) 0%, rgba(147, 51, 234, 0.3) 100%);
+      color: #ffffff;
+      border-left: 3px solid #ff2a6d;
+    }
+    .tv-focus {
+      outline-color: #ff2a6d;
+      background: #27272a !important;
+      box-shadow: 0 0 2vw rgba(255, 42, 109, 0.65);
+    }
+    .app-chip.tv-focus {
+      background: linear-gradient(135deg, #ff2a6d, #9333ea) !important;
+      color: #fff !important;
+    }
+    #tvVolFill {
+      background: linear-gradient(90deg, #ff2a6d, #9333ea);
+    }
+    #tvOsdNum { color: #ff2a6d; }
+    #tvOsdInfo { color: #c084fc; }
     /* layout selector */
-    .seg-btn { padding: 10px 6px; border-radius: 12px; background: #2c2c2e; color: #e5e5ea; font-size: 13px; font-weight: 700; border: 1px solid transparent; }
-    .seg-btn.on { background: #f5f5f7; color: #000; }
-    /* server chips (player er upore) */
-    #playerServerBar { position: absolute; left: 0; right: 0; top: calc(max(12px, env(safe-area-inset-top)) + 54px); z-index: 25; display: flex; gap: 8px; padding: 0 12px; overflow-x: auto; scrollbar-width: none; }
+    .seg-btn {
+      padding: 10px 6px;
+      border-radius: 12px;
+      background: #202024;
+      color: #e5e5ea;
+      font-size: 13px;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.2s;
+    }
+    .seg-btn.on {
+      background: linear-gradient(135deg, #ff2a6d 0%, #9333ea 100%);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(255, 42, 109, 0.4);
+    }
+    /* server chips */
+    #playerServerBar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(max(12px, env(safe-area-inset-top)) + 54px);
+      z-index: 25;
+      display: flex;
+      gap: 8px;
+      padding: 0 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
     #playerServerBar::-webkit-scrollbar { display: none; }
     #playerServerBar.hidden { display: none; }
     #playerModal.app-inline:not(.app-fs) #playerServerBar { top: 8px; }
-    .srv-chip { flex: none; height: 30px; padding: 0 14px; border-radius: 999px; background: rgba(28,28,30,.82); color: #e5e5ea; font-size: 12px; font-weight: 700; border: 1px solid rgba(255,255,255,.16); white-space: nowrap; }
-    .srv-chip.on { background: #f5f5f7; color: #000; border-color: #f5f5f7; }
+    .srv-chip {
+      flex: none;
+      height: 30px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: rgba(24, 24, 28, 0.88);
+      color: #e5e5ea;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .srv-chip.on {
+      background: linear-gradient(135deg, #ff2a6d 0%, #9333ea 100%);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 2px 10px rgba(255, 42, 109, 0.4);
+    }
     html.tv-mode #playerServerBar { display: none !important; }
     /* TV settings panel: remote focus */
-    html.tv-mode #appSettingsPanel :focus { outline: 3px solid #fff; outline-offset: 3px; border-radius: 14px; }
+    html.tv-mode #appSettingsPanel :focus { outline: 3px solid #ff2a6d; outline-offset: 3px; border-radius: 14px; }
     html.tv-mode #appSettingsBody { max-width: 760px; margin: 0 auto; }
+    /* Bottom Navigation Active Glowing Indicator */
+    .bottom-nav-btn.text-pink-500 {
+      color: #ff2a6d !important;
+    }
+    span[id^="navIndicator"] {
+      background: linear-gradient(90deg, #ff2a6d, #9333ea) !important;
+      box-shadow: 0 0 12px rgba(255, 42, 109, 0.65);
+    }
+    .live-dot {
+      background-color: #ff2a6d;
+      box-shadow: 0 0 8px #ff2a6d;
+    }
   </style>
 <script>try{localStorage.removeItem('sarah_lite');localStorage.removeItem('sarah_lite_recent');localStorage.removeItem('sarah_lite_plays');}catch(e){}</script>
 </head>
@@ -563,7 +741,7 @@
     <!-- DISCOVER VIEW -->
     <section id="viewDiscover" class="hidden px-4 py-4 space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <h2 class="text-xl font-bold">সব চ্যানেল</h2>
+        <h2 id="discoverSectionTitle" class="text-xl font-bold">সব চ্যানেল</h2>
         <div class="relative flex-1 max-w-sm">
           <input id="channelSearchInput" type="text" placeholder="🔍 চ্যানেল খুঁজুন..." class="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-pink-500" />
         </div>
@@ -1022,12 +1200,12 @@
     ];
 
     const CARD_GRADIENTS = [
-      'from-zinc-800 via-zinc-900 to-neutral-950',
-      'from-neutral-800 via-neutral-900 to-zinc-950',
-      'from-stone-800 via-neutral-900 to-neutral-950',
-      'from-zinc-700 via-zinc-900 to-black',
-      'from-neutral-700 via-neutral-900 to-zinc-950',
-      'from-slate-800 via-zinc-900 to-neutral-950'
+      'from-rose-950/70 via-purple-950/50 to-zinc-950',
+      'from-indigo-950/70 via-slate-900/50 to-zinc-950',
+      'from-violet-950/70 via-fuchsia-950/50 to-zinc-950',
+      'from-emerald-950/70 via-teal-950/50 to-zinc-950',
+      'from-amber-950/70 via-rose-950/50 to-zinc-950',
+      'from-sky-950/70 via-blue-950/50 to-zinc-950'
     ];
 
     // Logo link thik kore: github blob -> raw, // -> https, http -> https (https site e)
@@ -1059,16 +1237,25 @@
     }
     window.logoFail = logoFail;
 
-    function normalizeChannelsJson(rawJson, offset = 0) {
+    function normalizeChannelsJson(rawJson, offset = 0, defaultCategory = 'Live TV', sourceName = '', prefix = 'json', fallbackLogo = '', isEvent = false) {
       let arr = [];
       if (Array.isArray(rawJson)) {
         arr = rawJson;
       } else if (rawJson && typeof rawJson === 'object') {
-        arr = rawJson.channels || rawJson.data || rawJson.items || rawJson.streams || rawJson.list || [];
-        if (!Array.isArray(arr)) {
+        for (const k of ['events', 'matches', 'sports', 'playlist', 'channels', 'data', 'items', 'streams', 'list', 'result', 'feed']) {
+          if (Array.isArray(rawJson[k])) {
+            arr = rawJson[k];
+            break;
+          }
+        }
+        if (!arr.length) {
           Object.keys(rawJson).forEach(k => {
             if (Array.isArray(rawJson[k])) {
-              rawJson[k].forEach(item => arr.push({ ...item, category: item.category || k }));
+              rawJson[k].forEach(item => {
+                if (item && typeof item === 'object') {
+                  arr.push({ ...item, category: item.category || item.group || k });
+                }
+              });
             }
           });
         }
@@ -1077,29 +1264,56 @@
       if (!Array.isArray(arr) || arr.length === 0) return null;
 
       return arr.map((item, i0) => {
+        if (!item || typeof item !== 'object') return null;
         const idx = i0 + offset;
-        const name = item.name || item.title || item.channel_name || item.tvg_name || `Channel ${idx + 1}`;
-        const category = item.category || item.group || item.group_title || item.genre || item.type || 'Live TV';
-        const logo = normalizeLogoUrl(item.logo || item.logo_url || item.logoUrl || item.logoURL || item.tvg_logo || item['tvg-logo'] || item.tvg_logo_url || item.image || item.image_url || item.icon || item.icon_url || item.thumb || item.thumbnail || item.poster || '');
-        const streamUrl = item.url || item.streamUrl || item.stream_url || item.link || item.m3u8 || item.youtube || item.yt || item.file || item.src || item.source || 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+        const name = cleanTxt(item.name || item.title || item.event || item.event_name || item.match || item.match_name || item.channel || item.channel_name || item.tvg_name || `${sourceName || 'Channel'} ${idx + 1}`);
+        let category = cleanTxt(item.category || item.group || item.group_title || item.genre || item.sport || item.type || defaultCategory || 'Live TV');
+        if (/^(undefined|uncategori[sz]ed|general)$/i.test(category)) category = defaultCategory || 'Live TV';
+
+        let logo = normalizeLogoUrl(item.logo || item.logo_url || item.logoUrl || item.logoURL || item.image || item.image_url || item.imageUrl || item.poster || item.banner || item.thumb || item.thumbnail || item.icon || item.icon_url || item.tvg_logo || item['tvg-logo'] || fallbackLogo || '');
+
+        let streamUrl = item.url || item.streamUrl || item.stream_url || item.stream || item.link || item.m3u8 || item.playback_url || item.playbackUrl || item.source || item.src || item.file || item.youtube || item.yt || item.hls || item.mpd || 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+        
+        // Extract headers (Referer, User-Agent) if present
+        let hdr = {};
+        if (item.headers && typeof item.headers === 'object') {
+          Object.keys(item.headers).forEach(k => {
+            if (/referer/i.test(k)) hdr.referer = item.headers[k];
+            if (/user-agent/i.test(k)) hdr.ua = item.headers[k];
+          });
+        } else {
+          if (item.referer || item.referrer) hdr.referer = item.referer || item.referrer;
+          if (item.userAgent || item['User-Agent'] || item.ua) hdr.ua = item.userAgent || item['User-Agent'] || item.ua;
+        }
+
+        // Apply proxy if headers present
+        if (streamUrl && (hdr.referer || hdr.ua)) {
+          streamUrl = proxify(streamUrl, hdr);
+        }
+
         const iframeUrl = item.iframe || item.embed || item.embedUrl || '';
-        // servers: [{name,url}] thakle sob gulo nibe, na thakle main url ta ekta server
         let servers = [];
         if (Array.isArray(item.servers)) {
           item.servers.forEach(sv => {
             if (!sv) return;
-            const u = typeof sv === 'string' ? sv : (sv.url || sv.streamUrl || sv.link || sv.src || '');
-            const f = typeof sv === 'object' ? (sv.iframe || sv.embed || '') : '';
+            let u = typeof sv === 'string' ? sv : (sv.url || sv.streamUrl || sv.link || sv.src || '');
+            let f = typeof sv === 'object' ? (sv.iframe || sv.embed || '') : '';
+            if (u && (hdr.referer || hdr.ua)) u = proxify(u, hdr);
             if (u || f) servers.push({ url: u, iframe: f });
           });
         }
         if (!servers.length) servers = [{ url: streamUrl, iframe: iframeUrl }];
+
         const words = name.trim().split(/\s+/);
-        const shortLabel = item.shortLabel || (words.length >= 2 ? (words[0] + ' ' + words[1]).slice(0, 10) : name.slice(0, 8));
+        const vs = name.match(/^(.+?)\s+vs\s+(.+?)(?:\s+-|$)/i);
+        const shortLabel = item.shortLabel || (vs ? (vs[1].slice(0, 6) + ' v ' + vs[2].slice(0, 6)) : (words.length >= 2 ? (words[0] + ' ' + words[1]).slice(0, 10) : name.slice(0, 8)));
         const subLabel = item.subLabel || item.quality || category.toUpperCase().slice(0, 10);
 
+        const timeInfo = item.startTime || item.time || item.date || item.status || '';
+        const ticker = item.ticker || item.description || (timeInfo ? `🔴 ${timeInfo} • ${name} • ${sourceName || category}` : `🔴 LIVE: ${name} • ${sourceName || category} • Sarah TV`);
+
         return {
-          id: String(item.id || `ch-json-${idx}`),
+          id: String(item.id || `${prefix}-${idx}`),
           name,
           shortLabel,
           subLabel,
@@ -1108,20 +1322,48 @@
           streamUrl: servers[0].url || streamUrl,
           iframeUrl: servers[0].iframe || iframeUrl,
           servers,
+          needsHeaders: Boolean(hdr.referer || hdr.ua),
+          isEvent: Boolean(isEvent || item.isEvent || /event|match|vs/i.test(name)),
+          sourceName: sourceName || category,
+          fromRemoteJson: true,
           premium: Boolean(item.premium || item.vip || item.isPremium),
           badgeColor: BADGE_COLORS[idx % BADGE_COLORS.length],
           cardGradient: CARD_GRADIENTS[idx % CARD_GRADIENTS.length],
           themeColor: item.themeColor || '#1c1c1e',
-          ticker: item.ticker || item.description || `${name} • ${category} Live Stream on Sarah TV`
+          ticker
         };
-      });
+      }).filter(Boolean);
     }
 
+    // ===== Remote JSON Sources (SonyLiv + Live Sports Events) =====
+    const REMOTE_JSON_SOURCES = [
+      {
+        url: 'https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv_playlist.json',
+        prefix: 'sony',
+        sourceName: 'SonyLIV',
+        defaultCategory: 'SonyLIV',
+        fallbackLogo: 'https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv.png'
+      },
+      {
+        url: 'https://raw.githubusercontent.com/srhady/willow-event/refs/heads/main/live_sports.json',
+        prefix: 'live-sports',
+        sourceName: 'Live Sports',
+        defaultCategory: 'Live Events',
+        isEvent: true
+      },
+      {
+        url: 'https://raw.githubusercontent.com/srhady/willow-event/refs/heads/main/primevideo_sports.json',
+        prefix: 'prime-sports',
+        sourceName: 'Prime Video Sports',
+        defaultCategory: 'Live Events',
+        isEvent: true
+      }
+    ];
 
-    // ===== SonyLiv M3U auto loader (channels always shown FIRST) =====
+    let REMOTE_JSON_CHANNELS = [];
+
+    // ===== M3U Sources (FanCode, Toffee, BD Streams - SonyLiv is now in JSON playlists) =====
     const M3U_SOURCES = [
-      // Order matters: SonyLIV first, then FanCode, then Toffee.
-      { url: 'https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv_playlist.m3u', prefix: 'sony', sourceName: 'SonyLIV' },
       { url: 'https://raw.githubusercontent.com/doctor-8trange/zyphx8/refs/heads/main/data/fancode.m3u', prefix: 'fan', sourceName: 'FanCode' },
       { url: 'https://tv9.workerbot-tv9.workers.dev/toffee.m3u', prefix: 'toffee', sourceName: 'Toffee' },
       { url: 'https://iptv-org.github.io/iptv/countries/bd.m3u', prefix: 'bd', sourceName: 'Bangladesh', clean: true }
@@ -1306,27 +1548,52 @@
       });
     }
 
-    // M3U (age) + JSON channel merge -> CHANNELS. Return: list change hoyeche kina
+    async function fetchRemoteJsonPlaylists() {
+      const lists = await Promise.all(REMOTE_JSON_SOURCES.map(async (src) => {
+        try {
+          const r = await fetchTimeout(src.url + '?t=' + Date.now(), { cache: 'no-store' });
+          if (!r.ok) return [];
+          const data = await r.json();
+          return normalizeChannelsJson(data, 0, src.defaultCategory, src.sourceName, src.prefix, src.fallbackLogo, src.isEvent) || [];
+        } catch (e) {
+          return [];
+        }
+      }));
+      return [].concat(...lists);
+    }
+
+    // Remote JSON (SonyLIV + Live Sports) + M3U + Local JSON merge -> CHANNELS
     function rebuildChannels() {
       const prev = CHANNELS;
       const wasPlaying = (prev[state.currentChannelIndex] || {}).id;
       const srvById = {};
       prev.forEach(c => { srvById[c.id] = c.srv || 0; });
       const base = JSON_CHANNELS.length ? JSON_CHANNELS : DEFAULT_CHANNELS_JSON.map(c => Object.assign({ servers: [{ url: c.streamUrl, iframe: '' }] }, c));
-      CHANNELS = groupChannels(M3U_CHANNELS.concat(base));
-      CHANNELS.forEach(c => { if (srvById[c.id] != null && srvById[c.id] < c.servers.length) { c.srv = srvById[c.id]; c.streamUrl = c.servers[c.srv].url; c.iframeUrl = c.servers[c.srv].iframe; } });
+      
+      // Order matters: SonyLiv & Live Sports events first, then M3U, then local base
+      CHANNELS = groupChannels(REMOTE_JSON_CHANNELS.concat(M3U_CHANNELS, base));
+      CHANNELS.forEach(c => {
+        if (srvById[c.id] != null && srvById[c.id] < c.servers.length) {
+          c.srv = srvById[c.id];
+          c.streamUrl = c.servers[c.srv].url;
+          c.iframeUrl = c.servers[c.srv].iframe;
+        }
+      });
       const ni = CHANNELS.findIndex(c => c.id === wasPlaying);
       state.currentChannelIndex = ni >= 0 ? ni : Math.min(state.currentChannelIndex, Math.max(0, CHANNELS.length - 1));
       const sig = (l) => l.map(c => c.id + ':' + (c.servers ? c.servers.length : 1) + ':' + c.name).join('|');
       return sig(prev) !== sig(CHANNELS);
     }
 
-    async function refreshM3UChannels() {
-      const list = await fetchM3UChannels();
-      if (!list.length) return false;
-      M3U_CHANNELS = list;
-      // token refresh: list same thakle UI abar draw korbo na (hero/scroll reset hoy)
-      if (rebuildChannels()) renderAllFromChannelsJson();
+    async function refreshDynamicSources() {
+      const [m3uList, remoteList] = await Promise.all([
+        fetchM3UChannels(),
+        fetchRemoteJsonPlaylists()
+      ]);
+      let changed = false;
+      if (m3uList && m3uList.length) { M3U_CHANNELS = m3uList; changed = true; }
+      if (remoteList && remoteList.length) { REMOTE_JSON_CHANNELS = remoteList; changed = true; }
+      if (changed && rebuildChannels()) renderAllFromChannelsJson();
       return true;
     }
 
@@ -1344,23 +1611,25 @@
       const sourceText = document.getElementById('jsonSourceUrlText');
       const sources = buildJsonSources(jsonPath);
 
-      const m3uPromise = fetchM3UChannels();
-      const results = await Promise.all(sources.map(async (src) => {
-        try {
-          const response = await fetchTimeout(src, { cache: 'no-store' });
-          if (!response.ok) return null;
-          const data = await response.json();
-          return { src, data };
-        } catch (err) { return null; }
-      }));
+      const [localResults, remoteJsonLists, m3uList] = await Promise.all([
+        Promise.all(sources.map(async (src) => {
+          try {
+            const response = await fetchTimeout(src, { cache: 'no-store' });
+            if (!response.ok) return null;
+            const data = await response.json();
+            return { src, data };
+          } catch (err) { return null; }
+        })),
+        fetchRemoteJsonPlaylists(),
+        fetchM3UChannels()
+      ]);
 
       const merged = [];
-      const seenKeys = new Set();
       const seenIds = new Set();
       let filesLoaded = 0;
-      results.forEach(r => {
+      localResults.forEach(r => {
         if (!r) return;
-        const list = normalizeChannelsJson(r.data, merged.length);
+        const list = normalizeChannelsJson(r.data, merged.length, 'Live TV', 'Local', 'local');
         if (!list || !list.length) return;
         filesLoaded++;
         list.forEach(ch => {
@@ -1372,17 +1641,17 @@
         });
       });
 
-      const m3uList = await m3uPromise;
-      if (m3uList.length) M3U_CHANNELS = m3uList;
+      if (remoteJsonLists && remoteJsonLists.length) REMOTE_JSON_CHANNELS = remoteJsonLists;
+      if (m3uList && m3uList.length) M3U_CHANNELS = m3uList;
 
-      if (merged.length > 0 || M3U_CHANNELS.length > 0) {
+      if (merged.length > 0 || REMOTE_JSON_CHANNELS.length > 0 || M3U_CHANNELS.length > 0) {
         if (merged.length) JSON_CHANNELS = merged;
         rebuildChannels();
         if (state.currentChannelIndex >= CHANNELS.length) state.currentChannelIndex = 0;
         statusLabel.textContent = `● ${CHANNELS.length} চ্যানেল লাইভ`;
         statusLabel.className = 'text-[9px] text-emerald-400 font-semibold tracking-tight';
         if (sourceText) sourceText.textContent = `Loaded ${CHANNELS.length} channels (same channel = ek card, ekadhik server)`;
-        if (showFeedback) showToast(`Loaded ${CHANNELS.length} channels from ${filesLoaded} file!`);
+        if (showFeedback) showToast(`Loaded ${CHANNELS.length} channels & live events!`);
         renderAllFromChannelsJson();
         return true;
       }
@@ -1498,9 +1767,23 @@
       if (typeof appOnChannelsReady === 'function') appOnChannelsReady();
     }
 
+    function matchesCategory(ch, selectedCat) {
+      if (!selectedCat || selectedCat.toLowerCase() === 'all') return true;
+      const sel = selectedCat.trim().toLowerCase();
+      const cat = (ch.category || '').trim().toLowerCase();
+      if (cat === sel) return true;
+      if (sel === 'live events' && (ch.isEvent || /event|live sports/i.test(cat) || /event|match|vs/i.test(ch.name))) return true;
+      if (sel === 'sports' && (/sport|cricket|football|tennis/i.test(cat) || ch.isEvent)) return true;
+      if (sel === 'cricket' && (/cricket/i.test(cat) || /cricket/i.test(ch.name))) return true;
+      return false;
+    }
+
     function renderCategoryNavTabs() {
       const nav = document.getElementById('topCategoryNav');
+      if (!nav) return;
       const uniqueCats = [];
+      const priorityOrder = ['Cricket', 'Sports', 'Live Events', 'Live Action', 'Bangla TV', 'SonyLIV', 'News', 'Drama', 'Movies', 'Entertainment', 'Music', 'Kids', 'Infotainment', 'Documentary', 'Religious', 'Web Series'];
+      
       CHANNELS.forEach(ch => {
         const c = (ch.category || 'Live TV').trim();
         if (c && !uniqueCats.some(existing => existing.toLowerCase() === c.toLowerCase())) {
@@ -1508,11 +1791,26 @@
         }
       });
 
+      // Ensure 'Live Events' is always available in tabs if we have events
+      if (!uniqueCats.some(c => c.toLowerCase() === 'live events') && CHANNELS.some(c => c.isEvent)) {
+        uniqueCats.push('Live Events');
+      }
+
+      uniqueCats.sort((a, b) => {
+        const idxA = priorityOrder.findIndex(p => p.toLowerCase() === a.toLowerCase());
+        const idxB = priorityOrder.findIndex(p => p.toLowerCase() === b.toLowerCase());
+        if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+        if (idxA !== -1) return -1;
+        if (idxB !== -1) return 1;
+        return a.localeCompare(b);
+      });
+
+      const isAllActive = !state.currentCategory || state.currentCategory.toLowerCase() === 'all';
       const tabsHtml = [
-        `<button data-cat="all" class="cat-tab ${state.currentCategory === 'all' ? 'text-pink-400 font-bold border-b-2 border-pink-500' : 'text-slate-300 hover:text-white'} pb-1 whitespace-nowrap transition">Live TV (${CHANNELS.length})</button>`,
+        `<button data-cat="all" class="cat-tab ${isAllActive ? 'active-cat text-pink-400 font-bold' : 'text-slate-300 hover:text-white'} transition">Live TV (${CHANNELS.length})</button>`,
         ...uniqueCats.map(cat => {
-          const isActive = state.currentCategory.toLowerCase() === cat.toLowerCase();
-          return `<button data-cat="${cat}" class="cat-tab ${isActive ? 'text-pink-400 font-bold border-b-2 border-pink-500' : 'text-slate-300 hover:text-white'} pb-1 whitespace-nowrap transition">${cat}</button>`;
+          const isActive = !isAllActive && state.currentCategory.toLowerCase() === cat.toLowerCase();
+          return `<button data-cat="${cat}" class="cat-tab ${isActive ? 'active-cat text-pink-400 font-bold' : 'text-slate-300 hover:text-white'} transition">${cat}</button>`;
         })
       ];
       nav.innerHTML = tabsHtml.join('');
@@ -1594,11 +1892,15 @@
     function renderLiveTvCircles() {
       const track = document.getElementById('liveTvCirclesTrack');
       const badge = document.getElementById('totalChannelsBadge');
-      const filtered = state.currentCategory === 'all'
-        ? CHANNELS
-        : CHANNELS.filter(c => (c.category || '').toLowerCase() === state.currentCategory.toLowerCase());
+      if (!track) return;
+      const filtered = CHANNELS.filter(c => matchesCategory(c, state.currentCategory));
 
       if (badge) badge.textContent = `${filtered.length}`;
+
+      if (!filtered.length) {
+        track.innerHTML = `<div class="py-4 px-2 text-xs text-slate-400">এই ক্যাটাগরিতে কোনো চ্যানেল নেই</div>`;
+        return;
+      }
 
       track.innerHTML = filtered.map(ch => `
         <button data-play-channel="${ch.id}" class="channel-ring relative flex-shrink-0 flex flex-col items-center group snap-start-item focus:outline-none">
@@ -1690,17 +1992,44 @@
 
     function renderDiscoverGrid(query = '') {
       const grid = document.getElementById('discoverGrid');
+      const title = document.getElementById('discoverSectionTitle');
+      if (!grid) return;
       const q = query.trim().toLowerCase();
-      const list = CHANNELS.filter(c => !q || channelMatchesQuery(c, q));
+      
+      let list = CHANNELS.filter(c => matchesCategory(c, state.currentCategory));
+      if (q) {
+        list = list.filter(c => channelMatchesQuery(c, q));
+      }
+
+      if (title) {
+        if (!state.currentCategory || state.currentCategory.toLowerCase() === 'all') {
+          title.textContent = `সব চ্যানেল (${list.length})`;
+        } else {
+          title.textContent = `${state.currentCategory} (${list.length})`;
+        }
+      }
+
       if (!list.length) {
-        grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400 text-sm">কোনো চ্যানেল পাওয়া যায়নি</div>`;
+        grid.innerHTML = `
+          <div class="col-span-full py-14 text-center text-slate-400 text-sm space-y-3">
+            <div class="w-14 h-14 mx-auto rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-2xl">📺</div>
+            <p class="font-medium text-slate-300">এই ক্যাটাগরিতে কোনো চ্যানেল পাওয়া যায়নি</p>
+            <button id="resetCatFilterBtn" class="px-4 py-2 rounded-full toffee-gradient text-xs font-bold text-white shadow-lg transition active:scale-95">সব চ্যানেল দেখুন</button>
+          </div>
+        `;
+        document.getElementById('resetCatFilterBtn')?.addEventListener('click', () => {
+          state.currentCategory = 'all';
+          renderCategoryNavTabs();
+          renderDiscoverGrid();
+        });
         return;
       }
+
       grid.innerHTML = list.map(ch => `
-        <button data-play-channel="${ch.id}" class="p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 flex flex-col items-center text-center group transition">
+        <button data-play-channel="${ch.id}" class="p-3 rounded-2xl bg-[#141416] hover:bg-[#1f1f23] border border-white/10 hover:border-pink-500/50 flex flex-col items-center text-center group transition active:scale-95 shadow-md">
           ${getChannelCircleAvatarHtml(ch, 'w-16 h-16')}
-          <span class="text-xs font-bold text-white mt-2 line-clamp-1">${ch.name}</span>
-          <span class="text-[10px] text-slate-400">${ch.category}</span>
+          <span class="text-xs font-bold text-white mt-2 line-clamp-1 w-full text-center">${ch.name}</span>
+          <span class="text-[10px] text-slate-400 font-medium truncate w-full text-center mt-0.5">${ch.category}</span>
         </button>
       `).join('');
     }
@@ -3636,7 +3965,7 @@
       syncAuthAndSettingsUI();
 
       fetchChannelsFromJson(state.jsonUrl || './channels.json', false);
-      setInterval(() => { refreshM3UChannels(); }, M3U_REFRESH_MS);
+      setInterval(() => { refreshDynamicSources(); }, M3U_REFRESH_MS);
 
       // Splash Screen / Welcome Animation Hide after exactly 2 seconds (2000ms)
       setTimeout(() => {
@@ -3708,10 +4037,30 @@
       document.getElementById('topCategoryNav').addEventListener('click', (e) => {
         const tab = e.target.closest('.cat-tab');
         if (!tab) return;
-        state.currentCategory = tab.dataset.cat;
+        state.currentCategory = tab.dataset.cat || 'all';
         renderCategoryNavTabs();
-        switchMainView('home');
-        renderLiveTvCircles();
+        
+        tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+        const isDiscover = !document.getElementById('viewDiscover').classList.contains('hidden');
+        const isHome = !document.getElementById('viewHome').classList.contains('hidden');
+
+        if (isDiscover) {
+          renderDiscoverGrid(document.getElementById('channelSearchInput')?.value || '');
+        } else if (isHome) {
+          renderLiveTvCircles();
+          renderContentRowsFromChannels();
+        } else {
+          renderDiscoverGrid(document.getElementById('channelSearchInput')?.value || '');
+          renderLiveTvCircles();
+          renderContentRowsFromChannels();
+        }
+
+        if (typeof appOnChannelsReady === 'function' && window.__CSTV_APP__) {
+          appCat = state.currentCategory;
+          if (typeof renderAppCats === 'function') renderAppCats();
+          if (typeof renderAppGrid === 'function') renderAppGrid();
+        }
       });
 
       document.querySelectorAll('.bottom-nav-btn').forEach(btn => {
