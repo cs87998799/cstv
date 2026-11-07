@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M3U Playlist Video Player</title>
+    <title>SonyLiv M3U Stream Player</title>
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- HLS.js for playing m3u8 streams in web browsers -->
@@ -12,7 +12,7 @@
 <body class="bg-gray-900 text-white font-sans min-h-screen flex flex-col items-center justify-center p-4">
 
     <div class="w-full max-w-3xl bg-gray-800 rounded-lg shadow-xl p-6">
-        <h1 class="text-2xl font-bold mb-4 text-center text-indigo-400">IPTV M3U Stream Player</h1>
+        <h1 class="text-2xl font-bold mb-4 text-center text-indigo-400">SonyLiv Live Stream Player</h1>
         
         <!-- Channel Selector -->
         <div class="mb-4">
@@ -24,14 +24,17 @@
 
         <!-- Video Player -->
         <div class="relative w-full aspect-video bg-black rounded-lg overflow-hidden shadow-inner">
-            <video id="videoPlayer" controls autoplay class="w-full h-full"></video>
+            <video id="videoPlayer" controls autoplay playsinline class="w-full h-full"></video>
         </div>
         
         <p id="status" class="text-xs text-gray-400 mt-3 text-center"></p>
     </div>
 
     <script>
-        const m3uUrl = "https://raw.githubusercontent.com/sm-monirulislam/SonyLiv_Event_Playlist/refs/heads/main/sonyLiv.m3u";
+        // CORS সমস্যা এড়াতে পাবলিক CORS প্রক্সি ব্যবহার করা হয়েছে
+        const rawM3uUrl = "https://raw.githubusercontent.com/sm-monirulislam/SonyLiv_Event_Playlist/refs/heads/main/sonyLiv.m3u";
+        const m3uUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(rawM3uUrl);
+        
         const channelSelect = document.getElementById('channelSelect');
         const video = document.getElementById('videoPlayer');
         const statusText = document.getElementById('status');
@@ -44,11 +47,12 @@
             try {
                 statusText.innerText = "প্লেলিস্ট ডাউনলোড করা হচ্ছে...";
                 const response = await fetch(m3uUrl);
+                if (!response.ok) throw new Error("Network response was not ok");
                 const data = await response.text();
                 parseM3U(data);
             } catch (error) {
                 console.error("Error loading M3U:", error);
-                statusText.innerText = "প্লেলিস্ট লোড করতে সমস্যা হয়েছে! CORS পলিসির কারণে লোকাল ব্রাউজারে সমস্যা হতে পারে।";
+                statusText.innerText = "প্লেলিস্ট লোড করতে সমস্যা হয়েছে! CORS প্রক্সি বা ইন্টারনেট কানেকশন চেক করুন।";
             }
         }
 
@@ -61,11 +65,10 @@
             for (let line of lines) {
                 line = line.trim();
                 if (line.startsWith('#EXTINF:')) {
-                    // এক্সটিনফ থেকে চ্যানেলের নাম বের করা (কমা-এর পরের অংশ)
                     const parts = line.split(',');
                     currentTitle = parts.length > 1 ? parts[1] : 'Unknown Channel';
                 } else if (line && !line.startsWith('#')) {
-                    // এটি ভিডিও লিংক
+                    // যদি লিংক http হয়, তবে ব্রাউজারের সিকিউরিটি ভাঙতে https এ রূপান্তর করার চেষ্টা করা যেতে পারে (যদি সার্ভার সাপোর্ট করে)
                     channels.push({ title: currentTitle, url: line });
                     currentTitle = '';
                 }
@@ -102,20 +105,51 @@
         });
 
         function playStream(url) {
-            statusText.innerText = `প্লে হচ্ছে: ${url}`;
+            statusText.innerText = `প্লে হচ্ছে...`;
             
+            // যদি স্ট্রিম লিংক http হয় এবং আপনার সাইট https হয়, ব্রাউজার ব্লক করতে পারে। 
+            // তাই সিকিউরিটি এরর এড়াতে প্রয়োজন হলে লিংকটি https এ কনভার্ট করা হচ্ছে:
+            if (url.startsWith('http://')) {
+                url = url.replace('http://', 'https://');
+            }
+
             if (Hls.isSupported()) {
                 if (hls) {
                     hls.destroy();
                 }
-                hls = new Hls();
+                hls = new Hls({
+                    xhrSetup: function (xhr, url) {
+                        // কিছু স্ট্রিমিং সার্ভারের ক্ষেত্রে হেডার হ্যান্ডেল করার জন্য
+                        xhr.withCredentials = false;
+                    }
+                });
                 hls.loadSource(url);
                 hls.attachMedia(video);
                 hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                    video.play().catch(e => console.log("Autoplay blocked:", e));
+                    video.play().catch(e => {
+                        console.log("Autoplay blocked:", e);
+                        statusText.innerText = "অটো-প্লে ব্লক করা হয়েছে, দয়া করে প্লে বাটনে ক্লিক করুন।";
+                    });
+                });
+                hls.on(Hls.Events.ERROR, function (event, data) {
+                    if (data.fatal) {
+                        switch (data.type) {
+                            case Hls.ErrorTypes.NETWORK_ERROR:
+                                statusText.innerText = "নেটওয়ার্ক ত্রুটি: স্ট্রিম লোড হচ্ছে না বা লিংক এক্সপায়ার হয়েছে।";
+                                hls.startLoad();
+                                break;
+                            case Hls.ErrorTypes.MEDIA_ERROR:
+                                statusText.innerText = "মিডিয়া ত্রুটি: রিকভার করার চেষ্টা করা হচ্ছে...";
+                                hls.recoverMediaError();
+                                break;
+                            default:
+                                statusText.innerText = "এই স্ট্রিমটি বর্তমানে এই ব্রাউজারে চালানো সম্ভব নয়।";
+                                hls.destroy();
+                                break;
+                        }
+                    }
                 });
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                // Safari ব্রাউজারের জন্য নেটিভ সাপোর্ট
                 video.src = url;
                 video.addEventListener('loadedmetadata', () => {
                     video.play();
@@ -125,7 +159,6 @@
             }
         }
 
-        // পেজ লোড হলে প্লেলিস্ট ফেচ করা শুরু হবে
         loadPlaylist();
     </script>
 </body>
