@@ -9,21 +9,30 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script>
-    /* UI mode: website => classic UI | app (WebView / installed PWA) => app UI.
-       Manual override: ?mode=app  |  ?mode=web  |  ?mode=auto (reset) */
+    if (window.tailwind) tailwind.config = { theme: { extend: { colors: {
+      pink: { 300: '#e5e5ea', 400: '#d1d1d6', 500: '#ffffff', 600: '#8e8e93', 700: '#636366' },
+      fuchsia: { 300: '#f2f2f7', 900: '#2c2c2e' },
+      purple: { 800: '#48484a', 950: '#1c1c1e' }
+    } } } };
+  </script>
+  <script>
+    /* Layout: Settings > Layout theke Phone / TV / Auto.
+       Phone => app UI | TV => remote UI | Auto => device dekhe nijei bujhe nibe | website => classic UI.
+       Manual override: ?mode=app | ?mode=tv | ?mode=web | ?mode=auto (reset) */
     (function () {
       var app = false, saved = null, tv = false;
       try {
         var q = new URLSearchParams(location.search).get('mode');
-        if (q === 'app' || q === 'web' || q === 'tv') localStorage.setItem('cstv_ui_mode', q);
+        if (q === 'app' || q === 'phone') localStorage.setItem('cstv_ui_mode', 'app');
+        else if (q === 'tv' || q === 'web') localStorage.setItem('cstv_ui_mode', q);
         else if (q === 'auto') localStorage.removeItem('cstv_ui_mode');
         saved = localStorage.getItem('cstv_ui_mode');
       } catch (e) {}
+      var ua = navigator.userAgent || '';
       if (saved) {
         app = (saved === 'app' || saved === 'tv'); tv = (saved === 'tv');
       } else {
         try {
-          var ua = navigator.userAgent || '';
           app = !!(window.Capacitor || window.cordova || window.AndroidInterface || window.Android || window.ReactNativeWebView) ||
             /; wv\)/.test(ua) ||
             (/Android/.test(ua) && /Chrome\//.test(ua) && /Version\/\d+\.\d+/.test(ua)) ||
@@ -33,14 +42,16 @@
             window.navigator.standalone === true ||
             (document.referrer || '').indexOf('android-app://') === 0;
         } catch (e) {}
-      }
-      if (!saved) {
         try {
-          if (/Android ?TV|AndroidTV|SMART-?TV|SmartTV|GoogleTV|BRAVIA|Tizen|Web0S|WebOS|HbbTV|NetCast|AFT[A-Z]{1,3}\b|MiTV|; TV\b|AppleTV/i.test(navigator.userAgent || '')) { tv = true; app = true; }
+          var big = Math.max(screen.width || 0, screen.height || 0) >= 1000;
+          var noTouch = !(navigator.maxTouchPoints > 0);
+          if (/Android ?TV|AndroidTV|SMART-?TV|SmartTV|GoogleTV|BRAVIA|Tizen|Web0S|WebOS|HbbTV|NetCast|AFT[A-Z]{0,3}\b|MiTV|MIBOX|; TV\b|AppleTV|FireTV|Philips|Hisense|Vestel|Roku|CrKey|SHIELD/i.test(ua)) { tv = true; app = true; }
+          else if (/Android/.test(ua) && !/Mobile/.test(ua) && big && noTouch) { tv = true; app = true; }
         } catch (e) {}
       }
       window.__CSTV_TV__ = tv;
       window.__CSTV_APP__ = app;
+      window.__CSTV_LAYOUT_SAVED__ = saved;
       if (app) document.documentElement.classList.add('app-mode');
       if (tv) document.documentElement.classList.add('tv-mode');
     })();
@@ -54,7 +65,7 @@
     }
     body {
       font-family: 'Inter', 'Hind Siliguri', sans-serif;
-      background-color: #0b0714;
+      background-color: #000000;
       color: #f8fafc;
       overflow-x: hidden;
     }
@@ -75,12 +86,10 @@
       scroll-snap-align: start;
     }
     @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 18px rgba(255, 0, 128, 0.45); }
-      50% { box-shadow: 0 0 32px rgba(255, 0, 128, 0.85); }
+      0%, 100% { box-shadow: 0 0 18px rgba(255,255,255, 0.45); }
+      50% { box-shadow: 0 0 32px rgba(255,255,255, 0.85); }
     }
-    .neon-box {
-      animation: pulseGlow 3s infinite ease-in-out;
-    }
+    .neon-box { }
     @keyframes liveDot {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.35; transform: scale(0.8); }
@@ -89,19 +98,19 @@
       animation: liveDot 1.4s infinite;
     }
     .toffee-gradient {
-      background: linear-gradient(90deg, #ff1f8e 0%, #a81eff 100%);
+      background: linear-gradient(90deg, #f5f5f7 0%, #98989d 100%);
     }
     .hero-bg-1 {
-      background: radial-gradient(circle at 50% 35%, #581166 0%, #240734 48%, #0b0714 100%);
+      background: radial-gradient(circle at 50% 35%, #581166 0%, #240734 48%, #000000 100%);
     }
     .hero-bg-2 {
-      background: radial-gradient(circle at 50% 35%, #0f3d6e 0%, #091a3a 48%, #0b0714 100%);
+      background: radial-gradient(circle at 50% 35%, #0f3d6e 0%, #091a3a 48%, #000000 100%);
     }
     .hero-bg-3 {
-      background: radial-gradient(circle at 50% 35%, #611233 0%, #2b081c 48%, #0b0714 100%);
+      background: radial-gradient(circle at 50% 35%, #611233 0%, #2b081c 48%, #000000 100%);
     }
     .hero-bg-4 {
-      background: radial-gradient(circle at 50% 35%, #0e4f3c 0%, #07231e 48%, #0b0714 100%);
+      background: radial-gradient(circle at 50% 35%, #0e4f3c 0%, #07231e 48%, #000000 100%);
     }
     .channel-ring {
       transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
@@ -136,13 +145,13 @@
     /* ===== Sarah TV Player v3 ===== */
     .ov-fade { transition: opacity .3s ease, transform .3s ease; }
     .ov-hidden { opacity: 0 !important; pointer-events: none !important; }
-    .cs-spinner { width: 54px; height: 54px; border-radius: 50%; border: 4px solid rgba(255,255,255,.15); border-top-color: #ec4899; animation: csSpin .8s linear infinite; }
+    .cs-spinner { width: 54px; height: 54px; border-radius: 50%; border: 4px solid rgba(255,255,255,.15); border-top-color: #ffffff; animation: csSpin .8s linear infinite; }
     @keyframes csSpin { to { transform: rotate(360deg); } }
     .cs-range { -webkit-appearance: none; appearance: none; width: 100%; height: 22px; background: transparent; cursor: pointer; margin: 0; }
-    .cs-range::-webkit-slider-runnable-track { height: 4px; border-radius: 999px; background: linear-gradient(to right, #ec4899 var(--p,0%), rgba(255,255,255,.25) var(--p,0%)); }
-    .cs-range::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #fff; margin-top: -5px; box-shadow: 0 0 0 3px rgba(236,72,153,.45); }
+    .cs-range::-webkit-slider-runnable-track { height: 4px; border-radius: 999px; background: linear-gradient(to right, #ffffff var(--p,0%), rgba(255,255,255,.25) var(--p,0%)); }
+    .cs-range::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #fff; margin-top: -5px; box-shadow: 0 0 0 3px rgba(255,255,255,.45); }
     .cs-range::-moz-range-track { height: 4px; border-radius: 999px; background: rgba(255,255,255,.25); }
-    .cs-range::-moz-range-progress { height: 4px; border-radius: 999px; background: #ec4899; }
+    .cs-range::-moz-range-progress { height: 4px; border-radius: 999px; background: #ffffff; }
     .cs-range::-moz-range-thumb { width: 14px; height: 14px; border: 0; border-radius: 50%; background: #fff; }
     .cs-range:disabled { cursor: default; }
     .cs-range:disabled::-webkit-slider-thumb { opacity: 0; }
@@ -152,11 +161,11 @@
     .cs-btn:active { transform: scale(.92); }
     .cs-live-btn { height: 26px; padding: 0 10px; border-radius: 999px; font-size: 10px; font-weight: 800; letter-spacing: .04em; background: rgba(255,255,255,.14); color: #e2e8f0; border: 1px solid rgba(255,255,255,.2); }
     .cs-live-btn.is-live { background: #dc2626; border-color: #dc2626; color: #fff; }
-    .cs-menu { background: rgba(18,11,34,.96); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(236,72,153,.35); border-radius: 16px; padding: 8px; min-width: 170px; box-shadow: 0 20px 50px rgba(0,0,0,.6); }
-    .cs-menu-title { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #f472b6; padding: 4px 10px 6px; }
+    .cs-menu { background: rgba(28,28,30,.96); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.35); border-radius: 16px; padding: 8px; min-width: 170px; box-shadow: 0 20px 50px rgba(0,0,0,.6); }
+    .cs-menu-title { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #d1d1d6; padding: 4px 10px 6px; }
     .cs-menu-item { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 9px 10px; border-radius: 10px; font-size: 13px; font-weight: 600; color: #e2e8f0; text-align: left; }
     .cs-menu-item:hover { background: rgba(255,255,255,.08); }
-    .cs-menu-item.active { background: rgba(236,72,153,.2); color: #fff; }
+    .cs-menu-item.active { background: rgba(255,255,255,.2); color: #fff; }
     .cs-center-btn { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
     .yt-mode #playerPipBtn, .yt-mode #playerQualityBtn { display: none !important; }
     #ytHost iframe { width: 100%; height: 100%; border: 0; pointer-events: none; }
@@ -170,17 +179,17 @@
     html.app-mode body > *:not(#appUI):not(#toastBox):not(#splashScreen):not(#phoneLoginModal):not(#customStreamModal):not(#subscribeModal):not(script) { display: none !important; }
     html.app-mode #appUI { display: flex; }
     #appCatBar, #appGrid { -webkit-overflow-scrolling: touch; }
-    .app-chip { padding: 11px 22px; border-radius: 999px; background: #2b2b2b; color: #e5e5e5; font-size: 16px; font-weight: 500; white-space: nowrap; flex-shrink: 0; transition: background .15s, transform .15s; }
+    .app-chip { padding: 11px 22px; border-radius: 999px; background: #2c2c2e; color: #e5e5e5; font-size: 16px; font-weight: 500; white-space: nowrap; flex-shrink: 0; transition: background .15s, transform .15s; }
     .app-chip:active { transform: scale(.95); }
-    .app-chip.active { background: #5b1de8; color: #fff; }
+    .app-chip.active { background: #f5f5f7; color: #fff; }
     #appGrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; padding: 4px 10px 20px; align-content: start; }
-    .app-card { background: #2b2b2b; border: 2px solid transparent; border-radius: 10px; padding: 5px 3px 6px; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; transition: transform .15s, border-color .15s; }
+    .app-card { background: #2c2c2e; border: 2px solid transparent; border-radius: 10px; padding: 5px 3px 6px; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; transition: transform .15s, border-color .15s; }
     .app-card:active { transform: scale(.95); }
-    .app-card.active { border-color: #5b1de8; }
+    .app-card.active { border-color: #f5f5f7; }
     .app-card-logo { width: 100%; aspect-ratio: 1 / 1; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 2px; font-weight: 800; text-align: center; }
     .app-card-logo img { width: 100%; height: 100%; object-fit: contain; }
     .app-card-name { font-size: 9px; line-height: 1.15; font-weight: 600; color: #fff; max-width: 100%; width: 100%; text-align: center; white-space: normal; overflow: visible; word-break: break-word; overflow-wrap: anywhere; }
-    .app-card-num { color: #f472b6; font-weight: 800; }
+    .app-card-num { color: #d1d1d6; font-weight: 800; }
     .app-card-logo span { font-size: 10px !important; }
     #playerModal.app-inline { position: relative !important; inset: auto !important; width: 100%; aspect-ratio: 16 / 9; display: flex !important; z-index: auto !important; }
     #playerModal.app-inline.app-fs { position: fixed !important; inset: 0 !important; width: 100vw; height: 100vh; height: 100dvh; aspect-ratio: auto; z-index: 9999 !important; }
@@ -213,24 +222,24 @@
     #tvDrawer .app-card-logo span { font-size: 1.1vw !important; }
     .tv-title { font-size: 1.7vw; font-weight: 800; margin-bottom: .7vw; }
     .tv-title small { font-size: .95vw; font-weight: 500; color: #9ca3af; margin-left: 1vw; }
-    .tv-focus { outline: .26vw solid #ec4899; outline-offset: .1vw; transform: scale(1.07); background: #3b2a5c !important; box-shadow: 0 0 2vw rgba(236,72,153,.65); position: relative; z-index: 2; }
-    .app-chip.tv-focus { background: #ec4899 !important; color: #fff; }
+    .tv-focus { outline: .26vw solid #ffffff; outline-offset: .1vw; transform: scale(1.07); background: #3a3a3c !important; box-shadow: 0 0 2vw rgba(255,255,255,.65); position: relative; z-index: 2; }
+    .app-chip.tv-focus { background: #ffffff !important; color: #fff; }
     #tvOsd { position: fixed; left: 3vw; right: 3vw; bottom: 3vw; z-index: 4; display: flex; align-items: center; gap: 1.6vw;
-      padding: 1.1vw 1.8vw; border-radius: 1.4vw; background: rgba(12,6,24,.9); border: 1px solid rgba(236,72,153,.45);
+      padding: 1.1vw 1.8vw; border-radius: 1.4vw; background: rgba(28,28,30,.9); border: 1px solid rgba(255,255,255,.45);
       opacity: 0; transform: translateY(2vw); transition: opacity .25s, transform .25s; pointer-events: none; }
     #tvOsd.show { opacity: 1; transform: none; }
-    #tvOsdNum { font-size: 4vw; font-weight: 800; color: #f472b6; min-width: 7vw; text-align: center; }
+    #tvOsdNum { font-size: 4vw; font-weight: 800; color: #d1d1d6; min-width: 7vw; text-align: center; }
     #tvOsdLogo { width: 5.5vw; height: 5.5vw; background: #fff; border-radius: .6vw; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; font-weight: 800; text-align: center; }
     #tvOsdLogo img { width: 100%; height: 100%; object-fit: contain; }
     #tvOsdName { font-size: 2.4vw; font-weight: 800; }
     #tvOsdInfo { font-size: 1.2vw; color: #a78bfa; margin-top: .3vw; }
     #tvVol { position: fixed; top: 3vw; left: 50%; transform: translateX(-50%); z-index: 6; display: flex; align-items: center; gap: 1.2vw;
-      padding: 1vw 1.8vw; min-width: 30vw; border-radius: 1.2vw; background: rgba(12,6,24,.92); border: 1px solid rgba(236,72,153,.45);
+      padding: 1vw 1.8vw; min-width: 30vw; border-radius: 1.2vw; background: rgba(28,28,30,.92); border: 1px solid rgba(255,255,255,.45);
       opacity: 0; transition: opacity .2s; pointer-events: none; }
     #tvVol.show { opacity: 1; }
     #tvVolIcon { font-size: 2.2vw; }
     #tvVolBar { flex: 1; height: .8vw; border-radius: 9vw; background: rgba(255,255,255,.2); overflow: hidden; }
-    #tvVolFill { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #ff1f8e, #a81eff); }
+    #tvVolFill { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #f5f5f7, #98989d); }
     #tvVolPct { font-size: 1.6vw; font-weight: 800; min-width: 4.5vw; text-align: right; }
     #tvNumEntry { position: fixed; top: 3vw; right: 4vw; z-index: 6; font-size: 7vw; font-weight: 800; color: #fff; text-shadow: 0 .2vw 1vw #000; opacity: 0; pointer-events: none; }
     #tvNumEntry.show { opacity: 1; }
@@ -238,28 +247,28 @@
 
   <style>
     /* ===== Home polish ===== */
-    body { background-image: radial-gradient(120% 60% at 50% -10%, rgba(168,30,255,.22), transparent 60%); background-repeat: no-repeat; }
+    body { background-image: radial-gradient(120% 60% at 50% -10%, rgba(255,255,255,.22), transparent 60%); background-repeat: no-repeat; }
     .hero-num { font-family: 'Hind Siliguri','Inter',sans-serif; font-weight: 700; font-size: clamp(76px, 26vw, 128px); line-height: .95; letter-spacing: -.02em;
-      background: linear-gradient(180deg, #fff3c4 0%, #fbbf24 55%, #f472b6 120%); -webkit-background-clip: text; background-clip: text; color: transparent;
+      background: linear-gradient(180deg, #fff3c4 0%, #fbbf24 55%, #d1d1d6 120%); -webkit-background-clip: text; background-clip: text; color: transparent;
       filter: drop-shadow(0 6px 28px rgba(251,191,36,.35)); }
-    .hero-watch-btn { padding: 10px 22px !important; font-size: 13px !important; box-shadow: 0 10px 26px rgba(236,72,153,.45) !important; }
+    .hero-watch-btn { padding: 10px 22px !important; font-size: 13px !important; box-shadow: 0 10px 26px rgba(255,255,255,.45) !important; }
     .home-stats { display: grid; grid-template-columns: repeat(3, 1fr); border-radius: 18px; overflow: hidden; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
     .home-stats > div { padding: 12px 6px; text-align: center; }
     .home-stats > div + div { border-left: 1px solid rgba(255,255,255,.08); }
     .home-stats b { display: block; font-family: 'Hind Siliguri','Inter',sans-serif; font-size: 20px; line-height: 1.1; color: #fbbf24; }
     .home-stats span { display: block; font-size: 10.5px; color: #cbd5e1; margin-top: 2px; }
     #viewHome h3 { display: flex; align-items: center; gap: 8px; }
-    #viewHome h3::before { content: ""; width: 4px; height: 18px; border-radius: 4px; background: linear-gradient(180deg, #ff1f8e, #a81eff); }
+    #viewHome h3::before { content: ""; width: 4px; height: 18px; border-radius: 4px; background: linear-gradient(180deg, #f5f5f7, #98989d); }
     #liveTvCirclesTrack { padding: 8px 2px 10px; }
-    #liveTvCirclesTrack .channel-ring:hover > :not(span):first-of-type, #liveTvCirclesTrack .channel-ring:hover > div { box-shadow: 0 0 0 2px #ec4899, 0 8px 24px rgba(236,72,153,.45); }
+    #liveTvCirclesTrack .channel-ring:hover > :not(span):first-of-type, #liveTvCirclesTrack .channel-ring:hover > div { box-shadow: 0 0 0 2px #ffffff, 0 8px 24px rgba(255,255,255,.45); }
     #eplRowTrack > button, #saffRowTrack > button, #dramaRowTrack > button, #dynamicCategorySections button[data-play-channel] { border-radius: 20px; box-shadow: 0 10px 24px rgba(0,0,0,.35); }
     #topCategoryNav .cat-tab { padding: 6px 14px; border-radius: 999px; border: 0 !important; background: rgba(255,255,255,.06); }
-    #topCategoryNav .cat-tab.text-pink-400 { background: linear-gradient(90deg, #ff1f8e, #a81eff); color: #fff; }
+    #topCategoryNav .cat-tab.text-pink-400 { background: linear-gradient(90deg, #f5f5f7, #98989d); color: #fff; }
     #topCategoryNav { gap: 8px; }
   </style>
   <style>
     /* ===== Round 2 polish ===== */
-    :focus-visible { outline: 2px solid #f472b6; outline-offset: 2px; }
+    :focus-visible { outline: 2px solid #d1d1d6; outline-offset: 2px; }
     html { scroll-behavior: smooth; }
     #headerSearchBtn { background: rgba(255,255,255,.08); }
     header { padding-top: env(safe-area-inset-top); }
@@ -271,7 +280,7 @@
     @keyframes skel { to { background-position: -200% 0; } }
     /* empty states */
     .empty-state { padding: 56px 16px; text-align: center; border: 1px dashed rgba(255,255,255,.15); border-radius: 22px; background: rgba(255,255,255,.03); }
-    .empty-ico { width: 56px; height: 56px; margin: 0 auto 12px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; color: #f472b6; background: rgba(236,72,153,.15); }
+    .empty-ico { width: 56px; height: 56px; margin: 0 auto 12px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; color: #d1d1d6; background: rgba(255,255,255,.15); }
     /* bottom nav */
     nav.fixed.bottom-0 { padding-bottom: env(safe-area-inset-bottom); border-top-left-radius: 22px; border-top-right-radius: 22px; box-shadow: 0 -10px 30px rgba(0,0,0,.4); }
     .bottom-nav-btn { min-width: 64px; padding: 4px 8px; transition: transform .15s, color .15s; }
@@ -281,7 +290,7 @@
     #channelSearchInput { border-radius: 999px; padding-left: 16px; }
     #viewSettings > div { border-radius: 20px; }
     #toastBox > * { border-radius: 999px; box-shadow: 0 12px 30px rgba(0,0,0,.5); }
-    ::selection { background: #ec4899; color: #fff; }
+    ::selection { background: #ffffff; color: #fff; }
   </style>
   <style>
     /* developer-only controls: visible with ?admin=1 (saved on this device), hide with ?admin=0 */
@@ -301,282 +310,143 @@
 </script>
 
   <style>
-    /* ===== HERO BANNER v3 ===== */
-    #heroWrap { position: relative; overflow: hidden; user-select: none; }
+    /* ===== HERO v4 (Apple TV style • halka animation: sudhu opacity/transform) ===== */
+    #heroWrap { position: relative; overflow: hidden; margin: 6px 14px 0; border-radius: 28px; background: #000; user-select: none; contain: layout paint; }
     #heroTrack { scrollbar-width: none; }
-    .hs { position: relative; min-width: 100%; min-height: 500px; overflow: hidden; isolation: isolate;
-      display: flex; align-items: center; justify-content: center; padding: 30px 18px 46px; text-align: center;
-      --c1: #ff2d95; --c2: #7c3aed; --c3: #ffd166;
+    .hs { position: relative; min-width: 100%; height: clamp(430px, 118vw, 500px); overflow: hidden; isolation: isolate; color: #f5f5f7;
+      --h: 220;
       background:
-        radial-gradient(75% 55% at 12% 0%, color-mix(in srgb, var(--c1) 62%, transparent) 0%, transparent 70%),
-        radial-gradient(70% 55% at 100% 100%, color-mix(in srgb, var(--c2) 70%, transparent) 0%, transparent 70%),
-        radial-gradient(45% 35% at 85% 12%, color-mix(in srgb, var(--c3) 28%, transparent) 0%, transparent 70%),
-        linear-gradient(165deg, #140a26 0%, #0b0714 60%, #07040f 100%); }
-    .hs::after { content: ""; position: absolute; inset: auto 0 0 0; height: 110px; z-index: 1; pointer-events: none;
-      background: linear-gradient(to top, #0b0714 5%, transparent); }
-    .hs-aurora { position: absolute; inset: 0; z-index: -3; overflow: hidden; }
-    .hs-aurora i { position: absolute; border-radius: 50%; filter: blur(60px); mix-blend-mode: screen; will-change: transform; }
-    .hs-aurora i:nth-child(1) { width: 300px; height: 300px; background: var(--c1); opacity: .45; top: -80px; left: -70px; animation: hsDrift1 12s ease-in-out infinite alternate; }
-    .hs-aurora i:nth-child(2) { width: 340px; height: 340px; background: var(--c2); opacity: .5; bottom: -120px; right: -90px; animation: hsDrift2 15s ease-in-out infinite alternate; }
-    .hs-aurora i:nth-child(3) { width: 200px; height: 200px; background: var(--c3); opacity: .28; top: 30%; left: 52%; animation: hsDrift1 18s ease-in-out infinite alternate-reverse; }
-    @keyframes hsDrift1 { to { transform: translate(80px, 70px) scale(1.25); } }
-    @keyframes hsDrift2 { to { transform: translate(-90px, -60px) scale(1.18); } }
-    .hs-rays { position: absolute; left: 50%; top: 40%; width: 760px; height: 760px; margin: -380px 0 0 -380px; z-index: -2; border-radius: 50%; pointer-events: none;
-      background: repeating-conic-gradient(from 0deg, color-mix(in srgb, var(--c3) 30%, transparent) 0deg 6deg, transparent 6deg 24deg);
-      -webkit-mask-image: radial-gradient(circle, #000 0%, transparent 62%); mask-image: radial-gradient(circle, #000 0%, transparent 62%);
-      opacity: .5; animation: hsSpin 40s linear infinite; }
-    .hs-grid { position: absolute; inset: 0; z-index: -1; opacity: .4;
-      background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
-      background-size: 36px 36px; -webkit-mask-image: radial-gradient(70% 60% at 50% 40%, #000 15%, transparent 75%); mask-image: radial-gradient(70% 60% at 50% 40%, #000 15%, transparent 75%); }
-    .hs-spark { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-    .hs-spark b { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #fff; box-shadow: 0 0 10px 2px color-mix(in srgb, var(--c3) 80%, #fff); opacity: 0; animation: hsTwinkle 4s ease-in-out infinite; }
-    @keyframes hsTwinkle { 0%, 100% { opacity: 0; transform: translateY(0) scale(.5); } 50% { opacity: .95; transform: translateY(-16px) scale(1.2); } }
-    .hs-ghost { position: absolute; left: 50%; top: 45%; transform: translate(-50%, -50%); z-index: -1; white-space: nowrap; max-width: 140%;
-      font-family: 'Inter','Hind Siliguri',sans-serif; font-weight: 900; font-size: clamp(76px, 25vw, 138px); letter-spacing: -.04em; line-height: 1; text-transform: uppercase;
-      color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.1); overflow: hidden; }
-    .hs-count { position: absolute; top: 16px; right: 16px; z-index: 3; font-weight: 800; font-size: 13px; color: #fff; letter-spacing: .08em;
-      padding: 6px 12px; border-radius: 999px; background: linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.04)); border: 1px solid rgba(255,255,255,.22);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 6px 18px rgba(0,0,0,.3); }
-    .hs-count small { opacity: .6; font-weight: 600; }
-    .hs-body { position: relative; z-index: 2; width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; }
-    /* staggered entrance */
-    .hs-body > * { opacity: 0; transform: translateY(22px) scale(.97); transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
+        radial-gradient(95% 75% at 88% -5%, hsl(var(--h) 52% 38% / .9) 0%, transparent 68%),
+        radial-gradient(70% 55% at 0% 30%, hsl(calc(var(--h) + 40) 40% 26% / .55) 0%, transparent 70%),
+        linear-gradient(180deg, #1c1c1e 0%, #000 100%); }
+    .hs::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 64%; z-index: -1; pointer-events: none;
+      background: linear-gradient(to top, #000 6%, rgba(0,0,0,.6) 52%, transparent); }
+    .hs-art { position: absolute; top: 36px; left: 50%; width: 140px; height: 140px; margin-left: -70px; border-radius: 34px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center; background: #f5f5f7;
+      box-shadow: 0 26px 50px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.5);
+      opacity: 0; transform: scale(.92); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
+    .hs.in .hs-art { opacity: 1; transform: none; }
+    .hs-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 22px; background: #f5f5f7; }
+    .hs-art span { font-weight: 800; font-size: 20px; line-height: 1.1; padding: 10px; text-align: center; color: #1c1c1e; word-break: break-word; }
+    .hs-art.brand { background: linear-gradient(160deg, #3a3a3c 0%, #000 100%); box-shadow: 0 26px 50px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.22); }
+    .hs-art.brand svg { width: 58px; height: 58px; color: #fff; }
+    .hs-body { position: absolute; left: 0; right: 0; bottom: 0; padding: 0 22px 44px; display: flex; flex-direction: column; align-items: flex-start; }
+    .hs-body > * { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .55s cubic-bezier(.2,.8,.2,1); }
     .hs.in .hs-body > * { opacity: 1; transform: none; }
-    .hs.in .hs-body > *:nth-child(1) { transition-delay: .05s; } .hs.in .hs-body > *:nth-child(2) { transition-delay: .15s; }
-    .hs.in .hs-body > *:nth-child(3) { transition-delay: .25s; } .hs.in .hs-body > *:nth-child(4) { transition-delay: .35s; }
-    .hs.in .hs-body > *:nth-child(5) { transition-delay: .45s; } .hs.in .hs-body > *:nth-child(6) { transition-delay: .55s; }
-    .hs.in .hs-body > *:nth-child(7) { transition-delay: .65s; } .hs.in .hs-body > *:nth-child(8) { transition-delay: .75s; }
-    .hs-live { display: inline-flex; align-items: center; gap: 8px; padding: 6px 15px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: .16em; color: #fff;
-      background: linear-gradient(90deg, #ff3d6e, #ff8a3d); box-shadow: 0 8px 24px rgba(255,61,110,.5), inset 0 1px 0 rgba(255,255,255,.4); }
-    .hs-live i { width: 7px; height: 7px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px #fff; animation: liveDot 1.4s infinite; }
-    /* logo disc */
-    .hs-disc { position: relative; width: 186px; height: 186px; margin: 22px 0 20px; display: flex; align-items: center; justify-content: center; }
-    .hs-disc::before { content: ""; position: absolute; inset: -18px; border-radius: 50%;
-      background: conic-gradient(from 0deg, var(--c1), var(--c2), var(--c3), var(--c1)); filter: blur(26px); opacity: .85; animation: hsSpin 8s linear infinite; }
-    .hs-disc::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; padding: 4px;
-      background: conic-gradient(from 90deg, var(--c3), var(--c1), transparent 28%, var(--c2) 52%, transparent 78%, var(--c3));
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: hsSpin 5s linear infinite reverse; }
-    @keyframes hsSpin { to { transform: rotate(360deg); } }
-    .hs-logo { position: relative; width: 164px; height: 164px; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden;
-      background: radial-gradient(circle at 28% 22%, #ffffff 0%, #f1eefb 55%, #ddd6f3 100%);
-      box-shadow: 0 24px 50px rgba(0,0,0,.6), inset 0 -10px 22px rgba(124,58,237,.12), inset 0 2px 0 #fff; animation: hsFloat 5s ease-in-out infinite; }
-    .hs-logo::after { content: ""; position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
-      background: linear-gradient(125deg, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 38%); }
-    .hs-logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 22px; }
-    .hs-logo span { font-weight: 900; font-size: 22px; line-height: 1.1; padding: 12px; text-transform: uppercase; letter-spacing: -.01em; word-break: break-word;
-      background: linear-gradient(135deg, var(--c2), var(--c1)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    @keyframes hsFloat { 50% { transform: translateY(-9px); } }
-    .hs-title { font-size: clamp(27px, 8.4vw, 38px); font-weight: 900; line-height: 1.12; letter-spacing: -.01em; margin: 0; max-width: 100%; text-wrap: balance;
-      background: linear-gradient(100deg, #fff 0%, var(--c3) 30%, #fff 50%, var(--c3) 70%, #fff 100%); background-size: 220% 100%;
-      -webkit-background-clip: text; background-clip: text; color: transparent; animation: hsText 6s linear infinite; filter: drop-shadow(0 4px 20px rgba(0,0,0,.5)); }
-    @keyframes hsText { to { background-position: -220% 0; } }
-    .hs-meta { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 14px; }
-    .hs-chip { font-size: 11.5px; font-weight: 700; padding: 6px 14px; border-radius: 999px; color: #fff; letter-spacing: .03em;
-      background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.05)); border: 1px solid rgba(255,255,255,.25);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 6px 16px rgba(0,0,0,.25); }
-    .hs-chip.hd { background: linear-gradient(90deg, #ffb703, #ffe08a); color: #2a1a00; border-color: transparent; box-shadow: 0 6px 20px rgba(255,183,3,.45); }
-    .hs-btn { position: relative; overflow: hidden; margin-top: 24px; padding: 14px 32px; border-radius: 999px; font-weight: 800; font-size: 14.5px; letter-spacing: .02em; color: #fff; border: 0; cursor: pointer;
-      background: linear-gradient(100deg, var(--c1) 0%, var(--c2) 100%);
-      box-shadow: 0 16px 38px color-mix(in srgb, var(--c1) 60%, transparent), 0 0 0 1px rgba(255,255,255,.25), inset 0 1px 0 rgba(255,255,255,.45);
-      display: inline-flex; align-items: center; gap: 10px; transition: transform .2s; }
-    .hs-btn:active { transform: scale(.95); }
-    .hs-btn::after { content: ""; position: absolute; top: 0; bottom: 0; width: 40%; left: -60%; transform: skewX(-20deg);
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent); animation: hsShine 3s ease-in-out infinite; }
-    @keyframes hsShine { 0%, 55% { left: -60%; } 100% { left: 140%; } }
-    .hs-btn .play { width: 24px; height: 24px; border-radius: 50%; background: #fff; color: var(--c1); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; padding-left: 2px; box-shadow: 0 4px 10px rgba(0,0,0,.25); }
-    /* intro slide */
-    .hs-intro .hero-num { margin: 0; }
-    .hs-pill { margin-top: 14px; padding: 10px 22px; border-radius: 18px; font-size: 13px; font-weight: 600; color: #fff;
-      background: linear-gradient(135deg, rgba(255,45,149,.25), rgba(124,58,237,.25)); border: 1.5px solid rgba(255,140,200,.7);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 0 30px rgba(255,45,149,.4), inset 0 0 20px rgba(255,45,149,.15); }
-    .hs-cats { margin-top: 22px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; width: 100%; max-width: 330px; }
-    .hs-cats div { padding: 12px 4px; border-radius: 15px; font-size: 11px; font-weight: 800; letter-spacing: .1em; color: #fff;
-      box-shadow: 0 12px 24px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.4); animation: hsFloat 5s ease-in-out infinite; }
-    .hs-cats div:nth-child(even) { animation-delay: -2.2s; } .hs-cats div:nth-child(3n) { animation-delay: -1.1s; }
-    /* dots */
-    .hs-poster { position: absolute; inset: 0; z-index: -1; background-size: cover; background-position: center; opacity: .5; filter: saturate(1.15); }
-    .hs-poster::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,7,20,.35) 0%, rgba(11,7,20,.15) 35%, rgba(11,7,20,.92) 100%); }
-    .hs-m3u-logo .hs-logo img { padding: 0; object-fit: cover; }
-    #heroDots { position: absolute; left: 0; right: 0; bottom: 12px; z-index: 5; display: flex; justify-content: center; gap: 6px; padding: 0; margin: 0; }
-    .hero-dot { width: 7px; height: 7px; border-radius: 999px; background: rgba(255,255,255,.3); border: 0; padding: 0; transition: width .35s, background .35s; }
-    .hero-dot.on { width: 28px; background: linear-gradient(90deg, #ff2d95, #ffd166); box-shadow: 0 0 14px rgba(255,45,149,.8); }
-    #heroPrevBtn, #heroNextBtn { z-index: 6; width: 40px; height: 40px; font-size: 22px; line-height: 1; background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.05)); border: 1px solid rgba(255,255,255,.25); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .hs.in .hs-body > *:nth-child(2) { transition-delay: .06s; } .hs.in .hs-body > *:nth-child(3) { transition-delay: .12s; } .hs.in .hs-body > *:nth-child(4) { transition-delay: .18s; }
+    .hs-live { display: inline-flex; align-items: center; gap: 7px; padding: 4px 11px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .06em; color: #fff; background: #ff3b30; }
+    .hs-live i { width: 6px; height: 6px; border-radius: 50%; background: #fff; animation: liveDot 1.6s ease-in-out infinite; }
+    .hs-title { margin: 12px 0 0; max-width: 100%; font-size: clamp(30px, 9vw, 44px); font-weight: 800; line-height: 1.07; letter-spacing: -.025em; color: #fff; text-wrap: balance; }
+    .hs-sub { margin: 8px 0 0; font-size: 14px; font-weight: 500; color: #a1a1a6; max-width: 100%; }
+    .hs-actions { display: flex; align-items: center; gap: 10px; margin-top: 18px; }
+    .hs-btn { display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 24px; border: 0; border-radius: 999px; background: #f5f5f7; color: #000; font-weight: 700; font-size: 15px; cursor: pointer; }
+    .hs-btn:active { transform: scale(.96); }
+    .hs-btn svg { width: 15px; height: 15px; }
+    .hs-ghost { width: 46px; height: 46px; border: 0; border-radius: 50%; background: rgba(255,255,255,.18); color: #fff; font-size: 22px; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .hs-ghost:active { transform: scale(.94); }
+    #heroDots { position: absolute; left: 0; right: 0; bottom: 16px; z-index: 5; display: flex; justify-content: center; gap: 6px; padding: 0; margin: 0; }
+    .hero-dot { width: 6px; height: 6px; border-radius: 999px; background: rgba(255,255,255,.35); border: 0; padding: 0; transition: width .3s ease, background .3s ease; }
+    .hero-dot.on { width: 20px; background: #fff; }
+    #heroPrevBtn, #heroNextBtn { z-index: 6; width: 40px; height: 40px; font-size: 22px; line-height: 1; background: rgba(28,28,30,.72); border: 1px solid rgba(255,255,255,.18); }
     @media (hover: none) { #heroPrevBtn, #heroNextBtn { display: none; } }
-    @media (prefers-reduced-motion: reduce) { .hs *, .hs::before, .hs::after { animation: none !important; } .hs-body > * { opacity: 1; transform: none; transition: none; } }
-  </style>
-<script>try{var _l=localStorage.getItem('sarah_lite');var _c=navigator.connection||{};if(_l==='1'||(_l===null&&(_c.saveData||/2g/.test(_c.effectiveType||''))))document.documentElement.classList.add('lite');}catch(e){}</script>
-  <style>
-    /* ===== LITE MODE ===== */
-    #liteBanner { display: none; }
-    #liteBtn { height: 36px; padding: 0 12px; border-radius: 999px; font-size: 12px; font-weight: 800; color: #fff; display: inline-flex; align-items: center; gap: 5px;
-      background: linear-gradient(90deg, #14b8a6, #22c55e); color: #04120f; border: 0; }
-    html.lite #liteBtn { background: rgba(255,255,255,.1); color: #fff; border: 1px solid rgba(255,255,255,.2); }
-    html.lite *, html.lite *::before, html.lite *::after { animation: none !important; transition: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: none !important; text-shadow: none !important; }
-    html.lite body { background: #0a0c10 !important; }
-    html.lite header { background: #0a0c10 !important; border-bottom: 1px solid rgba(255,255,255,.08); }
-    html.lite #heroWrap, html.lite .home-stats { display: none !important; }
-    html.lite #liteBanner { display: block; }
-    html.lite .toffee-gradient { background: #14b8a6 !important; color: #04120f !important; }
-    html.lite #viewHome h3::before { background: #14b8a6; }
-    html.lite #topCategoryNav .cat-tab.text-pink-400 { background: #14b8a6; color: #04120f; }
-    html.lite #totalChannelsBadge, html.lite #savedCountBadge { background: rgba(20,184,166,.18); color: #5eead4; }
-    html.lite #eplRowTrack > button, html.lite #saffRowTrack > button, html.lite #dramaRowTrack > button, html.lite #dynamicCategorySections button[data-play-channel] { border-radius: 12px; border: 1px solid rgba(255,255,255,.08); }
-    html.lite .text-pink-400, html.lite .text-pink-300 { color: #5eead4 !important; }
-    html.lite #liveTvCirclesTrack:empty { background: rgba(255,255,255,.05); }
-    .lb { border: 1px solid rgba(20,184,166,.4); background: linear-gradient(135deg, #0e1c1b, #0a0c10); border-radius: 16px; padding: 16px; }
-    .lb h2 { font-size: 18px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px; margin: 0; }
-    .lb p { font-size: 12.5px; color: #94a3b8; margin: 6px 0 0; line-height: 1.5; }
-    .lb ul { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; padding: 0; list-style: none; }
-    .lb li { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: rgba(20,184,166,.15); color: #5eead4; }
-    .lb .row { display: flex; gap: 8px; margin-top: 14px; }
-    .lb button { flex: 1; padding: 11px 10px; border-radius: 12px; font-weight: 800; font-size: 13px; border: 0; }
-    .lb .go { background: #14b8a6; color: #04120f; }
-    .lb .full { background: rgba(255,255,255,.08); color: #fff; border: 1px solid rgba(255,255,255,.15); }
+    @media (min-width: 700px) {
+      #heroWrap { margin: 10px 18px 0; }
+      .hs { height: 460px; }
+      .hs-art { left: auto; right: 9%; top: 50%; width: 250px; height: 250px; margin: -125px 0 0 0; border-radius: 56px; }
+      .hs-art.brand svg { width: 100px; height: 100px; }
+      .hs-art img { padding: 38px; }
+      .hs-body { padding: 0 9% 56px; max-width: 62%; }
+      .hs-title { font-size: 52px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .hs *, .hs-live i { animation: none !important; transition: none !important; } .hs-body > *, .hs-art { opacity: 1; transform: none; } }
   </style>
   <style>
-    /* ===== LITE APP v3 (APK-style home) ===== */
-    #liteApp { display: none; }
-    html.lite header, html.lite main, html.lite nav.fixed.bottom-0 { display: none !important; }
-    html.lite #liteApp { display: block; }
-    html.lite body { background: #0f0f14 !important; color: #fff; }
-    #liteApp { min-height: 100vh; padding-bottom: 28px; max-width: 640px; margin: 0 auto; color: #fff; font-family: 'Inter','Hind Siliguri',system-ui,sans-serif; }
-    .lt-head { position: sticky; top: 0; z-index: 20; background: #0f0f14; }
-    .lt-bar { display: flex; align-items: center; gap: 6px; padding: env(safe-area-inset-top) 8px 0 6px; height: calc(56px + env(safe-area-inset-top)); background: #343678; }
-    .lt-bar h1 { margin: 0; font-size: 20px; font-weight: 700; flex: 1; }
-    .lt-bar h1 sup { font-size: 9px; font-weight: 800; background: #00d8f6; color: #04202a; border-radius: 4px; padding: 2px 5px; margin-left: 6px; vertical-align: middle; letter-spacing: .08em; }
-    .lt-ic { width: 44px; height: 44px; border: 0; background: transparent; color: #fff; display: flex; align-items: center; justify-content: center; }
-    .lt-ic svg { width: 26px; height: 26px; }
-    .lt-stage { position: relative; aspect-ratio: 16 / 9; max-height: 32vh; width: 100%; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .lt-stage .disc { position: relative; width: 78px; height: 78px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; font-weight: 800; color: #343678; font-size: 13px; text-align: center; }
-    .lt-stage .disc img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 9px; background: #fff; }
-    .lt-stage .live { position: absolute; left: 12px; top: 10px; background: #e11d2e; font-size: 10.5px; font-weight: 800; padding: 3px 9px; border-radius: 999px; }
-    .lt-stage .play { position: absolute; inset: 0; margin: auto; width: 58px; height: 58px; top: auto; bottom: 14px; right: 14px; left: auto; border-radius: 50%; border: 0; background: rgba(99,102,241,.95); color: #fff; font-size: 18px; padding-left: 3px; }
-    .lt-info { display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: #0f0f14; }
-    .lt-info .t { flex: 1; min-width: 0; }
-    .lt-info strong { display: block; font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .lt-info span { font-size: 13px; font-weight: 600; color: #6366f1; }
-    .lt-info button { width: 42px; height: 42px; border: 0; background: transparent; color: #fff; font-size: 26px; display: flex; align-items: center; justify-content: center; }
-    .lt-info button.on { color: #eab308; }
-    .lt-info button svg { width: 26px; height: 26px; }
-    .lt-sr { display: flex; gap: 12px; align-items: center; padding: 12px 16px 6px; }
-    #ltSearch { flex: 1; min-width: 0; height: 54px; padding: 0 22px; border-radius: 999px; border: 0; background: #1f1f25; color: #fff; font-size: 15px; outline: none; }
-    #ltSearch::placeholder { color: #7b7b86; }
-    .lt-gear { flex: none; width: 54px; height: 54px; border-radius: 50%; border: 0; background: #1f1f25; color: #cfd0d6; display: flex; align-items: center; justify-content: center; }
-    .lt-gear svg { width: 24px; height: 24px; }
-    #ltChips { display: flex; gap: 10px; overflow-x: auto; padding: 8px 16px 12px; scrollbar-width: none; }
-    #ltChips::-webkit-scrollbar { display: none; }
-    #ltChips button { flex: none; height: 52px; padding: 0 26px; border-radius: 999px; border: 0; font-size: 17px; font-weight: 500; background: #1f1f25; color: #9a9aa6; white-space: nowrap; }
-    #ltChips button.on { background: #6366f1; color: #fff; }
-    #ltList { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 4px 14px; }
-    .lt-card { position: relative; padding: 8px 8px 10px; border-radius: 16px; background: #1c1c22; border: 1.5px solid #26262e; }
-    .lt-card:active { background: #24242c; }
-    .lt-card.playing { border-color: #6366f1; }
-    .lt-card .th { position: relative; aspect-ratio: 16 / 10; border-radius: 10px; overflow: hidden; background: radial-gradient(circle at 50% 40%, #4a1738, #16101c 75%); display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800; color: #fff; text-align: center; padding: 6px; line-height: 1.1; }
-    .lt-card .th img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 12px; }
-    .lt-card .badge { position: absolute; left: 6px; top: 6px; background: #e11d2e; font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 999px; }
-    .lt-fav { position: absolute; right: 2px; top: 0; width: 34px; height: 34px; border: 0; background: transparent; font-size: 20px; color: #e5e5ea; text-shadow: 0 1px 3px #000 !important; }
-    .lt-fav.on { color: #ef4458; }
-    .lt-card p { margin: 8px 4px 0; font-size: 15px; font-weight: 700; color: #cfd0d6; line-height: 1.25; text-align: center; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.5em; }
-    .lt-card p b { color: #b94b8c; margin-right: 6px; }
-    .lt-more { grid-column: 1 / -1; padding: 13px; border-radius: 14px; border: 0; background: #1f1f25; color: #fff; font-weight: 700; font-size: 14px; }
-    .lt-empty { grid-column: 1 / -1; text-align: center; color: #8e8e99; padding: 48px 20px; font-size: 14px; line-height: 1.7; }
-    .lt-set { margin: 8px 16px 0; background: #1c1c22; border-radius: 16px; overflow: hidden; }
-    .lt-set label, .lt-set button { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 16px; font-size: 15px; font-weight: 600; background: transparent; border: 0; border-bottom: 1px solid #26262e; text-align: left; color: #fff; }
-    .lt-set input { width: 22px; height: 22px; accent-color: #6366f1; }
-    .lt-set small { display: block; font-weight: 400; color: #8e8e99; font-size: 12px; margin-top: 2px; }
-    .lt-note { padding: 14px 20px; font-size: 12.5px; color: #8e8e99; }
-    /* drawer */
-    #ltDrawer { position: fixed; inset: 0; z-index: 40; display: none; }
-    #ltDrawer.on { display: flex; }
-    .lt-scrim { position: absolute; inset: 0; background: rgba(0,0,0,.55); }
-    #ltDrawer aside { position: relative; width: 78%; max-width: 320px; height: 100%; overflow-y: auto; padding: calc(24px + env(safe-area-inset-top)) 16px 24px; background: linear-gradient(180deg, #7c80f5, #5558cf); }
-    .lt-me { display: flex; align-items: center; gap: 14px; padding: 18px; border-radius: 22px; background: rgba(255,255,255,.14); }
-    .lt-me i { width: 56px; height: 56px; border-radius: 16px; background: #00d8f6; color: #04202a; font-style: normal; font-size: 26px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
-    .lt-me b { display: block; font-size: 18px; } .lt-me span { font-size: 12.5px; opacity: .8; }
-    .lt-sec { margin: 20px 6px 8px; font-size: 12px; font-weight: 700; letter-spacing: .22em; opacity: .75; }
-    .lt-grp { border-radius: 22px; background: rgba(255,255,255,.12); padding: 6px; }
-    .lt-grp button { display: flex; align-items: center; gap: 14px; width: 100%; padding: 13px 12px; border: 0; background: transparent; color: #fff; font-size: 16px; font-weight: 600; border-radius: 16px; text-align: left; }
-    .lt-grp button:active { background: rgba(255,255,255,.16); }
-    .lt-grp button u { text-decoration: none; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.16); display: flex; align-items: center; justify-content: center; font-size: 18px; }
-    @media (max-height: 520px) { .lt-stage { display: none; } }
+    /* ===== Apple TV palette: black • graphite • white, accent = white / system green (switch) ===== */
+    body { background: #000; }
+    .toffee-gradient { background: #f5f5f7 !important; color: #000 !important; }
+    .toffee-gradient svg { color: #000 !important; }
+    html.app-mode body, html.tv-mode body { background: #000; }
+    #viewHome h3::before { background: #f5f5f7 !important; }
+    #topCategoryNav .cat-tab.text-pink-400 { background: #f5f5f7 !important; color: #000 !important; }
+    #totalChannelsBadge, #savedCountBadge { background: rgba(255,255,255,.12) !important; color: #d1d1d6 !important; }
+    button[role=switch].bg-pink-600 { background: #30d158 !important; }
+    .app-chip { background: #2c2c2e; color: #d1d1d6; }
+    .app-chip.active { background: #f5f5f7 !important; color: #000 !important; }
+    .app-card { background: #1c1c1e; }
+    .app-card.active { border-color: #fff; }
+    .app-card-name { color: #f5f5f7; }
+    .app-card-num { color: #8e8e93; }
+    #appStreamInfo { color: #98989d !important; }
+    .cs-range::-webkit-slider-runnable-track { background: linear-gradient(to right, #fff var(--p,0%), rgba(255,255,255,.25) var(--p,0%)); }
+    .cs-range::-webkit-slider-thumb { box-shadow: 0 0 0 3px rgba(255,255,255,.35); }
+    .cs-range::-moz-range-progress { background: #fff; }
+    .cs-spinner { border-top-color: #fff; }
+    .cs-menu { background: rgba(28,28,30,.97); border-color: rgba(255,255,255,.16); }
+    .cs-menu-title { color: #98989d; }
+    .cs-menu-item.active { background: rgba(255,255,255,.16); }
+    .tv-focus { outline-color: #fff; background: #3a3a3c !important; box-shadow: 0 0 2vw rgba(255,255,255,.28); }
+    .app-chip.tv-focus { background: #fff !important; color: #000 !important; }
+    #tvVolFill { background: #fff; }
+    #tvOsdNum { color: #fff; }
+    #tvOsdInfo { color: #98989d; }
+    /* brand mark */
+    .brand-mark { background: linear-gradient(160deg, #ffffff 0%, #c7c7cc 100%) !important; color: #000; box-shadow: 0 8px 24px rgba(255,255,255,.12) !important; }
+    .brand-mark svg { color: #000 !important; }
+    /* layout selector */
+    .seg-btn { padding: 10px 6px; border-radius: 12px; background: #2c2c2e; color: #e5e5ea; font-size: 13px; font-weight: 700; border: 1px solid transparent; }
+    .seg-btn.on { background: #f5f5f7; color: #000; }
+    /* server chips (player er upore) */
+    #playerServerBar { position: absolute; left: 0; right: 0; top: calc(max(12px, env(safe-area-inset-top)) + 54px); z-index: 25; display: flex; gap: 8px; padding: 0 12px; overflow-x: auto; scrollbar-width: none; }
+    #playerServerBar::-webkit-scrollbar { display: none; }
+    #playerServerBar.hidden { display: none; }
+    #playerModal.app-inline:not(.app-fs) #playerServerBar { top: 8px; }
+    .srv-chip { flex: none; height: 30px; padding: 0 14px; border-radius: 999px; background: rgba(28,28,30,.82); color: #e5e5ea; font-size: 12px; font-weight: 700; border: 1px solid rgba(255,255,255,.16); white-space: nowrap; }
+    .srv-chip.on { background: #f5f5f7; color: #000; border-color: #f5f5f7; }
+    html.tv-mode #playerServerBar { display: none !important; }
+    /* TV settings panel: remote focus */
+    html.tv-mode #appSettingsPanel :focus { outline: 3px solid #fff; outline-offset: 3px; border-radius: 14px; }
+    html.tv-mode #appSettingsBody { max-width: 760px; margin: 0 auto; }
   </style>
+<script>try{localStorage.removeItem('sarah_lite');localStorage.removeItem('sarah_lite_recent');localStorage.removeItem('sarah_lite_plays');}catch(e){}</script>
 </head>
-<body class="min-h-screen bg-[#0b0714] text-white flex flex-col justify-between pb-20">
+<body class="min-h-screen bg-[#000000] text-white flex flex-col justify-between pb-20">
 
   <!-- SPLASH / WELCOME SCREEN (2 Seconds Animation) -->
-  <div id="splashScreen" class="fixed inset-0 z-50 bg-[#0b0714] flex flex-col items-center justify-center transition-opacity duration-500">
+  <div id="splashScreen" class="fixed inset-0 z-50 bg-[#000000] flex flex-col items-center justify-center transition-opacity duration-500">
     <div class="flex flex-col items-center text-center p-6 splash-animate">
-      <div class="w-20 h-20 rounded-3xl toffee-gradient flex items-center justify-center shadow-2xl shadow-pink-500/50 mb-4 neon-box">
-        <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
+      <div class="w-20 h-20 rounded-3xl brand-mark flex items-center justify-center mb-4">
+        <svg class="w-10 h-10 text-black" viewBox="0 0 24 24" fill="currentColor">
           <path d="M4 6.5C4 5.12 5.12 4 6.5 4h11C18.88 4 20 5.12 20 6.5v11c0 1.38-1.12 2.5-2.5 2.5h-11C5.12 20 4 18.88 4 17.5v-11zm6 2.5v6l5-3-5-3z"/>
         </svg>
       </div>
-      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-wider bg-gradient-to-r from-pink-400 via-fuchsia-300 to-white bg-clip-text text-transparent">Sarah TV</h1>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-wider bg-gradient-to-r from-white via-fuchsia-300 to-pink-500 bg-clip-text text-transparent">Sarah TV</h1>
       <p class="text-xs sm:text-sm text-slate-300 mt-2 font-medium">Welcome to Live TV & Sports Streaming</p>
       <div class="mt-6 flex items-center gap-1.5">
         <span class="w-2 h-2 rounded-full bg-pink-500 live-dot"></span>
-        <span class="text-[11px] text-pink-400 font-semibold tracking-wider">LOADING STREAM...</span>
+        <span class="text-[11px] text-slate-300 font-semibold tracking-wider">LOADING STREAM...</span>
       </div>
     </div>
   </div>
 
   <!-- TOP STICKY NAVBAR (Sarah TV Branding) -->
-  <div id="liteApp">
-    <div class="lt-head">
-      <div class="lt-bar">
-        <button class="lt-ic" id="ltMenu" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-        <h1>Sarah TV<sup>LITE</sup></h1>
-      </div>
-      <div id="ltStage"></div>
-      <div id="ltInfo" class="lt-info"></div>
-    </div>
-    <div class="lt-sr">
-      <input id="ltSearch" type="search" placeholder="চ্যানেল খুঁজুন…" autocomplete="off">
-      <button class="lt-gear" id="ltGear" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></button>
-    </div>
-    <div id="ltChips"></div>
-    <div id="ltList"></div>
-    <div id="ltSettings" style="display:none"></div>
-    <div id="ltDrawer">
-      <div class="lt-scrim" data-ltclose></div>
-      <aside>
-        <div class="lt-me"><i>S</i><div><b>Sarah TV</b><span>Lite মোড</span></div></div>
-        <div class="lt-sec">QUICK ACTIONS</div>
-        <div class="lt-grp">
-          <button data-ltgo="home"><u>🏠</u>Home</button>
-          <button data-ltgo="fav"><u>★</u>Favorites</button>
-          <button data-ltgo="recent"><u>🕘</u>Recent</button>
-          <button data-ltgo="pop"><u>🔥</u>Popular</button>
-          <button data-ltgo="random"><u>🎲</u>Random Channel</button>
-        </div>
-        <div class="lt-sec">UTILITY</div>
-        <div class="lt-grp">
-          <button data-ltgo="settings"><u>⚙</u>Settings</button>
-          <button data-ltgo="share"><u>↗</u>Share App</button>
-          <button data-ltgo="full"><u>🌟</u>Full Version</button>
-        </div>
-      </aside>
-    </div>
-  </div>
-
-  <header class="sticky top-0 z-30 bg-[#0b0714]/95 backdrop-blur-md border-b border-white/5">
+  <!-- TOP STICKY NAVBAR (Sarah TV Branding) -->
+  <header class="sticky top-0 z-30 bg-[#000000]/95 backdrop-blur-md border-b border-white/5">
     <div class="max-w-5xl mx-auto px-4 pt-3 pb-2 flex items-center justify-between gap-2">
       <!-- Brand Logo: Sarah TV -->
       <button id="brandLogoBtn" class="flex items-center gap-2 focus:outline-none group">
-        <div class="w-9 h-9 rounded-xl toffee-gradient flex items-center justify-center shadow-lg shadow-pink-500/25 group-active:scale-95 transition">
-          <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+        <div class="w-9 h-9 rounded-xl brand-mark flex items-center justify-center group-active:scale-95 transition">
+          <svg class="w-5 h-5 text-black" viewBox="0 0 24 24" fill="currentColor">
             <path d="M4 6.5C4 5.12 5.12 4 6.5 4h11C18.88 4 20 5.12 20 6.5v11c0 1.38-1.12 2.5-2.5 2.5h-11C5.12 20 4 18.88 4 17.5v-11zm6 2.5v6l5-3-5-3z"/>
           </svg>
         </div>
         <div class="flex flex-col text-left">
-          <span class="font-extrabold tracking-wider text-lg leading-none bg-gradient-to-r from-pink-400 via-fuchsia-300 to-white bg-clip-text text-transparent">Sarah TV</span>
+          <span class="font-extrabold tracking-wider text-lg leading-none bg-gradient-to-r from-white via-fuchsia-300 to-pink-500 bg-clip-text text-transparent">Sarah TV</span>
           <span id="jsonStatusLabel" class="text-[9px] text-emerald-400 font-semibold tracking-tight">● লাইভ</span>
         </div>
       </button>
 
       <!-- Right Actions: Subscribe + Sign In / User Profile -->
       <div class="flex items-center gap-2.5">
-        <button id="liteBtn" aria-label="Lite mode">⚡ Lite</button>
         <button id="headerSearchBtn" aria-label="Search" class="w-9 h-9 rounded-full bg-white/8 border border-white/15 text-white flex items-center justify-center active:scale-95 transition">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"/><path d="M21 21l-4.35-4.35"/></svg>
         </button>
@@ -610,45 +480,20 @@
     <!-- HOME VIEW -->
     <section id="viewHome" class="space-y-6 pb-6">
 
-      <!-- LITE BANNER -->
-      <div id="liteBanner" class="px-4 pt-4">
-        <div class="lb">
-          <h2>⚡ লাইট মোড চালু</h2>
-          <p>দ্রুত লোড, কম ডেটা, কম ব্যাটারি। চ্যানেল, সার্চ, সেভ ও প্লেয়ার, সব ফিচার মূল ওয়েবসাইটের মতোই।</p>
-          <ul><li>কম ডেটা</li><li>ফাস্ট লোড</li><li>সব চ্যানেল</li></ul>
-          <div class="row">
-            <button class="go" data-play-index="0">▶ লাইভ দেখুন</button>
-            <button class="full" id="liteToFullBtn">ফুল ভার্সন</button>
-          </div>
-        </div>
-      </div>
-
       <!-- HERO SLIDER -->
       <div id="heroWrap">
         <div id="heroTrack" class="flex overflow-x-auto snap-x-mandatory no-scrollbar scroll-smooth">
 
           <!-- Slide 0: brand intro -->
-          <div class="hs hs-intro in snap-center-item" style="--c1:#a81eff;--c2:#ff1f8e;--c3:#fbbf24">
-            <div class="hs-aurora"><i></i><i></i><i></i></div>
-            <div class="hs-rays"></div>
-            <div class="hs-grid"></div>
-            <div class="hs-spark"></div>
-            <div class="hs-count" id="heroCount0">01<small>/01</small></div>
+          <div class="hs hs-intro in snap-center-item" style="--h:268">
+            <div class="hs-art brand"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 6.5C4 5.12 5.12 4 6.5 4h11C18.88 4 20 5.12 20 6.5v11c0 1.38-1.12 2.5-2.5 2.5h-11C5.12 20 4 18.88 4 17.5v-11zm6 2.5v6l5-3-5-3z"/></svg></div>
             <div class="hs-body">
-              <span class="hs-live"><i></i>SARAH TV</span>
-              <h2 class="hero-num" style="margin-top:14px">২০০+</h2>
-              <p class="text-2xl sm:text-3xl font-extrabold text-white mt-1 drop-shadow">লাইভ চ্যানেল</p>
-              <p class="text-base sm:text-lg font-bold text-amber-300 mt-1">এক জায়গায়, সারাক্ষণ লাইভ</p>
-              <div class="hs-pill">এখন আরো বেশি দেখুন <span class="text-pink-400 font-bold">Sarah TV -তে</span></div>
-              <div class="hs-cats">
-                <div style="background:linear-gradient(135deg,#f43f5e,#f97316)">LIVE</div>
-                <div style="background:linear-gradient(135deg,#2563eb,#4338ca)">SPORTS</div>
-                <div style="background:linear-gradient(135deg,#10b981,#0f766e)">CRICKET</div>
-                <div style="background:linear-gradient(135deg,#f59e0b,#dc2626)">DRAMA</div>
-                <div style="background:linear-gradient(135deg,#d946ef,#6b21a8)">MOVIES</div>
-                <div style="background:linear-gradient(135deg,#06b6d4,#1d4ed8)">NEWS</div>
+              <span class="hs-live"><i></i>LIVE</span>
+              <h2 class="hs-title">Sarah TV</h2>
+              <p class="hs-sub" id="heroIntroSub">লাইভ চ্যানেল, এক জায়গায়, সারাক্ষণ</p>
+              <div class="hs-actions">
+                <button data-play-index="0" class="hs-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>এখনই দেখুন</button>
               </div>
-              <button data-play-index="0" class="hs-btn"><span class="play">▶</span> এখনই দেখুন</button>
             </div>
           </div>
 
@@ -664,7 +509,7 @@
       <!-- QUICK STATS -->
       <div class="px-4 -mt-2">
         <div class="home-stats">
-          <div><b>২০০+</b><span>লাইভ চ্যানেল</span></div>
+          <div><b id="statCount">০</b><span>লাইভ চ্যানেল</span></div>
           <div><b>HD</b><span>ক্লিয়ার কোয়ালিটি</span></div>
           <div><b>২৪/৭</b><span>নন-স্টপ লাইভ</span></div>
         </div>
@@ -750,6 +595,16 @@
         <button id="settingsAuthActionBtn" class="px-4 py-2 rounded-xl toffee-gradient text-xs font-bold shadow">Sign In</button>
       </div>
 
+      <div id="layoutCard" class="p-4 rounded-2xl bg-white/5 border border-white/10">
+        <p class="font-semibold text-sm">Layout</p>
+        <p class="text-xs text-slate-400 mb-3">Phone বা TV, যেটা বেছে নেবেন অ্যাপ সেই layout-এই চলবে</p>
+        <div id="layoutSeg" class="grid grid-cols-3 gap-2">
+          <button data-layout="auto" class="seg-btn">Auto</button>
+          <button data-layout="phone" class="seg-btn">📱 Phone</button>
+          <button data-layout="tv" class="seg-btn">📺 TV</button>
+        </div>
+      </div>
+
       <div id="adminSourceCard" class="admin-only p-4 rounded-2xl bg-pink-500/10 border border-pink-500/30 space-y-3">
         <div class="flex items-center justify-between">
           <div>
@@ -770,7 +625,7 @@
             <p class="font-semibold text-sm">Default Video Quality</p>
             <p class="text-xs text-slate-400">Choose preferred stream resolution</p>
           </div>
-          <select id="settingQualitySelect" class="bg-[#181028] border border-white/20 rounded-lg px-3 py-1.5 text-xs font-semibold text-white focus:outline-none">
+          <select id="settingQualitySelect" class="bg-[#1c1c1e] border border-white/20 rounded-lg px-3 py-1.5 text-xs font-semibold text-white focus:outline-none">
             <option value="Auto">Auto (Recommended)</option>
             <option value="1080p">1080p Full HD</option>
             <option value="720p">720p HD</option>
@@ -840,6 +695,9 @@
       <div id="playerSkipFlash" class="hidden absolute top-1/2 -translate-y-1/2 px-4 py-3 rounded-full bg-black/60 text-white text-sm font-extrabold pointer-events-none"></div>
     </div>
 
+    <!-- Server selector (player er uporei) -->
+    <div id="playerServerBar" data-no-tap class="ov-fade hidden"></div>
+
     <div id="playerStatusMsg" class="hidden absolute left-1/2 -translate-x-1/2 z-30 max-w-[90%] px-4 py-2 rounded-full bg-black/75 border border-pink-500/40 text-xs font-semibold text-white text-center pointer-events-none" style="top:84px"></div>
 
     <!-- Top bar -->
@@ -881,7 +739,7 @@
     </div>
 
     <!-- Channel popup -->
-    <div id="playerHorizontalPopup" data-no-tap class="player-popup-drawer absolute left-3 right-3 max-w-[420px] mx-auto bg-[#120b22]/95 backdrop-blur-xl border border-pink-500/30 rounded-xl p-1.5 z-30 shadow-2xl" style="bottom:calc(96px + env(safe-area-inset-bottom))">
+    <div id="playerHorizontalPopup" data-no-tap class="player-popup-drawer absolute left-3 right-3 max-w-[420px] mx-auto bg-[#1c1c1e]/95 backdrop-blur-xl border border-pink-500/30 rounded-xl p-1.5 z-30 shadow-2xl" style="bottom:calc(96px + env(safe-area-inset-bottom))">
       <div class="flex items-center justify-between mb-1 px-1">
         <div class="flex items-center gap-1.5">
           <span class="text-[10px] font-bold text-pink-400 uppercase tracking-wider">Nearby Channels</span>
@@ -930,7 +788,7 @@
     <div class="flex items-center gap-3 px-4 py-4 flex-shrink-0">
       <div id="appChLogo" class="w-14 h-14 rounded-sm bg-white flex items-center justify-center overflow-hidden flex-shrink-0 text-xs font-extrabold text-slate-800 text-center leading-tight"></div>
       <h2 id="appChName" class="text-2xl font-bold truncate flex-1 min-w-0">Channel</h2>
-      <span id="appStreamInfo" class="text-[13px] font-semibold whitespace-nowrap" style="color:#6a3dff">Loading…</span>
+      <span id="appStreamInfo" class="text-[13px] font-semibold whitespace-nowrap" style="color:#98989d">Loading…</span>
       <button id="appFavBtn" class="w-9 h-9 flex items-center justify-center text-2xl text-white flex-shrink-0" title="Save">☆</button>
       <button id="appFsBtn" class="w-9 h-9 flex items-center justify-center text-white flex-shrink-0" title="Fullscreen">
         <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h7v2.5H5.5V10H3V3zm11 0h7v7h-2.5V5.5H14V3zM3 14h2.5v4.5H10V21H3v-7zm15.5 0H21v7h-7v-2.5h4.5V14z"/></svg>
@@ -938,8 +796,8 @@
     </div>
 
     <div class="flex items-center gap-2 px-4 pb-3 flex-shrink-0">
-      <input id="appSearchInput" type="text" placeholder="🔍 চ্যানেল খুঁজুন..." class="flex-1 min-w-0 bg-[#2b2b2b] rounded-full px-4 py-2.5 text-sm text-white placeholder-slate-400 focus:outline-none" style="user-select:text" />
-      <button id="appSettingsBtn" class="w-11 h-11 rounded-full bg-[#2b2b2b] text-white text-xl flex items-center justify-center flex-shrink-0" title="Settings">⚙</button>
+      <input id="appSearchInput" type="text" placeholder="🔍 চ্যানেল খুঁজুন..." class="flex-1 min-w-0 bg-[#2c2c2e] rounded-full px-4 py-2.5 text-sm text-white placeholder-slate-400 focus:outline-none" style="user-select:text" />
+      <button id="appSettingsBtn" class="w-11 h-11 rounded-full bg-[#2c2c2e] text-white text-xl flex items-center justify-center flex-shrink-0" title="Settings">⚙</button>
     </div>
     <div id="appCatBar" class="flex gap-3 overflow-x-auto no-scrollbar px-4 pb-4 flex-shrink-0"></div>
     <div id="appGrid" class="flex-1 overflow-y-auto"></div>
@@ -947,7 +805,7 @@
 
   <!-- PHONE LOGIN MODAL -->
   <div id="phoneLoginModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="w-full max-w-sm rounded-3xl bg-[#160e29] border border-pink-500/30 p-6 shadow-2xl space-y-5">
+    <div class="w-full max-w-sm rounded-3xl bg-[#1c1c1e] border border-pink-500/30 p-6 shadow-2xl space-y-5">
       <div class="flex items-center justify-between">
         <div>
           <h3 class="text-lg font-extrabold text-white">Sign In to Sarah TV</h3>
@@ -986,7 +844,7 @@
 
   <!-- SUBSCRIBE / PREMIUM PASS MODAL -->
   <div id="subscribeModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="w-full max-w-sm rounded-3xl bg-[#160e29] border border-pink-500/30 p-6 shadow-2xl space-y-4">
+    <div class="w-full max-w-sm rounded-3xl bg-[#1c1c1e] border border-pink-500/30 p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between">
         <span class="px-3 py-1 rounded-full toffee-gradient text-xs font-bold">👑 Sarah TV VIP PASS</span>
         <button id="closeSubscribeModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
@@ -1014,7 +872,7 @@
 
   <!-- CUSTOM M3U8 STREAM MODAL -->
   <div id="customStreamModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="w-full max-w-sm rounded-3xl bg-[#160e29] border border-white/20 p-6 shadow-2xl space-y-4">
+    <div class="w-full max-w-sm rounded-3xl bg-[#1c1c1e] border border-white/20 p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between">
         <h3 class="text-base font-bold">Play Any Video Link</h3>
         <button id="closeCustomStreamModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 flex items-center justify-center">✕</button>
@@ -1029,7 +887,7 @@
   <div id="toastBox" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-full bg-pink-600 text-white text-xs font-bold shadow-xl">Notification</div>
 
   <!-- BOTTOM NAVIGATION BAR -->
-  <nav class="fixed bottom-0 left-0 right-0 z-30 bg-[#120b20]/95 backdrop-blur-md border-t border-white/10">
+  <nav class="fixed bottom-0 left-0 right-0 z-30 bg-[#1c1c1e]/95 backdrop-blur-md border-t border-white/10">
     <div class="max-w-md mx-auto flex items-center justify-around py-2">
       <button data-nav="home" class="bottom-nav-btn flex flex-col items-center gap-1 text-pink-500 font-semibold text-xs relative">
         <span id="navIndicatorHome" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2"></span>
@@ -1065,7 +923,7 @@
         logo: '',
         premium: true,
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-        themeColor: '#e11d48',
+        themeColor: '#1c1c1e',
         ticker: 'Sarah TV LIVE: Ipswich Town vs Nottingham Forest • Premier League'
       },
       {
@@ -1137,7 +995,7 @@
         logo: '',
         premium: true,
         streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-        themeColor: '#be185d',
+        themeColor: '#636366',
         ticker: 'Star Jalsha Movies: Superhit Bengali Blockbuster Cinema'
       },
       {
@@ -1157,23 +1015,19 @@
     let CHANNELS = [...DEFAULT_CHANNELS_JSON];
 
     const BADGE_COLORS = [
-      'text-rose-600 font-extrabold',
-      'text-red-700 font-bold',
-      'text-orange-600 font-extrabold',
-      'text-indigo-900 font-extrabold',
-      'text-emerald-700 font-extrabold',
-      'text-blue-800 font-bold',
-      'text-pink-700 font-extrabold',
-      'text-purple-800 font-extrabold'
+      'text-neutral-900 font-extrabold',
+      'text-zinc-800 font-extrabold',
+      'text-neutral-800 font-bold',
+      'text-zinc-900 font-extrabold'
     ];
 
     const CARD_GRADIENTS = [
-      'from-blue-900 via-slate-900 to-red-900',
-      'from-rose-950 via-slate-900 to-sky-900',
-      'from-emerald-950 via-slate-900 to-blue-950',
-      'from-fuchsia-900 via-purple-950 to-slate-900',
-      'from-amber-900 via-red-950 to-slate-900',
-      'from-cyan-900 via-slate-900 to-indigo-950'
+      'from-zinc-800 via-zinc-900 to-neutral-950',
+      'from-neutral-800 via-neutral-900 to-zinc-950',
+      'from-stone-800 via-neutral-900 to-neutral-950',
+      'from-zinc-700 via-zinc-900 to-black',
+      'from-neutral-700 via-neutral-900 to-zinc-950',
+      'from-slate-800 via-zinc-900 to-neutral-950'
     ];
 
     // Logo link thik kore: github blob -> raw, // -> https, http -> https (https site e)
@@ -1182,6 +1036,8 @@
       if (!u) return '';
       if (/^data:/i.test(u)) return u;
       if (u.startsWith('//')) u = 'https:' + u;
+      const wm = u.match(/^https?:\/\/commons\.wikimedia\.org\/wiki\/File:([^?#]+)/i);
+      if (wm) u = 'https://commons.wikimedia.org/wiki/Special:FilePath/' + wm[1] + '?width=256';
       const gh = u.match(/^https?:\/\/github\.com\/([^\/]+)\/([^\/]+)\/blob\/(.+)$/i);
       if (gh) u = `https://raw.githubusercontent.com/${gh[1]}/${gh[2]}/${gh[3].split('?')[0]}`;
       if (location.protocol === 'https:' && /^http:\/\//i.test(u)) u = 'https://' + u.slice(7);
@@ -1227,6 +1083,17 @@
         const logo = normalizeLogoUrl(item.logo || item.logo_url || item.logoUrl || item.logoURL || item.tvg_logo || item['tvg-logo'] || item.tvg_logo_url || item.image || item.image_url || item.icon || item.icon_url || item.thumb || item.thumbnail || item.poster || '');
         const streamUrl = item.url || item.streamUrl || item.stream_url || item.link || item.m3u8 || item.youtube || item.yt || item.file || item.src || item.source || 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
         const iframeUrl = item.iframe || item.embed || item.embedUrl || '';
+        // servers: [{name,url}] thakle sob gulo nibe, na thakle main url ta ekta server
+        let servers = [];
+        if (Array.isArray(item.servers)) {
+          item.servers.forEach(sv => {
+            if (!sv) return;
+            const u = typeof sv === 'string' ? sv : (sv.url || sv.streamUrl || sv.link || sv.src || '');
+            const f = typeof sv === 'object' ? (sv.iframe || sv.embed || '') : '';
+            if (u || f) servers.push({ url: u, iframe: f });
+          });
+        }
+        if (!servers.length) servers = [{ url: streamUrl, iframe: iframeUrl }];
         const words = name.trim().split(/\s+/);
         const shortLabel = item.shortLabel || (words.length >= 2 ? (words[0] + ' ' + words[1]).slice(0, 10) : name.slice(0, 8));
         const subLabel = item.subLabel || item.quality || category.toUpperCase().slice(0, 10);
@@ -1238,12 +1105,13 @@
           subLabel,
           category,
           logo,
-          streamUrl,
-          iframeUrl,
+          streamUrl: servers[0].url || streamUrl,
+          iframeUrl: servers[0].iframe || iframeUrl,
+          servers,
           premium: Boolean(item.premium || item.vip || item.isPremium),
           badgeColor: BADGE_COLORS[idx % BADGE_COLORS.length],
           cardGradient: CARD_GRADIENTS[idx % CARD_GRADIENTS.length],
-          themeColor: item.themeColor || '#831843',
+          themeColor: item.themeColor || '#1c1c1e',
           ticker: item.ticker || item.description || `${name} • ${category} Live Stream on Sarah TV`
         };
       });
@@ -1255,8 +1123,10 @@
       // Order matters: SonyLIV first, then FanCode, then Toffee.
       { url: 'https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv_playlist.m3u', prefix: 'sony', sourceName: 'SonyLIV' },
       { url: 'https://raw.githubusercontent.com/doctor-8trange/zyphx8/refs/heads/main/data/fancode.m3u', prefix: 'fan', sourceName: 'FanCode' },
-      { url: 'https://tv9.workerbot-tv9.workers.dev/toffee.m3u', prefix: 'toffee', sourceName: 'Toffee' }
+      { url: 'https://tv9.workerbot-tv9.workers.dev/toffee.m3u', prefix: 'toffee', sourceName: 'Toffee' },
+      { url: 'https://iptv-org.github.io/iptv/countries/bd.m3u', prefix: 'bd', sourceName: 'Bangladesh', clean: true }
     ];
+    const FETCH_TIMEOUT_MS = 9000; // ekta source atke gele baki gulo jeno na atke
     const M3U_REFRESH_MS = 5 * 60 * 1000; // token expire hoy tai 5 min por por refresh
 
     // Stream proxy (Cloudflare Worker). Fancode er Referer/User-Agent lage, browser eta pathate pare na.
@@ -1300,10 +1170,18 @@
             group: attr(line, 'group-title'),
             name: attr(line, 'tvg-name') || title
           };
+        } else if (/^#EXTVLCOPT:/i.test(line)) {
+          const m = line.match(/^#EXTVLCOPT:\s*([^=]+)=(.*)$/i);
+          if (m && meta) {
+            const k = m[1].trim().toLowerCase(), v = m[2].trim();
+            meta.hdr = meta.hdr || {};
+            if (k === 'http-referrer' || k === 'http-referer') meta.hdr.referer = v;
+            else if (k === 'http-user-agent') meta.hdr.ua = v;
+          }
         } else if (line[0] !== '#' && /^https?:\/\//i.test(line)) {
           const i = out.length + offset;
           // Kodi style: url|User-Agent=...&Referer=...
-          let streamLine = line, hdr = {};
+          let streamLine = line, hdr = Object.assign({}, (meta && meta.hdr) || {});
           const pi = line.indexOf('|');
           if (pi > 0) {
             streamLine = line.slice(0, pi);
@@ -1315,11 +1193,16 @@
               else if (k === 'user-agent') hdr.ua = v;
             });
           }
-          const name = (meta && meta.name) || `SonyLiv ${i + 1}`;
+          let name = (meta && meta.name) || `Channel ${i + 1}`;
           const source = M3U_SOURCES.find(src => src.prefix === prefix);
           const sourceName = source ? source.sourceName : prefix.toUpperCase();
-          const category = (meta && meta.group) || sourceName;
+          // iptv-org: "ATN Bangla (576p) [Not 24/7]" -> "ATN Bangla"
+          if (source && source.clean) name = name.replace(/\s*[\(\[][^\)\]]*[\)\]]/g, ' ').replace(/\s+/g, ' ').trim() || name;
+          let category = (meta && meta.group) || sourceName;
+          if (/^(undefined|uncategori[sz]ed|general)$/i.test(category)) category = sourceName;
           const short = name.split('|')[0].trim();
+          // https site e http stream blocked hoy, tai https try kora hobe
+          if (location.protocol === 'https:' && /^http:\/\//i.test(streamLine) && !STREAM_PROXY) streamLine = 'https://' + streamLine.slice(7);
           const vs = short.match(/^(.+?)\s+vs\s+(.+?)(?:\s+-|$)/i);
           out.push({
             id: prefix + '-' + ((meta && meta.id) || i),
@@ -1329,6 +1212,7 @@
             category,
             logo: normalizeLogoUrl(meta && meta.logo),
             streamUrl: proxify(streamLine, hdr),
+            servers: [{ url: proxify(streamLine, hdr), iframe: '' }],
             needsHeaders: !!(hdr.referer || hdr.ua),
             iframeUrl: '',
             premium: false,
@@ -1336,7 +1220,7 @@
             sourceName,
             badgeColor: BADGE_COLORS[i % BADGE_COLORS.length],
             cardGradient: CARD_GRADIENTS[i % CARD_GRADIENTS.length],
-            themeColor: '#e11d48',
+            themeColor: '#1c1c1e',
             ticker: `🔴 LIVE: ${name} • ${sourceName} • Sarah TV`
           });
           meta = null;
@@ -1345,10 +1229,18 @@
       return out;
     }
 
+    function fetchTimeout(url, opts) {
+      opts = opts || {};
+      if (typeof AbortController === 'undefined') return fetch(url, opts);
+      const ac = new AbortController();
+      const t = setTimeout(() => ac.abort(), FETCH_TIMEOUT_MS);
+      return fetch(url, Object.assign({}, opts, { signal: ac.signal })).finally(() => clearTimeout(t));
+    }
+
     async function fetchM3UChannels() {
       const lists = await Promise.all(M3U_SOURCES.map(async (src) => {
         try {
-          const r = await fetch(src.url + '?t=' + Date.now(), { cache: 'no-store' });
+          const r = await fetchTimeout(src.url + '?t=' + Date.now(), { cache: 'no-store' });
           if (!r.ok) return [];
           return parseM3U(await r.text(), src.prefix);
         } catch (e) { return []; }
@@ -1357,20 +1249,84 @@
       return [].concat(...lists);
     }
 
-    function mergeM3UFirst(others) {
-      const ids = new Set(M3U_CHANNELS.map(c => c.id));
-      return M3U_CHANNELS.concat((others || []).filter(c => !ids.has(c.id)));
+    // ===== Same channel -> ekta card, ekadhik server =====
+    let JSON_CHANNELS = [];
+    function nameKey(n) {
+      return String(n || '').toLowerCase()
+        .replace(/\(.*?\)|\[.*?\]/g, ' ')
+        .replace(/\s[-–—]\s*\d+\s*$/, '')
+        .replace(/\b(hd|sd|fhd|uhd|4k|live|1080p|720p|576p|480p|360p|240p)\b/g, ' ')
+        .replace(/&/g, 'and')
+        .replace(/[^a-z0-9\u0980-\u09ff]+/g, '');
+    }
+    const cleanTxt = (t) => String(t == null ? '' : t).replace(/[<>"`]/g, '').trim();
+
+    function groupChannels(list) {
+      const map = new Map(), groups = [];
+      list.forEach(ch => {
+        const key = nameKey(ch.name) || ('id:' + ch.id);
+        let g = map.get(key);
+        if (!g) { g = []; map.set(key, g); groups.push(g); }
+        g.push(ch);
+      });
+      const usedIds = new Set();
+      return groups.map(members => {
+        // curated JSON age, tarpor M3U
+        const ordered = members.filter(m => !m.fromM3U).concat(members.filter(m => m.fromM3U));
+        const base = Object.assign({}, ordered[0]);
+        const servers = [], seen = new Set();
+        ordered.forEach(m => {
+          (m.servers && m.servers.length ? m.servers : [{ url: m.streamUrl, iframe: m.iframeUrl }]).forEach(sv => {
+            const k = sv.url || sv.iframe;
+            if (!k || seen.has(k)) return;
+            seen.add(k);
+            servers.push({ url: sv.url || '', iframe: sv.iframe || '' });
+          });
+        });
+        if (!servers.length) servers.push({ url: base.streamUrl || '', iframe: base.iframeUrl || '' });
+        servers.forEach((sv, i) => { sv.name = 'Server ' + (i + 1); });
+        base.servers = servers;
+        base.srv = 0;
+        base.streamUrl = servers[0].url;
+        base.iframeUrl = servers[0].iframe;
+        if (!base.logo) { const l = ordered.find(m => m.logo); if (l) base.logo = l.logo; }
+        base.fromM3U = ordered.every(m => m.fromM3U);
+        base.name = cleanTxt(base.name).replace(/\s[-–—]\s*\d+\s*$/, '') || 'Channel';
+        base.category = cleanTxt(base.category) || 'Live TV';
+        base.shortLabel = cleanTxt(base.shortLabel) || base.name.slice(0, 8);
+        base.subLabel = cleanTxt(base.subLabel);
+        base.ticker = cleanTxt(base.ticker);
+        base.logo = cleanTxt(base.logo);
+        let id = cleanTxt(base.id).replace(/[^\w\-.@:]/g, '_') || 'ch', n = 2;
+        const id0 = id;
+        while (usedIds.has(id)) id = id0 + '-' + (n++);
+        usedIds.add(id);
+        base.id = id;
+        return base;
+      });
+    }
+
+    // M3U (age) + JSON channel merge -> CHANNELS. Return: list change hoyeche kina
+    function rebuildChannels() {
+      const prev = CHANNELS;
+      const wasPlaying = (prev[state.currentChannelIndex] || {}).id;
+      const srvById = {};
+      prev.forEach(c => { srvById[c.id] = c.srv || 0; });
+      const base = JSON_CHANNELS.length ? JSON_CHANNELS : DEFAULT_CHANNELS_JSON.map(c => Object.assign({ servers: [{ url: c.streamUrl, iframe: '' }] }, c));
+      CHANNELS = groupChannels(M3U_CHANNELS.concat(base));
+      CHANNELS.forEach(c => { if (srvById[c.id] != null && srvById[c.id] < c.servers.length) { c.srv = srvById[c.id]; c.streamUrl = c.servers[c.srv].url; c.iframeUrl = c.servers[c.srv].iframe; } });
+      const ni = CHANNELS.findIndex(c => c.id === wasPlaying);
+      state.currentChannelIndex = ni >= 0 ? ni : Math.min(state.currentChannelIndex, Math.max(0, CHANNELS.length - 1));
+      const sig = (l) => l.map(c => c.id + ':' + (c.servers ? c.servers.length : 1) + ':' + c.name).join('|');
+      return sig(prev) !== sig(CHANNELS);
     }
 
     async function refreshM3UChannels() {
       const list = await fetchM3UChannels();
       if (!list.length) return false;
-      const wasPlaying = (CHANNELS[state.currentChannelIndex] || {}).id;
       M3U_CHANNELS = list;
-      CHANNELS = mergeM3UFirst(CHANNELS.filter(c => !c.fromM3U));
-      const ni = CHANNELS.findIndex(c => c.id === wasPlaying);
-      state.currentChannelIndex = ni >= 0 ? ni : 0;
-      renderAllFromChannelsJson();
+      // token refresh: list same thakle UI abar draw korbo na (hero/scroll reset hoy)
+      if (rebuildChannels()) renderAllFromChannelsJson();
       return true;
     }
 
@@ -1391,7 +1347,7 @@
       const m3uPromise = fetchM3UChannels();
       const results = await Promise.all(sources.map(async (src) => {
         try {
-          const response = await fetch(src, { cache: 'no-store' });
+          const response = await fetchTimeout(src, { cache: 'no-store' });
           if (!response.ok) return null;
           const data = await response.json();
           return { src, data };
@@ -1408,9 +1364,6 @@
         if (!list || !list.length) return;
         filesLoaded++;
         list.forEach(ch => {
-          const key = (ch.name + '|' + (ch.iframeUrl || ch.streamUrl)).toLowerCase();
-          if (seenKeys.has(key)) return; // same channel duplicate hole skip
-          seenKeys.add(key);
           let id = ch.id, n = 2;
           while (seenIds.has(id)) id = `${ch.id}-${n++}`;
           seenIds.add(id);
@@ -1423,11 +1376,12 @@
       if (m3uList.length) M3U_CHANNELS = m3uList;
 
       if (merged.length > 0 || M3U_CHANNELS.length > 0) {
-        CHANNELS = mergeM3UFirst(merged.length ? merged : CHANNELS.filter(c => !c.fromM3U));
+        if (merged.length) JSON_CHANNELS = merged;
+        rebuildChannels();
         if (state.currentChannelIndex >= CHANNELS.length) state.currentChannelIndex = 0;
         statusLabel.textContent = `● ${CHANNELS.length} চ্যানেল লাইভ`;
         statusLabel.className = 'text-[9px] text-emerald-400 font-semibold tracking-tight';
-        if (sourceText) sourceText.textContent = `Loaded ${CHANNELS.length} channels • SonyLIV → FanCode → Toffee first, followed by your JSON channels`;
+        if (sourceText) sourceText.textContent = `Loaded ${CHANNELS.length} channels (same channel = ek card, ekadhik server)`;
         if (showFeedback) showToast(`Loaded ${CHANNELS.length} channels from ${filesLoaded} file!`);
         renderAllFromChannelsJson();
         return true;
@@ -1504,7 +1458,7 @@
       if (ch.logo) {
         return `
           <div class="${sizeClasses} rounded-full bg-white border-2 border-white/20 group-hover:border-pink-500 shadow-lg flex items-center justify-center p-2 text-center overflow-hidden relative">
-            <img referrerpolicy="no-referrer" src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="logoFail(this,'flex')" />
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="logoFail(this,'flex')" />
             <div style="display:none" class="flex-col items-center justify-center w-full h-full">
               <span class="text-xs sm:text-sm ${ch.badgeColor} leading-tight">${ch.shortLabel}</span>
               <span class="mt-1 px-1.5 py-0.5 rounded bg-slate-900 text-white text-[9px] font-bold">${ch.subLabel}</span>
@@ -1569,57 +1523,41 @@
       const dotsBox = document.getElementById('heroDots');
       if (!track || !dotsBox) return;
       const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
-      const PALETTES = [
-        ['#ff2d95', '#7c3aed', '#ffd166'],
-        ['#00c6ff', '#6a5cff', '#7affd6'],
-        ['#00e08a', '#0a8fa8', '#f9f871'],
-        ['#ff7a18', '#ff2e63', '#ffe29a'],
-        ['#a855f7', '#ff4ecd', '#5ef0ff'],
-        ['#19d3c5', '#3b6bff', '#c4ff6a'],
-        ['#ff4d6d', '#ff9a3c', '#ffd6a5'],
-        ['#4f8bff', '#c04bff', '#ffa8f0']
-      ];
+      const HUES = [212, 268, 340, 24, 152, 48, 192, 300];
+      const bn = (n) => String(n).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
       const pool = (CHANNELS && CHANNELS.length ? CHANNELS : DEFAULT_CHANNELS_JSON);
-      const m3uFirst = pool.filter(c => c.fromM3U);
-      const withLogo = pool.filter(c => !c.fromM3U && c.logo);
-      const rest = pool.filter(c => !c.fromM3U && !c.logo);
-      const picks = m3uFirst.concat(withLogo, rest).slice(0, Math.max(8, m3uFirst.length));
+
+      const withLogo = pool.filter(c => c.logo);
+      const live = withLogo.filter(c => c.fromM3U && /sport|match|cricket|football|live/i.test((c.category || '') + ' ' + (c.name || '')));
+      const seen = new Set(), picks = [];
+      live.concat(withLogo, pool).forEach(c => { if (picks.length < 7 && !seen.has(c.id)) { seen.add(c.id); picks.push(c); } });
+
+      const sub = document.getElementById('heroIntroSub');
+      if (sub) sub.textContent = `${bn(pool.length)}টি লাইভ চ্যানেল, এক জায়গায়`;
+      const st = document.getElementById('statCount');
+      if (st) st.textContent = bn(pool.length);
 
       track.querySelectorAll('.hs-ch').forEach(el => el.remove());
       const total = picks.length + 1;
-      const c0 = document.getElementById('heroCount0');
-      if (c0) c0.innerHTML = `01<small>/${String(total).padStart(2, '0')}</small>`;
 
       picks.forEach((ch, i) => {
-        const p = PALETTES[i % PALETTES.length];
         const el = document.createElement('div');
-        el.className = 'hs hs-ch snap-center-item' + (ch.fromM3U ? ' hs-m3u-logo' : '');
-        el.style.cssText = `--c1:${p[0]};--c2:${p[1]};--c3:${p[2]}`;
+        el.className = 'hs hs-ch snap-center-item';
+        el.style.setProperty('--h', HUES[i % HUES.length]);
         const label = esc(ch.shortLabel || (ch.name || '').slice(0, 8));
-        const isHD = /hd|sport|premium/i.test((ch.subLabel || '') + ' ' + (ch.category || '')) || ch.premium;
+        const n = ch.servers ? ch.servers.length : 1;
+        const meta = [ch.category || 'Live TV', ch.sourceName, n > 1 ? `${bn(n)}টি সার্ভার` : ''].filter(Boolean).map(esc).join('  ·  ');
+        const saved = state.favorites.includes(ch.id);
         el.innerHTML = `
-          <div class="hs-aurora"><i></i><i></i><i></i></div>
-          ${ch.fromM3U && ch.logo ? `<div class="hs-poster" style="background-image:url('${esc(ch.logo)}')"></div>` : ''}
-          <div class="hs-rays"></div>
-          <div class="hs-grid"></div>
-          <div class="hs-spark"></div>
-          <div class="hs-ghost">${esc(ch.name)}</div>
-          <div class="hs-count">${String(i + 2).padStart(2, '0')}<small>/${String(total).padStart(2, '0')}</small></div>
+          <div class="hs-art"><span>${label}</span>${ch.logo ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async" onerror="logoFail(this,'remove')" src="${esc(ch.logo)}" alt="" />` : ''}</div>
           <div class="hs-body">
-            <span class="hs-live"><i></i>LIVE NOW</span>
-            <div class="hs-disc">
-              <div class="hs-logo">
-                <span>${label}</span>
-                ${ch.logo ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" onerror="logoFail(this,'remove')" src="${esc(ch.logo)}" alt="${esc(ch.name)}" />` : ''}
-              </div>
-            </div>
+            <span class="hs-live"><i></i>LIVE</span>
             <h2 class="hs-title">${esc(ch.name)}</h2>
-            <div class="hs-meta">
-              <span class="hs-chip">${esc(ch.category || 'Live TV')}</span>
-              ${ch.sourceName ? `<span class="hs-chip">${esc(ch.sourceName)}</span>` : ''}
-              <span class="hs-chip ${isHD ? 'hd' : ''}">${isHD ? 'FULL HD' : 'LIVE STREAM'}</span>
+            <p class="hs-sub">${meta}</p>
+            <div class="hs-actions">
+              <button data-play-channel="${esc(ch.id)}" class="hs-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch Live</button>
+              <button data-hero-fav="${esc(ch.id)}" class="hs-ghost" aria-label="My List">${saved ? '✓' : '+'}</button>
             </div>
-            <button data-play-channel="${esc(ch.id)}" class="hs-btn"><span class="play">▶</span> Watch Now</button>
           </div>`;
         track.appendChild(el);
       });
@@ -1639,18 +1577,6 @@
     }
     function heroDecorate() {
       const track = document.getElementById('heroTrack');
-      track.querySelectorAll('.hs-spark').forEach(box => {
-        if (box.childElementCount) return;
-        for (let n = 0; n < 16; n++) {
-          const b = document.createElement('b');
-          b.style.left = (Math.random() * 96 + 2) + '%';
-          b.style.top = (Math.random() * 90 + 5) + '%';
-          b.style.animationDelay = (Math.random() * 4).toFixed(2) + 's';
-          b.style.animationDuration = (3 + Math.random() * 3).toFixed(2) + 's';
-          b.style.transform = 'scale(' + (0.5 + Math.random()).toFixed(2) + ')';
-          box.appendChild(b);
-        }
-      });
       if (window.__heroIO) window.__heroIO.disconnect();
       if ('IntersectionObserver' in window) {
         window.__heroIO = new IntersectionObserver(entries => {
@@ -1698,7 +1624,7 @@
           <div class="flex items-center gap-3 my-2">
             <div class="w-12 h-12 rounded-xl bg-white flex-shrink-0 flex items-center justify-center p-1 overflow-hidden shadow">
               ${ch.logo
-                ? `<img referrerpolicy="no-referrer" src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="logoFail(this,'block')" /><span style="display:none" class="text-[10px] ${ch.badgeColor}">${ch.shortLabel}</span>`
+                ? `<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="logoFail(this,'block')" /><span style="display:none" class="text-[10px] ${ch.badgeColor}">${ch.shortLabel}</span>`
                 : `<span class="text-[11px] ${ch.badgeColor}">${ch.shortLabel}</span>`
               }
             </div>
@@ -1794,7 +1720,7 @@
         <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-2">
           <button data-play-channel="${ch.id}" class="flex items-center gap-3 text-left flex-1 overflow-hidden">
             <div class="w-12 h-12 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-xs ${ch.badgeColor} overflow-hidden p-1">
-              ${ch.logo ? `<img referrerpolicy="no-referrer" onerror="logoFail(this,'remove')" src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" />` : ch.shortLabel}
+              ${ch.logo ? `<img loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="logoFail(this,'remove')" src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" />` : ch.shortLabel}
             </div>
             <div class="overflow-hidden">
               <p class="font-bold text-xs sm:text-sm text-white truncate">${ch.name}</p>
@@ -1829,7 +1755,7 @@
           <button data-popup-channel-index="${idx}" ${isCurrent ? 'data-current="1"' : ''} class="flex-shrink-0 w-[7.5rem] p-1.5 rounded-lg border ${isCurrent ? 'border-pink-500 bg-pink-500/20' : 'border-white/10 bg-white/5 hover:bg-white/10'} flex items-center gap-1.5 text-left snap-start-item transition active:scale-95">
             <div class="w-7 h-7 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-[8px] ${ch.badgeColor} overflow-hidden p-0.5">
               ${ch.logo
-                ? `<img referrerpolicy="no-referrer" src="${appEsc(ch.logo)}" alt="" class="w-full h-full object-contain" onerror="logoFail(this,'block')" /><span style="display:none">${appEsc(ch.shortLabel)}</span>`
+                ? `<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${appEsc(ch.logo)}" alt="" class="w-full h-full object-contain" onerror="logoFail(this,'block')" /><span style="display:none">${appEsc(ch.shortLabel)}</span>`
                 : `<span>${appEsc(ch.shortLabel)}</span>`
               }
             </div>
@@ -1880,6 +1806,7 @@
       $p('playerTopBar').classList.toggle('ov-hidden', !on);
       $p('playerControlBar').classList.toggle('ov-hidden', !on);
       $p('playerCenterControls').classList.toggle('center-controls-hidden', !on);
+      const sb = $p('playerServerBar'); if (sb) sb.classList.toggle('ov-hidden', !on);
     }
 
     function overlaysAreVisible() {
@@ -2217,6 +2144,21 @@
         setPlayerStatus('কাস্টম স্ট্রিম চলছে না, লিংকটি চেক করুন');
         return;
       }
+      // Ager server na cholle, ekoi channel er porer server e jabe
+      if (ch && ch.servers && ch.servers.length > 1 && srvFail < ch.servers.length - 1) {
+        srvFail++;
+        ch.srv = ((ch.srv || 0) + 1) % ch.servers.length;
+        ch.streamUrl = ch.servers[ch.srv].url; ch.iframeUrl = ch.servers[ch.srv].iframe;
+        const nx = ++loadToken;
+        setTimeout(() => {
+          if (nx === loadToken && playerIsOpen()) {
+            loadCurrentChannelInPlayer(null, true);
+            setPlayerStatus(`আগের সার্ভার চলছে না • Server ${ch.srv + 1} এ যাচ্ছি…`, 2500);
+          }
+        }, 600);
+        return;
+      }
+      if (ch && ch.servers && ch.servers.length > 1) { ch.srv = 0; ch.streamUrl = ch.servers[0].url; ch.iframeUrl = ch.servers[0].iframe; }
       if (!state.autoplay) {
         setPlayerStatus(`${ch ? ch.name : 'চ্যানেল'} চলছে না • অটো-প্লে বন্ধ, অন্য চ্যানেল বেছে নিন`);
         return;
@@ -2505,9 +2447,39 @@
       try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch (e) {}
     }
 
-    function loadCurrentChannelInPlayer(customUrl = null) {
+    let srvFail = 0;
+    function activeServer(ch) {
+      if (!ch.servers || !ch.servers.length) return { url: ch.streamUrl, iframe: ch.iframeUrl, name: 'Server 1' };
+      if (!(ch.srv >= 0 && ch.srv < ch.servers.length)) ch.srv = 0;
+      return ch.servers[ch.srv];
+    }
+    function renderServerBar() {
+      const bar = $p('playerServerBar');
+      if (!bar) return;
+      const ch = CHANNELS[state.currentChannelIndex];
+      if (!ch || currentIsCustom || !ch.servers || ch.servers.length < 2) { bar.classList.add('hidden'); bar.innerHTML = ''; return; }
+      bar.innerHTML = ch.servers.map((sv, i) =>
+        `<button data-server-idx="${i}" class="srv-chip ${i === (ch.srv || 0) ? 'on' : ''}">${appEsc(sv.name || ('Server ' + (i + 1)))}</button>`).join('');
+      bar.classList.remove('hidden');
+      const on = bar.querySelector('.on');
+      if (on) bar.scrollLeft = on.offsetLeft - 12;
+    }
+    function switchServer(i) {
+      const ch = CHANNELS[state.currentChannelIndex];
+      if (!ch || !ch.servers || ch.servers.length < 2) return false;
+      const n = ch.servers.length;
+      ch.srv = ((i % n) + n) % n;
+      ch.streamUrl = ch.servers[ch.srv].url; ch.iframeUrl = ch.servers[ch.srv].iframe;
+      failStreak = 0;
+      loadCurrentChannelInPlayer();
+      return true;
+    }
+    window.switchServer = switchServer;
+
+    function loadCurrentChannelInPlayer(customUrl = null, isSrvRetry = false) {
       const ch = CHANNELS[state.currentChannelIndex] || CHANNELS[0];
       if (!ch) return;
+      if (!isSrvRetry) srvFail = 0;
 
       const token = ++loadToken;
       currentIsCustom = !!customUrl;
@@ -2518,7 +2490,9 @@
 
       state.isPlaying = true;
       $p('playerChannelTitle').textContent = customUrl ? 'Custom Stream' : ch.name;
-      $p('playerChannelSub').textContent = `${ch.category} • ${qSel} Stream`;
+      const srvTag = (!customUrl && ch.servers && ch.servers.length > 1) ? ` • Server ${(ch.srv || 0) + 1}/${ch.servers.length}` : '';
+      $p('playerChannelSub').textContent = `${ch.category} • ${qSel} Stream${srvTag}`;
+      renderServerBar();
       $p('playerQualityBadge').textContent = qSel;
       setPlayerStatus(null);
       closePlayerMenu();
@@ -2534,10 +2508,11 @@
       const video = $p('liveVideoEl');
       const iframe = $p('liveIframeEl');
       const modal = $p('playerModal');
-      const streamSrc = customUrl || ch.streamUrl;
+      const curSrv = activeServer(ch);
+      const streamSrc = customUrl || curSrv.url || ch.streamUrl;
 
       // Iframe / embed channel (YouTube, Vimeo, Dailymotion, embed page)
-      const embedUrl = (!customUrl && ch.iframeUrl) ? ch.iframeUrl : toEmbedUrl(streamSrc);
+      const embedUrl = (!customUrl && curSrv.iframe) ? curSrv.iframe : toEmbedUrl(streamSrc);
       if (embedUrl && isYtEmbed(embedUrl)) {
         $p('playerChannelSub').textContent = `${ch.category} • YouTube`;
         loadYouTubeOwnPlayer(token, embedUrl);
@@ -2799,8 +2774,8 @@
       (function initSwipeGestures() {
         const osd = document.createElement('div');
         osd.id = 'swipeOsd';
-        osd.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:35;display:none;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;background:rgba(12,6,24,.82);border:1px solid rgba(236,72,153,.45);color:#fff;font:700 14px Inter,sans-serif;pointer-events:none;';
-        osd.innerHTML = '<span id="swipeOsdIcon" style="font-size:20px"></span><span style="width:120px;height:6px;border-radius:9px;background:rgba(255,255,255,.25);overflow:hidden"><i id="swipeOsdFill" style="display:block;height:100%;width:0;background:linear-gradient(90deg,#ff1f8e,#a81eff)"></i></span><span id="swipeOsdPct" style="min-width:38px;text-align:right"></span>';
+        osd.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:35;display:none;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;background:rgba(28,28,30,.82);border:1px solid rgba(255,255,255,.45);color:#fff;font:700 14px Inter,sans-serif;pointer-events:none;';
+        osd.innerHTML = '<span id="swipeOsdIcon" style="font-size:20px"></span><span style="width:120px;height:6px;border-radius:9px;background:rgba(255,255,255,.25);overflow:hidden"><i id="swipeOsdFill" style="display:block;height:100%;width:0;background:linear-gradient(90deg,#f5f5f7,#98989d)"></i></span><span id="swipeOsdPct" style="min-width:38px;text-align:right"></span>';
         modal.appendChild(osd);
         let osdTimer = null;
         const showOsd = (icon, frac, label) => {
@@ -3052,7 +3027,11 @@
 
       // Keyboard
       window.addEventListener('keydown', (e) => {
-        if (!playerIsOpen()) return;
+        if (!playerIsOpen() || !e.key) return;
+        if (document.documentElement.classList.contains('tv-mode')) return;
+        const sp = document.getElementById('appSettingsPanel');
+        if (sp && sp.style.display === 'block') return;
+        if (e.target && e.target.matches && e.target.matches('input,select,textarea')) return;
         if (e.target && e.target.classList && e.target.classList.contains('cs-range')) return;
         if (e.key === 'ArrowLeft') { e.preventDefault(); changeChannel(-1); }
         else if (e.key === 'ArrowRight') { e.preventDefault(); changeChannel(1); }
@@ -3079,10 +3058,10 @@
 
     function appLogoHtml(ch) {
       if (ch.logo) {
-        return `<img referrerpolicy="no-referrer" src="${appEsc(ch.logo)}" alt="" loading="lazy" onerror="logoFail(this,'remove')" />` +
-               `<span style="position:absolute;color:${appEsc(ch.themeColor || '#be185d')};font-size:13px;z-index:0">${appEsc(ch.shortLabel)}</span>`;
+        return `<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${appEsc(ch.logo)}" alt="" loading="lazy" onerror="logoFail(this,'remove')" />` +
+               `<span style="position:absolute;color:${appEsc(ch.themeColor || '#636366')};font-size:13px;z-index:0">${appEsc(ch.shortLabel)}</span>`;
       }
-      return `<span style="color:${appEsc(ch.themeColor || '#be185d')};font-size:15px;padding:4px">${appEsc(ch.shortLabel)}</span>`;
+      return `<span style="color:${appEsc(ch.themeColor || '#636366')};font-size:15px;padding:4px">${appEsc(ch.shortLabel)}</span>`;
     }
 
     function renderAppCats() {
@@ -3094,7 +3073,7 @@
       const items = [{ k: 'all', l: 'All' }, { k: 'fav', l: 'Favorites' }].concat(cats.map(c => ({ k: c, l: c })));
       $p('appCatBar').innerHTML = items.map(i =>
         `<button data-app-cat="${appEsc(i.k)}" class="app-chip ${appCat.toLowerCase() === i.k.toLowerCase() ? 'active' : ''}">${appEsc(i.l)}</button>`
-      ).join('');
+      ).join('') + (window.__CSTV_TV__ ? '<button data-tv-action="settings" class="app-chip">⚙ Settings</button>' : '');
     }
 
     function renderAppGrid() {
@@ -3222,17 +3201,22 @@
       // Settings panel (app mode e Settings page)
       const panel = document.createElement('div');
       panel.id = 'appSettingsPanel';
-      panel.style.cssText = 'display:none;position:fixed;inset:0;z-index:40;background:#0b0714;overflow-y:auto;-webkit-overflow-scrolling:touch;';
-      panel.innerHTML = '<div style="position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:12px;padding:max(12px, env(safe-area-inset-top)) 16px 12px;background:#0b0714;border-bottom:1px solid rgba(255,255,255,.08)"><button id="appSettingsClose" style="width:36px;height:36px;border-radius:999px;background:#2b2b2b;color:#fff;font-size:18px">←</button><span style="font-weight:800;font-size:16px">Settings</span></div><div id="appSettingsBody" style="padding:16px 0 32px"></div>';
+      panel.style.cssText = 'display:none;position:fixed;inset:0;z-index:40;background:#000000;overflow-y:auto;-webkit-overflow-scrolling:touch;';
+      panel.innerHTML = '<div style="position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:12px;padding:max(12px, env(safe-area-inset-top)) 16px 12px;background:#000000;border-bottom:1px solid rgba(255,255,255,.08)"><button id="appSettingsClose" style="width:36px;height:36px;border-radius:999px;background:#2c2c2e;color:#fff;font-size:18px">←</button><span style="font-weight:800;font-size:16px">Settings</span></div><div id="appSettingsBody" style="padding:16px 0 32px"></div>';
       $p('appUI').appendChild(panel);
       const settingsView = $p('viewSettings');
       settingsView.classList.remove('hidden');
       $p('appSettingsBody').appendChild(settingsView);
-      $p('appSettingsBtn').addEventListener('click', () => { panel.style.display = 'block'; syncAuthAndSettingsUI(); });
+      window.__openAppSettings = () => { panel.style.display = 'block'; syncAuthAndSettingsUI(); if (window.syncSettingsControls) syncSettingsControls(); panel.scrollTop = 0; };
+      $p('appSettingsBtn').addEventListener('click', window.__openAppSettings);
       $p('appSettingsClose').addEventListener('click', () => { panel.style.display = 'none'; });
-      window.addEventListener('popstate', () => { panel.style.display = 'none'; });
+      window.__appBack = function () {
+        if (panel.style.display === 'block') { panel.style.display = 'none'; return true; }
+        return false;
+      };
 
       $p('appCatBar').addEventListener('click', (e) => {
+        if (e.target.closest('[data-tv-action]')) { if (window.__tvOpenSettings) window.__tvOpenSettings(); return; }
         const b = e.target.closest('[data-app-cat]');
         if (!b) return;
         appCat = b.dataset.appCat;
@@ -3297,7 +3281,7 @@
 
       const drawer = document.createElement('div');
       drawer.id = 'tvDrawer';
-      drawer.innerHTML = '<div class="tv-title">📺 Channel List <small>◀ ▶ ▲ ▼ move • OK play • BACK close</small></div>';
+      drawer.innerHTML = '<div class="tv-title">📺 Channel List <small>◀ ▶ ▲ ▼ move • OK play • BACK close • Settings = সবার শেষ chip</small></div>';
       drawer.appendChild($p('appCatBar'));
       drawer.appendChild($p('appGrid'));
       ui.appendChild(drawer);
@@ -3314,6 +3298,8 @@
       numBox.id = 'tvNumEntry';
       ui.appendChild(numBox);
 
+      const panel = $p('appSettingsPanel');
+      if (panel) { panel.style.zoom = String(Math.max(1, Math.min(2.2, window.innerWidth / 760))); }
       let osdTimer = null, volTimer = null, numTimer = null, numStr = '', lastIdx = -1;
       let zone = 'grid', gIdx = 0, cIdx = 0;
 
@@ -3324,12 +3310,72 @@
         $p('tvOsdNum').textContent = appNum(state.currentChannelIndex);
         $p('tvOsdLogo').innerHTML = appLogoHtml(ch);
         $p('tvOsdName').textContent = ch.name;
-        $p('tvOsdInfo').textContent = $p('appStreamInfo').textContent;
+        $p('tvOsdInfo').textContent = osdInfoText();
         osd.classList.add('show');
         clearTimeout(osdTimer);
         osdTimer = setTimeout(() => osd.classList.remove('show'), 4500);
       }
-      setInterval(() => { if (osd.classList.contains('show')) $p('tvOsdInfo').textContent = $p('appStreamInfo').textContent; }, 1000);
+      function osdInfoText() {
+        const ch = CHANNELS[state.currentChannelIndex] || {};
+        const n = ch.servers ? ch.servers.length : 1;
+        return $p('appStreamInfo').textContent + (n > 1 ? `  •  Server ${(ch.srv || 0) + 1}/${n}  (MENU / 🟨 = সার্ভার বদল)` : '');
+      }
+      setInterval(() => { if (osd.classList.contains('show')) $p('tvOsdInfo').textContent = osdInfoText(); }, 1000);
+      function nextServer() {
+        const ch = CHANNELS[state.currentChannelIndex];
+        if (!ch || !ch.servers || ch.servers.length < 2) { showToast('এই চ্যানেলে একটাই সার্ভার'); return; }
+        switchServer((ch.srv || 0) + 1);
+        showToast(`Server ${(ch.srv || 0) + 1}/${ch.servers.length}`);
+        showOsd();
+      }
+
+      // ---- Settings panel (remote diye) ----
+      const panelOpen = () => !!panel && panel.style.display === 'block';
+      window.__tvOpenSettings = function () {
+        closeDrawer();
+        window.__openAppSettings();
+        setTimeout(() => {
+          const first = panel.querySelector('#layoutSeg .seg-btn.on') || panel.querySelector('button, select');
+          if (first) first.focus();
+        }, 60);
+      };
+      function panelFocusables() {
+        return Array.from(panel.querySelectorAll('button, select, input, a[href]'))
+          .filter(el => !el.disabled && el.offsetParent !== null && el.id !== 'appSettingsClose' || el.id === 'appSettingsClose' && el.offsetParent !== null);
+      }
+      function panelMove(dir) {
+        const els = panelFocusables();
+        let cur = document.activeElement;
+        if (!cur || !panel.contains(cur)) { if (els[0]) els[0].focus(); return; }
+        const r0 = cur.getBoundingClientRect();
+        const cx = r0.left + r0.width / 2, cy = r0.top + r0.height / 2;
+        let best = null, bestScore = 1e9;
+        els.forEach(el => {
+          if (el === cur) return;
+          const r = el.getBoundingClientRect();
+          const x = r.left + r.width / 2, y = r.top + r.height / 2;
+          const dx = x - cx, dy = y - cy;
+          let main, off;
+          if (dir === 'ArrowDown') { main = dy; off = Math.abs(dx); }
+          else if (dir === 'ArrowUp') { main = -dy; off = Math.abs(dx); }
+          else if (dir === 'ArrowRight') { main = dx; off = Math.abs(dy); }
+          else { main = -dx; off = Math.abs(dy); }
+          if (main <= 2) return;
+          const score = main + off * 2.2;
+          if (score < bestScore) { bestScore = score; best = el; }
+        });
+        if (best) { best.focus(); best.scrollIntoView({ block: 'center' }); }
+        else if (dir === 'ArrowDown') panel.scrollBy(0, 120);
+        else if (dir === 'ArrowUp') panel.scrollBy(0, -120);
+      }
+      function panelOk() {
+        const el = document.activeElement;
+        if (!el || !panel.contains(el)) return;
+        if (el.tagName === 'SELECT') {
+          el.selectedIndex = (el.selectedIndex + 1) % el.options.length;
+          el.dispatchEvent(new Event('change', { bubbles: true }));
+        } else el.click();
+      }
 
       // ---- Volume ----
       function getVol() {
@@ -3431,7 +3477,8 @@
           else if (k === 'ArrowDown') { zone = 'grid'; paintFocus(); }
           else if (isOk(k, c)) {
             const b = chips()[cIdx];
-            if (b) { appCat = b.dataset.appCat; renderAppCats(); renderAppGrid(); gIdx = 0; paintFocus(); }
+            if (b && b.dataset.tvAction === 'settings') { window.__tvOpenSettings(); }
+            else if (b) { appCat = b.dataset.appCat; renderAppCats(); renderAppGrid(); gIdx = 0; paintFocus(); }
           } else return false;
           return true;
         }
@@ -3461,6 +3508,16 @@
       window.addEventListener('keydown', (e) => {
         const k = e.key, c = e.keyCode;
         let handled = true;
+        if (!k && !c) return;
+        if (panelOpen() && !(/^Audio|^Volume|Mute/.test(k || '') || c === 447 || c === 448 || c === 449)) {
+          const tag = (document.activeElement && document.activeElement.tagName) || '';
+          if (isBack(k, c) && !((k === 'Backspace' || c === 8) && /INPUT|TEXTAREA/.test(tag))) { panel.style.display = 'none'; }
+          else if (k === 'ArrowUp' || k === 'ArrowDown' || k === 'ArrowLeft' || k === 'ArrowRight') panelMove(k);
+          else if (isOk(k, c)) panelOk();
+          else { return; }
+          e.preventDefault(); e.stopImmediatePropagation();
+          return;
+        }
         if (/^[0-9]$/.test(k)) { addDigit(k); }
         else if (k === 'AudioVolumeUp' || k === 'VolumeUp' || c === 447) setVol(getVol() + 0.05);
         else if (k === 'AudioVolumeDown' || k === 'VolumeDown' || c === 448) setVol(getVol() - 0.05);
@@ -3476,6 +3533,7 @@
           else if (isOk(k, c)) { if (numStr) commitNum(); else openDrawer(); }
           else if (k === 'MediaPlayPause' || c === 179) { video.paused ? video.play().catch(() => {}) : video.pause(); }
           else if (k === 'MediaLast' || k === 'r' || k === 'R') { if (lastIdx >= 0) goChannel(lastIdx); }
+          else if (k === 'ContextMenu' || k === 'Menu' || k === 'ColorF2Yellow' || k === 'ColorF1Green' || k === 'ColorF0Red' || k === 's' || k === 'S' || c === 82 || c === 82 || c === 405 || c === 404 || c === 403 || c === 82) nextServer();
           else if (k === 'i' || k === 'I' || k === 'Info' || k === 'Guide' || c === 457) showOsd();
           else handled = false;
         }
@@ -3486,7 +3544,13 @@
       $p('appGrid').addEventListener('click', (e) => { if (e.target.closest('[data-app-ch]')) { closeDrawer(); showOsd(); } });
       $p('appPlayerSlot').addEventListener('click', () => { isOpen() ? closeDrawer() : openDrawer(); });
 
-      showToast('TV Mode • ▲▼ Channel  ◀▶ Volume  OK = List  0-9 = Channel No.');
+      // Back button (key event na ele popstate diye) -> drawer bondho
+      const prevBack = window.__appBack;
+      window.__appBack = function () {
+        if (isOpen()) { closeDrawer(); return true; }
+        return prevBack ? prevBack() : false;
+      };
+      showToast('TV Mode • ▲▼ Channel  ◀▶ Volume  OK = List  MENU = Server');
       setTimeout(showOsd, 1200);
     }
 
@@ -3603,7 +3667,7 @@
           return;
         }
 
-        if (window.__ltBack && window.__ltBack()) {
+        if (window.__appBack && window.__appBack()) {
           history.pushState(null, '', window.location.href);
           return;
         }
@@ -3666,6 +3730,24 @@
           const idx = parseInt(playIdxBtn.dataset.playIndex, 10) || 0;
           state.currentChannelIndex = idx < CHANNELS.length ? idx : 0;
           openPlayerByChannelId(CHANNELS[state.currentChannelIndex].id);
+          return;
+        }
+
+        const srvBtn = e.target.closest('[data-server-idx]');
+        if (srvBtn) {
+          e.stopPropagation();
+          switchServer(parseInt(srvBtn.dataset.serverIdx, 10) || 0);
+          return;
+        }
+
+        const heroFav = e.target.closest('[data-hero-fav]');
+        if (heroFav) {
+          const id = heroFav.dataset.heroFav;
+          if (state.favorites.includes(id)) { state.favorites = state.favorites.filter(x => x !== id); showToast('My List থেকে সরানো হয়েছে'); }
+          else { state.favorites.push(id); showToast('My List এ সেভ হয়েছে ✓'); }
+          saveState();
+          heroFav.textContent = state.favorites.includes(id) ? '✓' : '+';
+          renderMyList();
           return;
         }
 
@@ -3929,16 +4011,20 @@
       stop();
       if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       timer = setInterval(function () {
-        if (userTouch || document.hidden || document.documentElement.classList.contains('lite')) return;
+        if (userTouch || document.hidden || window.__heroVisible === false) return;
         var home = document.getElementById('viewHome');
         if (home && home.classList.contains('hidden')) return;
         scrollToHeroSlide(idx() + 1);
-      }, 5000);
+      }, 6000);
     }
     function stop() { if (timer) clearInterval(timer); }
     track.addEventListener('touchstart', function () { userTouch = true; }, { passive: true });
     track.addEventListener('touchend', function () { setTimeout(function () { userTouch = false; }, 4000); }, { passive: true });
     start();
+    try {
+      var wrap = document.getElementById('heroWrap');
+      if (wrap && 'IntersectionObserver' in window) new IntersectionObserver(function (es) { window.__heroVisible = es[0].isIntersecting; }, { threshold: 0.2 }).observe(wrap);
+    } catch (e) {}
     var sb = document.getElementById('headerSearchBtn');
     if (sb) sb.addEventListener('click', function () {
       var b = document.querySelector('.bottom-nav-btn[data-nav="discover"]'); if (b) b.click();
@@ -3948,134 +4034,28 @@
 </script>
 <script>
 (function () {
-  var root = document.documentElement, btn = document.getElementById('liteBtn');
-  function paint() { if (btn) btn.textContent = root.classList.contains('lite') ? '🌟 Full' : '⚡ Lite'; }
-  function lazy() { document.querySelectorAll('img:not([loading])').forEach(function (i) { i.loading = 'lazy'; i.decoding = 'async'; }); }
-  function setLite(on, say) {
-    root.classList.toggle('lite', on);
-    try { localStorage.setItem('sarah_lite', on ? '1' : '0'); } catch (e) {}
-    paint(); if (on) lazy();
-    if (say && window.showToast) showToast(on ? 'লাইট মোড চালু হয়েছে' : 'ফুল ভার্সন চালু হয়েছে');
+  var seg = document.getElementById('layoutSeg'); if (!seg) return;
+  function current() {
+    var m = window.__CSTV_LAYOUT_SAVED__;
+    return m === 'app' ? 'phone' : m === 'tv' ? 'tv' : 'auto';
   }
-  if (btn) btn.addEventListener('click', function () { setLite(!root.classList.contains('lite'), true); });
-  var f = document.getElementById('liteToFullBtn'); if (f) f.addEventListener('click', function () { setLite(false, true); });
-  new MutationObserver(function () { if (root.classList.contains('lite')) lazy(); }).observe(document.body, { childList: true, subtree: true });
-  paint(); if (root.classList.contains('lite')) lazy();
-})();
-</script>
-<script>
-(function () {
-  var L = { tab: 'all', cat: 'all', q: '', n: 60, playing: null };
-  var $ = function (id) { return document.getElementById(id); };
-  var esc = function (v) { return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
-  function ld(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } }
-  function sv(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
-  var recent = ld('sarah_lite_recent', []), plays = ld('sarah_lite_plays', {});
-  function byId(id) { for (var i = 0; i < CHANNELS.length; i++) if (String(CHANNELS[i].id) === String(id)) return CHANNELS[i]; return null; }
-  function num(c) { var i = CHANNELS.indexOf(c) + 1; return i < 10 ? '0' + i : '' + i; }
-  function quality(c) { var t = ((c.name || '') + ' ' + (c.subLabel || '') + ' ' + (c.category || '')).toLowerCase();
-    return /fhd|full ?hd|1080/.test(t) ? 'FHD' : /\bhd\b/.test(t) ? 'HD' : /\bsd\b/.test(t) ? 'SD' : 'LIVE'; }
-  function popular() { return CHANNELS.slice().sort(function (a, b) { return ((plays[b.id] || 0) - (plays[a.id] || 0)) || ((b.logo ? 1 : 0) - (a.logo ? 1 : 0)); }).slice(0, 80); }
-  function recents() { return recent.map(byId).filter(Boolean); }
-  function favs() { return CHANNELS.filter(function (c) { return state.favorites.indexOf(c.id) > -1; }); }
-  function items() {
-    var b = L.tab === 'fav' ? favs() : L.tab === 'recent' ? recents() : L.tab === 'pop' ? popular() : CHANNELS;
-    if (L.tab === 'all' && L.cat !== 'all') b = b.filter(function (c) { return (c.category || '').toLowerCase() === L.cat.toLowerCase(); });
-    if (L.q) { var q = L.q.toLowerCase(); b = b.filter(function (c) { return (c.name + ' ' + (c.category || '')).toLowerCase().indexOf(q) > -1; }); }
-    return b;
+  function paint() {
+    var c = current();
+    seg.querySelectorAll('[data-layout]').forEach(function (b) { b.classList.toggle('on', b.dataset.layout === c); });
   }
-  function img(c) { return c.logo ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="logoFail(this,\'remove\')" src="' + esc(c.logo) + '" alt="">' : ''; }
-  function card(c) {
-    var fav = state.favorites.indexOf(c.id) > -1, pl = String(L.playing) === String(c.id);
-    return '<div class="lt-card' + (pl ? ' playing' : '') + '" data-ltplay="' + esc(c.id) + '"><div class="th">' + esc(c.shortLabel || (c.name || '').slice(0, 8)) + img(c) +
-      (pl ? '<span class="badge">● LIVE</span>' : '') + '<button class="lt-fav' + (fav ? ' on' : '') + '" data-ltfav="' + esc(c.id) + '" aria-label="Save">' + (fav ? '♥' : '♡') + '</button></div>' +
-      '<p><b>' + num(c) + '</b>' + esc(c.name) + '</p></div>';
-  }
-  function stage() {
-    var c = byId(L.playing) || recents()[0] || CHANNELS[0];
-    if (!c) { $('ltStage').innerHTML = ''; $('ltInfo').innerHTML = ''; return; }
-    var fav = state.favorites.indexOf(c.id) > -1;
-    $('ltStage').innerHTML = '<div class="lt-stage" data-ltplay="' + esc(c.id) + '"><span class="live">● LIVE</span><div class="disc">' + esc(c.shortLabel || (c.name || '').slice(0, 6)) + img(c) + '</div><button class="play" aria-label="Play">▶</button></div>';
-    $('ltInfo').innerHTML = '<div class="t"><strong>' + esc(c.name) + '</strong><span>' + quality(c) + ' | ' + esc(c.category || 'Live TV') + '</span></div>' +
-      '<button class="' + (fav ? 'on' : '') + '" data-ltfav="' + esc(c.id) + '" aria-label="Save">' + (fav ? '★' : '☆') + '</button>' +
-      '<button data-ltplay="' + esc(c.id) + '" aria-label="Fullscreen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>';
-  }
-  function chipOn(k) { return k === 'all' ? (L.tab === 'all' && L.cat === 'all') : (k === 'fav' || k === 'recent' || k === 'pop') ? L.tab === k : (L.tab === 'all' && 'c:' + L.cat.toLowerCase() === k.toLowerCase()); }
-  function render() {
-    if (!$('ltList')) return;
-    var set = L.tab === 'settings'; stage();
-    var cats = []; CHANNELS.forEach(function (c) { var k = c.category; if (k && cats.indexOf(k) < 0) cats.push(k); });
-    var chips = [['all', 'সব'], ['fav', '★ ফেভারিট'], ['recent', 'রিসেন্ট'], ['pop', 'পপুলার']].concat(cats.map(function (k) { return ['c:' + k, k]; }));
-    $('ltChips').innerHTML = chips.map(function (x) { return '<button data-lchip="' + esc(x[0]) + '" class="' + (!set && chipOn(x[0]) ? 'on' : '') + '">' + esc(x[1]) + '</button>'; }).join('');
-    $('ltList').style.display = set ? 'none' : 'grid';
-    $('ltSettings').style.display = set ? 'block' : 'none';
-    if (set) {
-      $('ltSettings').innerHTML = '<div class="lt-set">' +
-        '<label>অটো-প্লে নেক্সট<input type="checkbox" id="ltAuto"' + (state.autoplay ? ' checked' : '') + '></label>' +
-        '<label><div>ডেটা সেভার<small>কম কোয়ালিটিতে চালিয়ে ডেটা বাঁচায়</small></div><input type="checkbox" id="ltData"' + (state.dataSaver ? ' checked' : '') + '></label>' +
-        '<button id="ltClear">সেভ করা চ্যানেল মুছুন<span>🗑</span></button>' +
-        '<button id="ltClearR">রিসেন্ট মুছুন<span>🕘</span></button>' +
-        '<button id="ltFull">ফুল ভার্সনে যান<span>🌟</span></button></div><p class="lt-note">মোট চ্যানেল: ' + CHANNELS.length + '</p>';
-      return;
-    }
-    var all = items(), part = all.slice(0, L.n);
-    $('ltList').innerHTML = all.length ? part.map(card).join('') + (all.length > L.n ? '<button class="lt-more" id="ltMore">আরও দেখুন</button>' : '')
-      : '<div class="lt-empty">' + (L.tab === 'fav' ? '♡ এখনো কিছু সেভ করা হয়নি।<br>যেকোনো চ্যানেলের হার্ট চাপুন।' : L.tab === 'recent' ? 'এখনো কিছু দেখা হয়নি।' : 'কোনো চ্যানেল পাওয়া যায়নি।') + '</div>';
-  }
-  function played(id) {
-    L.playing = id; recent = [id].concat(recent.filter(function (x) { return String(x) !== String(id); })).slice(0, 30);
-    plays[id] = (plays[id] || 0) + 1; sv('sarah_lite_recent', recent); sv('sarah_lite_plays', plays);
-  }
-  var op = window.openPlayerByChannelId;
-  if (typeof op === 'function') window.openPlayerByChannelId = function (id) { try { played(id); } catch (e) {} var r = op.apply(this, arguments); setTimeout(render, 0); return r; };
-  function drawer(on) { $('ltDrawer').classList.toggle('on', on); }
-  function go(a) {
-    drawer(false);
-    if (a === 'home') { L.tab = 'all'; L.cat = 'all'; L.q = ''; $('ltSearch').value = ''; }
-    else if (a === 'fav' || a === 'recent' || a === 'pop' || a === 'settings') L.tab = a;
-    else if (a === 'random') { if (CHANNELS.length) openPlayerByChannelId(CHANNELS[Math.floor(Math.random() * CHANNELS.length)].id); return; }
-    else if (a === 'share') {
-      var d = { title: 'Sarah TV', text: 'Sarah TV দেখুন', url: location.href.split('#')[0] };
-      if (navigator.share) navigator.share(d).catch(function () {});
-      else { try { navigator.clipboard.writeText(d.url); if (window.showToast) showToast('লিংক কপি হয়েছে'); } catch (e) {} }
-      return;
-    } else if (a === 'full') { var b = $('liteBtn'); if (b) b.click(); return; }
-    L.n = 60; render(); window.scrollTo(0, 0);
-  }
-  window.__ltBack = function () {
-    if (!document.documentElement.classList.contains('lite')) return false;
-    if ($('ltDrawer').classList.contains('on')) { drawer(false); return true; }
-    if (L.tab !== 'all' || L.cat !== 'all' || L.q) { go('home'); return true; }
-    return false;
-  };
-  var app = $('liteApp');
-  app.addEventListener('click', function (e) {
-    var t = e.target, f = t.closest('[data-ltfav]');
-    if (f) { var ch = byId(f.dataset.ltfav), key = ch ? ch.id : f.dataset.ltfav, i = state.favorites.indexOf(key);
-      if (i > -1) state.favorites.splice(i, 1); else state.favorites.push(key);
-      saveState(); render(); return; }
-    var p = t.closest('[data-ltplay]'); if (p) { openPlayerByChannelId(p.dataset.ltplay); return; }
-    var c = t.closest('[data-lchip]'); if (c) { var k = c.dataset.lchip; L.n = 60;
-      if (k === 'all') { L.tab = 'all'; L.cat = 'all'; } else if (k === 'fav' || k === 'recent' || k === 'pop') L.tab = k; else { L.tab = 'all'; L.cat = k.slice(2); }
-      render(); return; }
-    if (t.closest('[data-ltclose]')) { drawer(false); return; }
-    var g = t.closest('[data-ltgo]'); if (g) { go(g.dataset.ltgo); return; }
-    if (t.closest('#ltMenu')) { drawer(true); return; }
-    if (t.closest('#ltMore')) { L.n += 60; render(); return; }
-    if (t.closest('#ltGear')) { L.tab = L.tab === 'settings' ? 'all' : 'settings'; render(); return; }
-    if (t.closest('#ltFull')) { var b = $('liteBtn'); if (b) b.click(); return; }
-    if (t.closest('#ltClear')) { state.favorites = []; saveState(); render(); if (window.showToast) showToast('সেভ করা চ্যানেল মুছে গেছে'); return; }
-    if (t.closest('#ltClearR')) { recent = []; plays = {}; sv('sarah_lite_recent', recent); sv('sarah_lite_plays', plays); render(); }
+  seg.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-layout]'); if (!b) return;
+    var v = b.dataset.layout;
+    try {
+      if (v === 'auto') localStorage.removeItem('cstv_ui_mode');
+      else localStorage.setItem('cstv_ui_mode', v === 'phone' ? 'app' : 'tv');
+    } catch (er) {}
+    window.__CSTV_LAYOUT_SAVED__ = v === 'auto' ? null : (v === 'phone' ? 'app' : 'tv');
+    paint();
+    if (window.showToast) showToast(v === 'tv' ? 'TV layout চালু হচ্ছে…' : v === 'phone' ? 'Phone layout চালু হচ্ছে…' : 'Auto layout চালু হচ্ছে…');
+    setTimeout(function () { location.reload(); }, 450);
   });
-  app.addEventListener('change', function (e) {
-    if (e.target.id === 'ltAuto') { state.autoplay = e.target.checked; saveState(); }
-    if (e.target.id === 'ltData') { state.dataSaver = e.target.checked; saveState(); }
-  });
-  $('ltSearch').addEventListener('input', function (e) { L.q = e.target.value.trim(); L.n = 60; if (L.tab === 'settings') L.tab = 'all'; render(); });
-  var lb = $('liteBtn'); if (lb) lb.addEventListener('click', function () { setTimeout(render, 0); });
-  var orig = window.renderAllFromChannelsJson;
-  if (typeof orig === 'function') window.renderAllFromChannelsJson = function () { var r = orig.apply(this, arguments); render(); return r; };
-  render();
+  paint();
 })();
 </script>
 </body>
