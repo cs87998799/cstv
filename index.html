@@ -1606,18 +1606,34 @@
     }
 
     // ===== Remote JSON Sources (Cleared as requested; all SM IPTV M3U Playlists are in M3U_SOURCES below) =====
-    const REMOTE_JSON_SOURCES = [];
+    const REMOTE_JSON_SOURCES = [
+      // 📡 Tapmad live/upcoming matches (JSON) - Tapmad M3U er sathe merge hobe
+      {
+        url: 'https://raw.githubusercontent.com/sm-monirulislam/Tapmad_Auto_Update_Playlist/refs/heads/main/tapmad_data.json',
+        prefix: 'sm-tapmad-json',
+        sourceName: 'Tapmad',
+        defaultCategory: 'Sports',
+        isEvent: true
+      }
+    ];
     let REMOTE_JSON_CHANNELS = [];
 
     // ===== 🔰 Active M3U Playlists (SonyLiv, Both Toffee, Ayna OTT, Tapmad, Jago BD, SM Combined) 🔰 =====
     const M3U_SOURCES = [
-      // 🌐 Toffee Playlist 2 (Workerbot)
+      // 🌐 Toffee Playlist (new: SM Toffee Auto Update)
       {
-        url: 'https://tv9.workerbot-tv9.workers.dev/toffee.m3u',
-        prefix: 'toffee-wb',
-        sourceName: 'Toffee 2',
+        url: 'https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update/refs/heads/main/toffee_playlist.m3u',
+        prefix: 'toffee-sm',
+        sourceName: 'Toffee',
         defaultCategory: 'Toffee',
         isEvent: true
+      },
+      // 📡 Akash All Player Playlist
+      {
+        url: 'https://raw.githubusercontent.com/sm-monirulislam/SM-IPTV/refs/heads/main/akash_all_player.m3u',
+        prefix: 'sm-akash',
+        sourceName: 'Akash',
+        defaultCategory: 'Akash'
       },
       // 📡 Ayna OTT Playlist
       {
@@ -2508,6 +2524,8 @@
     let hlsInstance = null;
     let streamCheckTimer = null;
     let stallTimer = null;
+    let startWatchTimer = null;
+    const START_TIMEOUT_MS = 4000; // video 4 sec e na challe auto server/channel change
     let loadToken = 0;
     let failStreak = 0;
     let netRetry = 0;
@@ -2588,6 +2606,8 @@
     function clearStreamCheck() {
       clearTimeout(streamCheckTimer);
       clearTimeout(stallTimer);
+      clearTimeout(startWatchTimer);
+      startWatchTimer = null;
       streamCheckTimer = null;
       stallTimer = null;
     }
@@ -2897,7 +2917,7 @@
             loadCurrentChannelInPlayer(null, true);
             setPlayerStatus(`আগের সার্ভার চলছে না • Server ${ch.srv + 1} এ যাচ্ছি…`, 2500);
           }
-        }, 600);
+        }, 250);
         return;
       }
       if (ch && ch.servers && ch.servers.length > 1) { ch.srv = 0; ch.streamUrl = ch.servers[0].url; ch.iframeUrl = ch.servers[0].iframe; }
@@ -2917,7 +2937,7 @@
       const next = ++loadToken;
       setTimeout(() => {
         if (next === loadToken && playerIsOpen()) loadCurrentChannelInPlayer();
-      }, 1200);
+      }, 400);
     }
 
     function armStall() {
@@ -2941,7 +2961,7 @@
         } else {
           handleStreamFailure(token, 'stalled');
         }
-      }, 12000);
+      }, 8000);
     }
 
     // ---------- Quality ----------
@@ -3295,7 +3315,24 @@
       // Startup timeout -> auto next channel
       streamCheckTimer = setTimeout(() => handleStreamFailure(token, 'timeout'), 24000 + (engineChain.length - 1) * 8000);
 
+      armStartWatch(token);
       runEngine(token);
+    }
+
+    // 4 second er moddhe video na challe: age onno server, na thakle porer channel
+    function armStartWatch(token) {
+      clearTimeout(startWatchTimer);
+      startWatchTimer = setTimeout(() => {
+        startWatchTimer = null;
+        const v = $p('liveVideoEl');
+        if (token !== loadToken || !playerIsOpen() || playerIframeMode) return;
+        let buf = 0;
+        try { if (v.buffered && v.buffered.length) buf = v.buffered.end(v.buffered.length - 1); } catch (e) {}
+        const ok = v.readyState >= 3 || v.currentTime > 0 || buf > 0;
+        if (ok) return;
+        setPlayerStatus('৪ সেকেন্ডে চালু হয়নি • অটো সার্ভার/চ্যানেল বদলাচ্ছি…', 2500);
+        handleStreamFailure(token, 'start-4s');
+      }, START_TIMEOUT_MS);
     }
 
     function tryPlayVideo() {
@@ -3357,7 +3394,7 @@
 
       clearTimeout(engineTimer);
       engineTimer = null;
-      if (!isLast) engineTimer = setTimeout(() => failEngine(token, 'engine-timeout'), 18000);
+      if (!isLast) engineTimer = setTimeout(() => failEngine(token, 'engine-timeout'), 8000);
 
       try {
         if (engine === 'shaka') {
