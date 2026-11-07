@@ -2850,9 +2850,19 @@
       return 'auto';
     }
 
-    function buildEngineChain(type) {
+    function buildEngineChain(type, channel) {
       const hlsOk = !!(window.Hls && Hls.isSupported());
       const shakaOk = !!(window.shaka && shaka.Player && shaka.Player.isBrowserSupported && shaka.Player.isBrowserSupported());
+      // Toffee streams may be encrypted HLS / ClearKey. Try Shaka first so the
+      // browser does not treat an encrypted stream as ordinary HLS media.
+      const toffeeSource = /toffee/i.test([
+        channel && channel.sourceName, channel && channel.category,
+        channel && channel.id, channel && channel.name
+      ].filter(Boolean).join(' '));
+      if (toffeeSource) {
+        if (shakaOk) return ['shaka', ...(hlsOk ? ['hls'] : []), 'native'];
+        return hlsOk ? ['hls', 'native'] : ['native'];
+      }
       switch (type) {
         case 'drm': return shakaOk ? ['shaka', 'dash', 'hls', 'native'] : ['dash', 'hls', 'native'];
         case 'hls': return hlsOk ? (shakaOk ? ['hls', 'shaka', 'native'] : ['hls', 'native']) : (shakaOk ? ['shaka', 'native'] : ['native']);
@@ -3279,11 +3289,11 @@
 
       engineSrc = streamSrc;
       engineHint = detectStreamType(streamSrc, curSrv);
-      engineChain = buildEngineChain(engineHint);
+      engineChain = buildEngineChain(engineHint, CHANNELS[state.currentChannelIndex] || {});
       engineIdx = 0;
 
       // Startup timeout -> auto next channel
-      streamCheckTimer = setTimeout(() => handleStreamFailure(token, 'timeout'), 12000 + (engineChain.length - 1) * 6000);
+      streamCheckTimer = setTimeout(() => handleStreamFailure(token, 'timeout'), 24000 + (engineChain.length - 1) * 8000);
 
       runEngine(token);
     }
@@ -3347,7 +3357,7 @@
 
       clearTimeout(engineTimer);
       engineTimer = null;
-      if (!isLast) engineTimer = setTimeout(() => failEngine(token, 'engine-timeout'), 8500);
+      if (!isLast) engineTimer = setTimeout(() => failEngine(token, 'engine-timeout'), 18000);
 
       try {
         if (engine === 'shaka') {
@@ -3415,12 +3425,15 @@
             liveMaxLatencyDurationCount: 10,
             startFragPrefetch: true,
             abrEwmaDefaultEstimate: saver ? 600000 : 2000000,
-            manifestLoadingMaxRetry: 3,
-            manifestLoadingRetryDelay: 700,
-            levelLoadingMaxRetry: 3,
-            levelLoadingRetryDelay: 700,
-            fragLoadingMaxRetry: 4,
-            fragLoadingRetryDelay: 600,
+            manifestLoadingMaxRetry: 5,
+            manifestLoadingRetryDelay: 900,
+            manifestLoadingTimeOut: 20000,
+            levelLoadingMaxRetry: 5,
+            levelLoadingRetryDelay: 900,
+            levelLoadingTimeOut: 20000,
+            fragLoadingMaxRetry: 5,
+            fragLoadingRetryDelay: 800,
+            fragLoadingTimeOut: 20000,
             xhrSetup: function (xhr, url) {
               xhr.withCredentials = false;
               // Forward Akamai hdntl / hdnea query tokens to child variant playlists and segments if missing
