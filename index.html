@@ -626,10 +626,6 @@
 
       <!-- Right Actions: Live Events + Search + Subscribe + Sign In -->
       <div class="flex items-center gap-2">
-        <a href="./live.html" class="toffee-gradient text-white text-xs font-extrabold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md active:scale-95 transition">
-          <span class="w-2 h-2 rounded-full bg-white live-dot"></span>
-          <span>Live Events</span>
-        </a>
         <button id="headerSearchBtn" aria-label="Search" class="w-9 h-9 rounded-full bg-white/8 border border-white/15 text-white flex items-center justify-center active:scale-95 transition">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"/><path d="M21 21l-4.35-4.35"/></svg>
         </button>
@@ -1081,11 +1077,6 @@
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
         <span>Discover</span>
       </button>
-      <a href="./live.html" class="flex flex-col items-center gap-1 text-pink-400 hover:text-white font-bold text-xs relative active:scale-95 transition">
-        <span class="w-2 h-2 rounded-full bg-rose-500 live-dot absolute -top-0.5 right-2"></span>
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        <span>Live Events</span>
-      </a>
       <button data-nav="mylist" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
         <span id="navIndicatorMylist" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
@@ -1620,13 +1611,14 @@
 
     // ===== 🔰 Active M3U Playlists (SonyLiv, Both Toffee, Ayna OTT, Tapmad, Jago BD, SM Combined) 🔰 =====
     const M3U_SOURCES = [
-      // 🌐 Toffee Playlist (new: SM Toffee Auto Update)
+      // 📺 FASTIPTV Playlist (Toffee er jaygay) - alada category, onno channel er sathe merge hobe na
       {
-        url: 'https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update/refs/heads/main/toffee_playlist.m3u',
-        prefix: 'toffee-sm',
-        sourceName: 'Toffee',
-        defaultCategory: 'Toffee',
-        isEvent: true
+        url: 'http://103.238.115.159:8080/tv/playlists/dfdffd?token=ZIBOPLAYVS',
+        prefix: 'fastiptv',
+        sourceName: 'FASTIPTV',
+        defaultCategory: 'FASTIPTV',
+        forceCategory: true,
+        noMerge: true
       },
       // 📡 Akash All Player Playlist
       {
@@ -1793,6 +1785,7 @@
           if (source && source.clean) name = name.replace(/\s*\((?:1080p|720p|576p|480p|360p|Not 24\/7|Geo-blocked)\)/gi, ' ').replace(/\s*\[(?:Not 24\/7|Geo-blocked)\]/gi, ' ').replace(/\s+/g, ' ').trim() || name;
           let category = (meta && meta.group) || defaultCat;
           if (/^(undefined|uncategori[sz]ed|general)$/i.test(category)) category = defaultCat;
+          if (source && source.forceCategory) category = defaultCat;
           const short = name.split('|')[0].trim();
           const vs = short.match(/^(.+?)\s+vs\s+(.+?)(?:\s+-|$)/i);
           const activeDrm = (meta && meta.drm && (Object.keys(meta.drm.clearKeys).length || meta.drm.licenseUrl)) ? meta.drm : null;
@@ -1826,6 +1819,7 @@
             iframeUrl: '',
             premium: false,
             fromM3U: true,
+            noMerge: !!(source && source.noMerge),
             isEvent: eventFlag,
             sourceName,
             badgeColor: BADGE_COLORS[i % BADGE_COLORS.length],
@@ -1850,8 +1844,11 @@
     async function fetchM3UChannels() {
       const lists = await Promise.all(M3U_SOURCES.map(async (src) => {
         try {
-          const r = await fetchTimeout(src.url + '?t=' + Date.now(), { cache: 'no-store' });
-          if (!r.ok) return [];
+          const bust = src.url + (src.url.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now();
+          let r = null;
+          try { r = await fetchTimeout(bust, { cache: 'no-store' }); } catch (e) { r = null; }
+          if ((!r || !r.ok) && STREAM_PROXY) r = await fetchTimeout(proxify(bust), { cache: 'no-store' });
+          if (!r || !r.ok) return [];
           return parseM3U(await r.text(), src.prefix);
         } catch (e) { return []; }
       }));
@@ -1874,7 +1871,7 @@
     function groupChannels(list) {
       const map = new Map(), groups = [];
       list.forEach(ch => {
-        const key = nameKey(ch.name) || ('id:' + ch.id);
+        const key = (ch.noMerge ? 'src:' + ch.sourceName + ':' : '') + (nameKey(ch.name) || ('id:' + ch.id));
         let g = map.get(key);
         if (!g) { g = []; map.set(key, g); groups.push(g); }
         g.push(ch);
@@ -2170,9 +2167,9 @@
       });
 
       // Ensure 'Live Events' is always available in tabs if we have events
-      if (!uniqueCats.some(c => c.toLowerCase() === 'live events') && CHANNELS.some(c => c.isEvent)) {
-        uniqueCats.push('Live Events');
-      }
+      // Live Events tab bondho kora hoyeche
+      for (let i = uniqueCats.length - 1; i >= 0; i--) { if (uniqueCats[i].toLowerCase() === 'live events') uniqueCats.splice(i, 1); }
+      if (state.currentCategory && state.currentCategory.toLowerCase() === 'live events') state.currentCategory = 'all';
 
       uniqueCats.sort((a, b) => {
         const idxA = priorityOrder.findIndex(p => p.toLowerCase() === a.toLowerCase());
@@ -2236,7 +2233,6 @@
               <h2 class="hs-title">Live Sports & Events</h2>
               <p class="hs-sub">লাইভ ইভেন্ট লোড হচ্ছে...</p>
               <div class="hs-actions">
-                <a href="./live.html" class="hs-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Live Events Page</a>
               </div>
             </div>
           </div>`;
@@ -2261,7 +2257,6 @@
             <p class="hs-sub">${meta}</p>
             <div class="hs-actions">
               <button data-play-channel="${esc(ch.id)}" class="hs-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch Live</button>
-              <a href="./live.html" class="px-4 h-[46px] rounded-full bg-white/15 hover:bg-white/25 border border-white/25 text-white font-bold text-xs flex items-center gap-1.5 backdrop-blur-md transition">🔴 All Events</a>
               <button data-hero-fav="${esc(ch.id)}" class="hs-ghost" aria-label="My List">${saved ? '✓' : '+'}</button>
             </div>
           </div>`;
@@ -2914,8 +2909,20 @@
       const v = $p('liveVideoEl'); try { v.pause(); } catch (e) {}
       $p('playerSorry').classList.add('on');
       showPlayerOverlaysAndStart5sTimer();
+      clearTimeout(sorryTimer);
+      if (!currentIsCustom && state.autoplay !== false && CHANNELS.length > 1) {
+        // 5 sec pic thakbe, tarpor abar porer channel e try korbe
+        sorryTimer = setTimeout(() => {
+          sorryTimer = null;
+          if (!playerIsOpen() || !$p('playerSorry').classList.contains('on')) return;
+          failStreak = 0;
+          state.currentChannelIndex = (state.currentChannelIndex + 1) % CHANNELS.length;
+          loadCurrentChannelInPlayer();
+        }, 5000);
+      }
     }
-    function hideSorry() { const el = $p('playerSorry'); if (el) el.classList.remove('on'); }
+    let sorryTimer = null;
+    function hideSorry() { clearTimeout(sorryTimer); sorryTimer = null; const el = $p('playerSorry'); if (el) el.classList.remove('on'); }
     function handleStreamFailure(token, reason) {
       if (token !== loadToken || !playerIsOpen()) return;
       clearStreamCheck();
