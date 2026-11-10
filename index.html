@@ -778,7 +778,7 @@
         <div class="flex items-center justify-between">
           <div>
             <p class="font-bold text-sm text-white">চ্যানেল লিস্ট সোর্স (Advanced)</p>
-            <p id="jsonSourceUrlText" class="text-xs text-slate-300">Auto-loads channels.json + channels(1).json + channels(2).json</p>
+            <p id="jsonSourceUrlText" class="text-xs text-slate-300">Root folder er sokol .json + .m3u file auto-load hoy</p>
           </div>
           <button id="reloadJsonBtn" class="px-3 py-1.5 rounded-lg toffee-gradient text-xs font-bold shadow">↻ Reload JSON</button>
         </div>
@@ -1081,104 +1081,7 @@
   </nav>
 
   <script>
-    const DEFAULT_CHANNELS_JSON = [
-      {
-        id: 'ch-epl1',
-        name: 'IPS vs NFO • EPL',
-        shortLabel: 'IPS vs NFO',
-        subLabel: '•EPL',
-        category: 'Sports',
-        logo: '',
-        premium: true,
-        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
-        themeColor: '#1c1c1e',
-        ticker: 'Sarah TV LIVE: Ipswich Town vs Nottingham Forest • Premier League'
-      },
-      {
-        id: 'ch-somoy',
-        name: 'Somoy TV Live',
-        shortLabel: 'সময়',
-        subLabel: 'NEWS 24/7',
-        category: 'News',
-        logo: '',
-        premium: false,
-        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
-        themeColor: '#b91c1c',
-        ticker: 'সময় সংবাদ লাইভ: দেশ ও আন্তর্জাতিক সর্বশেষ খবর দেখুন Sarah TV-তে'
-      },
-      {
-        id: 'ch-zeebangla',
-        name: 'Zee Bangla HD',
-        shortLabel: 'Z বাংলা',
-        subLabel: 'DRAMA HD',
-        category: 'Drama',
-        logo: '',
-        premium: true,
-        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
-        themeColor: '#ea580c',
-        ticker: 'জি বাংলা এইচডি: জনপ্রিয় সিরিয়াল ও নাটক সরাসরি Sarah TV-তে'
-      },
-      {
-        id: 'ch-sony1',
-        name: 'Sony Sports Ten 1',
-        shortLabel: 'SONY',
-        subLabel: 'SPORTS 1 HD',
-        category: 'Sports',
-        logo: '',
-        premium: true,
-        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
-        themeColor: '#312e81',
-        ticker: 'SONY SPORTS TEN 1 HD: UEFA & Premier League Official Broadcast'
-      },
-      {
-        id: 'ch-tsports',
-        name: 'T Sports HD',
-        shortLabel: 'T SPORTS',
-        subLabel: 'LIVE HD',
-        category: 'Sports',
-        logo: '',
-        premium: true,
-        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
-        themeColor: '#047857',
-        ticker: 'T SPORTS HD: SAFF Championship 2026 & Bangladesh Cricket Live'
-      },
-      {
-        id: 'ch-jamuna',
-        name: 'Jamuna TV',
-        shortLabel: 'যমুনা',
-        subLabel: 'LIVE TV',
-        category: 'News',
-        logo: '',
-        premium: false,
-        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
-        themeColor: '#1e40af',
-        ticker: 'যমুনা টেলিভিশন ২৪ ঘণ্টা সরাসরি সম্প্রচার Sarah TV-তে'
-      },
-      {
-        id: 'ch-starjalsha',
-        name: 'Star Jalsha Movies',
-        shortLabel: 'জলসা',
-        subLabel: 'MOVIES HD',
-        category: 'Movies',
-        logo: '',
-        premium: true,
-        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
-        themeColor: '#636366',
-        ticker: 'Star Jalsha Movies: Superhit Bengali Blockbuster Cinema'
-      },
-      {
-        id: 'ch-cstv-series',
-        name: 'Sarah TV Originals',
-        shortLabel: 'Sarah TV',
-        subLabel: 'WEB SERIES',
-        category: 'Web Series',
-        logo: '',
-        premium: false,
-        streamUrl: 'https://d1e7rcqq4o2ma.cloudfront.net/bpk-tv/1709/output/index.m3u8',
-        themeColor: '#6b21a8',
-        ticker: 'Sarah TV Exclusive Web Series • New Episodes Streaming Now'
-      }
-    ];
+    const DEFAULT_CHANNELS_JSON = [];
 
     let CHANNELS = [...DEFAULT_CHANNELS_JSON];
 
@@ -1420,7 +1323,7 @@
       if (Array.isArray(rawJson)) {
         arr = rawJson;
       } else if (rawJson && typeof rawJson === 'object') {
-        const listKeys = ['live_matches', 'matches', 'events', 'sports', 'playlist', 'channels', 'data', 'items', 'streams', 'list', 'result', 'feed', 'upcoming_matches'];
+        const listKeys = ['categories', 'live_matches', 'matches', 'events', 'sports', 'playlist', 'channels', 'data', 'items', 'streams', 'list', 'result', 'feed', 'upcoming_matches'];
         listKeys.forEach(k => {
           if (Array.isArray(rawJson[k])) {
             rawJson[k].forEach(item => {
@@ -1442,6 +1345,24 @@
           });
         }
       }
+
+      // Nested format: [{ name:'Category', channels:[...] }] -> flat list (category = parent name)
+      arr = arr.flatMap(it => {
+        if (it && typeof it === 'object' && Array.isArray(it.channels) && it.channels.length && typeof it.channels[0] === 'object') {
+          const catName = it.name || it.title || it.category || it.group || '';
+          return it.channels.map(c => {
+            const o = Object.assign({}, c);
+            if (!o.category && catName) o.category = catName;
+            const extra = [].concat(o.alt_urls || o.altUrls || []);
+            if (extra.length) o.servers = [].concat(Array.isArray(o.servers) ? o.servers : [], extra);
+            return o;
+          });
+        }
+        if (it && typeof it === 'object' && Array.isArray(it.alt_urls) && it.alt_urls.length) {
+          return [Object.assign({}, it, { servers: [].concat(Array.isArray(it.servers) ? it.servers : [], it.alt_urls) })];
+        }
+        return [it];
+      });
 
       if (!Array.isArray(arr) || arr.length === 0) return null;
 
@@ -1601,20 +1522,7 @@
 
     // ===== 🔰 Active M3U Playlists (SonyLiv, Both Toffee, Ayna OTT, Tapmad, Jago BD, SM Combined) 🔰 =====
     const M3U_SOURCES = [
-      // 📂 Sarah TV Playlist (nijer GitHub repo er root e playlist.m3u - auto update)
-      {
-        url: './playlist.m3u',
-        prefix: 'sarah-pl',
-        sourceName: 'Sarah TV',
-        defaultCategory: 'Sarah TV'
-      },
-      // 📡 Akash All Player Playlist
-      {
-        url: 'https://raw.githubusercontent.com/sm-monirulislam/SM-IPTV/refs/heads/main/akash_all_player.m3u',
-        prefix: 'sm-akash',
-        sourceName: 'Akash',
-        defaultCategory: 'Akash'
-      },
+      // Root folder er sokol .m3u file auto-discover hoye ekhane add hoy (discoverRootFiles)
       // 📡 Ayna OTT Playlist
       {
         url: 'https://raw.githubusercontent.com/sm-monirulislam/AynaOTT_Auto_Update_Playlist/refs/heads/main/aynaott.m3u',
@@ -1984,26 +1892,111 @@
       return true;
     }
 
-    // channels.json + channels(1).json + channels(2).json -- 3 file theke channel load hobe
+    // channels.json + channels(1).json + ... (custom URL dile ei pattern e numbered file try kore)
     function buildJsonSources(url) {
       url = (url || './channels.json').trim();
       const m = url.match(/^(.*?)channels(?:\(\d+\))?\.json(\?.*)?$/i);
       if (!m) return [url];
       const base = m[1], q = m[2] || '';
-      return [`${base}channels.json${q}`, `${base}channels(1).json${q}`, `${base}channels(2).json${q}`];
+      const out = [`${base}channels.json${q}`];
+      for (let i = 1; i <= 9; i++) out.push(`${base}channels(${i}).json${q}`);
+      return out;
+    }
+
+    // ===== Root folder er sokol .json + .m3u file auto-discover =====
+    const ROOT_SKIP = /^(package(-lock)?|manifest|composer|tsconfig|jsconfig|vercel|netlify|firebase|renovate|\.eslintrc|\.prettierrc)\.json$/i;
+    async function discoverRootFiles() {
+      const CK = 'sarah_root_files_v1';
+      try {
+        const c = JSON.parse(sessionStorage.getItem(CK) || 'null');
+        if (c && Date.now() - c.t < 5 * 60 * 1000 && c.files && c.files.length) return c.files;
+      } catch (e) {}
+      const files = [];
+      const add = (n) => {
+        n = String(n || '').replace(/^\.?\//, '');
+        if (!n || /[\/\\]/.test(n) || !/\.(json|m3u)$/i.test(n) || ROOT_SKIP.test(n)) return;
+        if (!files.includes(n)) files.push(n);
+      };
+      // 1) Server directory listing (Apache / nginx autoindex / python http.server)
+      try {
+        const r = await fetchTimeout('./?t=' + Date.now(), { cache: 'no-store' });
+        if (r.ok) {
+          const h = await r.text();
+          h.replace(/href\s*=\s*["']([^"'#?]+)["']/gi, (_, x) => { try { x = decodeURIComponent(x); } catch (e) {} add(x); return ''; });
+        }
+      } catch (e) {}
+      // 2) GitHub Pages: repo root file list (GitHub API)
+      if (!files.length) {
+        const gm = location.hostname.match(/^([^.]+)\.github\.io$/i);
+        if (gm) {
+          const owner = gm[1];
+          const seg = location.pathname.split('/').filter(Boolean)[0];
+          const repo = (seg && !/\.html?$/i.test(seg)) ? seg : owner + '.github.io';
+          try {
+            const r = await fetchTimeout(`https://api.github.com/repos/${owner}/${repo}/contents/`, { cache: 'no-store' });
+            if (r.ok) (await r.json()).forEach(f => { if (f && f.type === 'file') add(f.name); });
+          } catch (e) {}
+        }
+      }
+      // 3) Fallback: common names probe (channels.json, channels(1).json ... playlist.m3u ...)
+      if (!files.length) {
+        const names = [];
+        ['channels', 'playlist'].forEach(b => ['json', 'm3u'].forEach(ext => {
+          names.push(`${b}.${ext}`);
+          for (let i = 1; i <= 9; i++) names.push(`${b}(${i}).${ext}`);
+        }));
+        const hits = await Promise.all(names.map(async (n) => {
+          try {
+            const r = await fetchTimeout('./' + encodeURIComponent(n), { method: 'HEAD', cache: 'no-store' });
+            return (r.ok && !/text\/html/i.test(r.headers.get('content-type') || '')) ? n : null;
+          } catch (e) { return null; }
+        }));
+        hits.forEach(add);
+      }
+      files.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+      try { sessionStorage.setItem(CK, JSON.stringify({ t: Date.now(), files })); } catch (e) {}
+      return files;
+    }
+
+    function registerLocalM3U(names) {
+      names.forEach(n => {
+        const url = './' + encodeURIComponent(n);
+        if (M3U_SOURCES.some(x => x.url === url)) return;
+        M3U_SOURCES.push({
+          url,
+          prefix: 'root-' + n.replace(/\W+/g, '_'),
+          sourceName: 'Local',
+          defaultCategory: n.replace(/\.m3u$/i, '')
+        });
+      });
+    }
+
+    async function resolveLocalSources(url) {
+      url = (url || './channels.json').trim();
+      const isDefault = /^(\.\/|\/)?channels(?:\(\d+\))?\.json(\?.*)?$/i.test(url);
+      if (!isDefault) return { json: buildJsonSources(url), m3u: [] };
+      const files = await discoverRootFiles();
+      const json = files.filter(f => /\.json$/i.test(f)).map(f => './' + encodeURIComponent(f));
+      const m3u = files.filter(f => /\.m3u$/i.test(f));
+      if (!json.length) json.push('./channels.json');
+      return { json, m3u };
     }
 
     async function fetchChannelsFromJson(jsonPath = './channels.json', showFeedback = false) {
       const statusLabel = document.getElementById('jsonStatusLabel');
       const sourceText = document.getElementById('jsonSourceUrlText');
-      const sources = buildJsonSources(jsonPath);
+      const found = await resolveLocalSources(jsonPath);
+      registerLocalM3U(found.m3u);
+      const sources = found.json;
 
       const [localResults, remoteJsonLists, m3uList] = await Promise.all([
         Promise.all(sources.map(async (src) => {
           try {
             const response = await fetchTimeout(src, { cache: 'no-store' });
             if (!response.ok) return null;
-            const data = await response.json();
+            const txt = await response.text();
+            let data;
+            try { data = JSON.parse(txt.replace(/^\uFEFF/, '')); } catch (e) { data = txt; }
             return { src, data };
           } catch (err) { return null; }
         })),
