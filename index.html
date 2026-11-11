@@ -370,6 +370,15 @@
     .hs-btn svg { width: 15px; height: 15px; }
     .hs-ghost { width: 46px; height: 46px; border: 0; border-radius: 50%; background: rgba(255,255,255,.18); color: #fff; font-size: 22px; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; }
     .hs-ghost:active { transform: scale(.94); }
+    /* hero mini live preview */
+    .hs-art.vid { width: min(calc(100% - 56px), 300px); height: auto; aspect-ratio: 16/9; margin: 0 auto; left: 0; right: 0; border-radius: 22px; background: #000; }
+    .hs-art.vid img { padding: 14px; }
+    .hs-art.vid span { font-size: 17px; }
+    .hs-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; opacity: 0; transition: opacity .35s ease; }
+    .hs-art.playing .hs-vid { opacity: 1; }
+    .hs-mute { position: absolute; right: 8px; bottom: 8px; z-index: 2; width: 30px; height: 30px; border: 0; border-radius: 50%; background: rgba(0,0,0,.55); color: #fff; font-size: 14px; display: none; align-items: center; justify-content: center; }
+    .hs-art.playing .hs-mute { display: flex; }
+    @media (min-width: 700px) { .hs-art.vid { left: auto; right: 7%; width: 380px; margin: -107px 0 0 0; } }
     #heroDots { position: absolute; left: 0; right: 0; bottom: 16px; z-index: 5; display: flex; justify-content: center; gap: 6px; padding: 0; margin: 0; }
     .hero-dot { width: 6px; height: 6px; border-radius: 999px; background: rgba(255,255,255,.35); border: 0; padding: 0; transition: width .3s ease, background .3s ease; }
     .hero-dot.on { width: 20px; background: #fff; }
@@ -1828,6 +1837,7 @@
         if (!base.logo) { const l = ordered.find(m => m.logo); if (l) base.logo = l.logo; }
         base.fromM3U = ordered.every(m => m.fromM3U);
         base.isEvent = ordered.some(m => m.isEvent);
+        base.heroLive = ordered.some(m => m.heroLive);
         base.name = cleanTxt(base.name).replace(/\s[-–—]\s*\d+\s*$/, '') || 'Channel';
         base.category = cleanTxt(base.category) || 'Live TV';
         base.shortLabel = cleanTxt(base.shortLabel) || base.name.slice(0, 8);
@@ -1906,7 +1916,7 @@
     // ===== Root folder er sokol .json + .m3u file auto-discover =====
     const ROOT_SKIP = /^(package(-lock)?|manifest|composer|tsconfig|jsconfig|vercel|netlify|firebase|renovate|\.eslintrc|\.prettierrc)\.json$/i;
     async function discoverRootFiles() {
-      const CK = 'sarah_root_files_v1';
+      const CK = 'sarah_root_files_v2';
       try {
         const c = JSON.parse(sessionStorage.getItem(CK) || 'null');
         if (c && Date.now() - c.t < 5 * 60 * 1000 && c.files && c.files.length) return c.files;
@@ -1953,6 +1963,8 @@
         }));
         hits.forEach(add);
       }
+      // Always load these root files (GitHub API / dir-listing fail korleo)
+      ['toffee_data.json', 'sonyLiv_data.json'].forEach(add);
       files.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
       try { sessionStorage.setItem(CK, JSON.stringify({ t: Date.now(), files })); } catch (e) {}
       return files;
@@ -2009,7 +2021,11 @@
       let filesLoaded = 0;
       localResults.forEach(r => {
         if (!r) return;
-        const list = normalizeChannelsJson(r.data, merged.length, 'Live TV', 'Local', 'local');
+        const fnm = decodeURIComponent(String(r.src).split('?')[0].split('/').pop() || '');
+        const isToffee = /toffee/i.test(fnm), isSony = /sony/i.test(fnm);
+        const srcName = isToffee ? 'Toffee' : (isSony ? 'SonyLIV' : 'Local');
+        const list = normalizeChannelsJson(r.data, merged.length, isToffee ? 'Toffee Live' : (isSony ? 'SonyLIV Live' : 'Live TV'), srcName, isToffee ? 'toffee' : (isSony ? 'sonyliv' : 'local'));
+        if (list && (isToffee || isSony)) list.forEach(ch => { ch.heroLive = true; });
         if (!list || !list.length) return;
         filesLoaded++;
         list.forEach(ch => {
@@ -2209,22 +2225,15 @@
       const st = document.getElementById('statCount');
       if (st) st.textContent = bn(pool.length);
 
-      // Filter strictly for LIVE EVENTS (from Willow, Prime Video, SonyLIV, FanCode, or any match/event)
-      let eventPicks = pool.filter(c =>
-        c.isEvent ||
-        c.fromRemoteJson ||
-        /live events|willow|prime|sonyliv|fancode/i.test((c.sourceName || '') + ' ' + (c.category || '')) ||
-        /\bvs\b|match|odi|t20|test|league|cup|trophy|live/i.test(c.name || '')
-      );
+      // ONLY live links: Toffee/SonyLIV root JSON + live events (Tapmad, Willow, FanCode ...)
+      const hasStream = (c) => (c.servers || []).some(sv => sv && (sv.url || sv.iframe)) || c.streamUrl;
+      const eventPicks = pool.filter(c => hasStream(c) && (
+        c.heroLive || c.isEvent ||
+        /live events|willow|prime|sonyliv|fancode|toffee/i.test((c.sourceName || '') + ' ' + (c.category || ''))
+      ));
 
-      if (!eventPicks.length) {
-        eventPicks = pool.filter(c => /sport|cricket|football/i.test((c.category || '') + ' ' + (c.name || '')));
-      }
-      if (!eventPicks.length) {
-        eventPicks = pool.slice(0, 8);
-      }
-
-      const picks = eventPicks.slice(0, 12);
+      const picks = eventPicks.slice(0, 15);
+      window.__heroPicks = picks;
 
       // Clear ALL slides in heroTrack (including static intro slide) so ONLY live events show!
       track.innerHTML = '';
@@ -2255,7 +2264,7 @@
         const meta = [ch.category || 'Live Event', ch.sourceName, n > 1 ? `${bn(n)}টি সার্ভার` : 'HD Stream'].filter(Boolean).map(esc).join('  ·  ');
         const saved = state.favorites.includes(ch.id);
         el.innerHTML = `
-          <div class="hs-art"><span>${label}</span>${ch.logo ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async" onerror="logoFail(this,'remove')" src="${esc(ch.logo)}" alt="" />` : ''}</div>
+          <div class="hs-art vid"><span>${label}</span>${ch.logo ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async" onerror="logoFail(this,'remove')" src="${esc(ch.logo)}" alt="" />` : ''}<video class="hs-vid" muted playsinline webkit-playsinline preload="none" data-play-channel="${esc(ch.id)}"></video><button type="button" class="hs-mute" aria-label="Sound">🔇</button></div>
           <div class="hs-body">
             <span class="hs-live"><i></i>LIVE EVENT • ${esc(badgeText)}</span>
             <h2 class="hs-title">${esc(ch.name)}</h2>
@@ -2280,6 +2289,7 @@
       state.heroSlideIndex = 0;
       track.scrollLeft = 0;
       heroDecorate();
+      heroPreviewStart(0, true);
     }
     function heroDecorate() {
       const track = document.getElementById('heroTrack');
@@ -2295,7 +2305,109 @@
     }
     window.heroPaint = function (i) {
       document.querySelectorAll('#heroDots .hero-dot').forEach((d, k) => { d.className = 'hero-dot' + (k === i ? ' on' : ''); });
+      if (i !== HP.idx) heroPreviewStart(i);
     };
+
+    // ===== Hero mini live preview (sudhu active slide e video cholbe) =====
+    const HP = { idx: -1, tok: 0, hls: null, shaka: null, timer: null, deb: null, muted: true };
+    function heroPreviewStop() {
+      HP.tok++; clearTimeout(HP.timer); window.__heroPlaying = false;
+      try { if (HP.hls) HP.hls.destroy(); } catch (e) {}
+      try { if (HP.shaka) HP.shaka.destroy(); } catch (e) {}
+      HP.hls = HP.shaka = null;
+      document.querySelectorAll('#heroTrack .hs-art.playing').forEach(a => a.classList.remove('playing'));
+      document.querySelectorAll('#heroTrack video.hs-vid').forEach(v => {
+        try { v.pause(); v.removeAttribute('src'); v.load(); } catch (e) {}
+      });
+    }
+    function heroPreviewStart(i, now) {
+      clearTimeout(HP.deb);
+      HP.deb = setTimeout(() => heroPreviewRun(i), now ? 400 : 350);
+    }
+    function heroPreviewRun(i) {
+      heroPreviewStop();
+      HP.idx = i;
+      const picks = window.__heroPicks || [];
+      const ch = picks[i];
+      const track = document.getElementById('heroTrack');
+      const el = track && track.children[i];
+      if (!ch || !el) return;
+      if (document.hidden || (typeof playerIsOpen === 'function' && playerIsOpen())) return;
+      const home = document.getElementById('viewHome');
+      if (home && home.classList.contains('hidden')) return;
+      const art = el.querySelector('.hs-art'), video = el.querySelector('video.hs-vid');
+      if (!art || !video) return;
+      const srv = (ch.servers || []).find(sv => sv && sv.url) || null;
+      const src = srv ? srv.url : ch.streamUrl;
+      if (!src || (typeof toEmbedUrl === 'function' && !/\.(m3u8|mpd|mp4|ts)(\?|$)/i.test(src) && toEmbedUrl(src))) return;
+      const tok = ++HP.tok;
+      video.muted = HP.muted; video.defaultMuted = true; video.playsInline = true;
+      const type = detectStreamType(src, srv || {});
+      let chain = buildEngineChain(type, ch).filter(e => e === 'hls' || e === 'shaka' || e === 'native');
+      if (!chain.length) chain = ['native'];
+      let idx = 0;
+      const masterToken = extractQueryToken(src);
+      const next = () => {
+        if (tok !== HP.tok) return;
+        clearTimeout(HP.timer);
+        try { if (HP.hls) HP.hls.destroy(); } catch (e) {} HP.hls = null;
+        try { if (HP.shaka) HP.shaka.destroy(); } catch (e) {} HP.shaka = null;
+        if (idx >= chain.length) return;
+        const eng = chain[idx++];
+        HP.timer = setTimeout(next, 9000);
+        try {
+          if (eng === 'hls') {
+            const h = new Hls({ enableWorker: true, lowLatencyMode: false, maxBufferLength: 8, maxMaxBufferLength: 12, capLevelToPlayerSize: true, startLevel: 0,
+              xhrSetup: (xhr, url) => { if (masterToken) { const u2 = appendTokenToSubUrl(url, masterToken); if (u2 !== url) xhr.open('GET', u2, true); } } });
+            HP.hls = h;
+            h.on(Hls.Events.ERROR, (_, d) => { if (d && d.fatal && HP.hls === h) next(); });
+            h.loadSource(src); h.attachMedia(video);
+            h.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(() => {}));
+          } else if (eng === 'shaka') {
+            try { shaka.polyfill.installAll(); } catch (e) {}
+            const pl = new shaka.Player(video); HP.shaka = pl;
+            const drm = (srv && srv.drm) || ch.drm || null;
+            const cfg = { streaming: { bufferingGoal: 8, rebufferingGoal: 1 }, abr: { restrictions: { maxHeight: 480 } } };
+            if (drm) {
+              cfg.drm = {};
+              if (drm.clearKeys && Object.keys(drm.clearKeys).length) cfg.drm.clearKeys = drm.clearKeys;
+              if (drm.licenseUrl) cfg.drm.servers = { 'com.widevine.alpha': drm.licenseUrl, 'com.microsoft.playready': drm.licenseUrl };
+            }
+            pl.configure(cfg);
+            const ne = pl.getNetworkingEngine();
+            if (ne && masterToken) ne.registerRequestFilter((t, rq) => { rq.uris = rq.uris.map(u => appendTokenToSubUrl(u, masterToken)); });
+            pl.addEventListener('error', e => { if (HP.shaka === pl && e.detail && e.detail.severity === 2) next(); });
+            pl.load(src).then(() => { if (tok === HP.tok) video.play().catch(() => {}); }).catch(() => { if (HP.shaka === pl) next(); });
+          } else {
+            video.src = src; video.load(); video.play().catch(() => {});
+            video.onerror = () => next();
+          }
+        } catch (e) { next(); }
+      };
+      video.onplaying = () => {
+        if (tok !== HP.tok) return;
+        clearTimeout(HP.timer); art.classList.add('playing'); window.__heroPlaying = true;
+        const mb = art.querySelector('.hs-mute'); if (mb) mb.textContent = video.muted ? '🔇' : '🔊';
+      };
+      next();
+    }
+    document.addEventListener('click', (e) => {
+      const mb = e.target.closest && e.target.closest('.hs-mute');
+      if (!mb) return;
+      e.stopPropagation();
+      const v = mb.parentElement.querySelector('video');
+      if (!v) return;
+      v.muted = !v.muted; HP.muted = v.muted; mb.textContent = v.muted ? '🔇' : '🔊';
+      if (!v.muted) v.play().catch(() => {});
+    }, true);
+    // Full player khulle preview bondho, bondho hole abar chalu; tab/home change e o handle
+    setInterval(() => {
+      const open = (typeof playerIsOpen === 'function' && playerIsOpen());
+      const home = document.getElementById('viewHome');
+      const off = document.hidden || open || (home && home.classList.contains('hidden'));
+      if (off && (window.__heroPlaying || HP.hls || HP.shaka)) { heroPreviewStop(); HP.idx = -1; }
+      else if (!off && HP.idx === -1 && window.__heroPicks && window.__heroPicks.length) heroPreviewRun(state.heroSlideIndex || 0);
+    }, 1500);
 
     function renderLiveTvCircles() {
       const track = document.getElementById('liveTvCirclesTrack');
@@ -4984,7 +5096,7 @@
       stop();
       if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       timer = setInterval(function () {
-        if (userTouch || document.hidden || window.__heroVisible === false) return;
+        if (userTouch || document.hidden || window.__heroVisible === false || window.__heroPlaying) return;
         var home = document.getElementById('viewHome');
         if (home && home.classList.contains('hidden')) return;
         scrollToHeroSlide(idx() + 1);
