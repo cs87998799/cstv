@@ -338,7 +338,9 @@
   <style>
     /* ===== HERO v4 (Apple TV style • halka animation: sudhu opacity/transform) ===== */
     #heroWrap { position: relative; overflow: hidden; margin: 6px 14px 0; border-radius: 28px; background: #000; user-select: none; contain: layout paint; }
-    #heroTrack { scrollbar-width: none; }
+    #heroTrack, #upTrack { scrollbar-width: none; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+    #upTrack .hs { content-visibility: auto; contain-intrinsic-size: 100% 460px; transition: opacity .35s ease; }
+    .hs, .hs-art, .hs-body > * { will-change: auto; backface-visibility: hidden; }
     .hs { position: relative; min-width: 100%; height: clamp(430px, 118vw, 500px); overflow: hidden; isolation: isolate; color: #f5f5f7;
       --h: 220;
       background:
@@ -1574,13 +1576,6 @@
     // ===== 🔰 Active M3U Playlists (SonyLiv, Both Toffee, Ayna OTT, Tapmad, Jago BD, SM Combined) 🔰 =====
     const M3U_SOURCES = [
       // Root folder er sokol .m3u file auto-discover hoye ekhane add hoy (discoverRootFiles)
-      // 📡 Ayna OTT Playlist
-      {
-        url: 'https://raw.githubusercontent.com/sm-monirulislam/AynaOTT_Auto_Update_Playlist/refs/heads/main/aynaott.m3u',
-        prefix: 'sm-ayna',
-        sourceName: 'Ayna OTT',
-        defaultCategory: 'Ayna OTT'
-      },
       // 📡 Tapmad Playlist
       {
         url: 'https://raw.githubusercontent.com/sm-monirulislam/Tapmad_Auto_Update_Playlist/refs/heads/main/tapmad_sm.m3u',
@@ -1958,7 +1953,7 @@
     // ===== Root folder er sokol .json + .m3u file auto-discover =====
     const ROOT_SKIP = /^(package(-lock)?|manifest|composer|tsconfig|jsconfig|vercel|netlify|firebase|renovate|\.eslintrc|\.prettierrc)\.json$/i;
     async function discoverRootFiles() {
-      const CK = 'sarah_root_files_v2';
+      const CK = 'sarah_root_files_v3';
       try {
         const c = JSON.parse(sessionStorage.getItem(CK) || 'null');
         if (c && Date.now() - c.t < 5 * 60 * 1000 && c.files && c.files.length) return c.files;
@@ -2006,7 +2001,7 @@
         hits.forEach(add);
       }
       // Always load these root files (GitHub API / dir-listing fail korleo)
-      ['toffee_data.json', 'sonyLiv_data.json'].forEach(add);
+      ['aynaott_data.json', 'sonyLiv_data.json', 'toffee_data.json', 'sonyLiv.m3u', 'toffee_playlist.m3u'].forEach(add);
       files.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
       try { sessionStorage.setItem(CK, JSON.stringify({ t: Date.now(), files })); } catch (e) {}
       return files;
@@ -2019,8 +2014,8 @@
         M3U_SOURCES.push({
           url,
           prefix: 'root-' + n.replace(/\W+/g, '_'),
-          sourceName: 'Local',
-          defaultCategory: n.replace(/\.m3u$/i, '')
+          sourceName: /toffee/i.test(n) ? 'Toffee' : (/sony/i.test(n) ? 'SonyLIV' : 'Local'),
+          defaultCategory: /toffee/i.test(n) ? 'Toffee Live' : (/sony/i.test(n) ? 'SonyLIV Live' : n.replace(/\.m3u$/i, ''))
         });
       });
     }
@@ -2065,9 +2060,9 @@
       localResults.forEach(r => {
         if (!r) return;
         const fnm = decodeURIComponent(String(r.src).split('?')[0].split('/').pop() || '');
-        const isToffee = /toffee/i.test(fnm), isSony = /sony/i.test(fnm);
-        const srcName = isToffee ? 'Toffee' : (isSony ? 'SonyLIV' : 'Local');
-        const list = normalizeChannelsJson(r.data, merged.length, isToffee ? 'Toffee Live' : (isSony ? 'SonyLIV Live' : 'Live TV'), srcName, isToffee ? 'toffee' : (isSony ? 'sonyliv' : 'local'));
+        const isToffee = /toffee/i.test(fnm), isSony = /sony/i.test(fnm), isAyna = /ayna/i.test(fnm);
+        const srcName = isToffee ? 'Toffee' : (isSony ? 'SonyLIV' : (isAyna ? 'Ayna OTT' : 'Local'));
+        const list = normalizeChannelsJson(r.data, merged.length, isToffee ? 'Toffee Live' : (isSony ? 'SonyLIV Live' : (isAyna ? 'Ayna OTT' : 'Live TV')), srcName, isToffee ? 'toffee' : (isSony ? 'sonyliv' : (isAyna ? 'ayna' : 'local')));
         if (list && (isToffee || isSony)) list.forEach(ch => { ch.heroLive = true; });
         if (!list || !list.length) return;
         filesLoaded++;
@@ -2348,7 +2343,7 @@
       renderUpcomingBanner(picks);
     }
 
-    // ===== Banner 2: UPCOMING schedule (max 20, sudhu SonyLIV + Tapmad) =====
+    // ===== Banner 2: UPCOMING schedule (max 80, sudhu SonyLIV + Tapmad) =====
     function renderUpcomingBanner(livePicks) {
       const wrap = document.getElementById('upWrap');
       const track = document.getElementById('upTrack');
@@ -2363,13 +2358,20 @@
         .filter(c => !c.startTs || c.startTs > now - 3 * 3600e3)
         .filter(c => { const k = nameKey(c.name); if (liveKeys.has(k) || seen.has(k)) return false; seen.add(k); return true; })
         .sort((a, b) => (a.startTs || 9e15) - (b.startTs || 9e15))
-        .slice(0, 20);
+        .slice(0, 80);
       wrap.classList.toggle('hidden', !picks.length);
       const cnt = document.getElementById('upCount'); if (cnt) cnt.textContent = picks.length;
       track.innerHTML = ''; dotsBox.innerHTML = '';
       if (!picks.length) return;
       picks.forEach((ch, i) => track.appendChild(heroSlideEl(ch, i, true)));
-      picks.forEach((_, k) => {
+      const manyUp = picks.length > 10;
+      if (manyUp) {
+        const pill = document.createElement('span');
+        pill.id = 'upPill';
+        pill.style.cssText = 'padding:3px 11px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;font-weight:700;backdrop-filter:blur(6px)';
+        pill.textContent = '1 / ' + picks.length;
+        dotsBox.appendChild(pill);
+      } else picks.forEach((_, k) => {
         const b = document.createElement('button');
         b.className = 'hero-dot' + (k === 0 ? ' on' : '');
         b.setAttribute('aria-label', 'Upcoming ' + (k + 1));
@@ -2386,8 +2388,22 @@
           t = setTimeout(() => {
             const i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
             dotsBox.querySelectorAll('.hero-dot').forEach((d, k) => { d.className = 'hero-dot' + (k === i ? ' on' : ''); });
-          }, 80);
+            const pl = document.getElementById('upPill'); if (pl) pl.textContent = (i + 1) + ' / ' + track.children.length;
+          }, 60);
         }, { passive: true });
+        // smooth auto-slide every 7s (loop)
+        let upTouch = false, upVis = true;
+        track.addEventListener('touchstart', () => { upTouch = true; }, { passive: true });
+        track.addEventListener('touchend', () => { setTimeout(() => { upTouch = false; }, 4000); }, { passive: true });
+        try { new IntersectionObserver(es => { upVis = es[0].isIntersecting; }, { threshold: 0.3 }).observe(wrap); } catch (e) {}
+        setInterval(() => {
+          if (upTouch || !upVis || document.hidden) return;
+          const home = document.getElementById('viewHome');
+          if (home && home.classList.contains('hidden')) return;
+          const n = track.children.length; if (n < 2) return;
+          const i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+          track.scrollTo({ left: track.clientWidth * ((i + 1) % n), behavior: 'smooth' });
+        }, 7000);
       }
     }
     function heroDecorate() {
@@ -2745,7 +2761,7 @@
     let streamCheckTimer = null;
     let stallTimer = null;
     let startWatchTimer = null;
-    const START_TIMEOUT_MS = 5000; // video 5 sec e na challe auto server/channel change
+    const START_TIMEOUT_MS = 7000; // video 5 sec e na challe auto server/channel change
     const MAX_AUTO_SKIP = 3; // porpor koyta channel fail hole 'sorry' pic ashbe
     let playerLocked = false;
     const PL_VOL_ON = '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>';
@@ -3134,7 +3150,7 @@
           failStreak = 0;
           state.currentChannelIndex = (state.currentChannelIndex + 1) % CHANNELS.length;
           loadCurrentChannelInPlayer();
-        }, 5000);
+        }, 7000);
       }
     }
     let sorryTimer = null;
@@ -5199,7 +5215,7 @@
         var home = document.getElementById('viewHome');
         if (home && home.classList.contains('hidden')) return;
         scrollToHeroSlide(idx() + 1);
-      }, 6000);
+      }, 7000);
     }
     function stop() { if (timer) clearInterval(timer); }
     track.addEventListener('touchstart', function () { userTouch = true; }, { passive: true });
