@@ -374,6 +374,8 @@
     .hs-art.vid { width: min(calc(100% - 56px), 300px); height: auto; aspect-ratio: 16/9; margin: 0 auto; left: 0; right: 0; border-radius: 22px; background: #000; }
     .hs-art.vid img { padding: 14px; }
     .hs-art.vid span { font-size: 17px; }
+    .hs.up-slide { height: clamp(360px, 100vw, 420px); }
+    .hs.up-slide .hs-body { padding-bottom: 40px; }
     .hs-live.up { background: #ff9f0a; color: #000; }
     .hs-live.up i { background: #000; }
     .hs-art.poster img { padding: 0; object-fit: cover; }
@@ -685,6 +687,20 @@
         <button id="heroNextBtn" aria-label="Next Slide" class="absolute right-2 top-1/2 -translate-y-1/2 rounded-full text-white flex items-center justify-center">›</button>
 
         <div id="heroDots"><button data-slide="0" class="hero-dot on" aria-label="Slide 1"></button></div>
+      </div>
+
+      <!-- UPCOMING SCHEDULE BANNER (SonyLIV + Tapmad) -->
+      <div id="upSection" class="px-4 -mt-2">
+        <div id="upWrap" class="hidden">
+          <div class="flex items-center justify-between mb-2 px-1">
+            <h3 class="text-sm font-bold text-white">🗓 Upcoming Schedule</h3>
+            <span class="text-[11px] text-slate-400"><span id="upCount">0</span> ইভেন্ট</span>
+          </div>
+          <div id="upCard" style="position:relative;overflow:hidden;border-radius:28px;background:#000;contain:layout paint">
+            <div id="upTrack" class="flex overflow-x-auto snap-x-mandatory no-scrollbar scroll-smooth" style="scrollbar-width:none"></div>
+            <div id="upDots" style="position:absolute;left:0;right:0;bottom:14px;z-index:5;display:flex;justify-content:center;flex-wrap:wrap;gap:5px;padding:0 24px"></div>
+          </div>
+        </div>
       </div>
 
       <!-- QUICK STATS -->
@@ -2239,35 +2255,65 @@
       nav.innerHTML = tabsHtml.join('');
     }
 
+    function heroEsc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch])); }
+    function heroSrcText(c) { return [c.sourceName, c.category, c.id].concat((c.servers || []).map(sv => sv && sv.sourceName)).filter(Boolean).join(' '); }
+    function heroSlideEl(ch, i, upcomingBanner) {
+      const esc = heroEsc;
+      const HUES = [340, 268, 212, 152, 24, 300, 192, 48];
+      const bn = (n) => String(n).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+      const el = document.createElement('div');
+      el.className = 'hs hs-ch snap-center-item' + (upcomingBanner ? ' up-slide' : '') + (i === 0 ? ' in' : '');
+      el.style.setProperty('--h', HUES[i % HUES.length]);
+      const label = esc(ch.shortLabel || (ch.name || '').slice(0, 8));
+      const n = ch.servers ? ch.servers.length : 1;
+      const badgeText = (ch.sourceName || ch.category || 'LIVE EVENT').toUpperCase();
+      const noStream = !(ch.servers && ch.servers.length) && !ch.streamUrl;
+      const isUp = upcomingBanner || noStream;
+      let whenTxt = '';
+      if (ch.startTs) { try { whenTxt = new Date(ch.startTs).toLocaleString([], { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }); } catch (e) {} }
+      const meta = [ch.category || 'Live Event', ch.sourceName, isUp ? (whenTxt || 'Coming Soon') : (n > 1 ? `${bn(n)}টি সার্ভার` : 'HD Stream')].filter(Boolean).map(esc).join('  ·  ');
+      const saved = state.favorites.includes(ch.id);
+      const showVideo = !isUp && !noStream;
+      el.innerHTML = `
+        <div class="hs-art vid${isUp ? ' poster' : ''}"><span>${label}</span>${ch.logo ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async" onerror="logoFail(this,'remove')" src="${esc(ch.logo)}" alt="" />` : ''}${showVideo ? `<video class="hs-vid" muted playsinline webkit-playsinline preload="none" data-play-channel="${esc(ch.id)}"></video><button type="button" class="hs-mute" aria-label="Sound">🔇</button>` : ''}</div>
+        <div class="hs-body">
+          <span class="hs-live${isUp ? ' up' : ''}"><i></i>${isUp ? 'UPCOMING' : 'LIVE EVENT'} • ${esc(badgeText)}</span>
+          <h2 class="hs-title">${esc(ch.name)}</h2>
+          <p class="hs-sub">${meta}</p>
+          <div class="hs-actions">
+            ${noStream ? `<button type="button" class="hs-btn" disabled style="opacity:.6">⏰ ${esc(whenTxt || 'Coming Soon')}</button>` : `<button data-play-channel="${esc(ch.id)}" class="hs-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>${isUp ? 'Watch' : 'Watch Live'}</button>`}
+            ${noStream ? '' : `<button data-hero-fav="${esc(ch.id)}" class="hs-ghost" aria-label="My List">${saved ? '✓' : '+'}</button>`}
+          </div>
+        </div>`;
+      return el;
+    }
+    function heroObserve(track, key) {
+      if (window[key]) window[key].disconnect();
+      if ('IntersectionObserver' in window) {
+        window[key] = new IntersectionObserver(entries => {
+          entries.forEach(en => en.target.classList.toggle('in', en.isIntersecting));
+        }, { root: track, threshold: 0.55 });
+        Array.from(track.children).forEach(el => window[key].observe(el));
+      } else Array.from(track.children).forEach(el => el.classList.add('in'));
+    }
+
+    // ===== Banner 1: LIVE events (Ayna OTT bad) =====
     function renderHeroFromChannels() {
       const track = document.getElementById('heroTrack');
       const dotsBox = document.getElementById('heroDots');
       if (!track || !dotsBox) return;
-      const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
-      const HUES = [340, 268, 212, 152, 24, 300, 192, 48];
       const bn = (n) => String(n).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
       const pool = (CHANNELS && CHANNELS.length ? CHANNELS : []);
-
-      // Update total channel count in stats
       const st = document.getElementById('statCount');
       if (st) st.textContent = bn(pool.length);
 
-      // ONLY live links: Toffee/SonyLIV root JSON + live events (Tapmad, Willow, FanCode ...)
       const hasStream = (c) => (c.servers || []).some(sv => sv && (sv.url || sv.iframe)) || c.streamUrl;
-      const eventPicks = pool.filter(c => hasStream(c) && (
+      const isFuture = (c) => c.startTs && c.startTs > Date.now() + 60e3;
+      const picks = pool.filter(c => hasStream(c) && !isFuture(c) && !/ayna/i.test(heroSrcText(c)) && (
         c.heroLive || c.isEvent ||
         /live events|willow|prime|sonyliv|fancode|toffee/i.test((c.sourceName || '') + ' ' + (c.category || ''))
-      ));
-
-      const liveNow = eventPicks.slice(0, 10);
-      const liveKeys = new Set(liveNow.map(c => nameKey(c.name)));
-      const upNext = UPCOMING_POOL
-        .filter(u => !liveKeys.has(nameKey(u.name)) && (!u.startTs || u.startTs > Date.now() - 3 * 3600e3))
-        .sort((a, b) => (a.startTs || 9e15) - (b.startTs || 9e15)).slice(0, 8);
-      const picks = liveNow.concat(upNext);
+      )).slice(0, 12);
       window.__heroPicks = picks;
-
-      // Clear ALL slides in heroTrack (including static intro slide) so ONLY live events show!
       track.innerHTML = '';
 
       if (!picks.length) {
@@ -2278,41 +2324,14 @@
               <span class="hs-live"><i></i>LIVE EVENTS</span>
               <h2 class="hs-title">Live Sports & Events</h2>
               <p class="hs-sub">লাইভ ইভেন্ট লোড হচ্ছে...</p>
-              <div class="hs-actions">
-              </div>
+              <div class="hs-actions"></div>
             </div>
           </div>`;
         dotsBox.innerHTML = '<button data-slide="0" class="hero-dot on" aria-label="Slide 1"></button>';
+        renderUpcomingBanner(picks);
         return;
       }
-
-      picks.forEach((ch, i) => {
-        const el = document.createElement('div');
-        el.className = 'hs hs-ch snap-center-item' + (i === 0 ? ' in' : '');
-        el.style.setProperty('--h', HUES[i % HUES.length]);
-        const label = esc(ch.shortLabel || (ch.name || '').slice(0, 8));
-        const n = ch.servers ? ch.servers.length : 1;
-        const badgeText = (ch.sourceName || ch.category || 'LIVE EVENT').toUpperCase();
-        const noStream = !(ch.servers && ch.servers.length) && !ch.streamUrl;
-        const isUp = noStream || (ch.startTs && ch.startTs > Date.now() + 60e3);
-        let whenTxt = '';
-        if (ch.startTs) { try { whenTxt = new Date(ch.startTs).toLocaleString([], { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }); } catch (e) {} }
-        const meta = [ch.category || 'Live Event', ch.sourceName, isUp ? (whenTxt || 'Coming Soon') : (n > 1 ? `${bn(n)}টি সার্ভার` : 'HD Stream')].filter(Boolean).map(esc).join('  ·  ');
-        const saved = state.favorites.includes(ch.id);
-        el.innerHTML = `
-          <div class="hs-art vid${noStream ? ' poster' : ''}"><span>${label}</span>${ch.logo ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async" onerror="logoFail(this,'remove')" src="${esc(ch.logo)}" alt="" />` : ''}${noStream ? '' : `<video class="hs-vid" muted playsinline webkit-playsinline preload="none" data-play-channel="${esc(ch.id)}"></video><button type="button" class="hs-mute" aria-label="Sound">🔇</button>`}</div>
-          <div class="hs-body">
-            <span class="hs-live${isUp ? ' up' : ''}"><i></i>${isUp ? 'UPCOMING' : 'LIVE EVENT'} • ${esc(badgeText)}</span>
-            <h2 class="hs-title">${esc(ch.name)}</h2>
-            <p class="hs-sub">${meta}</p>
-            <div class="hs-actions">
-              ${noStream ? `<button type="button" class="hs-btn" disabled style="opacity:.6">⏰ ${esc(whenTxt || 'Coming Soon')}</button>` : `<button data-play-channel="${esc(ch.id)}" class="hs-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>${isUp ? 'Watch' : 'Watch Live'}</button>`}
-              ${noStream ? '' : `<button data-hero-fav="${esc(ch.id)}" class="hs-ghost" aria-label="My List">${saved ? '✓' : '+'}</button>`}
-            </div>
-          </div>`;
-        track.appendChild(el);
-      });
-
+      picks.forEach((ch, i) => track.appendChild(heroSlideEl(ch, i, false)));
       dotsBox.innerHTML = '';
       for (let k = 0; k < picks.length; k++) {
         const b = document.createElement('button');
@@ -2326,6 +2345,50 @@
       track.scrollLeft = 0;
       heroDecorate();
       heroPreviewStart(0, true);
+      renderUpcomingBanner(picks);
+    }
+
+    // ===== Banner 2: UPCOMING schedule (max 20, sudhu SonyLIV + Tapmad) =====
+    function renderUpcomingBanner(livePicks) {
+      const wrap = document.getElementById('upWrap');
+      const track = document.getElementById('upTrack');
+      const dotsBox = document.getElementById('upDots');
+      if (!wrap || !track || !dotsBox) return;
+      const liveKeys = new Set((livePicks || []).map(c => nameKey(c.name)));
+      const now = Date.now();
+      const fromChannels = (CHANNELS || []).filter(c => c.startTs && c.startTs > now + 60e3);
+      const seen = new Set();
+      const picks = UPCOMING_POOL.concat(fromChannels)
+        .filter(c => /sony|tapmad/i.test(heroSrcText(c)) && !/ayna/i.test(heroSrcText(c)))
+        .filter(c => !c.startTs || c.startTs > now - 3 * 3600e3)
+        .filter(c => { const k = nameKey(c.name); if (liveKeys.has(k) || seen.has(k)) return false; seen.add(k); return true; })
+        .sort((a, b) => (a.startTs || 9e15) - (b.startTs || 9e15))
+        .slice(0, 20);
+      wrap.classList.toggle('hidden', !picks.length);
+      const cnt = document.getElementById('upCount'); if (cnt) cnt.textContent = picks.length;
+      track.innerHTML = ''; dotsBox.innerHTML = '';
+      if (!picks.length) return;
+      picks.forEach((ch, i) => track.appendChild(heroSlideEl(ch, i, true)));
+      picks.forEach((_, k) => {
+        const b = document.createElement('button');
+        b.className = 'hero-dot' + (k === 0 ? ' on' : '');
+        b.setAttribute('aria-label', 'Upcoming ' + (k + 1));
+        b.addEventListener('click', () => track.scrollTo({ left: track.clientWidth * k, behavior: 'smooth' }));
+        dotsBox.appendChild(b);
+      });
+      track.scrollLeft = 0;
+      heroObserve(track, '__upIO');
+      if (!track.__bound) {
+        track.__bound = true;
+        let t;
+        track.addEventListener('scroll', () => {
+          clearTimeout(t);
+          t = setTimeout(() => {
+            const i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+            dotsBox.querySelectorAll('.hero-dot').forEach((d, k) => { d.className = 'hero-dot' + (k === i ? ' on' : ''); });
+          }, 80);
+        }, { passive: true });
+      }
     }
     function heroDecorate() {
       const track = document.getElementById('heroTrack');
