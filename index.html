@@ -374,6 +374,9 @@
     .hs-art.vid { width: min(calc(100% - 56px), 300px); height: auto; aspect-ratio: 16/9; margin: 0 auto; left: 0; right: 0; border-radius: 22px; background: #000; }
     .hs-art.vid img { padding: 14px; }
     .hs-art.vid span { font-size: 17px; }
+    .hs-live.up { background: #ff9f0a; color: #000; }
+    .hs-live.up i { background: #000; }
+    .hs-art.poster img { padding: 0; object-fit: cover; }
     .hs-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; opacity: 0; transition: opacity .35s ease; }
     .hs-art.playing .hs-vid { opacity: 1; }
     .hs-mute { position: absolute; right: 8px; bottom: 8px; z-index: 2; width: 30px; height: 30px; border: 0; border-radius: 50%; background: rgba(0,0,0,.55); color: #fff; font-size: 14px; display: none; align-items: center; justify-content: center; }
@@ -1318,6 +1321,16 @@
       return { urls, iframes };
     }
 
+    // Stream-less upcoming events (SonyLIV schedule etc.) - banner e dekhanor jonno
+    let UPCOMING_POOL = [];
+    function parseStartTs(item) {
+      const raw = item.startTime || item.start_time || item.start || item.startDate || item.start_date || item.match_time || item.matchTime ||
+        item.scheduled_at || item.scheduledAt || item.kickoff || item.kick_off || item.time || item.date || '';
+      if (raw === '' || raw == null) return 0;
+      if (typeof raw === 'number' || /^\d{9,13}$/.test(String(raw).trim())) { const n = Number(raw); return n < 1e11 ? n * 1000 : n; }
+      const t = String(raw).trim();
+      return Date.parse(t.replace(/^(\d{4}-\d{2}-\d{2})\s+/, '$1T')) || Date.parse(t) || 0;
+    }
     function normalizeChannelsJson(rawJson, offset = 0, defaultCategory = 'Live TV', sourceName = '', prefix = 'json', fallbackLogo = '', isEvent = false) {
       // If a .json file actually contains raw M3U text, parse as M3U!
       if (typeof rawJson === 'string') {
@@ -1468,7 +1481,19 @@
           });
         }
 
-        if (!servers.length) return null;
+        const startTs = parseStartTs(item);
+        if (!servers.length) {
+          const stat = String(item.status || item.match_status || item.state || '');
+          const looksUp = startTs || /upcoming|scheduled|soon|not.?started/i.test(stat) || /upcoming/i.test(String(item._parentGroup || ''));
+          if (looksUp && !(startTs && startTs < Date.now() - 6 * 3600e3)) {
+            const uid = String(item.id || item.match_id || item.contentId || `${prefix}-up-${idx}`);
+            const up = { id: uid, name, shortLabel: name.slice(0, 10), category, logo, startTs, upcoming: true, isEvent: true,
+              sourceName: sourceName || category, servers: [], streamUrl: '', iframeUrl: '' };
+            const ex = UPCOMING_POOL.findIndex(x => x.id === uid && x.sourceName === up.sourceName);
+            if (ex >= 0) UPCOMING_POOL[ex] = up; else UPCOMING_POOL.push(up);
+          }
+          return null;
+        }
 
         const streamUrl = servers[0].url || '';
         const iframeUrl = servers[0].iframe || '';
@@ -1505,6 +1530,7 @@
           hdr: servers[0].hdr || null,
           needsHeaders: Boolean(hdr.referer || hdr.ua),
           isEvent: eventFlag,
+          startTs,
           sourceName: sourceName || category,
           fromRemoteJson: true,
           premium: Boolean(item.premium || item.vip || item.isPremium),
@@ -1997,6 +2023,7 @@
     async function fetchChannelsFromJson(jsonPath = './channels.json', showFeedback = false) {
       const statusLabel = document.getElementById('jsonStatusLabel');
       const sourceText = document.getElementById('jsonSourceUrlText');
+      UPCOMING_POOL = [];
       const found = await resolveLocalSources(jsonPath);
       registerLocalM3U(found.m3u);
       const sources = found.json;
@@ -2232,7 +2259,12 @@
         /live events|willow|prime|sonyliv|fancode|toffee/i.test((c.sourceName || '') + ' ' + (c.category || ''))
       ));
 
-      const picks = eventPicks.slice(0, 15);
+      const liveNow = eventPicks.slice(0, 10);
+      const liveKeys = new Set(liveNow.map(c => nameKey(c.name)));
+      const upNext = UPCOMING_POOL
+        .filter(u => !liveKeys.has(nameKey(u.name)) && (!u.startTs || u.startTs > Date.now() - 3 * 3600e3))
+        .sort((a, b) => (a.startTs || 9e15) - (b.startTs || 9e15)).slice(0, 8);
+      const picks = liveNow.concat(upNext);
       window.__heroPicks = picks;
 
       // Clear ALL slides in heroTrack (including static intro slide) so ONLY live events show!
@@ -2261,17 +2293,21 @@
         const label = esc(ch.shortLabel || (ch.name || '').slice(0, 8));
         const n = ch.servers ? ch.servers.length : 1;
         const badgeText = (ch.sourceName || ch.category || 'LIVE EVENT').toUpperCase();
-        const meta = [ch.category || 'Live Event', ch.sourceName, n > 1 ? `${bn(n)}টি সার্ভার` : 'HD Stream'].filter(Boolean).map(esc).join('  ·  ');
+        const noStream = !(ch.servers && ch.servers.length) && !ch.streamUrl;
+        const isUp = noStream || (ch.startTs && ch.startTs > Date.now() + 60e3);
+        let whenTxt = '';
+        if (ch.startTs) { try { whenTxt = new Date(ch.startTs).toLocaleString([], { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }); } catch (e) {} }
+        const meta = [ch.category || 'Live Event', ch.sourceName, isUp ? (whenTxt || 'Coming Soon') : (n > 1 ? `${bn(n)}টি সার্ভার` : 'HD Stream')].filter(Boolean).map(esc).join('  ·  ');
         const saved = state.favorites.includes(ch.id);
         el.innerHTML = `
-          <div class="hs-art vid"><span>${label}</span>${ch.logo ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async" onerror="logoFail(this,'remove')" src="${esc(ch.logo)}" alt="" />` : ''}<video class="hs-vid" muted playsinline webkit-playsinline preload="none" data-play-channel="${esc(ch.id)}"></video><button type="button" class="hs-mute" aria-label="Sound">🔇</button></div>
+          <div class="hs-art vid${noStream ? ' poster' : ''}"><span>${label}</span>${ch.logo ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async" onerror="logoFail(this,'remove')" src="${esc(ch.logo)}" alt="" />` : ''}${noStream ? '' : `<video class="hs-vid" muted playsinline webkit-playsinline preload="none" data-play-channel="${esc(ch.id)}"></video><button type="button" class="hs-mute" aria-label="Sound">🔇</button>`}</div>
           <div class="hs-body">
-            <span class="hs-live"><i></i>LIVE EVENT • ${esc(badgeText)}</span>
+            <span class="hs-live${isUp ? ' up' : ''}"><i></i>${isUp ? 'UPCOMING' : 'LIVE EVENT'} • ${esc(badgeText)}</span>
             <h2 class="hs-title">${esc(ch.name)}</h2>
             <p class="hs-sub">${meta}</p>
             <div class="hs-actions">
-              <button data-play-channel="${esc(ch.id)}" class="hs-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch Live</button>
-              <button data-hero-fav="${esc(ch.id)}" class="hs-ghost" aria-label="My List">${saved ? '✓' : '+'}</button>
+              ${noStream ? `<button type="button" class="hs-btn" disabled style="opacity:.6">⏰ ${esc(whenTxt || 'Coming Soon')}</button>` : `<button data-play-channel="${esc(ch.id)}" class="hs-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>${isUp ? 'Watch' : 'Watch Live'}</button>`}
+              ${noStream ? '' : `<button data-hero-fav="${esc(ch.id)}" class="hs-ghost" aria-label="My List">${saved ? '✓' : '+'}</button>`}
             </div>
           </div>`;
         track.appendChild(el);
