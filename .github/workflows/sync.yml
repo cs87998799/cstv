@@ -1,8 +1,8 @@
-name: Sync Toffee and SonyLiv Data
+name: Sync Toffee, SonyLiv and AynaOTT Data
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -20,11 +20,12 @@ jobs:
           curl -fsSL -o toffee_playlist.m3u "https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update/main/toffee_playlist.m3u"
           curl -fsSL -o sonyLiv_data.json "https://raw.githubusercontent.com/sm-monirulislam/SonyLiv_Event_Playlist/main/sonyLiv_data.json"
           curl -fsSL -o sonyLiv.m3u "https://raw.githubusercontent.com/sm-monirulislam/SonyLiv_Event_Playlist/main/sonyLiv.m3u"
+          curl -fsSL -o aynaott_data.json "https://raw.githubusercontent.com/sm-monirulislam/AynaOTT_Auto_Update_Playlist/main/aynaott_data.json"
 
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add toffee_data.json toffee_playlist.m3u sonyLiv_data.json sonyLiv.m3u
+          git add toffee_data.json toffee_playlist.m3u sonyLiv_data.json sonyLiv.m3u aynaott_data.json
           git diff --staged --quiet || git commit -m "Auto sync"
           git push
