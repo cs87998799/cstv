@@ -1,4 +1,4 @@
-name: Sync Toffee Data
+name: Sync Toffee and SonyLiv Data
 
 on:
   schedule:
@@ -14,14 +14,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download latest JSON
+      - name: Download latest JSON files
         run: |
           curl -fsSL -o toffee_data.json "https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update/main/toffee_data.json"
+          curl -fsSL -o sonyLiv_data.json "https://raw.githubusercontent.com/sm-monirulislam/SonyLiv_Event_Playlist/main/sonyLiv_data.json"
 
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add toffee_data.json
+          git add toffee_data.json sonyLiv_data.json
           git diff --staged --quiet || git commit -m "Auto sync"
           git push
