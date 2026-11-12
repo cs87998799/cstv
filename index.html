@@ -2258,53 +2258,32 @@
       if (typeof appOnChannelsReady === 'function') appOnChannelsReady();
     }
 
+    // Compact category navigation: Live Action is reserved for Tapmad + SonyLIV only.
+    function isLiveActionSource(ch) {
+      const sourceText = [ch && ch.sourceName, ch && ch.id]
+        .concat((ch && ch.servers || []).map(sv => sv && sv.sourceName))
+        .filter(Boolean).join(' ');
+      return /tapmad|sony\s?liv/i.test(sourceText);
+    }
+
     function matchesCategory(ch, selectedCat) {
       if (!selectedCat || selectedCat.toLowerCase() === 'all') return true;
-      const sel = selectedCat.trim().toLowerCase();
-      const cat = (ch.category || '').trim().toLowerCase();
-      if (cat === sel) return true;
-      if (sel === 'live events' && (ch.isEvent || /event|live sports/i.test(cat) || /event|match|vs/i.test(ch.name))) return true;
-      if (sel === 'sports' && (/sport|cricket|football|tennis/i.test(cat) || ch.isEvent)) return true;
-      if (sel === 'cricket' && (/cricket/i.test(cat) || /cricket/i.test(ch.name))) return true;
+      if (selectedCat.trim().toLowerCase() === 'live action') return isLiveActionSource(ch);
       return false;
     }
 
     function renderCategoryNavTabs() {
       const nav = document.getElementById('topCategoryNav');
       if (!nav) return;
-      const uniqueCats = [];
-      const priorityOrder = ['Cricket', 'Sports', 'Live Events', 'Live Action', 'Bangla TV', 'SonyLIV', 'News', 'Drama', 'Movies', 'Entertainment', 'Music', 'Kids', 'Infotainment', 'Documentary', 'Religious', 'Web Series'];
-      
-      CHANNELS.forEach(ch => {
-        const c = (ch.category || 'Live TV').trim();
-        if (c && !uniqueCats.some(existing => existing.toLowerCase() === c.toLowerCase())) {
-          uniqueCats.push(c);
-        }
-      });
-
-      // Ensure 'Live Events' is always available in tabs if we have events
-      // Live Events tab bondho kora hoyeche
-      for (let i = uniqueCats.length - 1; i >= 0; i--) { if (uniqueCats[i].toLowerCase() === 'live events') uniqueCats.splice(i, 1); }
-      if (state.currentCategory && state.currentCategory.toLowerCase() === 'live events') state.currentCategory = 'all';
-
-      uniqueCats.sort((a, b) => {
-        const idxA = priorityOrder.findIndex(p => p.toLowerCase() === a.toLowerCase());
-        const idxB = priorityOrder.findIndex(p => p.toLowerCase() === b.toLowerCase());
-        if (idxA !== -1 && idxB !== -1) return idxA - idxB;
-        if (idxA !== -1) return -1;
-        if (idxB !== -1) return 1;
-        return a.localeCompare(b);
-      });
-
+      const liveActionCount = CHANNELS.filter(isLiveActionSource).length;
+      if (state.currentCategory && !['all', 'live action'].includes(state.currentCategory.toLowerCase())) {
+        state.currentCategory = 'all';
+      }
       const isAllActive = !state.currentCategory || state.currentCategory.toLowerCase() === 'all';
-      const tabsHtml = [
+      nav.innerHTML = [
         `<button data-cat="all" class="cat-tab ${isAllActive ? 'active-cat text-pink-400 font-bold' : 'text-slate-300 hover:text-white'} transition">Live TV (${CHANNELS.length})</button>`,
-        ...uniqueCats.map(cat => {
-          const isActive = !isAllActive && state.currentCategory.toLowerCase() === cat.toLowerCase();
-          return `<button data-cat="${cat}" class="cat-tab ${isActive ? 'active-cat text-pink-400 font-bold' : 'text-slate-300 hover:text-white'} transition">${cat}</button>`;
-        })
-      ];
-      nav.innerHTML = tabsHtml.join('');
+        `<button data-cat="Live Action" class="cat-tab ${!isAllActive ? 'active-cat text-pink-400 font-bold' : 'text-slate-300 hover:text-white'} transition">Live Action (${liveActionCount})</button>`
+      ].join('');
     }
 
     function heroEsc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch])); }
@@ -2829,7 +2808,7 @@
     let streamCheckTimer = null;
     let stallTimer = null;
     let startWatchTimer = null;
-    const START_TIMEOUT_MS = 5000; // video 5 sec e na challe auto server/channel change
+    const START_TIMEOUT_MS = 5000; // normal sources: quick startup check; Toffee gets a longer grace period
     const MAX_AUTO_SKIP = 3; // porpor koyta channel fail hole 'sorry' pic ashbe
     let playerLocked = false;
     const PL_VOL_ON = '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>';
@@ -3257,9 +3236,13 @@
         showSorry();
         return;
       }
-      // Toffee/SonyLIV: token expire hoye thakle JSON/M3U abar ene notun link diye retry (45s e ekbar)
-      if (ch && /toffee|sony/i.test(String(ch.sourceName || '')) && Date.now() - (window.__lastLinkRefresh || 0) > 45000) {
+      // Toffee/SonyLIV: refresh an expired playlist link once before failing over.
+      const isToffeeFailure = !!(ch && /toffee/i.test(String(ch.sourceName || '') + ' ' + (ch.servers || []).map(sv => sv && sv.sourceName || '').join(' ')));
+      window.__toffeeRefreshedIds = window.__toffeeRefreshedIds || new Set();
+      if (ch && /toffee|sony/i.test(String(ch.sourceName || '') + ' ' + (ch.servers || []).map(sv => sv && sv.sourceName || '').join(' ')) &&
+          Date.now() - (window.__lastLinkRefresh || 0) > 45000 && (!isToffeeFailure || !window.__toffeeRefreshedIds.has(ch.id))) {
         window.__lastLinkRefresh = Date.now();
+        if (isToffeeFailure) window.__toffeeRefreshedIds.add(ch.id);
         const cid = ch.id;
         setPlayerStatus('লিংক নতুন করে আনা হচ্ছে…', 3000);
         fetchChannelsFromJson(state.jsonUrl || './channels.json', false).then(() => {
@@ -3677,7 +3660,8 @@
       engineIdx = 0;
 
       // Startup timeout -> auto next channel
-      streamCheckTimer = setTimeout(() => handleStreamFailure(token, 'timeout'), 24000 + (engineChain.length - 1) * 8000);
+      const isToffeeChannel = /toffee/i.test(String(ch.sourceName || '') + ' ' + (ch.servers || []).map(sv => sv && sv.sourceName || '').join(' '));
+      streamCheckTimer = setTimeout(() => handleStreamFailure(token, 'timeout'), (isToffeeChannel ? 90000 : 24000) + (engineChain.length - 1) * 8000);
 
       armStartWatch(token);
       runEngine(token);
@@ -3686,6 +3670,8 @@
     // 4 second er moddhe video na challe: age onno server, na thakle porer channel
     function armStartWatch(token) {
       clearTimeout(startWatchTimer);
+      const activeCh = CHANNELS[state.currentChannelIndex];
+      const isToffeeChannel = /toffee/i.test(String(activeCh && activeCh.sourceName || '') + ' ' + ((activeCh && activeCh.servers) || []).map(sv => sv && sv.sourceName || '').join(' '));
       startWatchTimer = setTimeout(() => {
         startWatchTimer = null;
         const v = $p('liveVideoEl');
@@ -3696,7 +3682,7 @@
         if (ok) return;
         setPlayerStatus('৫ সেকেন্ডে চালু হয়নি • অটো সার্ভার/চ্যানেল বদলাচ্ছি…', 2500);
         handleStreamFailure(token, 'start-5s');
-      }, START_TIMEOUT_MS);
+      }, isToffeeChannel ? 85000 : START_TIMEOUT_MS);
     }
 
     function tryPlayVideo() {
