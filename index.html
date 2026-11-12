@@ -1465,7 +1465,7 @@
 
         let servers = [];
         extracted.urls.forEach((u, sIdx) => {
-          const finalUrl = (hdr.referer || hdr.ua || hdr.cookie) ? proxify(u, hdr) : u;
+          const finalUrl = proxify(u, hdr);
           servers.push({
             name: `Server ${sIdx + 1}`,
             url: finalUrl,
@@ -1487,7 +1487,7 @@
             if (u && IMAGE_EXT.test(u)) u = '';
             const svDrm = typeof sv === 'object' ? extractDrmFromObject(sv) : null;
             const finalDrm = (svDrm && (Object.keys(svDrm.clearKeys).length || svDrm.licenseUrl)) ? svDrm : ((drm && (Object.keys(drm.clearKeys).length || drm.licenseUrl)) ? drm : null);
-            const finalUrl = (u && (hdr.referer || hdr.ua || hdr.cookie)) ? proxify(u, hdr) : u;
+            const finalUrl = u ? proxify(u, hdr) : u;
             if ((finalUrl || f) && !servers.some(existing => existing.url === finalUrl && existing.iframe === f)) {
               servers.push({
                 name: sv.name || `Server ${servers.length + 1}`,
@@ -1599,7 +1599,9 @@
 
     // Stream proxy (Cloudflare Worker). Fancode er Referer/User-Agent lage, browser eta pathate pare na.
     // Worker URL ekhane boshan ba site er link e ?proxy=https://your-worker.workers.dev joure din (browser e save thake).
-    let STREAM_PROXY = '';
+    // Cloudflare Worker link ekhane boshan (ba ?proxy=... diye ekbar khulun)
+    const DEFAULT_STREAM_PROXY = '';
+    let STREAM_PROXY = DEFAULT_STREAM_PROXY;
     try {
       const q = new URLSearchParams(location.search).get('proxy');
       if (q !== null) localStorage.setItem('sarah_stream_proxy', q);
@@ -1607,6 +1609,9 @@
     } catch (e) {}
     function proxify(url, headers) {
       if (!STREAM_PROXY) return url;
+      // Sudhu header lagbe emon ba SonyLIV/Akamai stream proxy te jabe (Worker er free limit bachate)
+      const needs = !!(headers && (headers.referer || headers.ua || headers.cookie)) || /sonyeventsglobal|sonydaime|sonyliv/i.test(String(url));
+      if (!needs) return url;
       let u = STREAM_PROXY + '?url=' + encodeURIComponent(url);
       if (headers && headers.referer) u += '&referer=' + encodeURIComponent(headers.referer);
       if (headers && headers.ua) u += '&ua=' + encodeURIComponent(headers.ua);
@@ -3133,16 +3138,26 @@
     }
 
     function buildEngineChain(type, channel) {
-      const c = buildEngineChainBase(type, channel);
-      // Akamai/SonyLIV: hls.js XHR CORS e atke, tai browser er nijer HLS player (CORS lage na) age try
+      // Toffee: DRM/ClearKey na thakle normal HLS er moto (native -> hls.js -> shaka), DRM thakle Shaka age
+      let hasDrm = false, isToffee = false;
+      try {
+        const sv = (channel && typeof activeServer === 'function') ? (activeServer(channel) || {}) : {};
+        const d = sv.drm || (channel && channel.drm) || null;
+        hasDrm = !!(d && (Object.keys(d.clearKeys || {}).length || d.licenseUrl));
+        isToffee = /toffee/i.test(String((channel && (channel.sourceName || channel.id)) || ''));
+      } catch (e) {}
+      const plainToffee = isToffee && !hasDrm && type !== 'dash';
+      const baseType = plainToffee ? 'hls' : type;
+      const c = buildEngineChainBase(baseType, plainToffee ? null : channel);
+      // Akamai/SonyLIV/Toffee: hls.js XHR CORS e atke, tai browser er nijer HLS player (CORS lage na) age try
       try {
         const v = document.createElement('video');
         const nativeHls = !!(v.canPlayType && v.canPlayType('application/vnd.apple.mpegurl'));
-        const isSonyish = /sony|akamaized/i.test(String((channel && (channel.sourceName || '')) + ' ' + (channel && (channel.streamUrl || ''))));
-        if (nativeHls && isSonyish && type === 'hls') { const k = c.indexOf('native'); if (k >= 0) c.splice(k, 1); c.unshift('native'); }
+        const isSonyish = plainToffee || /sony|akamaized/i.test(String((channel && (channel.sourceName || '')) + ' ' + (channel && (channel.streamUrl || ''))));
+        if (nativeHls && isSonyish && baseType === 'hls' && !hasDrm && !STREAM_PROXY) { const k = c.indexOf('native'); if (k >= 0) c.splice(k, 1); c.unshift('native'); }
       } catch (e) {}
       const i = c.indexOf('hls');
-      if (i >= 0 && !STREAM_PROXY && type !== 'drm' && !/toffee/i.test((channel && channel.sourceName) || '')) c.splice(i + 1, 0, 'hlsproxy', 'hlsproxy2');
+      if (i >= 0 && !STREAM_PROXY && !hasDrm && type !== 'drm') c.splice(i + 1, 0, 'hlsproxy', 'hlsproxy2');
       return c;
     }
     function buildEngineChainBase(type, channel) {
@@ -3198,6 +3213,17 @@
 
       if (currentIsCustom) {
         showSorry();
+        return;
+      }
+      // Toffee/SonyLIV: token expire hoye thakle JSON/M3U abar ene notun link diye retry (45s e ekbar)
+      if (ch && /toffee|sony/i.test(String(ch.sourceName || '')) && Date.now() - (window.__lastLinkRefresh || 0) > 45000) {
+        window.__lastLinkRefresh = Date.now();
+        const cid = ch.id;
+        setPlayerStatus('লিংক নতুন করে আনা হচ্ছে…', 3000);
+        fetchChannelsFromJson(state.jsonUrl || './channels.json', false).then(() => {
+          const i = CHANNELS.findIndex(c => c.id === cid);
+          if (i >= 0 && playerIsOpen()) { state.currentChannelIndex = i; srvFail = 0; loadCurrentChannelInPlayer(); }
+        }).catch(() => {});
         return;
       }
       // Ager server na cholle, ekoi channel er porer server e jabe
