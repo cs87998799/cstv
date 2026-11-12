@@ -338,9 +338,7 @@
   <style>
     /* ===== HERO v4 (Apple TV style • halka animation: sudhu opacity/transform) ===== */
     #heroWrap { position: relative; overflow: hidden; margin: 6px 14px 0; border-radius: 28px; background: #000; user-select: none; contain: layout paint; }
-    #heroTrack, #upTrack { scrollbar-width: none; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
-    #upTrack .hs { content-visibility: auto; contain-intrinsic-size: 100% 460px; transition: opacity .35s ease; }
-    .hs, .hs-art, .hs-body > * { will-change: auto; backface-visibility: hidden; }
+    #heroTrack { scrollbar-width: none; }
     .hs { position: relative; min-width: 100%; height: clamp(430px, 118vw, 500px); overflow: hidden; isolation: isolate; color: #f5f5f7;
       --h: 220;
       background:
@@ -1463,7 +1461,7 @@
 
         let servers = [];
         extracted.urls.forEach((u, sIdx) => {
-          const finalUrl = (hdr.referer || hdr.ua) ? proxify(u, hdr) : u;
+          const finalUrl = (hdr.referer || hdr.ua || hdr.cookie) ? proxify(u, hdr) : u;
           servers.push({
             name: `Server ${sIdx + 1}`,
             url: finalUrl,
@@ -1485,7 +1483,7 @@
             if (u && IMAGE_EXT.test(u)) u = '';
             const svDrm = typeof sv === 'object' ? extractDrmFromObject(sv) : null;
             const finalDrm = (svDrm && (Object.keys(svDrm.clearKeys).length || svDrm.licenseUrl)) ? svDrm : ((drm && (Object.keys(drm.clearKeys).length || drm.licenseUrl)) ? drm : null);
-            const finalUrl = (u && (hdr.referer || hdr.ua)) ? proxify(u, hdr) : u;
+            const finalUrl = (u && (hdr.referer || hdr.ua || hdr.cookie)) ? proxify(u, hdr) : u;
             if ((finalUrl || f) && !servers.some(existing => existing.url === finalUrl && existing.iframe === f)) {
               servers.push({
                 name: sv.name || `Server ${servers.length + 1}`,
@@ -1576,6 +1574,13 @@
     // ===== 🔰 Active M3U Playlists (SonyLiv, Both Toffee, Ayna OTT, Tapmad, Jago BD, SM Combined) 🔰 =====
     const M3U_SOURCES = [
       // Root folder er sokol .m3u file auto-discover hoye ekhane add hoy (discoverRootFiles)
+      // 📡 Ayna OTT Playlist
+      {
+        url: 'https://raw.githubusercontent.com/sm-monirulislam/AynaOTT_Auto_Update_Playlist/refs/heads/main/aynaott.m3u',
+        prefix: 'sm-ayna',
+        sourceName: 'Ayna OTT',
+        defaultCategory: 'Ayna OTT'
+      },
       // 📡 Tapmad Playlist
       {
         url: 'https://raw.githubusercontent.com/sm-monirulislam/Tapmad_Auto_Update_Playlist/refs/heads/main/tapmad_sm.m3u',
@@ -1601,6 +1606,8 @@
       let u = STREAM_PROXY + '?url=' + encodeURIComponent(url);
       if (headers && headers.referer) u += '&referer=' + encodeURIComponent(headers.referer);
       if (headers && headers.ua) u += '&ua=' + encodeURIComponent(headers.ua);
+      if (headers && headers.cookie) u += '&cookie=' + encodeURIComponent(String(headers.cookie).replace(/^cookie:\s*/i, ''));
+      if (headers && headers.origin) u += '&origin=' + encodeURIComponent(headers.origin);
       return u;
     }
     let M3U_CHANNELS = [];
@@ -1815,6 +1822,7 @@
           const r = await fetchPlaylistText(src);
           if (!r.text) { M3U_STATUS[src.prefix] = { ok: false, errs: r.errs }; return []; }
           const out = parseM3U(r.text, src.prefix);
+          if (src.heroLive) out.forEach(c => { c.heroLive = true; });
           M3U_STATUS[src.prefix] = { ok: true, via: r.via, count: out.length };
           return out;
         } catch (e) { M3U_STATUS[src.prefix] = { ok: false, errs: [String(e)] }; return []; }
@@ -1863,6 +1871,23 @@
             });
           });
         });
+        // Best & sohoje chole emon stream age; max 2 server (best + 1 fallback)
+        const score = (sv) => {
+          const u = String(sv.rawUrl || sv.url || '');
+          let sc = 0;
+          if (sv.iframe && !sv.url) sc += 50;
+          if (sv.drm && (Object.keys(sv.drm.clearKeys || {}).length || sv.drm.licenseUrl)) sc += 30;
+          if (sv.hdr || (sv.url && sv.rawUrl && sv.url !== sv.rawUrl)) sc += 20;
+          if (/^http:\/\//i.test(u)) sc += 15;
+          if (/\.m3u8(\?|$)/i.test(u)) sc += 0; else if (/\.mpd(\?|$)/i.test(u)) sc += 10; else sc += 5;
+          const sn = String(sv.sourceName || '');
+          sc += /sony|toffee/i.test(sn) ? 0 : (/tapmad/i.test(sn) ? 2 : (/ayna/i.test(sn) ? 6 : 3));
+          return sc;
+        };
+        if (servers.length > 1) {
+          servers.map((sv, i) => ({ sv, i, sc: score(sv) })).sort((a, b) => a.sc - b.sc || a.i - b.i).forEach((o, k) => { servers[k] = o.sv; });
+          servers.length = Math.min(servers.length, 2);
+        }
         if (!servers.length) servers.push({ url: base.streamUrl || '', rawUrl: base.streamUrl || '', iframe: base.iframeUrl || '' });
         servers.forEach((sv, i) => {
           sv.name = sv.sourceName ? `Server ${i + 1} (${sv.sourceName})` : `Server ${i + 1}`;
@@ -1913,7 +1938,14 @@
       const base = JSON_CHANNELS.length ? JSON_CHANNELS : DEFAULT_CHANNELS_JSON.map(c => Object.assign({ servers: [{ url: c.streamUrl, iframe: '' }] }, c));
       
       // Order matters: SonyLiv & Live Sports events first, then M3U, then local base
-      CHANNELS = groupChannels(REMOTE_JSON_CHANNELS.concat(M3U_CHANNELS, base));
+      let all = REMOTE_JSON_CHANNELS.concat(M3U_CHANNELS, base);
+      const isAyna = (c) => /ayna/i.test((c.sourceName || '') + ' ' + (c.id || ''));
+      if (AYNA_MODE === 'off') all = all.filter(c => !isAyna(c));
+      else if (AYNA_MODE === 'unique') {
+        const others = new Set(all.filter(c => !isAyna(c)).map(c => nameKey(c.name)));
+        all = all.filter(c => !isAyna(c) || !others.has(nameKey(c.name)));
+      }
+      CHANNELS = groupChannels(all);
       CHANNELS.forEach(c => {
         if (srvById[c.id] != null && srvById[c.id] < c.servers.length) {
           c.srv = srvById[c.id];
@@ -1952,8 +1984,13 @@
 
     // ===== Root folder er sokol .json + .m3u file auto-discover =====
     const ROOT_SKIP = /^(package(-lock)?|manifest|composer|tsconfig|jsconfig|vercel|netlify|firebase|renovate|\.eslintrc|\.prettierrc)\.json$/i;
+    // Sudhu ei 4 ta root file load hobe
+    const ROOT_FILES = ['sonyLiv.m3u', 'sonyLiv_data.json', 'toffee_data.json', 'toffee_playlist.m3u'];
+    // Ayna OTT: 'unique' = sudhu je channel onno source e nai; 'off' = Ayna ekdom bondho
+    const AYNA_MODE = 'unique';
     async function discoverRootFiles() {
-      const CK = 'sarah_root_files_v3';
+      return ROOT_FILES.slice();
+      const CK = 'sarah_root_files_v2';
       try {
         const c = JSON.parse(sessionStorage.getItem(CK) || 'null');
         if (c && Date.now() - c.t < 5 * 60 * 1000 && c.files && c.files.length) return c.files;
@@ -2001,7 +2038,7 @@
         hits.forEach(add);
       }
       // Always load these root files (GitHub API / dir-listing fail korleo)
-      ['aynaott_data.json', 'sonyLiv_data.json', 'toffee_data.json', 'sonyLiv.m3u', 'toffee_playlist.m3u'].forEach(add);
+      ['toffee_data.json', 'sonyLiv_data.json'].forEach(add);
       files.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
       try { sessionStorage.setItem(CK, JSON.stringify({ t: Date.now(), files })); } catch (e) {}
       return files;
@@ -2015,7 +2052,8 @@
           url,
           prefix: 'root-' + n.replace(/\W+/g, '_'),
           sourceName: /toffee/i.test(n) ? 'Toffee' : (/sony/i.test(n) ? 'SonyLIV' : 'Local'),
-          defaultCategory: /toffee/i.test(n) ? 'Toffee Live' : (/sony/i.test(n) ? 'SonyLIV Live' : n.replace(/\.m3u$/i, ''))
+          heroLive: /toffee|sony/i.test(n),
+          defaultCategory: n.replace(/\.m3u$/i, '')
         });
       });
     }
@@ -2060,9 +2098,9 @@
       localResults.forEach(r => {
         if (!r) return;
         const fnm = decodeURIComponent(String(r.src).split('?')[0].split('/').pop() || '');
-        const isToffee = /toffee/i.test(fnm), isSony = /sony/i.test(fnm), isAyna = /ayna/i.test(fnm);
-        const srcName = isToffee ? 'Toffee' : (isSony ? 'SonyLIV' : (isAyna ? 'Ayna OTT' : 'Local'));
-        const list = normalizeChannelsJson(r.data, merged.length, isToffee ? 'Toffee Live' : (isSony ? 'SonyLIV Live' : (isAyna ? 'Ayna OTT' : 'Live TV')), srcName, isToffee ? 'toffee' : (isSony ? 'sonyliv' : (isAyna ? 'ayna' : 'local')));
+        const isToffee = /toffee/i.test(fnm), isSony = /sony/i.test(fnm);
+        const srcName = isToffee ? 'Toffee' : (isSony ? 'SonyLIV' : 'Local');
+        const list = normalizeChannelsJson(r.data, merged.length, isToffee ? 'Toffee Live' : (isSony ? 'SonyLIV Live' : 'Live TV'), srcName, isToffee ? 'toffee' : (isSony ? 'sonyliv' : 'local'));
         if (list && (isToffee || isSony)) list.forEach(ch => { ch.heroLive = true; });
         if (!list || !list.length) return;
         filesLoaded++;
@@ -2304,7 +2342,7 @@
 
       const hasStream = (c) => (c.servers || []).some(sv => sv && (sv.url || sv.iframe)) || c.streamUrl;
       const isFuture = (c) => c.startTs && c.startTs > Date.now() + 60e3;
-      const picks = pool.filter(c => hasStream(c) && !isFuture(c) && !/ayna/i.test(heroSrcText(c)) && (
+      const picks = pool.filter(c => hasStream(c) && !isFuture(c) && !/ayna/i.test((c.sourceName || '') + ' ' + (c.id || '')) && (
         c.heroLive || c.isEvent ||
         /live events|willow|prime|sonyliv|fancode|toffee/i.test((c.sourceName || '') + ' ' + (c.category || ''))
       )).slice(0, 12);
@@ -2343,7 +2381,7 @@
       renderUpcomingBanner(picks);
     }
 
-    // ===== Banner 2: UPCOMING schedule (max 80, sudhu SonyLIV + Tapmad) =====
+    // ===== Banner 2: UPCOMING schedule (max 20, sudhu SonyLIV + Tapmad) =====
     function renderUpcomingBanner(livePicks) {
       const wrap = document.getElementById('upWrap');
       const track = document.getElementById('upTrack');
@@ -2354,24 +2392,17 @@
       const fromChannels = (CHANNELS || []).filter(c => c.startTs && c.startTs > now + 60e3);
       const seen = new Set();
       const picks = UPCOMING_POOL.concat(fromChannels)
-        .filter(c => /sony|tapmad/i.test(heroSrcText(c)) && !/ayna/i.test(heroSrcText(c)))
+        .filter(c => /sony|tapmad/i.test(heroSrcText(c)) && !/ayna/i.test((c.sourceName || '') + ' ' + (c.id || '')))
         .filter(c => !c.startTs || c.startTs > now - 3 * 3600e3)
         .filter(c => { const k = nameKey(c.name); if (liveKeys.has(k) || seen.has(k)) return false; seen.add(k); return true; })
         .sort((a, b) => (a.startTs || 9e15) - (b.startTs || 9e15))
-        .slice(0, 80);
+        .slice(0, 20);
       wrap.classList.toggle('hidden', !picks.length);
       const cnt = document.getElementById('upCount'); if (cnt) cnt.textContent = picks.length;
       track.innerHTML = ''; dotsBox.innerHTML = '';
       if (!picks.length) return;
       picks.forEach((ch, i) => track.appendChild(heroSlideEl(ch, i, true)));
-      const manyUp = picks.length > 10;
-      if (manyUp) {
-        const pill = document.createElement('span');
-        pill.id = 'upPill';
-        pill.style.cssText = 'padding:3px 11px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;font-weight:700;backdrop-filter:blur(6px)';
-        pill.textContent = '1 / ' + picks.length;
-        dotsBox.appendChild(pill);
-      } else picks.forEach((_, k) => {
+      picks.forEach((_, k) => {
         const b = document.createElement('button');
         b.className = 'hero-dot' + (k === 0 ? ' on' : '');
         b.setAttribute('aria-label', 'Upcoming ' + (k + 1));
@@ -2388,22 +2419,8 @@
           t = setTimeout(() => {
             const i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
             dotsBox.querySelectorAll('.hero-dot').forEach((d, k) => { d.className = 'hero-dot' + (k === i ? ' on' : ''); });
-            const pl = document.getElementById('upPill'); if (pl) pl.textContent = (i + 1) + ' / ' + track.children.length;
-          }, 60);
+          }, 80);
         }, { passive: true });
-        // smooth auto-slide every 7s (loop)
-        let upTouch = false, upVis = true;
-        track.addEventListener('touchstart', () => { upTouch = true; }, { passive: true });
-        track.addEventListener('touchend', () => { setTimeout(() => { upTouch = false; }, 4000); }, { passive: true });
-        try { new IntersectionObserver(es => { upVis = es[0].isIntersecting; }, { threshold: 0.3 }).observe(wrap); } catch (e) {}
-        setInterval(() => {
-          if (upTouch || !upVis || document.hidden) return;
-          const home = document.getElementById('viewHome');
-          if (home && home.classList.contains('hidden')) return;
-          const n = track.children.length; if (n < 2) return;
-          const i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
-          track.scrollTo({ left: track.clientWidth * ((i + 1) % n), behavior: 'smooth' });
-        }, 7000);
       }
     }
     function heroDecorate() {
@@ -2761,7 +2778,7 @@
     let streamCheckTimer = null;
     let stallTimer = null;
     let startWatchTimer = null;
-    const START_TIMEOUT_MS = 7000; // video 5 sec e na challe auto server/channel change
+    const START_TIMEOUT_MS = 5000; // video 5 sec e na challe auto server/channel change
     const MAX_AUTO_SKIP = 3; // porpor koyta channel fail hole 'sorry' pic ashbe
     let playerLocked = false;
     const PL_VOL_ON = '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>';
@@ -3112,6 +3129,12 @@
     }
 
     function buildEngineChain(type, channel) {
+      const c = buildEngineChainBase(type, channel);
+      const i = c.indexOf('hls');
+      if (i >= 0 && !STREAM_PROXY && type !== 'drm' && !/toffee/i.test((channel && channel.sourceName) || '')) c.splice(i + 1, 0, 'hlsproxy', 'hlsproxy2');
+      return c;
+    }
+    function buildEngineChainBase(type, channel) {
       const hlsOk = !!(window.Hls && Hls.isSupported());
       const shakaOk = !!(window.shaka && shaka.Player && shaka.Player.isBrowserSupported && shaka.Player.isBrowserSupported());
       // Toffee streams may be encrypted HLS / ClearKey. Try Shaka first so the
@@ -3150,7 +3173,7 @@
           failStreak = 0;
           state.currentChannelIndex = (state.currentChannelIndex + 1) % CHANNELS.length;
           loadCurrentChannelInPlayer();
-        }, 7000);
+        }, 5000);
       }
     }
     let sorryTimer = null;
@@ -3711,7 +3734,9 @@
           }).catch(() => {
             if (shakaInstance === player) failEngine(token, 'shaka-load-fail');
           });
-        } else if (engine === 'hls') {
+        } else if (engine === 'hls' || engine === 'hlsproxy' || engine === 'hlsproxy2') {
+          // hlsproxy*: direct CORS-e atkale public CORS proxy diye try (worker lagbe na)
+          const pubBase = engine === 'hlsproxy' ? 'https://corsproxy.io/?url=' : (engine === 'hlsproxy2' ? 'https://api.allorigins.win/raw?url=' : '');
           const saver = !!state.dataSaver;
           const hls = new Hls({
             enableWorker: true,
@@ -3736,12 +3761,14 @@
             xhrSetup: function (xhr, url) {
               xhr.withCredentials = false;
               // Forward Akamai hdntl / hdnea query tokens to child variant playlists and segments if missing
+              let target = url;
               if (masterToken && url && !url.includes('hdntl=') && !url.includes('hdnea=') && !url.includes('Signature=')) {
-                try {
-                  const tokenizedUrl = appendTokenToSubUrl(url, masterToken);
-                  xhr.open('GET', tokenizedUrl, true);
-                } catch (e) {}
+                target = appendTokenToSubUrl(url, masterToken);
               }
+              try {
+                if (pubBase) xhr.open('GET', pubBase + encodeURIComponent(target), true);
+                else if (target !== url) xhr.open('GET', target, true);
+              } catch (e) {}
             }
           });
           hlsInstance = hls;
@@ -5215,7 +5242,7 @@
         var home = document.getElementById('viewHome');
         if (home && home.classList.contains('hidden')) return;
         scrollToHeroSlide(idx() + 1);
-      }, 7000);
+      }, 6000);
     }
     function stop() { if (timer) clearInterval(timer); }
     track.addEventListener('touchstart', function () { userTouch = true; }, { passive: true });
