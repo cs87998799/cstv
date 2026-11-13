@@ -172,7 +172,14 @@ def main():
         log("\nCandidate URL gulo:")
         for u in sorted(seen):
             log("  " + u)
-        open("debug_report.txt", "w", encoding="utf-8").write("\n".join(report))
+
+    log(f"\n[page length] {len(page)} chars")
+    log("[page start]\n" + page[:1500])
+    inline = re.findall(r"https?://[^\s\"'<>]+", clean(page))
+    log("\n[all URLs in page]")
+    for u in sorted(set(inline))[:80]:
+        log("  " + u)
+    open("debug_report.txt", "w", encoding="utf-8").write("\n".join(report))
 
     with open(OUT_JSON, "w", encoding="utf-8") as f:
         json.dump({"source": SITE,
