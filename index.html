@@ -612,6 +612,45 @@
     }
   </style>
 <script>try{localStorage.removeItem('sarah_lite');localStorage.removeItem('sarah_lite_recent');localStorage.removeItem('sarah_lite_plays');}catch(e){}</script>
+
+  <style>
+    /* ===== Banner polish v5: choto lekha, smooth, sundor ===== */
+    #heroWrap, #upCard { border-radius: 24px; box-shadow: 0 14px 40px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.07); }
+    #heroTrack, #upTrack { scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+    .hs { height: clamp(236px, 62vw, 268px); will-change: transform; scroll-snap-align: center; scroll-snap-stop: always; }
+    .hs.up-slide { height: clamp(222px, 58vw, 250px); }
+    .hs::after { height: 70%; background: linear-gradient(to top, rgba(0,0,0,.96) 4%, rgba(0,0,0,.55) 50%, transparent); }
+    .hs-art { top: 16px; width: 76px; height: 76px; margin-left: -38px; border-radius: 20px; transition: opacity .6s ease, transform .7s cubic-bezier(.22,.9,.28,1); }
+    .hs-art.vid, .hs.up-slide .hs-art.vid { width: min(calc(100% - 120px), 168px); border-radius: 14px; top: 16px; box-shadow: 0 14px 30px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.16); }
+    .hs-art span { font-size: 15px; }
+    .hs-body { padding: 0 16px 26px; }
+    .hs.up-slide .hs-body { padding-bottom: 30px; }
+    .hs-body > * { transition: opacity .6s ease, transform .7s cubic-bezier(.22,.9,.28,1); }
+    .hs-live { padding: 3px 9px; font-size: 9.5px; letter-spacing: .07em; gap: 6px; box-shadow: 0 4px 12px rgba(255,59,48,.35); }
+    .hs-live.up { box-shadow: 0 4px 12px rgba(255,159,10,.3); }
+    .hs-live i { width: 5px; height: 5px; }
+    .hs-title { margin-top: 6px; font-size: clamp(16px, 4.6vw, 20px); font-weight: 700; line-height: 1.15; letter-spacing: -.015em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .hs-sub { margin-top: 3px; font-size: 11px; font-weight: 500; color: #9a9aa0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .hs-time { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; color: #ffd60a; background: rgba(255,214,10,.12); border: 1px solid rgba(255,214,10,.28); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .hs-time svg { width: 12px; height: 12px; }
+    .hs-actions { margin-top: 9px; gap: 7px; }
+    .hs-btn { height: 32px; padding: 0 16px; font-size: 12px; gap: 6px; transition: transform .2s ease, background .2s ease; }
+    .hs-btn svg { width: 12px; height: 12px; }
+    .hs-ghost { width: 32px; height: 32px; font-size: 18px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: transform .2s ease; }
+    #heroPrevBtn, #heroNextBtn { width: 32px; height: 32px; font-size: 18px; }
+    #heroDots { bottom: 10px; gap: 5px; }
+    .hero-dot { width: 5px; height: 5px; transition: width .35s cubic-bezier(.22,.9,.28,1), background .3s ease; }
+    .hero-dot.on { width: 16px; }
+    #upDots { bottom: 10px !important; }
+    .up-count { padding: 2px 9px; border-radius: 999px; font-size: 10px; font-weight: 700; letter-spacing: .04em; color: #fff; background: rgba(255,255,255,.16); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    @media (min-width: 700px) {
+      .hs, .hs.up-slide { height: 290px; }
+      .hs-art { width: 140px; height: 140px; margin: -70px 0 0 0; }
+      .hs-art.vid, .hs.up-slide .hs-art.vid { width: 280px; margin: -78px 0 0 0; }
+      .hs-title { font-size: 26px; }
+      .hs-body { padding: 0 8% 34px; }
+    }
+  </style>
 </head>
 <body class="min-h-screen bg-[#000000] text-white flex flex-col justify-between pb-20">
 
@@ -702,7 +741,7 @@
       <div id="upSection" class="px-4 -mt-2">
         <div id="upWrap" class="hidden">
           <div class="flex items-center justify-between mb-2 px-1">
-            <h3 class="text-sm font-bold text-white">🗓 Upcoming Schedule</h3>
+            <h3 class="text-sm font-bold text-white">🗓 Upcoming Schedule <span class="text-[10px] font-medium text-slate-400">(BDT)</span></h3>
             <span class="text-[11px] text-slate-400"><span id="upCount">0</span> ইভেন্ট</span>
           </div>
           <div id="upCard" style="position:relative;overflow:hidden;border-radius:28px;background:#000;contain:layout paint">
@@ -1856,6 +1895,20 @@
     }
     const cleanTxt = (t) => String(t == null ? '' : t).replace(/[<>"`]/g, '').trim();
 
+    // ===== Category komiye ekta chhoto fixed set e ana =====
+    const CAT_ORDER = ['Sports', 'Entertainment', 'Movies', 'News', 'Kids', 'Music', 'Religious', 'Documentary', 'Live TV'];
+    function canonCategory(cat, name) {
+      const t = (String(cat || '') + ' ' + String(name || '')).toLowerCase();
+      if (/sport|cricket|football|soccer|epl|ucl|la ?liga|serie|bundesliga|f1|nba|nfl|tennis|kabaddi|wwe|ufc|match|\bvs\b|tapmad|ten ?\d|star sports|sony sports|bein|willow|fancode|t20|\bodi\b|ipl|bpl|live event/.test(t)) return 'Sports';
+      if (/news|khobor|খবর|jamuna|somoy|ekattor|independent|channel ?24|dbc|nagorik|ary|cnn|bbc|al ?jazeera|aaj ?tak|abp|ndtv|republic|zee ?24/.test(t)) return 'News';
+      if (/kid|cartoon|anime|nick|pogo|disney|toon|chhota|\bbaby\b|junior/.test(t)) return 'Kids';
+      if (/movie|film|cinema|cine|\bhbo\b|\bmax\b|gold|action|thriller|&pictures|zee ?(cinema|bangla cinema)|sony ?max|b4u|bollywood|hollywood/.test(t)) return 'Movies';
+      if (/music|gaan|song|mtv|9xm|\bb4u ?music|zing|radio|vh1/.test(t)) return 'Music';
+      if (/relig|islam|quran|makkah|madina|peace|iqra|hindu|bhakti|church|god|prayer|sangat/.test(t)) return 'Religious';
+      if (/document|discovery|nat ?geo|national geographic|animal|history|knowledge|science|travel|food|fashion|infotain|tlc|hgtv/.test(t)) return 'Documentary';
+      if (/entertain|drama|serial|bangla|hindi|star ?(plus|jalsha|gold|bharat)|zee|colors|sony ?(tv|liv|sab|pal)|sab|toffee|ayna|iptv|sarah|local|general|variety|live tv|tv/.test(t)) return 'Entertainment';
+      return 'Live TV';
+    }
     function groupChannels(list) {
       const map = new Map(), groups = [];
       list.forEach(ch => {
@@ -1919,7 +1972,7 @@
         base.isEvent = ordered.some(m => m.isEvent);
         base.heroLive = ordered.some(m => m.heroLive);
         base.name = cleanTxt(base.name).replace(/\s[-–—]\s*\d+\s*$/, '') || 'Channel';
-        base.category = cleanTxt(base.category) || 'Live TV';
+        base.category = canonCategory(cleanTxt(base.category), base.name);
         base.shortLabel = cleanTxt(base.shortLabel) || base.name.slice(0, 8);
         base.subLabel = cleanTxt(base.subLabel);
         base.ticker = cleanTxt(base.ticker);
@@ -2003,12 +2056,17 @@
     // ===== Root folder er sokol .json + .m3u file auto-discover =====
     const ROOT_SKIP = /^(package(-lock)?|manifest|composer|tsconfig|jsconfig|vercel|netlify|firebase|renovate|\.eslintrc|\.prettierrc)\.json$/i;
     // Sudhu ei 4 ta root file load hobe
-    const ROOT_FILES = ['sonyLiv.m3u', 'sonyLiv_data.json', 'toffee_data.json', 'toffee_playlist.m3u', 'aynaott_data.json'];
+    const ROOT_FILES = [
+      'aynaott_data.json', 'channels.json', 'channels(1).json',
+      'iptvidn.json', 'iptvidn.m3u',
+      'sarah.json', 'sarah.m3u',
+      'sonyLiv.m3u', 'sonyLiv_data.json',
+      'toffee_data.json', 'toffee_playlist.m3u'
+    ];
     // Ayna OTT: 'unique' = sudhu je channel onno source e nai; 'off' = Ayna ekdom bondho
     const AYNA_MODE = 'unique';
     async function discoverRootFiles() {
-      return ROOT_FILES.slice();
-      const CK = 'sarah_root_files_v2';
+      const CK = 'sarah_root_files_v3';
       try {
         const c = JSON.parse(sessionStorage.getItem(CK) || 'null');
         if (c && Date.now() - c.t < 5 * 60 * 1000 && c.files && c.files.length) return c.files;
@@ -2056,12 +2114,21 @@
         hits.forEach(add);
       }
       // Always load these root files (GitHub API / dir-listing fail korleo)
-      ['toffee_data.json', 'sonyLiv_data.json'].forEach(add);
+      ROOT_FILES.forEach(add);
       files.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
       try { sessionStorage.setItem(CK, JSON.stringify({ t: Date.now(), files })); } catch (e) {}
       return files;
     }
 
+    function srcNameFromFile(n) {
+      n = String(n || '');
+      if (/toffee/i.test(n)) return 'Toffee';
+      if (/sony/i.test(n)) return 'SonyLIV';
+      if (/ayna/i.test(n)) return 'Ayna OTT';
+      if (/iptvidn/i.test(n)) return 'IPTV IDN';
+      if (/sarah/i.test(n)) return 'Sarah';
+      return 'Local';
+    }
     function registerLocalM3U(names) {
       names.forEach(n => {
         const url = './' + encodeURIComponent(n);
@@ -2069,9 +2136,9 @@
         M3U_SOURCES.push({
           url,
           prefix: 'root-' + n.replace(/\W+/g, '_'),
-          sourceName: /toffee/i.test(n) ? 'Toffee' : (/sony/i.test(n) ? 'SonyLIV' : 'Local'),
+          sourceName: srcNameFromFile(n),
           heroLive: /toffee|sony/i.test(n),
-          defaultCategory: n.replace(/\.m3u$/i, '')
+          defaultCategory: srcNameFromFile(n)
         });
       });
     }
@@ -2117,8 +2184,9 @@
         if (!r) return;
         const fnm = decodeURIComponent(String(r.src).split('?')[0].split('/').pop() || '');
         const isToffee = /toffee/i.test(fnm), isSony = /sony/i.test(fnm), isAyna = /ayna/i.test(fnm);
-        const srcName = isToffee ? 'Toffee' : (isSony ? 'SonyLIV' : (isAyna ? 'Ayna OTT' : 'Local'));
-        const list = normalizeChannelsJson(r.data, merged.length, isToffee ? 'Toffee Live' : (isSony ? 'SonyLIV Live' : (isAyna ? 'Ayna OTT' : 'Live TV')), srcName, isToffee ? 'toffee' : (isSony ? 'sonyliv' : (isAyna ? 'aynajson' : 'local')));
+        const srcName = srcNameFromFile(fnm);
+        const pfx = isToffee ? 'toffee' : (isSony ? 'sonyliv' : (isAyna ? 'aynajson' : 'f_' + fnm.replace(/\W+/g, '_').toLowerCase()));
+        const list = normalizeChannelsJson(r.data, merged.length, isToffee ? 'Toffee Live' : (isSony ? 'SonyLIV Live' : (isAyna ? 'Ayna OTT' : 'Live TV')), srcName, pfx);
         if (list && isAyna) list.forEach(ch => { ch.localAyna = true; });
         if (list && (isToffee || isSony)) list.forEach(ch => { ch.heroLive = true; });
         if (!list || !list.length) return;
@@ -2288,7 +2356,53 @@
 
     function heroEsc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch])); }
     function heroSrcText(c) { return [c.sourceName, c.category, c.id].concat((c.servers || []).map(sv => sv && sv.sourceName)).filter(Boolean).join(' '); }
-    const UP_MAX = 20; // schedule banner e max koyta event
+    const UP_MAX = 500; // Sony + Tapmad er puro schedule
+    // ===== BDT (Asia/Dhaka) time - internet theke auto sync =====
+    const BD = { off: 0, synced: false };
+    const bdNow = () => Date.now() + BD.off;
+    async function syncBdTime() {
+      const tryOne = async (url, pick) => {
+        const t0 = Date.now();
+        const r = await fetchTimeout(url, { cache: 'no-store' });
+        if (!r.ok) throw new Error('http');
+        const ms = pick(await r.json());
+        if (!ms || isNaN(ms)) throw new Error('bad');
+        const t1 = Date.now();
+        return ms + (t1 - t0) / 2 - t1;
+      };
+      const tries = [
+        () => tryOne('https://worldtimeapi.org/api/timezone/Asia/Dhaka', j => Date.parse(j.utc_datetime) || (j.unixtime * 1000)),
+        () => tryOne('https://timeapi.io/api/Time/current/zone?timeZone=Asia/Dhaka', j => Date.parse(j.dateTime + '+06:00')),
+        async () => { const t0 = Date.now(); const r = await fetchTimeout('./?t=' + t0, { method: 'HEAD', cache: 'no-store' }); const d = Date.parse(r.headers.get('Date') || ''); if (!d) throw new Error('nodate'); const t1 = Date.now(); return d + (t1 - t0) / 2 - t1; }
+      ];
+      for (const f of tries) {
+        try { BD.off = await f(); BD.synced = true; break; } catch (e) {}
+      }
+      if (typeof renderUpcomingBanner === 'function' && window.__heroPicks) renderUpcomingBanner(window.__heroPicks);
+    }
+    const BD_DAY = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Dhaka', year: 'numeric', month: '2-digit', day: '2-digit' });
+    const BD_TIME = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Dhaka', hour: 'numeric', minute: '2-digit', hour12: true });
+    const BD_DATE = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Dhaka', day: 'numeric', month: 'short' });
+    function fmtBdt(ts) {
+      if (!ts) return '';
+      try {
+        const d = BD_DAY.format(ts), today = BD_DAY.format(bdNow()), tmr = BD_DAY.format(bdNow() + 864e5);
+        const day = d === today ? 'Today' : (d === tmr ? 'Tomorrow' : BD_DATE.format(ts));
+        return `${day} • ${BD_TIME.format(ts)} BDT`;
+      } catch (e) { return ''; }
+    }
+    function relIn(ts) {
+      const mins = Math.round((ts - bdNow()) / 60000);
+      if (mins <= 0) return 'starting';
+      const dd = Math.floor(mins / 1440), hh = Math.floor((mins % 1440) / 60), mm = mins % 60;
+      return 'in ' + (dd > 0 ? `${dd}d ${hh}h` : (hh > 0 ? `${hh}h ${mm}m` : `${mm}m`));
+    }
+    setInterval(() => {
+      document.querySelectorAll('[data-up-ts]').forEach(el => {
+        const ts = Number(el.getAttribute('data-up-ts'));
+        if (ts) el.innerHTML = '<i></i>UPCOMING • ' + relIn(ts);
+      });
+    }, 30000);
     function heroSlideEl(ch, i, upcomingBanner) {
       const esc = heroEsc;
       const HUES = [340, 268, 212, 152, 24, 300, 192, 48];
@@ -2301,25 +2415,20 @@
       const badgeText = (ch.sourceName || ch.category || 'LIVE EVENT').toUpperCase();
       const noStream = !(ch.servers && ch.servers.length) && !ch.streamUrl;
       const isUp = upcomingBanner || noStream;
-      let whenTxt = '';
-      if (ch.startTs) { try { whenTxt = new Date(ch.startTs).toLocaleString([], { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }); } catch (e) {} }
-      let relTxt = '';
-      if (ch.startTs && ch.startTs > Date.now()) {
-        const mins = Math.round((ch.startTs - Date.now()) / 60000), dd = Math.floor(mins / 1440), hh = Math.floor((mins % 1440) / 60), mm = mins % 60;
-        relTxt = dd > 0 ? `${dd}d ${hh}h` : (hh > 0 ? `${hh}h ${mm}m` : `${mm}m`);
-        relTxt = 'in ' + relTxt;
-      }
-      const meta = [ch.category || 'Live Event', ch.sourceName, isUp ? (whenTxt || 'Coming Soon') : (n > 1 ? `${bn(n)}টি সার্ভার` : 'HD Stream')].filter(Boolean).map(esc).join('  ·  ');
+      const whenTxt = fmtBdt(ch.startTs);
+      const relTxt = (ch.startTs && ch.startTs > bdNow()) ? relIn(ch.startTs) : '';
+      const meta = [ch.category || 'Live Event', ch.sourceName, isUp ? '' : (n > 1 ? `${bn(n)}টি সার্ভার` : 'HD Stream')].filter(Boolean).map(esc).join('  ·  ');
       const saved = state.favorites.includes(ch.id);
       const showVideo = !isUp && !noStream;
       el.innerHTML = `
         <div class="hs-art vid${isUp ? ' poster' : ''}"><span>${label}</span>${ch.logo ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async" onerror="logoFail(this,'remove')" src="${esc(ch.logo)}" alt="" />` : ''}${showVideo ? `<video class="hs-vid" muted playsinline webkit-playsinline preload="none" data-play-channel="${esc(ch.id)}"></video><button type="button" class="hs-mute" aria-label="Sound">🔇</button>` : ''}</div>
         <div class="hs-body">
-          <span class="hs-live${isUp ? ' up' : ''}"><i></i>${isUp ? 'UPCOMING' + (relTxt ? ' • ' + esc(relTxt) : '') : 'LIVE EVENT • ' + esc(badgeText)}</span>
+          <span class="hs-live${isUp ? ' up' : ''}"${isUp && ch.startTs ? ` data-up-ts="${ch.startTs}"` : ''}><i></i>${isUp ? 'UPCOMING' + (relTxt ? ' • ' + esc(relTxt) : '') : 'LIVE • ' + esc(badgeText)}</span>
           <h2 class="hs-title">${esc(ch.name)}</h2>
+          ${isUp ? `<div class="hs-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>${esc(whenTxt || 'Time TBA')}</div>` : ''}
           <p class="hs-sub">${meta}</p>
           <div class="hs-actions">
-            ${noStream ? `<button type="button" class="hs-btn" disabled style="opacity:.6">⏰ ${esc(whenTxt || 'Coming Soon')}</button>` : `<button data-play-channel="${esc(ch.id)}" class="hs-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>${isUp ? 'Watch' : 'Watch Live'}</button>`}
+            ${noStream ? `<button type="button" class="hs-btn" disabled style="opacity:.55">⏰ Coming Soon</button>` : `<button data-play-channel="${esc(ch.id)}" class="hs-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>${isUp ? 'Watch' : 'Watch Live'}</button>`}
             ${noStream ? '' : `<button data-hero-fav="${esc(ch.id)}" class="hs-ghost" aria-label="My List">${saved ? '✓' : '+'}</button>`}
           </div>
         </div>`;
@@ -2347,10 +2456,8 @@
 
       const hasStream = (c) => (c.servers || []).some(sv => sv && (sv.url || sv.iframe)) || c.streamUrl;
       const isFuture = (c) => c.startTs && c.startTs > Date.now() + 60e3;
-      const picks = pool.filter(c => hasStream(c) && !isFuture(c) && !/ayna/i.test((c.sourceName || '') + ' ' + (c.id || '')) && (
-        c.heroLive || c.isEvent ||
-        /live events|willow|prime|sonyliv|fancode|toffee/i.test((c.sourceName || '') + ' ' + (c.category || ''))
-      )).slice(0, 12);
+      const picks = pool.filter(c => hasStream(c) && !isFuture(c) && /sony\s?liv|tapmad/i.test(heroSrcText(c)) && !/ayna/i.test((c.sourceName || '') + ' ' + (c.id || ''))
+      ).sort((a, b) => (b.isEvent ? 1 : 0) - (a.isEvent ? 1 : 0)).slice(0, 12);
       window.__heroPicks = picks;
       track.innerHTML = '';
 
@@ -2393,7 +2500,7 @@
       const dotsBox = document.getElementById('upDots');
       if (!wrap || !track || !dotsBox) return;
       const liveKeys = new Set((livePicks || []).map(c => nameKey(c.name)));
-      const now = Date.now();
+      const now = bdNow();
       const fromChannels = (CHANNELS || []).filter(c => c.startTs && c.startTs > now + 60e3);
       const seen = new Set();
       const picks = UPCOMING_POOL.concat(fromChannels)
@@ -2407,18 +2514,23 @@
       track.innerHTML = ''; dotsBox.innerHTML = '';
       if (!picks.length) return;
       picks.forEach((ch, i) => track.appendChild(heroSlideEl(ch, i, true)));
-      picks.forEach((_, k) => {
+      const manyUp = picks.length > 7;
+      if (!manyUp) picks.forEach((_, k) => {
         const b = document.createElement('button');
         b.className = 'hero-dot' + (k === 0 ? ' on' : '');
         b.setAttribute('aria-label', 'Upcoming ' + (k + 1));
         b.addEventListener('click', () => track.scrollTo({ left: track.clientWidth * k, behavior: 'smooth' }));
         dotsBox.appendChild(b);
       });
+      else dotsBox.innerHTML = '<span class="up-count">1 / ' + picks.length + '</span>';
       track.scrollLeft = 0;
       heroObserve(track, '__upIO');
       const card = document.getElementById('upCard');
       const n = picks.length;
-      const paintUp = (i) => { dotsBox.querySelectorAll('.hero-dot').forEach((d, k) => { d.className = 'hero-dot' + (k === i ? ' on' : ''); }); };
+      const paintUp = (i) => {
+        if (manyUp) { const c = dotsBox.querySelector('.up-count'); if (c) c.textContent = (i + 1) + ' / ' + n; return; }
+        dotsBox.querySelectorAll('.hero-dot').forEach((d, k) => { d.className = 'hero-dot' + (k === i ? ' on' : ''); });
+      };
       let upPaused = false, upVisible = true, upTimer = null;
       const upIndex = () => Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
       const upSchedule = () => {
@@ -2633,7 +2745,10 @@
         groups[cat].push(ch);
       });
 
-      const catNames = Object.keys(groups);
+      const catNames = Object.keys(groups).sort((a, b) => {
+        const ia = CAT_ORDER.indexOf(a), ib = CAT_ORDER.indexOf(b);
+        return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || groups[b].length - groups[a].length;
+      });
 
       const group1 = groups[catNames[0]] || CHANNELS;
       const group2 = groups[catNames[1]] || CHANNELS;
@@ -5349,6 +5464,13 @@
   });
   paint();
 })();
+</script>
+
+<script>
+  (function () {
+    function go() { try { syncBdTime(); setInterval(syncBdTime, 15 * 60 * 1000); } catch (e) {} }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+  })();
 </script>
 </body>
 </html>
