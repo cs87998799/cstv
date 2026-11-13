@@ -25,6 +25,16 @@ jobs:
       - name: Run script
         run: python iptvidn.py
 
+      - name: Upload debug files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug
+          path: |
+            debug_page.html
+            debug_report.txt
+          if-no-files-found: ignore
+
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
