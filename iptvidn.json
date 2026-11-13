@@ -1,8 +1,104 @@
 {
   "source": "https://teleghor.online/",
-  "updated": "2026-11-13 10:26:55 UTC",
-  "count": 167,
+  "updated": "2026-11-13 11:24:04 UTC",
+  "count": 157,
   "channels": [
+    {
+      "name": "Ramayana 2026",
+      "logo": "https://upload.kbhub.online/files/Cosmic%20Ramayana_%20Heroes%20and%20Demons.png",
+      "group": "OTT Movies Series",
+      "url": "https://media.kbhub.online/OTT%20KB/Movies/Dubbed%20Movies/Ramayana%202026/Ramayana.m3u8"
+    },
+    {
+      "name": "Spider Man Brand New Day",
+      "logo": "https://upload.kbhub.online/files/spider-man-brand-3840x2160-26612.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Movies/Dubbed%20Movies/Spider%20Man/Spider.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E1",
+      "logo": "",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/1/S03_E01.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E2",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/2/S03_E02.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E3",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/3/S03_E03.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E4",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/4/S03_E04.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E5",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/5/S03_E05.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E6",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/6/S03_E06.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E7",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/7/S03_E07.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E8",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/8/S03_E08.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E9",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/9/S03_E09.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E10",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/10/S03_E10.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E11",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/11/S03_E11.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E12",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/12/S03_E12.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E13",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/13/S03_E13.m3u8"
+    },
+    {
+      "name": "Maa IntiBangaram [Hindi] 480p",
+      "logo": "https://upload.kbhub.online/files/1786611180000551_maa_inti_bangaram_Landscape_Thumb.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Movies/Maa%20IntiBangaram%20Hindi%20480P.mkv"
+    },
     {
       "name": "LIVE CRICKET",
       "logo": "https://i.postimg.cc/Qd0ZrPBb/images-(2).png",
@@ -68,12 +164,6 @@
       "logo": "https://i.postimg.cc/kXrYt6K3/20240822-230901.png",
       "group": "𝐁𝐚𝐧𝐠𝐥𝐚𝐝𝐞𝐬𝐡𝐢",
       "url": "https://tvsen6.aynaott.com/39ee93nUbCCmm5LsyD4t/index.m3u8"
-    },
-    {
-      "name": "Nagorik",
-      "logo": "https://i.postimg.cc/Z54fVGww/20240822_230947.png",
-      "group": "𝐁𝐚𝐧𝐠𝐥𝐚𝐝𝐞𝐬𝐡𝐢",
-      "url": "https://box.bbaria.net/Nagorik_TV/tracks-v1a1/mono.m3u8"
     },
     {
       "name": "SRK",
@@ -190,18 +280,6 @@
       "url": "https://live-bangla.akamaized.net/liveabr/pub-iobanglakp3sff/live_720p/chunks.m3u8"
     },
     {
-      "name": "Gold Mines",
-      "logo": "https://i.postimg.cc/7ZNqRywh/20240823-023440.png",
-      "group": "𝐈𝐧𝐝𝐢𝐚𝐧 𝐇𝐢𝐧𝐝𝐢",
-      "url": "https://streams.tangotv.in/GOLDMINES/ORIGIN/index.m3u8"
-    },
-    {
-      "name": "Gold Mines Movie",
-      "logo": "https://i.postimg.cc/7ZNqRywh/20240823-023440.png",
-      "group": "𝐈𝐧𝐝𝐢𝐚𝐧 𝐇𝐢𝐧𝐝𝐢",
-      "url": "https://streams.tangotv.in/GOLDMINEMOVIES/ORIGIN/index.m3u8"
-    },
-    {
       "name": "Calcutta News",
       "logo": "https://i.postimg.cc/T3TrX75k/Calcutta-news.webp",
       "group": "𝐈𝐧𝐝𝐢𝐚𝐧 News",
@@ -232,12 +310,6 @@
       "url": "https://ndtvindiaelemarchana.akamaized.net/hls/live/2003679-b/ndtvindia/master.m3u8"
     },
     {
-      "name": "Love Natural",
-      "logo": "https://i.postimg.cc/MZR248Yw/20240823-024104.png",
-      "group": "𝐃𝐨𝐜𝐮𝐦𝐞𝐧𝐭𝐨𝐫𝐲",
-      "url": "https://bamusa-naturetime-emea-eng-rakuten.amagi.tv/playlist.m3u8"
-    },
-    {
       "name": "Sony BBC Earth",
       "logo": "https://i.postimg.cc/MZR248Yw/20240823-024104.png",
       "group": "𝐃𝐨𝐜𝐮𝐦𝐞𝐧𝐭𝐨𝐫𝐲",
@@ -250,34 +322,10 @@
       "url": "https://tvsen6.aynaott.com/talkSPORT/index.m3u8"
     },
     {
-      "name": "Test Live TV",
-      "logo": "https://web.aynaott.com/storage/019dd92f-107c-7056-9e79-e5233f6e51d9/uploads/images/2026-04-05/thumbnails_e7c232fc971625f04bb5f1c464a92159_playmist_live_tv_placeholder.png",
-      "group": "Live TV",
-      "url": "https://byphdgllyk.gpcdn.net/hls/deeptotv/index.m3u8"
-    },
-    {
-      "name": "Bangla\",Thikana (BD)",
-      "logo": "https://web.aynaott.com/storage/019dd92f-107c-7056-9e79-e5233f6e51d9/uploads/images/2026-07-02/images_b9a8bdbfcea2fb4656204d06f615682a_playmist_thikana400x400.jpg",
-      "group": "General",
-      "url": "https://5dd3981940faa.streamlock.net:443/thikanatv/thikanatv/playlist.m3u8"
-    },
-    {
       "name": "Weather, Channels, News\",Weather SPY",
       "logo": "https://web.aynaott.com/storage/019dd92f-107c-7056-9e79-e5233f6e51d9/uploads/images/2026-07-15/images_12ff352e97642f2042f8e88a93eca33d_playmist_weather_spy400x400.jpg",
       "group": "General",
       "url": "https://jukin-weatherspy-2-in.samsung.wurl.tv/playlist.m3u8"
-    },
-    {
-      "name": "Channels, English\",Wion",
-      "logo": "https://web.aynaott.com/storage/019dd92f-107c-7056-9e79-e5233f6e51d9/uploads/images/2026-07-15/images_af4d270a6fc7246b2dc185399cce7dbd_playmist_wion_400x400.jpg",
-      "group": "General",
-      "url": "https://d7x8z4yuq42qn.cloudfront.net/index_7.m3u8"
-    },
-    {
-      "name": "English, Channels\",World War TV",
-      "logo": "https://web.aynaott.com/storage/019dd92f-107c-7056-9e79-e5233f6e51d9/uploads/images/2026-07-15/images_ac6813356117e23244894d632de90fe9_playmist_world_war_tv.jpg",
-      "group": "General",
-      "url": "https://aenetworks-worldwartv-rakuten.amagi.tv/playlist.m3u8"
     },
     {
       "name": "Sports\",Xtrem Sports",
@@ -290,18 +338,6 @@
       "logo": "https://i.imgur.com/QjJYohG.png",
       "group": "India",
       "url": "https://ndtvindiaelemarchana.akamaized.net/hls/live/2003679/ndtvindia/master.m3u8"
-    },
-    {
-      "name": "Bantul The Great",
-      "logo": "https://imglink.cc/cdn/_OIh6UYTpa.jpg",
-      "group": "Cartoon",
-      "url": "https://tv.kbhub.online/Cartoon/Bantul-The-Great.m3u8"
-    },
-    {
-      "name": "Nick",
-      "logo": "https://i.postimg.cc/NMpFqbTV/images.png",
-      "group": "Cartoon",
-      "url": "https://tv.kbhub.online/Cartoon/Nicktoons.m3u8"
     },
     {
       "name": "Dangal TV",
@@ -908,102 +944,6 @@
       "logo": "https://upload.kbhub.online/files/Bachelor%20Point%20Season%205%20Promotional%20Banner.png",
       "group": "Bachelor Point",
       "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/134/E134.m3u8"
-    },
-    {
-      "name": "Ramayana 2026",
-      "logo": "https://upload.kbhub.online/files/Cosmic%20Ramayana_%20Heroes%20and%20Demons.png",
-      "group": "OTT Movies Series",
-      "url": "https://media.kbhub.online/OTT%20KB/Movies/Dubbed%20Movies/Ramayana%202026/Ramayana.m3u8"
-    },
-    {
-      "name": "Spider Man Brand New Day",
-      "logo": "https://upload.kbhub.online/files/spider-man-brand-3840x2160-26612.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Movies/Dubbed%20Movies/Spider%20Man/Spider.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E1",
-      "logo": "",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/1/S03_E01.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E2",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/2/S03_E02.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E3",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/3/S03_E03.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E4",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/4/S03_E04.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E5",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/5/S03_E05.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E6",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/6/S03_E06.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E7",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/7/S03_E07.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E8",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/8/S03_E08.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E9",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/9/S03_E09.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E10",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/10/S03_E10.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E11",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/11/S03_E11.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E12",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/12/S03_E12.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E13",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/13/S03_E13.m3u8"
-    },
-    {
-      "name": "Maa IntiBangaram [Hindi] 480p",
-      "logo": "https://upload.kbhub.online/files/1786611180000551_maa_inti_bangaram_Landscape_Thumb.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Movies/Maa%20IntiBangaram%20Hindi%20480P.mkv"
     }
   ]
 }
