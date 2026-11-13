@@ -1,0 +1,79 @@
+name: Toffee M3U to channels.json
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # token expire hoy ~1 ghonta, tai 30 min por por update
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: toffee-json
+  cancel-in-progress: true
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download playlist
+        run: |
+          curl -fsSL --retry 3 \
+            "https://raw.githubusercontent.com/srhady/toffee-bd/main/toffee_playlist.m3u" \
+            -o toffee_playlist.m3u
+
+      - name: Convert to channels.json
+        run: |
+          python3 - <<'EOF'
+          import json, re
+          from datetime import datetime, timezone
+
+          channels = []
+          meta = None
+
+          with open("toffee_playlist.m3u", encoding="utf-8") as f:
+              for raw in f:
+                  line = raw.strip()
+                  if not line:
+                      continue
+                  if line.startswith("#EXTINF"):
+                      attrs = dict(re.findall(r'([\w-]+)="([^"]*)"', line))
+                      name = line.rsplit(",", 1)[-1].strip()
+                      meta = {
+                          "id": attrs.get("tvg-id", ""),
+                          "name": name,
+                          "logo": attrs.get("tvg-logo", ""),
+                          "group": attrs.get("group-title", ""),
+                      }
+                  elif not line.startswith("#") and meta:
+                      meta["url"] = line
+                      channels.append(meta)
+                      meta = None
+
+          out = {
+              "updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+              "total": len(channels),
+              "channels": channels,
+          }
+
+          with open("channels.json", "w", encoding="utf-8") as f:
+              json.dump(out, f, ensure_ascii=False, indent=2)
+
+          print(f"Saved {len(channels)} channels")
+          EOF
+
+      - name: Commit & push
+        run: |
+          rm -f toffee_playlist.m3u
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add channels.json
+          if git diff --staged --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Update channels.json"
+            git push
+          fi
