@@ -764,7 +764,7 @@
       <div class="px-4">
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2">
-            <h3 class="text-base sm:text-lg font-bold tracking-tight text-white">Live TV Channels</h3>
+            <h3 id="liveCirclesTitle" class="text-base sm:text-lg font-bold tracking-tight text-white">Live TV Channels</h3>
             <span id="totalChannelsBadge" class="text-[11px] px-2 py-0.5 rounded-full bg-pink-500/20 text-pink-300 font-semibold">0</span>
           </div>
           <button id="viewAllChannelsBtn" class="text-xs font-semibold text-slate-300 hover:text-pink-400 flex items-center gap-1">
@@ -782,7 +782,7 @@
       <div class="px-4">
         <div class="flex items-center justify-between mb-3">
           <h3 id="row1Title" class="text-base sm:text-lg font-bold tracking-tight text-white">Featured Sports & Live</h3>
-          <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
+          <button data-view-all-row="0" class="va-btn">View All ›</button>
         </div>
         <div id="eplRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1"></div>
       </div>
@@ -790,7 +790,7 @@
       <div class="px-4">
         <div class="flex items-center justify-between mb-3">
           <h3 id="row2Title" class="text-base sm:text-lg font-bold tracking-tight text-white">News & Information</h3>
-          <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
+          <button data-view-all-row="1" class="va-btn">View All ›</button>
         </div>
         <div id="saffRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1"></div>
       </div>
@@ -798,7 +798,7 @@
       <div class="px-4">
         <div class="flex items-center justify-between mb-3">
           <h3 id="row3Title" class="text-base sm:text-lg font-bold tracking-tight text-white">Entertainment, Drama & Movies</h3>
-          <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
+          <button data-view-all-row="2" class="va-btn">View All ›</button>
         </div>
         <div id="dramaRowTrack" class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1"></div>
       </div>
@@ -928,6 +928,12 @@
 
   </main>
 
+  <style id="va-css">
+    .va-btn { font-size: 11.5px; font-weight: 700; color: #f5f5f7; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.16);
+      padding: 4px 11px; border-radius: 999px; white-space: nowrap; transition: background .15s, transform .15s; }
+    .va-btn:hover { background: rgba(255,255,255,.2); }
+    .va-btn:active { transform: scale(.94); }
+  </style>
   <style id="plv4-css">
     #playerModal .pl-ic{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;color:#fff;background:transparent;border:0;border-radius:999px;flex:none;transition:transform .15s,background .15s}
     #playerModal .pl-ic:active{transform:scale(.85);background:rgba(255,255,255,.14)}
@@ -936,8 +942,10 @@
     #playerModal .pl-seek-time{font-size:12px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
     #playerModal #playerViewport{will-change:transform}
     #playerModal #playerHorizontalPopup{transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .3s ease}
-    #playerModal #playerPopupTrack{scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
-    #playerModal .pl-chip{flex:none;width:58px;display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 3px 4px;border-radius:12px;border:1px solid transparent;background:rgba(255,255,255,.06);scroll-snap-align:center;transition:background .25s,border-color .25s,transform .2s}
+    #playerModal #playerPopupTrack{scroll-snap-type:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x;scroll-behavior:auto;will-change:scroll-position;cursor:grab;padding-left:6px;padding-right:6px}
+    #playerModal #playerPopupTrack:active{cursor:grabbing}
+    #playerModal .pl-chip{content-visibility:auto;contain-intrinsic-size:58px 56px}
+    #playerModal .pl-chip{flex:none;width:58px;display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 3px 4px;border-radius:12px;border:1px solid transparent;background:rgba(255,255,255,.06);transition:background .25s,border-color .25s,transform .2s}
     #playerModal .pl-chip:active{transform:scale(.92)}
     #playerModal .pl-chip.cur{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.75)}
     #playerModal .pl-chip .lg{width:28px;height:28px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:2px;font-size:8px;font-weight:800}
@@ -1895,6 +1903,19 @@
     }
     const cleanTxt = (t) => String(t == null ? '' : t).replace(/[<>"`]/g, '').trim();
 
+    // ===== Blocked titles: ei naam gula kono playlist e thakleo website e ashbe na =====
+    // Notun kichu block korte hole ekhane regex add korun.
+    const BLOCKED_TITLES = [
+      /demon[\s_.-]*slayer/i,
+      /kimetsu/i,
+      /bachelor[\s_.-]*party/i
+    ];
+    function isBlockedTitle(c) {
+      const t = [c && c.name, c && c.category, c && c.shortLabel, c && c.subLabel, c && c.ticker]
+        .map(v => String(v == null ? '' : v)).join(' ');
+      return BLOCKED_TITLES.some(re => re.test(t));
+    }
+
     // ===== Category komiye ekta chhoto fixed set e ana =====
     const CAT_ORDER = ['Sports', 'Entertainment', 'Movies', 'News', 'Kids', 'Music', 'Religious', 'Documentary', 'Live TV'];
     function canonCategory(cat, name) {
@@ -2009,7 +2030,7 @@
       const base = JSON_CHANNELS.length ? JSON_CHANNELS : DEFAULT_CHANNELS_JSON.map(c => Object.assign({ servers: [{ url: c.streamUrl, iframe: '' }] }, c));
       
       // Order matters: SonyLiv & Live Sports events first, then M3U, then local base
-      let all = REMOTE_JSON_CHANNELS.concat(M3U_CHANNELS, base);
+      let all = REMOTE_JSON_CHANNELS.concat(M3U_CHANNELS, base).filter(c => !isBlockedTitle(c));
       const isAyna = (c) => !c.localAyna && /ayna/i.test((c.sourceName || '') + ' ' + (c.id || ''));
       if (AYNA_MODE === 'off') all = all.filter(c => !isAyna(c));
       else if (AYNA_MODE === 'unique') {
@@ -2223,6 +2244,7 @@
 
     const state = {
       currentCategory: 'all',
+      discoverCat: '',
       currentChannelIndex: 0,
       isPlaying: true,
       isMuted: false,
@@ -2690,6 +2712,8 @@
       const filtered = CHANNELS.filter(c => matchesCategory(c, state.currentCategory));
 
       if (badge) badge.textContent = `${filtered.length}`;
+      const lct = document.getElementById('liveCirclesTitle');
+      if (lct) lct.textContent = (state.currentCategory || 'all').toLowerCase() === 'live action' ? 'Live Action' : 'Live TV Channels';
 
       if (!filtered.length) {
         track.innerHTML = `<div class="py-4 px-2 text-xs text-slate-400">এই ক্যাটাগরিতে কোনো চ্যানেল নেই</div>`;
@@ -2739,7 +2763,8 @@
 
     function renderContentRowsFromChannels() {
       const groups = {};
-      CHANNELS.forEach(ch => {
+      const SRC = CHANNELS.filter(c => matchesCategory(c, state.currentCategory));
+      SRC.forEach(ch => {
         const cat = ch.category || 'Live TV';
         if (!groups[cat]) groups[cat] = [];
         groups[cat].push(ch);
@@ -2750,9 +2775,14 @@
         return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || groups[b].length - groups[a].length;
       });
 
-      const group1 = groups[catNames[0]] || CHANNELS;
-      const group2 = groups[catNames[1]] || CHANNELS;
-      const group3 = groups[catNames[2]] || CHANNELS;
+      const group1 = groups[catNames[0]] || [];
+      const group2 = groups[catNames[1]] || [];
+      const group3 = groups[catNames[2]] || [];
+      window.__ROW_CATS = [catNames[0] || '', catNames[1] || '', catNames[2] || ''];
+      [['eplRowTrack', group1], ['saffRowTrack', group2], ['dramaRowTrack', group3]].forEach(([id, g]) => {
+        const box = document.getElementById(id) && document.getElementById(id).closest('.px-4');
+        if (box) box.style.display = g.length ? '' : 'none';
+      });
 
       document.getElementById('row1Title').textContent = catNames[0] ? `${catNames[0]} Channels` : 'Featured Live Channels';
       document.getElementById('eplRowTrack').innerHTML = group1.map((ch, i) => buildChannelCardHtml(ch, i)).join('');
@@ -2769,7 +2799,7 @@
           <div class="px-4">
             <div class="flex items-center justify-between mb-3">
               <h3 class="text-base sm:text-lg font-bold tracking-tight text-white">${catName}</h3>
-              <span class="text-[11px] text-pink-400 font-semibold">Swipe ›</span>
+              <button data-view-all-cat="${encodeURIComponent(catName)}" class="va-btn">View All ›</button>
             </div>
             <div class="flex items-center gap-3.5 overflow-x-auto no-scrollbar snap-x-mandatory pb-1">
               ${groups[catName].map((ch, i) => buildChannelCardHtml(ch, gIdx + i)).join('')}
@@ -2794,12 +2824,15 @@
       const q = query.trim().toLowerCase();
       
       let list = CHANNELS.filter(c => matchesCategory(c, state.currentCategory));
+      if (state.discoverCat) list = list.filter(c => (c.category || 'Live TV') === state.discoverCat);
       if (q) {
         list = list.filter(c => channelMatchesQuery(c, q));
       }
 
       if (title) {
-        if (!state.currentCategory || state.currentCategory.toLowerCase() === 'all') {
+        if (state.discoverCat) {
+          title.innerHTML = `${appEsc(state.discoverCat)} (${list.length}) <button data-clear-discover-cat="1" class="va-btn" style="margin-left:6px">✕ সব চ্যানেল</button>`;
+        } else if (!state.currentCategory || state.currentCategory.toLowerCase() === 'all') {
           title.textContent = `সব চ্যানেল (${list.length})`;
         } else {
           title.textContent = `${state.currentCategory} (${list.length})`;
@@ -2858,6 +2891,17 @@
       `).join('');
     }
 
+    // Player er niche channel strip: ekbar e sob channel render (DOM bar bar bhange na), tai swipe smooth.
+    let __stripSig = '';
+    function centerPlayerStrip(instant) {
+      const track = document.getElementById('playerPopupTrack');
+      if (!track) return;
+      const curEl = track.querySelector('[data-current="1"]');
+      if (!curEl || !track.clientWidth) return;
+      const left = Math.max(0, curEl.offsetLeft - (track.clientWidth - curEl.offsetWidth) / 2);
+      if (instant) { track.scrollTo({ left, behavior: 'auto' }); return; }
+      track.scrollTo({ left, behavior: 'smooth' });
+    }
     function renderPlayerHorizontalPopup() {
       const track = document.getElementById('playerPopupTrack');
       const n = CHANNELS.length;
@@ -2865,51 +2909,52 @@
       const cur = Math.min(Math.max(state.currentChannelIndex, 0), n - 1);
       const activeCh = CHANNELS[cur];
 
-      // Show up to 25 nearby channels (±12 around current channel, or all if <= 25)
-      const RADIUS = 12;
-      let indices = [];
-      if (n <= RADIUS * 2 + 1) {
-        indices = CHANNELS.map((_, i) => i);
-      } else {
-        for (let d = -RADIUS; d <= RADIUS; d++) indices.push((cur + d + n) % n);
-      }
-
-      const prevEl = track.querySelector('[data-current="1"]');
-      const prevId = prevEl ? prevEl.getAttribute('data-ch-id') : null;
-      track.innerHTML = indices.map((idx) => {
-        const ch = CHANNELS[idx];
-        const isCurrent = ch.id === activeCh.id;
-        return `
-          <button data-popup-channel-index="${idx}" data-ch-id="${appEsc(String(ch.id))}" ${isCurrent ? 'data-current="1"' : ''} class="pl-chip ${isCurrent ? 'cur' : ''}">
+      const sig = n + '|' + CHANNELS.map(c => c.id).join(',');
+      if (sig !== __stripSig) {
+        __stripSig = sig;
+        track.innerHTML = CHANNELS.map((ch, idx) => `
+          <button data-popup-channel-index="${idx}" data-ch-id="${appEsc(String(ch.id))}" class="pl-chip">
             <div class="lg ${ch.badgeColor || ''}">
               ${ch.logo
-                ? `<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${appEsc(ch.logo)}" alt="" class="w-full h-full object-contain" onerror="logoFail(this,'block')" /><span style="display:none">${appEsc(ch.shortLabel)}</span>`
+                ? `<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${appEsc(ch.logo)}" alt="" draggable="false" class="w-full h-full object-contain" onerror="logoFail(this,'block')" /><span style="display:none">${appEsc(ch.shortLabel)}</span>`
                 : `<span>${appEsc(ch.shortLabel)}</span>`
               }
             </div>
             <span class="nm">${appEsc(ch.name)}</span>
-          </button>
-        `;
-      }).join('');
+          </button>`).join('');
+      }
 
-      // Smoothly glide the strip so the playing channel stays centered
-      const curEl = track.querySelector('[data-current="1"]');
-      if (curEl) {
-        const target = () => curEl.offsetLeft - (track.clientWidth - curEl.offsetWidth) / 2;
-        const from = prevId ? track.querySelector('[data-ch-id="' + (window.CSS && CSS.escape ? CSS.escape(prevId) : prevId) + '"]') : null;
-        if (from && from !== curEl) {
-          track.style.scrollSnapType = 'none';
-          track.scrollLeft = from.offsetLeft - (track.clientWidth - from.offsetWidth) / 2;
-          requestAnimationFrame(() => {
-            track.scrollTo({ left: target(), behavior: 'smooth' });
-            setTimeout(() => { track.style.scrollSnapType = ''; }, 450);
-          });
-        } else {
-          track.scrollLeft = target();
-          requestAnimationFrame(() => { track.scrollLeft = target(); });
-        }
+      // sudhu "cur" class bodlano (re-render nai)
+      const old = track.querySelector('[data-current="1"]');
+      const nowEl = track.children[cur];
+      if (old && old !== nowEl) { old.removeAttribute('data-current'); old.classList.remove('cur'); }
+      if (nowEl) {
+        nowEl.setAttribute('data-current', '1'); nowEl.classList.add('cur');
+        const first = !track.__centered || !track.clientWidth;
+        if (track.clientWidth) { centerPlayerStrip(first); track.__centered = true; }
+        else { track.__centered = false; requestAnimationFrame(() => requestAnimationFrame(() => centerPlayerStrip(true))); }
       }
     }
+    // mouse diye drag-scroll (touch e native swipe), drag er por accidental click atkano
+    (function initStripDrag() {
+      window.addEventListener('DOMContentLoaded', () => {
+        const track = document.getElementById('playerPopupTrack');
+        if (!track) return;
+        let down = false, sx = 0, sl = 0, moved = false;
+        track.addEventListener('pointerdown', (e) => {
+          if (e.pointerType !== 'mouse') return;
+          down = true; moved = false; sx = e.clientX; sl = track.scrollLeft;
+        });
+        window.addEventListener('pointermove', (e) => {
+          if (!down) return;
+          const dx = e.clientX - sx;
+          if (Math.abs(dx) > 5) moved = true;
+          if (moved) track.scrollLeft = sl - dx;
+        });
+        window.addEventListener('pointerup', () => { down = false; });
+        track.addEventListener('click', (e) => { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
+      });
+    })();
 
     // ================= Sarah TV Player v3 =================
     const $p = (id) => document.getElementById(id);
@@ -3057,11 +3102,40 @@
       return _ytApiPromise;
     }
 
+    function ytWatchUrlFromEmbed(embedUrl) {
+      try {
+        const x = new URL(embedUrl);
+        const m = x.pathname.match(/\/embed\/([\w-]{11})/);
+        if (m) return 'https://www.youtube.com/watch?v=' + m[1];
+        const ch = x.searchParams.get('channel');
+        if (ch) return 'https://www.youtube.com/channel/' + ch + '/live';
+        const li = x.searchParams.get('list');
+        if (li) return 'https://www.youtube.com/playlist?list=' + li;
+      } catch (e) {}
+      return 'https://www.youtube.com/';
+    }
+    function showYtOpenBtn(embedUrl) {
+      let b = document.getElementById('ytOpenBtn');
+      if (!b) {
+        b = document.createElement('a');
+        b.id = 'ytOpenBtn';
+        b.target = '_blank'; b.rel = 'noopener noreferrer';
+        b.setAttribute('data-no-tap', '');
+        b.style.cssText = 'position:absolute;left:50%;transform:translateX(-50%);bottom:calc(120px + env(safe-area-inset-bottom));z-index:45;padding:9px 18px;border-radius:999px;background:#ff0033;color:#fff;font-size:12.5px;font-weight:800;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.5)';
+        b.textContent = '▶ YouTube এ খুলুন';
+        document.getElementById('playerModal').appendChild(b);
+      }
+      b.href = ytWatchUrlFromEmbed(embedUrl);
+      b.style.display = 'block';
+    }
+    function hideYtOpenBtn() { const b = document.getElementById('ytOpenBtn'); if (b) b.style.display = 'none'; }
+
     function isYtEmbed(u) {
       try { const x = new URL(u); return /(^|\.)youtube(-nocookie)?\.com$/.test(x.hostname) && x.pathname.startsWith('/embed/'); } catch (e) { return false; }
     }
 
     function destroyYt() {
+      hideYtOpenBtn(); window.__ytAutoMuted = false;
       clearInterval(ytTimer); ytTimer = null;
       if (ytPlayer) { try { ytPlayer.destroy(); } catch (e) {} ytPlayer = null; }
       const h = document.getElementById('ytHost');
@@ -3165,6 +3239,18 @@
               ytTimer = setInterval(ytTick, 500);
               try { ytPlayer.playVideo(); } catch (e) {}
               ytTick();
+              // Browser autoplay block korle: mute kore chalu kore dey (tarpor 🔊 chap dile sound)
+              setTimeout(() => {
+                if (token !== loadToken || !ytMode || !ytPlayer) return;
+                try {
+                  const st = ytPlayer.getPlayerState();
+                  if (st !== 1 && st !== 3) {
+                    ytPlayer.mute(); ytPlayer.playVideo();
+                    window.__ytAutoMuted = true;
+                    setPlayerStatus('মিউট অবস্থায় চালু হয়েছে — 🔊 চাপুন', 4000);
+                  }
+                } catch (e) {}
+              }, 2200);
             },
             onStateChange: (e) => {
               if (token !== loadToken) return;
@@ -3185,7 +3271,24 @@
             },
             onError: (e) => {
               if (token !== loadToken) return;
-              handleStreamFailure(token, 'yt-error-' + (e && e.data));
+              const code = e && e.data;
+              const msgs = {
+                2: 'YouTube লিংকটি সঠিক নয়',
+                5: 'YouTube প্লেয়ারে সমস্যা হয়েছে',
+                100: 'ভিডিওটি পাওয়া যায়নি বা প্রাইভেট',
+                101: 'ভিডিও ওনার এখানে প্লে করতে দেননি',
+                150: 'ভিডিও ওনার এখানে প্লে করতে দেননি',
+                153: 'YouTube প্লেয়ার কনফিগ সমস্যা (লিংক/ডোমেইন চেক করুন)'
+              };
+              // Custom link / single video: skip na kore kharap hoyeche seta dekhay + YouTube e kholar button
+              if (currentIsCustom || [2, 100, 101, 150, 153].includes(code)) {
+                setSpinner(false); state.isPlaying = false; updatePlayPauseIcon();
+                setPlayerStatus(msgs[code] || 'ভিডিও চালানো যাচ্ছে না', 9000);
+                showYtOpenBtn(embedUrl);
+                if (!currentIsCustom) handleStreamFailure(token, 'yt-error-' + code);
+                return;
+              }
+              handleStreamFailure(token, 'yt-error-' + code);
             }
           }
         });
@@ -3226,7 +3329,14 @@
 
       // YouTube
       if (host === 'youtu.be' || host === 'youtube.com' || host === 'music.youtube.com' || host === 'youtube-nocookie.com') {
-        const q = 'autoplay=1&playsinline=1&rel=0&modestbranding=1';
+        let q = 'autoplay=1&playsinline=1&rel=0&modestbranding=1';
+        const tv = u.searchParams.get('t') || u.searchParams.get('start');
+        if (tv) {
+          let sec = 0;
+          const m = String(tv).match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s?)?$/i);
+          if (m) sec = (+m[1] || 0) * 3600 + (+m[2] || 0) * 60 + (+m[3] || 0);
+          if (sec > 0) q += '&start=' + sec;
+        }
         let id = null;
         if (host === 'youtu.be') id = path[0];
         else if (path[0] === 'watch') id = u.searchParams.get('v');
@@ -3648,6 +3758,7 @@
       modal.classList.remove('hidden');
       modal.classList.add('flex');
       showPlayerOverlaysAndStart5sTimer();
+      requestAnimationFrame(() => centerPlayerStrip(true));
     }
 
     function closePlayer() {
@@ -5090,7 +5201,26 @@
       });
 
       document.getElementById('brandLogoBtn').addEventListener('click', () => switchMainView('home'));
-      document.getElementById('viewAllChannelsBtn').addEventListener('click', () => switchMainView('discover'));
+      document.getElementById('viewAllChannelsBtn').addEventListener('click', () => { state.discoverCat = ''; switchMainView('discover'); });
+
+      // Category row er "View All ›"  +  discover e filter clear
+      document.body.addEventListener('click', (e) => {
+        const va = e.target.closest('[data-view-all-cat], [data-view-all-row]');
+        if (va) {
+          let cat = '';
+          if (va.dataset.viewAllCat != null) { try { cat = decodeURIComponent(va.dataset.viewAllCat); } catch (_) { cat = va.dataset.viewAllCat; } }
+          else cat = (window.__ROW_CATS || [])[parseInt(va.dataset.viewAllRow, 10)] || '';
+          state.discoverCat = cat;
+          const si = document.getElementById('channelSearchInput'); if (si) si.value = '';
+          switchMainView('discover');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+        if (e.target.closest('[data-clear-discover-cat]')) {
+          state.discoverCat = '';
+          renderDiscoverGrid(document.getElementById('channelSearchInput')?.value || '');
+        }
+      });
 
       document.getElementById('topCategoryNav').addEventListener('click', (e) => {
         const tab = e.target.closest('.cat-tab');
@@ -5122,7 +5252,7 @@
       });
 
       document.querySelectorAll('.bottom-nav-btn').forEach(btn => {
-        btn.addEventListener('click', () => switchMainView(btn.dataset.nav));
+        btn.addEventListener('click', () => { if (btn.dataset.nav === 'discover') state.discoverCat = ''; switchMainView(btn.dataset.nav); });
       });
 
       document.body.addEventListener('click', (e) => {
@@ -5375,8 +5505,18 @@
         customModal.classList.add('hidden');
         customModal.classList.remove('flex');
       });
+      document.getElementById('customM3u8Input').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); document.getElementById('playCustomM3u8Btn').click(); } });
       document.getElementById('playCustomM3u8Btn').addEventListener('click', () => {
-        const url = document.getElementById('customM3u8Input').value.trim() || '';
+        let url = document.getElementById('customM3u8Input').value.trim() || '';
+        if (!url) { showToast('একটা লিংক দিন'); return; }
+        if (!/^[a-z][a-z0-9+.-]*:\/\//i.test(url)) url = 'https://' + url.replace(/^\/+/, '');
+        try {
+          const hn = new URL(url).hostname.replace(/^(www|m)\./, '');
+          if (/(^|\.)(youtube(-nocookie)?\.com|youtu\.be)$/.test(hn) && !toEmbedUrl(url)) {
+            showToast('এই YouTube লিংক চলবে না — ভিডিও / লাইভ / প্লেলিস্ট লিংক দিন');
+            return;
+          }
+        } catch (e) { showToast('লিংকটি সঠিক নয়'); return; }
         state.currentChannelIndex = Math.min(state.currentChannelIndex, CHANNELS.length - 1);
         customModal.classList.add('hidden');
         customModal.classList.remove('flex');
