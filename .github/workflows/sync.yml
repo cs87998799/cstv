@@ -2,7 +2,7 @@ name: Sync Toffee, SonyLiv and AynaOTT Data
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 permissions:
