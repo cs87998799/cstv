@@ -1,6 +1,20 @@
 {
-  "total": 369,
+  "total": 371,
   "channels": [
+    {
+      "name": "musss",
+      "id": "",
+      "logo": "https://upload.kbhub.online/files/68027b8e39125765b56c544d956bf5e2.webp",
+      "group": "Live Event Sports",
+      "url": "https://d2lk5u59tns74c.cloudfront.net/out/v1/f913cf893c594f73b114216e74a2efbc/index.m3u8"
+    },
+    {
+      "name": "TS ATN",
+      "id": "",
+      "logo": "https://upload.kbhub.online/files/68027b8e39125765b56c544d956bf5e2.webp",
+      "group": "Live Event Sports",
+      "url": "http://qavxero.xyz:80/live/MAGCXS3FQH/TcuoVNciP2/72262.ts"
+    },
     {
       "name": "France vs Itali",
       "id": "",
