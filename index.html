@@ -203,7 +203,7 @@
     /* ===== App UI (WebView / installed app) ===== */
     #appUI { display: none; position: fixed; inset: 0; flex-direction: column; background: #000; color: #fff; z-index: 10; }
     html.app-mode body { background: #000; padding-bottom: 0 !important; display: block; min-height: 0; }
-    html.app-mode body > *:not(#appUI):not(#toastBox):not(#splashScreen):not(#phoneLoginModal):not(#customStreamModal):not(#subscribeModal):not(script) { display: none !important; }
+    html.app-mode body > *:not(#appUI):not(#toastBox):not(#splashScreen):not(#phoneLoginModal):not(#customStreamModal):not(#subscribeModal):not(#dailyModal):not(style):not(script) { display: none !important; }
     html.app-mode #appUI { display: flex; }
     #appCatBar, #appGrid { -webkit-overflow-scrolling: touch; }
     .app-chip { padding: 11px 22px; border-radius: 999px; background: #2c2c2e; color: #e5e5e5; font-size: 16px; font-weight: 500; white-space: nowrap; flex-shrink: 0; transition: background .15s, transform .15s; }
@@ -5612,5 +5612,291 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
   })();
 </script>
+<style id="daily-css">
+  #dailyModal { position: fixed; inset: 0; z-index: 70; display: none; align-items: center; justify-content: center;
+    padding: max(14px, env(safe-area-inset-top)) 14px max(14px, env(safe-area-inset-bottom));
+    background: rgba(0,0,0,.74); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  #dailyModal.show { display: flex; animation: dailyFade .3s ease both; }
+  @keyframes dailyFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes dailyPop { from { opacity: 0; transform: translateY(16px) scale(.97); } to { opacity: 1; transform: none; } }
+  #dailyCard { width: 100%; max-width: 420px; max-height: 88vh; max-height: 88dvh; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+    border-radius: 26px; padding: 22px 20px 18px; color: #f5f5f7; user-select: text;
+    font-family: 'Hind Siliguri', 'Inter', sans-serif; line-height: 1.55;
+    background: radial-gradient(120% 70% at 50% -10%, rgba(255,255,255,.13), transparent 60%), linear-gradient(170deg, #26262a, #121214);
+    border: 1px solid rgba(255,255,255,.14); box-shadow: 0 30px 80px rgba(0,0,0,.65); animation: dailyPop .42s cubic-bezier(.2,.8,.2,1) both; }
+  #dailyCard * { user-select: text; }
+  #dailyCard .dl-hd { text-align: center; font-size: 25px; font-weight: 700; letter-spacing: -.01em; padding-bottom: 12px; }
+  #dailyCard .dl-sec { padding: 11px 0; border-top: 1px solid rgba(255,255,255,.09); display: flex; flex-direction: column; gap: 5px; font-size: 14.5px; }
+  #dailyCard .dl-row { display: flex; gap: 8px; align-items: flex-start; }
+  #dailyCard .dl-row > .ic { flex: none; width: 22px; text-align: center; }
+  #dailyCard .dl-row > .tx { flex: 1; min-width: 0; }
+  #dailyCard .dl-row b { font-weight: 600; color: #fff; }
+  #dailyCard .dl-t { font-size: 12px; font-weight: 700; letter-spacing: .02em; color: #a1a1a6; margin-bottom: 2px; }
+  #dailyCard .dl-pr { display: flex; justify-content: space-between; gap: 10px; padding: 3px 0; border-bottom: 1px dashed rgba(255,255,255,.08); }
+  #dailyCard .dl-pr:last-child { border-bottom: 0; }
+  #dailyCard .dl-pr span:last-child { font-weight: 700; color: #fff; text-align: right; white-space: nowrap; }
+  #dailyCard .dl-q { border-left: 3px solid #f5f5f7; padding: 4px 0 4px 12px; font-size: 15px; font-style: normal; color: #e5e5ea; }
+  #dailyCard .dl-ft { text-align: center; font-size: 14px; color: #d1d1d6; padding: 10px 0 14px; border-top: 1px solid rgba(255,255,255,.09); }
+  #dailyCard .dl-ok { width: 100%; height: 44px; border: 0; border-radius: 999px; background: #f5f5f7; color: #000; font: 700 15px 'Hind Siliguri','Inter',sans-serif; cursor: pointer; }
+  #dailyCard .dl-ok:active { transform: scale(.97); }
+</style>
+<div id="dailyModal" role="dialog" aria-modal="true" aria-label="আজকের তথ্য"><div id="dailyCard"></div></div>
+<script>
+/* ===== প্রতিদিনের পপআপ (শুভেচ্ছা • তারিখ • সূর্যোদয়/সূর্যাস্ত • নামাজ • ছুটি • বাণী) =====
+   সব কিছু ঢাকার সময় ও আজকের তারিখ থেকে অটো হিসাব হয়, ইন্টারনেট লাগে না।
+   দিনে একবার (প্রথমবার app/site খুললে) দেখায়।  জোর করে দেখাতে: ?daily=1 */
+(function () {
+  var LAT = 23.8103, LON = 90.4125, TZ = 6;              // ঢাকা
+  var HIJRI_ADJUST = 0;                                   // চাঁদ দেখা অনুযায়ী ±১ দিন করতে চাইলে এখানে বদলান
+  var BN_DAY_ADJUST = 0;                                  // বাংলা তারিখ ±১ দিন করতে চাইলে
+  var ZUHR_OFFSET = 1, SEHRI_BEFORE_FAJR = 5;             // মিনিট
+
+  var BN_DIGITS = '০১২৩৪৫৬৭৮৯';
+  var bn = function (v) { return String(v).replace(/\d/g, function (d) { return BN_DIGITS[d]; }); };
+  var pad2 = function (n) { return (n < 10 ? '0' : '') + n; };
+
+  var WEEK = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'];
+  var BN_MONTHS = ['বৈশাখ', 'জ্যৈষ্ঠ', 'আষাঢ়', 'শ্রাবণ', 'ভাদ্র', 'আশ্বিন', 'কার্তিক', 'অগ্রহায়ণ', 'পৌষ', 'মাঘ', 'ফাল্গুন', 'চৈত্র'];
+  var SEASONS = ['গ্রীষ্মকাল', 'গ্রীষ্মকাল', 'বর্ষাকাল', 'বর্ষাকাল', 'শরৎকাল', 'শরৎকাল', 'হেমন্তকাল', 'হেমন্তকাল', 'শীতকাল', 'শীতকাল', 'বসন্তকাল', 'বসন্তকাল'];
+  // (বৈশাখ-জ্যৈষ্ঠ গ্রীষ্ম, আষাঢ়-শ্রাবণ বর্ষা, ভাদ্র-আশ্বিন শরৎ, কার্তিক-অগ্রহায়ণ হেমন্ত, পৌষ-মাঘ শীত, ফাল্গুন-চৈত্র বসন্ত)
+  SEASONS = ['গ্রীষ্মকাল', 'গ্রীষ্মকাল', 'বর্ষাকাল', 'বর্ষাকাল', 'শরৎকাল', 'শরৎকাল', 'হেমন্তকাল', 'হেমন্তকাল', 'শীতকাল', 'শীতকাল', 'বসন্তকাল', 'বসন্তকাল'];
+  var HJ_MONTHS = ['মুহাররম', 'সফর', 'রবিউল আউয়াল', 'রবিউস সানি', 'জমাদিউল আউয়াল', 'জমাদিউস সানি', 'রজব', 'শাবান', 'রমজান', 'শাওয়াল', 'জিলকদ', 'জিলহজ'];
+  var GR_MONTHS = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+
+  // প্রতি বছর একই তারিখের সরকারি ছুটি (মাস-দিন)
+  var FIXED_HOLIDAYS = {
+    '02-21': 'শহীদ দিবস ও আন্তর্জাতিক মাতৃভাষা দিবস',
+    '03-26': 'স্বাধীনতা ও জাতীয় দিবস',
+    '04-14': 'পহেলা বৈশাখ',
+    '05-01': 'মে দিবস',
+    '08-05': 'জুলাই গণঅভ্যুত্থান দিবস',
+    '12-16': 'বিজয় দিবস',
+    '12-25': 'বড়দিন'
+  };
+  // চাঁদ/তিথি নির্ভর ছুটি (ঈদ, পূজা ইত্যাদি) সরকারি তালিকা বেরোলে এখানে 'YYYY-MM-DD': 'নাম' দিয়ে যোগ করুন
+  var EXTRA_HOLIDAYS = {
+    // '2027-03-10': 'ঈদুল ফিতর',
+  };
+
+  var QUOTES = [
+    'সততা এবং কঠোর পরিশ্রমের বিকল্প নেই; সততা থাকলে দেরিতে হলেও সাফল্য আসবেই।',
+    'ধৈর্য ধরলে কঠিন পথও একদিন সহজ হয়ে যায়।',
+    'আজকের ছোট প্রচেষ্টাই আগামীকালের বড় সাফল্যের ভিত্তি।',
+    'সময়ের মূল্য যে বোঝে, সময়ও তাকে মূল্য দেয়।',
+    'মিথ্যার আশ্রয়ে যা গড়া হয়, সত্যের আঘাতে তা ভেঙে পড়ে।',
+    'জ্ঞান এমন সম্পদ, যা বিলালে কমে না, বরং বাড়ে।',
+    'ভালো কাজের শুরুটা ছোট হলেও তার ফল হয় সুদূরপ্রসারী।',
+    'যে নিজের ভুল শুধরে নিতে জানে, সে-ই প্রকৃত বিজয়ী।',
+    'হাসিমুখে বলা একটি ভালো কথা মন জয় করে নেয়।',
+    'কৃতজ্ঞ মানুষ কখনো অসুখী হয় না।',
+    'স্বপ্ন দেখলেই হয় না, তা পূরণের জন্য জেগে থাকতে হয়।',
+    'পরিশ্রম সৌভাগ্যের জননী।',
+    'অন্যকে সম্মান করলে নিজের সম্মানও বাড়ে।',
+    'সুস্থ দেহ ও শান্ত মন—দুটোই জীবনের বড় সম্পদ।',
+    'হার মানা মানেই শেষ নয়, আবার শুরু করার সুযোগ।',
+    'যে কথা রাখে, মানুষ তাকে বিশ্বাস করে।',
+    'বিনয় মানুষকে বড় করে, অহংকার ছোট করে।',
+    'প্রতিটি সকাল নতুন করে শুরু করার একটি সুযোগ।',
+    'ক্ষমা করতে পারা মনের বড়ত্বের পরিচয়।',
+    'যা আছে তা নিয়েই শুরু করো, পথ নিজেই তৈরি হবে।',
+    'পিতা-মাতার দোয়া জীবনের সবচেয়ে বড় সম্বল।',
+    'অল্প অল্প করে জমানো সাহসই একদিন বড় পাহাড় ডিঙায়।',
+    'সৎ সঙ্গে থাকলে মন ভালো থাকে, চলার পথ সহজ হয়।',
+    'রাগ সামলাতে পারাই প্রকৃত শক্তি।',
+    'প্রতিবেশীর খোঁজ রাখলে ঘরে শান্তি আসে।',
+    'আজকের কাজ কালকের ভরসায় ফেলে রাখলে সেই কাল আর আসে না।',
+    'ছোট ছোট সদিচ্ছাই সমাজকে বদলে দেয়।',
+    'নীরবে পাশে থাকাই অনেক সময় সবচেয়ে বড় সান্ত্বনা।',
+    'শেখার কোনো বয়স নেই; থেমে গেলেই শেখা শেষ।',
+    'নিজের কাজকে ভালোবাসলে কাজও তোমাকে ভালোবাসবে।',
+    'আলো জ্বালাতে শেখো, অন্ধকার নিজেই সরে যাবে।',
+    'সত্য বলার সাহসই সবচেয়ে বড় সাহস।',
+    'যে মন খুলে দান করে, তার সম্পদে বরকত আসে।',
+    'কঠিন সময় চিরদিন থাকে না, দৃঢ় মানুষ থেকে যায়।'
+  ];
+
+  /* ---------- ঢাকার আজকের তারিখ ---------- */
+  function dhakaNow(ms) {
+    var d = new Date((ms == null ? Date.now() : ms) + TZ * 3600000);
+    return { y: d.getUTCFullYear(), m: d.getUTCMonth() + 1, d: d.getUTCDate(), wd: d.getUTCDay(), min: d.getUTCHours() * 60 + d.getUTCMinutes() };
+  }
+  var isLeap = function (y) { return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0; };
+
+  /* ---------- বাংলা তারিখ (বাংলাদেশ সংশোধিত পঞ্জিকা) ---------- */
+  function banglaDate(y, m, d) {
+    var sy = (m > 4 || (m === 4 && d >= 14)) ? y : y - 1;           // ১৪ এপ্রিল থেকে বছর শুরু
+    var n = Math.floor((Date.UTC(y, m - 1, d) - Date.UTC(sy, 3, 14)) / 864e5) + BN_DAY_ADJUST;
+    var len = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, isLeap(sy + 1) ? 30 : 29, 30];
+    var mi = 0;
+    while (mi < 11 && n >= len[mi]) { n -= len[mi]; mi++; }
+    return { day: n + 1, month: mi, year: sy - 593 };
+  }
+
+  /* ---------- হিজরি তারিখ ---------- */
+  function hijriDate(y, m, d) {
+    var base = Date.UTC(y, m - 1, d) + HIJRI_ADJUST * 864e5;
+    try {
+      var parts = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn', { day: 'numeric', month: 'numeric', year: 'numeric', timeZone: 'UTC' }).formatToParts(new Date(base));
+      var o = {};
+      parts.forEach(function (p) { if (p.type === 'day' || p.type === 'month' || p.type === 'year') o[p.type] = parseInt(p.value, 10); });
+      if (o.day && o.month && o.year && o.year > 1300 && o.year < 1700) return { day: o.day, month: o.month - 1, year: o.year };
+    } catch (e) {}
+    // fallback: tabular Islamic calendar
+    var jd = Math.floor(base / 864e5) + 2440588;
+    var l = jd - 1948440 + 10632, nn = Math.floor((l - 1) / 10631); l = l - 10631 * nn + 354;
+    var j = (Math.floor((10985 - l) / 5316)) * (Math.floor((50 * l) / 17719)) + (Math.floor(l / 5670)) * (Math.floor((43 * l) / 15238));
+    l = l - (Math.floor((30 - j) / 15)) * (Math.floor((17719 * j) / 50)) - (Math.floor(j / 16)) * (Math.floor((15238 * j) / 43)) + 29;
+    var hm = Math.floor((24 * l) / 709), hd = l - Math.floor((709 * hm) / 24), hy = 30 * nn + j - 30;
+    return { day: hd, month: hm - 1, year: hy };
+  }
+
+  /* ---------- সূর্যোদয়/সূর্যাস্ত/নামাজের সময় (ঢাকা) ---------- */
+  var rad = function (x) { return x * Math.PI / 180; }, deg = function (x) { return x * 180 / Math.PI; };
+  function sunTimes(y, m, d) {
+    var jd = Date.UTC(y, m - 1, d, 6, 0, 0) / 864e5 + 2440587.5;     // স্থানীয় দুপুর ১২টা
+    var T = (jd - 2451545) / 36525;
+    var L0 = (280.46646 + T * (36000.76983 + T * 0.0003032)) % 360;
+    var M = 357.52911 + T * (35999.05029 - 0.0001537 * T);
+    var e = 0.016708634 - T * (0.000042037 + 0.0000001267 * T);
+    var C = Math.sin(rad(M)) * (1.914602 - T * (0.004817 + 0.000014 * T)) + Math.sin(rad(2 * M)) * (0.019993 - 0.000101 * T) + Math.sin(rad(3 * M)) * 0.000289;
+    var om = 125.04 - 1934.136 * T;
+    var lam = L0 + C - 0.00569 - 0.00478 * Math.sin(rad(om));
+    var eps0 = 23 + (26 + ((21.448 - T * (46.815 + T * (0.00059 - T * 0.001813)))) / 60) / 60;
+    var eps = eps0 + 0.00256 * Math.cos(rad(om));
+    var decl = deg(Math.asin(Math.sin(rad(eps)) * Math.sin(rad(lam))));
+    var y2 = Math.pow(Math.tan(rad(eps / 2)), 2);
+    var eot = 4 * deg(y2 * Math.sin(2 * rad(L0)) - 2 * e * Math.sin(rad(M)) + 4 * e * y2 * Math.sin(rad(M)) * Math.cos(2 * rad(L0)) - 0.5 * y2 * y2 * Math.sin(4 * rad(L0)) - 1.25 * e * e * Math.sin(2 * rad(M)));
+    var noon = 720 - 4 * LON - eot + TZ * 60;
+    var H = function (alt) {
+      var c = (Math.sin(rad(alt)) - Math.sin(rad(LAT)) * Math.sin(rad(decl))) / (Math.cos(rad(LAT)) * Math.cos(rad(decl)));
+      return deg(Math.acos(Math.max(-1, Math.min(1, c)))) * 4;
+    };
+    var hs = H(-0.833);
+    var asrAlt = deg(Math.atan(1 / (1 + Math.tan(rad(Math.abs(LAT - decl))))));   // শাফেয়ী/স্ট্যান্ডার্ড আসর
+    var r = Math.round;
+    return {
+      sunrise: r(noon - hs), sunset: r(noon + hs),
+      fajr: r(noon - H(-18)), sehri: r(noon - H(-18)) - SEHRI_BEFORE_FAJR,
+      zuhr: r(noon) + ZUHR_OFFSET, asr: r(noon + H(asrAlt)),
+      maghrib: r(noon + hs), isha: r(noon + H(-18))
+    };
+  }
+
+  function period(h) {
+    if (h < 4) return 'রাত'; if (h < 6) return 'ভোর'; if (h < 12) return 'সকাল';
+    if (h < 16) return 'দুপুর'; if (h < 18) return 'বিকেল'; if (h < 20) return 'সন্ধ্যা'; return 'রাত';
+  }
+  function fmt(min) {
+    min = ((min % 1440) + 1440) % 1440;
+    var h = Math.floor(min / 60), mi = min % 60, h12 = h % 12 === 0 ? 12 : h % 12;
+    return period(h) + ' ' + bn(pad2(h12) + ':' + pad2(mi)) + ' মি.';
+  }
+  function dur(mins) { return bn(Math.floor(mins / 60)) + ' ঘণ্টা ' + bn(mins % 60) + ' মিনিট'; }
+
+  function greeting(min) {
+    var h = Math.floor(min / 60);
+    if (h >= 4 && h < 12) return { ic: '🌸', t: 'শুভ সকাল', w: 'দিনটি' };
+    if (h >= 12 && h < 16) return { ic: '☀️', t: 'শুভ দুপুর', w: 'দিনটি' };
+    if (h >= 16 && h < 18) return { ic: '🌇', t: 'শুভ বিকেল', w: 'বিকেলটি' };
+    if (h >= 18 && h < 20) return { ic: '🌆', t: 'শুভ সন্ধ্যা', w: 'সন্ধ্যাটি' };
+    return { ic: '🌙', t: 'শুভ রাত্রি', w: 'রাতটি' };
+  }
+
+  function holidayText(t) {
+    var key = t.y + '-' + pad2(t.m) + '-' + pad2(t.d);
+    var name = EXTRA_HOLIDAYS[key] || FIXED_HOLIDAYS[pad2(t.m) + '-' + pad2(t.d)];
+    var weekly = (t.wd === 5 || t.wd === 6);                       // শুক্র-শনি সাপ্তাহিক ছুটি
+    if (name && weekly) return 'আজ সরকারি ছুটি — ' + name + ' (সাপ্তাহিক ছুটির দিনও)।';
+    if (name) return 'আজ সরকারি ছুটি — ' + name + '।';
+    if (weekly) return 'আজ সাপ্তাহিক ছুটির দিন (' + WEEK[t.wd] + ')।';
+    return 'আজ কোনো সরকারি সাধারণ ছুটি নেই।';
+  }
+
+  /* ---------- সব তথ্য একসাথে ---------- */
+  function build(ms) {
+    var t = dhakaNow(ms), bd = banglaDate(t.y, t.m, t.d), hj = hijriDate(t.y, t.m, t.d), st = sunTimes(t.y, t.m, t.d);
+    var doy = Math.floor((Date.UTC(t.y, t.m - 1, t.d) - Date.UTC(t.y, 0, 0)) / 864e5);
+    var dayLen = st.sunset - st.sunrise;
+    return {
+      greet: greeting(t.min),
+      weekday: WEEK[t.wd],
+      bangla: bn(bd.day) + ' ' + BN_MONTHS[bd.month] + ' ' + bn(bd.year) + ' বঙ্গাব্দ • ' + SEASONS[bd.month],
+      hijri: bn(hj.day) + ' ' + HJ_MONTHS[hj.month] + ' ' + bn(hj.year) + ' হিজরি',
+      greg: bn(t.d) + ' ' + GR_MONTHS[t.m - 1] + ' ' + bn(t.y) + ' খ্রিস্টাব্দ',
+      sunrise: fmt(st.sunrise), sunset: fmt(st.sunset),
+      lengths: 'দিন ' + dur(dayLen) + ' | রাত ' + dur(1440 - dayLen),
+      prayers: [['সেহরির শেষ সময়', fmt(st.sehri)], ['ফজর', fmt(st.fajr)], ['যোহর', fmt(st.zuhr)], ['আসর', fmt(st.asr)], ['মাগরিব (ইফতার শুরু)', fmt(st.maghrib)], ['এশা', fmt(st.isha)]],
+      holiday: holidayText(t),
+      quote: QUOTES[(doy - 1 + QUOTES.length * 10) % QUOTES.length],
+      key: t.y + '-' + pad2(t.m) + '-' + pad2(t.d)
+    };
+  }
+  window.__buildDaily = build;                                       // টেস্ট/ডিবাগের জন্য
+
+  /* ---------- UI ---------- */
+  function el(tag, cls, txt) { var n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; }
+  function row(ic, html) {
+    var r = el('div', 'dl-row'); r.appendChild(el('span', 'ic', ic));
+    var tx = el('span', 'tx'); html.forEach(function (p) { tx.appendChild(typeof p === 'string' ? document.createTextNode(p) : p); }); r.appendChild(tx); return r;
+  }
+  function bold(t) { return el('b', '', t); }
+
+  function render() {
+    var D = build(), card = document.getElementById('dailyCard');
+    card.innerHTML = '';
+    card.appendChild(el('div', 'dl-hd', D.greet.ic + ' ' + D.greet.t + ' ' + D.greet.ic));
+
+    var s1 = el('div', 'dl-sec');
+    s1.appendChild(row('📅', ['আজ: ', bold(D.weekday)]));
+    s1.appendChild(row('🌾', [D.bangla]));
+    s1.appendChild(row('🌙', [D.hijri]));
+    s1.appendChild(row('🗓', [D.greg]));
+    card.appendChild(s1);
+
+    var s2 = el('div', 'dl-sec');
+    s2.appendChild(row('☀️', ['সূর্যোদয়: ', bold(D.sunrise)]));
+    s2.appendChild(row('🌇', ['সূর্যাস্ত: ', bold(D.sunset)]));
+    s2.appendChild(row('⏳', [D.lengths]));
+    card.appendChild(s2);
+
+    var s3 = el('div', 'dl-sec');
+    s3.appendChild(el('div', 'dl-t', '🕌 নামাজ ও রোজা (ঢাকা ও পার্শ্ববর্তী)'));
+    D.prayers.forEach(function (p) { var r = el('div', 'dl-pr'); r.appendChild(el('span', '', '▫️ ' + p[0])); r.appendChild(el('span', '', p[1])); s3.appendChild(r); });
+    card.appendChild(s3);
+
+    var s4 = el('div', 'dl-sec'); s4.appendChild(row('📌', ['আজকের ছুটি: ' + D.holiday])); card.appendChild(s4);
+
+    var s5 = el('div', 'dl-sec'); s5.appendChild(el('div', 'dl-t', '✨ আজকের সুন্দর বাণী')); s5.appendChild(el('div', 'dl-q', '“' + D.quote + '”')); card.appendChild(s5);
+
+    card.appendChild(el('div', 'dl-ft', '🌿 ' + D.greet.w + ' আপনার জন্য মঙ্গলময় ও বরকতময় হোক! 🌿'));
+    var ok = el('button', 'dl-ok', 'ঠিক আছে'); ok.type = 'button'; ok.addEventListener('click', close); card.appendChild(ok);
+    return D;
+  }
+  function open() { var D = render(); document.getElementById('dailyModal').classList.add('show'); return D; }
+  function close() { document.getElementById('dailyModal').classList.remove('show'); }
+  window.openDailyPopup = open;
+
+  function init() {
+    var modal = document.getElementById('dailyModal');
+    if (!modal) return;
+    modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    var force = false;
+    try { force = new URLSearchParams(location.search).get('daily') === '1'; } catch (e) {}
+    if (window.__CSTV_TV__ && !force) return;                          // TV remote এ পপআপ নয়
+    var key = build().key, seen = null;
+    try { seen = localStorage.getItem('sarah_daily_seen'); } catch (e) {}
+    if (seen === key && !force) return;
+    setTimeout(function () {
+      if (!force) { try { localStorage.setItem('sarah_daily_seen', key); } catch (e) {} }
+      open();
+    }, 2700);                                                          // splash (২ সেকেন্ড) শেষ হওয়ার পর
+  }
+  if (typeof document !== 'undefined' && document.addEventListener) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+  }
+})();
+</script>
+
 </body>
 </html>
