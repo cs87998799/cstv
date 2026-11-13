@@ -24,6 +24,7 @@ jobs:
 
       - name: Run script
         run: python iptvidn.py
+        timeout-minutes: 15
 
       - name: Upload debug files
         if: always()
