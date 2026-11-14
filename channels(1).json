@@ -1,1 +1,18 @@
-
+{
+  "channels": [
+    {
+      "name": "T Sports HD",
+      "category": "BD Sports",
+      "logo": "https://yt3.googleusercontent.com/IFgAG_o_AdtX4IauErKIzuFGCj0m4QyH81Q1Uq8H-2Si9ul3vmXkLihDUnn6-QI3xiMZech0AQ=s900-c-k-c0x00ffffff-no-rj",
+      "url": "https://bdtop1.tvhunter.top/T-SPORTS-HD/index.m3u8",
+      "type": "hls"
+    },
+    {
+      "name": "T Sports HD (Backup)",
+      "category": "BD Sports",
+      "logo": "https://yt3.googleusercontent.com/IFgAG_o_AdtX4IauErKIzuFGCj0m4QyH81Q1Uq8H-2Si9ul3vmXkLihDUnn6-QI3xiMZech0AQ=s900-c-k-c0x00ffffff-no-rj",
+      "url": "http://server1.ziboplay.co/T-SPORRTS-HD/index.m3u8?token=AKASH",
+      "type": "hls"
+    }
+  ]
+}
