@@ -1,12 +1,26 @@
 {
-  "total": 371,
+  "total": 370,
   "channels": [
     {
-      "name": "musss",
+      "name": "Argentina vs Uruguay",
       "id": "",
-      "logo": "https://upload.kbhub.online/files/68027b8e39125765b56c544d956bf5e2.webp",
+      "logo": "https://upload.kbhub.online/files/Today%20ARG%20Match.jpeg",
       "group": "Live Event Sports",
-      "url": "https://d2lk5u59tns74c.cloudfront.net/out/v1/f913cf893c594f73b114216e74a2efbc/index.m3u8"
+      "url": "https://live2.jorvakstreamcache.com/live/channel4.m3u8"
+    },
+    {
+      "name": "2.Argentina vs Uruguay",
+      "id": "",
+      "logo": "https://upload.kbhub.online/files/Today%20ARG%20Match.jpeg",
+      "group": "Live Event Sports",
+      "url": "https://live05.wecile.app/live/08552895.m3u8"
+    },
+    {
+      "name": "3.Argentina vs Uruguay",
+      "id": "",
+      "logo": "https://upload.kbhub.online/files/Today%20ARG%20Match.jpeg",
+      "group": "Live Event Sports",
+      "url": "https://live2.domaincdn.cc/livecdn/channel-4.m3u8?auth_key=3000001794609750-0-0-243947615049fb65c1e4bc8b58e676ce"
     },
     {
       "name": "TS ATN",
@@ -14,27 +28,6 @@
       "logo": "https://upload.kbhub.online/files/68027b8e39125765b56c544d956bf5e2.webp",
       "group": "Live Event Sports",
       "url": "http://qavxero.xyz:80/live/MAGCXS3FQH/TcuoVNciP2/72262.ts"
-    },
-    {
-      "name": "France vs Itali",
-      "id": "",
-      "logo": "https://upload.kbhub.online/files/68027b8e39125765b56c544d956bf5e2.webp",
-      "group": "Live Event Sports",
-      "url": "https://tencent-cdn.tapmad.com/v1/01a14abbcff31ea540a81c2b41b760/01a14abc06421567ee931e109fa577/singapore10_1080.m3u8"
-    },
-    {
-      "name": "Spain vs Czchecia",
-      "id": "",
-      "logo": "https://upload.kbhub.online/files/https___media.mrfixitstips.co.uk_main_2026_09_Spain-v-Czechia.png",
-      "group": "Live Event Sports",
-      "url": "https://tencent-cdn.tapmad.com/v1/01a14a9fb90c15fc60e91e1786b061/01a14a9feb881ea540a81c2b41b75e/singapore8_1080.m3u8"
-    },
-    {
-      "name": "England vs Croatia",
-      "id": "",
-      "logo": "https://upload.kbhub.online/files/England-vs-Croatia.jpg",
-      "group": "Live Event Sports",
-      "url": "https://tencent-cdn.tapmad.com/v1/01a14ab8af8915fc600b1e3e9683f0/01a14ab953dd1ea540a81c2b41b75f/singapore9_1080.m3u8"
     },
     {
       "name": "T Sports",
