@@ -9,7 +9,7 @@
   <title>Sarah TV - Live TV & Sports Streaming</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script>
     if (window.tailwind) tailwind.config = {
@@ -650,6 +650,20 @@
       .hs-title { font-size: 26px; }
       .hs-body { padding: 0 8% 34px; }
     }
+
+    /* ===== Banner full-bleed: poster/video pura banner jure ===== */
+    .hs .hs-art.vid, .hs.up-slide .hs-art.vid {
+      position: absolute !important; inset: 0 !important; top: 0 !important; left: 0 !important; right: 0 !important;
+      width: 100% !important; height: 100% !important; margin: 0 !important; aspect-ratio: auto !important;
+      border-radius: 0 !important; box-shadow: none !important; background: #000 !important; }
+    .hs .hs-art.vid img { padding: 0 !important; object-fit: cover; object-position: center; background: #000; }
+    .hs .hs-art.vid:not(.poster) img { object-fit: contain; padding: 34px 34px 96px !important; }
+    .hs .hs-art.vid > span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-bottom: 60px; color: #fff; }
+    .hs .hs-art.vid .hs-mute { top: 12px; right: 12px; bottom: auto; }
+    .hs::after { z-index: 1 !important; height: 68% !important;
+      background: linear-gradient(to top, rgba(0,0,0,.9) 0%, rgba(0,0,0,.5) 50%, transparent 100%) !important; }
+    .hs .hs-body { z-index: 2; text-shadow: 0 1px 8px rgba(0,0,0,.6); }
+    #heroDots, #upDots { z-index: 6; }
   </style>
 </head>
 <body class="min-h-screen bg-[#000000] text-white flex flex-col justify-between pb-20">
@@ -1908,7 +1922,11 @@
     const BLOCKED_TITLES = [
       /demon[\s_.-]*slayer/i,
       /kimetsu/i,
-      /bachelor[\s_.-]*party/i
+      /bachelor[\s_.-]*party/i,
+      // Bachelor EP 105 -> EP 134
+      /bachelor[^0-9]{0,30}0*(?:10[5-9]|1[12][0-9]|13[0-4])(?![0-9])/i,
+      // Spy X Family S3E1 -> S3E13
+      /spy[\s_.\-x\u00d7]*family[^0-9]{0,15}s0*3[\s_.\-]*e(?:p(?:isode)?)?[\s_.\-]*0*(?:[1-9]|1[0-3])(?![0-9])/i
     ];
     function isBlockedTitle(c) {
       const t = [c && c.name, c && c.category, c && c.shortLabel, c && c.subLabel, c && c.ticker]
@@ -5621,7 +5639,7 @@
   @keyframes dailyPop { from { opacity: 0; transform: translateY(16px) scale(.97); } to { opacity: 1; transform: none; } }
   #dailyCard { width: 100%; max-width: 420px; max-height: 88vh; max-height: 88dvh; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
     border-radius: 26px; padding: 22px 20px 18px; color: #f5f5f7; user-select: text;
-    font-family: 'Hind Siliguri', 'Inter', sans-serif; line-height: 1.55;
+    font-family: 'Noto Sans Bengali', 'Inter', sans-serif; line-height: 1.6;
     background: radial-gradient(120% 70% at 50% -10%, rgba(255,255,255,.13), transparent 60%), linear-gradient(170deg, #26262a, #121214);
     border: 1px solid rgba(255,255,255,.14); box-shadow: 0 30px 80px rgba(0,0,0,.65); animation: dailyPop .42s cubic-bezier(.2,.8,.2,1) both; }
   #dailyCard * { user-select: text; }
@@ -5637,7 +5655,7 @@
   #dailyCard .dl-pr span:last-child { font-weight: 700; color: #fff; text-align: right; white-space: nowrap; }
   #dailyCard .dl-q { border-left: 3px solid #f5f5f7; padding: 4px 0 4px 12px; font-size: 15px; font-style: normal; color: #e5e5ea; }
   #dailyCard .dl-ft { text-align: center; font-size: 14px; color: #d1d1d6; padding: 10px 0 14px; border-top: 1px solid rgba(255,255,255,.09); }
-  #dailyCard .dl-ok { width: 100%; height: 44px; border: 0; border-radius: 999px; background: #f5f5f7; color: #000; font: 700 15px 'Hind Siliguri','Inter',sans-serif; cursor: pointer; }
+  #dailyCard .dl-ok { width: 100%; height: 44px; border: 0; border-radius: 999px; background: #f5f5f7; color: #000; font: 700 15px 'Noto Sans Bengali','Inter',sans-serif; cursor: pointer; }
   #dailyCard .dl-ok:active { transform: scale(.97); }
 </style>
 <div id="dailyModal" role="dialog" aria-modal="true" aria-label="আজকের তথ্য"><div id="dailyCard"></div></div>
@@ -5884,11 +5902,8 @@
     var force = false;
     try { force = new URLSearchParams(location.search).get('daily') === '1'; } catch (e) {}
     if (window.__CSTV_TV__ && !force) return;                          // TV remote এ পপআপ নয়
-    var key = build().key, seen = null;
-    try { seen = localStorage.getItem('sarah_daily_seen'); } catch (e) {}
-    if (seen === key && !force) return;
+    /* প্রতিবার page খুললেই দেখাবে (daily-seen check বাদ) */
     setTimeout(function () {
-      if (!force) { try { localStorage.setItem('sarah_daily_seen', key); } catch (e) {} }
       open();
     }, 2700);                                                          // splash (২ সেকেন্ড) শেষ হওয়ার পর
   }
