@@ -1,284 +1,8 @@
 {
   "source": "https://teleghor.online/",
-  "updated": "2026-11-13 23:31:53 UTC",
+  "updated": "2026-11-14 00:36:31 UTC",
   "count": 159,
   "channels": [
-    {
-      "name": "Bachelor EP 105",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/105/S05E105.m3u8"
-    },
-    {
-      "name": "Bachelor EP 106",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/106/S05E106.m3u8"
-    },
-    {
-      "name": "Bachelor EP 107",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/107/S05E107.m3u8"
-    },
-    {
-      "name": "Bachelor EP 108",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/108/S05E108.m3u8"
-    },
-    {
-      "name": "Bachelor EP 109",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/109/S05E109.m3u8"
-    },
-    {
-      "name": "Bachelor EP 110",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/110/S05E110.m3u8"
-    },
-    {
-      "name": "Bachelor EP 111",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/111/S05E111.m3u8"
-    },
-    {
-      "name": "Bachelor EP 112",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/112/S05E112.m3u8"
-    },
-    {
-      "name": "Bachelor EP 113",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/113/Bachelor.Point.S05E113.m3u8"
-    },
-    {
-      "name": "Bachelor EP 114",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/114/Bachelor.Point.S05E114.m3u8"
-    },
-    {
-      "name": "Bachelor EP 115",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/115/Bachelor.Point.S05E115.m3u8"
-    },
-    {
-      "name": "Bachelor EP 116",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/116/Bachelor.Point.S05E116.m3u8"
-    },
-    {
-      "name": "Bachelor EP 117",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/117/Bachelor.Point.S05E117.m3u8"
-    },
-    {
-      "name": "Bachelor EP 118",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/118/Bachelor.Point.S05E118.m3u8"
-    },
-    {
-      "name": "Bachelor EP 119",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/119/Bachelor.Point.S05E119.m3u8"
-    },
-    {
-      "name": "Bachelor EP 120",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/120/Bachelor.Point.S05E120.m3u8"
-    },
-    {
-      "name": "Bachelor EP 121",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/121/Episode_121.m3u8"
-    },
-    {
-      "name": "Bachelor EP 122",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/122/Episode_122.m3u8"
-    },
-    {
-      "name": "Bachelor EP 123",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/123/Episode_123.m3u8"
-    },
-    {
-      "name": "Bachelor EP 124",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/124/Episode_124.m3u8"
-    },
-    {
-      "name": "Bachelor EP 125",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/125/Episode_125.m3u8"
-    },
-    {
-      "name": "Bachelor EP 126",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/126/Episode_126.m3u8"
-    },
-    {
-      "name": "Bachelor EP 127",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/127/Episode_127.m3u8"
-    },
-    {
-      "name": "Bachelor EP 128",
-      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/128/Episode_128.m3u8"
-    },
-    {
-      "name": "Bachelor EP 129",
-      "logo": "https://upload.kbhub.online/files/Bachelor%20Point%20Season%205%20Promotional%20Banner.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/129/E129.m3u8"
-    },
-    {
-      "name": "Bachelor EP 130",
-      "logo": "https://upload.kbhub.online/files/Bachelor%20Point%20Season%205%20Promotional%20Banner.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/130/E130.m3u8"
-    },
-    {
-      "name": "Bachelor EP 131",
-      "logo": "https://upload.kbhub.online/files/Bachelor%20Point%20Season%205%20Promotional%20Banner.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/131/E131.m3u8"
-    },
-    {
-      "name": "Bachelor EP 132",
-      "logo": "https://upload.kbhub.online/files/Bachelor%20Point%20Season%205%20Promotional%20Banner.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/132/E132.m3u8"
-    },
-    {
-      "name": "Bachelor EP 133",
-      "logo": "https://upload.kbhub.online/files/Bachelor%20Point%20Season%205%20Promotional%20Banner.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/133/E133.m3u8"
-    },
-    {
-      "name": "Bachelor EP 134",
-      "logo": "https://upload.kbhub.online/files/Bachelor%20Point%20Season%205%20Promotional%20Banner.png",
-      "group": "Bachelor Point",
-      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/134/E134.m3u8"
-    },
-    {
-      "name": "Ramayana 2026",
-      "logo": "https://upload.kbhub.online/files/Cosmic%20Ramayana_%20Heroes%20and%20Demons.png",
-      "group": "OTT Movies Series",
-      "url": "https://media.kbhub.online/OTT%20KB/Movies/Dubbed%20Movies/Ramayana%202026/Ramayana.m3u8"
-    },
-    {
-      "name": "Spider Man Brand New Day",
-      "logo": "https://upload.kbhub.online/files/spider-man-brand-3840x2160-26612.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Movies/Dubbed%20Movies/Spider%20Man/Spider.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E1",
-      "logo": "",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/1/S03_E01.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E2",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/2/S03_E02.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E3",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/3/S03_E03.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E4",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/4/S03_E04.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E5",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/5/S03_E05.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E6",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/6/S03_E06.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E7",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/7/S03_E07.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E8",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/8/S03_E08.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E9",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/9/S03_E09.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E10",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/10/S03_E10.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E11",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/11/S03_E11.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E12",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/12/S03_E12.m3u8"
-    },
-    {
-      "name": "Spy X Family S3E13",
-      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/13/S03_E13.m3u8"
-    },
-    {
-      "name": "Maa IntiBangaram [Hindi] 480p",
-      "logo": "https://upload.kbhub.online/files/1786611180000551_maa_inti_bangaram_Landscape_Thumb.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Movies/Maa%20IntiBangaram%20Hindi%20480P.mkv"
-    },
     {
       "name": "Demon Slayer S1E1",
       "logo": "https://upload.kbhub.online/files/Demon%20Slayer%20Moonlit%20Battle%20Poster.png",
@@ -658,6 +382,294 @@
       "url": "https://media.kbhub.online/OTT%20KB/Anime/Demon%20Slayer%20Season%201-5/S4/8/E08.mkv"
     },
     {
+      "name": "Ramayana 2026",
+      "logo": "https://upload.kbhub.online/files/Cosmic%20Ramayana_%20Heroes%20and%20Demons.png",
+      "group": "OTT Movies Series",
+      "url": "https://media.kbhub.online/OTT%20KB/Movies/Dubbed%20Movies/Ramayana%202026/Ramayana.m3u8"
+    },
+    {
+      "name": "Spider Man Brand New Day",
+      "logo": "https://upload.kbhub.online/files/spider-man-brand-3840x2160-26612.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Movies/Dubbed%20Movies/Spider%20Man/Spider.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E1",
+      "logo": "",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/1/S03_E01.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E2",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/2/S03_E02.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E3",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/3/S03_E03.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E4",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/4/S03_E04.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E5",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/5/S03_E05.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E6",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/6/S03_E06.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E7",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/7/S03_E07.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E8",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/8/S03_E08.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E9",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/9/S03_E09.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E10",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/10/S03_E10.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E11",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/11/S03_E11.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E12",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/12/S03_E12.m3u8"
+    },
+    {
+      "name": "Spy X Family S3E13",
+      "logo": "https://upload.kbhub.online/files/911390084a8f805835e479045de9fd12eb812230dd6579ff7735833f45eca891._SX1080_FMjpg_.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Spy%20X%20Family/13/S03_E13.m3u8"
+    },
+    {
+      "name": "Maa IntiBangaram [Hindi] 480p",
+      "logo": "https://upload.kbhub.online/files/1786611180000551_maa_inti_bangaram_Landscape_Thumb.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Movies/Maa%20IntiBangaram%20Hindi%20480P.mkv"
+    },
+    {
+      "name": "Bachelor EP 105",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/105/S05E105.m3u8"
+    },
+    {
+      "name": "Bachelor EP 106",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/106/S05E106.m3u8"
+    },
+    {
+      "name": "Bachelor EP 107",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/107/S05E107.m3u8"
+    },
+    {
+      "name": "Bachelor EP 108",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/108/S05E108.m3u8"
+    },
+    {
+      "name": "Bachelor EP 109",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/109/S05E109.m3u8"
+    },
+    {
+      "name": "Bachelor EP 110",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/110/S05E110.m3u8"
+    },
+    {
+      "name": "Bachelor EP 111",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/111/S05E111.m3u8"
+    },
+    {
+      "name": "Bachelor EP 112",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/112/S05E112.m3u8"
+    },
+    {
+      "name": "Bachelor EP 113",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/113/Bachelor.Point.S05E113.m3u8"
+    },
+    {
+      "name": "Bachelor EP 114",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/114/Bachelor.Point.S05E114.m3u8"
+    },
+    {
+      "name": "Bachelor EP 115",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/115/Bachelor.Point.S05E115.m3u8"
+    },
+    {
+      "name": "Bachelor EP 116",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/116/Bachelor.Point.S05E116.m3u8"
+    },
+    {
+      "name": "Bachelor EP 117",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/117/Bachelor.Point.S05E117.m3u8"
+    },
+    {
+      "name": "Bachelor EP 118",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/118/Bachelor.Point.S05E118.m3u8"
+    },
+    {
+      "name": "Bachelor EP 119",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/119/Bachelor.Point.S05E119.m3u8"
+    },
+    {
+      "name": "Bachelor EP 120",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/120/Bachelor.Point.S05E120.m3u8"
+    },
+    {
+      "name": "Bachelor EP 121",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/121/Episode_121.m3u8"
+    },
+    {
+      "name": "Bachelor EP 122",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/122/Episode_122.m3u8"
+    },
+    {
+      "name": "Bachelor EP 123",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/123/Episode_123.m3u8"
+    },
+    {
+      "name": "Bachelor EP 124",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/124/Episode_124.m3u8"
+    },
+    {
+      "name": "Bachelor EP 125",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/125/Episode_125.m3u8"
+    },
+    {
+      "name": "Bachelor EP 126",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/126/Episode_126.m3u8"
+    },
+    {
+      "name": "Bachelor EP 127",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/127/Episode_127.m3u8"
+    },
+    {
+      "name": "Bachelor EP 128",
+      "logo": "https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/128/Episode_128.m3u8"
+    },
+    {
+      "name": "Bachelor EP 129",
+      "logo": "https://upload.kbhub.online/files/Bachelor%20Point%20Season%205%20Promotional%20Banner.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/129/E129.m3u8"
+    },
+    {
+      "name": "Bachelor EP 130",
+      "logo": "https://upload.kbhub.online/files/Bachelor%20Point%20Season%205%20Promotional%20Banner.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/130/E130.m3u8"
+    },
+    {
+      "name": "Bachelor EP 131",
+      "logo": "https://upload.kbhub.online/files/Bachelor%20Point%20Season%205%20Promotional%20Banner.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/131/E131.m3u8"
+    },
+    {
+      "name": "Bachelor EP 132",
+      "logo": "https://upload.kbhub.online/files/Bachelor%20Point%20Season%205%20Promotional%20Banner.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/132/E132.m3u8"
+    },
+    {
+      "name": "Bachelor EP 133",
+      "logo": "https://upload.kbhub.online/files/Bachelor%20Point%20Season%205%20Promotional%20Banner.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/133/E133.m3u8"
+    },
+    {
+      "name": "Bachelor EP 134",
+      "logo": "https://upload.kbhub.online/files/Bachelor%20Point%20Season%205%20Promotional%20Banner.png",
+      "group": "Bachelor Point",
+      "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/134/E134.m3u8"
+    },
+    {
+      "name": "Argentina vs Uruguay",
+      "logo": "https://upload.kbhub.online/files/Today%20ARG%20Match.jpeg",
+      "group": "Live Event Sports",
+      "url": "https://live.teleghor.online/Live-Event-Sports/Argentina-vs-Uruguay.m3u8"
+    },
+    {
+      "name": "2.Argentina vs Uruguay",
+      "logo": "https://upload.kbhub.online/files/Today%20ARG%20Match.jpeg",
+      "group": "Live Event Sports",
+      "url": "https://live.teleghor.online/Live-Event-Sports/2-Argentina-vs-Uruguay.m3u8"
+    },
+    {
       "name": "LIVE CRICKET",
       "logo": "https://i.postimg.cc/Qd0ZrPBb/images-(2).png",
       "group": "General",
@@ -944,18 +956,6 @@
       "logo": "https://s3.aynaott.com/storage/495e1816602db61aa4c2a348a257bd0a",
       "group": "Sports",
       "url": "https://streams2.sofast.tv/sofastplayout/WiseM3U8_1/master.m3u8"
-    },
-    {
-      "name": "Argentina vs Uruguay",
-      "logo": "https://upload.kbhub.online/files/Today%20ARG%20Match.jpeg",
-      "group": "Live Event Sports",
-      "url": "https://live.teleghor.online/Live-Event-Sports/Argentina-vs-Uruguay.m3u8"
-    },
-    {
-      "name": "2.Argentina vs Uruguay",
-      "logo": "https://upload.kbhub.online/files/Today%20ARG%20Match.jpeg",
-      "group": "Live Event Sports",
-      "url": "https://live.teleghor.online/Live-Event-Sports/2-Argentina-vs-Uruguay.m3u8"
     }
   ]
 }
