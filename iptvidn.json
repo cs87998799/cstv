@@ -1,7 +1,7 @@
 {
   "source": "https://teleghor.online/",
-  "updated": "2026-11-14 09:36:26 UTC",
-  "count": 158,
+  "updated": "2026-11-14 10:31:41 UTC",
+  "count": 159,
   "channels": [
     {
       "name": "Demon Slayer S1E1",
@@ -382,6 +382,18 @@
       "url": "https://media.kbhub.online/OTT%20KB/Anime/Demon%20Slayer%20Season%201-5/S4/8/E08.mkv"
     },
     {
+      "name": "Brazil vs Japan",
+      "logo": "https://upload.kbhub.online/files/BRA-VS-JAP.jpeg",
+      "group": "Live Event Sports",
+      "url": "https://live.teleghor.online/Live-Event-Sports/Brazil-vs-Japan.m3u8"
+    },
+    {
+      "name": "2.Brazil vs Japan",
+      "logo": "https://upload.kbhub.online/files/BRA-VS-JAP.jpeg",
+      "group": "Live Event Sports",
+      "url": "https://live.teleghor.online/Live-Event-Sports/2-Brazil-vs-Japan.m3u8"
+    },
+    {
       "name": "LIVE CRICKET",
       "logo": "https://i.postimg.cc/Qd0ZrPBb/images-(2).png",
       "group": "General",
@@ -668,12 +680,6 @@
       "logo": "https://s3.aynaott.com/storage/495e1816602db61aa4c2a348a257bd0a",
       "group": "Sports",
       "url": "https://streams2.sofast.tv/sofastplayout/WiseM3U8_1/master.m3u8"
-    },
-    {
-      "name": "Brazil vs Japan",
-      "logo": "https://upload.kbhub.online/files/BRA-VS-JAP.jpeg",
-      "group": "Live Event Sports",
-      "url": "https://live.teleghor.online/Live-Event-Sports/Brazil-vs-Japan.m3u8"
     },
     {
       "name": "Bachelor EP 105",
