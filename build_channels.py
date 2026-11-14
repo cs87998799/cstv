@@ -3,7 +3,7 @@ import json, urllib.request, datetime
 
 API = "https://iptv-org.github.io/api"
 COUNTRIES = {"BD", "IN"}
-OUT = "channels.json"
+OUT = "channels(1).json"
 
 
 def get(name):
