@@ -2545,6 +2545,7 @@
 
     // ===== Banner 2: UPCOMING schedule (max 20, sudhu SonyLIV + Tapmad) =====
     function renderUpcomingBanner(livePicks) {
+      window.__sarahUP = UPCOMING_POOL; try { if (window.__sarahGuideRefresh) window.__sarahGuideRefresh(); } catch (e) {}
       const wrap = document.getElementById('upWrap');
       const track = document.getElementById('upTrack');
       const dotsBox = document.getElementById('upDots');
@@ -5688,8 +5689,8 @@
    সব কিছু ঢাকার সময় ও আজকের তারিখ থেকে অটো হিসাব হয়, ইন্টারনেট লাগে না।
    দিনে একবার (প্রথমবার app/site খুললে) দেখায়।  জোর করে দেখাতে: ?daily=1 */
 (function () {
-  var LAT = 23.8103, LON = 90.4125, TZ = 6;              // ঢাকা
-  var HIJRI_ADJUST = 0;                                   // চাঁদ দেখা অনুযায়ী ±১ দিন করতে চাইলে এখানে বদলান
+  var LAT0 = 23.8103, LON0 = 90.4125, TZ = 6;              // ঢাকা
+  var HIJRI_ADJUST = -1;                                   // চাঁদ দেখা অনুযায়ী ±১ দিন করতে চাইলে এখানে বদলান
   var BN_DAY_ADJUST = 0;                                  // বাংলা তারিখ ±১ দিন করতে চাইলে
   /* ইসলামিক ফাউন্ডেশনের (ঢাকা) প্রকাশিত সময়ের সাথে মিলিয়ে ক্যালিব্রেট করা (মিনিট) */
   var FAJR_ADD = 2, ZUHR_OFFSET = 3.5, MAGHRIB_ADD = 3.5, ISHA_ADD = 1;
@@ -5795,7 +5796,8 @@
 
   /* ---------- সূর্যোদয়/সূর্যাস্ত/নামাজের সময় (ঢাকা) ---------- */
   var rad = function (x) { return x * Math.PI / 180; }, deg = function (x) { return x * 180 / Math.PI; };
-  function sunTimes(y, m, d) {
+  function sunTimes(y, m, d, lat, lon) {
+    var LAT = (lat == null ? LAT0 : lat), LON = (lon == null ? LON0 : lon);
     var jd = Date.UTC(y, m - 1, d, 6, 0, 0) / 864e5 + 2440587.5;     // স্থানীয় দুপুর ১২টা
     var T = (jd - 2451545) / 36525;
     var L0 = (280.46646 + T * (36000.76983 + T * 0.0003032)) % 360;
@@ -5874,7 +5876,7 @@
       key: t.y + '-' + pad2(t.m) + '-' + pad2(t.d)
     };
   }
-  window.__sunTimes = sunTimes; window.__fmtT = fmt;
+  window.__sunTimes = sunTimes; window.__fmtT = fmt; window.__hijriDate = hijriDate;
   window.__buildDaily = build;                                       // টেস্ট/ডিবাগের জন্য
 
   /* ---------- UI ---------- */
@@ -6397,7 +6399,301 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     if (pm && window.MutationObserver) new MutationObserver(function () { if (pm.classList.contains('hidden')) { cwUpdatePos(); cwRender(); } else { setTimeout(wmPlace, 100); } }).observe(pm, { attributes: true, attributeFilter: ['class'] });
     document.addEventListener('visibilitychange', function () { if (!document.hidden) { nzCheck(); loadNews(false); cwRender(); } });
   }
+  window.__sx = { getText: getText, PROXIES: PROXIES, alert: nzAlert, beep: beep, bn: bn, esc: esc, lsGet: lsGet, lsSet: lsSet };
   window.__sarahExtras = { classify: classify, parseXml: parseXml, nzNext: nzNext, nzEvents: nzEvents, bn: bn };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+
+<style id="sarah-extras2-css">
+/* Ramadan */
+.rm-card { background:linear-gradient(135deg,#1b1340,#0f2a3d); border:1px solid rgba(255,255,255,.12); border-radius:18px; padding:14px; color:#fff; font-family:'Noto Sans Bengali','Inter',sans-serif; }
+.rm-card.on { background:linear-gradient(135deg,#3b1a6b,#0f4a4a); border-color:rgba(255,215,0,.35); }
+.rm-h { font-size:13px; font-weight:700; } .rm-h small { font-weight:500; color:#c7c7cc; }
+.rm-big { font-size:17px; margin-top:8px; } .rm-big b { font-size:26px; color:#ffd666; }
+.rm-sub { font-size:12.5px; color:#d1d1d6; margin-top:2px; }
+.rm-two { display:flex; gap:10px; margin-top:10px; }
+.rm-two > div { flex:1; background:rgba(255,255,255,.08); border-radius:12px; padding:8px 10px; }
+.rm-two span { display:block; font-size:11px; color:#c7c7cc; } .rm-two b { font-size:15px; }
+.rm-act { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.rm-cal { margin-top:10px; max-height:300px; overflow:auto; border-radius:12px; background:rgba(0,0,0,.25); }
+.rm-tb { width:100%; border-collapse:collapse; font-size:12px; }
+.rm-tb th, .rm-tb td { padding:6px 8px; text-align:left; white-space:nowrap; }
+.rm-tb th { position:sticky; top:0; background:#1d1d24; color:#c7c7cc; font-weight:600; }
+.rm-tb tr.td td { background:rgba(255,214,102,.18); font-weight:700; }
+.rm-note { font-size:10.5px; color:#a1a1a6; padding:8px; line-height:1.4; }
+/* TV guide */
+.gd-live { display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; margin-bottom:8px; }
+.gd-lv { flex:0 0 auto; display:inline-flex; align-items:center; gap:6px; border:0; border-radius:999px; padding:6px 12px; font-size:12px; font-weight:700; background:rgba(225,29,72,.2); color:#fda4af; }
+.gd-lv i { width:7px; height:7px; border-radius:50%; background:#e11d48; }
+.gd-it { display:flex; align-items:center; gap:10px; background:#141416; border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:9px 11px; }
+.gd-tm { flex:0 0 74px; font-size:12.5px; font-weight:700; color:#ffd666; }
+.gd-in { flex:1; min-width:0; }
+.gd-bell { flex:none; border:0; background:#2c2c2e; border-radius:50%; width:34px; height:34px; font-size:15px; }
+.gd-bell.on { background:rgba(255,42,109,.3); }
+/* Live score */
+#scTrack, .sc-strip { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; }
+#scTrack::-webkit-scrollbar, .sc-strip::-webkit-scrollbar { display:none; }
+.sc-strip { margin-bottom:8px; flex:none; }
+.sc-card { flex:0 0 150px; text-decoration:none; color:#fff; background:#141416; border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:8px 10px; font-family:'Noto Sans Bengali','Inter',sans-serif; }
+.sc-top { font-size:10.5px; margin-bottom:4px; color:#a1a1a6; }
+.sc-lv { color:#fb7185; font-weight:800; } .sc-dn { color:#a1a1a6; } .sc-pr { color:#ffd666; font-weight:700; }
+.sc-r { display:flex; justify-content:space-between; gap:6px; font-size:12.5px; line-height:1.55; }
+.sc-r span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } .sc-r b { font-weight:800; }
+/* Quality chip */
+#sxQ { position:absolute; right:12px; top:calc(56px + env(safe-area-inset-top)); z-index:25; display:inline-flex; align-items:center; gap:5px; border:1px solid rgba(255,255,255,.3); background:rgba(0,0,0,.55); color:#fff; border-radius:999px; padding:5px 10px; font-size:11.5px; font-weight:700; backdrop-filter:blur(6px); }
+#playerModal.pl-locked #sxQ, #playerModal.app-inline:not(.app-fs) #sxQ, html.tv-mode #sxQ { display:none !important; }
+</style>
+
+<script id="sarah-extras2-js">
+(function () {
+  'use strict';
+  var X = window.__sx; if (!X) return;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var bn = X.bn, esc = X.esc, lsGet = X.lsGet, lsSet = X.lsSet;
+
+  /* ================= A) RAMADAN MODE — গাজীপুর ================= */
+  var GZ = { lat: 23.9999, lon: 90.4203, name: 'গাজীপুর' };
+  var RM_KEY = 'sarah_ram_v1';
+  var GR_M = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
+  var WK = ['রবি','সোম','মঙ্গল','বুধ','বৃহস্পতি','শুক্র','শনি'];
+  function wall(off) { return new Date(Date.now() + 6 * 3600e3 + (off || 0) * 864e5); }
+  function ymd(d) { return { y: d.getUTCFullYear(), m: d.getUTCMonth() + 1, d: d.getUTCDate() }; }
+  function gzTimes(y, m, d) { return window.__sunTimes(y, m, d, GZ.lat, GZ.lon); }
+  function fm(min) { return window.__fmtT(min).replace(' মি.', ''); }
+  function ramInfo() {
+    var forced = /[?&]ramadan=1\b/.test(location.search);
+    var t = ymd(wall(0)), h = window.__hijriDate(t.y, t.m, t.d), start, isR = h.month === 8, day = 0;
+    if (forced) { isR = true; h = { day: 10, month: 8, year: h.year }; }
+    if (isR) { day = h.day; start = Date.UTC(t.y, t.m - 1, t.d) - (day - 1) * 864e5; }
+    else {
+      var base = Date.UTC(t.y, t.m - 1, t.d);
+      for (var k = 1; k < 420; k++) {
+        var dt = new Date(base + k * 864e5), x = window.__hijriDate(dt.getUTCFullYear(), dt.getUTCMonth() + 1, dt.getUTCDate());
+        if (x.month === 8 && x.day === 1) { start = base + k * 864e5; h = { year: x.year }; break; }
+      }
+    }
+    return { isR: isR, day: day, start: start, year: h.year, daysTo: isR ? 0 : Math.round((start - Date.UTC(t.y, t.m - 1, t.d)) / 864e5) };
+  }
+  function leftTxt(ms) { var m = Math.max(0, Math.round(ms / 60000)), h = Math.floor(m / 60); return (h ? bn(h) + ' ঘণ্টা ' : '') + bn(m % 60) + ' মিনিট'; }
+  function ramNext() {
+    var now = Date.now() + 6 * 3600e3, out = [];
+    [0, 1].forEach(function (o) {
+      var d = wall(o), t = ymd(d), st = gzTimes(t.y, t.m, t.d), base = Date.UTC(t.y, t.m - 1, t.d);
+      out.push({ key: 'sehri', name: 'সেহরির শেষ সময়', t: base + st.sehri * 60000, min: st.sehri });
+      out.push({ key: 'iftar', name: 'ইফতার', t: base + st.maghrib * 60000, min: st.maghrib });
+    });
+    return out.filter(function (e) { return e.t > now; })[0];
+  }
+  function ramCalHtml(info) {
+    var rows = '';
+    for (var i = 0; i < 30; i++) {
+      var dt = new Date(info.start + i * 864e5), y = dt.getUTCFullYear(), m = dt.getUTCMonth() + 1, d = dt.getUTCDate(), st = gzTimes(y, m, d);
+      var today = info.isR && info.day === i + 1;
+      rows += '<tr' + (today ? ' class="td"' : '') + '><td>' + bn(i + 1) + '</td><td>' + bn(d) + ' ' + GR_M[m - 1].slice(0, 3) + ' (' + WK[dt.getUTCDay()] + ')</td><td>' + fm(st.sehri) + '</td><td>' + fm(st.maghrib) + '</td></tr>';
+    }
+    return '<table class="rm-tb"><thead><tr><th>রোজা</th><th>তারিখ</th><th>সেহরি শেষ</th><th>ইফতার</th></tr></thead><tbody>' + rows + '</tbody></table>' +
+      '<div class="rm-note">গাজীপুর জেলার জন্য গাণিতিক হিসাব (ইসলামিক ফাউন্ডেশনের সূচির কাছাকাছি)। রমজানের তারিখ চাঁদ দেখা সাপেক্ষে ১ দিন এদিক-ওদিক হতে পারে।</div>';
+  }
+  var ramOpen = false;
+  function ramRender() {
+    var box = $('#rmSection'); if (!box || !window.__sunTimes || !window.__hijriDate) return;
+    var info = ramInfo(), cfg = lsGet(RM_KEY, {}) || {}, h = '';
+    if (!info.start) { box.style.display = 'none'; return; }
+    box.style.display = '';
+    if (info.isR) {
+      var nx = ramNext(), t = ymd(wall(0)), st = gzTimes(t.y, t.m, t.d);
+      h = '<div class="rm-card on"><div class="rm-h">🌙 রমজান ' + bn(info.year) + ' • রোজা ' + bn(info.day) + '/৩০ <small>(' + GZ.name + ')</small></div>' +
+        '<div class="rm-big">' + (nx ? nx.name + ' <b>' + fm(nx.min) + '</b>' : '') + '</div>' +
+        '<div class="rm-sub">' + (nx ? 'আর ' + leftTxt(nx.t - (Date.now() + 6 * 3600e3)) + ' বাকি' : '') + '</div>' +
+        '<div class="rm-two"><div><span>সেহরি শেষ</span><b>' + fm(st.sehri) + '</b></div><div><span>ইফতার</span><b>' + fm(st.maghrib) + '</b></div></div>';
+    } else {
+      h = '<div class="rm-card"><div class="rm-h">🌙 রমজান ' + bn(info.year) + ' <small>(' + GZ.name + ')</small></div>' +
+        '<div class="rm-big"><b>আর ' + bn(info.daysTo) + ' দিন</b></div>' +
+        '<div class="rm-sub">আনুমানিক শুরু: ' + (function () { var d = new Date(info.start); return bn(d.getUTCDate()) + ' ' + GR_M[d.getUTCMonth()] + ' ' + bn(d.getUTCFullYear()); })() + ' (চাঁদ দেখা সাপেক্ষে)</div>';
+    }
+    h += '<div class="rm-act"><button type="button" class="nz-tg' + (cfg.alert ? ' on' : '') + '" id="rmAlert">' + (cfg.alert ? '🔔 সেহরি/ইফতার অ্যালার্ট চালু' : '🔕 সেহরি/ইফতার অ্যালার্ট') + '</button>' +
+      '<button type="button" class="nz-tg" id="rmCal">📅 ক্যালেন্ডার ' + (ramOpen ? '▴' : '▾') + '</button></div>' +
+      (ramOpen ? '<div class="rm-cal">' + ramCalHtml(info) + '</div>' : '') + '</div>';
+    box.innerHTML = h;
+  }
+  function ramCheck() {
+    var cfg = lsGet(RM_KEY, {}) || {}; ramRender(); if (!cfg.alert) return;
+    var info = ramInfo(); if (!info.isR) return;
+    var now = Date.now() + 6 * 3600e3, fired = lsGet('sarah_ram_fired', {}), ch = false;
+    [0, 1].forEach(function (o) {
+      var d = wall(o), t = ymd(d), st = gzTimes(t.y, t.m, t.d), base = Date.UTC(t.y, t.m - 1, t.d), id = t.y + '-' + t.m + '-' + t.d;
+      [['s15', base + (st.sehri - 15) * 60000, 'সেহরির আর ১৫ মিনিট বাকি', 'সেহরির শেষ সময় ' + fm(st.sehri)],
+       ['s0', base + st.sehri * 60000, 'সেহরির সময় শেষ', 'এখন থেকে পানাহার বন্ধ'],
+       ['i5', base + (st.maghrib - 5) * 60000, 'ইফতারের আর ৫ মিনিট বাকি', 'ইফতার ' + fm(st.maghrib)],
+       ['i0', base + st.maghrib * 60000, 'ইফতারের সময় হয়েছে 🌙', 'আল্লাহুম্মা লাকা সুমতু… রোজা কবুল হোক']].forEach(function (a) {
+        var k = id + a[0]; if (!fired[k] && now >= a[1] && now < a[1] + 120000) { fired[k] = 1; ch = true; X.alert('🌙 ' + a[2], a[3]); }
+      });
+    });
+    if (ch) { var ks = Object.keys(fired); if (ks.length > 40) ks.slice(0, ks.length - 40).forEach(function (k) { delete fired[k]; }); lsSet('sarah_ram_fired', fired); }
+  }
+
+  /* ================= B) TV GUIDE ================= */
+  var EV_KEY = 'sarah_evrem_v1', gdDay = 0, gdOpen = false;
+  var DAYFMT = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Dhaka', year: 'numeric', month: '2-digit', day: '2-digit' });
+  var TIMEFMT; try { TIMEFMT = new Intl.DateTimeFormat('bn-BD', { timeZone: 'Asia/Dhaka', hour: 'numeric', minute: '2-digit', hour12: true }); } catch (e) { TIMEFMT = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Dhaka', hour: 'numeric', minute: '2-digit', hour12: true }); }
+  function evList() {
+    var now = Date.now(), seen = {}, out = [];
+    var all = (window.__sarahUP || []).concat((window.__sarahCH || []).filter(function (c) { return c.startTs; }));
+    all.forEach(function (c) {
+      if (!c.startTs) return; var k = (c.name || '').toLowerCase().replace(/\W+/g, '') + c.startTs; if (seen[k]) return; seen[k] = 1;
+      if (c.startTs < now - 4 * 3600e3) return;
+      out.push(c);
+    });
+    out.sort(function (a, b) { return a.startTs - b.startTs; });
+    return out;
+  }
+  function dayKey(ts) { return DAYFMT.format(ts); }
+  function guideRender() {
+    var box = $('#gdSection'); if (!box) return;
+    var now = Date.now(), list = evList(), rem = lsGet(EV_KEY, {});
+    var live = list.filter(function (c) { return c.startTs <= now && !c.upcoming && (window.__sarahCH || []).some(function (x) { return String(x.id) === String(c.id); }); });
+    var up = list.filter(function (c) { return c.startTs > now - 20 * 60000 && live.indexOf(c) < 0; });
+    if (!live.length && !up.length) { box.style.display = 'none'; return; }
+    box.style.display = '';
+    var today = dayKey(now), tmr = dayKey(now + 864e5);
+    var tabs = [['0', 'আজ'], ['1', 'আগামীকাল'], ['2', 'পরবর্তী']];
+    var items = up.filter(function (c) { var d = dayKey(c.startTs); return gdDay === 0 ? d === today : (gdDay === 1 ? d === tmr : (d !== today && d !== tmr && c.startTs > now)); });
+    var cap = gdOpen ? 40 : 6;
+    var h = '<div class="sx-h"><b>📺 টিভি গাইড</b><small>বাংলাদেশ সময়</small></div>';
+    if (live.length) h += '<div class="gd-live">' + live.slice(0, 8).map(function (c) { return '<button type="button" class="gd-lv" data-play-channel="' + esc(c.id) + '"><i></i>' + esc(c.name) + '</button>'; }).join('') + '</div>';
+    h += '<div class="sx-nw-chips">' + tabs.map(function (t) { return '<button type="button" class="sx-chip' + (gdDay === +t[0] ? ' on' : '') + '" data-gd-day="' + t[0] + '">' + t[1] + '</button>'; }).join('') + '</div>';
+    h += '<div class="sx-nw-list">' + (items.length ? items.slice(0, cap).map(function (c) {
+      var id = String(c.id || c.name) + ':' + c.startTs, on = !!rem[id];
+      return '<div class="gd-it"><div class="gd-tm">' + esc(TIMEFMT.format(c.startTs)) + '</div><div class="gd-in"><div class="nw-t">' + esc(c.name) + '</div><div class="nw-m">' + esc(c.category || '') + (c.sourceName ? ' • ' + esc(c.sourceName) : '') + '</div></div>' +
+        '<button type="button" class="gd-bell' + (on ? ' on' : '') + '" data-gd-bell="' + esc(id) + '" data-name="' + esc(c.name) + '" data-ts="' + c.startTs + '" aria-label="রিমাইন্ডার">' + (on ? '🔔' : '🔕') + '</button></div>';
+    }).join('') + (items.length > 6 ? '<button type="button" class="nw-more" data-gd-more>' + (gdOpen ? 'কম দেখুন ▴' : 'আরও দেখুন ▾') + '</button>' : '') : '<div class="nw-empty">এই দিনে কোনো ইভেন্ট নেই</div>') + '</div>';
+    box.innerHTML = h;
+  }
+  function evCheck() {
+    var rem = lsGet(EV_KEY, {}), now = Date.now(), ch = false;
+    Object.keys(rem).forEach(function (k) {
+      var e = rem[k];
+      if (now > e.ts + 3 * 3600e3) { delete rem[k]; ch = true; return; }
+      if (!e.f && now >= e.ts - 10 * 60000 && now < e.ts + 30 * 60000) { e.f = 1; ch = true; X.alert('📺 ' + e.name, now >= e.ts ? 'এখন শুরু হয়েছে!' : '১০ মিনিটের মধ্যে শুরু হচ্ছে'); }
+    });
+    if (ch) lsSet(EV_KEY, rem);
+  }
+
+  /* ================= C) LIVE SCORE ================= */
+  var SC = { items: [], t: 0, busy: false };
+  function fetchJson(url) {
+    var tries = [function () { return X.getText(url, 6000); }];
+    X.PROXIES.forEach(function (p) { tries.push(function () { return X.getText(p(url), 8000); }); });
+    var i = 0;
+    function next() { if (i >= tries.length) return Promise.reject(new Error('fail')); return tries[i++]().then(function (t) { return JSON.parse(t); }).catch(next); }
+    return next();
+  }
+  function soccer() {
+    return fetchJson('https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard').then(function (j) {
+      return (j.events || []).map(function (ev) {
+        var c = (ev.competitions || [])[0] || {}, cs = c.competitors || [];
+        var h = cs.filter(function (x) { return x.homeAway === 'home'; })[0] || cs[0], a = cs.filter(function (x) { return x.homeAway === 'away'; })[0] || cs[1];
+        if (!h || !a) return null;
+        var st = ((ev.status || c.status || {}).type) || {}, state = st.state === 'in' ? 'live' : (st.state === 'post' ? 'done' : 'pre');
+        var clock = (ev.status && ev.status.displayClock) || '';
+        return { sp: '⚽', state: state, when: Date.parse(ev.date) || 0, status: state === 'live' ? (st.shortDetail || clock) : (state === 'done' ? 'সমাপ্ত' : ''),
+          a: (h.team && (h.team.shortDisplayName || h.team.displayName)) || '', as: h.score, b: (a.team && (a.team.shortDisplayName || a.team.displayName)) || '', bs: a.score,
+          link: ((ev.links || [])[0] || {}).href || '' };
+      }).filter(Boolean);
+    });
+  }
+  function cricket() {
+    return fetchJson('https://hs-consumer-api.espncricinfo.com/v1/pages/matches/current?lang=en&latest=true').then(function (j) {
+      return ((j && j.matches) || []).map(function (m) {
+        var tm = m.teams || []; if (tm.length < 2) return null;
+        var state = /live/i.test(m.state || '') ? 'live' : (/post|result|complete/i.test(m.state || '') ? 'done' : 'pre');
+        var nm = function (x) { return (x.team && (x.team.abbreviation || x.team.name)) || ''; };
+        var sc = function (x) { return [x.score, x.scoreInfo].filter(Boolean).join(' ').trim(); };
+        return { sp: '🏏', state: state, when: Date.parse(m.startTime || m.startDate || '') || 0, status: state === 'live' ? (m.statusText || 'LIVE') : (m.statusText || ''),
+          a: nm(tm[0]), as: sc(tm[0]), b: nm(tm[1]), bs: sc(tm[1]), link: m.slug ? 'https://www.espncricinfo.com/series/' + (m.series && m.series.slug || 'x') + '/' + m.slug + '-' + m.objectId + '/live-cricket-score' : '' };
+      }).filter(Boolean);
+    });
+  }
+  function scoreLoad(force) {
+    if (SC.busy || (!force && Date.now() - SC.t < 55000)) return; SC.busy = true;
+    Promise.all([soccer().catch(function () { return []; }), cricket().catch(function () { return []; })]).then(function (r) {
+      var all = r[0].concat(r[1]), now = Date.now();
+      all = all.filter(function (x) { return x.state === 'live' || (x.state === 'pre' && x.when - now < 6 * 3600e3 && x.when > now - 3600e3) || (x.state === 'done' && now - x.when < 5 * 3600e3); });
+      var rank = { live: 0, pre: 1, done: 2 };
+      all.sort(function (a, b) { return rank[a.state] - rank[b.state] || a.when - b.when; });
+      SC.items = all.slice(0, 16); SC.t = Date.now(); SC.busy = false; scoreRender();
+    });
+  }
+  function scoreCard(x) {
+    var top = x.state === 'live' ? '<span class="sc-lv">● LIVE ' + esc(x.status) + '</span>' : (x.state === 'done' ? '<span class="sc-dn">সমাপ্ত</span>' : '<span class="sc-pr">' + esc(TIMEFMT.format(x.when)) + '</span>');
+    return '<a class="sc-card" ' + (x.link ? 'href="' + esc(x.link) + '" target="_blank" rel="noopener noreferrer"' : '') + '><div class="sc-top">' + x.sp + ' ' + top + '</div>' +
+      '<div class="sc-r"><span>' + esc(x.a) + '</span><b>' + esc(x.state === 'pre' ? '' : x.as) + '</b></div><div class="sc-r"><span>' + esc(x.b) + '</span><b>' + esc(x.state === 'pre' ? '' : x.bs) + '</b></div></a>';
+  }
+  function scoreRender() {
+    var html = SC.items.length ? SC.items.map(scoreCard).join('') : '';
+    var home = $('#scSection'); if (home) { home.style.display = SC.items.length ? '' : 'none'; var tr = $('#scTrack'); if (tr) tr.innerHTML = html; }
+    var st = $('[data-score-strip]'); if (st) { st.style.display = SC.items.length ? '' : 'none'; st.innerHTML = html; }
+  }
+
+  /* ================= D) QUALITY CHIP (player) ================= */
+  function qualityChip() {
+    var m = $('#playerModal'); if (!m || $('#sxQ')) return;
+    var b = document.createElement('button'); b.id = 'sxQ'; b.type = 'button'; b.className = 'ov-fade'; b.setAttribute('data-no-tap', '');
+    b.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.4 13a7.5 7.5 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.6 7.6 0 0 0-1.7-1L15 3h-4l-.4 3a7.6 7.6 0 0 0-1.7 1l-2.4-1-2 3.4L6.6 11a7.5 7.5 0 0 0 0 2l-2 1.6 2 3.4 2.4-1c.5.4 1.1.7 1.7 1l.4 3h4l.4-3c.6-.3 1.2-.6 1.7-1l2.4 1 2-3.4-2-1.6zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/></svg><span>Auto</span>';
+    m.appendChild(b);
+    b.addEventListener('click', function (e) { e.stopPropagation(); var q = $('#playerQualityBtn'); if (q) q.click(); });
+    var badge = $('#playerQualityBadge'), top = $('#playerTopBar');
+    function sync() {
+      b.querySelector('span').textContent = (badge && badge.textContent.trim()) || 'Auto';
+      b.classList.toggle('ov-hidden', !!(top && top.classList.contains('ov-hidden')));
+      var ifr = $('#liveIframeEl'), yt = $('#ytHost');
+      var embed = (ifr && !ifr.classList.contains('hidden')) || (yt && !yt.classList.contains('hidden'));
+      b.style.display = embed ? 'none' : '';
+    }
+    if (window.MutationObserver) {
+      if (badge) new MutationObserver(sync).observe(badge, { childList: true, characterData: true, subtree: true });
+      if (top) new MutationObserver(sync).observe(top, { attributes: true, attributeFilter: ['class'] });
+    }
+    setInterval(function () { if (!m.classList.contains('hidden')) sync(); }, 1200); sync();
+  }
+
+  /* ================= INIT / EVENTS ================= */
+  function build() {
+    var nz = $('#nzSection'), nw = $('#nwHome'); if (!nz || !nw || $('#rmSection')) return;
+    var mk = function (id, cls) { var d = document.createElement('div'); d.id = id; d.className = cls; return d; };
+    var rm = mk('rmSection', 'sx-sec'); rm.style.display = 'none'; nz.parentNode.insertBefore(rm, nz);
+    var gd = mk('gdSection', 'sx-sec sx-news'); gd.style.display = 'none'; nw.parentNode.insertBefore(gd, nw);
+    var sc = mk('scSection', 'sx-sec'); sc.style.display = 'none'; sc.innerHTML = '<div class="sx-h"><b>⚽🏏 লাইভ স্কোর</b><small>অটো রিফ্রেশ</small></div><div id="scTrack"></div>'; nw.parentNode.insertBefore(sc, nw);
+    var pl = $('#plNews'); if (pl && !$('[data-score-strip]')) { var s = document.createElement('div'); s.className = 'sc-strip'; s.setAttribute('data-score-strip', ''); s.style.display = 'none'; pl.insertBefore(s, pl.querySelector('[data-nw-chips]')); }
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target; if (!t.closest) return;
+    if (t.closest('#rmCal')) { ramOpen = !ramOpen; ramRender(); return; }
+    if (t.closest('#rmAlert')) {
+      var c = lsGet(RM_KEY, {}) || {}; c.alert = !c.alert; lsSet(RM_KEY, c);
+      if (c.alert) { try { if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission(); } catch (er) {} X.beep(); }
+      ramRender(); return;
+    }
+    var d = t.closest('[data-gd-day]'); if (d) { gdDay = +d.getAttribute('data-gd-day'); guideRender(); return; }
+    if (t.closest('[data-gd-more]')) { gdOpen = !gdOpen; guideRender(); return; }
+    var b = t.closest('[data-gd-bell]');
+    if (b) {
+      var rem = lsGet(EV_KEY, {}), id = b.getAttribute('data-gd-bell');
+      if (rem[id]) delete rem[id]; else { rem[id] = { name: b.getAttribute('data-name'), ts: +b.getAttribute('data-ts') }; try { if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission(); } catch (er) {} }
+      lsSet(EV_KEY, rem); guideRender(); return;
+    }
+  });
+  function init() {
+    build(); qualityChip();
+    ramRender(); guideRender(); scoreRender(); scoreLoad(true);
+    setInterval(function () { ramCheck(); evCheck(); }, 15000);
+    setInterval(guideRender, 60000);
+    setInterval(function () { if (!document.hidden) scoreLoad(false); }, 60000);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) { ramRender(); guideRender(); scoreLoad(false); } });
+    window.__sarahGuideRefresh = guideRender;
+  }
+  window.__sarahExtras2 = { ramInfo: ramInfo, ramNext: ramNext, gzTimes: gzTimes };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
