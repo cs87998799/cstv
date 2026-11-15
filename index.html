@@ -1047,6 +1047,14 @@
     </div>
   </div>
 
+
+  <!-- Player-er niche Songbad Shironam (portrait split) -->
+  <div id="plNews" class="sx-news sx-news-pl">
+    <div class="sx-nw-head"><b>📰 সংবাদ শিরোনাম</b><button type="button" class="sx-nw-refresh" data-nw-refresh aria-label="রিফ্রেশ">↻</button></div>
+    <div class="sx-nw-chips" data-nw-chips></div>
+    <div class="sx-nw-list" id="nwPlayerList"></div>
+  </div>
+
   <!-- APP UI (shown only in app mode) -->
   <div id="appUI">
     <div id="appPlayerSlot" class="flex-shrink-0 bg-black" style="padding-top:max(env(safe-area-inset-top), 0px)"></div>
@@ -2355,6 +2363,8 @@
     }
 
     function renderAllFromChannelsJson() {
+      window.__sarahCH = CHANNELS;
+      try { if (window.__sarahCW) window.__sarahCW.render(); } catch (e) {}
       notifyLiveOnce();
       renderCategoryNavTabs();
       renderHeroFromChannels();
@@ -3832,6 +3842,7 @@
     function loadCurrentChannelInPlayer(customUrl = null, isSrvRetry = false) {
       const ch = CHANNELS[state.currentChannelIndex] || CHANNELS[0];
       if (!ch) return;
+      try { if (window.__sarahOnPlay) window.__sarahOnPlay(ch, !!customUrl); } catch (e) {}
       if (!isSrvRetry) srvFail = 0;
 
       const token = ++loadToken;
@@ -5863,6 +5874,7 @@
       key: t.y + '-' + pad2(t.m) + '-' + pad2(t.d)
     };
   }
+  window.__sunTimes = sunTimes; window.__fmtT = fmt;
   window.__buildDaily = build;                                       // টেস্ট/ডিবাগের জন্য
 
   /* ---------- UI ---------- */
@@ -5924,6 +5936,469 @@
   if (typeof document !== 'undefined' && document.addEventListener) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
   }
+})();
+</script>
+
+<style id="sarah-extras-css">
+/* ===== Sarah TV extras: Continue Watching / Namaz / News / Player split / Watermark ===== */
+.sx-sec { padding: 0 16px; margin: 14px 0; font-family: 'Noto Sans Bengali','Hind Siliguri','Inter',sans-serif; }
+.sx-h { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.sx-h b { font-size:15px; font-weight:700; color:#fff; }
+.sx-h small { font-size:11px; color:#a1a1a6; }
+/* Continue watching */
+#cwTrack { display:flex; gap:10px; overflow-x:auto; scrollbar-width:none; padding-bottom:2px; }
+#cwTrack::-webkit-scrollbar { display:none; }
+.cw-card { position:relative; flex:0 0 138px; }
+.cw-play { display:block; width:100%; text-align:left; background:#141416; border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:8px; color:#fff; }
+.cw-play:active { transform:scale(.97); }
+.cw-thumb { position:relative; height:66px; border-radius:10px; background:#fff; display:flex; align-items:center; justify-content:center; overflow:hidden; font-weight:800; color:#222; font-size:20px; }
+.cw-thumb img { width:100%; height:100%; object-fit:contain; padding:6px; position:absolute; inset:0; background:#fff; }
+.cw-badge { position:absolute; left:5px; top:5px; font-size:9px; font-weight:800; padding:1px 6px; border-radius:999px; background:#e11d48; color:#fff; z-index:2; }
+.cw-badge.vod { background:rgba(0,0,0,.7); }
+.cw-name { margin-top:6px; font-size:12.5px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.cw-sub { font-size:10.5px; color:#a1a1a6; margin-top:1px; }
+.cw-bar { height:3px; border-radius:3px; background:rgba(255,255,255,.18); margin-top:5px; overflow:hidden; }
+.cw-bar i { display:block; height:100%; background:#ff2a6d; }
+.cw-x { position:absolute; right:3px; top:3px; z-index:3; width:22px; height:22px; border-radius:50%; border:0; background:rgba(0,0,0,.65); color:#fff; font-size:14px; line-height:22px; text-align:center; }
+/* Namaz */
+.nz-card { background:#141416; border:1px solid rgba(255,255,255,.1); border-radius:16px; padding:12px 14px; color:#fff; }
+.nz-top { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.nz-next { font-size:12px; color:#a1a1a6; }
+.nz-next b { display:block; font-size:15px; color:#fff; margin-top:1px; }
+.nz-tg { flex:none; border:0; border-radius:999px; padding:7px 12px; font-size:12px; font-weight:700; background:#2c2c2e; color:#fff; }
+.nz-tg.on { background:#ff2a6d; }
+.nz-chips { display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; margin-top:10px; }
+.nz-chips::-webkit-scrollbar { display:none; }
+.nz-chip { flex:0 0 auto; min-width:66px; text-align:center; padding:6px 8px; border-radius:11px; background:rgba(255,255,255,.06); border:1px solid transparent; }
+.nz-chip span { display:block; font-size:10.5px; color:#a1a1a6; }
+.nz-chip b { font-size:12px; font-weight:700; }
+.nz-chip.nx { border-color:#ff2a6d; background:rgba(255,42,109,.14); }
+.nz-set { margin-top:10px; border-top:1px solid rgba(255,255,255,.08); padding-top:10px; display:none; font-size:12.5px; }
+.nz-set.open { display:block; }
+.nz-set label { display:inline-flex; align-items:center; gap:5px; margin:3px 10px 3px 0; }
+.nz-set select { background:#2c2c2e; color:#fff; border:0; border-radius:8px; padding:5px 8px; font-size:12.5px; }
+.nz-link { background:none; border:0; color:#9ecbff; font-size:12px; padding:4px 0; }
+.nz-note { font-size:11px; color:#8e8e93; margin-top:6px; line-height:1.4; }
+#nzBanner { position:fixed; left:10px; right:10px; top:calc(10px + env(safe-area-inset-top)); z-index:100000; display:none; background:linear-gradient(135deg,#ff2a6d,#7c3aed); color:#fff; border-radius:16px; padding:12px 14px; box-shadow:0 10px 30px rgba(0,0,0,.5); font-family:'Noto Sans Bengali','Inter',sans-serif; }
+#nzBanner.show { display:flex; gap:10px; align-items:center; animation:nzIn .35s ease; }
+#nzBanner b { display:block; font-size:15px; }
+#nzBanner span { font-size:12.5px; opacity:.95; }
+#nzBanner button { margin-left:auto; border:0; background:rgba(0,0,0,.3); color:#fff; width:28px; height:28px; border-radius:50%; font-size:16px; }
+@keyframes nzIn { from { transform:translateY(-20px); opacity:0 } to { transform:none; opacity:1 } }
+/* News */
+.sx-news { color:#fff; font-family:'Noto Sans Bengali','Hind Siliguri','Inter',sans-serif; }
+.sx-nw-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.sx-nw-head b { font-size:15px; font-weight:700; }
+.sx-nw-refresh { border:0; background:#2c2c2e; color:#fff; width:28px; height:28px; border-radius:50%; font-size:15px; }
+.sx-nw-refresh.spin { animation:sxspin .8s linear infinite; }
+@keyframes sxspin { to { transform:rotate(360deg) } }
+.sx-nw-chips { display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; margin-bottom:8px; }
+.sx-nw-chips::-webkit-scrollbar { display:none; }
+.sx-chip { flex:0 0 auto; border:0; border-radius:999px; padding:5px 12px; font-size:12px; font-weight:600; background:#2c2c2e; color:#e5e5ea; }
+.sx-chip.on { background:#ff2a6d; color:#fff; }
+.sx-nw-list { display:flex; flex-direction:column; gap:7px; }
+.nw-item { display:block; text-decoration:none; color:#fff; background:#141416; border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:9px 11px; }
+.nw-item:active { background:#1f1f23; }
+.nw-t { font-size:13.5px; font-weight:600; line-height:1.45; }
+.nw-m { margin-top:4px; font-size:11px; color:#a1a1a6; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.nw-tag { font-size:10px; font-weight:700; padding:1px 7px; border-radius:999px; background:rgba(255,255,255,.12); color:#fff; }
+.nw-tag.sports { background:rgba(34,197,94,.25); color:#86efac; }
+.nw-tag.desh { background:rgba(59,130,246,.25); color:#93c5fd; }
+.nw-tag.media { background:rgba(168,85,247,.25); color:#d8b4fe; }
+.nw-tag.intl { background:rgba(245,158,11,.25); color:#fcd34d; }
+.nw-brk { background:#e11d48; color:#fff; font-size:10px; font-weight:800; padding:1px 7px; border-radius:999px; }
+.nw-empty { text-align:center; color:#a1a1a6; font-size:12.5px; padding:16px 8px; }
+.nw-more { margin-top:8px; width:100%; border:0; border-radius:10px; padding:8px; background:#2c2c2e; color:#fff; font-size:12.5px; font-weight:600; }
+/* Player news panel (portrait split) */
+#plNews { display:none; }
+@media (orientation: portrait) {
+  html:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) {
+    inset: 0 0 auto 0 !important; width:100% !important;
+    height: calc(min(56.25vw, 46vh) + env(safe-area-inset-top)) !important; }
+  html:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) #playerViewport { top: env(safe-area-inset-top); }
+  html:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) #playerHorizontalPopup { display:none !important; }
+  html:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) #playerControlBar { padding-top:22px; padding-bottom:6px; }
+  html:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) #playerMenu { bottom:62px; max-height:140px; overflow-y:auto; }
+  html:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) #playerStatusMsg { top: calc(54px + env(safe-area-inset-top)) !important; }
+  html:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) ~ #plNews {
+    display:flex; flex-direction:column; position:fixed; left:0; right:0; bottom:0; z-index:51; background:#0b0b0d;
+    top: calc(min(56.25vw, 46vh) + env(safe-area-inset-top)); padding:12px 14px calc(12px + env(safe-area-inset-bottom)); overflow:hidden; }
+  #plNews .sx-nw-list { overflow-y:auto; -webkit-overflow-scrolling:touch; flex:1; padding-bottom:8px; }
+}
+/* Sarah TV watermark (channel logo-r upor) */
+#sxWm { position:absolute; z-index:4; pointer-events:none; display:none; background:rgba(0,0,0,.9); border-radius:8px; padding:3px 6px; box-shadow:0 2px 10px rgba(0,0,0,.45); line-height:0; }
+#sxWm img { width:100%; height:auto; display:block; }
+html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.4); }
+</style>
+
+<script id="sarah-extras-js">
+(function () {
+  'use strict';
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var BNUM = '০১২৩৪৫৬৭৮৯';
+  function bn(x) { return String(x).replace(/\d/g, function (d) { return BNUM[d]; }); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function lsGet(k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function agoText(ms) {
+    var m = Math.max(0, Math.round((Date.now() - ms) / 60000));
+    if (m < 1) return 'এইমাত্র';
+    if (m < 60) return bn(m) + ' মিনিট আগে';
+    var h = Math.floor(m / 60); if (h < 24) return bn(h) + ' ঘণ্টা আগে';
+    return bn(Math.floor(h / 24)) + ' দিন আগে';
+  }
+
+  /* ================= 1) CONTINUE WATCHING ================= */
+  var CW_KEY = 'sarah_cw_v1', cur = null, curTimer = null, lastPosSave = 0;
+  function cwList() { return lsGet(CW_KEY, []); }
+  function curVideoInfo() {
+    var v = $('#liveVideoEl'), live = true, dur = 0, pos = 0;
+    if (v && isFinite(v.duration) && v.duration > 120) { live = false; dur = v.duration; pos = v.currentTime || 0; }
+    return { live: live, dur: dur, pos: pos };
+  }
+  window.__sarahOnPlay = function (ch, custom) {
+    if (custom || !ch || ch.id == null) { cur = null; return; }
+    cur = { id: String(ch.id), name: ch.name || '', logo: ch.logo || '', cat: ch.category || '' };
+    var me = cur; clearTimeout(curTimer);
+    curTimer = setTimeout(function () { if (cur === me) cwSave(me); }, 4000);   // ৪ সেকেন্ড চললে তবেই সেভ
+    wmApplyChannel(ch);
+  };
+  function cwSave(c) {
+    var vi = curVideoInfo();
+    var list = cwList().filter(function (x) { return x.id !== c.id; });
+    list.unshift({ id: c.id, name: c.name, logo: c.logo, cat: c.cat, t: Date.now(), live: vi.live, pos: vi.pos, dur: vi.dur });
+    lsSet(CW_KEY, list.slice(0, 12)); cwRender();
+  }
+  function cwUpdatePos() {
+    if (!cur) return; var vi = curVideoInfo(); if (vi.live) return;
+    var list = cwList(), it = list.filter(function (x) { return x.id === cur.id; })[0];
+    if (!it) return; it.pos = vi.pos; it.dur = vi.dur; it.live = false; it.t = Date.now(); lsSet(CW_KEY, list);
+  }
+  function cwRender() {
+    var box = $('#cwSection'); if (!box) return;
+    var chs = window.__sarahCH || [], map = {};
+    chs.forEach(function (c) { map[String(c.id)] = c; });
+    var list = cwList().filter(function (x) { return map[x.id]; });
+    if (!list.length) { box.style.display = 'none'; return; }
+    box.style.display = '';
+    $('#cwTrack').innerHTML = list.map(function (x) {
+      var c = map[x.id], name = c.name || x.name, logo = c.logo || x.logo;
+      var pct = (!x.live && x.dur > 0) ? Math.min(100, Math.round(x.pos / x.dur * 100)) : 0;
+      return '<div class="cw-card"><button type="button" class="cw-play" data-play-channel="' + esc(x.id) + '">' +
+        '<div class="cw-thumb"><span>' + esc((name || '?').charAt(0)) + '</span>' +
+        (logo ? '<img src="' + esc(logo) + '" alt="" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display=\'none\'">' : '') +
+        '<span class="cw-badge' + (x.live ? '' : ' vod') + '">' + (x.live ? 'LIVE' : '▶ ' + bn(pct) + '%') + '</span></div>' +
+        '<div class="cw-name">' + esc(name) + '</div><div class="cw-sub">' + agoText(x.t) + '</div>' +
+        (pct > 0 ? '<div class="cw-bar"><i style="width:' + pct + '%"></i></div>' : '') +
+        '</button><button type="button" class="cw-x" data-cw-del="' + esc(x.id) + '" aria-label="সরান">×</button></div>';
+    }).join('');
+  }
+  window.__sarahCW = { render: cwRender };
+  document.addEventListener('click', function (e) {
+    var d = e.target.closest && e.target.closest('[data-cw-del]'); if (!d) return;
+    e.preventDefault(); e.stopPropagation();
+    lsSet(CW_KEY, cwList().filter(function (x) { return x.id !== d.getAttribute('data-cw-del'); })); cwRender();
+  }, true);
+  function bindVideo() {
+    var v = $('#liveVideoEl'); if (!v || v.__sx) return; v.__sx = 1;
+    v.addEventListener('loadedmetadata', function () {
+      wmPlace();
+      if (!cur || !isFinite(v.duration) || v.duration <= 120) return;
+      var it = cwList().filter(function (x) { return x.id === cur.id; })[0];
+      if (it && !it.live && it.pos > 15 && it.pos < v.duration - 45) { try { v.currentTime = it.pos; } catch (e) {} }
+    });
+    v.addEventListener('timeupdate', function () { var n = Date.now(); if (n - lastPosSave > 5000) { lastPosSave = n; cwUpdatePos(); } });
+    v.addEventListener('ended', function () {
+      if (!cur) return; var l = cwList(), it = l.filter(function (x) { return x.id === cur.id; })[0];
+      if (it) { it.pos = 0; lsSet(CW_KEY, l); }
+    });
+    v.addEventListener('resize', wmPlace);
+  }
+
+  /* ================= 2) NAMAZ REMINDER ================= */
+  var NZ_KEY = 'sarah_namaz_v1', NZ_FIRED = 'sarah_namaz_fired';
+  var NZ = [['sehri', 'সেহরির শেষ সময়'], ['fajr', 'ফজর'], ['zuhr', 'যোহর'], ['asr', 'আসর'], ['maghrib', 'মাগরিব'], ['isha', 'এশা']];
+  function nzCfg() { var c = lsGet(NZ_KEY, null) || {}; if (c.on === undefined) c.on = false; if (c.lead === undefined) c.lead = 10; if (!c.off) c.off = { sehri: true }; return c; }
+  function dayTimes(off) {
+    var d = new Date(Date.now() + 6 * 3600e3 + off * 864e5);
+    var y = d.getUTCFullYear(), m = d.getUTCMonth() + 1, dd = d.getUTCDate();
+    return { id: y + '-' + m + '-' + dd, st: window.__sunTimes ? window.__sunTimes(y, m, dd) : null, base: Date.UTC(y, m - 1, dd) };
+  }
+  function nzEvents() {
+    var out = [];
+    [0, 1].forEach(function (o) {
+      var dt = dayTimes(o); if (!dt.st) return;
+      NZ.forEach(function (p) { var min = dt.st[p[0]]; if (min != null) out.push({ key: p[0], name: p[1], t: dt.base + min * 60000, day: dt.id, min: min }); });
+    });
+    return out;
+  }
+  function nzWallNow() { return Date.now() + 6 * 3600e3; }
+  function fmtMin(min) { var s = window.__fmtT ? window.__fmtT(min) : ''; return s.replace(' মি.', ''); }
+  function nzNext() {
+    var now = nzWallNow(), ev = nzEvents().filter(function (e) { return e.key !== 'sehri' && e.t > now; });
+    return ev[0] || null;
+  }
+  function leftText(ms) {
+    var m = Math.max(0, Math.round(ms / 60000)), h = Math.floor(m / 60), mm = m % 60;
+    return (h ? bn(h) + ' ঘণ্টা ' : '') + bn(mm) + ' মিনিট';
+  }
+  function nzRender() {
+    var box = $('#nzSection'); if (!box) return;
+    var cfg = nzCfg(), nx = nzNext(), dt = dayTimes(0);
+    if (!dt.st) { box.style.display = 'none'; return; }
+    box.style.display = '';
+    $('#nzNext').innerHTML = nx ? ('পরবর্তী ওয়াক্ত<b>' + esc(nx.name) + ' — ' + esc(fmtMin(nx.min)) + ' <span style="font-weight:500;color:#a1a1a6;font-size:12px">(' + leftText(nx.t - nzWallNow()) + ' বাকি)</span></b>') : '';
+    var tg = $('#nzToggle'); tg.className = 'nz-tg' + (cfg.on ? ' on' : ''); tg.textContent = cfg.on ? '🔔 চালু' : '🔕 বন্ধ';
+    $('#nzChips').innerHTML = NZ.map(function (p) {
+      return '<div class="nz-chip' + (nx && nx.key === p[0] && nx.day === dt.id ? ' nx' : '') + '"><span>' + p[1].replace('সেহরির শেষ সময়', 'সেহরি শেষ') + '</span><b>' + esc(fmtMin(dt.st[p[0]])) + '</b></div>';
+    }).join('');
+  }
+  function nzSettingsHtml() {
+    var cfg = nzCfg();
+    var leads = [0, 5, 10, 15, 30].map(function (n) { return '<option value="' + n + '"' + (cfg.lead === n ? ' selected' : '') + '>' + (n ? bn(n) + ' মিনিট আগে' : 'ঠিক ওয়াক্তে') + '</option>'; }).join('');
+    var cbs = NZ.map(function (p) { return '<label><input type="checkbox" data-nz-key="' + p[0] + '"' + (cfg.off[p[0]] ? '' : ' checked') + '> ' + p[1] + '</label>'; }).join('');
+    return '<div>কখন জানাবে: <select id="nzLead">' + leads + '</select></div><div style="margin-top:6px">' + cbs + '</div>' +
+      '<button type="button" class="nz-link" id="nzTest">🔊 টেস্ট অ্যালার্ট</button>' +
+      '<div class="nz-note">অ্যালার্ট তখনই বাজবে যখন Sarah TV ওয়েবসাইট/অ্যাপ খোলা থাকবে (ব্যাকগ্রাউন্ডে ফোন ব্রাউজার বন্ধ করে দিলে বাজবে না)। ঢাকার সময় অনুযায়ী, ইসলামিক ফাউন্ডেশনের সময়সূচির কাছাকাছি।</div>';
+  }
+  var bannerTimer = null, audioCtx = null;
+  function beep() {
+    try {
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      [0, 0.28, 0.56].forEach(function (d, i) {
+        var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = 'sine'; o.frequency.value = i === 2 ? 880 : 660; o.connect(g); g.connect(audioCtx.destination);
+        var t0 = audioCtx.currentTime + d; g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.35, t0 + 0.03); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.25);
+        o.start(t0); o.stop(t0 + 0.28);
+      });
+    } catch (e) {}
+  }
+  function nzAlert(title, body) {
+    var b = $('#nzBanner'); if (b) {
+      b.querySelector('b').textContent = title; b.querySelector('span').textContent = body; b.classList.add('show');
+      clearTimeout(bannerTimer); bannerTimer = setTimeout(function () { b.classList.remove('show'); }, 30000);
+    }
+    beep(); try { if (navigator.vibrate) navigator.vibrate([300, 150, 300]); } catch (e) {}
+    try { if ('Notification' in window && Notification.permission === 'granted') new Notification(title, { body: body, tag: 'sarah-namaz' }); } catch (e) {}
+  }
+  function nzCheck() {
+    var cfg = nzCfg(); nzRender(); if (!cfg.on) return;
+    var now = nzWallNow(), fired = lsGet(NZ_FIRED, {}), changed = false;
+    nzEvents().forEach(function (e) {
+      if (cfg.off[e.key]) return;
+      var fk = e.day + ':' + e.key, at = e.t - cfg.lead * 60000;
+      if (!fired[fk] && now >= at && now < e.t + 120000) {
+        fired[fk] = 1; changed = true;
+        var left = e.t - now;
+        nzAlert('🕌 ' + e.name + (e.key === 'sehri' ? '' : ' নামাজের') + ' সময়' + (left > 60000 ? ' হয়ে আসছে' : ' হয়েছে'),
+          (left > 60000 ? leftText(left) + ' পর — ' : '') + fmtMin(e.min));
+      }
+    });
+    if (changed) { var keys = Object.keys(fired); if (keys.length > 40) keys.slice(0, keys.length - 40).forEach(function (k) { delete fired[k]; }); lsSet(NZ_FIRED, fired); }
+  }
+
+  /* ================= 3) NEWS ================= */
+  var FEEDS = [
+    { n: 'জাগো নিউজ', u: 'https://www.jagonews24.com/rss/rss.xml', k: 'paper' },
+    { n: 'রাইজিংবিডি', u: 'https://www.risingbd.com/rss/rss.xml', k: 'paper' },
+    { n: 'বিডি২৪লাইভ', u: 'https://www.bd24live.com/bangla/feed', k: 'paper' },
+    { n: 'কালের কণ্ঠ', u: 'https://www.kalerkantho.com/rss.xml', k: 'paper' },
+    { n: 'যুগান্তর', u: 'https://www.jugantor.com/feed/rss.xml', k: 'paper' },
+    { n: 'বিবিসি বাংলা', u: 'https://feeds.bbci.co.uk/bengali/rss.xml', k: 'paper', c: 'intl' },
+    { n: 'প্রথম আলো (ইংরেজি)', u: 'https://en.prothomalo.com/stories.rss', k: 'paper' },
+    { n: 'The Daily Star', u: 'https://www.thedailystar.net/frontpage/rss.xml', k: 'paper' },
+    { n: 'The Daily Star Sports', u: 'https://www.thedailystar.net/sports/rss.xml', k: 'paper', c: 'sports' },
+    { n: 'The Daily Star World', u: 'https://www.thedailystar.net/world/rss.xml', k: 'paper', c: 'intl' },
+    { n: 'যমুনা টিভি', u: 'https://jamuna.tv/feed', k: 'tv' },
+    { n: 'সময় টিভি', u: 'https://www.somoynews.tv/rss.xml', k: 'tv' },
+    { n: 'ডিবিসি নিউজ', u: 'https://www.dbcnews.tv/rss.xml', k: 'tv' },
+    { n: 'চ্যানেল ২৪', u: 'https://www.channel24bd.tv/rss.xml', k: 'tv' }
+  ];
+  var CATS = [['all', 'সব'], ['sports', 'খেলা'], ['desh', 'দেশ'], ['media', 'মিডিয়া'], ['intl', 'আন্তর্জাতিক']];
+  var CAT_LABEL = { sports: 'খেলা', desh: 'দেশ', media: 'মিডিয়া', intl: 'আন্তর্জাতিক' };
+  var RE_SPORTS = /ক্রিকেট|ফুটবল|ম্যাচ|টেস্ট|ওয়ানডে|টি-?টোয়েন্টি|বিপিএল|আইপিএল|বিশ্বকাপ|লিগ|গোল|সাকিব|তামিম|মুশফিক|মিরাজ|মেসি|রোনালদো|নেইমার|এমবাপ্পে|টেনিস|ব্যাডমিন্টন|অলিম্পিক|উইকেট|ব্যাটার|বোলার|কোচ|স্কোয়াড|সিরিজ|ফাইনাল|সেমিফাইনাল|সাফ|ফিফা|ম্যানচেস্টার|বার্সেলোনা|রিয়াল মাদ্রিদ|cricket|football|match|league|goal|world cup|tournament|\bBPL\b|\bIPL\b|\bT20\b|\bODI\b|tennis|olympic|stadium|squad|wicket|FIFA|SAFF|Messi|Ronaldo|\bfinal\b|scores?\b|beat[s]?\b|\bwin[s]?\b.*(?:match|test|series)/i;
+  var RE_MEDIA = /টিভি|চ্যানেল|নাটক|সিনেমা|চলচ্চিত্র|অভিনেত্রী|অভিনেতা|শোবিজ|ওটিটি|গণমাধ্যম|সাংবাদিক|মুক্তি পাচ্ছে|টক শো|রিয়েলিটি|সংগীত|গায়ক|গায়িকা|ওয়েব সিরিজ|পরিচালক|ফিল্ম|ঢালিউড|বলিউড|হলিউড|drama|actor|actress|movie|film|showbiz|television|\bTV\b|channel|OTT|journalist|media|singer|bollywood|dhallywood/i;
+  var RE_INTL = /যুক্তরাষ্ট্র|আমেরিকা|ভারত|পাকিস্তান|চীন|রাশিয়া|ইউক্রেন|গাজা|ইসরায়েল|ইসরাইল|ইরান|ফিলিস্তিন|জাতিসংঘ|ট্রাম্প|বাইডেন|পুতিন|নেতানিয়াহু|ইউরোপ|ব্রিটেন|যুক্তরাজ্য|জাপান|সৌদি|তুরস্ক|আফগানিস্তান|মিয়ানমার|নেপাল|শ্রীলঙ্কা|ইইউ|ন্যাটো|লন্ডন|ওয়াশিংটন|দিল্লি|বেইজিং|মস্কো|\bUS\b|\bUN\b|\bEU\b|NATO|Trump|Gaza|Israel|Iran|Russia|Ukraine|China|India|Pakistan|Putin|Washington|London|Europe|world/i;
+  function classify(it, feed) {
+    var t = it.title;
+    if (feed.c === 'sports') return 'sports';
+    if (RE_SPORTS.test(t)) return 'sports';
+    if (RE_MEDIA.test(t)) return 'media';
+    if (feed.c === 'intl') return 'intl';
+    if (RE_INTL.test(t) && !/বাংলাদেশ|ঢাকা|Bangladesh|Dhaka/i.test(t)) return 'intl';
+    return 'desh';
+  }
+  var NEWS = { items: [], cat: 'all', open: false, busy: false, t: 0, ok: 0 };
+  var TO = function (ms) { return typeof AbortController === 'undefined' ? { s: undefined, c: function () {} } : (function () { var a = new AbortController(), t = setTimeout(function () { a.abort(); }, ms); return { s: a.signal, c: function () { clearTimeout(t); } }; })(); };
+  function getText(url, ms) {
+    var a = TO(ms || 8000);
+    return fetch(url, { signal: a.s }).then(function (r) { a.c(); if (!r.ok) throw new Error('http ' + r.status); return r.text(); }, function (e) { a.c(); throw e; });
+  }
+  var PROXIES = [
+    function (u) { return 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u); },
+    function (u) { return 'https://api.codetabs.com/v1/proxy/?quest=' + encodeURIComponent(u); },
+    function (u) { return 'https://corsproxy.io/?' + encodeURIComponent(u); }
+  ];
+  function parseXml(txt) {
+    var doc = new DOMParser().parseFromString(txt, 'text/xml');
+    if (doc.getElementsByTagName('parsererror').length && !doc.getElementsByTagName('item').length && !doc.getElementsByTagName('entry').length) throw new Error('parse');
+    var nodes = doc.getElementsByTagName('item'); if (!nodes.length) nodes = doc.getElementsByTagName('entry');
+    var out = [];
+    for (var i = 0; i < nodes.length && i < 14; i++) {
+      var n = nodes[i], g = function (tag) { var e = n.getElementsByTagName(tag)[0]; return e ? (e.textContent || '').trim() : ''; };
+      var link = g('link'); if (!link) { var le = n.getElementsByTagName('link')[0]; link = le ? (le.getAttribute('href') || '') : ''; }
+      var d = g('pubDate') || g('published') || g('updated');
+      if (!d) { var dc = n.getElementsByTagNameNS('*', 'date')[0]; d = dc ? dc.textContent : ''; }
+      var title = g('title').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+      if (title && link) out.push({ title: title, link: link, t: d ? Date.parse(d) : NaN });
+    }
+    if (!out.length) throw new Error('empty');
+    return out;
+  }
+  function viaRss2Json(u) {
+    return getText('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(u)).then(function (t) {
+      var j = JSON.parse(t); if (!j || j.status !== 'ok' || !j.items || !j.items.length) throw new Error('r2j');
+      return j.items.slice(0, 14).map(function (x) { return { title: String(x.title || '').replace(/<[^>]+>/g, '').trim(), link: x.link, t: Date.parse((x.pubDate || '').replace(' ', 'T') + 'Z') }; });
+    });
+  }
+  function fetchFeed(feed) {
+    var custom = ''; try { custom = (localStorage.getItem('sarah_news_proxy') || '').trim(); } catch (e) {}
+    var tries = [];
+    if (custom) tries.push(function () { return getText(custom.replace('{url}', encodeURIComponent(feed.u))).then(parseXml); });
+    tries.push(function () { return getText(feed.u, 5000).then(parseXml); });
+    PROXIES.forEach(function (p) { tries.push(function () { return getText(p(feed.u)).then(parseXml); }); });
+    tries.push(function () { return viaRss2Json(feed.u); });
+    var i = 0;
+    function next() { if (i >= tries.length) return Promise.reject(new Error('all failed')); return tries[i++]().catch(next); }
+    return next();
+  }
+  function mergeItems(bucket) {
+    var seen = {}, all = [], now = Date.now();
+    Object.keys(bucket).forEach(function (k) {
+      var feed = bucket[k].feed;
+      bucket[k].items.forEach(function (it, idx) {
+        var t = isNaN(it.t) ? now - idx * 60000 : it.t;
+        if (t > now + 3600e3) t = now;
+        if (now - t > 72 * 3600e3) return;
+        var key = it.title.slice(0, 60); if (seen[key]) return; seen[key] = 1;
+        all.push({ title: it.title, link: it.link, t: t, src: feed.n, kind: feed.k, cat: classify(it, feed) });
+      });
+    });
+    all.sort(function (a, b) { return b.t - a.t; });
+    return all.slice(0, 80);
+  }
+  function loadNews(force) {
+    if (NEWS.busy) return; if (!force && Date.now() - NEWS.t < 5 * 60000 && NEWS.items.length) return;
+    NEWS.busy = true; NEWS.ok = 0; spin(true);
+    var bucket = {}, pending = FEEDS.length, tmr = null;
+    function flush() { var m = mergeItems(bucket); if (m.length) { NEWS.items = m; NEWS.t = Date.now(); lsSet('sarah_news_v1', { t: NEWS.t, items: m }); } newsRender(); }
+    FEEDS.forEach(function (f) {
+      fetchFeed(f).then(function (items) { bucket[f.u] = { feed: f, items: items }; NEWS.ok++; clearTimeout(tmr); tmr = setTimeout(flush, 400); })
+        .catch(function () {})
+        .then(function () { if (--pending === 0) { NEWS.busy = false; spin(false); flush(); } });
+    });
+  }
+  function spin(on) { [].forEach.call(document.querySelectorAll('[data-nw-refresh]'), function (b) { b.classList.toggle('spin', !!on); }); }
+  function itemHtml(n) {
+    var brk = Date.now() - n.t < 3600e3;
+    return '<a class="nw-item" href="' + esc(n.link) + '" target="_blank" rel="noopener noreferrer"><div class="nw-t">' + esc(n.title) + '</div><div class="nw-m">' +
+      (brk ? '<span class="nw-brk">ব্রেকিং</span>' : '') + '<span class="nw-tag ' + n.cat + '">' + CAT_LABEL[n.cat] + '</span><span>' + (n.kind === 'tv' ? '📺 ' : '') + esc(n.src) + ' • ' + agoText(n.t) + '</span></div></a>';
+  }
+  function chipsHtml() { return CATS.map(function (c) { return '<button type="button" class="sx-chip' + (NEWS.cat === c[0] ? ' on' : '') + '" data-nw-cat="' + c[0] + '">' + c[1] + '</button>'; }).join(''); }
+  function newsRender() {
+    var list = NEWS.items.filter(function (n) { return NEWS.cat === 'all' || n.cat === NEWS.cat; });
+    [].forEach.call(document.querySelectorAll('[data-nw-chips]'), function (c) { c.innerHTML = chipsHtml(); });
+    var empty = '<div class="nw-empty">' + (NEWS.busy ? 'সংবাদ লোড হচ্ছে…' : (NEWS.items.length ? 'এই বিভাগে এখন কোনো সংবাদ নেই' : 'সংবাদ আনা যায়নি — ইন্টারনেট চেক করে ↻ চাপুন')) + '</div>';
+    var pl = $('#nwPlayerList'); if (pl) pl.innerHTML = list.length ? list.slice(0, 40).map(itemHtml).join('') : empty;
+    var hl = $('#nwHomeList'); if (hl) {
+      var cap = NEWS.open ? 30 : 6;
+      hl.innerHTML = list.length ? list.slice(0, cap).map(itemHtml).join('') + (list.length > 6 ? '<button type="button" class="nw-more" data-nw-more>' + (NEWS.open ? 'কম দেখুন ▴' : 'আরও সংবাদ দেখুন ▾') + '</button>' : '') : empty;
+    }
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target; if (!t.closest) return;
+    var c = t.closest('[data-nw-cat]'); if (c) { NEWS.cat = c.getAttribute('data-nw-cat'); newsRender(); return; }
+    if (t.closest('[data-nw-refresh]')) { loadNews(true); return; }
+    if (t.closest('[data-nw-more]')) { NEWS.open = !NEWS.open; newsRender(); return; }
+    var tg = t.closest('#nzToggle');
+    if (tg) {
+      var cfg = nzCfg(); cfg.on = !cfg.on; lsSet(NZ_KEY, cfg);
+      if (cfg.on) { try { if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission(); } catch (er) {} beep(); }
+      nzRender(); return;
+    }
+    if (t.closest('#nzMore')) { $('#nzSet').classList.toggle('open'); return; }
+    if (t.closest('#nzTest')) { nzAlert('🕌 টেস্ট অ্যালার্ট', 'রিমাইন্ডার ঠিকমতো কাজ করছে ✅'); return; }
+    if (t.closest('#nzBanner button')) { $('#nzBanner').classList.remove('show'); return; }
+  });
+  document.addEventListener('change', function (e) {
+    var t = e.target;
+    if (t.id === 'nzLead') { var c = nzCfg(); c.lead = parseInt(t.value, 10) || 0; lsSet(NZ_KEY, c); }
+    else if (t.getAttribute && t.getAttribute('data-nz-key')) { var c2 = nzCfg(); c2.off[t.getAttribute('data-nz-key')] = !t.checked; lsSet(NZ_KEY, c2); }
+  });
+
+  /* ================= 4) SARAH TV LOGO OVER CHANNEL LOGO ================= */
+  var WM_POS = {};            // channel id -> 'tl' | 'tr' | 'bl' | 'br'  (যেমন: { 'somoy-tv': 'tl' })
+  var WM_DEFAULT = 'tr', wmPos = WM_DEFAULT, wmId = null;
+  function wmEnsure() {
+    var vp = $('#playerViewport'); if (!vp) return null;
+    var w = $('#sxWm'); if (w) return w;
+    var src = ($('#brandLogoBtn img') || {}).src; if (!src) return null;
+    w = document.createElement('div'); w.id = 'sxWm'; w.innerHTML = '<img alt="Sarah TV" src="' + src + '">';
+    vp.appendChild(w);
+    w.addEventListener('click', function (e) {                      // শুধু admin: ট্যাপ করলে কোণা বদলাবে
+      if (!document.documentElement.classList.contains('is-admin')) return; e.stopPropagation();
+      var order = ['tr', 'tl', 'bl', 'br']; wmPos = order[(order.indexOf(wmPos) + 1) % 4];
+      var m = lsGet('sarah_wm_pos', {}); m[wmId] = wmPos; lsSet('sarah_wm_pos', m); wmPlace();
+    });
+    return w;
+  }
+  function wmApplyChannel(ch) {
+    wmId = String(ch.id); var m = lsGet('sarah_wm_pos', {});
+    wmPos = m[wmId] || ch.wmPos || WM_POS[wmId] || WM_DEFAULT;
+    wmEnsure(); wmPlace();
+  }
+  function wmPlace() {
+    var w = wmEnsure(), vp = $('#playerViewport'), v = $('#liveVideoEl'); if (!w || !vp) return;
+    var r = vp.getBoundingClientRect(), W = r.width, H = r.height; if (!W || !H) { w.style.display = 'none'; return; }
+    var rw = W, rh = H, ox = 0, oy = 0;
+    var vis = v && !v.classList.contains('hidden');
+    var vw = vis ? v.videoWidth : 0, vh = vis ? v.videoHeight : 0; if (!vw || !vh) { vw = 16; vh = 9; }
+    var fit = vis ? getComputedStyle(v).objectFit : 'contain';
+    if (fit === 'contain' || fit === 'scale-down') { var s = Math.min(W / vw, H / vh); rw = vw * s; rh = vh * s; ox = (W - rw) / 2; oy = (H - rh) / 2; }
+    var wd = Math.max(40, Math.min(130, rw * 0.13)), mg = Math.max(4, rw * 0.012);
+    w.style.width = wd + 'px'; w.style.display = 'block'; w.style.left = w.style.right = w.style.top = w.style.bottom = 'auto';
+    if (wmPos.charAt(0) === 't') w.style.top = (oy + mg) + 'px'; else w.style.bottom = (oy + mg) + 'px';
+    if (wmPos.charAt(1) === 'l') w.style.left = (ox + mg) + 'px'; else w.style.right = (ox + mg) + 'px';
+  }
+
+  /* ================= INIT ================= */
+  function buildSections() {
+    var stats = $('.home-stats'); var anchor = stats && stats.parentElement; if (!anchor || $('#cwSection')) return;
+    var html =
+      '<div id="cwSection" class="sx-sec" style="display:none"><div class="sx-h"><b>▶ দেখা চালিয়ে যান</b><small>আপনার সর্বশেষ দেখা</small></div><div id="cwTrack"></div></div>' +
+      '<div id="nzSection" class="sx-sec" style="display:none"><div class="nz-card"><div class="nz-top"><div class="nz-next" id="nzNext"></div><button type="button" id="nzToggle" class="nz-tg">🔕 বন্ধ</button></div>' +
+      '<div class="nz-chips" id="nzChips"></div><button type="button" class="nz-link" id="nzMore">⚙ রিমাইন্ডার সেটিংস</button><div class="nz-set" id="nzSet">' + nzSettingsHtml() + '</div></div></div>' +
+      '<div id="nwHome" class="sx-sec sx-news"><div class="sx-nw-head"><b>📰 সংবাদ শিরোনাম</b><button type="button" class="sx-nw-refresh" data-nw-refresh aria-label="রিফ্রেশ">↻</button></div>' +
+      '<div class="sx-nw-chips" data-nw-chips></div><div class="sx-nw-list" id="nwHomeList"></div></div>';
+    var wrap = document.createElement('div'); wrap.innerHTML = html;
+    while (wrap.firstChild) anchor.parentNode.insertBefore(wrap.firstChild, anchor);
+    if (!$('#nzBanner')) { var b = document.createElement('div'); b.id = 'nzBanner'; b.innerHTML = '<div><b></b><span></span></div><button type="button" aria-label="বন্ধ">×</button>'; document.body.appendChild(b); }
+  }
+  function init() {
+    buildSections(); bindVideo(); wmEnsure();
+    var cache = lsGet('sarah_news_v1', null); if (cache && cache.items) { NEWS.items = cache.items; NEWS.t = cache.t || 0; }
+    newsRender(); cwRender(); nzRender(); nzCheck();
+    loadNews(false);
+    setInterval(nzCheck, 15000);
+    setInterval(function () { loadNews(false); }, 6 * 60000);
+    setInterval(function () { var m = $('#playerModal'); if (m && !m.classList.contains('hidden')) wmPlace(); }, 1500);
+    window.addEventListener('resize', wmPlace); window.addEventListener('orientationchange', function () { setTimeout(wmPlace, 300); });
+    var pm = $('#playerModal');
+    if (pm && window.MutationObserver) new MutationObserver(function () { if (pm.classList.contains('hidden')) { cwUpdatePos(); cwRender(); } else { setTimeout(wmPlace, 100); } }).observe(pm, { attributes: true, attributeFilter: ['class'] });
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) { nzCheck(); loadNews(false); cwRender(); } });
+  }
+  window.__sarahExtras = { classify: classify, parseXml: parseXml, nzNext: nzNext, nzEvents: nzEvents, bn: bn };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
 
