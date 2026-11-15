@@ -2994,6 +2994,7 @@
     let remainingSeconds = AUTO_HIDE_SECONDS;
 
     let hlsInstance = null;
+    window.__getHls = () => hlsInstance;
     let streamCheckTimer = null;
     let stallTimer = null;
     let startWatchTimer = null;
@@ -3485,6 +3486,7 @@
       destroyHls();
       setSpinner(false);
       const ch = CHANNELS[state.currentChannelIndex];
+      try { if (window.__sarahOnFail) window.__sarahOnFail(ch, reason); } catch (e) {}
 
       if (currentIsCustom) {
         showSorry();
@@ -6013,22 +6015,23 @@
 .nw-more { margin-top:8px; width:100%; border:0; border-radius:10px; padding:8px; background:#2c2c2e; color:#fff; font-size:12.5px; font-weight:600; }
 /* Player news panel (portrait split) */
 #plNews { display:none; }
+html:not(.sx-news-on) #nwHome { display:none !important; }
 @media (orientation: portrait) {
-  html:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) {
+  html.sx-news-on:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) {
     inset: 0 0 auto 0 !important; width:100% !important;
     height: calc(min(56.25vw, 46vh) + env(safe-area-inset-top)) !important; }
-  html:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) #playerViewport { top: env(safe-area-inset-top); }
-  html:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) #playerHorizontalPopup { display:none !important; }
-  html:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) #playerControlBar { padding-top:22px; padding-bottom:6px; }
-  html:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) #playerMenu { bottom:62px; max-height:140px; overflow-y:auto; }
-  html:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) #playerStatusMsg { top: calc(54px + env(safe-area-inset-top)) !important; }
-  html:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) ~ #plNews {
+  html.sx-news-on:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) #playerViewport { top: env(safe-area-inset-top); }
+  html.sx-news-on:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) #playerHorizontalPopup { display:none !important; }
+  html.sx-news-on:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) #playerControlBar { padding-top:22px; padding-bottom:6px; }
+  html.sx-news-on:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) #playerMenu { bottom:62px; max-height:140px; overflow-y:auto; }
+  html.sx-news-on:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) #playerStatusMsg { top: calc(54px + env(safe-area-inset-top)) !important; }
+  html.sx-news-on:not(.tv-mode) #playerModal:not(.hidden):not(.app-inline):not(:fullscreen):not(:-webkit-full-screen) ~ #plNews {
     display:flex; flex-direction:column; position:fixed; left:0; right:0; bottom:0; z-index:51; background:#0b0b0d;
     top: calc(min(56.25vw, 46vh) + env(safe-area-inset-top)); padding:12px 14px calc(12px + env(safe-area-inset-bottom)); overflow:hidden; }
   #plNews .sx-nw-list { overflow-y:auto; -webkit-overflow-scrolling:touch; flex:1; padding-bottom:8px; }
 }
 /* Sarah TV watermark (channel logo-r upor) */
-#sxWm { position:absolute; z-index:4; pointer-events:none; display:none; background:rgba(0,0,0,.9); border-radius:8px; padding:3px 6px; box-shadow:0 2px 10px rgba(0,0,0,.45); line-height:0; }
+#sxWm { position:absolute; z-index:4; pointer-events:none; display:none; background:rgba(0,0,0,.9); border-radius:6px; padding:2px 4px; box-shadow:0 2px 10px rgba(0,0,0,.45); line-height:0; }
 #sxWm img { width:100%; height:auto; display:block; }
 html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.4); }
 </style>
@@ -6230,6 +6233,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     if (RE_INTL.test(t) && !/বাংলাদেশ|ঢাকা|Bangladesh|Dhaka/i.test(t)) return 'intl';
     return 'desh';
   }
+  var NEWS_ENABLED = false;   /* সংবাদ শিরোনাম/ব্রেকিং নিউজ: true করলে আবার চালু হবে */
   var NEWS = { items: [], cat: 'all', open: false, busy: false, t: 0, ok: 0 };
   var TO = function (ms) { return typeof AbortController === 'undefined' ? { s: undefined, c: function () {} } : (function () { var a = new AbortController(), t = setTimeout(function () { a.abort(); }, ms); return { s: a.signal, c: function () { clearTimeout(t); } }; })(); };
   function getText(url, ms) {
@@ -6290,6 +6294,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     return all.slice(0, 80);
   }
   function loadNews(force) {
+    if (!NEWS_ENABLED) return;
     if (NEWS.busy) return; if (!force && Date.now() - NEWS.t < 5 * 60000 && NEWS.items.length) return;
     NEWS.busy = true; NEWS.ok = 0; spin(true);
     var bucket = {}, pending = FEEDS.length, tmr = null;
@@ -6367,7 +6372,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     var vw = vis ? v.videoWidth : 0, vh = vis ? v.videoHeight : 0; if (!vw || !vh) { vw = 16; vh = 9; }
     var fit = vis ? getComputedStyle(v).objectFit : 'contain';
     if (fit === 'contain' || fit === 'scale-down') { var s = Math.min(W / vw, H / vh); rw = vw * s; rh = vh * s; ox = (W - rw) / 2; oy = (H - rh) / 2; }
-    var wd = Math.max(40, Math.min(130, rw * 0.13)), mg = Math.max(4, rw * 0.012);
+    var wd = Math.max(26, Math.min(80, rw * 0.082)), mg = Math.max(3, rw * 0.012);
     w.style.width = wd + 'px'; w.style.display = 'block'; w.style.left = w.style.right = w.style.top = w.style.bottom = 'auto';
     if (wmPos.charAt(0) === 't') w.style.top = (oy + mg) + 'px'; else w.style.bottom = (oy + mg) + 'px';
     if (wmPos.charAt(1) === 'l') w.style.left = (ox + mg) + 'px'; else w.style.right = (ox + mg) + 'px';
@@ -6388,6 +6393,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   }
   function init() {
     buildSections(); bindVideo(); wmEnsure();
+    if (NEWS_ENABLED) document.documentElement.classList.add('sx-news-on');
     var cache = lsGet('sarah_news_v1', null); if (cache && cache.items) { NEWS.items = cache.items; NEWS.t = cache.t || 0; }
     newsRender(); cwRender(); nzRender(); nzCheck();
     loadNews(false);
@@ -6399,7 +6405,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     if (pm && window.MutationObserver) new MutationObserver(function () { if (pm.classList.contains('hidden')) { cwUpdatePos(); cwRender(); } else { setTimeout(wmPlace, 100); } }).observe(pm, { attributes: true, attributeFilter: ['class'] });
     document.addEventListener('visibilitychange', function () { if (!document.hidden) { nzCheck(); loadNews(false); cwRender(); } });
   }
-  window.__sx = { getText: getText, PROXIES: PROXIES, alert: nzAlert, beep: beep, bn: bn, esc: esc, lsGet: lsGet, lsSet: lsSet };
+  window.__sx = { cur: function () { return cur; }, getText: getText, PROXIES: PROXIES, alert: nzAlert, beep: beep, bn: bn, esc: esc, lsGet: lsGet, lsSet: lsSet };
   window.__sarahExtras = { classify: classify, parseXml: parseXml, nzNext: nzNext, nzEvents: nzEvents, bn: bn };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
@@ -6435,11 +6441,13 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 #scTrack, .sc-strip { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; }
 #scTrack::-webkit-scrollbar, .sc-strip::-webkit-scrollbar { display:none; }
 .sc-strip { margin-bottom:8px; flex:none; }
-.sc-card { flex:0 0 150px; text-decoration:none; color:#fff; background:#141416; border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:8px 10px; font-family:'Noto Sans Bengali','Inter',sans-serif; }
+.sc-wrap { flex:0 0 150px; } .sc-card { display:block; text-decoration:none; color:#fff; background:#141416; border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:8px 10px; font-family:'Noto Sans Bengali','Inter',sans-serif; }
 .sc-top { font-size:10.5px; margin-bottom:4px; color:#a1a1a6; }
 .sc-lv { color:#fb7185; font-weight:800; } .sc-dn { color:#a1a1a6; } .sc-pr { color:#ffd666; font-weight:700; }
 .sc-r { display:flex; justify-content:space-between; gap:6px; font-size:12.5px; line-height:1.55; }
 .sc-r span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } .sc-r b { font-weight:800; }
+.sc-pred { margin-top:4px; font-size:10.5px; color:#d1d1d6; display:flex; gap:4px; align-items:center; flex-wrap:wrap; }
+.sc-pred button { border:0; border-radius:999px; background:#2c2c2e; color:#fff; font-size:10.5px; padding:3px 7px; }
 /* Quality chip */
 #sxQ { position:absolute; right:12px; top:calc(56px + env(safe-area-inset-top)); z-index:25; display:inline-flex; align-items:center; gap:5px; border:1px solid rgba(255,255,255,.3); background:rgba(0,0,0,.55); color:#fff; border-radius:999px; padding:5px 10px; font-size:11.5px; font-weight:700; backdrop-filter:blur(6px); }
 #playerModal.pl-locked #sxQ, #playerModal.app-inline:not(.app-fs) #sxQ, html.tv-mode #sxQ { display:none !important; }
@@ -6625,10 +6633,19 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
       SC.items = all.slice(0, 16); SC.t = Date.now(); SC.busy = false; scoreRender();
     });
   }
+  function predKey(x) { return x.a + '|' + x.b + '|' + DAYFMT.format(x.when || Date.now()); }
+  function predWinner(x) { var A = parseInt(x.as, 10), B = parseInt(x.bs, 10); if (isNaN(A) || isNaN(B)) return ''; return A > B ? 'a' : (A < B ? 'b' : 'd'); }
   function scoreCard(x) {
     var top = x.state === 'live' ? '<span class="sc-lv">● LIVE ' + esc(x.status) + '</span>' : (x.state === 'done' ? '<span class="sc-dn">সমাপ্ত</span>' : '<span class="sc-pr">' + esc(TIMEFMT.format(x.when)) + '</span>');
-    return '<a class="sc-card" ' + (x.link ? 'href="' + esc(x.link) + '" target="_blank" rel="noopener noreferrer"' : '') + '><div class="sc-top">' + x.sp + ' ' + top + '</div>' +
-      '<div class="sc-r"><span>' + esc(x.a) + '</span><b>' + esc(x.state === 'pre' ? '' : x.as) + '</b></div><div class="sc-r"><span>' + esc(x.b) + '</span><b>' + esc(x.state === 'pre' ? '' : x.bs) + '</b></div></a>';
+    var pk = x.sp === '⚽' ? predKey(x) : '', pr = pk ? (lsGet('sarah_pred_v1', {})[pk] || null) : null, extra = '';
+    if (pk && x.state === 'pre') {
+      extra = '<div class="sc-pred">' + (pr ? '🎯 আপনার ধারণা: ' + esc(pr.c === 'a' ? x.a : (pr.c === 'b' ? x.b : 'ড্র')) :
+        '<span>ধারণা:</span>' + [['a', x.a], ['d', 'ড্র'], ['b', x.b]].map(function (o) { return '<button type="button" data-pred="' + o[0] + '" data-pk="' + esc(pk) + '">' + esc(String(o[1]).slice(0, 7)) + '</button>'; }).join('')) + '</div>';
+    } else if (pk && pr && x.state === 'done') {
+      var w = predWinner(x); if (w) extra = '<div class="sc-pred">' + (pr.c === w ? '✅ আপনার ধারণা সঠিক!' : '❌ ধারণা মেলেনি') + '</div>';
+    }
+    return '<div class="sc-wrap"><a class="sc-card" ' + (x.link ? 'href="' + esc(x.link) + '" target="_blank" rel="noopener noreferrer"' : '') + '><div class="sc-top">' + x.sp + ' ' + top + '</div>' +
+      '<div class="sc-r"><span>' + esc(x.a) + '</span><b>' + esc(x.state === 'pre' ? '' : x.as) + '</b></div><div class="sc-r"><span>' + esc(x.b) + '</span><b>' + esc(x.state === 'pre' ? '' : x.bs) + '</b></div></a>' + extra + '</div>';
   }
   function scoreRender() {
     var html = SC.items.length ? SC.items.map(scoreCard).join('') : '';
@@ -6693,7 +6710,452 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     document.addEventListener('visibilitychange', function () { if (!document.hidden) { ramRender(); guideRender(); scoreLoad(false); } });
     window.__sarahGuideRefresh = guideRender;
   }
-  window.__sarahExtras2 = { ramInfo: ramInfo, ramNext: ramNext, gzTimes: gzTimes };
+  window.__sarahExtras2 = { ramInfo: ramInfo, ramNext: ramNext, gzTimes: gzTimes, scores: function () { return SC.items; }, scoreRender: scoreRender, predKey: predKey, predWinner: predWinner, evList: evList, fetchJson: fetchJson, TIMEFMT: TIMEFMT };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+
+<style id="sarah-extras3-css">
+[data-sx-hide="1"] { display:none !important; }
+/* sheet */
+#sxSheet { position:fixed; inset:0; z-index:100001; background:#0b0b0d; color:#fff; display:none; flex-direction:column; font-family:'Noto Sans Bengali','Hind Siliguri','Inter',sans-serif; padding-top:env(safe-area-inset-top); }
+#sxSheet.open { display:flex; }
+.sxs-h { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-bottom:1px solid rgba(255,255,255,.08); }
+.sxs-t { font-size:16px; font-weight:700; }
+.sxs-x { border:0; background:#2c2c2e; color:#fff; width:32px; height:32px; border-radius:50%; font-size:18px; }
+.sxs-b { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:14px 16px calc(24px + env(safe-area-inset-bottom)); }
+#sxToast { position:fixed; left:12px; right:12px; bottom:calc(76px + env(safe-area-inset-bottom)); z-index:100002; background:#1f1f23; color:#fff; border:1px solid rgba(255,255,255,.15); border-radius:14px; padding:11px 14px; font-size:13px; display:none; align-items:center; gap:10px; box-shadow:0 10px 30px rgba(0,0,0,.5); font-family:'Noto Sans Bengali','Inter',sans-serif; }
+#sxToast.show { display:flex; }
+#sxToast span { flex:1; } #sxToast button { border:0; border-radius:999px; padding:7px 12px; background:#ff2a6d; color:#fff; font-weight:700; font-size:12px; }
+/* tools */
+.tl-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+.tl-t { display:flex; flex-direction:column; align-items:center; gap:4px; border:1px solid rgba(255,255,255,.1); background:#141416; color:#fff; border-radius:14px; padding:10px 4px; font-size:10.5px; font-weight:600; text-align:center; line-height:1.25; }
+.tl-t span { font-size:20px; } .tl-t:active { transform:scale(.96); }
+.sx-admin-tile { display:none; } html.is-admin .sx-admin-tile { display:flex; }
+/* forms */
+.rq-f { display:flex; gap:8px; margin-top:10px; } .rq-f.col { flex-direction:column; }
+.rq-f input, .rq-f textarea { flex:1; background:#1c1c1e; border:1px solid rgba(255,255,255,.12); border-radius:10px; color:#fff; padding:10px 12px; font-size:14px; font-family:inherit; }
+/* multi-view */
+.mv-grid { display:grid; gap:10px; grid-template-columns:1fr; } @media (orientation:landscape) { .mv-grid { grid-template-columns:1fr 1fr; } }
+.mv-v { position:relative; aspect-ratio:16/9; background:#000; border-radius:12px; overflow:hidden; } .mv-v video { width:100%; height:100%; object-fit:contain; background:#000; }
+.mv-m { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:12.5px; color:#d1d1d6; background:rgba(0,0,0,.45); }
+.mv-c { display:flex; gap:8px; margin-top:6px; } .mv-c select { flex:1; min-width:0; background:#2c2c2e; color:#fff; border:0; border-radius:10px; padding:8px; font-size:13px; } .mv-a { border:0; background:#2c2c2e; border-radius:10px; width:42px; font-size:16px; }
+/* gesture HUD, CC */
+#sxHud { position:absolute; left:50%; top:22%; transform:translateX(-50%); z-index:30; background:rgba(0,0,0,.65); color:#fff; padding:8px 14px; border-radius:999px; font-size:14px; font-weight:700; opacity:0; transition:opacity .2s; pointer-events:none; }
+#sxCC { position:absolute; right:12px; top:calc(92px + env(safe-area-inset-top)); z-index:25; border:1px solid rgba(255,255,255,.3); background:rgba(0,0,0,.55); color:#fff; border-radius:999px; padding:4px 10px; font-size:11.5px; font-weight:800; backdrop-filter:blur(6px); }
+#sxCC.on { background:#ff2a6d; border-color:#ff2a6d; }
+#playerModal.pl-locked #sxCC, #playerModal.app-inline:not(.app-fs) #sxCC, html.tv-mode #sxCC { display:none !important; }
+/* qibla */
+.ql-box { position:relative; width:260px; height:260px; margin:10px auto; }
+#qlDial { position:absolute; inset:0; border-radius:50%; border:3px solid #3a3a3c; background:radial-gradient(circle,#1c1c1e 60%,#141416); transition:transform .15s linear; }
+#qlDial span { position:absolute; font-size:13px; font-weight:800; color:#a1a1a6; } #qlDial .n { top:8px; left:50%; transform:translateX(-50%); color:#ff453a; } #qlDial .s { bottom:8px; left:50%; transform:translateX(-50%); } #qlDial .e { right:10px; top:50%; transform:translateY(-50%); } #qlDial .w { left:10px; top:50%; transform:translateY(-50%); }
+#qlNeedle { position:absolute; inset:0; transition:transform .15s linear; } #qlNeedle::before { content:''; position:absolute; left:50%; top:34px; bottom:50%; width:4px; margin-left:-2px; border-radius:4px; background:#ffd666; } #qlNeedle i { position:absolute; left:50%; top:6px; transform:translateX(-50%); font-style:normal; font-size:28px; }
+#qlWrap.ok #qlDial { border-color:#30d158; box-shadow:0 0 24px rgba(48,209,88,.5); } #qlWrap.ok #qlNeedle::before { background:#30d158; }
+/* weekly bars + announcement */
+.wk-bars { display:flex; align-items:flex-end; justify-content:space-between; gap:6px; height:100px; margin:12px 0; } .wk-b { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:4px; } .wk-b i { width:100%; max-width:28px; border-radius:6px 6px 2px 2px; background:linear-gradient(#ff2a6d,#7c3aed); } .wk-b span { font-size:10px; color:#a1a1a6; }
+#anBanner { margin:8px 16px 0; display:flex; align-items:center; gap:10px; background:linear-gradient(135deg,#ff2a6d,#7c3aed); color:#fff; border-radius:14px; padding:10px 12px; font-size:13px; font-weight:600; font-family:'Noto Sans Bengali','Inter',sans-serif; }
+#anBanner span { flex:1; } #anBanner a { color:#fff; background:rgba(0,0,0,.3); border-radius:999px; padding:4px 10px; font-size:12px; text-decoration:none; } #anBanner button { border:0; background:rgba(0,0,0,.3); color:#fff; width:24px; height:24px; border-radius:50%; }
+</style>
+
+<script id="sarah-extras3-js">
+(function () {
+  'use strict';
+  var X = window.__sx, X2 = window.__sarahExtras2; if (!X || !X2) return;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var bn = X.bn, esc = X.esc, lsGet = X.lsGet, lsSet = X.lsSet;
+  var ADMIN_WA = '';        /* চ্যানেল রিকোয়েস্ট যে WhatsApp নম্বরে যাবে (দেশের কোডসহ, যেমন 8801XXXXXXXXX). ফাঁকা থাকলে Share/Copy হবে */
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  function chUrl(c) { return c.streamUrl || (c.servers && c.servers[c.srv || 0] && c.servers[c.srv || 0].url) || ''; }
+  function chs() { return window.__sarahCH || []; }
+  function dayKey(ms) { var d = new Date(ms + 6 * 3600e3); return d.getUTCFullYear() + '-' + String(d.getUTCMonth() + 1).padStart(2, '0') + '-' + String(d.getUTCDate()).padStart(2, '0'); }
+  function durTxt(sec) { var m = Math.round(sec / 60), h = Math.floor(m / 60); return (h ? bn(h) + ' ঘণ্টা ' : '') + bn(m % 60) + ' মিনিট'; }
+
+  /* ---------- generic sheet + toast ---------- */
+  function sheet(title, html, onClose) {
+    var s = $('#sxSheet');
+    if (!s) {
+      s = document.createElement('div'); s.id = 'sxSheet';
+      s.innerHTML = '<div class="sxs-h"><b class="sxs-t"></b><button type="button" class="sxs-x" data-sheet-close aria-label="বন্ধ">×</button></div><div class="sxs-b"></div>';
+      document.body.appendChild(s);
+    }
+    if (s._onClose) { try { s._onClose(); } catch (e) {} }
+    s.querySelector('.sxs-t').textContent = title; s.querySelector('.sxs-b').innerHTML = html; s._onClose = onClose || null; s.classList.add('open');
+    return s.querySelector('.sxs-b');
+  }
+  function closeSheet() { var s = $('#sxSheet'); if (!s) return; s.classList.remove('open'); if (s._onClose) { try { s._onClose(); } catch (e) {} s._onClose = null; } s.querySelector('.sxs-b').innerHTML = ''; }
+  var toastT = null;
+  function toast(text, label, fn) {
+    var t = $('#sxToast'); if (!t) { t = document.createElement('div'); t.id = 'sxToast'; document.body.appendChild(t); }
+    t.innerHTML = '<span></span>' + (label ? '<button type="button"></button>' : '');
+    t.firstChild.textContent = text; if (label) { var b = t.querySelector('button'); b.textContent = label; b.onclick = function () { t.classList.remove('show'); if (fn) fn(); }; }
+    t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('show'); }, label ? 12000 : 3500);
+  }
+
+  /* ---------- 1) Data Saver suggestion ---------- */
+  function dsCheck() {
+    try {
+      var c = navigator.connection || navigator.mozConnection; if (!c) return;
+      var slow = c.saveData || /^(slow-2g|2g|3g)$/.test(c.effectiveType || '') || c.type === 'cellular';
+      var btn = $('#toggleDataSaverBtn'); if (!slow || !btn || btn.getAttribute('aria-checked') === 'true') return;
+      if (sessionStorage.getItem('sx_ds_asked')) return; sessionStorage.setItem('sx_ds_asked', '1');
+      toast('📶 মোবাইল ডেটা/ধীর নেট ধরা পড়েছে। Data Saver চালু করবেন?', 'চালু করুন', function () { if (btn.getAttribute('aria-checked') !== 'true') btn.click(); toast('Data Saver চালু হয়েছে (সর্বোচ্চ ৪৮০p)'); });
+    } catch (e) {}
+  }
+
+  /* ---------- 2) Subtitle / CC chip ---------- */
+  function ccInfo() {
+    var h = window.__getHls && window.__getHls(), v = $('#liveVideoEl');
+    if (h && h.subtitleTracks && h.subtitleTracks.length) return { k: 'hls', h: h, n: h.subtitleTracks.length };
+    if (v && v.textTracks) { var tr = [].filter.call(v.textTracks, function (t) { return /subtitles|captions/.test(t.kind); }); if (tr.length) return { k: 'nat', tr: tr, n: tr.length }; }
+    return null;
+  }
+  function ccCycle() {
+    var i = ccInfo(); if (!i) return;
+    if (i.k === 'hls') { i.h.subtitleDisplay = true; var nx = i.h.subtitleTrack + 1; i.h.subtitleTrack = nx >= i.n ? -1 : nx; }
+    else { var cur = -1; i.tr.forEach(function (t, ix) { if (t.mode === 'showing') cur = ix; }); i.tr.forEach(function (t) { t.mode = 'disabled'; }); if (cur + 1 < i.n) i.tr[cur + 1].mode = 'showing'; }
+    ccSync();
+  }
+  function ccSync() {
+    var b = $('#sxCC'), i = ccInfo(); if (!b) return;
+    if (!i) { b.style.display = 'none'; return; }
+    var on = i.k === 'hls' ? i.h.subtitleTrack >= 0 : i.tr.some(function (t) { return t.mode === 'showing'; });
+    b.style.display = ''; b.classList.toggle('on', on); b.textContent = on ? 'CC ✓' : 'CC';
+  }
+  function ccInit() {
+    var m = $('#playerModal'); if (!m || $('#sxCC')) return;
+    var b = document.createElement('button'); b.id = 'sxCC'; b.type = 'button'; b.className = 'ov-fade'; b.style.display = 'none'; b.textContent = 'CC'; m.appendChild(b);
+    b.addEventListener('click', function (e) { e.stopPropagation(); ccCycle(); });
+    setInterval(function () { if (!m.classList.contains('hidden')) ccSync(); }, 1500);
+  }
+
+  /* ---------- 3) Multi-view ---------- */
+  var mv = { hls: [null, null] };
+  function mvPlayable() { return chs().filter(function (c) { var u = chUrl(c); return /\.m3u8|\.mp4/i.test(u) && !/youtu|embed/i.test(u); }); }
+  function mvLoad(i, id) {
+    var pane = $('#mvP' + i), v = pane.querySelector('video'), msg = pane.querySelector('.mv-m'), ch = chs().filter(function (c) { return String(c.id) === String(id); })[0];
+    if (mv.hls[i]) { try { mv.hls[i].destroy(); } catch (e) {} mv.hls[i] = null; }
+    v.removeAttribute('src'); if (!ch) { msg.textContent = ''; return; }
+    var url = chUrl(ch); msg.textContent = 'লোড হচ্ছে…'; msg.style.display = '';
+    function ok() { msg.style.display = 'none'; }
+    function go(pub) {
+      if (window.Hls && Hls.isSupported()) {
+        var h = new Hls({ maxBufferLength: 10, manifestLoadingMaxRetry: 1, xhrSetup: function (x, u) { try { if (pub) x.open('GET', pub + encodeURIComponent(u), true); } catch (e) {} } });
+        mv.hls[i] = h; h.loadSource(url); h.attachMedia(v);
+        h.on(Hls.Events.MANIFEST_PARSED, function () { var p = v.play(); if (p && p.catch) p.catch(function () { v.muted = true; v.play(); }); });
+        h.on(Hls.Events.FRAG_LOADED, ok);
+        h.on(Hls.Events.ERROR, function (e, d) { if (!d.fatal) return; try { h.destroy(); } catch (x) {} if (!pub) go('https://corsproxy.io/?url='); else msg.textContent = '⚠ চালানো যায়নি'; });
+      } else if (v.canPlayType('application/vnd.apple.mpegurl')) { v.src = url; v.play().catch(function () {}); v.onplaying = ok; }
+      else msg.textContent = 'এই ব্রাউজারে সাপোর্ট নেই';
+    }
+    go('');
+  }
+  function mvStop() { mv.hls.forEach(function (h, i) { if (h) { try { h.destroy(); } catch (e) {} mv.hls[i] = null; } }); }
+  function mvOpen(firstId) {
+    var list = mvPlayable(); if (list.length < 2) { toast('মাল্টি-ভিউয়ের জন্য কমপক্ষে ২টি চলার মতো চ্যানেল দরকার'); return; }
+    var opts = function (sel) { return '<option value="">— চ্যানেল বাছুন —</option>' + list.map(function (c) { return '<option value="' + esc(c.id) + '"' + (String(c.id) === String(sel) ? ' selected' : '') + '>' + esc(c.name) + '</option>'; }).join(''); };
+    var pane = function (i) { return '<div class="mv-p" id="mvP' + i + '"><div class="mv-v"><video playsinline ' + (i ? 'muted' : '') + '></video><div class="mv-m" style="display:none"></div></div><div class="mv-c"><select data-mv-sel="' + i + '">' + opts(i === 0 ? firstId : '') + '</select><button type="button" class="mv-a" data-mv-audio="' + i + '">' + (i ? '🔇' : '🔊') + '</button></div></div>'; };
+    sheet('⧉ মাল্টি-ভিউ', '<div class="mv-grid">' + pane(0) + pane(1) + '</div><div class="nz-note" style="padding:10px">দুটি চ্যানেল একসাথে চলবে। 🔊 চাপলে সেই চ্যানেলের শব্দ চালু হবে। ডেটা বেশি খরচ হয়।</div>', mvStop);
+    if (firstId) mvLoad(0, firstId);
+  }
+
+  /* ---------- 4) Brightness / Volume swipe ---------- */
+  var bright = parseFloat(localStorage.getItem('sarah_bright') || '1') || 1, g = null, hudT = null;
+  function hud(t) { var h = $('#sxHud'); if (!h) return; h.textContent = t; h.style.opacity = 1; clearTimeout(hudT); hudT = setTimeout(function () { h.style.opacity = 0; }, 700); }
+  function applyBright() { var v = $('#liveVideoEl'); if (v) v.style.filter = bright === 1 ? '' : 'brightness(' + bright + ')'; }
+  function gestureInit() {
+    var vp = $('#playerViewport'); if (!vp || vp.__sxg) return; vp.__sxg = 1;
+    var hd = document.createElement('div'); hd.id = 'sxHud'; vp.appendChild(hd);
+    vp.addEventListener('touchstart', function (e) {
+      var v = $('#liveVideoEl'); if (e.touches.length !== 1 || !v || v.classList.contains('hidden')) { g = null; return; }
+      var t = e.touches[0], r = vp.getBoundingClientRect();
+      g = { x: t.clientX, y: t.clientY, left: (t.clientX - r.left) < r.width / 2, b0: bright, v0: v.volume, h: r.height, moved: false };
+    }, { passive: true });
+    vp.addEventListener('touchmove', function (e) {
+      if (!g) return; var t = e.touches[0], dy = g.y - t.clientY, dx = t.clientX - g.x, v = $('#liveVideoEl');
+      if (!g.moved) { if (Math.abs(dx) > 24 && Math.abs(dx) > Math.abs(dy)) { g = null; return; } if (Math.abs(dy) < 16) return; g.moved = true; }
+      var d = dy / (g.h * 0.7);
+      if (g.left) { bright = clamp(g.b0 + d, 0.3, 1.6); applyBright(); hud('🔆 ' + bn(Math.round(bright * 100)) + '%'); }
+      else { v.muted = false; v.volume = clamp(g.v0 + d, 0, 1); hud((v.volume === 0 ? '🔇 ' : '🔊 ') + bn(Math.round(v.volume * 100)) + '%'); }
+      e.preventDefault();
+    }, { passive: false });
+    vp.addEventListener('touchend', function () { if (g && g.moved) { try { localStorage.setItem('sarah_bright', String(bright)); } catch (e) {} } g = null; }, { passive: true });
+    applyBright();
+  }
+
+  /* ---------- 5) Team match alerts ---------- */
+  var TEAM_KEY = 'sarah_teams_v1';
+  var TEAMS = [['বাংলাদেশ', 'bangladesh'], ['ভারত', 'india'], ['পাকিস্তান', 'pakistan'], ['আর্জেন্টিনা', 'argentina'], ['ব্রাজিল', 'brazil'], ['পর্তুগাল', 'portugal'], ['ইংল্যান্ড', 'england'], ['রিয়াল মাদ্রিদ', 'real madrid'], ['বার্সেলোনা', 'barcelona'], ['ম্যান ইউনাইটেড', 'manchester united'], ['ম্যান সিটি', 'manchester city'], ['লিভারপুল', 'liverpool'], ['আর্সেনাল', 'arsenal'], ['চেলসি', 'chelsea']];
+  function teamsHtml() {
+    var sel = lsGet(TEAM_KEY, []);
+    var custom = sel.filter(function (k) { return !TEAMS.some(function (t) { return t[1] === k; }); });
+    return '<div class="sx-nw-chips" style="flex-wrap:wrap;overflow:visible">' + TEAMS.map(function (t) { return '<button type="button" class="sx-chip' + (sel.indexOf(t[1]) > -1 ? ' on' : '') + '" data-team="' + t[1] + '">' + t[0] + '</button>'; }).join('') +
+      custom.map(function (k) { return '<button type="button" class="sx-chip on" data-team="' + esc(k) + '">' + esc(k) + ' ×</button>'; }).join('') + '</div>' +
+      '<div class="rq-f"><input id="teamIn" placeholder="অন্য দল (ইংরেজিতে, যেমন: Chelsea)"><button type="button" class="nz-tg on" id="teamAdd">যোগ</button></div>' +
+      '<div class="nz-note" style="padding:6px 2px">এই দলগুলোর ম্যাচ লাইভ হলে বা শুরুর ১৫ মিনিট আগে অ্যালার্ট আসবে। (সাইট/অ্যাপ খোলা থাকলে)</div>';
+  }
+  function teamCheck() {
+    var tm = lsGet(TEAM_KEY, []); if (!tm.length) return; var now = Date.now(), fired = lsGet('sarah_teamfired', {}), ch = false;
+    var match = function (t) { t = String(t || '').toLowerCase(); return tm.some(function (k) { return t.indexOf(k) > -1; }); };
+    (X2.scores() || []).forEach(function (x) {
+      if (!match(x.a + ' ' + x.b)) return; var id = X2.predKey(x);
+      if (x.state === 'live' && !fired[id + 'L']) { fired[id + 'L'] = 1; ch = true; X.alert('🔴 লাইভ: ' + x.a + ' vs ' + x.b, (x.as || '0') + ' - ' + (x.bs || '0') + ' ' + (x.status || '')); }
+      else if (x.state === 'pre' && x.when - now < 15 * 60000 && x.when - now > -60000 && !fired[id + 'P']) { fired[id + 'P'] = 1; ch = true; X.alert('⏰ ' + x.a + ' vs ' + x.b, 'ম্যাচ ১৫ মিনিটের মধ্যে শুরু'); }
+    });
+    (X2.evList() || []).forEach(function (c) {
+      if (!match(c.name)) return; var id = 'E' + c.name + c.startTs;
+      if (c.startTs - now < 15 * 60000 && c.startTs - now > -60000 && !fired[id]) { fired[id] = 1; ch = true; X.alert('⏰ ' + c.name, 'শীঘ্রই শুরু হচ্ছে'); }
+    });
+    if (ch) { var ks = Object.keys(fired); if (ks.length > 80) ks.slice(0, ks.length - 80).forEach(function (k) { delete fired[k]; }); lsSet('sarah_teamfired', fired); }
+  }
+  function predEval() {
+    var pr = lsGet('sarah_pred_v1', {}), ch = false;
+    (X2.scores() || []).forEach(function (x) {
+      if (x.sp !== '⚽' || x.state !== 'done') return; var k = X2.predKey(x), p = pr[k]; if (!p || p.r) return;
+      var w = X2.predWinner(x); if (w) { p.r = p.c === w ? 'w' : 'l'; ch = true; }
+    });
+    if (ch) lsSet('sarah_pred_v1', pr);
+  }
+
+  /* ---------- 6) Points table / fixtures ---------- */
+  var LEAGUES = [['eng.1', 'প্রিমিয়ার লিগ'], ['esp.1', 'লা লিগা'], ['ita.1', 'সিরি আ'], ['ger.1', 'বুন্দেসলিগা'], ['fra.1', 'লিগ ১'], ['uefa.champions', 'চ্যাম্পিয়নস লিগ'], ['fifa.world', 'বিশ্বকাপ']];
+  var tb = { lg: 'eng.1', tab: 'table' };
+  function tableOpen() {
+    var body = sheet('📊 পয়েন্ট টেবিল / ফিক্সচার', '<div class="sx-nw-chips" id="tbLg">' + LEAGUES.map(function (l) { return '<button type="button" class="sx-chip' + (tb.lg === l[0] ? ' on' : '') + '" data-tb-lg="' + l[0] + '">' + l[1] + '</button>'; }).join('') + '</div>' +
+      '<div class="sx-nw-chips"><button type="button" class="sx-chip' + (tb.tab === 'table' ? ' on' : '') + '" data-tb-tab="table">পয়েন্ট টেবিল</button><button type="button" class="sx-chip' + (tb.tab === 'fix' ? ' on' : '') + '" data-tb-tab="fix">ফিক্সচার</button></div><div id="tbBody"><div class="nw-empty">লোড হচ্ছে…</div></div>');
+    tableLoad();
+  }
+  function stat(e, n) { var s = (e.stats || []).filter(function (x) { return x.name === n; })[0]; return s ? (s.displayValue != null ? s.displayValue : s.value) : '-'; }
+  function tableLoad() {
+    var box = $('#tbBody'); if (!box) return; box.innerHTML = '<div class="nw-empty">লোড হচ্ছে…</div>'; var lg = tb.lg, tab = tb.tab;
+    if (tab === 'table') {
+      X2.fetchJson('https://site.api.espn.com/apis/v2/sports/soccer/' + lg + '/standings').then(function (j) {
+        if (lg !== tb.lg || tab !== tb.tab) return;
+        var groups = (j.children || []).filter(function (c) { return c.standings && c.standings.entries && c.standings.entries.length; });
+        if (!groups.length) throw new Error('none');
+        box.innerHTML = groups.map(function (gp) {
+          var es = gp.standings.entries.slice().sort(function (a, b) { return (+stat(a, 'rank') || 99) - (+stat(b, 'rank') || 99); });
+          return (groups.length > 1 ? '<div class="sx-h"><b>' + esc(gp.name || '') + '</b></div>' : '') + '<div class="rm-cal" style="max-height:none"><table class="rm-tb"><thead><tr><th>#</th><th>দল</th><th>ম্যাচ</th><th>জয়</th><th>ড্র</th><th>হার</th><th>পয়েন্ট</th></tr></thead><tbody>' +
+            es.map(function (e, i) { return '<tr><td>' + bn(stat(e, 'rank') !== '-' ? stat(e, 'rank') : i + 1) + '</td><td>' + esc((e.team && e.team.displayName) || '') + '</td><td>' + bn(stat(e, 'gamesPlayed')) + '</td><td>' + bn(stat(e, 'wins')) + '</td><td>' + bn(stat(e, 'ties')) + '</td><td>' + bn(stat(e, 'losses')) + '</td><td><b>' + bn(stat(e, 'points')) + '</b></td></tr>'; }).join('') + '</tbody></table></div>';
+        }).join('');
+      }).catch(function () { if (box) box.innerHTML = '<div class="nw-empty">এই লিগের টেবিল আনা যায়নি (এখন চলছে না, বা ইন্টারনেট সমস্যা)</div>'; });
+    } else {
+      var f = function (ms) { return dayKey(ms).replace(/-/g, ''); };
+      X2.fetchJson('https://site.api.espn.com/apis/site/v2/sports/soccer/' + lg + '/scoreboard?dates=' + f(Date.now()) + '-' + f(Date.now() + 10 * 864e5)).then(function (j) {
+        if (lg !== tb.lg || tab !== tb.tab) return;
+        var ev = (j.events || []).slice().sort(function (a, b) { return Date.parse(a.date) - Date.parse(b.date); });
+        if (!ev.length) throw new Error('none');
+        box.innerHTML = '<div class="sx-nw-list">' + ev.slice(0, 40).map(function (e) {
+          var c = (e.competitions || [])[0] || {}, cs = c.competitors || [], h = cs.filter(function (x) { return x.homeAway === 'home'; })[0] || cs[0] || {}, a = cs.filter(function (x) { return x.homeAway === 'away'; })[0] || cs[1] || {};
+          var t = Date.parse(e.date), st = ((e.status || {}).type || {}).state;
+          return '<div class="gd-it"><div class="gd-tm" style="flex-basis:88px">' + esc(new Date(t + 6 * 3600e3).getUTCDate() + '/' + (new Date(t + 6 * 3600e3).getUTCMonth() + 1)) + ' ' + esc(X2.TIMEFMT.format(t)) + '</div><div class="gd-in"><div class="nw-t">' + esc(((h.team || {}).shortDisplayName || '') + ' vs ' + ((a.team || {}).shortDisplayName || '')) + '</div>' + (st === 'post' || st === 'in' ? '<div class="nw-m">' + esc((h.score || 0) + ' - ' + (a.score || 0)) + '</div>' : '') + '</div></div>';
+        }).join('') + '</div>';
+      }).catch(function () { if (box) box.innerHTML = '<div class="nw-empty">আগামী ১০ দিনে কোনো ম্যাচ পাওয়া যায়নি</div>'; });
+    }
+  }
+
+  /* ---------- 7) Qibla ---------- */
+  var KAABA = { lat: 21.4225, lon: 39.8262 };
+  function qiblaBearing(lat, lon) {
+    var r = function (x) { return x * Math.PI / 180; }, dl = r(KAABA.lon - lon);
+    var y = Math.sin(dl) * Math.cos(r(KAABA.lat)), x = Math.cos(r(lat)) * Math.sin(r(KAABA.lat)) - Math.sin(r(lat)) * Math.cos(r(KAABA.lat)) * Math.cos(dl);
+    return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+  }
+  var ql = { lat: 23.9999, lon: 90.4203, head: null, on: false };
+  function qiblaDraw() {
+    var b = qiblaBearing(ql.lat, ql.lon), n = $('#qlNeedle'), d = $('#qlDial'), t = $('#qlTxt'); if (!n) return;
+    var h = ql.head == null ? 0 : ql.head; d.style.transform = 'rotate(' + (-h) + 'deg)'; n.style.transform = 'rotate(' + (b - h) + 'deg)';
+    var diff = Math.abs(((b - h + 540) % 360) - 180); $('#qlWrap').classList.toggle('ok', ql.head != null && diff < 6);
+    t.textContent = 'কিবলা: উত্তর থেকে ' + bn(Math.round(b)) + '°' + (ql.head == null ? ' (কম্পাস চালু করুন)' : ' • আপনি ' + bn(Math.round(h)) + '° এ');
+  }
+  function onOri(e) {
+    var h = e.webkitCompassHeading != null ? e.webkitCompassHeading : (e.alpha != null ? (e.absolute || e.type === 'deviceorientationabsolute' ? (360 - e.alpha) : null) : null);
+    if (h == null) return; ql.head = (h + 360) % 360; qiblaDraw();
+  }
+  function qiblaStart() {
+    var go = function () { window.addEventListener('deviceorientationabsolute', onOri, true); window.addEventListener('deviceorientation', onOri, true); ql.on = true; $('#qlStart').textContent = 'কম্পাস চালু ✓'; };
+    try { if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === 'function') DeviceOrientationEvent.requestPermission().then(function (r) { if (r === 'granted') go(); else toast('কম্পাসের অনুমতি দেওয়া হয়নি'); }).catch(function () {}); else go(); } catch (e) { go(); }
+  }
+  function qiblaStop() { window.removeEventListener('deviceorientationabsolute', onOri, true); window.removeEventListener('deviceorientation', onOri, true); ql.on = false; }
+  function qiblaOpen() {
+    sheet('🧭 কিবলা কম্পাস', '<div id="qlWrap"><div class="ql-box"><div id="qlDial"><span class="n">উ</span><span class="e">পূ</span><span class="s">দ</span><span class="w">প</span></div><div id="qlNeedle"><i>🕋</i></div></div><div id="qlTxt" class="rm-sub" style="text-align:center;margin:10px 0"></div>' +
+      '<div class="rm-act" style="justify-content:center"><button type="button" class="nz-tg on" id="qlStart">▶ কম্পাস চালু করুন</button><button type="button" class="nz-tg" id="qlLoc">📍 আমার অবস্থান</button></div>' +
+      '<div class="nz-note" style="text-align:center;padding:10px">ডিফল্ট অবস্থান: গাজীপুর। ফোন সমতলে ধরুন; 🕋 ওপরে এলে সবুজ হবে। কম্পাস না চললে (ডেস্কটপ/সেন্সর নেই) ডিগ্রি দেখে দিক ঠিক করুন।</div></div>', qiblaStop);
+    qiblaDraw();
+  }
+
+  /* ---------- 8) Channel request ---------- */
+  function reqOpen() {
+    var hist = lsGet('sarah_req_v1', []);
+    sheet('📝 চ্যানেল রিকোয়েস্ট', '<div class="rq-f col"><input id="rqName" placeholder="চ্যানেলের নাম *"><input id="rqLink" placeholder="লিংক/ওয়েবসাইট (ঐচ্ছিক)"><textarea id="rqNote" rows="3" placeholder="কিছু বলতে চাইলে…"></textarea><button type="button" class="nz-tg on" id="rqSend">পাঠান</button></div>' +
+      '<div class="nz-note" style="padding:8px 2px">' + (ADMIN_WA ? 'রিকোয়েস্ট WhatsApp এ অ্যাডমিনের কাছে যাবে।' : 'এখনো অ্যাডমিনের নম্বর সেট করা নেই — তাই Share/কপি হবে।') + '</div>' +
+      (hist.length ? '<div class="sx-h" style="margin-top:8px"><b>আপনার আগের রিকোয়েস্ট</b></div>' + hist.map(function (h) { return '<div class="gd-it" style="margin-bottom:6px"><div class="gd-in"><div class="nw-t">' + esc(h.n) + '</div><div class="nw-m">' + esc(new Date(h.t).toLocaleDateString('bn-BD')) + '</div></div></div>'; }).join('') : ''));
+  }
+  function reqSend() {
+    var n = ($('#rqName').value || '').trim(); if (!n) { toast('চ্যানেলের নাম লিখুন'); return; }
+    var l = ($('#rqLink').value || '').trim(), note = ($('#rqNote').value || '').trim();
+    var txt = '📺 Sarah TV — চ্যানেল রিকোয়েস্ট\nনাম: ' + n + (l ? '\nলিংক: ' + l : '') + (note ? '\nনোট: ' + note : '');
+    var h = lsGet('sarah_req_v1', []); h.unshift({ n: n, t: Date.now() }); lsSet('sarah_req_v1', h.slice(0, 10));
+    if (ADMIN_WA) window.open('https://wa.me/' + ADMIN_WA + '?text=' + encodeURIComponent(txt), '_blank');
+    else if (navigator.share) navigator.share({ text: txt }).catch(function () {});
+    else { try { navigator.clipboard.writeText(txt); toast('কপি হয়েছে — অ্যাডমিনকে পাঠিয়ে দিন'); } catch (e) { toast(txt); } }
+    reqOpen();
+  }
+
+  /* ---------- 9) Watch stats / weekly summary ---------- */
+  var ST_KEY = 'sarah_stats_v1';
+  function stats() { var s = lsGet(ST_KEY, null) || {}; s.days = s.days || {}; s.fails = s.fails || {}; return s; }
+  function trackTick() {
+    var m = $('#playerModal'); if (!m || m.classList.contains('hidden') || document.hidden) return;
+    var c = X.cur(); if (!c) return; var v = $('#liveVideoEl'), ifr = $('#liveIframeEl');
+    var playing = (v && !v.classList.contains('hidden') && !v.paused && !v.ended && v.readyState > 2) || (ifr && !ifr.classList.contains('hidden'));
+    if (!playing) return;
+    var s = stats(), dk = dayKey(Date.now()), d = s.days[dk] = s.days[dk] || {}, e = d[c.id] = d[c.id] || { n: c.name, s: 0 };
+    e.s += 5; e.n = c.name;
+    Object.keys(s.days).sort().slice(0, -21).forEach(function (k) { delete s.days[k]; });
+    lsSet(ST_KEY, s);
+  }
+  window.__sarahOnFail = function (ch, reason) {
+    if (!ch) return; var s = stats(), f = s.fails[ch.id] = s.fails[ch.id] || { n: ch.name, c: 0 }; f.c++; f.t = Date.now(); f.r = reason || ''; lsSet(ST_KEY, s);
+  };
+  function weekData(days) {
+    var s = stats(), tot = 0, per = {}, bars = [];
+    for (var i = days - 1; i >= 0; i--) {
+      var dk = dayKey(Date.now() - i * 864e5), d = s.days[dk] || {}, sum = 0;
+      Object.keys(d).forEach(function (id) { sum += d[id].s; var p = per[id] = per[id] || { n: d[id].n, s: 0 }; p.s += d[id].s; });
+      tot += sum; bars.push({ k: dk, s: sum });
+    }
+    var top = Object.keys(per).map(function (id) { return per[id]; }).sort(function (a, b) { return b.s - a.s; });
+    return { tot: tot, top: top, bars: bars, fails: s.fails };
+  }
+  function weekOpen() {
+    var w = weekData(7), mx = Math.max.apply(null, w.bars.map(function (b) { return b.s; }).concat([1])), WKD = ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহঃ', 'শুক্র', 'শনি'];
+    var pr = lsGet('sarah_pred_v1', {}), win = 0, lose = 0; Object.keys(pr).forEach(function (k) { if (pr[k].r === 'w') win++; else if (pr[k].r === 'l') lose++; });
+    sheet('📅 আমার সপ্তাহ', '<div class="rm-card on"><div class="rm-h">গত ৭ দিনে আপনি দেখেছেন</div><div class="rm-big"><b>' + (w.tot ? durTxt(w.tot) : '—') + '</b></div></div>' +
+      '<div class="wk-bars">' + w.bars.map(function (b) { var d = new Date(b.k + 'T00:00:00Z'); return '<div class="wk-b"><i style="height:' + Math.max(3, Math.round(b.s / mx * 70)) + 'px"></i><span>' + WKD[d.getUTCDay()] + '</span></div>'; }).join('') + '</div>' +
+      '<div class="sx-h"><b>সবচেয়ে বেশি দেখা চ্যানেল</b></div>' + (w.top.length ? w.top.slice(0, 5).map(function (t, i) { return '<div class="gd-it" style="margin-bottom:6px"><div class="gd-tm" style="flex-basis:24px">' + bn(i + 1) + '</div><div class="gd-in"><div class="nw-t">' + esc(t.n) + '</div></div><div class="nw-m">' + durTxt(t.s) + '</div></div>'; }).join('') : '<div class="nw-empty">এখনো কিছু দেখা হয়নি — ভিডিও চালালে এখানে জমা হবে</div>') +
+      '<div class="sx-h" style="margin-top:10px"><b>🎯 ম্যাচ প্রেডিকশন</b></div><div class="nw-t">✅ সঠিক ' + bn(win) + ' • ❌ ভুল ' + bn(lose) + '</div><div class="nz-note" style="padding:8px 2px">তথ্য শুধু এই ডিভাইসে জমা থাকে।</div>');
+  }
+
+  /* ---------- 10) Admin dashboard + stream check ---------- */
+  var CK_KEY = 'sarah_check_v1', ck = { run: false, stop: false };
+  function probe(ch) {
+    return new Promise(function (res) {
+      var url = chUrl(ch); if (!url || !/\.m3u8|\.m3u(\?|$)/i.test(url) || !window.Hls || !Hls.isSupported()) { res('skip'); return; }
+      var v = document.createElement('video'); v.muted = true; var done = false, hls, tm;
+      function fin(r) { if (done) return; done = true; clearTimeout(tm); try { hls.destroy(); } catch (e) {} res(r); }
+      function go(pub) {
+        hls = new Hls({ enableWorker: false, maxBufferLength: 4, manifestLoadingMaxRetry: 0, levelLoadingMaxRetry: 0, fragLoadingMaxRetry: 0, xhrSetup: function (x, u) { try { if (pub) x.open('GET', pub + encodeURIComponent(u), true); } catch (e) {} } });
+        hls.on(Hls.Events.FRAG_LOADED, function () { fin('ok'); });
+        hls.on(Hls.Events.ERROR, function (e, d) { if (!d.fatal || done) return; try { hls.destroy(); } catch (x) {} if (!pub) go('https://corsproxy.io/?url='); else fin('fail'); });
+        hls.loadSource(url); hls.attachMedia(v);
+      }
+      tm = setTimeout(function () { fin('fail'); }, 16000); go('');
+    });
+  }
+  function checkRun() {
+    if (ck.run) return; var list = chs().filter(function (c) { return !c.upcoming; }), i = 0, active = 0, done = 0, res = {}; ck.run = true; ck.stop = false;
+    var bar = $('#ckProg');
+    function tick() {
+      if (bar) bar.textContent = 'চেক হচ্ছে ' + bn(done) + '/' + bn(list.length) + '…';
+      if (ck.stop || (i >= list.length && active === 0)) { ck.run = false; lsSet(CK_KEY, { t: Date.now(), res: res }); adminOpen(); return; }
+      while (active < 3 && i < list.length && !ck.stop) {
+        (function (c) { active++; probe(c).then(function (r) { res[c.id] = { s: r, n: c.name }; }).then(function () { active--; done++; tick(); }); })(list[i++]);
+      }
+    }
+    tick();
+  }
+  function adminOpen() {
+    var w = weekData(14), c = lsGet(CK_KEY, null), fails = Object.keys(w.fails).map(function (k) { return w.fails[k]; }).sort(function (a, b) { return b.c - a.c; }).slice(0, 10);
+    var bad = c ? Object.keys(c.res).filter(function (k) { return c.res[k].s === 'fail'; }).map(function (k) { return c.res[k].n; }) : [];
+    var okN = c ? Object.keys(c.res).filter(function (k) { return c.res[k].s === 'ok'; }).length : 0;
+    sheet('🛠 অ্যাডমিন ড্যাশবোর্ড', '<div class="nz-note" style="padding:0 2px 8px">⚠ এখানে শুধু <b>এই ডিভাইসের</b> তথ্য দেখায়। সব ইউজারের হিসাব (কে কতজন দেখছে) পেতে সার্ভার/অ্যানালিটিক্স লাগবে।</div>' +
+      '<div class="rm-two"><div><span>মোট চ্যানেল</span><b>' + bn(chs().length) + '</b></div><div><span>১৪ দিনে দেখা</span><b>' + (w.tot ? durTxt(w.tot) : '—') + '</b></div></div>' +
+      '<div class="sx-h" style="margin-top:12px"><b>✅ স্ট্রিম চেক</b><small>' + (c ? 'শেষ: ' + new Date(c.t).toLocaleString('bn-BD') : 'এখনো চালানো হয়নি') + '</small></div>' +
+      '<div class="rm-act"><button type="button" class="nz-tg on" id="ckStart">' + (ck.run ? '⏳ চলছে…' : '▶ সব চ্যানেল চেক করুন') + '</button>' + (ck.run ? '<button type="button" class="nz-tg" id="ckStop">⏹ থামান</button>' : '') + '</div><div id="ckProg" class="nz-note"></div>' +
+      (c ? '<div class="nw-t" style="margin-top:8px">চলছে: ' + bn(okN) + ' • সমস্যা: ' + bn(bad.length) + '</div>' + (bad.length ? '<div class="gd-it" style="margin-top:6px;display:block"><div class="nw-t" style="font-weight:500;white-space:pre-line">' + esc(bad.join('\n')) + '</div></div><button type="button" class="nz-link" id="ckCopy">📋 সমস্যার তালিকা কপি</button>' : '') : '') +
+      '<div class="nz-note">চেক ব্রাউজার থেকে হয় — টোকেন/জিও-লক করা লিংক ভুল করে "সমস্যা" দেখাতে পারে। YouTube/embed চ্যানেল বাদ যায়।</div>' +
+      '<div class="sx-h" style="margin-top:12px"><b>⚠ সবচেয়ে বেশি ফেল করা চ্যানেল</b></div>' + (fails.length ? fails.map(function (f) { return '<div class="gd-it" style="margin-bottom:6px"><div class="gd-in"><div class="nw-t">' + esc(f.n) + '</div><div class="nw-m">' + esc(f.r || '') + '</div></div><div class="nw-m">' + bn(f.c) + ' বার</div></div>'; }).join('') : '<div class="nw-empty">এখনো কোনো ফেল রেকর্ড নেই</div>') +
+      '<div class="sx-h" style="margin-top:12px"><b>📢 ঘোষণা ব্যানার</b></div><div class="nz-note">সাইটের ফোল্ডারে <code>announce.json</code> ফাইল রাখুন: <code>{"id":"1","text":"নতুন চ্যানেল যোগ হয়েছে","link":"","until":"2026-12-31"}</code> — সবার হোমে দেখা যাবে।</div>');
+  }
+
+  /* ---------- 11) Announcement banner ---------- */
+  function announce() {
+    var host = $('#viewHome'); if (!host || $('#anBanner')) return;
+    var show = function (a) {
+      if (!a || !a.text) return; if (a.until && Date.parse(a.until) < Date.now()) return;
+      var gone = lsGet('sarah_an_gone', []); if (a.id && gone.indexOf(String(a.id)) > -1) return;
+      var d = document.createElement('div'); d.id = 'anBanner'; d.setAttribute('data-id', a.id || '');
+      d.innerHTML = '<span>📢 ' + esc(a.text) + '</span>' + (a.link ? '<a href="' + esc(a.link) + '" target="_blank" rel="noopener">দেখুন</a>' : '') + '<button type="button" data-an-x aria-label="বন্ধ">×</button>';
+      host.insertBefore(d, host.firstChild);
+    };
+    var q = (location.search.match(/[?&]announce=([^&]+)/) || [])[1]; if (q) { show({ id: 'preview', text: decodeURIComponent(q) }); return; }
+    fetch('./announce.json?_=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(show).catch(function () {});
+  }
+
+  /* ---------- 12) Home sections reorder ---------- */
+  var ORDER_KEY = 'sarah_order_v1';
+  var SECS = [['cwSection', '▶ দেখা চালিয়ে যান'], ['rmSection', '🌙 রমজান'], ['nzSection', '🕌 নামাজের সময়'], ['gdSection', '📺 টিভি গাইড'], ['scSection', '⚽🏏 লাইভ স্কোর'], ['toolsSection', '🧰 টুলস']];
+  function orderCfg() { var o = lsGet(ORDER_KEY, null); if (!o || !o.ids) o = { ids: SECS.map(function (s) { return s[0]; }), hide: {} }; SECS.forEach(function (s) { if (o.ids.indexOf(s[0]) < 0) o.ids.push(s[0]); }); return o; }
+  function applyOrder() {
+    var o = orderCfg(), anchor = $('#nwHome'); if (!anchor) return; var parent = anchor.parentNode;
+    o.ids.forEach(function (id) { var el = document.getElementById(id); if (!el) return; parent.insertBefore(el, anchor); if (o.hide[id]) el.setAttribute('data-sx-hide', '1'); else el.removeAttribute('data-sx-hide'); });
+  }
+  function orderOpen() {
+    var o = orderCfg(), nm = {}; SECS.forEach(function (s) { nm[s[0]] = s[1]; });
+    sheet('↕ হোম সাজান', '<div class="nz-note" style="padding:0 2px 8px">▲▼ দিয়ে ওপর-নিচ করুন, 👁 দিয়ে লুকান/দেখান।</div>' + o.ids.map(function (id, i) {
+      return '<div class="gd-it" style="margin-bottom:6px"><div class="gd-in"><div class="nw-t">' + esc(nm[id] || id) + '</div></div><button type="button" class="gd-bell" data-ord-up="' + i + '"' + (i === 0 ? ' disabled' : '') + '>▲</button><button type="button" class="gd-bell" data-ord-dn="' + i + '"' + (i === o.ids.length - 1 ? ' disabled' : '') + '>▼</button><button type="button" class="gd-bell' + (o.hide[id] ? '' : ' on') + '" data-ord-eye="' + id + '">' + (o.hide[id] ? '🙈' : '👁') + '</button></div>';
+    }).join('') + '<button type="button" class="nz-link" id="ordReset">↺ ডিফল্টে ফেরান</button>');
+  }
+
+  /* ---------- tools hub + events ---------- */
+  var TILES = [['multi', '⧉', 'মাল্টি-ভিউ'], ['table', '📊', 'পয়েন্ট টেবিল'], ['qibla', '🧭', 'কিবলা'], ['teams', '🔔', 'টিম অ্যালার্ট'], ['week', '📅', 'আমার সপ্তাহ'], ['req', '📝', 'চ্যানেল রিকোয়েস্ট'], ['order', '↕', 'হোম সাজান'], ['admin', '🛠', 'ড্যাশবোর্ড']];
+  function buildHub() {
+    var nw = $('#nwHome'); if (!nw || $('#toolsSection')) return;
+    var d = document.createElement('div'); d.id = 'toolsSection'; d.className = 'sx-sec';
+    d.innerHTML = '<div class="sx-h"><b>🧰 টুলস</b></div><div class="tl-grid">' + TILES.map(function (t) { return '<button type="button" class="tl-t' + (t[0] === 'admin' ? ' sx-admin-tile' : '') + '" data-tool="' + t[0] + '"><span>' + t[1] + '</span>' + t[2] + '</button>'; }).join('') + '</div>';
+    nw.parentNode.insertBefore(d, nw);
+  }
+  function openTool(k) {
+    if (k === 'multi') mvOpen(); else if (k === 'table') tableOpen(); else if (k === 'qibla') qiblaOpen(); else if (k === 'teams') sheet('🔔 টিম অ্যালার্ট', teamsHtml());
+    else if (k === 'week') weekOpen(); else if (k === 'req') reqOpen(); else if (k === 'order') orderOpen(); else if (k === 'admin') adminOpen();
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target; if (!t.closest) return; var q;
+    if (t.closest('[data-sheet-close]')) { closeSheet(); return; }
+    if ((q = t.closest('[data-tool]'))) { openTool(q.getAttribute('data-tool')); return; }
+    if ((q = t.closest('[data-pred]'))) { e.preventDefault(); var pr = lsGet('sarah_pred_v1', {}); pr[q.getAttribute('data-pk')] = { c: q.getAttribute('data-pred'), t: Date.now() }; lsSet('sarah_pred_v1', pr); X2.scoreRender(); return; }
+    if ((q = t.closest('[data-an-x]'))) { var b = $('#anBanner'), id = b && b.getAttribute('data-id'); if (id) { var gone = lsGet('sarah_an_gone', []); gone.push(id); lsSet('sarah_an_gone', gone); } if (b) b.remove(); return; }
+    if ((q = t.closest('[data-team]'))) { var tm = lsGet(TEAM_KEY, []), k = q.getAttribute('data-team'), ix = tm.indexOf(k); if (ix > -1) tm.splice(ix, 1); else tm.push(k); lsSet(TEAM_KEY, tm); if ($('.sxs-b')) $('.sxs-b').innerHTML = teamsHtml(); try { if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission(); } catch (er) {} return; }
+    if (t.closest('#teamAdd')) { var v = ($('#teamIn').value || '').trim().toLowerCase(); if (v) { var tm2 = lsGet(TEAM_KEY, []); if (tm2.indexOf(v) < 0) tm2.push(v); lsSet(TEAM_KEY, tm2); $('.sxs-b').innerHTML = teamsHtml(); } return; }
+    if ((q = t.closest('[data-tb-lg]'))) { tb.lg = q.getAttribute('data-tb-lg'); tableOpen(); return; }
+    if ((q = t.closest('[data-tb-tab]'))) { tb.tab = q.getAttribute('data-tb-tab'); tableOpen(); return; }
+    if (t.closest('#qlStart')) { qiblaStart(); return; }
+    if (t.closest('#qlLoc')) { if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function (p) { ql.lat = p.coords.latitude; ql.lon = p.coords.longitude; qiblaDraw(); toast('অবস্থান আপডেট হয়েছে'); }, function () { toast('অবস্থান পাওয়া যায়নি'); }, { timeout: 8000 }); return; }
+    if (t.closest('#rqSend')) { reqSend(); return; }
+    if (t.closest('#ckStart')) { checkRun(); return; }
+    if (t.closest('#ckStop')) { ck.stop = true; return; }
+    if (t.closest('#ckCopy')) { var c = lsGet(CK_KEY, null); if (c) { try { navigator.clipboard.writeText(Object.keys(c.res).filter(function (k) { return c.res[k].s === 'fail'; }).map(function (k) { return c.res[k].n; }).join('\n')); toast('কপি হয়েছে'); } catch (er) {} } return; }
+    if ((q = t.closest('[data-mv-audio]'))) { var i = +q.getAttribute('data-mv-audio'); [0, 1].forEach(function (j) { var vv = $('#mvP' + j + ' video'), bb = $('#mvP' + j + ' .mv-a'); if (vv) { vv.muted = j !== i; bb.textContent = j === i ? '🔊' : '🔇'; } }); return; }
+    var o;
+    if ((q = t.closest('[data-ord-up]'))) { o = orderCfg(); var a = +q.getAttribute('data-ord-up'); if (a > 0) { var x = o.ids.splice(a, 1)[0]; o.ids.splice(a - 1, 0, x); lsSet(ORDER_KEY, o); applyOrder(); orderOpen(); } return; }
+    if ((q = t.closest('[data-ord-dn]'))) { o = orderCfg(); var b2 = +q.getAttribute('data-ord-dn'); if (b2 < o.ids.length - 1) { var y = o.ids.splice(b2, 1)[0]; o.ids.splice(b2 + 1, 0, y); lsSet(ORDER_KEY, o); applyOrder(); orderOpen(); } return; }
+    if ((q = t.closest('[data-ord-eye]'))) { o = orderCfg(); var id = q.getAttribute('data-ord-eye'); o.hide[id] = !o.hide[id]; lsSet(ORDER_KEY, o); applyOrder(); orderOpen(); return; }
+    if (t.closest('#ordReset')) { try { localStorage.removeItem(ORDER_KEY); } catch (er) {} applyOrder(); orderOpen(); return; }
+  });
+  document.addEventListener('change', function (e) {
+    var t = e.target; if (!t.getAttribute) return; var i = t.getAttribute('data-mv-sel'); if (i != null) mvLoad(+i, t.value);
+  });
+
+  function init() {
+    buildHub(); applyOrder(); ccInit(); gestureInit(); announce();
+    setTimeout(dsCheck, 4000);
+    setInterval(trackTick, 5000);
+    setInterval(function () { teamCheck(); predEval(); }, 60000);
+    setTimeout(function () { teamCheck(); predEval(); }, 15000);
+    var pm = $('#playerModal'); if (pm && window.MutationObserver) new MutationObserver(function () { if (!pm.classList.contains('hidden')) { gestureInit(); applyBright(); } }).observe(pm, { attributes: true, attributeFilter: ['class'] });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSheet(); });
+  }
+  window.__sarahExtras3 = { qiblaBearing: qiblaBearing, weekData: weekData };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
