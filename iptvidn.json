@@ -1,14 +1,8 @@
 {
   "source": "https://teleghor.online/",
-  "updated": "2026-11-15 10:34:51 UTC",
+  "updated": "2026-11-15 11:29:35 UTC",
   "count": 157,
   "channels": [
-    {
-      "name": "Bangladesh vs Pakistan",
-      "logo": "https://i.postimg.cc/nzRZnjhH/bdvspk.jpg",
-      "group": "Live Event Sports",
-      "url": "https://live.teleghor.online/Live-Event-Sports/Bangladesh-vs-Pakistan-2.m3u8"
-    },
     {
       "name": "Demon Slayer S1E1",
       "logo": "https://upload.kbhub.online/files/Demon%20Slayer%20Moonlit%20Battle%20Poster.png",
@@ -386,6 +380,12 @@
       "logo": "https://upload.kbhub.online/files/Demon%20Slayer%20Moonlit%20Battle%20Poster.png",
       "group": "Anime",
       "url": "https://media.kbhub.online/OTT%20KB/Anime/Demon%20Slayer%20Season%201-5/S4/8/E08.mkv"
+    },
+    {
+      "name": "Bangladesh vs Pakistan",
+      "logo": "https://i.postimg.cc/nzRZnjhH/bdvspk.jpg",
+      "group": "Live Event Sports",
+      "url": "https://live.teleghor.online/Live-Event-Sports/Bangladesh-vs-Pakistan-2.m3u8"
     },
     {
       "name": "Bachelor EP 105",

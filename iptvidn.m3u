@@ -1,6 +1,4 @@
 #EXTM3U
-#EXTINF:-1 tvg-logo="https://i.postimg.cc/nzRZnjhH/bdvspk.jpg" group-title="Live Event Sports",Bangladesh vs Pakistan
-https://live.teleghor.online/Live-Event-Sports/Bangladesh-vs-Pakistan-2.m3u8
 #EXTINF:-1 tvg-logo="https://upload.kbhub.online/files/Demon%20Slayer%20Moonlit%20Battle%20Poster.png" group-title="Anime",Demon Slayer S1E1
 https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Anime/Demon%20Slayer%20Season%201-5/S1/1/Demon_Slayer_01.m3u8
 #EXTINF:-1 tvg-logo="https://upload.kbhub.online/files/Demon%20Slayer%20Moonlit%20Battle%20Poster.png" group-title="Anime",Demon Slayer S1E2
@@ -127,6 +125,8 @@ https://media.kbhub.online/OTT%20KB/Anime/Demon%20Slayer%20Season%201-5/S4/6/E06
 https://media.kbhub.online/OTT%20KB/Anime/Demon%20Slayer%20Season%201-5/S4/7/E07.m3u8
 #EXTINF:-1 tvg-logo="https://upload.kbhub.online/files/Demon%20Slayer%20Moonlit%20Battle%20Poster.png" group-title="Anime",Demon Slayer S4E8
 https://media.kbhub.online/OTT%20KB/Anime/Demon%20Slayer%20Season%201-5/S4/8/E08.mkv
+#EXTINF:-1 tvg-logo="https://i.postimg.cc/nzRZnjhH/bdvspk.jpg" group-title="Live Event Sports",Bangladesh vs Pakistan
+https://live.teleghor.online/Live-Event-Sports/Bangladesh-vs-Pakistan-2.m3u8
 #EXTINF:-1 tvg-logo="https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png" group-title="Bachelor Point",Bachelor EP 105
 https://media.kbhub.online/OTT%20KB/Bachelor%20Point/105/S05E105.m3u8
 #EXTINF:-1 tvg-logo="https://upload.kbhub.online/files/Bechlor%20Point%20Rooftop%20Crew.png" group-title="Bachelor Point",Bachelor EP 106
