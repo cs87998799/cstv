@@ -1,0 +1,26 @@
+{
+  "name": "Sarah TV",
+  "short_name": "Sarah TV",
+  "description": "লাইভ টিভি, খেলা, নামাজের সময় ও আরও",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b0b0d",
+  "theme_color": "#0b0b0d",
+  "lang": "bn",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

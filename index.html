@@ -412,21 +412,21 @@
     /* ===== Sarah TV Ultra-Vibrant Live Streaming Palette ===== */
     body {
       background: #000000;
-      background-image: radial-gradient(120% 60% at 50% -10%, rgba(255, 42, 109, 0.22), rgba(147, 51, 234, 0.12) 45%, transparent 70%);
+      background-image: radial-gradient(120% 60% at 50% -10%, rgba(var(--sx-rgb), 0.22), rgba(147, 51, 234, 0.12) 45%, transparent 70%);
       background-repeat: no-repeat;
     }
     .brand-mark {
-      background: linear-gradient(135deg, #ff2a6d 0%, #be185d 50%, #7c3aed 100%) !important;
+      background: linear-gradient(135deg, var(--sx-acc) 0%, #be185d 50%, #7c3aed 100%) !important;
       color: #ffffff !important;
-      box-shadow: 0 8px 26px rgba(255, 42, 109, 0.45) !important;
+      box-shadow: 0 8px 26px rgba(var(--sx-rgb), 0.45) !important;
     }
     .brand-mark svg {
       color: #ffffff !important;
     }
     .toffee-gradient {
-      background: linear-gradient(135deg, #ff2a6d 0%, #e11d48 40%, #9333ea 100%) !important;
+      background: linear-gradient(135deg, var(--sx-acc) 0%, var(--sx-acc2) 40%, var(--sx-acc3) 100%) !important;
       color: #ffffff !important;
-      box-shadow: 0 6px 22px rgba(255, 42, 109, 0.4) !important;
+      box-shadow: 0 6px 22px rgba(var(--sx-rgb), 0.4) !important;
       border: 1px solid rgba(255, 255, 255, 0.25) !important;
     }
     .toffee-gradient svg {
@@ -441,8 +441,8 @@
       width: 4px;
       height: 18px;
       border-radius: 4px;
-      background: linear-gradient(180deg, #ff2a6d 0%, #9333ea 100%) !important;
-      box-shadow: 0 0 10px rgba(255, 42, 109, 0.6);
+      background: linear-gradient(180deg, var(--sx-acc) 0%, #9333ea 100%) !important;
+      box-shadow: 0 0 10px rgba(var(--sx-rgb), 0.6);
     }
     /* Top Category Navigation Pills */
     #topCategoryNav {
@@ -474,74 +474,74 @@
     }
     #topCategoryNav .cat-tab.active-cat,
     #topCategoryNav .cat-tab.text-pink-400 {
-      background: linear-gradient(135deg, #ff2a6d 0%, #e11d48 40%, #9333ea 100%) !important;
+      background: linear-gradient(135deg, var(--sx-acc) 0%, var(--sx-acc2) 40%, var(--sx-acc3) 100%) !important;
       color: #ffffff !important;
       font-weight: 700 !important;
       border: 1px solid rgba(255, 255, 255, 0.4) !important;
-      box-shadow: 0 4px 18px rgba(255, 42, 109, 0.5) !important;
+      box-shadow: 0 4px 18px rgba(var(--sx-rgb), 0.5) !important;
       transform: scale(1.02);
     }
     #totalChannelsBadge, #savedCountBadge {
-      background: rgba(255, 42, 109, 0.2) !important;
+      background: rgba(var(--sx-rgb), 0.2) !important;
       color: #ff6b9d !important;
-      border: 1px solid rgba(255, 42, 109, 0.35) !important;
+      border: 1px solid rgba(var(--sx-rgb), 0.35) !important;
     }
     button[role=switch].bg-pink-600 {
-      background: linear-gradient(135deg, #ff2a6d, #9333ea) !important;
-      box-shadow: 0 0 12px rgba(255, 42, 109, 0.5);
+      background: linear-gradient(135deg, var(--sx-acc), #9333ea) !important;
+      box-shadow: 0 0 12px rgba(var(--sx-rgb), 0.5);
     }
     .app-chip {
       background: #1f1f23;
       color: #d1d5db;
     }
     .app-chip.active {
-      background: linear-gradient(135deg, #ff2a6d 0%, #9333ea 100%) !important;
+      background: linear-gradient(135deg, var(--sx-acc) 0%, #9333ea 100%) !important;
       color: #ffffff !important;
-      box-shadow: 0 4px 14px rgba(255, 42, 109, 0.4);
+      box-shadow: 0 4px 14px rgba(var(--sx-rgb), 0.4);
     }
     .app-card {
       background: #161619;
       border: 2px solid transparent;
     }
     .app-card.active {
-      border-color: #ff2a6d;
-      box-shadow: 0 0 16px rgba(255, 42, 109, 0.45);
+      border-color: var(--sx-acc);
+      box-shadow: 0 0 16px rgba(var(--sx-rgb), 0.45);
     }
     .app-card-name { color: #f8fafc; }
     .app-card-num { color: #ff6b9d; }
     #appStreamInfo { color: #a1a1aa !important; }
     .cs-range::-webkit-slider-runnable-track {
-      background: linear-gradient(to right, #ff2a6d var(--p,0%), rgba(255,255,255,.2) var(--p,0%));
+      background: linear-gradient(to right, var(--sx-acc) var(--p,0%), rgba(255,255,255,.2) var(--p,0%));
     }
     .cs-range::-webkit-slider-thumb {
-      box-shadow: 0 0 0 3px rgba(255, 42, 109, 0.6);
+      box-shadow: 0 0 0 3px rgba(var(--sx-rgb), 0.6);
     }
-    .cs-range::-moz-range-progress { background: #ff2a6d; }
-    .cs-spinner { border-top-color: #ff2a6d; }
+    .cs-range::-moz-range-progress { background: var(--sx-acc); }
+    .cs-spinner { border-top-color: var(--sx-acc); }
     .cs-menu {
       background: rgba(22, 22, 26, 0.98);
-      border-color: rgba(255, 42, 109, 0.3);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 24px rgba(255, 42, 109, 0.25);
+      border-color: rgba(var(--sx-rgb), 0.3);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 24px rgba(var(--sx-rgb), 0.25);
     }
     .cs-menu-title { color: #ff6b9d; }
     .cs-menu-item.active {
-      background: linear-gradient(135deg, rgba(255, 42, 109, 0.3) 0%, rgba(147, 51, 234, 0.3) 100%);
+      background: linear-gradient(135deg, rgba(var(--sx-rgb), 0.3) 0%, rgba(147, 51, 234, 0.3) 100%);
       color: #ffffff;
-      border-left: 3px solid #ff2a6d;
+      border-left: 3px solid var(--sx-acc);
     }
     .tv-focus {
-      outline-color: #ff2a6d;
+      outline-color: var(--sx-acc);
       background: #27272a !important;
-      box-shadow: 0 0 2vw rgba(255, 42, 109, 0.65);
+      box-shadow: 0 0 2vw rgba(var(--sx-rgb), 0.65);
     }
     .app-chip.tv-focus {
-      background: linear-gradient(135deg, #ff2a6d, #9333ea) !important;
+      background: linear-gradient(135deg, var(--sx-acc), #9333ea) !important;
       color: #fff !important;
     }
     #tvVolFill {
-      background: linear-gradient(90deg, #ff2a6d, #9333ea);
+      background: linear-gradient(90deg, var(--sx-acc), #9333ea);
     }
-    #tvOsdNum { color: #ff2a6d; }
+    #tvOsdNum { color: var(--sx-acc); }
     #tvOsdInfo { color: #c084fc; }
     /* layout selector */
     .seg-btn {
@@ -555,9 +555,9 @@
       transition: all 0.2s;
     }
     .seg-btn.on {
-      background: linear-gradient(135deg, #ff2a6d 0%, #9333ea 100%);
+      background: linear-gradient(135deg, var(--sx-acc) 0%, #9333ea 100%);
       color: #fff;
-      box-shadow: 0 4px 14px rgba(255, 42, 109, 0.4);
+      box-shadow: 0 4px 14px rgba(var(--sx-rgb), 0.4);
     }
     /* server chips */
     #playerServerBar {
@@ -589,26 +589,26 @@
       transition: all 0.2s;
     }
     .srv-chip.on {
-      background: linear-gradient(135deg, #ff2a6d 0%, #9333ea 100%);
+      background: linear-gradient(135deg, var(--sx-acc) 0%, #9333ea 100%);
       color: #fff;
       border-color: rgba(255, 255, 255, 0.35);
-      box-shadow: 0 2px 10px rgba(255, 42, 109, 0.4);
+      box-shadow: 0 2px 10px rgba(var(--sx-rgb), 0.4);
     }
     html.tv-mode #playerServerBar { display: none !important; }
     /* TV settings panel: remote focus */
-    html.tv-mode #appSettingsPanel :focus { outline: 3px solid #ff2a6d; outline-offset: 3px; border-radius: 14px; }
+    html.tv-mode #appSettingsPanel :focus { outline: 3px solid var(--sx-acc); outline-offset: 3px; border-radius: 14px; }
     html.tv-mode #appSettingsBody { max-width: 760px; margin: 0 auto; }
     /* Bottom Navigation Active Glowing Indicator */
     .bottom-nav-btn.text-pink-500 {
-      color: #ff2a6d !important;
+      color: var(--sx-acc) !important;
     }
     span[id^="navIndicator"] {
-      background: linear-gradient(90deg, #ff2a6d, #9333ea) !important;
-      box-shadow: 0 0 12px rgba(255, 42, 109, 0.65);
+      background: linear-gradient(90deg, var(--sx-acc), #9333ea) !important;
+      box-shadow: 0 0 12px rgba(var(--sx-rgb), 0.65);
     }
     .live-dot {
-      background-color: #ff2a6d;
-      box-shadow: 0 0 8px #ff2a6d;
+      background-color: var(--sx-acc);
+      box-shadow: 0 0 8px var(--sx-acc);
     }
   </style>
 <script>try{localStorage.removeItem('sarah_lite');localStorage.removeItem('sarah_lite_recent');localStorage.removeItem('sarah_lite_plays');}catch(e){}</script>
@@ -665,6 +665,27 @@
     .hs .hs-body { z-index: 2; text-shadow: 0 1px 8px rgba(0,0,0,.6); }
     #heroDots, #upDots { z-index: 6; }
   </style>
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#0b0b0d">
+<script>try{var __t=localStorage.getItem('sarah_theme');if(__t)document.documentElement.setAttribute('data-sx-theme',__t)}catch(e){}</script>
+<style id="sarah-theme-css">
+:root { --sx-acc:#ff2a6d; --sx-acc2:#e11d48; --sx-acc3:#9333ea; --sx-acc-l:#ff7aa2; --sx-rgb:255,42,109; }
+html[data-sx-theme="blue"]   { --sx-acc:#3b82f6; --sx-acc2:#2563eb; --sx-acc3:#7c3aed; --sx-acc-l:#93c5fd; --sx-rgb:59,130,246; }
+html[data-sx-theme="green"]  { --sx-acc:#22c55e; --sx-acc2:#16a34a; --sx-acc3:#0d9488; --sx-acc-l:#86efac; --sx-rgb:34,197,94; }
+html[data-sx-theme="purple"] { --sx-acc:#a855f7; --sx-acc2:#7c3aed; --sx-acc3:#4f46e5; --sx-acc-l:#d8b4fe; --sx-rgb:168,85,247; }
+html[data-sx-theme="orange"] { --sx-acc:#f97316; --sx-acc2:#ea580c; --sx-acc3:#dc2626; --sx-acc-l:#fdba74; --sx-rgb:249,115,22; }
+html[data-sx-theme="teal"]   { --sx-acc:#14b8a6; --sx-acc2:#0d9488; --sx-acc3:#0891b2; --sx-acc-l:#5eead4; --sx-rgb:20,184,166; }
+html[data-sx-theme="gold"]   { --sx-acc:#f59e0b; --sx-acc2:#d97706; --sx-acc3:#b45309; --sx-acc-l:#fcd34d; --sx-rgb:245,158,11; }
+html[data-sx-theme="red"]    { --sx-acc:#ef4444; --sx-acc2:#dc2626; --sx-acc3:#9f1239; --sx-acc-l:#fca5a5; --sx-rgb:239,68,68; }
+html[data-sx-theme]:not([data-sx-theme="pink"]) .text-pink-300, html[data-sx-theme]:not([data-sx-theme="pink"]) .text-pink-400, html[data-sx-theme]:not([data-sx-theme="pink"]) .text-pink-500 { color: var(--sx-acc-l) !important; }
+html[data-sx-theme]:not([data-sx-theme="pink"]) .bg-pink-500, html[data-sx-theme]:not([data-sx-theme="pink"]) .bg-pink-600 { background-color: var(--sx-acc) !important; }
+html[data-sx-theme]:not([data-sx-theme="pink"]) .border-pink-400, html[data-sx-theme]:not([data-sx-theme="pink"]) .border-pink-500 { border-color: var(--sx-acc) !important; }
+html[data-sx-theme]:not([data-sx-theme="pink"]) .border-pink-500\/30 { border-color: rgba(var(--sx-rgb),.3) !important; }
+html[data-sx-theme]:not([data-sx-theme="pink"]) .bg-pink-500\/10 { background-color: rgba(var(--sx-rgb),.10) !important; }
+html[data-sx-theme]:not([data-sx-theme="pink"]) .bg-pink-500\/15 { background-color: rgba(var(--sx-rgb),.15) !important; }
+html[data-sx-theme]:not([data-sx-theme="pink"]) .bg-pink-500\/20 { background-color: rgba(var(--sx-rgb),.20) !important; }
+html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shadow-color: rgba(var(--sx-rgb),.3) !important; }
+</style>
 </head>
 <body class="min-h-screen bg-[#000000] text-white flex flex-col justify-between pb-20">
 
@@ -952,7 +973,7 @@
     #playerModal .pl-ic{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;color:#fff;background:transparent;border:0;border-radius:999px;flex:none;transition:transform .15s,background .15s}
     #playerModal .pl-ic:active{transform:scale(.85);background:rgba(255,255,255,.14)}
     #playerModal #playerFavIcon{font-size:25px;line-height:1}
-    #playerModal #playerFavBtn.fav-on #playerFavIcon{color:#ff2a6d}
+    #playerModal #playerFavBtn.fav-on #playerFavIcon{color:var(--sx-acc)}
     #playerModal .pl-seek-time{font-size:12px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
     #playerModal #playerViewport{will-change:transform}
     #playerModal #playerHorizontalPopup{transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .3s ease}
@@ -2384,9 +2405,26 @@
       return /tapmad|sony\s?liv/i.test(sourceText);
     }
 
+    const CAT_GROUPS = [
+      ['news', '📰 সংবাদ', /news|সংবাদ|খবর|বার্তা|jamuna|somoy|ekattor|dbc|independent|channel\s?24|bbc|cnn|al\s?jazeera|\bary\b/i],
+      ['sports', '⚽ খেলা', /sport|খেলা|cricket|football|t[\s-]?sports|sony\s?ten|ptv\s?sports|bpl|ipl/i],
+      ['movies', '🎬 মুভি', /movie|film|সিনেমা|cinema|hbo|cineplex|star\s?gold|sony\s?max/i],
+      ['kids', '🧸 কিডস', /\bkids?\b|cartoon|শিশু|disney|nick|pogo|baby/i],
+      ['islamic', '🕌 ইসলামিক', /islam|ইসলাম|quran|কুরআন|makkah|madina|peace\s?tv|huda|\bdeen\b/i]
+    ];
+    function chCatText(ch) { return [ch.category, ch.name, ch.sourceName].filter(Boolean).join(' '); }
+    function catTitle(cat) {
+      const c = (cat || 'all').toLowerCase();
+      if (c === 'all') return 'Live TV Channels';
+      if (c === 'live action') return 'Live Action';
+      const g = CAT_GROUPS.find(x => 'grp:' + x[0] === c);
+      return g ? g[1] + ' চ্যানেল' : 'Live TV Channels';
+    }
     function matchesCategory(ch, selectedCat) {
       if (!selectedCat || selectedCat.toLowerCase() === 'all') return true;
       if (selectedCat.trim().toLowerCase() === 'live action') return isLiveActionSource(ch);
+      const m = /^grp:(.+)$/i.exec(selectedCat.trim());
+      if (m) { const g = CAT_GROUPS.find(x => x[0] === m[1].toLowerCase()); return !!g && g[2].test(chCatText(ch)); }
       return false;
     }
 
@@ -2394,14 +2432,12 @@
       const nav = document.getElementById('topCategoryNav');
       if (!nav) return;
       const liveActionCount = CHANNELS.filter(isLiveActionSource).length;
-      if (state.currentCategory && !['all', 'live action'].includes(state.currentCategory.toLowerCase())) {
-        state.currentCategory = 'all';
-      }
-      const isAllActive = !state.currentCategory || state.currentCategory.toLowerCase() === 'all';
-      nav.innerHTML = [
-        `<button data-cat="all" class="cat-tab ${isAllActive ? 'active-cat text-pink-400 font-bold' : 'text-slate-300 hover:text-white'} transition">Live TV (${CHANNELS.length})</button>`,
-        `<button data-cat="Live Action" class="cat-tab ${!isAllActive ? 'active-cat text-pink-400 font-bold' : 'text-slate-300 hover:text-white'} transition">Live Action (${liveActionCount})</button>`
-      ].join('');
+      const cur = (state.currentCategory || 'all').toLowerCase();
+      if (!(cur === 'all' || cur === 'live action' || CAT_GROUPS.some(g => cur === 'grp:' + g[0]))) state.currentCategory = 'all';
+      const c2 = (state.currentCategory || 'all').toLowerCase();
+      const tab = (cat, label, active) => `<button data-cat="${cat}" class="cat-tab ${active ? 'active-cat text-pink-400 font-bold' : 'text-slate-300 hover:text-white'} transition">${label}</button>`;
+      nav.innerHTML = [tab('all', `Live TV (${CHANNELS.length})`, c2 === 'all'), tab('Live Action', `Live Action (${liveActionCount})`, c2 === 'live action')]
+        .concat(CAT_GROUPS.map(g => { const n = CHANNELS.filter(c => g[2].test(chCatText(c))).length; return n ? tab('grp:' + g[0], `${g[1]} (${n})`, c2 === 'grp:' + g[0]) : ''; })).join('');
     }
 
     function heroEsc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch])); }
@@ -2742,7 +2778,7 @@
 
       if (badge) badge.textContent = `${filtered.length}`;
       const lct = document.getElementById('liveCirclesTitle');
-      if (lct) lct.textContent = (state.currentCategory || 'all').toLowerCase() === 'live action' ? 'Live Action' : 'Live TV Channels';
+      if (lct) lct.textContent = catTitle(state.currentCategory);
 
       if (!filtered.length) {
         track.innerHTML = `<div class="py-4 px-2 text-xs text-slate-400">এই ক্যাটাগরিতে কোনো চ্যানেল নেই</div>`;
@@ -2864,7 +2900,7 @@
         } else if (!state.currentCategory || state.currentCategory.toLowerCase() === 'all') {
           title.textContent = `সব চ্যানেল (${list.length})`;
         } else {
-          title.textContent = `${state.currentCategory} (${list.length})`;
+          title.textContent = `${catTitle(state.currentCategory)} (${list.length})`;
         }
       }
 
@@ -5962,7 +5998,7 @@
 .cw-name { margin-top:6px; font-size:12.5px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .cw-sub { font-size:10.5px; color:#a1a1a6; margin-top:1px; }
 .cw-bar { height:3px; border-radius:3px; background:rgba(255,255,255,.18); margin-top:5px; overflow:hidden; }
-.cw-bar i { display:block; height:100%; background:#ff2a6d; }
+.cw-bar i { display:block; height:100%; background:var(--sx-acc); }
 .cw-x { position:absolute; right:3px; top:3px; z-index:3; width:22px; height:22px; border-radius:50%; border:0; background:rgba(0,0,0,.65); color:#fff; font-size:14px; line-height:22px; text-align:center; }
 /* Namaz */
 .nz-card { background:#141416; border:1px solid rgba(255,255,255,.1); border-radius:16px; padding:12px 14px; color:#fff; }
@@ -5970,20 +6006,20 @@
 .nz-next { font-size:12px; color:#a1a1a6; }
 .nz-next b { display:block; font-size:15px; color:#fff; margin-top:1px; }
 .nz-tg { flex:none; border:0; border-radius:999px; padding:7px 12px; font-size:12px; font-weight:700; background:#2c2c2e; color:#fff; }
-.nz-tg.on { background:#ff2a6d; }
+.nz-tg.on { background:var(--sx-acc); }
 .nz-chips { display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; margin-top:10px; }
 .nz-chips::-webkit-scrollbar { display:none; }
 .nz-chip { flex:0 0 auto; min-width:66px; text-align:center; padding:6px 8px; border-radius:11px; background:rgba(255,255,255,.06); border:1px solid transparent; }
 .nz-chip span { display:block; font-size:10.5px; color:#a1a1a6; }
 .nz-chip b { font-size:12px; font-weight:700; }
-.nz-chip.nx { border-color:#ff2a6d; background:rgba(255,42,109,.14); }
+.nz-chip.nx { border-color:var(--sx-acc); background:rgba(var(--sx-rgb),.14); }
 .nz-set { margin-top:10px; border-top:1px solid rgba(255,255,255,.08); padding-top:10px; display:none; font-size:12.5px; }
 .nz-set.open { display:block; }
 .nz-set label { display:inline-flex; align-items:center; gap:5px; margin:3px 10px 3px 0; }
 .nz-set select { background:#2c2c2e; color:#fff; border:0; border-radius:8px; padding:5px 8px; font-size:12.5px; }
 .nz-link { background:none; border:0; color:#9ecbff; font-size:12px; padding:4px 0; }
 .nz-note { font-size:11px; color:#8e8e93; margin-top:6px; line-height:1.4; }
-#nzBanner { position:fixed; left:10px; right:10px; top:calc(10px + env(safe-area-inset-top)); z-index:100000; display:none; background:linear-gradient(135deg,#ff2a6d,#7c3aed); color:#fff; border-radius:16px; padding:12px 14px; box-shadow:0 10px 30px rgba(0,0,0,.5); font-family:'Noto Sans Bengali','Inter',sans-serif; }
+#nzBanner { position:fixed; left:10px; right:10px; top:calc(10px + env(safe-area-inset-top)); z-index:100000; display:none; background:linear-gradient(135deg,var(--sx-acc),#7c3aed); color:#fff; border-radius:16px; padding:12px 14px; box-shadow:0 10px 30px rgba(0,0,0,.5); font-family:'Noto Sans Bengali','Inter',sans-serif; }
 #nzBanner.show { display:flex; gap:10px; align-items:center; animation:nzIn .35s ease; }
 #nzBanner b { display:block; font-size:15px; }
 #nzBanner span { font-size:12.5px; opacity:.95; }
@@ -5999,7 +6035,7 @@
 .sx-nw-chips { display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; margin-bottom:8px; }
 .sx-nw-chips::-webkit-scrollbar { display:none; }
 .sx-chip { flex:0 0 auto; border:0; border-radius:999px; padding:5px 12px; font-size:12px; font-weight:600; background:#2c2c2e; color:#e5e5ea; }
-.sx-chip.on { background:#ff2a6d; color:#fff; }
+.sx-chip.on { background:var(--sx-acc); color:#fff; }
 .sx-nw-list { display:flex; flex-direction:column; gap:7px; }
 .nw-item { display:block; text-decoration:none; color:#fff; background:#141416; border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:9px 11px; }
 .nw-item:active { background:#1f1f23; }
@@ -6184,7 +6220,14 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
       clearTimeout(bannerTimer); bannerTimer = setTimeout(function () { b.classList.remove('show'); }, 30000);
     }
     beep(); try { if (navigator.vibrate) navigator.vibrate([300, 150, 300]); } catch (e) {}
-    try { if ('Notification' in window && Notification.permission === 'granted') new Notification(title, { body: body, tag: 'sarah-namaz' }); } catch (e) {}
+    try {
+      if ('Notification' in window && Notification.permission === 'granted') {
+        var plain = function () { try { new Notification(title, { body: body, tag: 'sarah-alert' }); } catch (e) {} };
+        if (navigator.serviceWorker && navigator.serviceWorker.getRegistration) navigator.serviceWorker.getRegistration().then(function (r) {
+          if (r && r.showNotification) r.showNotification(title, { body: body, tag: 'sarah-alert-' + Date.now(), icon: './icon-192.png', badge: './icon-192.png', vibrate: [250, 120, 250], renotify: true, data: { url: './' } }); else plain();
+        }).catch(plain); else plain();
+      }
+    } catch (e) {}
   }
   function nzCheck() {
     var cfg = nzCfg(); nzRender(); if (!cfg.on) return;
@@ -6436,7 +6479,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 .gd-tm { flex:0 0 74px; font-size:12.5px; font-weight:700; color:#ffd666; }
 .gd-in { flex:1; min-width:0; }
 .gd-bell { flex:none; border:0; background:#2c2c2e; border-radius:50%; width:34px; height:34px; font-size:15px; }
-.gd-bell.on { background:rgba(255,42,109,.3); }
+.gd-bell.on { background:rgba(var(--sx-rgb),.3); }
 /* Live score */
 #scTrack, .sc-strip { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; }
 #scTrack::-webkit-scrollbar, .sc-strip::-webkit-scrollbar { display:none; }
@@ -6607,7 +6650,8 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
         var clock = (ev.status && ev.status.displayClock) || '';
         return { sp: '⚽', state: state, when: Date.parse(ev.date) || 0, status: state === 'live' ? (st.shortDetail || clock) : (state === 'done' ? 'সমাপ্ত' : ''),
           a: (h.team && (h.team.shortDisplayName || h.team.displayName)) || '', as: h.score, b: (a.team && (a.team.shortDisplayName || a.team.displayName)) || '', bs: a.score,
-          link: ((ev.links || [])[0] || {}).href || '' };
+          link: ((ev.links || [])[0] || {}).href || '',
+          last: (function () { var d = (c.details || []).filter(function (z) { return z.scoringPlay; }).pop(); return d ? { min: (d.clock && d.clock.displayValue) || '', p: ((d.athletesInvolved || [])[0] || {}).displayName || '' } : null; })() };
       }).filter(Boolean);
     });
   }
@@ -6624,13 +6668,13 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     });
   }
   function scoreLoad(force) {
-    if (SC.busy || (!force && Date.now() - SC.t < 55000)) return; SC.busy = true;
+    if (SC.busy || (!force && Date.now() - SC.t < 25000)) return; SC.busy = true;
     Promise.all([soccer().catch(function () { return []; }), cricket().catch(function () { return []; })]).then(function (r) {
       var all = r[0].concat(r[1]), now = Date.now();
       all = all.filter(function (x) { return x.state === 'live' || (x.state === 'pre' && x.when - now < 6 * 3600e3 && x.when > now - 3600e3) || (x.state === 'done' && now - x.when < 5 * 3600e3); });
       var rank = { live: 0, pre: 1, done: 2 };
       all.sort(function (a, b) { return rank[a.state] - rank[b.state] || a.when - b.when; });
-      SC.items = all.slice(0, 16); SC.t = Date.now(); SC.busy = false; scoreRender();
+      SC.items = all.slice(0, 16); SC.t = Date.now(); SC.busy = false; scoreRender(); try { if (window.__sarahOnScores) window.__sarahOnScores(SC.items); } catch (e) {}
     });
   }
   function predKey(x) { return x.a + '|' + x.b + '|' + DAYFMT.format(x.when || Date.now()); }
@@ -6706,7 +6750,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     ramRender(); guideRender(); scoreRender(); scoreLoad(true);
     setInterval(function () { ramCheck(); evCheck(); }, 15000);
     setInterval(guideRender, 60000);
-    setInterval(function () { if (!document.hidden) scoreLoad(false); }, 60000);
+    setInterval(function () { if (!document.hidden) scoreLoad(false); }, 30000);
     document.addEventListener('visibilitychange', function () { if (!document.hidden) { ramRender(); guideRender(); scoreLoad(false); } });
     window.__sarahGuideRefresh = guideRender;
   }
@@ -6726,7 +6770,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 .sxs-b { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:14px 16px calc(24px + env(safe-area-inset-bottom)); }
 #sxToast { position:fixed; left:12px; right:12px; bottom:calc(76px + env(safe-area-inset-bottom)); z-index:100002; background:#1f1f23; color:#fff; border:1px solid rgba(255,255,255,.15); border-radius:14px; padding:11px 14px; font-size:13px; display:none; align-items:center; gap:10px; box-shadow:0 10px 30px rgba(0,0,0,.5); font-family:'Noto Sans Bengali','Inter',sans-serif; }
 #sxToast.show { display:flex; }
-#sxToast span { flex:1; } #sxToast button { border:0; border-radius:999px; padding:7px 12px; background:#ff2a6d; color:#fff; font-weight:700; font-size:12px; }
+#sxToast span { flex:1; } #sxToast button { border:0; border-radius:999px; padding:7px 12px; background:var(--sx-acc); color:#fff; font-weight:700; font-size:12px; }
 /* tools */
 .tl-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
 .tl-t { display:flex; flex-direction:column; align-items:center; gap:4px; border:1px solid rgba(255,255,255,.1); background:#141416; color:#fff; border-radius:14px; padding:10px 4px; font-size:10.5px; font-weight:600; text-align:center; line-height:1.25; }
@@ -6743,7 +6787,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 /* gesture HUD, CC */
 #sxHud { position:absolute; left:50%; top:22%; transform:translateX(-50%); z-index:30; background:rgba(0,0,0,.65); color:#fff; padding:8px 14px; border-radius:999px; font-size:14px; font-weight:700; opacity:0; transition:opacity .2s; pointer-events:none; }
 #sxCC { position:absolute; right:12px; top:calc(92px + env(safe-area-inset-top)); z-index:25; border:1px solid rgba(255,255,255,.3); background:rgba(0,0,0,.55); color:#fff; border-radius:999px; padding:4px 10px; font-size:11.5px; font-weight:800; backdrop-filter:blur(6px); }
-#sxCC.on { background:#ff2a6d; border-color:#ff2a6d; }
+#sxCC.on { background:var(--sx-acc); border-color:var(--sx-acc); }
 #playerModal.pl-locked #sxCC, #playerModal.app-inline:not(.app-fs) #sxCC, html.tv-mode #sxCC { display:none !important; }
 /* qibla */
 .ql-box { position:relative; width:260px; height:260px; margin:10px auto; }
@@ -6752,8 +6796,8 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 #qlNeedle { position:absolute; inset:0; transition:transform .15s linear; } #qlNeedle::before { content:''; position:absolute; left:50%; top:34px; bottom:50%; width:4px; margin-left:-2px; border-radius:4px; background:#ffd666; } #qlNeedle i { position:absolute; left:50%; top:6px; transform:translateX(-50%); font-style:normal; font-size:28px; }
 #qlWrap.ok #qlDial { border-color:#30d158; box-shadow:0 0 24px rgba(48,209,88,.5); } #qlWrap.ok #qlNeedle::before { background:#30d158; }
 /* weekly bars + announcement */
-.wk-bars { display:flex; align-items:flex-end; justify-content:space-between; gap:6px; height:100px; margin:12px 0; } .wk-b { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:4px; } .wk-b i { width:100%; max-width:28px; border-radius:6px 6px 2px 2px; background:linear-gradient(#ff2a6d,#7c3aed); } .wk-b span { font-size:10px; color:#a1a1a6; }
-#anBanner { margin:8px 16px 0; display:flex; align-items:center; gap:10px; background:linear-gradient(135deg,#ff2a6d,#7c3aed); color:#fff; border-radius:14px; padding:10px 12px; font-size:13px; font-weight:600; font-family:'Noto Sans Bengali','Inter',sans-serif; }
+.wk-bars { display:flex; align-items:flex-end; justify-content:space-between; gap:6px; height:100px; margin:12px 0; } .wk-b { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:4px; } .wk-b i { width:100%; max-width:28px; border-radius:6px 6px 2px 2px; background:linear-gradient(var(--sx-acc),#7c3aed); } .wk-b span { font-size:10px; color:#a1a1a6; }
+#anBanner { margin:8px 16px 0; display:flex; align-items:center; gap:10px; background:linear-gradient(135deg,var(--sx-acc),#7c3aed); color:#fff; border-radius:14px; padding:10px 12px; font-size:13px; font-weight:600; font-family:'Noto Sans Bengali','Inter',sans-serif; }
 #anBanner span { flex:1; } #anBanner a { color:#fff; background:rgba(0,0,0,.3); border-radius:999px; padding:4px 10px; font-size:12px; text-decoration:none; } #anBanner button { border:0; background:rgba(0,0,0,.3); color:#fff; width:24px; height:24px; border-radius:50%; }
 </style>
 
@@ -6891,7 +6935,8 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     return '<div class="sx-nw-chips" style="flex-wrap:wrap;overflow:visible">' + TEAMS.map(function (t) { return '<button type="button" class="sx-chip' + (sel.indexOf(t[1]) > -1 ? ' on' : '') + '" data-team="' + t[1] + '">' + t[0] + '</button>'; }).join('') +
       custom.map(function (k) { return '<button type="button" class="sx-chip on" data-team="' + esc(k) + '">' + esc(k) + ' ×</button>'; }).join('') + '</div>' +
       '<div class="rq-f"><input id="teamIn" placeholder="অন্য দল (ইংরেজিতে, যেমন: Chelsea)"><button type="button" class="nz-tg on" id="teamAdd">যোগ</button></div>' +
-      '<div class="nz-note" style="padding:6px 2px">এই দলগুলোর ম্যাচ লাইভ হলে বা শুরুর ১৫ মিনিট আগে অ্যালার্ট আসবে। (সাইট/অ্যাপ খোলা থাকলে)</div>';
+      '<div class="rm-act" style="margin-top:10px"><button type="button" class="nz-tg' + (lsGet('sarah_goal_v1', {}).all ? ' on' : '') + '" data-goal-all>⚽ সব লাইভ ম্যাচের গোল অ্যালার্ট: ' + (lsGet('sarah_goal_v1', {}).all ? 'চালু' : 'বন্ধ') + '</button></div>' +
+      '<div class="nz-note" style="padding:6px 2px">গোল অ্যালার্ট: বাছাই করা দলের গোল সবসময় আসবে; উপরের বোতাম চালু করলে সব লাইভ ম্যাচের। এই দলগুলোর ম্যাচ লাইভ হলে বা শুরুর ১৫ মিনিট আগে অ্যালার্ট আসবে। (সাইট/অ্যাপ খোলা থাকলে)</div>';
   }
   function teamCheck() {
     var tm = lsGet(TEAM_KEY, []); if (!tm.length) return; var now = Date.now(), fired = lsGet('sarah_teamfired', {}), ch = false;
@@ -7094,7 +7139,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 
   /* ---------- 12) Home sections reorder ---------- */
   var ORDER_KEY = 'sarah_order_v1';
-  var SECS = [['cwSection', '▶ দেখা চালিয়ে যান'], ['rmSection', '🌙 রমজান'], ['nzSection', '🕌 নামাজের সময়'], ['gdSection', '📺 টিভি গাইড'], ['scSection', '⚽🏏 লাইভ স্কোর'], ['toolsSection', '🧰 টুলস']];
+  var SECS = [['cwSection', '▶ দেখা চালিয়ে যান'], ['newSection', '🆕 নতুন চ্যানেল'], ['rmSection', '🌙 রমজান'], ['nzSection', '🕌 নামাজের সময়'], ['gdSection', '📺 টিভি গাইড'], ['scSection', '⚽🏏 লাইভ স্কোর'], ['toolsSection', '🧰 টুলস']];
   function orderCfg() { var o = lsGet(ORDER_KEY, null); if (!o || !o.ids) o = { ids: SECS.map(function (s) { return s[0]; }), hide: {} }; SECS.forEach(function (s) { if (o.ids.indexOf(s[0]) < 0) o.ids.push(s[0]); }); return o; }
   function applyOrder() {
     var o = orderCfg(), anchor = $('#nwHome'); if (!anchor) return; var parent = anchor.parentNode;
@@ -7108,7 +7153,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   }
 
   /* ---------- tools hub + events ---------- */
-  var TILES = [['multi', '⧉', 'মাল্টি-ভিউ'], ['table', '📊', 'পয়েন্ট টেবিল'], ['qibla', '🧭', 'কিবলা'], ['teams', '🔔', 'টিম অ্যালার্ট'], ['week', '📅', 'আমার সপ্তাহ'], ['req', '📝', 'চ্যানেল রিকোয়েস্ট'], ['order', '↕', 'হোম সাজান'], ['admin', '🛠', 'ড্যাশবোর্ড']];
+  var TILES = [['multi', '⧉', 'মাল্টি-ভিউ'], ['table', '📊', 'পয়েন্ট টেবিল'], ['qibla', '🧭', 'কিবলা'], ['teams', '🔔', 'টিম অ্যালার্ট'], ['week', '📅', 'আমার সপ্তাহ'], ['req', '📝', 'চ্যানেল রিকোয়েস্ট'], ['order', '↕', 'হোম সাজান'], ['theme', '🎨', 'থিম'], ['push', '📲', 'পুশ'], ['admin', '🛠', 'ড্যাশবোর্ড']];
   function buildHub() {
     var nw = $('#nwHome'); if (!nw || $('#toolsSection')) return;
     var d = document.createElement('div'); d.id = 'toolsSection'; d.className = 'sx-sec';
@@ -7117,7 +7162,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   }
   function openTool(k) {
     if (k === 'multi') mvOpen(); else if (k === 'table') tableOpen(); else if (k === 'qibla') qiblaOpen(); else if (k === 'teams') sheet('🔔 টিম অ্যালার্ট', teamsHtml());
-    else if (k === 'week') weekOpen(); else if (k === 'req') reqOpen(); else if (k === 'order') orderOpen(); else if (k === 'admin') adminOpen();
+    else if (k === 'week') weekOpen(); else if (k === 'req') reqOpen(); else if (k === 'order') orderOpen(); else if (k === 'admin') adminOpen(); else if (window.__sx4 && window.__sx4.open) window.__sx4.open(k);
   }
   document.addEventListener('click', function (e) {
     var t = e.target; if (!t.closest) return; var q;
@@ -7126,6 +7171,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     if ((q = t.closest('[data-pred]'))) { e.preventDefault(); var pr = lsGet('sarah_pred_v1', {}); pr[q.getAttribute('data-pk')] = { c: q.getAttribute('data-pred'), t: Date.now() }; lsSet('sarah_pred_v1', pr); X2.scoreRender(); return; }
     if ((q = t.closest('[data-an-x]'))) { var b = $('#anBanner'), id = b && b.getAttribute('data-id'); if (id) { var gone = lsGet('sarah_an_gone', []); gone.push(id); lsSet('sarah_an_gone', gone); } if (b) b.remove(); return; }
     if ((q = t.closest('[data-team]'))) { var tm = lsGet(TEAM_KEY, []), k = q.getAttribute('data-team'), ix = tm.indexOf(k); if (ix > -1) tm.splice(ix, 1); else tm.push(k); lsSet(TEAM_KEY, tm); if ($('.sxs-b')) $('.sxs-b').innerHTML = teamsHtml(); try { if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission(); } catch (er) {} return; }
+    if (t.closest('[data-goal-all]')) { var gc = lsGet('sarah_goal_v1', {}); gc.all = !gc.all; lsSet('sarah_goal_v1', gc); $('.sxs-b').innerHTML = teamsHtml(); return; }
     if (t.closest('#teamAdd')) { var v = ($('#teamIn').value || '').trim().toLowerCase(); if (v) { var tm2 = lsGet(TEAM_KEY, []); if (tm2.indexOf(v) < 0) tm2.push(v); lsSet(TEAM_KEY, tm2); $('.sxs-b').innerHTML = teamsHtml(); } return; }
     if ((q = t.closest('[data-tb-lg]'))) { tb.lg = q.getAttribute('data-tb-lg'); tableOpen(); return; }
     if ((q = t.closest('[data-tb-tab]'))) { tb.tab = q.getAttribute('data-tb-tab'); tableOpen(); return; }
@@ -7155,7 +7201,151 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     var pm = $('#playerModal'); if (pm && window.MutationObserver) new MutationObserver(function () { if (!pm.classList.contains('hidden')) { gestureInit(); applyBright(); } }).observe(pm, { attributes: true, attributeFilter: ['class'] });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSheet(); });
   }
-  window.__sarahExtras3 = { qiblaBearing: qiblaBearing, weekData: weekData };
+  X.sheet = sheet; X.closeSheet = closeSheet; X.toast = toast;
+  window.__sarahExtras3 = { qiblaBearing: qiblaBearing, weekData: weekData, sheet: sheet, toast: toast };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+
+<style id="sarah-extras4-css">
+.th-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.th-sw { display:flex; flex-direction:column; align-items:center; gap:6px; border:2px solid transparent; background:#141416; color:#fff; border-radius:14px; padding:12px 4px; font-size:12px; font-weight:600; }
+.th-sw i { width:34px; height:34px; border-radius:50%; display:block; box-shadow:0 0 0 3px rgba(255,255,255,.12); }
+.th-sw.on { border-color:var(--sx-acc,#ff2a6d); }
+.sx-new { position:relative; }
+.sx-new::after { content:'NEW'; position:absolute; top:3px; right:3px; z-index:3; pointer-events:none; background:var(--sx-acc,#ff2a6d); color:#fff; font-size:8.5px; font-weight:800; padding:1px 5px; border-radius:999px; font-family:'Inter',sans-serif; }
+#sxOff { position:fixed; left:0; right:0; top:0; z-index:100003; text-align:center; font-size:12.5px; font-weight:700; padding:calc(6px + env(safe-area-inset-top)) 10px 6px; color:#fff; display:none; font-family:'Noto Sans Bengali','Inter',sans-serif; }
+#sxOff.show { display:block; } #sxOff.off { background:#b91c1c; } #sxOff.on { background:#15803d; }
+</style>
+
+<script id="sarah-extras4-js">
+(function () {
+  'use strict';
+  var X = window.__sx, X3 = window.__sarahExtras3, X2 = window.__sarahExtras2; if (!X || !X3 || !X2) return;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var bn = X.bn, esc = X.esc, lsGet = X.lsGet, lsSet = X.lsSet;
+  /* ---- পুশ সার্ভার সেটিং (push-server/README.md দেখুন). ফাঁকা থাকলে শুধু লোকাল টেস্ট হবে ---- */
+  var PUSH_SERVER = '';       // যেমন: 'https://sarah-push.onrender.com'
+  var VAPID_PUBLIC = '';      // web-push generate-vapid-keys এর Public Key
+
+  /* ================= THEME ================= */
+  var THEMES = [['pink', 'গোলাপি', '#ff2a6d'], ['blue', 'নীল', '#3b82f6'], ['green', 'সবুজ', '#22c55e'], ['purple', 'বেগুনি', '#a855f7'], ['orange', 'কমলা', '#f97316'], ['teal', 'টিল', '#14b8a6'], ['gold', 'সোনালি', '#f59e0b'], ['red', 'লাল', '#ef4444']];
+  function applyTheme(k) { var h = document.documentElement; if (!k || k === 'pink') h.removeAttribute('data-sx-theme'); else h.setAttribute('data-sx-theme', k); }
+  function themeOpen() {
+    var cur = localStorage.getItem('sarah_theme') || 'pink';
+    X3.sheet('🎨 থিম রঙ', '<div class="th-grid">' + THEMES.map(function (t) { return '<button type="button" class="th-sw' + (cur === t[0] ? ' on' : '') + '" data-theme-pick="' + t[0] + '"><i style="background:' + t[2] + '"></i>' + t[1] + '</button>'; }).join('') + '</div><div class="nz-note" style="padding:10px 2px">পছন্দের রঙ সব বাটন, ট্যাব ও হাইলাইটে লাগবে। এই ডিভাইসে সেভ থাকবে।</div>');
+  }
+  try { applyTheme(localStorage.getItem('sarah_theme')); } catch (e) {}
+
+  /* ================= GOAL ALERT ================= */
+  function goalCheck() {
+    var cfg = lsGet('sarah_goal_v1', {}), teams = lsGet('sarah_teams_v1', []); if (!cfg.all && !teams.length) return;
+    var items = (X2.scores() || []).filter(function (x) { return x.sp === '⚽' && x.state === 'live'; });
+    var prev = lsGet('sarah_goalprev', {}), next = {}, now = Date.now();
+    items.forEach(function (x) {
+      var k = X2.predKey(x), a = parseInt(x.as, 10) || 0, b = parseInt(x.bs, 10) || 0; next[k] = { a: a, b: b };
+      var p = prev[k]; if (!p || (a <= p.a && b <= p.b)) return;
+      var hit = cfg.all || teams.some(function (t) { return (x.a + ' ' + x.b).toLowerCase().indexOf(t) > -1; }); if (!hit) return;
+      var who = a > p.a ? x.a : x.b;
+      X.alert('⚽ গোল! ' + who, x.a + ' ' + a + ' - ' + b + ' ' + x.b + (x.status ? ' • ' + x.status : ''));
+    });
+    lsSet('sarah_goalprev', next);
+  }
+
+  /* ================= NEW channel badge ================= */
+  var SEEN = 'sarah_seen_ch_v1', newSet = {};
+  function newScan() {
+    var list = window.__sarahCH || []; if (!list.length) return; var s = lsGet(SEEN, null), now = Date.now(), ch = false;
+    if (!s || !s.ids) { s = { t0: now, ids: {} }; list.forEach(function (c) { s.ids[c.id] = 0; }); lsSet(SEEN, s); return; }   // প্রথমবার: সব পুরনো ধরা হবে
+    list.forEach(function (c) { if (!(c.id in s.ids)) { s.ids[c.id] = now; ch = true; } });
+    if (ch) lsSet(SEEN, s);
+    newSet = {}; list.forEach(function (c) { var t = s.ids[c.id]; if (t && now - t < 7 * 864e5) newSet[c.id] = c; });
+    newRow();
+  }
+  function newMark() {
+    [].forEach.call(document.querySelectorAll('[data-play-channel]'), function (el) { el.classList.toggle('sx-new', !!newSet[el.getAttribute('data-play-channel')]); });
+  }
+  function newRow() {
+    var ids = Object.keys(newSet), box = $('#newSection');
+    if (!ids.length) { if (box) box.style.display = 'none'; return; }
+    if (!box) {
+      var cw = $('#cwSection'); if (!cw) return; box = document.createElement('div'); box.id = 'newSection'; box.className = 'sx-sec'; cw.parentNode.insertBefore(box, cw);
+    }
+    box.style.display = '';
+    box.innerHTML = '<div class="sx-h"><b>🆕 নতুন যোগ হয়েছে</b><small>গত ৭ দিনে</small></div><div class="gd-live">' + ids.slice(0, 12).map(function (id) { return '<button type="button" class="gd-lv" style="background:rgba(var(--sx-rgb,255,42,109),.18);color:var(--sx-acc-l,#ff7aa2)" data-play-channel="' + esc(id) + '">' + esc(newSet[id].name) + '</button>'; }).join('') + '</div>';
+  }
+
+  /* ================= OFFLINE bar + SW ================= */
+  function offBar(on) {
+    var b = $('#sxOff'); if (!b) { b = document.createElement('div'); b.id = 'sxOff'; document.body.appendChild(b); }
+    b.className = on ? 'show off' : 'show on'; b.textContent = on ? '📴 ইন্টারনেট নেই — অফলাইন' : '✅ ইন্টারনেট ফিরেছে';
+    if (!on) setTimeout(function () { b.className = ''; }, 2200);
+  }
+  function swRegister() {
+    if (!('serviceWorker' in navigator) || !(location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) return;
+    var go = function () { navigator.serviceWorker.register('./sw.js').catch(function () {}); };
+    if (document.readyState === 'complete') go(); else window.addEventListener('load', go);
+  }
+
+  /* ================= PUSH ================= */
+  function u8(b64) { var p = '='.repeat((4 - b64.length % 4) % 4), s = (b64 + p).replace(/-/g, '+').replace(/_/g, '/'), r = atob(s), o = new Uint8Array(r.length); for (var i = 0; i < r.length; i++) o[i] = r.charCodeAt(i); return o; }
+  function swReg() { return navigator.serviceWorker ? navigator.serviceWorker.getRegistration().then(function (r) { return r || navigator.serviceWorker.register('./sw.js'); }) : Promise.reject(new Error('no sw')); }
+  function pushOpen() {
+    var supported = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
+    var secure = location.protocol === 'https:' || location.hostname === 'localhost';
+    var render = function (sub) {
+      var perm = ('Notification' in window) ? Notification.permission : 'unsupported';
+      var row = function (ok, t) { return '<div class="nw-t" style="margin:5px 0">' + (ok ? '✅ ' : '⚠ ') + t + '</div>'; };
+      X3.sheet('📲 পুশ নোটিফিকেশন',
+        row(supported && secure, supported ? (secure ? 'ব্রাউজার সাপোর্ট করে' : 'HTTPS লাগবে (সাইট https এ খুলুন)') : 'এই ব্রাউজারে পুশ সাপোর্ট নেই (iPhone এ হলে: Share → Add to Home Screen করে অ্যাপ হিসেবে খুলুন)') +
+        row(perm === 'granted', 'নোটিফিকেশন অনুমতি: ' + (perm === 'granted' ? 'দেওয়া আছে' : perm === 'denied' ? 'ব্লক করা — ব্রাউজার সেটিংস থেকে খুলুন' : 'এখনো দেওয়া হয়নি')) +
+        row(!!(PUSH_SERVER && VAPID_PUBLIC), PUSH_SERVER && VAPID_PUBLIC ? 'পুশ সার্ভার সেট করা আছে' : 'পুশ সার্ভার এখনো সেট করা নেই (নিচে দেখুন)') +
+        row(!!sub, sub ? 'এই ডিভাইস পুশের জন্য রেজিস্টার্ড' : 'এই ডিভাইস রেজিস্টার্ড নয়') +
+        '<div class="rm-act" style="margin-top:10px"><button type="button" class="nz-tg on" id="pushTest">🔔 টেস্ট নোটিফিকেশন</button>' +
+        (PUSH_SERVER && VAPID_PUBLIC ? (sub ? '<button type="button" class="nz-tg" id="pushOff">বন্ধ করুন</button>' : '<button type="button" class="nz-tg on" id="pushOn">চালু করুন</button>') : '') + '</div>' +
+        '<div class="nz-note" style="padding:10px 2px;line-height:1.5">সাইট/অ্যাপ <b>বন্ধ থাকলেও</b> নামাজ ও অন্য অ্যালার্ট পেতে একটা পুশ সার্ভার লাগে — সাইটের সাথে দেওয়া <code>push-server</code> ফোল্ডারের README দেখে চালু করুন, তারপর এই ফাইলের <code>PUSH_SERVER</code> আর <code>VAPID_PUBLIC</code> বসান। সার্ভার ছাড়া অ্যালার্ট শুধু সাইট খোলা থাকলে বাজবে।</div>');
+    };
+    if (!supported) { render(null); return; }
+    swReg().then(function (r) { return r.pushManager.getSubscription(); }).then(render).catch(function () { render(null); });
+  }
+  function pushTest() {
+    if (!('Notification' in window)) { X3.toast('এই ব্রাউজারে নোটিফিকেশন নেই'); return; }
+    Notification.requestPermission().then(function (p) {
+      if (p !== 'granted') { X3.toast('অনুমতি পাওয়া যায়নি'); return; }
+      swReg().then(function (r) { return r.showNotification('🔔 Sarah TV টেস্ট', { body: 'নোটিফিকেশন ঠিকমতো কাজ করছে ✅', icon: './icon-192.png', badge: './icon-192.png', vibrate: [200, 100, 200] }); }).catch(function () { try { new Notification('🔔 Sarah TV টেস্ট', { body: 'নোটিফিকেশন ঠিকমতো কাজ করছে ✅' }); } catch (e) {} });
+    });
+  }
+  function pushOn() {
+    Notification.requestPermission().then(function (p) {
+      if (p !== 'granted') { X3.toast('অনুমতি পাওয়া যায়নি'); return; }
+      return swReg().then(function (r) { return r.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: u8(VAPID_PUBLIC) }); }).then(function (sub) {
+        return fetch(PUSH_SERVER.replace(/\/$/, '') + '/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sub: sub, prefs: { prayer: true, tz: 'Asia/Dhaka' } }) });
+      }).then(function () { X3.toast('পুশ চালু হয়েছে ✅'); pushOpen(); });
+    }).catch(function () { X3.toast('পুশ চালু করা যায়নি (সার্ভার/কী চেক করুন)'); });
+  }
+  function pushOff() {
+    swReg().then(function (r) { return r.pushManager.getSubscription(); }).then(function (sub) {
+      if (!sub) return; var ep = sub.endpoint;
+      return sub.unsubscribe().then(function () { return fetch(PUSH_SERVER.replace(/\/$/, '') + '/unsubscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: ep }) }).catch(function () {}); });
+    }).then(function () { X3.toast('পুশ বন্ধ হয়েছে'); pushOpen(); });
+  }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target; if (!t.closest) return; var q;
+    if ((q = t.closest('[data-theme-pick]'))) { var k = q.getAttribute('data-theme-pick'); try { localStorage.setItem('sarah_theme', k); } catch (er) {} applyTheme(k); themeOpen(); return; }
+    if (t.closest('#pushTest')) { pushTest(); return; }
+    if (t.closest('#pushOn')) { pushOn(); return; }
+    if (t.closest('#pushOff')) { pushOff(); return; }
+  });
+  window.__sx4 = { open: function (k) { if (k === 'theme') themeOpen(); else if (k === 'push') pushOpen(); } };
+
+  function init() {
+    swRegister(); newScan(); newMark();
+    setInterval(newScan, 20000); setInterval(newMark, 1500);
+    setInterval(goalCheck, 20000);
+    window.addEventListener('offline', function () { offBar(true); }); window.addEventListener('online', function () { offBar(false); });
+    if (navigator.onLine === false) offBar(true);
+  }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sarah TV — ইন্টারনেট নেই</title><meta name="theme-color" content="#0b0b0d">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box} html,body{margin:0;background:#0b0b0d;color:#fff;font-family:'Noto Sans Bengali','Hind Siliguri',system-ui,sans-serif}
+body{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:max(24px,env(safe-area-inset-top)) 18px 28px}
+.ic{font-size:64px;margin-top:20px;animation:fl 2.2s ease-in-out infinite} @keyframes fl{50%{transform:translateY(-8px)}}
+h1{font-size:22px;margin:10px 0 4px;text-align:center} p.s{color:#a1a1a6;margin:0 0 18px;text-align:center;font-size:14px;line-height:1.5;max-width:340px}
+button{border:0;border-radius:999px;padding:12px 26px;font:700 15px inherit;font-family:inherit;color:#fff;background:linear-gradient(135deg,#ff2a6d,#e11d48 40%,#9333ea);box-shadow:0 8px 24px rgba(255,42,109,.35)}
+.card{width:100%;max-width:420px;margin-top:22px;background:#141416;border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:14px}
+.card h2{margin:0 0 4px;font-size:13px;color:#a1a1a6;font-weight:600} .nx{font-size:20px;font-weight:700} .nx small{display:block;font-size:13px;color:#ffd666;font-weight:600;margin-top:2px}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.g div{background:rgba(255,255,255,.06);border:1px solid transparent;border-radius:12px;padding:8px 6px;text-align:center}
+.g div.on{border-color:#ff2a6d;background:rgba(255,42,109,.14)} .g span{display:block;font-size:11px;color:#a1a1a6}.g b{font-size:13px}
+.hj{margin-top:10px;font-size:12.5px;color:#d1d1d6;text-align:center} .ft{margin-top:auto;padding-top:24px;font-size:11px;color:#6e6e73;text-align:center}
+</style></head><body>
+<div class="ic">📡</div><h1>ইন্টারনেট সংযোগ নেই</h1>
+<p class="s">নেট ফিরলেই Sarah TV আবার চালু হবে। ততক্ষণ নামাজের সময় এখানে দেখুন — এটা ইন্টারনেট ছাড়াই চলে।</p>
+<button id="rt" type="button">🔄 আবার চেষ্টা করুন</button>
+<div class="card"><h2>পরবর্তী ওয়াক্ত (ঢাকা)</h2><div class="nx" id="nx">…</div><div class="g" id="g"></div><div class="hj" id="hj"></div></div>
+<div class="ft">Sarah TV • অফলাইন পেজ</div>
+<script>
+(function(){
+  var LAT0 = 23.8103, LON0 = 90.4125, TZ = 6;              // ঢাকা
+  var HIJRI_ADJUST = -1;                                   // চাঁদ দেখা অনুযায়ী ±১ দিন করতে চাইলে এখানে বদলান
+  var BN_DAY_ADJUST = 0;                                  // বাংলা তারিখ ±১ দিন করতে চাইলে
+  /* ইসলামিক ফাউন্ডেশনের (ঢাকা) প্রকাশিত সময়ের সাথে মিলিয়ে ক্যালিব্রেট করা (মিনিট) */
+  var FAJR_ADD = 2, ZUHR_OFFSET = 3.5, MAGHRIB_ADD = 3.5, ISHA_ADD = 1;
+  var SEHRI_BEFORE_FAJR = 1;                              // সেহরির শেষ সময় = ফজরের ১ মিনিট আগে (রমজানে ৫ করতে চাইলে এখানে বদলান)
+  var ASR_SHADOW = 2;                                     // হানাফী আসর (ছায়া = ২ গুণ)
+
+  var BN_DIGITS = '০১২৩৪৫৬৭৮৯';
+  var bn = function (v) { return String(v).replace(/\d/g, function (d) { return BN_DIGITS[d]; }); };
+  var pad2 = function (n) { return (n < 10 ? '0' : '') + n; };
+
+  var WEEK = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'];
+  var BN_MONTHS = ['বৈশাখ', 'জ্যৈষ্ঠ', 'আষাঢ়', 'শ্রাবণ', 'ভাদ্র', 'আশ্বিন', 'কার্তিক', 'অগ্রহায়ণ', 'পৌষ', 'মাঘ', 'ফাল্গুন', 'চৈত্র'];
+  var SEASONS = ['গ্রীষ্মকাল', 'গ্রীষ্মকাল', 'বর্ষাকাল', 'বর্ষাকাল', 'শরৎকাল', 'শরৎকাল', 'হেমন্তকাল', 'হেমন্তকাল', 'শীতকাল', 'শীতকাল', 'বসন্তকাল', 'বসন্তকাল'];
+  // (বৈশাখ-জ্যৈষ্ঠ গ্রীষ্ম, আষাঢ়-শ্রাবণ বর্ষা, ভাদ্র-আশ্বিন শরৎ, কার্তিক-অগ্রহায়ণ হেমন্ত, পৌষ-মাঘ শীত, ফাল্গুন-চৈত্র বসন্ত)
+  SEASONS = ['গ্রীষ্মকাল', 'গ্রীষ্মকাল', 'বর্ষাকাল', 'বর্ষাকাল', 'শরৎকাল', 'শরৎকাল', 'হেমন্তকাল', 'হেমন্তকাল', 'শীতকাল', 'শীতকাল', 'বসন্তকাল', 'বসন্তকাল'];
+  var HJ_MONTHS = ['মুহাররম', 'সফর', 'রবিউল আউয়াল', 'রবিউস সানি', 'জমাদিউল আউয়াল', 'জমাদিউস সানি', 'রজব', 'শাবান', 'রমজান', 'শাওয়াল', 'জিলকদ', 'জিলহজ'];
+  var GR_MONTHS = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+
+  // প্রতি বছর একই তারিখের সরকারি ছুটি (মাস-দিন)
+  var FIXED_HOLIDAYS = {
+    '02-21': 'শহীদ দিবস ও আন্তর্জাতিক মাতৃভাষা দিবস',
+    '03-26': 'স্বাধীনতা ও জাতীয় দিবস',
+    '04-14': 'পহেলা বৈশাখ',
+    '05-01': 'মে দিবস',
+    '08-05': 'জুলাই গণঅভ্যুত্থান দিবস',
+    '12-16': 'বিজয় দিবস',
+    '12-25': 'বড়দিন'
+  };
+  // চাঁদ/তিথি নির্ভর ছুটি (ঈদ, পূজা ইত্যাদি) সরকারি তালিকা বেরোলে এখানে 'YYYY-MM-DD': 'নাম' দিয়ে যোগ করুন
+  var EXTRA_HOLIDAYS = {
+    // '2027-03-10': 'ঈদুল ফিতর',
+  };
+
+  var QUOTES = [
+    'নিশ্চয়ই কষ্টের সাথেই স্বস্তি আছে।||সূরা আল-ইনশিরাহ, ৯৪:৫',
+    'নিশ্চয়ই আল্লাহ ধৈর্যশীলদের সাথে আছেন।||সূরা আল-বাকারা, ২:১৫৩',
+    'জেনে রাখো, আল্লাহর স্মরণেই অন্তর প্রশান্ত হয়।||সূরা আর-রা’দ, ১৩:২৮',
+    'তোমরা আমাকে স্মরণ করো, আমিও তোমাদের স্মরণ করব।||সূরা আল-বাকারা, ২:১৫২',
+    'যে আল্লাহর ওপর ভরসা করে, তার জন্য আল্লাহই যথেষ্ট।||সূরা আত-তালাক, ৬৫:৩',
+    'আল্লাহ কারও ওপর তার সাধ্যের অতিরিক্ত বোঝা চাপান না।||সূরা আল-বাকারা, ২:২৮৬',
+    'যদি তোমরা কৃতজ্ঞ হও, তবে আমি অবশ্যই তোমাদের (নিয়ামত) আরও বাড়িয়ে দেব।||সূরা ইবরাহিম, ১৪:৭',
+    'তোমরা আমাকে ডাকো, আমি তোমাদের ডাকে সাড়া দেব।||সূরা গাফির, ৪০:৬০',
+    'নিশ্চয়ই আল্লাহ সৎকর্মশীলদের প্রতিদান নষ্ট করেন না।||সূরা আত-তাওবা, ৯:১২০',
+    'মানুষ তা-ই পায়, যার জন্য সে চেষ্টা করে।||সূরা আন-নাজম, ৫৩:৩৯',
+    'তোমরা আল্লাহর রহমত থেকে নিরাশ হয়ো না।||সূরা আয-যুমার, ৩৯:৫৩',
+    'তোমরা সৎকাজ ও তাকওয়ায় একে অপরকে সহযোগিতা করো।||সূরা আল-মায়িদা, ৫:২',
+    'তোমরা পিতা-মাতার সাথে সদ্ব্যবহার করো।||সূরা বনী ইসরাঈল, ১৭:২৩',
+    'বলো, হে আমার রব! আমার জ্ঞান বাড়িয়ে দিন।||সূরা ত্বহা, ২০:১১৪',
+    'যে আল্লাহকে ভয় করে, তিনি তার জন্য পথ বের করে দেন।||সূরা আত-তালাক, ৬৫:২',
+    'তোমরা মানুষের সাথে উত্তম কথা বলো।||সূরা আল-বাকারা, ২:৮৩',
+    'যারা ক্রোধ সংবরণ করে ও মানুষকে ক্ষমা করে — আল্লাহ সৎকর্মশীলদের ভালোবাসেন।||সূরা আলে ইমরান, ৩:১৩৪',
+    'তোমরা হতোদ্যম হয়ো না, দুঃখ করো না; তোমরাই বিজয়ী, যদি মুমিন হও।||সূরা আলে ইমরান, ৩:১৩৯',
+    'তোমরা সত্যবাদীদের সাথে থাকো।||সূরা আত-তাওবা, ৯:১১৯',
+    'মন্দকে প্রতিহত করো উত্তম দ্বারা।||সূরা ফুসসিলাত, ৪১:৩৪',
+    'নিশ্চয়ই আল্লাহ ন্যায়পরায়ণদের ভালোবাসেন।||সূরা আল-মায়িদা, ৫:৪২',
+    'তোমরা সবাই আল্লাহর রজ্জু দৃঢ়ভাবে ধারণ করো এবং বিচ্ছিন্ন হয়ো না।||সূরা আলে ইমরান, ৩:১০৩',
+    'খাও ও পান করো, কিন্তু অপচয় করো না।||সূরা আল-আ’রাফ, ৭:৩১',
+    'কেউ অণু পরিমাণ ভালো কাজ করলে সে তা দেখতে পাবে।||সূরা আয-যিলযাল, ৯৯:৭',
+    'আল্লাহ ধৈর্যশীলদের ভালোবাসেন।||সূরা আলে ইমরান, ৩:১৪৬',
+    'বলো, যারা জানে এবং যারা জানে না, তারা কি সমান?||সূরা আয-যুমার, ৩৯:৯',
+    'তোমরা ধৈর্য ও সালাতের মাধ্যমে সাহায্য প্রার্থনা করো।||সূরা আল-বাকারা, ২:৪৫',
+    'নিশ্চয়ই আল্লাহ তাওবাকারীদের ভালোবাসেন।||সূরা আল-বাকারা, ২:২২২',
+    'যে আল্লাহর ওপর ভরসা করে, নিশ্চয়ই আল্লাহ পরাক্রমশালী, প্রজ্ঞাময়।||সূরা আল-আনফাল, ৮:৪৯',
+    'আল্লাহ তোমাদের জন্য সহজ চান, কঠিন চান না।||সূরা আল-বাকারা, ২:১৮৫',
+    'তোমরা ন্যায়বিচার করো; এটাই তাকওয়ার নিকটতর।||সূরা আল-মায়িদা, ৫:৮',
+    'নিশ্চয়ই আল্লাহ সৎকর্মপরায়ণদের সাথে আছেন।||সূরা আল-আনকাবূত, ২৯:৬৯'
+  ];
+
+  /* ---------- ঢাকার আজকের তারিখ ---------- */
+  function dhakaNow(ms) {
+    var d = new Date((ms == null ? Date.now() : ms) + TZ * 3600000);
+    return { y: d.getUTCFullYear(), m: d.getUTCMonth() + 1, d: d.getUTCDate(), wd: d.getUTCDay(), min: d.getUTCHours() * 60 + d.getUTCMinutes() };
+  }
+  var isLeap = function (y) { return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0; };
+
+  /* ---------- বাংলা তারিখ (বাংলাদেশ সংশোধিত পঞ্জিকা) ---------- */
+  function banglaDate(y, m, d) {
+    var sy = (m > 4 || (m === 4 && d >= 14)) ? y : y - 1;           // ১৪ এপ্রিল থেকে বছর শুরু
+    var n = Math.floor((Date.UTC(y, m - 1, d) - Date.UTC(sy, 3, 14)) / 864e5) + BN_DAY_ADJUST;
+    var len = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, isLeap(sy + 1) ? 30 : 29, 30];
+    var mi = 0;
+    while (mi < 11 && n >= len[mi]) { n -= len[mi]; mi++; }
+    return { day: n + 1, month: mi, year: sy - 593 };
+  }
+
+  /* ---------- হিজরি তারিখ ---------- */
+  function hijriDate(y, m, d) {
+    var base = Date.UTC(y, m - 1, d) + HIJRI_ADJUST * 864e5;
+    try {
+      var parts = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn', { day: 'numeric', month: 'numeric', year: 'numeric', timeZone: 'UTC' }).formatToParts(new Date(base));
+      var o = {};
+      parts.forEach(function (p) { if (p.type === 'day' || p.type === 'month' || p.type === 'year') o[p.type] = parseInt(p.value, 10); });
+      if (o.day && o.month && o.year && o.year > 1300 && o.year < 1700) return { day: o.day, month: o.month - 1, year: o.year };
+    } catch (e) {}
+    // fallback: tabular Islamic calendar
+    var jd = Math.floor(base / 864e5) + 2440588;
+    var l = jd - 1948440 + 10632, nn = Math.floor((l - 1) / 10631); l = l - 10631 * nn + 354;
+    var j = (Math.floor((10985 - l) / 5316)) * (Math.floor((50 * l) / 17719)) + (Math.floor(l / 5670)) * (Math.floor((43 * l) / 15238));
+    l = l - (Math.floor((30 - j) / 15)) * (Math.floor((17719 * j) / 50)) - (Math.floor(j / 16)) * (Math.floor((15238 * j) / 43)) + 29;
+    var hm = Math.floor((24 * l) / 709), hd = l - Math.floor((709 * hm) / 24), hy = 30 * nn + j - 30;
+    return { day: hd, month: hm - 1, year: hy };
+  }
+
+  /* ---------- সূর্যোদয়/সূর্যাস্ত/নামাজের সময় (ঢাকা) ---------- */
+  var rad = function (x) { return x * Math.PI / 180; }, deg = function (x) { return x * 180 / Math.PI; };
+  function sunTimes(y, m, d, lat, lon) {
+    var LAT = (lat == null ? LAT0 : lat), LON = (lon == null ? LON0 : lon);
+    var jd = Date.UTC(y, m - 1, d, 6, 0, 0) / 864e5 + 2440587.5;     // স্থানীয় দুপুর ১২টা
+    var T = (jd - 2451545) / 36525;
+    var L0 = (280.46646 + T * (36000.76983 + T * 0.0003032)) % 360;
+    var M = 357.52911 + T * (35999.05029 - 0.0001537 * T);
+    var e = 0.016708634 - T * (0.000042037 + 0.0000001267 * T);
+    var C = Math.sin(rad(M)) * (1.914602 - T * (0.004817 + 0.000014 * T)) + Math.sin(rad(2 * M)) * (0.019993 - 0.000101 * T) + Math.sin(rad(3 * M)) * 0.000289;
+    var om = 125.04 - 1934.136 * T;
+    var lam = L0 + C - 0.00569 - 0.00478 * Math.sin(rad(om));
+    var eps0 = 23 + (26 + ((21.448 - T * (46.815 + T * (0.00059 - T * 0.001813)))) / 60) / 60;
+    var eps = eps0 + 0.00256 * Math.cos(rad(om));
+    var decl = deg(Math.asin(Math.sin(rad(eps)) * Math.sin(rad(lam))));
+    var y2 = Math.pow(Math.tan(rad(eps / 2)), 2);
+    var eot = 4 * deg(y2 * Math.sin(2 * rad(L0)) - 2 * e * Math.sin(rad(M)) + 4 * e * y2 * Math.sin(rad(M)) * Math.cos(2 * rad(L0)) - 0.5 * y2 * y2 * Math.sin(4 * rad(L0)) - 1.25 * e * e * Math.sin(2 * rad(M)));
+    var noon = 720 - 4 * LON - eot + TZ * 60;
+    var H = function (alt) {
+      var c = (Math.sin(rad(alt)) - Math.sin(rad(LAT)) * Math.sin(rad(decl))) / (Math.cos(rad(LAT)) * Math.cos(rad(decl)));
+      return deg(Math.acos(Math.max(-1, Math.min(1, c)))) * 4;
+    };
+    var hs = H(-0.833);
+    var asrAlt = deg(Math.atan(1 / (ASR_SHADOW + Math.tan(rad(Math.abs(LAT - decl))))));   // হানাফী আসর
+    var r = Math.round;
+    return {
+      sunrise: r(noon - hs), sunset: r(noon + hs),
+      fajr: r(noon - H(-18) + FAJR_ADD), sehri: r(noon - H(-18) + FAJR_ADD) - SEHRI_BEFORE_FAJR,
+      zuhr: r(noon + ZUHR_OFFSET), asr: r(noon + H(asrAlt)),
+      maghrib: r(noon + hs + MAGHRIB_ADD), isha: r(noon + H(-18) + ISHA_ADD)
+    };
+  }
+
+  function period(h) {
+    if (h < 4) return 'রাত'; if (h < 6) return 'ভোর'; if (h < 12) return 'সকাল';
+    if (h < 16) return 'দুপুর'; if (h < 18) return 'বিকেল'; if (h < 20) return 'সন্ধ্যা'; return 'রাত';
+  }
+  function fmt(min) {
+    min = ((min % 1440) + 1440) % 1440;
+    var h = Math.floor(min / 60), mi = min % 60, h12 = h % 12 === 0 ? 12 : h % 12;
+    return period(h) + ' ' + bn(pad2(h12) + ':' + pad2(mi)) + ' মি.';
+  }
+  function dur(mins) { return bn(Math.floor(mins / 60)) + ' ঘণ্টা ' + bn(mins % 60) + ' মিনিট'; }
+
+  function greeting(min) {
+    var h = Math.floor(min / 60);
+    if (h >= 4 && h < 12) return { ic: '🌸', t: 'শুভ সকাল', w: 'দিনটি' };
+    if (h >= 12 && h < 16) return { ic: '☀️', t: 'শুভ দুপুর', w: 'দিনটি' };
+    if (h >= 16 && h < 18) return { ic: '🌇', t: 'শুভ বিকেল', w: 'বিকেলটি' };
+    if (h >= 18 && h < 20) return { ic: '🌆', t: 'শুভ সন্ধ্যা', w: 'সন্ধ্যাটি' };
+    return { ic: '🌙', t: 'শুভ রাত্রি', w: 'রাতটি' };
+  }
+
+  function holidayText(t) {
+    var key = t.y + '-' + pad2(t.m) + '-' + pad2(t.d);
+    var name = EXTRA_HOLIDAYS[key] || FIXED_HOLIDAYS[pad2(t.m) + '-' + pad2(t.d)];
+    var weekly = (t.wd === 5 || t.wd === 6);                       // শুক্র-শনি সাপ্তাহিক ছুটি
+    if (name && weekly) return 'আজ সরকারি ছুটি — ' + name + ' (সাপ্তাহিক ছুটির দিনও)।';
+    if (name) return 'আজ সরকারি ছুটি — ' + name + '।';
+    if (weekly) return 'আজ সাপ্তাহিক ছুটির দিন (' + WEEK[t.wd] + ')।';
+    return 'আজ কোনো সরকারি সাধারণ ছুটি নেই।';
+  }
+
+  /* ---------- সব তথ্য একসাথে ---------- */
+  
+function esc(x){return String(x)}
+function render(){
+  var now=new Date(Date.now()+6*3600e3), y=now.getUTCFullYear(), m=now.getUTCMonth()+1, d=now.getUTCDate();
+  var st=sunTimes(y,m,d), nowMin=now.getUTCHours()*60+now.getUTCMinutes()+now.getUTCSeconds()/60;
+  var L=[['সেহরি শেষ','sehri'],['ফজর','fajr'],['যোহর','zuhr'],['আসর','asr'],['মাগরিব','maghrib'],['এশা','isha']];
+  var nx=null; L.forEach(function(p){ if(!nx && p[1]!=='sehri' && st[p[1]]>nowMin) nx=p; });
+  var tom=null; if(!nx){ var t2=new Date(now.getTime()+864e5); tom=sunTimes(t2.getUTCFullYear(),t2.getUTCMonth()+1,t2.getUTCDate()); nx=['ফজর','fajr']; }
+  var tmin = tom ? tom.fajr+1440 : st[nx[1]], left=Math.max(0,Math.round(tmin-nowMin)), h=Math.floor(left/60);
+  document.getElementById('nx').innerHTML = nx[0]+' — '+fmt(tom?tom.fajr:st[nx[1]]).replace(' মি.','')+'<small>আর '+(h?bn(h)+' ঘণ্টা ':'')+bn(left%60)+' মিনিট বাকি</small>';
+  document.getElementById('g').innerHTML = L.map(function(p){ return '<div'+(nx[1]===p[1]&&!tom?' class="on"':'')+'><span>'+p[0]+'</span><b>'+fmt(st[p[1]]).replace(' মি.','')+'</b></div>'; }).join('');
+  try{ var hj=hijriDate(y,m,d); document.getElementById('hj').textContent = bn(hj.day)+' '+HJ_MONTHS[hj.month]+' '+bn(hj.year)+' হিজরি • '+bn(d)+' '+GR_MONTHS[m-1]+' '+bn(y); }catch(e){}
+}
+render(); setInterval(render,20000);
+document.getElementById('rt').onclick=function(){ location.href='./'; };
+window.addEventListener('online',function(){ location.href='./'; });
+})();
+</script></body></html>
