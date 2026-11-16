@@ -686,6 +686,11 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .bg-pink-500\/15 { background-co
 html[data-sx-theme]:not([data-sx-theme="pink"]) .bg-pink-500\/20 { background-color: rgba(var(--sx-rgb),.20) !important; }
 html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shadow-color: rgba(var(--sx-rgb),.3) !important; }
 </style>
+<script>
+/* ===== OTP সার্ভারের URL — otp-server/README.md দেখুন. ফাঁকা থাকলে কোড ছাড়াই নম্বর সেভ হবে ===== */
+window.SARAH_OTP_BASE = '';
+window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.replace(/\/$/, '') + '/otp/send', verify: window.SARAH_OTP_BASE.replace(/\/$/, '') + '/otp/verify' } : null;
+</script>
 </head>
 <body class="min-h-screen bg-[#000000] text-white flex flex-col justify-between pb-20">
 
@@ -851,18 +856,6 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
       <div id="discoverGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 pt-2"></div>
     </section>
 
-    <!-- SCORES VIEW -->
-    <section id="viewScores" class="hidden px-4 py-4 space-y-3">
-      <h2 class="text-xl font-bold">⚽ স্কোর ও টেবিল</h2>
-      <div id="scvBody" class="sx-news"></div>
-    </section>
-
-    <!-- NAMAZ VIEW -->
-    <section id="viewNamaz" class="hidden px-4 py-4 space-y-4">
-      <h2 class="text-xl font-bold">🕌 নামাজের সময়</h2>
-      <div id="nzHost"></div>
-    </section>
-
     <!-- MY LIST VIEW -->
     <section id="viewMyList" class="hidden px-4 py-4 space-y-4">
       <div class="flex items-center justify-between">
@@ -972,6 +965,20 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
         </div>
       </div>
     </section>
+
+    <section id="viewScore" class="hidden px-4 py-4 space-y-4">
+      <div class="flex items-center justify-between"><h2 class="text-lg font-bold">⚽ লাইভ স্কোর ও টেবিল</h2><button type="button" id="scRefreshBtn" class="sx-nw-refresh" aria-label="রিফ্রেশ">↻</button></div>
+      <div><button type="button" data-tool="teams" class="nz-tg on">🔔 টিম / গোল অ্যালার্ট</button></div>
+      <div id="scHost"></div>
+      <div id="tbPage" class="sx-news" style="margin-top:6px"></div>
+    </section>
+
+    <section id="viewNamaz" class="hidden px-4 py-4 space-y-4">
+      <div class="flex items-center justify-between"><h2 class="text-lg font-bold">🕌 নামাজের সময়</h2><span class="text-xs text-slate-400">ঢাকা</span></div>
+      <div id="nzHost"></div>
+      <div id="nzSun" class="sx-news"></div>
+    </section>
+
 
   </main>
 
@@ -1135,13 +1142,14 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
       <div id="loginStepOtp" class="hidden space-y-4">
         <div class="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-xs text-emerald-200">
           OTP sent to <span id="otpSentPhoneLabel" class="font-bold">+88017...</span>! <br/>
-          <span>SMS-এ পাঠানো ৪ সংখ্যার কোডটি নিচে লিখুন।</span>
+          <span>SMS-এ পাঠানো কোডটি নিচে লিখুন।</span>
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Enter 4-Digit OTP</label>
-          <input id="otpInput" type="text" maxlength="4" placeholder="• • • •" inputmode="numeric" autocomplete="one-time-code" class="w-full text-center tracking-[0.5em] font-extrabold text-lg bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-pink-500" />
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Enter OTP Code</label>
+          <input id="otpInput" type="text" maxlength="6" placeholder="• • • • • •" inputmode="numeric" autocomplete="one-time-code" class="w-full text-center tracking-[0.5em] font-extrabold text-lg bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-pink-500" />
         </div>
         <div class="flex items-center justify-between gap-2">
+          <button id="resendOtpBtn" type="button" class="px-3 py-2.5 rounded-xl bg-white/10 text-xs font-semibold text-slate-300" disabled>আবার পাঠান</button>
           <button id="backToPhoneStepBtn" class="px-4 py-2.5 rounded-xl bg-white/10 text-xs font-semibold text-slate-300">← Change Number</button>
           <button id="verifyOtpBtn" class="flex-1 py-2.5 rounded-xl toffee-gradient font-bold text-sm text-white shadow-lg">Verify & Login</button>
         </div>
@@ -1206,14 +1214,14 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
         <span>Discover</span>
       </button>
-      <button data-nav="scores" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
-        <span id="navIndicatorScores" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5l3.8 2.8-1.4 4.4H9.6l-1.4-4.4z"/><path d="M12 3v4.5M3.5 9.8l4.7.5M20.5 9.8l-4.7.5M6.5 19l2.1-4.3M17.5 19l-2.1-4.3"/></svg>
-        <span>Scores</span>
+      <button data-nav="score" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
+        <span id="navIndicatorScore" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
+        <span class="bn-emo">⚽</span>
+        <span>Score</span>
       </button>
       <button data-nav="namaz" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
         <span id="navIndicatorNamaz" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <span class="bn-emo">🕌</span>
         <span>Namaz</span>
       </button>
       <button data-nav="mylist" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
@@ -5173,27 +5181,27 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
       const views = {
         home: document.getElementById('viewHome'),
         discover: document.getElementById('viewDiscover'),
-        scores: document.getElementById('viewScores'),
-        namaz: document.getElementById('viewNamaz'),
         mylist: document.getElementById('viewMyList'),
-        settings: document.getElementById('viewSettings')
+        settings: document.getElementById('viewSettings'),
+        score: document.getElementById('viewScore'),
+        namaz: document.getElementById('viewNamaz')
       };
       const indicators = {
         home: document.getElementById('navIndicatorHome'),
         discover: document.getElementById('navIndicatorDiscover'),
-        scores: document.getElementById('navIndicatorScores'),
-        namaz: document.getElementById('navIndicatorNamaz'),
         mylist: document.getElementById('navIndicatorMylist'),
-        settings: document.getElementById('navIndicatorSettings')
+        settings: document.getElementById('navIndicatorSettings'),
+        score: document.getElementById('navIndicatorScore'),
+        namaz: document.getElementById('navIndicatorNamaz')
       };
 
       Object.keys(views).forEach(k => {
         if (k === viewName) {
-          views[k].classList.remove('hidden');
-          indicators[k].classList.remove('hidden');
+          if (views[k]) views[k].classList.remove('hidden');
+          if (indicators[k]) indicators[k].classList.remove('hidden');
         } else {
-          views[k].classList.add('hidden');
-          indicators[k].classList.add('hidden');
+          if (views[k]) views[k].classList.add('hidden');
+          if (indicators[k]) indicators[k].classList.add('hidden');
         }
       });
 
@@ -5209,8 +5217,7 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
 
       if (viewName === 'discover') renderDiscoverGrid();
       if (viewName === 'mylist') renderMyList();
-      if (viewName === 'scores' && window.__scvOpen) window.__scvOpen();
-      window.scrollTo(0, 0);
+      try { window.scrollTo(0, 0); if (window.__sxOnNav) window.__sxOnNav(viewName); } catch (e) {}
     }
 
     function scrollToHeroSlide(index) {
@@ -5466,8 +5473,9 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
       };
       const postJson = async (url, body) => {
         const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-        if (!r.ok) throw new Error('http ' + r.status);
-        return r.json().catch(() => ({ ok: true }));
+        const j = await r.json().catch(() => null);
+        if (!r.ok) { const err = new Error('http ' + r.status); err.msg = j && j.message; throw err; }
+        return j || { ok: true };
       };
 
       document.getElementById('sendOtpBtn').addEventListener('click', async () => {
@@ -5483,10 +5491,17 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
           document.getElementById('loginStepPhone').classList.add('hidden');
           document.getElementById('loginStepOtp').classList.remove('hidden');
           document.getElementById('otpInput').focus();
-        } catch (e) { showToast('কোড পাঠানো যায়নি, একটু পরে আবার চেষ্টা করুন'); }
+          startResendTimer();
+        } catch (e) { showToast((e && e.msg) || 'কোড পাঠানো যায়নি, একটু পরে আবার চেষ্টা করুন'); }
         btn.disabled = false; btn.textContent = 'Send OTP Code';
       });
 
+      let resendT = null;
+      const startResendTimer = () => {
+        const b = document.getElementById('resendOtpBtn'); let n = 60; clearInterval(resendT); b.disabled = true; b.textContent = `আবার পাঠান (${n})`;
+        resendT = setInterval(() => { n--; if (n <= 0) { clearInterval(resendT); b.disabled = false; b.textContent = 'আবার পাঠান'; } else b.textContent = `আবার পাঠান (${n})`; }, 1000);
+      };
+      document.getElementById('resendOtpBtn').addEventListener('click', () => { if (!document.getElementById('resendOtpBtn').disabled) document.getElementById('sendOtpBtn').click(); });
       document.getElementById('backToPhoneStepBtn').addEventListener('click', () => {
         document.getElementById('loginStepOtp').classList.add('hidden');
         document.getElementById('loginStepPhone').classList.remove('hidden');
@@ -5495,11 +5510,11 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
       document.getElementById('verifyOtpBtn').addEventListener('click', async () => {
         const code = document.getElementById('otpInput').value.trim();
         const rawPhone = getPhone();
-        if (!/^\d{4}$/.test(code)) { showToast('৪ সংখ্যার কোড দিন'); return; }
+        if (!/^\d{4,6}$/.test(code)) { showToast('SMS-এর কোডটি লিখুন'); return; }
         try {
           const res = await postJson(OTP_API.verify, { phone: `+880${rawPhone}`, code });
           if (res && res.ok !== false) finishLogin(rawPhone); else showToast('কোডটি ভুল, আবার চেষ্টা করুন');
-        } catch (e) { showToast('ভেরিফাই করা যায়নি, আবার চেষ্টা করুন'); }
+        } catch (e) { showToast((e && e.msg) || 'ভেরিফাই করা যায়নি, আবার চেষ্টা করুন'); }
       });
 
       const subModal = document.getElementById('subscribeModal');
@@ -5936,7 +5951,7 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
       greg: bn(t.d) + ' ' + GR_MONTHS[t.m - 1] + ' ' + bn(t.y) + ' খ্রিস্টাব্দ',
       sunrise: fmt(st.sunrise), sunset: fmt(st.sunset),
       lengths: 'দিন ' + dur(dayLen) + ' | রাত ' + dur(1440 - dayLen),
-      prayers: [['ফজর', fmt(st.fajr)], ['যোহর', fmt(st.zuhr)], ['আসর', fmt(st.asr)], ['মাগরিব', fmt(st.maghrib)], ['এশা', fmt(st.isha)]],
+      prayers: [['সেহরির শেষ সময়', fmt(st.sehri)], ['ফজর', fmt(st.fajr)], ['যোহর', fmt(st.zuhr)], ['আসর', fmt(st.asr)], ['মাগরিব (ইফতার শুরু)', fmt(st.maghrib)], ['এশা', fmt(st.isha)]],
       holiday: holidayText(t),
       quote: QUOTES[(doy - 1 + QUOTES.length * 10) % QUOTES.length],
       key: t.y + '-' + pad2(t.m) + '-' + pad2(t.d)
@@ -5972,7 +5987,7 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
     card.appendChild(s2);
 
     var s3 = el('div', 'dl-sec');
-    s3.appendChild(el('div', 'dl-t', '🕌 নামাজের সময় (ঢাকা ও পার্শ্ববর্তী)'));
+    s3.appendChild(el('div', 'dl-t', '🕌 নামাজ ও রোজা (ঢাকা ও পার্শ্ববর্তী)'));
     D.prayers.forEach(function (p) { var r = el('div', 'dl-pr'); r.appendChild(el('span', '', '▫️ ' + p[0])); r.appendChild(el('span', '', p[1])); s3.appendChild(r); });
     card.appendChild(s3);
 
@@ -6186,7 +6201,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 
   /* ================= 2) NAMAZ REMINDER ================= */
   var NZ_KEY = 'sarah_namaz_v1', NZ_FIRED = 'sarah_namaz_fired';
-  var NZ = [['fajr', 'ফজর'], ['zuhr', 'যোহর'], ['asr', 'আসর'], ['maghrib', 'মাগরিব'], ['isha', 'এশা']];
+  var NZ = [['sehri', 'সেহরির শেষ সময়'], ['fajr', 'ফজর'], ['zuhr', 'যোহর'], ['asr', 'আসর'], ['maghrib', 'মাগরিব'], ['isha', 'এশা']];
   function nzCfg() { var c = lsGet(NZ_KEY, null) || {}; if (c.on === undefined) c.on = false; if (c.lead === undefined) c.lead = 10; if (!c.off) c.off = { sehri: true }; return c; }
   function dayTimes(off) {
     var d = new Date(Date.now() + 6 * 3600e3 + off * 864e5);
@@ -6216,6 +6231,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     var cfg = nzCfg(), nx = nzNext(), dt = dayTimes(0);
     if (!dt.st) { box.style.display = 'none'; return; }
     box.style.display = '';
+    try { var sun = $('#nzSun'), D = window.__buildDaily && window.__buildDaily(); if (sun && D) sun.innerHTML = '<div class="nz-card"><div class="rm-two" style="margin-top:0"><div><span>☀ সূর্যোদয়</span><b>' + esc(D.sunrise.replace(' মি.', '')) + '</b></div><div><span>🌇 সূর্যাস্ত</span><b>' + esc(D.sunset.replace(' মি.', '')) + '</b></div></div><div class="nz-note" style="font-size:12px">📅 ' + esc(D.hijri) + ' • ' + esc(D.greg) + '</div></div>'; } catch (e) {}
     $('#nzNext').innerHTML = nx ? ('পরবর্তী ওয়াক্ত<b>' + esc(nx.name) + ' — ' + esc(fmtMin(nx.min)) + ' <span style="font-weight:500;color:#a1a1a6;font-size:12px">(' + leftText(nx.t - nzWallNow()) + ' বাকি)</span></b>') : '';
     var tg = $('#nzToggle'); tg.className = 'nz-tg' + (cfg.on ? ' on' : ''); tg.textContent = cfg.on ? '🔔 চালু' : '🔕 বন্ধ';
     $('#nzChips').innerHTML = NZ.map(function (p) {
@@ -6460,6 +6476,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
       '<div class="sx-nw-chips" data-nw-chips></div><div class="sx-nw-list" id="nwHomeList"></div></div>';
     var wrap = document.createElement('div'); wrap.innerHTML = html;
     while (wrap.firstChild) anchor.parentNode.insertBefore(wrap.firstChild, anchor);
+    var nzH = $('#nzHost'), nzS = $('#nzSection'); if (nzH && nzS) nzH.appendChild(nzS);
     if (!$('#nzBanner')) { var b = document.createElement('div'); b.id = 'nzBanner'; b.innerHTML = '<div><b></b><span></span></div><button type="button" aria-label="বন্ধ">×</button>'; document.body.appendChild(b); }
   }
   function init() {
@@ -6579,7 +6596,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   }
 
   /* ================= C) LIVE SCORE ================= */
-  var SC = { items: [], all: [], t: 0, busy: false };
+  var SC = { items: [], t: 0, busy: false };
   function fetchJson(url) {
     var tries = [function () { return X.getText(url, 6000); }];
     X.PROXIES.forEach(function (p) { tries.push(function () { return X.getText(p(url), 8000); }); });
@@ -6587,35 +6604,45 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     function next() { if (i >= tries.length) return Promise.reject(new Error('fail')); return tries[i++]().then(function (t) { return JSON.parse(t); }).catch(next); }
     return next();
   }
-  var SC_LEAGUES = [['eng.1', 'প্রিমিয়ার লিগ'], ['esp.1', 'লা লিগা'], ['uefa.champions', 'চ্যাম্পিয়নস লিগ'], ['uefa.nations', 'নেশনস লিগ'], ['uefa.euro', 'ইউরো'], ['conmebol.america', 'কোপা আমেরিকা'], ['fifa.world', 'বিশ্বকাপ']];
-  function ymdUTC(ms) { var d = new Date(ms); return d.getUTCFullYear() + String(d.getUTCMonth() + 1).padStart(2, '0') + String(d.getUTCDate()).padStart(2, '0'); }
-  function leagueEvents(lg, rng) {
-    return fetchJson('https://site.api.espn.com/apis/site/v2/sports/soccer/' + lg[0] + '/scoreboard?dates=' + rng).then(function (j) {
-      return (j.events || []).map(function (ev) {
-        var c = (ev.competitions || [])[0] || {}, cs = c.competitors || [];
-        var h = cs.filter(function (x) { return x.homeAway === 'home'; })[0] || cs[0], a = cs.filter(function (x) { return x.homeAway === 'away'; })[0] || cs[1];
-        if (!h || !a) return null;
-        var st = ((ev.status || c.status || {}).type) || {}, state = st.state === 'in' ? 'live' : (st.state === 'post' ? 'done' : 'pre');
-        var clock = (ev.status && ev.status.displayClock) || '';
-        return { sp: '⚽', lg: lg[0], lgn: lg[1], state: state, when: Date.parse(ev.date) || 0, status: state === 'live' ? (st.shortDetail || clock) : (state === 'done' ? 'সমাপ্ত' : ''),
-          a: (h.team && (h.team.shortDisplayName || h.team.displayName)) || '', as: h.score, b: (a.team && (a.team.shortDisplayName || a.team.displayName)) || '', bs: a.score,
-          link: ((ev.links || [])[0] || {}).href || '' };
-      }).filter(Boolean);
-    }).catch(function () { return []; });
-  }
+  var LGS = [['eng.1', 'EPL'], ['esp.1', 'La Liga'], ['uefa.champions', 'UCL'], ['uefa.nations', 'Nations League'], ['uefa.euro', 'Euro'], ['conmebol.america', 'Copa América'], ['fifa.world', 'World Cup']];
   function soccer() {
-    var rng = ymdUTC(Date.now() - 864e5) + '-' + ymdUTC(Date.now() + 864e5);
-    return Promise.all(SC_LEAGUES.map(function (lg) { return leagueEvents(lg, rng); })).then(function (r) { return [].concat.apply([], r); });
+    return Promise.all(LGS.map(function (l) {
+      return fetchJson('https://site.api.espn.com/apis/site/v2/sports/soccer/' + l[0] + '/scoreboard').then(function (j) {
+        return (j.events || []).map(function (ev) {
+          var c = (ev.competitions || [])[0] || {}, cs = c.competitors || [];
+          var h = cs.filter(function (x) { return x.homeAway === 'home'; })[0] || cs[0], a = cs.filter(function (x) { return x.homeAway === 'away'; })[0] || cs[1];
+          if (!h || !a) return null;
+          var st = ((ev.status || c.status || {}).type) || {}, state = st.state === 'in' ? 'live' : (st.state === 'post' ? 'done' : 'pre');
+          var clock = (ev.status && ev.status.displayClock) || '';
+          return { sp: '⚽', lg: l[1], state: state, when: Date.parse(ev.date) || 0, status: state === 'live' ? (st.shortDetail || clock) : (state === 'done' ? 'সমাপ্ত' : ''),
+            a: (h.team && (h.team.shortDisplayName || h.team.displayName)) || '', as: h.score, b: (a.team && (a.team.shortDisplayName || a.team.displayName)) || '', bs: a.score,
+            link: ((ev.links || [])[0] || {}).href || '' };
+        }).filter(Boolean);
+      }).catch(function () { return []; });
+    })).then(function (arr) { return [].concat.apply([], arr); });
+  }
+  function cricket() { return Promise.resolve([]); }
+  function cricketOld() {
+    return fetchJson('https://hs-consumer-api.espncricinfo.com/v1/pages/matches/current?lang=en&latest=true').then(function (j) {
+      return ((j && j.matches) || []).map(function (m) {
+        var tm = m.teams || []; if (tm.length < 2) return null;
+        var state = /live/i.test(m.state || '') ? 'live' : (/post|result|complete/i.test(m.state || '') ? 'done' : 'pre');
+        var nm = function (x) { return (x.team && (x.team.abbreviation || x.team.name)) || ''; };
+        var sc = function (x) { return [x.score, x.scoreInfo].filter(Boolean).join(' ').trim(); };
+        return { sp: '🏏', state: state, when: Date.parse(m.startTime || m.startDate || '') || 0, status: state === 'live' ? (m.statusText || 'LIVE') : (m.statusText || ''),
+          a: nm(tm[0]), as: sc(tm[0]), b: nm(tm[1]), bs: sc(tm[1]), link: m.slug ? 'https://www.espncricinfo.com/series/' + (m.series && m.series.slug || 'x') + '/' + m.slug + '-' + m.objectId + '/live-cricket-score' : '' };
+      }).filter(Boolean);
+    });
   }
   function scoreLoad(force) {
     if (SC.busy || (!force && Date.now() - SC.t < 25000)) return; SC.busy = true;
-    soccer().then(function (all) {
-      var now = Date.now(), rank = { live: 0, pre: 1, done: 2 };
-      SC.all = all.slice().sort(function (a, b) { return rank[a.state] - rank[b.state] || (a.state === 'done' ? b.when - a.when : a.when - b.when); });
-      var items = all.filter(function (x) { return x.state === 'live' || (x.state === 'pre' && x.when - now < 6 * 3600e3 && x.when > now - 3600e3) || (x.state === 'done' && now - x.when < 5 * 3600e3); });
-      items.sort(function (a, b) { return rank[a.state] - rank[b.state] || a.when - b.when; });
-      SC.items = items.slice(0, 16); SC.t = Date.now(); SC.busy = false; scoreRender(); try { if (window.__sarahOnScores) window.__sarahOnScores(SC.items); } catch (e) {}
-    }).catch(function () { SC.busy = false; });
+    Promise.all([soccer().catch(function () { return []; }), cricket().catch(function () { return []; })]).then(function (r) {
+      var all = r[0].concat(r[1]), now = Date.now();
+      all = all.filter(function (x) { return x.state === 'live' || (x.state === 'pre' && x.when - now < 24 * 3600e3 && x.when > now - 3600e3) || (x.state === 'done' && now - x.when < 12 * 3600e3); });
+      var rank = { live: 0, pre: 1, done: 2 };
+      all.sort(function (a, b) { return rank[a.state] - rank[b.state] || a.when - b.when; });
+      SC.items = all.slice(0, 40); SC.t = Date.now(); SC.busy = false; scoreRender(); try { if (window.__sarahOnScores) window.__sarahOnScores(SC.items); } catch (e) {}
+    });
   }
   function predKey(x) { return x.a + '|' + x.b + '|' + DAYFMT.format(x.when || Date.now()); }
   function predWinner(x) { var A = parseInt(x.as, 10), B = parseInt(x.bs, 10); if (isNaN(A) || isNaN(B)) return ''; return A > B ? 'a' : (A < B ? 'b' : 'd'); }
@@ -6628,15 +6655,22 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     } else if (pk && pr && x.state === 'done') {
       var w = predWinner(x); if (w) extra = '<div class="sc-pred">' + (pr.c === w ? '✅ আপনার ধারণা সঠিক!' : '❌ ধারণা মেলেনি') + '</div>';
     }
-    return '<div class="sc-wrap"><a class="sc-card" ' + (x.link ? 'href="' + esc(x.link) + '" target="_blank" rel="noopener noreferrer"' : '') + '><div class="sc-top">' + x.sp + ' ' + top + '</div>' +
+    return '<div class="sc-wrap"><a class="sc-card" ' + (x.link ? 'href="' + esc(x.link) + '" target="_blank" rel="noopener noreferrer"' : '') + '><div class="sc-top">' + x.sp + ' ' + (x.lg ? '<b style="color:#e5e5ea">' + esc(x.lg) + '</b> · ' : '') + top + '</div>' +
       '<div class="sc-r"><span>' + esc(x.a) + '</span><b>' + esc(x.state === 'pre' ? '' : x.as) + '</b></div><div class="sc-r"><span>' + esc(x.b) + '</span><b>' + esc(x.state === 'pre' ? '' : x.bs) + '</b></div></a>' + extra + '</div>';
   }
   function scoreRender() {
-    var html = SC.items.length ? SC.items.map(scoreCard).join('') : '';
-    var home = $('#scSection'); if (home) { home.style.display = SC.items.length ? '' : 'none'; var tr = $('#scTrack'); if (tr) tr.innerHTML = html; }
-    var st = $('[data-score-strip]'); if (st) { st.style.display = SC.items.length ? '' : 'none'; st.innerHTML = html; }
-    try { if (window.__scvRender) window.__scvRender(); } catch (e) {}
+    var host = $('#scHost');
+    if (host) {
+      if (!SC.items.length) host.innerHTML = '<div class="nw-empty">' + (SC.t ? 'এখন কোনো ম্যাচ নেই' : 'লোড হচ্ছে…') + '<br><small>শুধু La Liga, EPL, UCL, Nations League, Euro, Copa América, World Cup</small></div>';
+      else {
+        var order = [], by = {};
+        SC.items.forEach(function (x) { var k = x.lg || 'ফুটবল'; if (!by[k]) { by[k] = []; order.push(k); } by[k].push(x); });
+        host.innerHTML = order.map(function (k) { return '<div class="sx-h" style="margin-top:6px"><b>🏆 ' + esc(k) + '</b></div><div class="sc-grid">' + by[k].map(scoreCard).join('') + '</div>'; }).join('');
+      }
+    }
+    var st = $('[data-score-strip]'); if (st) { st.style.display = SC.items.length ? '' : 'none'; st.innerHTML = SC.items.map(scoreCard).join(''); }
   }
+
 
   /* ================= D) QUALITY CHIP (player) ================= */
   function qualityChip() {
@@ -6662,7 +6696,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 
   /* ================= INIT / EVENTS ================= */
   function build() {
-    var nw = $('#nwHome'); if (!nw || $('#gdSection')) return;
+    var nz = $('#nzSection'), nw = $('#nwHome'); if (!nz || !nw || $('#gdSection')) return;
     var mk = function (id, cls) { var d = document.createElement('div'); d.id = id; d.className = cls; return d; };
     var gd = mk('gdSection', 'sx-sec sx-news'); gd.style.display = 'none'; nw.parentNode.insertBefore(gd, nw);
     var pl = $('#plNews'); if (pl && !$('[data-score-strip]')) { var s = document.createElement('div'); s.className = 'sc-strip'; s.setAttribute('data-score-strip', ''); s.style.display = 'none'; pl.insertBefore(s, pl.querySelector('[data-nw-chips]')); }
@@ -6681,13 +6715,13 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   function init() {
     build(); qualityChip();
     guideRender(); scoreRender(); scoreLoad(true);
-    setInterval(function () { evCheck(); }, 15000);
+    setInterval(evCheck, 15000);
     setInterval(guideRender, 60000);
     setInterval(function () { if (!document.hidden) scoreLoad(false); }, 30000);
     document.addEventListener('visibilitychange', function () { if (!document.hidden) { guideRender(); scoreLoad(false); } });
     window.__sarahGuideRefresh = guideRender;
   }
-  window.__sarahExtras2 = { all: function () { return SC.all; }, loaded: function () { return SC.t > 0; }, refresh: scoreLoad, scoreCard: scoreCard, leagues: SC_LEAGUES, scores: function () { return SC.items; }, scoreRender: scoreRender, predKey: predKey, predWinner: predWinner, evList: evList, fetchJson: fetchJson, TIMEFMT: TIMEFMT };
+  window.__sarahExtras2 = { scoreLoad: scoreLoad, scores: function () { return SC.items; }, scoreRender: scoreRender, predKey: predKey, predWinner: predWinner, evList: evList, fetchJson: fetchJson, TIMEFMT: TIMEFMT };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
@@ -6895,11 +6929,12 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   }
 
   /* ---------- 6) Points table / fixtures ---------- */
-  var LEAGUES = [['eng.1', 'প্রিমিয়ার লিগ'], ['esp.1', 'লা লিগা'], ['ita.1', 'সিরি আ'], ['ger.1', 'বুন্দেসলিগা'], ['fra.1', 'লিগ ১'], ['uefa.champions', 'চ্যাম্পিয়নস লিগ'], ['fifa.world', 'বিশ্বকাপ']];
+  var LEAGUES = [['eng.1', 'EPL'], ['esp.1', 'La Liga'], ['uefa.champions', 'UCL'], ['uefa.nations', 'Nations League'], ['uefa.euro', 'Euro'], ['conmebol.america', 'Copa América'], ['fifa.world', 'World Cup']];
   var tb = { lg: 'eng.1', tab: 'table' };
   function tableOpen() {
-    var body = sheet('📊 পয়েন্ট টেবিল / ফিক্সচার', '<div class="sx-nw-chips" id="tbLg">' + LEAGUES.map(function (l) { return '<button type="button" class="sx-chip' + (tb.lg === l[0] ? ' on' : '') + '" data-tb-lg="' + l[0] + '">' + l[1] + '</button>'; }).join('') + '</div>' +
+    var __h = ('<div class="sx-nw-chips" id="tbLg">' + LEAGUES.map(function (l) { return '<button type="button" class="sx-chip' + (tb.lg === l[0] ? ' on' : '') + '" data-tb-lg="' + l[0] + '">' + l[1] + '</button>'; }).join('') + '</div>' +
       '<div class="sx-nw-chips"><button type="button" class="sx-chip' + (tb.tab === 'table' ? ' on' : '') + '" data-tb-tab="table">পয়েন্ট টেবিল</button><button type="button" class="sx-chip' + (tb.tab === 'fix' ? ' on' : '') + '" data-tb-tab="fix">ফিক্সচার</button></div><div id="tbBody"><div class="nw-empty">লোড হচ্ছে…</div></div>');
+    if ($('#tbPage')) $('#tbPage').innerHTML = __h; else sheet('📊 পয়েন্ট টেবিল / ফিক্সচার', __h);
     tableLoad();
   }
   function stat(e, n) { var s = (e.stats || []).filter(function (x) { return x.name === n; })[0]; return s ? (s.displayValue != null ? s.displayValue : s.value) : '-'; }
@@ -7076,7 +7111,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   function orderCfg() { var o = lsGet(ORDER_KEY, null); if (!o || !o.ids) o = { ids: SECS.map(function (s) { return s[0]; }), hide: {} }; SECS.forEach(function (s) { if (o.ids.indexOf(s[0]) < 0) o.ids.push(s[0]); }); return o; }
   function applyOrder() {
     var o = orderCfg(), anchor = $('#nwHome'); if (!anchor) return; var parent = anchor.parentNode;
-    o.ids.forEach(function (id) { var el = document.getElementById(id); if (!el) return; parent.insertBefore(el, anchor); if (o.hide[id]) el.setAttribute('data-sx-hide', '1'); else el.removeAttribute('data-sx-hide'); });
+    o.ids.forEach(function (id) { if (!SECS.some(function (q) { return q[0] === id; })) return; var el = document.getElementById(id); if (!el) return; parent.insertBefore(el, anchor); if (o.hide[id]) el.setAttribute('data-sx-hide', '1'); else el.removeAttribute('data-sx-hide'); });
   }
   function orderOpen() {
     var o = orderCfg(), nm = {}; SECS.forEach(function (s) { nm[s[0]] = s[1]; });
@@ -7086,6 +7121,13 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   }
 
   /* ---------- tools hub + events ---------- */
+  var TILES = [['multi', '⧉', 'মাল্টি-ভিউ'], ['table', '📊', 'পয়েন্ট টেবিল'], ['qibla', '🧭', 'কিবলা'], ['teams', '🔔', 'টিম অ্যালার্ট'], ['week', '📅', 'আমার সপ্তাহ'], ['req', '📝', 'চ্যানেল রিকোয়েস্ট'], ['order', '↕', 'হোম সাজান'], ['theme', '🎨', 'থিম'], ['push', '📲', 'পুশ'], ['admin', '🛠', 'ড্যাশবোর্ড']];
+  function buildHub() {
+    var nw = $('#nwHome'); if (!nw || $('#toolsSection')) return;
+    var d = document.createElement('div'); d.id = 'toolsSection'; d.className = 'sx-sec';
+    d.innerHTML = '<div class="sx-h"><b>🧰 টুলস</b></div><div class="tl-grid">' + TILES.map(function (t) { return '<button type="button" class="tl-t' + (t[0] === 'admin' ? ' sx-admin-tile' : '') + '" data-tool="' + t[0] + '"><span>' + t[1] + '</span>' + t[2] + '</button>'; }).join('') + '</div>';
+    nw.parentNode.insertBefore(d, nw);
+  }
   function openTool(k) {
     if (k === 'multi') mvOpen(); else if (k === 'table') tableOpen(); else if (k === 'qibla') qiblaOpen(); else if (k === 'teams') sheet('🔔 টিম অ্যালার্ট', teamsHtml());
     else if (k === 'week') weekOpen(); else if (k === 'req') reqOpen(); else if (k === 'order') orderOpen(); else if (k === 'admin') adminOpen(); else if (window.__sx4 && window.__sx4.open) window.__sx4.open(k);
@@ -7119,7 +7161,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   });
 
   function init() {
-    applyOrder(); ccInit(); gestureInit(); announce();
+    ccInit(); gestureInit(); announce();
     setTimeout(dsCheck, 4000);
     setInterval(trackTick, 5000);
     setInterval(function () { teamCheck(); predEval(); }, 60000);
@@ -7128,7 +7170,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSheet(); });
   }
   X.sheet = sheet; X.closeSheet = closeSheet; X.toast = toast;
-  window.__sarahExtras3 = { qiblaBearing: qiblaBearing, weekData: weekData, sheet: sheet, toast: toast };
+  window.__sarahExtras3 = { qiblaBearing: qiblaBearing, weekData: weekData, sheet: sheet, toast: toast, openTool: openTool, tablePage: tableOpen };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
@@ -7142,6 +7184,10 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 .sx-new::after { content:'NEW'; position:absolute; top:3px; right:3px; z-index:3; pointer-events:none; background:var(--sx-acc,#ff2a6d); color:#fff; font-size:8.5px; font-weight:800; padding:1px 5px; border-radius:999px; font-family:'Inter',sans-serif; }
 #sxOff { position:fixed; left:0; right:0; top:0; z-index:100003; text-align:center; font-size:12.5px; font-weight:700; padding:calc(6px + env(safe-area-inset-top)) 10px 6px; color:#fff; display:none; font-family:'Noto Sans Bengali','Inter',sans-serif; }
 #sxOff.show { display:block; } #sxOff.off { background:#b91c1c; } #sxOff.on { background:#15803d; }
+#nzHost .sx-sec { padding:0; margin:0; }
+.sc-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:6px; }
+.sc-grid .sc-wrap { flex:none; min-width:0; }
+@media (min-width:640px) { .sc-grid { grid-template-columns:repeat(3,1fr); } }
 </style>
 
 <script id="sarah-extras4-js">
@@ -7265,113 +7311,26 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   });
   window.__sx4 = { open: function (k) { if (k === 'theme') themeOpen(); else if (k === 'push') pushOpen(); } };
 
+  /* ===== Score ট্যাব: খুললে টেবিল + স্কোর লোড ===== */
+  var tbDone = false;
+  function scoreTab() {
+    if (!tbDone && X3.tablePage) { tbDone = true; X3.tablePage(); }
+    X2.scoreLoad(true);
+  }
+  function hookTabs() {
+    var sb = $('.bottom-nav-btn[data-nav="score"]'); if (sb) sb.addEventListener('click', function () { setTimeout(scoreTab, 60); });
+    var vs = $('#viewScore'); if (vs && !vs.classList.contains('hidden')) scoreTab();
+  }
+  document.addEventListener('click', function (e) {
+    if (e.target.closest && e.target.closest('#scRefreshBtn')) { X2.scoreLoad(true); if (X3.tablePage) X3.tablePage(); }
+  });
   function init() {
-    swRegister(); newScan(); newMark();
+    hookTabs(); swRegister(); newScan(); newMark();
     setInterval(newScan, 20000); setInterval(newMark, 1500);
     setInterval(goalCheck, 20000);
     window.addEventListener('offline', function () { offBar(true); }); window.addEventListener('online', function () { offBar(false); });
     if (navigator.onLine === false) offBar(true);
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
-})();
-</script>
-
-
-<style id="sarah-scv-css">
-nav.fixed.bottom-0 .bottom-nav-btn { min-width: 0; flex: 1; padding: 4px 2px; font-size: 10.5px; }
-nav.fixed.bottom-0 .bottom-nav-btn svg { width: 22px; height: 22px; }
-.scv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.scv-grid .sc-wrap { flex: none; min-width: 0; }
-.scv-lg { font-size: 13px; font-weight: 700; margin: 12px 0 6px; color: #fff; }
-.scv-lg small { color: #a1a1a6; font-weight: 500; margin-left: 6px; }
-.scv-note { font-size: 10.5px; color: #8e8e93; margin-top: 10px; line-height: 1.4; }
-#viewNamaz .nz-chips { flex-wrap: wrap; }
-#viewNamaz .nz-chip { flex: 1 0 30%; padding: 10px 8px; }
-#viewNamaz .nz-chip b { font-size: 14px; }
-#viewNamaz .nz-chip span { font-size: 11.5px; }
-</style>
-<script id="sarah-scv-js">
-(function () {
-  'use strict';
-  var X = window.__sx, X2 = window.__sarahExtras2; if (!X || !X2) return;
-  var $ = function (s, r) { return (r || document).querySelector(s); };
-  var esc = X.esc, bn = X.bn, LG = X2.leagues;
-  var st = { tab: 'live', lg: 'all' }, built = false, seq = 0;
-  var TABS = [['live', '🔴 লাইভ স্কোর'], ['table', '📊 টেবিল'], ['fix', '📅 ফিক্সচার']];
-  var LOADING = '<div class="nw-empty">লোড হচ্ছে…</div>';
-
-  function shell() {
-    var b = $('#scvBody'); if (!b) return;
-    b.innerHTML = '<div class="sx-nw-chips" id="scvTabs"></div><div class="sx-nw-chips" id="scvLg"></div><div id="scvList"></div>';
-    built = true; chips(); fill();
-  }
-  function chips() {
-    $('#scvTabs').innerHTML = TABS.map(function (t) { return '<button type="button" class="sx-chip' + (st.tab === t[0] ? ' on' : '') + '" data-scv-tab="' + t[0] + '">' + t[1] + '</button>'; }).join('');
-    var list = (st.tab === 'live' ? [['all', 'সব']] : []).concat(LG);
-    $('#scvLg').innerHTML = list.map(function (l) { return '<button type="button" class="sx-chip' + (st.lg === l[0] ? ' on' : '') + '" data-scv-lg="' + l[0] + '">' + l[1] + '</button>'; }).join('');
-  }
-  function fill() {
-    var box = $('#scvList'); if (!box) return;
-    if (st.tab === 'live') fillLive(box); else loadData(box);
-  }
-  function fillLive(box) {
-    if (!X2.loaded()) { box.innerHTML = LOADING; return; }
-    var all = (X2.all() || []).filter(function (x) { return st.lg === 'all' || x.lg === st.lg; });
-    if (!all.length) { box.innerHTML = '<div class="nw-empty">এখন এই লিগ/টুর্নামেন্টে গতকাল-আজ-আগামীকালের কোনো ম্যাচ নেই</div>'; return; }
-    var h = '';
-    LG.forEach(function (l) {
-      var it = all.filter(function (x) { return x.lg === l[0]; }); if (!it.length) return;
-      h += '<div class="scv-lg">' + esc(l[1]) + '<small>' + bn(it.length) + 'টি ম্যাচ</small></div><div class="scv-grid">' + it.map(X2.scoreCard).join('') + '</div>';
-    });
-    box.innerHTML = h + '<div class="scv-note">স্কোর নিজে থেকেই রিফ্রেশ হয়। ম্যাচের কার্ডে ট্যাপ করলে বিস্তারিত খুলবে।</div>';
-  }
-  function stat(e, n) { var s = (e.stats || []).filter(function (x) { return x.name === n; })[0]; return s ? (s.displayValue != null ? s.displayValue : s.value) : '-'; }
-  function ymd(ms) { var d = new Date(ms); return d.getUTCFullYear() + String(d.getUTCMonth() + 1).padStart(2, '0') + String(d.getUTCDate()).padStart(2, '0'); }
-  function loadData(box) {
-    var lg = st.lg === 'all' ? LG[0][0] : st.lg, tab = st.tab, my = ++seq; box.innerHTML = LOADING;
-    var alive = function () { return my === seq && lg === (st.lg === 'all' ? LG[0][0] : st.lg) && tab === st.tab; };
-    if (tab === 'table') {
-      X2.fetchJson('https://site.api.espn.com/apis/v2/sports/soccer/' + lg + '/standings').then(function (j) {
-        if (!alive()) return;
-        var groups = (j.children || []).filter(function (c) { return c.standings && c.standings.entries && c.standings.entries.length; });
-        if (!groups.length) throw new Error('none');
-        box.innerHTML = groups.map(function (gp) {
-          var es = gp.standings.entries.slice().sort(function (a, b) { return (+stat(a, 'rank') || 99) - (+stat(b, 'rank') || 99); });
-          return (groups.length > 1 ? '<div class="scv-lg">' + esc(gp.name || '') + '</div>' : '') + '<div class="rm-cal" style="max-height:none"><table class="rm-tb"><thead><tr><th>#</th><th>দল</th><th>ম্যাচ</th><th>জয়</th><th>ড্র</th><th>হার</th><th>পয়েন্ট</th></tr></thead><tbody>' +
-            es.map(function (e, i) { return '<tr><td>' + bn(stat(e, 'rank') !== '-' ? stat(e, 'rank') : i + 1) + '</td><td>' + esc((e.team && e.team.displayName) || '') + '</td><td>' + bn(stat(e, 'gamesPlayed')) + '</td><td>' + bn(stat(e, 'wins')) + '</td><td>' + bn(stat(e, 'ties')) + '</td><td>' + bn(stat(e, 'losses')) + '</td><td><b>' + bn(stat(e, 'points')) + '</b></td></tr>'; }).join('') + '</tbody></table></div>';
-        }).join('');
-      }).catch(function () { if (alive()) box.innerHTML = '<div class="nw-empty">এই টুর্নামেন্টের টেবিল এখন পাওয়া যায়নি (চলছে না, বা ইন্টারনেট সমস্যা)</div>'; });
-    } else {
-      X2.fetchJson('https://site.api.espn.com/apis/site/v2/sports/soccer/' + lg + '/scoreboard?dates=' + ymd(Date.now()) + '-' + ymd(Date.now() + 14 * 864e5)).then(function (j) {
-        if (!alive()) return;
-        var ev = (j.events || []).slice().sort(function (a, b) { return Date.parse(a.date) - Date.parse(b.date); });
-        if (!ev.length) throw new Error('none');
-        box.innerHTML = '<div class="sx-nw-list">' + ev.slice(0, 40).map(function (e) {
-          var c = (e.competitions || [])[0] || {}, cs = c.competitors || [], h = cs.filter(function (x) { return x.homeAway === 'home'; })[0] || cs[0] || {}, a = cs.filter(function (x) { return x.homeAway === 'away'; })[0] || cs[1] || {};
-          var t = Date.parse(e.date), s2 = ((e.status || {}).type || {}).state, dd = new Date(t + 6 * 3600e3);
-          return '<div class="gd-it"><div class="gd-tm" style="flex-basis:88px">' + bn(dd.getUTCDate()) + '/' + bn(dd.getUTCMonth() + 1) + ' ' + esc(X2.TIMEFMT.format(t)) + '</div><div class="gd-in"><div class="nw-t">' + esc(((h.team || {}).shortDisplayName || '') + ' vs ' + ((a.team || {}).shortDisplayName || '')) + '</div>' + (s2 === 'post' || s2 === 'in' ? '<div class="nw-m">' + esc((h.score || 0) + ' - ' + (a.score || 0)) + '</div>' : '') + '</div></div>';
-        }).join('') + '</div>';
-      }).catch(function () { if (alive()) box.innerHTML = '<div class="nw-empty">আগামী ১৪ দিনে কোনো ম্যাচ পাওয়া যায়নি</div>'; });
-    }
-  }
-  document.addEventListener('click', function (e) {
-    var t = e.target; if (!t.closest) return; var q;
-    if ((q = t.closest('[data-scv-tab]'))) { st.tab = q.getAttribute('data-scv-tab'); if (st.tab !== 'live' && st.lg === 'all') st.lg = LG[0][0]; chips(); fill(); return; }
-    if ((q = t.closest('[data-scv-lg]'))) { st.lg = q.getAttribute('data-scv-lg'); chips(); fill(); return; }
-  });
-  window.__scvOpen = function () { if (!built) shell(); else fill(); X2.refresh(true); };
-  window.__scvRender = function () { var v = $('#viewScores'); if (built && v && !v.classList.contains('hidden') && st.tab === 'live') fillLive($('#scvList')); };
-
-  /* ---- Namaz card -> Namaz tab ---- */
-  function moveNamaz(n) {
-    var nz = $('#nzSection'), host = $('#nzHost');
-    if (!host) return;
-    if (!nz) { if (n < 20) setTimeout(function () { moveNamaz(n + 1); }, 300); return; }
-    host.appendChild(nz);
-    var set = $('#nzSet'); if (set) set.classList.add('open');
-    var more = $('#nzMore'); if (more) more.style.display = 'none';
-  }
-  function init() { moveNamaz(0); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
