@@ -851,6 +851,18 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
       <div id="discoverGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 pt-2"></div>
     </section>
 
+    <!-- SCORES VIEW -->
+    <section id="viewScores" class="hidden px-4 py-4 space-y-3">
+      <h2 class="text-xl font-bold">⚽ স্কোর ও টেবিল</h2>
+      <div id="scvBody" class="sx-news"></div>
+    </section>
+
+    <!-- NAMAZ VIEW -->
+    <section id="viewNamaz" class="hidden px-4 py-4 space-y-4">
+      <h2 class="text-xl font-bold">🕌 নামাজের সময়</h2>
+      <div id="nzHost"></div>
+    </section>
+
     <!-- MY LIST VIEW -->
     <section id="viewMyList" class="hidden px-4 py-4 space-y-4">
       <div class="flex items-center justify-between">
@@ -1193,6 +1205,16 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
         <span id="navIndicatorDiscover" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
         <span>Discover</span>
+      </button>
+      <button data-nav="scores" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
+        <span id="navIndicatorScores" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5l3.8 2.8-1.4 4.4H9.6l-1.4-4.4z"/><path d="M12 3v4.5M3.5 9.8l4.7.5M20.5 9.8l-4.7.5M6.5 19l2.1-4.3M17.5 19l-2.1-4.3"/></svg>
+        <span>Scores</span>
+      </button>
+      <button data-nav="namaz" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
+        <span id="navIndicatorNamaz" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <span>Namaz</span>
       </button>
       <button data-nav="mylist" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
         <span id="navIndicatorMylist" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
@@ -5151,12 +5173,16 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
       const views = {
         home: document.getElementById('viewHome'),
         discover: document.getElementById('viewDiscover'),
+        scores: document.getElementById('viewScores'),
+        namaz: document.getElementById('viewNamaz'),
         mylist: document.getElementById('viewMyList'),
         settings: document.getElementById('viewSettings')
       };
       const indicators = {
         home: document.getElementById('navIndicatorHome'),
         discover: document.getElementById('navIndicatorDiscover'),
+        scores: document.getElementById('navIndicatorScores'),
+        namaz: document.getElementById('navIndicatorNamaz'),
         mylist: document.getElementById('navIndicatorMylist'),
         settings: document.getElementById('navIndicatorSettings')
       };
@@ -5183,6 +5209,8 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
 
       if (viewName === 'discover') renderDiscoverGrid();
       if (viewName === 'mylist') renderMyList();
+      if (viewName === 'scores' && window.__scvOpen) window.__scvOpen();
+      window.scrollTo(0, 0);
     }
 
     function scrollToHeroSlide(index) {
@@ -5908,7 +5936,7 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
       greg: bn(t.d) + ' ' + GR_MONTHS[t.m - 1] + ' ' + bn(t.y) + ' খ্রিস্টাব্দ',
       sunrise: fmt(st.sunrise), sunset: fmt(st.sunset),
       lengths: 'দিন ' + dur(dayLen) + ' | রাত ' + dur(1440 - dayLen),
-      prayers: [['সেহরির শেষ সময়', fmt(st.sehri)], ['ফজর', fmt(st.fajr)], ['যোহর', fmt(st.zuhr)], ['আসর', fmt(st.asr)], ['মাগরিব (ইফতার শুরু)', fmt(st.maghrib)], ['এশা', fmt(st.isha)]],
+      prayers: [['ফজর', fmt(st.fajr)], ['যোহর', fmt(st.zuhr)], ['আসর', fmt(st.asr)], ['মাগরিব', fmt(st.maghrib)], ['এশা', fmt(st.isha)]],
       holiday: holidayText(t),
       quote: QUOTES[(doy - 1 + QUOTES.length * 10) % QUOTES.length],
       key: t.y + '-' + pad2(t.m) + '-' + pad2(t.d)
@@ -5944,7 +5972,7 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
     card.appendChild(s2);
 
     var s3 = el('div', 'dl-sec');
-    s3.appendChild(el('div', 'dl-t', '🕌 নামাজ ও রোজা (ঢাকা ও পার্শ্ববর্তী)'));
+    s3.appendChild(el('div', 'dl-t', '🕌 নামাজের সময় (ঢাকা ও পার্শ্ববর্তী)'));
     D.prayers.forEach(function (p) { var r = el('div', 'dl-pr'); r.appendChild(el('span', '', '▫️ ' + p[0])); r.appendChild(el('span', '', p[1])); s3.appendChild(r); });
     card.appendChild(s3);
 
@@ -6158,7 +6186,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 
   /* ================= 2) NAMAZ REMINDER ================= */
   var NZ_KEY = 'sarah_namaz_v1', NZ_FIRED = 'sarah_namaz_fired';
-  var NZ = [['sehri', 'সেহরির শেষ সময়'], ['fajr', 'ফজর'], ['zuhr', 'যোহর'], ['asr', 'আসর'], ['maghrib', 'মাগরিব'], ['isha', 'এশা']];
+  var NZ = [['fajr', 'ফজর'], ['zuhr', 'যোহর'], ['asr', 'আসর'], ['maghrib', 'মাগরিব'], ['isha', 'এশা']];
   function nzCfg() { var c = lsGet(NZ_KEY, null) || {}; if (c.on === undefined) c.on = false; if (c.lead === undefined) c.lead = 10; if (!c.off) c.off = { sehri: true }; return c; }
   function dayTimes(off) {
     var d = new Date(Date.now() + 6 * 3600e3 + off * 864e5);
@@ -6503,87 +6531,6 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var bn = X.bn, esc = X.esc, lsGet = X.lsGet, lsSet = X.lsSet;
 
-  /* ================= A) RAMADAN MODE — গাজীপুর ================= */
-  var GZ = { lat: 23.9999, lon: 90.4203, name: 'গাজীপুর' };
-  var RM_KEY = 'sarah_ram_v1';
-  var GR_M = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
-  var WK = ['রবি','সোম','মঙ্গল','বুধ','বৃহস্পতি','শুক্র','শনি'];
-  function wall(off) { return new Date(Date.now() + 6 * 3600e3 + (off || 0) * 864e5); }
-  function ymd(d) { return { y: d.getUTCFullYear(), m: d.getUTCMonth() + 1, d: d.getUTCDate() }; }
-  function gzTimes(y, m, d) { return window.__sunTimes(y, m, d, GZ.lat, GZ.lon); }
-  function fm(min) { return window.__fmtT(min).replace(' মি.', ''); }
-  function ramInfo() {
-    var forced = /[?&]ramadan=1\b/.test(location.search);
-    var t = ymd(wall(0)), h = window.__hijriDate(t.y, t.m, t.d), start, isR = h.month === 8, day = 0;
-    if (forced) { isR = true; h = { day: 10, month: 8, year: h.year }; }
-    if (isR) { day = h.day; start = Date.UTC(t.y, t.m - 1, t.d) - (day - 1) * 864e5; }
-    else {
-      var base = Date.UTC(t.y, t.m - 1, t.d);
-      for (var k = 1; k < 420; k++) {
-        var dt = new Date(base + k * 864e5), x = window.__hijriDate(dt.getUTCFullYear(), dt.getUTCMonth() + 1, dt.getUTCDate());
-        if (x.month === 8 && x.day === 1) { start = base + k * 864e5; h = { year: x.year }; break; }
-      }
-    }
-    return { isR: isR, day: day, start: start, year: h.year, daysTo: isR ? 0 : Math.round((start - Date.UTC(t.y, t.m - 1, t.d)) / 864e5) };
-  }
-  function leftTxt(ms) { var m = Math.max(0, Math.round(ms / 60000)), h = Math.floor(m / 60); return (h ? bn(h) + ' ঘণ্টা ' : '') + bn(m % 60) + ' মিনিট'; }
-  function ramNext() {
-    var now = Date.now() + 6 * 3600e3, out = [];
-    [0, 1].forEach(function (o) {
-      var d = wall(o), t = ymd(d), st = gzTimes(t.y, t.m, t.d), base = Date.UTC(t.y, t.m - 1, t.d);
-      out.push({ key: 'sehri', name: 'সেহরির শেষ সময়', t: base + st.sehri * 60000, min: st.sehri });
-      out.push({ key: 'iftar', name: 'ইফতার', t: base + st.maghrib * 60000, min: st.maghrib });
-    });
-    return out.filter(function (e) { return e.t > now; })[0];
-  }
-  function ramCalHtml(info) {
-    var rows = '';
-    for (var i = 0; i < 30; i++) {
-      var dt = new Date(info.start + i * 864e5), y = dt.getUTCFullYear(), m = dt.getUTCMonth() + 1, d = dt.getUTCDate(), st = gzTimes(y, m, d);
-      var today = info.isR && info.day === i + 1;
-      rows += '<tr' + (today ? ' class="td"' : '') + '><td>' + bn(i + 1) + '</td><td>' + bn(d) + ' ' + GR_M[m - 1].slice(0, 3) + ' (' + WK[dt.getUTCDay()] + ')</td><td>' + fm(st.sehri) + '</td><td>' + fm(st.maghrib) + '</td></tr>';
-    }
-    return '<table class="rm-tb"><thead><tr><th>রোজা</th><th>তারিখ</th><th>সেহরি শেষ</th><th>ইফতার</th></tr></thead><tbody>' + rows + '</tbody></table>' +
-      '<div class="rm-note">গাজীপুর জেলার জন্য গাণিতিক হিসাব (ইসলামিক ফাউন্ডেশনের সূচির কাছাকাছি)। রমজানের তারিখ চাঁদ দেখা সাপেক্ষে ১ দিন এদিক-ওদিক হতে পারে।</div>';
-  }
-  var ramOpen = false;
-  function ramRender() {
-    var box = $('#rmSection'); if (!box || !window.__sunTimes || !window.__hijriDate) return;
-    var info = ramInfo(), cfg = lsGet(RM_KEY, {}) || {}, h = '';
-    if (!info.start) { box.style.display = 'none'; return; }
-    box.style.display = '';
-    if (info.isR) {
-      var nx = ramNext(), t = ymd(wall(0)), st = gzTimes(t.y, t.m, t.d);
-      h = '<div class="rm-card on"><div class="rm-h">🌙 রমজান ' + bn(info.year) + ' • রোজা ' + bn(info.day) + '/৩০ <small>(' + GZ.name + ')</small></div>' +
-        '<div class="rm-big">' + (nx ? nx.name + ' <b>' + fm(nx.min) + '</b>' : '') + '</div>' +
-        '<div class="rm-sub">' + (nx ? 'আর ' + leftTxt(nx.t - (Date.now() + 6 * 3600e3)) + ' বাকি' : '') + '</div>' +
-        '<div class="rm-two"><div><span>সেহরি শেষ</span><b>' + fm(st.sehri) + '</b></div><div><span>ইফতার</span><b>' + fm(st.maghrib) + '</b></div></div>';
-    } else {
-      h = '<div class="rm-card"><div class="rm-h">🌙 রমজান ' + bn(info.year) + ' <small>(' + GZ.name + ')</small></div>' +
-        '<div class="rm-big"><b>আর ' + bn(info.daysTo) + ' দিন</b></div>' +
-        '<div class="rm-sub">আনুমানিক শুরু: ' + (function () { var d = new Date(info.start); return bn(d.getUTCDate()) + ' ' + GR_M[d.getUTCMonth()] + ' ' + bn(d.getUTCFullYear()); })() + ' (চাঁদ দেখা সাপেক্ষে)</div>';
-    }
-    h += '<div class="rm-act"><button type="button" class="nz-tg' + (cfg.alert ? ' on' : '') + '" id="rmAlert">' + (cfg.alert ? '🔔 সেহরি/ইফতার অ্যালার্ট চালু' : '🔕 সেহরি/ইফতার অ্যালার্ট') + '</button>' +
-      '<button type="button" class="nz-tg" id="rmCal">📅 ক্যালেন্ডার ' + (ramOpen ? '▴' : '▾') + '</button></div>' +
-      (ramOpen ? '<div class="rm-cal">' + ramCalHtml(info) + '</div>' : '') + '</div>';
-    box.innerHTML = h;
-  }
-  function ramCheck() {
-    var cfg = lsGet(RM_KEY, {}) || {}; ramRender(); if (!cfg.alert) return;
-    var info = ramInfo(); if (!info.isR) return;
-    var now = Date.now() + 6 * 3600e3, fired = lsGet('sarah_ram_fired', {}), ch = false;
-    [0, 1].forEach(function (o) {
-      var d = wall(o), t = ymd(d), st = gzTimes(t.y, t.m, t.d), base = Date.UTC(t.y, t.m - 1, t.d), id = t.y + '-' + t.m + '-' + t.d;
-      [['s15', base + (st.sehri - 15) * 60000, 'সেহরির আর ১৫ মিনিট বাকি', 'সেহরির শেষ সময় ' + fm(st.sehri)],
-       ['s0', base + st.sehri * 60000, 'সেহরির সময় শেষ', 'এখন থেকে পানাহার বন্ধ'],
-       ['i5', base + (st.maghrib - 5) * 60000, 'ইফতারের আর ৫ মিনিট বাকি', 'ইফতার ' + fm(st.maghrib)],
-       ['i0', base + st.maghrib * 60000, 'ইফতারের সময় হয়েছে 🌙', 'আল্লাহুম্মা লাকা সুমতু… রোজা কবুল হোক']].forEach(function (a) {
-        var k = id + a[0]; if (!fired[k] && now >= a[1] && now < a[1] + 120000) { fired[k] = 1; ch = true; X.alert('🌙 ' + a[2], a[3]); }
-      });
-    });
-    if (ch) { var ks = Object.keys(fired); if (ks.length > 40) ks.slice(0, ks.length - 40).forEach(function (k) { delete fired[k]; }); lsSet('sarah_ram_fired', fired); }
-  }
-
   /* ================= B) TV GUIDE ================= */
   var EV_KEY = 'sarah_evrem_v1', gdDay = 0, gdOpen = false;
   var DAYFMT = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Dhaka', year: 'numeric', month: '2-digit', day: '2-digit' });
@@ -6632,7 +6579,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   }
 
   /* ================= C) LIVE SCORE ================= */
-  var SC = { items: [], t: 0, busy: false };
+  var SC = { items: [], all: [], t: 0, busy: false };
   function fetchJson(url) {
     var tries = [function () { return X.getText(url, 6000); }];
     X.PROXIES.forEach(function (p) { tries.push(function () { return X.getText(p(url), 8000); }); });
@@ -6640,42 +6587,35 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     function next() { if (i >= tries.length) return Promise.reject(new Error('fail')); return tries[i++]().then(function (t) { return JSON.parse(t); }).catch(next); }
     return next();
   }
-  function soccer() {
-    return fetchJson('https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard').then(function (j) {
+  var SC_LEAGUES = [['eng.1', 'প্রিমিয়ার লিগ'], ['esp.1', 'লা লিগা'], ['uefa.champions', 'চ্যাম্পিয়নস লিগ'], ['uefa.nations', 'নেশনস লিগ'], ['uefa.euro', 'ইউরো'], ['conmebol.america', 'কোপা আমেরিকা'], ['fifa.world', 'বিশ্বকাপ']];
+  function ymdUTC(ms) { var d = new Date(ms); return d.getUTCFullYear() + String(d.getUTCMonth() + 1).padStart(2, '0') + String(d.getUTCDate()).padStart(2, '0'); }
+  function leagueEvents(lg, rng) {
+    return fetchJson('https://site.api.espn.com/apis/site/v2/sports/soccer/' + lg[0] + '/scoreboard?dates=' + rng).then(function (j) {
       return (j.events || []).map(function (ev) {
         var c = (ev.competitions || [])[0] || {}, cs = c.competitors || [];
         var h = cs.filter(function (x) { return x.homeAway === 'home'; })[0] || cs[0], a = cs.filter(function (x) { return x.homeAway === 'away'; })[0] || cs[1];
         if (!h || !a) return null;
         var st = ((ev.status || c.status || {}).type) || {}, state = st.state === 'in' ? 'live' : (st.state === 'post' ? 'done' : 'pre');
         var clock = (ev.status && ev.status.displayClock) || '';
-        return { sp: '⚽', state: state, when: Date.parse(ev.date) || 0, status: state === 'live' ? (st.shortDetail || clock) : (state === 'done' ? 'সমাপ্ত' : ''),
+        return { sp: '⚽', lg: lg[0], lgn: lg[1], state: state, when: Date.parse(ev.date) || 0, status: state === 'live' ? (st.shortDetail || clock) : (state === 'done' ? 'সমাপ্ত' : ''),
           a: (h.team && (h.team.shortDisplayName || h.team.displayName)) || '', as: h.score, b: (a.team && (a.team.shortDisplayName || a.team.displayName)) || '', bs: a.score,
-          link: ((ev.links || [])[0] || {}).href || '',
-          last: (function () { var d = (c.details || []).filter(function (z) { return z.scoringPlay; }).pop(); return d ? { min: (d.clock && d.clock.displayValue) || '', p: ((d.athletesInvolved || [])[0] || {}).displayName || '' } : null; })() };
+          link: ((ev.links || [])[0] || {}).href || '' };
       }).filter(Boolean);
-    });
+    }).catch(function () { return []; });
   }
-  function cricket() {
-    return fetchJson('https://hs-consumer-api.espncricinfo.com/v1/pages/matches/current?lang=en&latest=true').then(function (j) {
-      return ((j && j.matches) || []).map(function (m) {
-        var tm = m.teams || []; if (tm.length < 2) return null;
-        var state = /live/i.test(m.state || '') ? 'live' : (/post|result|complete/i.test(m.state || '') ? 'done' : 'pre');
-        var nm = function (x) { return (x.team && (x.team.abbreviation || x.team.name)) || ''; };
-        var sc = function (x) { return [x.score, x.scoreInfo].filter(Boolean).join(' ').trim(); };
-        return { sp: '🏏', state: state, when: Date.parse(m.startTime || m.startDate || '') || 0, status: state === 'live' ? (m.statusText || 'LIVE') : (m.statusText || ''),
-          a: nm(tm[0]), as: sc(tm[0]), b: nm(tm[1]), bs: sc(tm[1]), link: m.slug ? 'https://www.espncricinfo.com/series/' + (m.series && m.series.slug || 'x') + '/' + m.slug + '-' + m.objectId + '/live-cricket-score' : '' };
-      }).filter(Boolean);
-    });
+  function soccer() {
+    var rng = ymdUTC(Date.now() - 864e5) + '-' + ymdUTC(Date.now() + 864e5);
+    return Promise.all(SC_LEAGUES.map(function (lg) { return leagueEvents(lg, rng); })).then(function (r) { return [].concat.apply([], r); });
   }
   function scoreLoad(force) {
     if (SC.busy || (!force && Date.now() - SC.t < 25000)) return; SC.busy = true;
-    Promise.all([soccer().catch(function () { return []; }), cricket().catch(function () { return []; })]).then(function (r) {
-      var all = r[0].concat(r[1]), now = Date.now();
-      all = all.filter(function (x) { return x.state === 'live' || (x.state === 'pre' && x.when - now < 6 * 3600e3 && x.when > now - 3600e3) || (x.state === 'done' && now - x.when < 5 * 3600e3); });
-      var rank = { live: 0, pre: 1, done: 2 };
-      all.sort(function (a, b) { return rank[a.state] - rank[b.state] || a.when - b.when; });
-      SC.items = all.slice(0, 16); SC.t = Date.now(); SC.busy = false; scoreRender(); try { if (window.__sarahOnScores) window.__sarahOnScores(SC.items); } catch (e) {}
-    });
+    soccer().then(function (all) {
+      var now = Date.now(), rank = { live: 0, pre: 1, done: 2 };
+      SC.all = all.slice().sort(function (a, b) { return rank[a.state] - rank[b.state] || (a.state === 'done' ? b.when - a.when : a.when - b.when); });
+      var items = all.filter(function (x) { return x.state === 'live' || (x.state === 'pre' && x.when - now < 6 * 3600e3 && x.when > now - 3600e3) || (x.state === 'done' && now - x.when < 5 * 3600e3); });
+      items.sort(function (a, b) { return rank[a.state] - rank[b.state] || a.when - b.when; });
+      SC.items = items.slice(0, 16); SC.t = Date.now(); SC.busy = false; scoreRender(); try { if (window.__sarahOnScores) window.__sarahOnScores(SC.items); } catch (e) {}
+    }).catch(function () { SC.busy = false; });
   }
   function predKey(x) { return x.a + '|' + x.b + '|' + DAYFMT.format(x.when || Date.now()); }
   function predWinner(x) { var A = parseInt(x.as, 10), B = parseInt(x.bs, 10); if (isNaN(A) || isNaN(B)) return ''; return A > B ? 'a' : (A < B ? 'b' : 'd'); }
@@ -6695,6 +6635,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     var html = SC.items.length ? SC.items.map(scoreCard).join('') : '';
     var home = $('#scSection'); if (home) { home.style.display = SC.items.length ? '' : 'none'; var tr = $('#scTrack'); if (tr) tr.innerHTML = html; }
     var st = $('[data-score-strip]'); if (st) { st.style.display = SC.items.length ? '' : 'none'; st.innerHTML = html; }
+    try { if (window.__scvRender) window.__scvRender(); } catch (e) {}
   }
 
   /* ================= D) QUALITY CHIP (player) ================= */
@@ -6721,21 +6662,13 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 
   /* ================= INIT / EVENTS ================= */
   function build() {
-    var nz = $('#nzSection'), nw = $('#nwHome'); if (!nz || !nw || $('#rmSection')) return;
+    var nw = $('#nwHome'); if (!nw || $('#gdSection')) return;
     var mk = function (id, cls) { var d = document.createElement('div'); d.id = id; d.className = cls; return d; };
-    var rm = mk('rmSection', 'sx-sec'); rm.style.display = 'none'; nz.parentNode.insertBefore(rm, nz);
     var gd = mk('gdSection', 'sx-sec sx-news'); gd.style.display = 'none'; nw.parentNode.insertBefore(gd, nw);
-    var sc = mk('scSection', 'sx-sec'); sc.style.display = 'none'; sc.innerHTML = '<div class="sx-h"><b>⚽🏏 লাইভ স্কোর</b><small>অটো রিফ্রেশ</small></div><div id="scTrack"></div>'; nw.parentNode.insertBefore(sc, nw);
     var pl = $('#plNews'); if (pl && !$('[data-score-strip]')) { var s = document.createElement('div'); s.className = 'sc-strip'; s.setAttribute('data-score-strip', ''); s.style.display = 'none'; pl.insertBefore(s, pl.querySelector('[data-nw-chips]')); }
   }
   document.addEventListener('click', function (e) {
     var t = e.target; if (!t.closest) return;
-    if (t.closest('#rmCal')) { ramOpen = !ramOpen; ramRender(); return; }
-    if (t.closest('#rmAlert')) {
-      var c = lsGet(RM_KEY, {}) || {}; c.alert = !c.alert; lsSet(RM_KEY, c);
-      if (c.alert) { try { if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission(); } catch (er) {} X.beep(); }
-      ramRender(); return;
-    }
     var d = t.closest('[data-gd-day]'); if (d) { gdDay = +d.getAttribute('data-gd-day'); guideRender(); return; }
     if (t.closest('[data-gd-more]')) { gdOpen = !gdOpen; guideRender(); return; }
     var b = t.closest('[data-gd-bell]');
@@ -6747,14 +6680,14 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   });
   function init() {
     build(); qualityChip();
-    ramRender(); guideRender(); scoreRender(); scoreLoad(true);
-    setInterval(function () { ramCheck(); evCheck(); }, 15000);
+    guideRender(); scoreRender(); scoreLoad(true);
+    setInterval(function () { evCheck(); }, 15000);
     setInterval(guideRender, 60000);
     setInterval(function () { if (!document.hidden) scoreLoad(false); }, 30000);
-    document.addEventListener('visibilitychange', function () { if (!document.hidden) { ramRender(); guideRender(); scoreLoad(false); } });
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) { guideRender(); scoreLoad(false); } });
     window.__sarahGuideRefresh = guideRender;
   }
-  window.__sarahExtras2 = { ramInfo: ramInfo, ramNext: ramNext, gzTimes: gzTimes, scores: function () { return SC.items; }, scoreRender: scoreRender, predKey: predKey, predWinner: predWinner, evList: evList, fetchJson: fetchJson, TIMEFMT: TIMEFMT };
+  window.__sarahExtras2 = { all: function () { return SC.all; }, loaded: function () { return SC.t > 0; }, refresh: scoreLoad, scoreCard: scoreCard, leagues: SC_LEAGUES, scores: function () { return SC.items; }, scoreRender: scoreRender, predKey: predKey, predWinner: predWinner, evList: evList, fetchJson: fetchJson, TIMEFMT: TIMEFMT };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
@@ -7139,7 +7072,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 
   /* ---------- 12) Home sections reorder ---------- */
   var ORDER_KEY = 'sarah_order_v1';
-  var SECS = [['cwSection', '▶ দেখা চালিয়ে যান'], ['newSection', '🆕 নতুন চ্যানেল'], ['rmSection', '🌙 রমজান'], ['nzSection', '🕌 নামাজের সময়'], ['gdSection', '📺 টিভি গাইড'], ['scSection', '⚽🏏 লাইভ স্কোর'], ['toolsSection', '🧰 টুলস']];
+  var SECS = [['cwSection', '▶ দেখা চালিয়ে যান'], ['newSection', '🆕 নতুন চ্যানেল'], ['gdSection', '📺 টিভি গাইড']];
   function orderCfg() { var o = lsGet(ORDER_KEY, null); if (!o || !o.ids) o = { ids: SECS.map(function (s) { return s[0]; }), hide: {} }; SECS.forEach(function (s) { if (o.ids.indexOf(s[0]) < 0) o.ids.push(s[0]); }); return o; }
   function applyOrder() {
     var o = orderCfg(), anchor = $('#nwHome'); if (!anchor) return; var parent = anchor.parentNode;
@@ -7153,13 +7086,6 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   }
 
   /* ---------- tools hub + events ---------- */
-  var TILES = [['multi', '⧉', 'মাল্টি-ভিউ'], ['table', '📊', 'পয়েন্ট টেবিল'], ['qibla', '🧭', 'কিবলা'], ['teams', '🔔', 'টিম অ্যালার্ট'], ['week', '📅', 'আমার সপ্তাহ'], ['req', '📝', 'চ্যানেল রিকোয়েস্ট'], ['order', '↕', 'হোম সাজান'], ['theme', '🎨', 'থিম'], ['push', '📲', 'পুশ'], ['admin', '🛠', 'ড্যাশবোর্ড']];
-  function buildHub() {
-    var nw = $('#nwHome'); if (!nw || $('#toolsSection')) return;
-    var d = document.createElement('div'); d.id = 'toolsSection'; d.className = 'sx-sec';
-    d.innerHTML = '<div class="sx-h"><b>🧰 টুলস</b></div><div class="tl-grid">' + TILES.map(function (t) { return '<button type="button" class="tl-t' + (t[0] === 'admin' ? ' sx-admin-tile' : '') + '" data-tool="' + t[0] + '"><span>' + t[1] + '</span>' + t[2] + '</button>'; }).join('') + '</div>';
-    nw.parentNode.insertBefore(d, nw);
-  }
   function openTool(k) {
     if (k === 'multi') mvOpen(); else if (k === 'table') tableOpen(); else if (k === 'qibla') qiblaOpen(); else if (k === 'teams') sheet('🔔 টিম অ্যালার্ট', teamsHtml());
     else if (k === 'week') weekOpen(); else if (k === 'req') reqOpen(); else if (k === 'order') orderOpen(); else if (k === 'admin') adminOpen(); else if (window.__sx4 && window.__sx4.open) window.__sx4.open(k);
@@ -7193,7 +7119,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   });
 
   function init() {
-    buildHub(); applyOrder(); ccInit(); gestureInit(); announce();
+    applyOrder(); ccInit(); gestureInit(); announce();
     setTimeout(dsCheck, 4000);
     setInterval(trackTick, 5000);
     setInterval(function () { teamCheck(); predEval(); }, 60000);
@@ -7346,6 +7272,106 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     window.addEventListener('offline', function () { offBar(true); }); window.addEventListener('online', function () { offBar(false); });
     if (navigator.onLine === false) offBar(true);
   }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+
+
+<style id="sarah-scv-css">
+nav.fixed.bottom-0 .bottom-nav-btn { min-width: 0; flex: 1; padding: 4px 2px; font-size: 10.5px; }
+nav.fixed.bottom-0 .bottom-nav-btn svg { width: 22px; height: 22px; }
+.scv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.scv-grid .sc-wrap { flex: none; min-width: 0; }
+.scv-lg { font-size: 13px; font-weight: 700; margin: 12px 0 6px; color: #fff; }
+.scv-lg small { color: #a1a1a6; font-weight: 500; margin-left: 6px; }
+.scv-note { font-size: 10.5px; color: #8e8e93; margin-top: 10px; line-height: 1.4; }
+#viewNamaz .nz-chips { flex-wrap: wrap; }
+#viewNamaz .nz-chip { flex: 1 0 30%; padding: 10px 8px; }
+#viewNamaz .nz-chip b { font-size: 14px; }
+#viewNamaz .nz-chip span { font-size: 11.5px; }
+</style>
+<script id="sarah-scv-js">
+(function () {
+  'use strict';
+  var X = window.__sx, X2 = window.__sarahExtras2; if (!X || !X2) return;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var esc = X.esc, bn = X.bn, LG = X2.leagues;
+  var st = { tab: 'live', lg: 'all' }, built = false, seq = 0;
+  var TABS = [['live', '🔴 লাইভ স্কোর'], ['table', '📊 টেবিল'], ['fix', '📅 ফিক্সচার']];
+  var LOADING = '<div class="nw-empty">লোড হচ্ছে…</div>';
+
+  function shell() {
+    var b = $('#scvBody'); if (!b) return;
+    b.innerHTML = '<div class="sx-nw-chips" id="scvTabs"></div><div class="sx-nw-chips" id="scvLg"></div><div id="scvList"></div>';
+    built = true; chips(); fill();
+  }
+  function chips() {
+    $('#scvTabs').innerHTML = TABS.map(function (t) { return '<button type="button" class="sx-chip' + (st.tab === t[0] ? ' on' : '') + '" data-scv-tab="' + t[0] + '">' + t[1] + '</button>'; }).join('');
+    var list = (st.tab === 'live' ? [['all', 'সব']] : []).concat(LG);
+    $('#scvLg').innerHTML = list.map(function (l) { return '<button type="button" class="sx-chip' + (st.lg === l[0] ? ' on' : '') + '" data-scv-lg="' + l[0] + '">' + l[1] + '</button>'; }).join('');
+  }
+  function fill() {
+    var box = $('#scvList'); if (!box) return;
+    if (st.tab === 'live') fillLive(box); else loadData(box);
+  }
+  function fillLive(box) {
+    if (!X2.loaded()) { box.innerHTML = LOADING; return; }
+    var all = (X2.all() || []).filter(function (x) { return st.lg === 'all' || x.lg === st.lg; });
+    if (!all.length) { box.innerHTML = '<div class="nw-empty">এখন এই লিগ/টুর্নামেন্টে গতকাল-আজ-আগামীকালের কোনো ম্যাচ নেই</div>'; return; }
+    var h = '';
+    LG.forEach(function (l) {
+      var it = all.filter(function (x) { return x.lg === l[0]; }); if (!it.length) return;
+      h += '<div class="scv-lg">' + esc(l[1]) + '<small>' + bn(it.length) + 'টি ম্যাচ</small></div><div class="scv-grid">' + it.map(X2.scoreCard).join('') + '</div>';
+    });
+    box.innerHTML = h + '<div class="scv-note">স্কোর নিজে থেকেই রিফ্রেশ হয়। ম্যাচের কার্ডে ট্যাপ করলে বিস্তারিত খুলবে।</div>';
+  }
+  function stat(e, n) { var s = (e.stats || []).filter(function (x) { return x.name === n; })[0]; return s ? (s.displayValue != null ? s.displayValue : s.value) : '-'; }
+  function ymd(ms) { var d = new Date(ms); return d.getUTCFullYear() + String(d.getUTCMonth() + 1).padStart(2, '0') + String(d.getUTCDate()).padStart(2, '0'); }
+  function loadData(box) {
+    var lg = st.lg === 'all' ? LG[0][0] : st.lg, tab = st.tab, my = ++seq; box.innerHTML = LOADING;
+    var alive = function () { return my === seq && lg === (st.lg === 'all' ? LG[0][0] : st.lg) && tab === st.tab; };
+    if (tab === 'table') {
+      X2.fetchJson('https://site.api.espn.com/apis/v2/sports/soccer/' + lg + '/standings').then(function (j) {
+        if (!alive()) return;
+        var groups = (j.children || []).filter(function (c) { return c.standings && c.standings.entries && c.standings.entries.length; });
+        if (!groups.length) throw new Error('none');
+        box.innerHTML = groups.map(function (gp) {
+          var es = gp.standings.entries.slice().sort(function (a, b) { return (+stat(a, 'rank') || 99) - (+stat(b, 'rank') || 99); });
+          return (groups.length > 1 ? '<div class="scv-lg">' + esc(gp.name || '') + '</div>' : '') + '<div class="rm-cal" style="max-height:none"><table class="rm-tb"><thead><tr><th>#</th><th>দল</th><th>ম্যাচ</th><th>জয়</th><th>ড্র</th><th>হার</th><th>পয়েন্ট</th></tr></thead><tbody>' +
+            es.map(function (e, i) { return '<tr><td>' + bn(stat(e, 'rank') !== '-' ? stat(e, 'rank') : i + 1) + '</td><td>' + esc((e.team && e.team.displayName) || '') + '</td><td>' + bn(stat(e, 'gamesPlayed')) + '</td><td>' + bn(stat(e, 'wins')) + '</td><td>' + bn(stat(e, 'ties')) + '</td><td>' + bn(stat(e, 'losses')) + '</td><td><b>' + bn(stat(e, 'points')) + '</b></td></tr>'; }).join('') + '</tbody></table></div>';
+        }).join('');
+      }).catch(function () { if (alive()) box.innerHTML = '<div class="nw-empty">এই টুর্নামেন্টের টেবিল এখন পাওয়া যায়নি (চলছে না, বা ইন্টারনেট সমস্যা)</div>'; });
+    } else {
+      X2.fetchJson('https://site.api.espn.com/apis/site/v2/sports/soccer/' + lg + '/scoreboard?dates=' + ymd(Date.now()) + '-' + ymd(Date.now() + 14 * 864e5)).then(function (j) {
+        if (!alive()) return;
+        var ev = (j.events || []).slice().sort(function (a, b) { return Date.parse(a.date) - Date.parse(b.date); });
+        if (!ev.length) throw new Error('none');
+        box.innerHTML = '<div class="sx-nw-list">' + ev.slice(0, 40).map(function (e) {
+          var c = (e.competitions || [])[0] || {}, cs = c.competitors || [], h = cs.filter(function (x) { return x.homeAway === 'home'; })[0] || cs[0] || {}, a = cs.filter(function (x) { return x.homeAway === 'away'; })[0] || cs[1] || {};
+          var t = Date.parse(e.date), s2 = ((e.status || {}).type || {}).state, dd = new Date(t + 6 * 3600e3);
+          return '<div class="gd-it"><div class="gd-tm" style="flex-basis:88px">' + bn(dd.getUTCDate()) + '/' + bn(dd.getUTCMonth() + 1) + ' ' + esc(X2.TIMEFMT.format(t)) + '</div><div class="gd-in"><div class="nw-t">' + esc(((h.team || {}).shortDisplayName || '') + ' vs ' + ((a.team || {}).shortDisplayName || '')) + '</div>' + (s2 === 'post' || s2 === 'in' ? '<div class="nw-m">' + esc((h.score || 0) + ' - ' + (a.score || 0)) + '</div>' : '') + '</div></div>';
+        }).join('') + '</div>';
+      }).catch(function () { if (alive()) box.innerHTML = '<div class="nw-empty">আগামী ১৪ দিনে কোনো ম্যাচ পাওয়া যায়নি</div>'; });
+    }
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target; if (!t.closest) return; var q;
+    if ((q = t.closest('[data-scv-tab]'))) { st.tab = q.getAttribute('data-scv-tab'); if (st.tab !== 'live' && st.lg === 'all') st.lg = LG[0][0]; chips(); fill(); return; }
+    if ((q = t.closest('[data-scv-lg]'))) { st.lg = q.getAttribute('data-scv-lg'); chips(); fill(); return; }
+  });
+  window.__scvOpen = function () { if (!built) shell(); else fill(); X2.refresh(true); };
+  window.__scvRender = function () { var v = $('#viewScores'); if (built && v && !v.classList.contains('hidden') && st.tab === 'live') fillLive($('#scvList')); };
+
+  /* ---- Namaz card -> Namaz tab ---- */
+  function moveNamaz(n) {
+    var nz = $('#nzSection'), host = $('#nzHost');
+    if (!host) return;
+    if (!nz) { if (n < 20) setTimeout(function () { moveNamaz(n + 1); }, 300); return; }
+    host.appendChild(nz);
+    var set = $('#nzSet'); if (set) set.classList.add('open');
+    var more = $('#nzMore'); if (more) more.style.display = 'none';
+  }
+  function init() { moveNamaz(0); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
