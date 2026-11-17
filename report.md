@@ -99,6 +99,7 @@ No verified playlist found.
 - https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
 - https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
 - https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://www.tv.cricflixs.com/wp-content/themes/dooplay/assets/js/front.scripts.min.js?ver=2.5.5 : ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
 - https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
 - https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
 - https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
