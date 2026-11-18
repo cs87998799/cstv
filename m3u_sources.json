@@ -7,6 +7,20 @@
     "error": null
   },
   {
+    "url": "https://www.tv.cricflixs.com/live/a-league-men/iworks-pwa-manifest-js-extra",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/live/a-league-men/manifest",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
     "url": "https://www.tv.cricflixs.com/live/abu-dhabi-t10-league/iworks-pwa-manifest-js-extra",
     "status": 404,
     "content_type": "text/html; charset=UTF-8",
@@ -15,20 +29,6 @@
   },
   {
     "url": "https://www.tv.cricflixs.com/live/abu-dhabi-t10-league/manifest",
-    "status": 404,
-    "content_type": "text/html; charset=UTF-8",
-    "playlist_detected": false,
-    "error": null
-  },
-  {
-    "url": "https://www.tv.cricflixs.com/live/argentina-vs-costa-rica/iworks-pwa-manifest-js-extra",
-    "status": 404,
-    "content_type": "text/html; charset=UTF-8",
-    "playlist_detected": false,
-    "error": null
-  },
-  {
-    "url": "https://www.tv.cricflixs.com/live/argentina-vs-costa-rica/manifest",
     "status": 404,
     "content_type": "text/html; charset=UTF-8",
     "playlist_detected": false,
@@ -77,28 +77,28 @@
     "error": null
   },
   {
-    "url": "https://www.tv.cricflixs.com/live/japan-vs-paraguay/iworks-pwa-manifest-js-extra",
+    "url": "https://www.tv.cricflixs.com/live/laliga/iworks-pwa-manifest-js-extra",
     "status": 404,
     "content_type": "text/html; charset=UTF-8",
     "playlist_detected": false,
     "error": null
   },
   {
-    "url": "https://www.tv.cricflixs.com/live/japan-vs-paraguay/manifest",
+    "url": "https://www.tv.cricflixs.com/live/laliga/manifest",
     "status": 404,
     "content_type": "text/html; charset=UTF-8",
     "playlist_detected": false,
     "error": null
   },
   {
-    "url": "https://www.tv.cricflixs.com/live/saff-championship/iworks-pwa-manifest-js-extra",
+    "url": "https://www.tv.cricflixs.com/live/npl-t20/iworks-pwa-manifest-js-extra",
     "status": 404,
     "content_type": "text/html; charset=UTF-8",
     "playlist_detected": false,
     "error": null
   },
   {
-    "url": "https://www.tv.cricflixs.com/live/saff-championship/manifest",
+    "url": "https://www.tv.cricflixs.com/live/npl-t20/manifest",
     "status": 404,
     "content_type": "text/html; charset=UTF-8",
     "playlist_detected": false,
@@ -169,20 +169,6 @@
   },
   {
     "url": "https://www.tv.cricflixs.com/tv/cricket/manifest",
-    "status": 404,
-    "content_type": "text/html; charset=UTF-8",
-    "playlist_detected": false,
-    "error": null
-  },
-  {
-    "url": "https://www.tv.cricflixs.com/tv/fifa-friendly/iworks-pwa-manifest-js-extra",
-    "status": 404,
-    "content_type": "text/html; charset=UTF-8",
-    "playlist_detected": false,
-    "error": null
-  },
-  {
-    "url": "https://www.tv.cricflixs.com/tv/fifa-friendly/manifest",
     "status": 404,
     "content_type": "text/html; charset=UTF-8",
     "playlist_detected": false,
