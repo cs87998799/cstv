@@ -1,7 +1,7 @@
 {
   "source": "https://teleghor.online/",
-  "updated": "2026-11-19 09:33:18 UTC",
-  "count": 162,
+  "updated": "2026-11-19 10:52:04 UTC",
+  "count": 160,
   "channels": [
     {
       "name": "A Sports HD",
@@ -166,12 +166,6 @@
       "url": "https://da86m1sqpm3o0.cloudfront.net/28072023/smil:starjalsha.smil/chunklist_b1928000.m3u8"
     },
     {
-      "name": "Jalsha Movies",
-      "logo": "https://i.postimg.cc/fRN1f4M1/jalasa-ma-bha-ja-ra-la-ga.png",
-      "group": "MOVIES",
-      "url": "https://iptvlive-beta.vercel.app/jalsha-movies/index.m3u8"
-    },
-    {
       "name": "Zee Bangla HD",
       "logo": "https://i.postimg.cc/tJYx6vyL/download.jpg",
       "group": "General",
@@ -280,12 +274,6 @@
       "url": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/6e14bac6d0384e129521a4d005188bfb/index.m3u8"
     },
     {
-      "name": "Bein Sports",
-      "logo": "https://s3.aynaott.com/storage/04a56bc13c4c486ad4a4d82a1e00fd73",
-      "group": "Sports",
-      "url": "https://tvsen6.aynaott.com/beinsports/index.m3u8?e=1784102515&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=67d5960a5b93b5cfcf562312b4627330"
-    },
-    {
       "name": "Sports Grid",
       "logo": "https://s3.aynaott.com/storage/1aa37e387ed56a1260b285558eec7c46",
       "group": "Sports",
@@ -296,48 +284,6 @@
       "logo": "https://s3.aynaott.com/storage/495e1816602db61aa4c2a348a257bd0a",
       "group": "Sports",
       "url": "https://streams2.sofast.tv/sofastplayout/WiseM3U8_1/master.m3u8"
-    },
-    {
-      "name": "The Paradise (2026) Hindi",
-      "logo": "https://i.postimg.cc/tTxGCMyV/Paradise-2026-Beyond-Dreams.png",
-      "group": "OTT Movies Series",
-      "url": "https://kbtv.online/TeleGhor/Movies/The-Paradise-2026-Hindi-Dubbed-1080p-WEB-DL_reencoded.mp4"
-    },
-    {
-      "name": "Zombeid (2026) Hindi 1080p",
-      "logo": "https://i.postimg.cc/zBK79Pcy/Zombie-Movie-Blood-Moon-Rising.png",
-      "group": "OTT Movies Series",
-      "url": "https://kbtv.online/TeleGhor/Movies/Zombeid-2026-Urdu-1080p-WEBDL_reencoded.mp4"
-    },
-    {
-      "name": "Welcome to the Jungle (2026) Hindi",
-      "logo": "https://i.postimg.cc/MZD3qHDQ/Welcome-to-the-Jungle-2026.png",
-      "group": "OTT Movies Series",
-      "url": "https://kbtv.online/TeleGhor/Movies/Welcome-to-the-Jungle-2026-1080p-Hindi-WEB-DL_reencoded.mp4"
-    },
-    {
-      "name": "Tekka (2024) Bengali WEBDL",
-      "logo": "https://i.postimg.cc/HLCV6ZXr/Tekka-Ace-of-Destiny.png",
-      "group": "OTT Movies Series",
-      "url": "https://kbtv.online/TeleGhor/Movies/Tekka-2024-Bengali-WEBDL-1080p_reencoded.mp4"
-    },
-    {
-      "name": "Ramayana 2026",
-      "logo": "https://upload.kbhub.online/files/Cosmic%20Ramayana_%20Heroes%20and%20Demons.png",
-      "group": "OTT Movies Series",
-      "url": "https://media.kbhub.online/OTT%20KB/Movies/Dubbed%20Movies/Ramayana%202026/Ramayana.m3u8"
-    },
-    {
-      "name": "Spider Man Brand New Day",
-      "logo": "https://upload.kbhub.online/files/spider-man-brand-3840x2160-26612.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Movies/Dubbed%20Movies/Spider%20Man/Spider.m3u8"
-    },
-    {
-      "name": "Maa IntiBangaram [Hindi] 480p",
-      "logo": "https://upload.kbhub.online/files/1786611180000551_maa_inti_bangaram_Landscape_Thumb.jpg",
-      "group": "OTT Movies Series",
-      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Movies/Maa%20IntiBangaram%20Hindi%20480P.mkv"
     },
     {
       "name": "Demon Slayer S1E1",
@@ -974,6 +920,48 @@
       "logo": "https://upload.kbhub.online/files/Bachelor%20Point%20Season%205%20Promotional%20Banner.png",
       "group": "Bachelor Point",
       "url": "https://media.kbhub.online/OTT%20KB/Bachelor%20Point/134/E134.m3u8"
+    },
+    {
+      "name": "The Paradise (2026) Hindi",
+      "logo": "https://i.postimg.cc/tTxGCMyV/Paradise-2026-Beyond-Dreams.png",
+      "group": "OTT Movies Series",
+      "url": "https://kbtv.online/TeleGhor/Movies/The-Paradise-2026-Hindi-Dubbed-1080p-WEB-DL_reencoded.mp4"
+    },
+    {
+      "name": "Zombeid (2026) Hindi 1080p",
+      "logo": "https://i.postimg.cc/zBK79Pcy/Zombie-Movie-Blood-Moon-Rising.png",
+      "group": "OTT Movies Series",
+      "url": "https://kbtv.online/TeleGhor/Movies/Zombeid-2026-Urdu-1080p-WEBDL_reencoded.mp4"
+    },
+    {
+      "name": "Welcome to the Jungle (2026) Hindi",
+      "logo": "https://i.postimg.cc/MZD3qHDQ/Welcome-to-the-Jungle-2026.png",
+      "group": "OTT Movies Series",
+      "url": "https://kbtv.online/TeleGhor/Movies/Welcome-to-the-Jungle-2026-1080p-Hindi-WEB-DL_reencoded.mp4"
+    },
+    {
+      "name": "Tekka (2024) Bengali WEBDL",
+      "logo": "https://i.postimg.cc/HLCV6ZXr/Tekka-Ace-of-Destiny.png",
+      "group": "OTT Movies Series",
+      "url": "https://kbtv.online/TeleGhor/Movies/Tekka-2024-Bengali-WEBDL-1080p_reencoded.mp4"
+    },
+    {
+      "name": "Ramayana 2026",
+      "logo": "https://upload.kbhub.online/files/Cosmic%20Ramayana_%20Heroes%20and%20Demons.png",
+      "group": "OTT Movies Series",
+      "url": "https://media.kbhub.online/OTT%20KB/Movies/Dubbed%20Movies/Ramayana%202026/Ramayana.m3u8"
+    },
+    {
+      "name": "Spider Man Brand New Day",
+      "logo": "https://upload.kbhub.online/files/spider-man-brand-3840x2160-26612.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Movies/Dubbed%20Movies/Spider%20Man/Spider.m3u8"
+    },
+    {
+      "name": "Maa IntiBangaram [Hindi] 480p",
+      "logo": "https://upload.kbhub.online/files/1786611180000551_maa_inti_bangaram_Landscape_Thumb.jpg",
+      "group": "OTT Movies Series",
+      "url": "https://pub-af15042317bd401aa6315e0df0b1a277.r2.dev/OTT%20KB/Movies/Maa%20IntiBangaram%20Hindi%20480P.mkv"
     }
   ]
 }
