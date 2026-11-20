@@ -148,10 +148,10 @@
   },
   {
     "url": "https://www.tv.cricflixs.com/privacy-policy/iworks-pwa-manifest-js-extra",
-    "status": null,
-    "content_type": "",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
     "playlist_detected": false,
-    "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+    "error": null
   },
   {
     "url": "https://www.tv.cricflixs.com/privacy-policy/manifest",
