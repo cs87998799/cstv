@@ -1,0 +1,46 @@
+name: Khusbu M3U Detector
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 18 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install requests playwright
+          playwright install --with-deps chromium
+
+      - name: Run Khusbu detector
+        run: python Khusbu.py
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: Khusbu-Detection-Results
+          path: |
+            Khusbu.json
+            Khusbu.m3u
+          if-no-files-found: error
+
+      - name: Commit generated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Khusbu.json Khusbu.m3u
+          git commit -m "Update Khusbu detection results" || echo "No changes"
+          git push

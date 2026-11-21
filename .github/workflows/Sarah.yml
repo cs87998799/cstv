@@ -1,0 +1,45 @@
+name: Sarah M3U Detect
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install playwright
+          playwright install --with-deps chromium
+
+      - name: Run detector
+        run: python Sarah.py
+
+      - name: Upload output + debug files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sarah-output
+          path: |
+            Sarah.json
+            Sarah.m3u
+            debug_requests.txt
+            debug_page.html
+            debug_page.png
+
+      - name: Commit output files
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add Sarah.json Sarah.m3u
+          git diff --staged --quiet || git commit -m "Update Sarah.json and Sarah.m3u"
+          git push || true
