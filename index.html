@@ -3546,7 +3546,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
       } catch (e) {}
       const plainToffee = isToffee && !hasDrm && type !== 'dash';
       const baseType = plainToffee ? 'hls' : type;
-      const c = buildEngineChainBase(baseType, plainToffee ? null : channel);
+      const c = buildEngineChainBase(baseType, channel);
       // Akamai/SonyLIV/Toffee: hls.js XHR CORS e atke, tai browser er nijer HLS player (CORS lage na) age try
       try {
         const v = document.createElement('video');
@@ -3565,7 +3565,8 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
       // browser does not treat an encrypted stream as ordinary HLS media.
       const toffeeSource = /toffee/i.test([
         channel && channel.sourceName, channel && channel.category,
-        channel && channel.id, channel && channel.name
+        channel && channel.id, channel && channel.name,
+        ...((channel && Array.isArray(channel.servers)) ? channel.servers.map(sv => sv && sv.sourceName) : [])
       ].filter(Boolean).join(' '));
       if (toffeeSource) {
         if (shakaOk) return ['shaka', ...(hlsOk ? ['hls'] : []), 'native'];
