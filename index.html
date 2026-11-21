@@ -1104,7 +1104,7 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
 
   <!-- Player-er niche Songbad Shironam (portrait split) -->
   <div id="plNews" class="sx-news sx-news-pl">
-    <div class="sx-nw-head"><b>🏏 খেলার খবর</b><button type="button" class="sx-nw-refresh" data-nw-refresh aria-label="রিফ্রেশ">↻</button></div>
+    <div class="sx-nw-head"><b>📰 সংবাদ শিরোনাম</b><button type="button" class="sx-nw-refresh" data-nw-refresh aria-label="রিফ্রেশ">↻</button></div>
     <div class="sx-nw-chips" data-nw-chips></div>
     <div class="sx-nw-list" id="nwPlayerList"></div>
   </div>
@@ -2557,6 +2557,14 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
           : '';
       const noStream = !(ch.servers && ch.servers.length) && !ch.streamUrl;
       const isUp = upcomingBanner || noStream;
+      const tParts = String(ch.name || '').split(/\s+(?:vs\.?|v|x|বনাম)\s+/i).map(x => x.trim()).filter(Boolean);
+      const isMatch = tParts.length === 2;
+      const tLogo = (k) => {
+        const u = ch['team' + (k + 1) + 'Logo'] || ch['team' + (k + 1) + '_logo'] || (k ? (ch.awayLogo || ch.away_logo) : (ch.homeLogo || ch.home_logo)) || '';
+        return u ? `<img referrerpolicy="no-referrer" alt="" src="${esc(u)}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'hs-tm-ab',textContent:'${esc(tParts[k].slice(0,3).toUpperCase())}'}))">` : `<span class="hs-tm-ab">${esc(tParts[k].slice(0, 3).toUpperCase())}</span>`;
+      };
+      const matchCard = isMatch ? `<div class="hs-match">${tLogo(0)}<b>V</b>${tLogo(1)}</div>` : '';
+      const bigTitle = isMatch ? tParts.join(' ') : (ch.name || '');
       const whenTxt = fmtBdt(ch.startTs);
       const relTxt = (ch.startTs && ch.startTs > bdNow()) ? relIn(ch.startTs) : '';
       const meta = [ch.category || 'Live Event', isUp ? '' : (n > 1 ? `${bn(n)}টি সার্ভার` : 'HD Stream')].filter(Boolean).map(esc).join('  ·  ');
@@ -2566,8 +2574,10 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
         <div class="hs-art vid${isUp ? ' poster' : ''}"><span>${label}</span>${(ch.poster || ch.banner || ch.thumbnail || ch.image || ch.logo) ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async" onerror="logoFail(this,'remove')" src="${esc(ch.poster || ch.banner || ch.thumbnail || ch.image || ch.logo)}" alt="" />` : ''}${showVideo ? `<video class="hs-vid" muted playsinline webkit-playsinline preload="none" data-play-channel="${esc(ch.id)}"></video><button type="button" class="hs-mute" aria-label="Sound">🔇</button>` : ''}</div>
         <div class="hs-body">
           <div class="hs-brandline"><span class="hs-live${isUp ? ' up' : ''}"${isUp && ch.startTs ? ` data-up-ts="${ch.startTs}"` : ''}><i></i>${isUp ? 'UPCOMING' + (relTxt ? ' • ' + esc(relTxt) : '') : 'LIVE'}</span>${providerLogo}</div>
-          <h2 class="hs-title">${esc(ch.name)}</h2>
+          ${matchCard}
+          <h2 class="hs-title">${esc(bigTitle)}</h2>
           ${isUp ? `<div class="hs-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>${esc(whenTxt || 'Time TBA')}</div>` : ''}
+          ${isUp ? '' : '<div class="hs-time">● LIVE NOW</div>'}
           <p class="hs-sub">${meta}</p>
           <div class="hs-actions">
             ${noStream ? `<button type="button" class="hs-btn" disabled style="opacity:.55">⏰ Coming Soon</button>` : `<button data-play-channel="${esc(ch.id)}" class="hs-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>${isUp ? 'Watch' : 'Watch Live'}</button>`}
@@ -6332,11 +6342,8 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     { n: 'ডিবিসি নিউজ', u: 'https://www.dbcnews.tv/rss.xml', k: 'tv' },
     { n: 'চ্যানেল ২৪', u: 'https://www.channel24bd.tv/rss.xml', k: 'tv' }
   ];
-  var CATS = [['all', 'সব খেলা'], ['cricket', 'ক্রিকেট'], ['football', 'ফুটবল'], ['other', 'অন্যান্য']];
+  var CATS = [['all', 'সব'], ['sports', 'খেলা'], ['desh', 'দেশ'], ['media', 'মিডিয়া'], ['intl', 'আন্তর্জাতিক']];
   var CAT_LABEL = { sports: 'খেলা', desh: 'দেশ', media: 'মিডিয়া', intl: 'আন্তর্জাতিক' };
-  var RE_CRICKET = /ক্রিকেট|টেস্ট|ওয়ানডে|টি-?টোয়েন্টি|বিপিএল|আইপিএল|উইকেট|ব্যাটার|বোলার|সাকিব|তামিম|মুশফিক|মিরাজ|cricket|\bBPL\b|\bIPL\b|\bT20\b|\bODI\b|wicket|\bTest\b/i;
-  var RE_FOOTBALL = /ফুটবল|গোল|ফিফা|সাফ|মেসি|রোনালদো|নেইমার|এমবাপ্পে|লিগ|ম্যানচেস্টার|বার্সেলোনা|রিয়াল মাদ্রিদ|football|\bgoal|FIFA|SAFF|league|Messi|Ronaldo/i;
-  function subCat(t) { return RE_CRICKET.test(t) ? 'cricket' : (RE_FOOTBALL.test(t) ? 'football' : 'other'); }
   var RE_SPORTS = /ক্রিকেট|ফুটবল|ম্যাচ|টেস্ট|ওয়ানডে|টি-?টোয়েন্টি|বিপিএল|আইপিএল|বিশ্বকাপ|লিগ|গোল|সাকিব|তামিম|মুশফিক|মিরাজ|মেসি|রোনালদো|নেইমার|এমবাপ্পে|টেনিস|ব্যাডমিন্টন|অলিম্পিক|উইকেট|ব্যাটার|বোলার|কোচ|স্কোয়াড|সিরিজ|ফাইনাল|সেমিফাইনাল|সাফ|ফিফা|ম্যানচেস্টার|বার্সেলোনা|রিয়াল মাদ্রিদ|cricket|football|match|league|goal|world cup|tournament|\bBPL\b|\bIPL\b|\bT20\b|\bODI\b|tennis|olympic|stadium|squad|wicket|FIFA|SAFF|Messi|Ronaldo|\bfinal\b|scores?\b|beat[s]?\b|\bwin[s]?\b.*(?:match|test|series)/i;
   var RE_MEDIA = /টিভি|চ্যানেল|নাটক|সিনেমা|চলচ্চিত্র|অভিনেত্রী|অভিনেতা|শোবিজ|ওটিটি|গণমাধ্যম|সাংবাদিক|মুক্তি পাচ্ছে|টক শো|রিয়েলিটি|সংগীত|গায়ক|গায়িকা|ওয়েব সিরিজ|পরিচালক|ফিল্ম|ঢালিউড|বলিউড|হলিউড|drama|actor|actress|movie|film|showbiz|television|\bTV\b|channel|OTT|journalist|media|singer|bollywood|dhallywood/i;
   var RE_INTL = /যুক্তরাষ্ট্র|আমেরিকা|ভারত|পাকিস্তান|চীন|রাশিয়া|ইউক্রেন|গাজা|ইসরায়েল|ইসরাইল|ইরান|ফিলিস্তিন|জাতিসংঘ|ট্রাম্প|বাইডেন|পুতিন|নেতানিয়াহু|ইউরোপ|ব্রিটেন|যুক্তরাজ্য|জাপান|সৌদি|তুরস্ক|আফগানিস্তান|মিয়ানমার|নেপাল|শ্রীলঙ্কা|ইইউ|ন্যাটো|লন্ডন|ওয়াশিংটন|দিল্লি|বেইজিং|মস্কো|\bUS\b|\bUN\b|\bEU\b|NATO|Trump|Gaza|Israel|Iran|Russia|Ukraine|China|India|Pakistan|Putin|Washington|London|Europe|world/i;
@@ -6349,7 +6356,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     if (RE_INTL.test(t) && !/বাংলাদেশ|ঢাকা|Bangladesh|Dhaka/i.test(t)) return 'intl';
     return 'desh';
   }
-  var NEWS_ENABLED = true;   /* সংবাদ শিরোনাম/ব্রেকিং নিউজ: true করলে আবার চালু হবে */
+  var NEWS_ENABLED = false;   /* সংবাদ শিরোনাম/ব্রেকিং নিউজ: true করলে আবার চালু হবে */
   var NEWS = { items: [], cat: 'all', open: false, busy: false, t: 0, ok: 0 };
   var TO = function (ms) { return typeof AbortController === 'undefined' ? { s: undefined, c: function () {} } : (function () { var a = new AbortController(), t = setTimeout(function () { a.abort(); }, ms); return { s: a.signal, c: function () { clearTimeout(t); } }; })(); };
   function getText(url, ms) {
@@ -6366,7 +6373,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     if (doc.getElementsByTagName('parsererror').length && !doc.getElementsByTagName('item').length && !doc.getElementsByTagName('entry').length) throw new Error('parse');
     var nodes = doc.getElementsByTagName('item'); if (!nodes.length) nodes = doc.getElementsByTagName('entry');
     var out = [];
-    for (var i = 0; i < nodes.length && i < 40; i++) {
+    for (var i = 0; i < nodes.length && i < 14; i++) {
       var n = nodes[i], g = function (tag) { var e = n.getElementsByTagName(tag)[0]; return e ? (e.textContent || '').trim() : ''; };
       var link = g('link'); if (!link) { var le = n.getElementsByTagName('link')[0]; link = le ? (le.getAttribute('href') || '') : ''; }
       var d = g('pubDate') || g('published') || g('updated');
@@ -6380,7 +6387,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   function viaRss2Json(u) {
     return getText('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(u)).then(function (t) {
       var j = JSON.parse(t); if (!j || j.status !== 'ok' || !j.items || !j.items.length) throw new Error('r2j');
-      return j.items.slice(0, 40).map(function (x) { return { title: String(x.title || '').replace(/<[^>]+>/g, '').trim(), link: x.link, t: Date.parse((x.pubDate || '').replace(' ', 'T') + 'Z') }; });
+      return j.items.slice(0, 14).map(function (x) { return { title: String(x.title || '').replace(/<[^>]+>/g, '').trim(), link: x.link, t: Date.parse((x.pubDate || '').replace(' ', 'T') + 'Z') }; });
     });
   }
   function fetchFeed(feed) {
@@ -6403,8 +6410,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
         if (t > now + 3600e3) t = now;
         if (now - t > 72 * 3600e3) return;
         var key = it.title.slice(0, 60); if (seen[key]) return; seen[key] = 1;
-        var cat = classify(it, feed); if (cat !== 'sports') return;
-        all.push({ title: it.title, link: it.link, t: t, src: feed.n, kind: feed.k, cat: cat, sub: subCat(it.title) });
+        all.push({ title: it.title, link: it.link, t: t, src: feed.n, kind: feed.k, cat: classify(it, feed) });
       });
     });
     all.sort(function (a, b) { return b.t - a.t; });
@@ -6415,7 +6421,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     if (NEWS.busy) return; if (!force && Date.now() - NEWS.t < 5 * 60000 && NEWS.items.length) return;
     NEWS.busy = true; NEWS.ok = 0; spin(true);
     var bucket = {}, pending = FEEDS.length, tmr = null;
-    function flush() { var m = mergeItems(bucket); if (m.length) { NEWS.items = m; NEWS.t = Date.now(); lsSet('sarah_news_sports_v1', { t: NEWS.t, items: m }); } newsRender(); }
+    function flush() { var m = mergeItems(bucket); if (m.length) { NEWS.items = m; NEWS.t = Date.now(); lsSet('sarah_news_v1', { t: NEWS.t, items: m }); } newsRender(); }
     FEEDS.forEach(function (f) {
       fetchFeed(f).then(function (items) { bucket[f.u] = { feed: f, items: items }; NEWS.ok++; clearTimeout(tmr); tmr = setTimeout(flush, 400); })
         .catch(function () {})
@@ -6430,9 +6436,9 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   }
   function chipsHtml() { return CATS.map(function (c) { return '<button type="button" class="sx-chip' + (NEWS.cat === c[0] ? ' on' : '') + '" data-nw-cat="' + c[0] + '">' + c[1] + '</button>'; }).join(''); }
   function newsRender() {
-    var list = NEWS.items.filter(function (n) { return NEWS.cat === 'all' || n.sub === NEWS.cat; });
+    var list = NEWS.items.filter(function (n) { return NEWS.cat === 'all' || n.cat === NEWS.cat; });
     [].forEach.call(document.querySelectorAll('[data-nw-chips]'), function (c) { c.innerHTML = chipsHtml(); });
-    var empty = '<div class="nw-empty">' + (NEWS.busy ? 'সংবাদ লোড হচ্ছে…' : (NEWS.items.length ? 'এই বিভাগে এখন কোনো খেলার খবর নেই' : 'সংবাদ আনা যায়নি — ইন্টারনেট চেক করে ↻ চাপুন')) + '</div>';
+    var empty = '<div class="nw-empty">' + (NEWS.busy ? 'সংবাদ লোড হচ্ছে…' : (NEWS.items.length ? 'এই বিভাগে এখন কোনো সংবাদ নেই' : 'সংবাদ আনা যায়নি — ইন্টারনেট চেক করে ↻ চাপুন')) + '</div>';
     var pl = $('#nwPlayerList'); if (pl) pl.innerHTML = list.length ? list.slice(0, 40).map(itemHtml).join('') : empty;
     var hl = $('#nwHomeList'); if (hl) {
       var cap = NEWS.open ? 30 : 6;
@@ -6502,7 +6508,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
       '<div id="cwSection" class="sx-sec" style="display:none"><div class="sx-h"><b>▶ দেখা চালিয়ে যান</b><small>আপনার সর্বশেষ দেখা</small></div><div id="cwTrack"></div></div>' +
       '<div id="nzSection" class="sx-sec" style="display:none"><div class="nz-card"><div class="nz-top"><div class="nz-next" id="nzNext"></div><button type="button" id="nzToggle" class="nz-tg">🔕 বন্ধ</button></div>' +
       '<div class="nz-chips" id="nzChips"></div><button type="button" class="nz-link" id="nzMore">⚙ রিমাইন্ডার সেটিংস</button><div class="nz-set" id="nzSet">' + nzSettingsHtml() + '</div></div></div>' +
-      '<div id="nwHome" class="sx-sec sx-news"><div class="sx-nw-head"><b>🏏 খেলার খবর</b><button type="button" class="sx-nw-refresh" data-nw-refresh aria-label="রিফ্রেশ">↻</button></div>' +
+      '<div id="nwHome" class="sx-sec sx-news"><div class="sx-nw-head"><b>📰 সংবাদ শিরোনাম</b><button type="button" class="sx-nw-refresh" data-nw-refresh aria-label="রিফ্রেশ">↻</button></div>' +
       '<div class="sx-nw-chips" data-nw-chips></div><div class="sx-nw-list" id="nwHomeList"></div></div>';
     var wrap = document.createElement('div'); wrap.innerHTML = html;
     while (wrap.firstChild) anchor.parentNode.insertBefore(wrap.firstChild, anchor);
@@ -6512,7 +6518,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   function init() {
     buildSections(); bindVideo(); wmEnsure();
     if (NEWS_ENABLED) document.documentElement.classList.add('sx-news-on');
-    var cache = lsGet('sarah_news_sports_v1', null); if (cache && cache.items) { NEWS.items = cache.items; NEWS.t = cache.t || 0; }
+    var cache = lsGet('sarah_news_v1', null); if (cache && cache.items) { NEWS.items = cache.items; NEWS.t = cache.t || 0; }
     newsRender(); cwRender(); nzRender(); nzCheck();
     loadNews(false);
     setInterval(nzCheck, 15000);
@@ -8612,5 +8618,72 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 @media(prefers-reduced-motion:reduce){#heroTrack .hs *,#upTrack .hs *{animation:none!important;transition:none!important}}
 </style>
 
+
+<style id="sarah-toffee-banner">
+/* ===== Toffee-style hero banner ===== */
+html body #heroTrack .hs:not(.hs-intro), html body #upTrack .hs {
+  height: clamp(400px, 112vw, 480px) !important; min-height: 400px !important;
+  background: linear-gradient(180deg,#0b0d1f 0%,#14102f 55%,#0b0d1a 100%) !important;
+  border-radius: 0 !important; overflow: hidden !important;
+}
+html body #heroTrack .hs:not(.hs-intro) .hs-art.vid, html body #upTrack .hs .hs-art.vid {
+  position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important;
+  margin: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; z-index: 0 !important;
+}
+html body #heroTrack .hs:not(.hs-intro) .hs-art.vid img, html body #upTrack .hs .hs-art.vid img {
+  width: 100% !important; height: 100% !important; padding: 0 !important; object-fit: cover !important; object-position: 50% 28% !important; background: transparent !important;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 62%, transparent 96%); mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 62%, transparent 96%);
+  animation: none !important; transform: none !important;
+}
+/* purple diagonal shapes */
+html body #heroTrack .hs:not(.hs-intro)::before, html body #upTrack .hs::before {
+  content: "" !important; display: block !important; position: absolute !important; inset: 0 !important; z-index: 1 !important; pointer-events: none !important;
+  background:
+    linear-gradient(to bottom left, rgba(138,50,180,.78) 0 21%, transparent 21.2%),
+    linear-gradient(to bottom left, rgba(70,20,110,.55) 0 30%, transparent 30.2%),
+    linear-gradient(to top right, rgba(120,40,160,.75) 0 12%, transparent 12.2%) !important;
+  opacity: 1 !important; transform: none !important; border-radius: 0 !important;
+}
+/* bottom dark fade */
+html body #heroTrack .hs:not(.hs-intro)::after, html body #upTrack .hs::after {
+  content: "" !important; display: block !important; position: absolute !important; left: 0 !important; right: 0 !important; bottom: 0 !important; top: auto !important;
+  height: 62% !important; z-index: 2 !important; pointer-events: none !important;
+  background: linear-gradient(to top, #090b18 6%, rgba(9,11,24,.78) 42%, transparent 100%) !important;
+}
+html body #heroTrack .hs:not(.hs-intro) .hs-body, html body #upTrack .hs .hs-body {
+  position: absolute !important; left: 0 !important; right: 0 !important; bottom: 0 !important; z-index: 3 !important; max-width: 100% !important;
+  padding: 0 16px 22px !important; display: flex !important; flex-direction: column !important; align-items: center !important; text-align: center !important; text-shadow: none !important;
+}
+html body #heroTrack .hs .hs-brandline, html body #upTrack .hs .hs-brandline { top: 14px !important; left: 14px !important; z-index: 4 !important; }
+/* match card: team A  V  team B */
+html body .hs .hs-match {
+  display: flex; align-items: center; justify-content: center; gap: 16px; min-width: 176px; height: 54px; padding: 0 18px;
+  background: rgba(255,255,255,.92); border-radius: 3px; box-shadow: 0 6px 22px rgba(0,0,0,.45); margin-bottom: 10px;
+}
+html body .hs .hs-match b { font-size: 30px; font-weight: 900; line-height: 1; color: #7a22d6; font-family: 'Inter',Arial,sans-serif; }
+html body .hs .hs-match img { height: 40px; width: 40px; object-fit: contain; }
+html body .hs .hs-tm-ab { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; height: 40px; font-size: 15px; font-weight: 800; color: #1a1a2e; letter-spacing: .02em; }
+/* big translucent title + date line */
+html body #heroTrack .hs .hs-title, html body #upTrack .hs .hs-title {
+  max-width: 94% !important; margin: 0 auto !important; font-size: clamp(26px, 8.4vw, 38px) !important; font-weight: 800 !important; line-height: 1.12 !important;
+  letter-spacing: -.01em !important; color: rgba(255,255,255,.58) !important; text-align: center !important;
+  display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; overflow: hidden !important; white-space: normal !important;
+}
+html body #heroTrack .hs .hs-time, html body #upTrack .hs .hs-time {
+  display: block !important; margin: 8px auto 0 !important; padding: 0 !important; background: none !important; border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
+  font-size: clamp(17px, 5.2vw, 25px) !important; font-weight: 800 !important; color: rgba(255,255,255,.42) !important;
+}
+html body #heroTrack .hs .hs-time svg, html body #upTrack .hs .hs-time svg { display: none !important; }
+html body #heroTrack .hs .hs-sub, html body #upTrack .hs .hs-sub { display: none !important; }
+html body #heroTrack .hs .hs-actions, html body #upTrack .hs .hs-actions { margin: 14px auto 0 !important; justify-content: center !important; }
+html body #heroTrack .hs .hs-btn, html body #upTrack .hs .hs-btn {
+  background: linear-gradient(90deg,#8e2de2,#ff2d87) !important; color: #fff !important; border-radius: 999px !important; height: 36px !important; min-height: 36px !important; padding: 0 20px !important; font-weight: 700 !important;
+}
+html body #heroTrack .hs .hs-ghost, html body #upTrack .hs .hs-ghost { border-radius: 50% !important; background: rgba(255,255,255,.16) !important; }
+@media (min-width: 700px) {
+  html body #heroTrack .hs:not(.hs-intro), html body #upTrack .hs { height: 470px !important; }
+  html body #heroTrack .hs:not(.hs-intro) .hs-art.vid img, html body #upTrack .hs .hs-art.vid img { object-position: 50% 22% !important; }
+}
+</style>
 </body>
 </html>
