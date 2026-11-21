@@ -2628,18 +2628,25 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
       el.style.setProperty('--h', HUES[i % HUES.length]);
       const label = esc(ch.shortLabel || (ch.name || '').slice(0, 8));
       const n = ch.servers ? ch.servers.length : 1;
-      const badgeText = (ch.sourceName || ch.category || 'LIVE EVENT').toUpperCase();
+      const sourceText = String(ch.sourceName || '');
+      const provider = /sony\s?liv/i.test(sourceText) ? 'sony' : (/tapmad/i.test(sourceText) ? 'tapmad' : '');
+      const badgeText = provider ? 'LIVE EVENT' : (ch.sourceName || ch.category || 'LIVE EVENT').toUpperCase();
+      const providerLogo = provider === 'sony'
+        ? `<span class="hs-provider-logo hs-provider-sony" role="img" aria-label="SonyLIV logo"><span class="sony-word">SONY</span><span class="liv-word">liv</span></span>`
+        : provider === 'tapmad'
+          ? `<span class="hs-provider-logo hs-provider-tapmad" role="img" aria-label="tapmad logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.8c0-.8.9-1.3 1.6-.9l13 7.1c.8.4.8 1.6 0 2.1l-13 7.1c-.7.4-1.6-.1-1.6-.9V4.8z" fill="currentColor"/></svg><span><b>tap</b><i>mad</i></span></span>`
+          : '';
       const noStream = !(ch.servers && ch.servers.length) && !ch.streamUrl;
       const isUp = upcomingBanner || noStream;
       const whenTxt = fmtBdt(ch.startTs);
       const relTxt = (ch.startTs && ch.startTs > bdNow()) ? relIn(ch.startTs) : '';
-      const meta = [ch.category || 'Live Event', ch.sourceName, isUp ? '' : (n > 1 ? `${bn(n)}টি সার্ভার` : 'HD Stream')].filter(Boolean).map(esc).join('  ·  ');
+      const meta = [ch.category || 'Live Event', isUp ? '' : (n > 1 ? `${bn(n)}টি সার্ভার` : 'HD Stream')].filter(Boolean).map(esc).join('  ·  ');
       const saved = state.favorites.includes(ch.id);
       const showVideo = !isUp && !noStream;
       el.innerHTML = `
         <div class="hs-art vid${isUp ? ' poster' : ''}"><span>${label}</span>${ch.logo ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async" onerror="logoFail(this,'remove')" src="${esc(ch.logo)}" alt="" />` : ''}${showVideo ? `<video class="hs-vid" muted playsinline webkit-playsinline preload="none" data-play-channel="${esc(ch.id)}"></video><button type="button" class="hs-mute" aria-label="Sound">🔇</button>` : ''}</div>
         <div class="hs-body">
-          <span class="hs-live${isUp ? ' up' : ''}"${isUp && ch.startTs ? ` data-up-ts="${ch.startTs}"` : ''}><i></i>${isUp ? 'UPCOMING' + (relTxt ? ' • ' + esc(relTxt) : '') : 'LIVE • ' + esc(badgeText)}</span>
+          <div class="hs-brandline"><span class="hs-live${isUp ? ' up' : ''}"${isUp && ch.startTs ? ` data-up-ts="${ch.startTs}"` : ''}><i></i>${isUp ? 'UPCOMING' + (relTxt ? ' • ' + esc(relTxt) : '') : 'LIVE'}</span>${providerLogo}</div>
           <h2 class="hs-title">${esc(ch.name)}</h2>
           ${isUp ? `<div class="hs-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>${esc(whenTxt || 'Time TBA')}</div>` : ''}
           <p class="hs-sub">${meta}</p>
@@ -7654,5 +7661,1012 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   setInterval(function () { var v = $('#viewEpg'); if (v && !v.classList.contains('hidden')) render(); }, 60000);
 })();
 </script>
+
+<style id="sarah-upcoming-banner-premium">
+  /* Banner 2 — premium cinematic upcoming-event treatment */
+  #upSection { padding-top: 4px; }
+  #upSection > #upWrap > .flex { margin-bottom: 10px !important; }
+  #upSection h3 {
+    display:flex; align-items:center; gap:8px;
+    font-size:13px !important; letter-spacing:.015em;
+  }
+  #upSection h3::before {
+    content:""; width:4px; height:17px; border-radius:8px;
+    background:linear-gradient(180deg,#ffcf70,#ff8a3d);
+    box-shadow:0 0 14px rgba(255,166,74,.55);
+  }
+  #upSection #upCount {
+    color:#ffd18a; font-weight:800; font-variant-numeric:tabular-nums;
+  }
+  #upCard {
+    border:1px solid rgba(255,255,255,.13);
+    background:#090a12 !important;
+    box-shadow:0 18px 48px rgba(0,0,0,.48), 0 0 0 1px rgba(255,255,255,.025),
+      0 10px 34px rgba(255,132,58,.08) !important;
+  }
+  #upTrack .hs.up-slide {
+    height:clamp(248px,66vw,286px);
+    background:
+      radial-gradient(ellipse at 83% 16%,rgba(255,164,82,.34),transparent 43%),
+      radial-gradient(ellipse at 10% 20%,rgba(126,80,255,.23),transparent 48%),
+      linear-gradient(125deg,#171326 0%,#11111c 48%,#080a12 100%) !important;
+  }
+  #upTrack .hs.up-slide::before {
+    content:""; position:absolute; z-index:0; inset:0; pointer-events:none;
+    background:
+      linear-gradient(112deg,transparent 25%,rgba(255,255,255,.055) 48%,transparent 70%),
+      radial-gradient(circle at 88% 78%,rgba(255,170,88,.13),transparent 34%);
+    opacity:.9;
+  }
+  #upTrack .hs.up-slide::after {
+    z-index:1 !important; height:88% !important;
+    background:linear-gradient(0deg,rgba(5,6,12,.98) 0%,rgba(5,6,12,.78) 42%,rgba(5,6,12,.13) 100%) !important;
+  }
+  #upTrack .hs.up-slide .hs-art.vid {
+    opacity:1; z-index:0; overflow:hidden;
+    background:linear-gradient(135deg,#302348,#151724) !important;
+  }
+  #upTrack .hs.up-slide .hs-art.vid img {
+    object-fit:cover !important; object-position:center 35%;
+    filter:saturate(1.12) contrast(1.04);
+    transform:scale(1.025);
+  }
+  #upTrack .hs.up-slide .hs-art.vid > span {
+    z-index:0; color:rgba(255,255,255,.18); font-size:clamp(30px,9vw,58px);
+    font-weight:900; letter-spacing:-.06em; text-shadow:0 4px 25px rgba(0,0,0,.4);
+  }
+  #upTrack .hs.up-slide .hs-body {
+    z-index:2; padding:0 18px 34px !important;
+    max-width:min(100%,680px);
+  }
+  #upTrack .hs.up-slide .hs-live.up {
+    background:rgba(255,178,82,.16) !important; color:#ffd49a !important;
+    border:1px solid rgba(255,190,112,.42);
+    box-shadow:0 5px 22px rgba(255,154,66,.12) !important;
+    padding:5px 11px; font-size:9px; letter-spacing:.11em;
+    backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  }
+  #upTrack .hs.up-slide .hs-live.up i {
+    background:#ffbd70 !important; box-shadow:0 0 10px #ffbd70;
+  }
+  #upTrack .hs.up-slide .hs-title {
+    max-width:94%; margin-top:10px;
+    font-size:clamp(21px,6vw,29px); line-height:1.08;
+    font-weight:850; letter-spacing:-.035em;
+    text-shadow:0 3px 18px rgba(0,0,0,.6);
+  }
+  #upTrack .hs.up-slide .hs-time {
+    margin-top:9px; padding:7px 12px;
+    color:#fff0d7; font-size:11px; font-weight:750;
+    background:rgba(255,177,92,.15);
+    border:1px solid rgba(255,193,126,.32);
+    box-shadow:0 6px 22px rgba(0,0,0,.16);
+    backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  }
+  #upTrack .hs.up-slide .hs-time svg { color:#ffc27d; width:14px; height:14px; }
+  #upTrack .hs.up-slide .hs-sub {
+    margin-top:7px; color:rgba(255,255,255,.72);
+    font-size:10.5px; letter-spacing:.025em;
+  }
+  #upTrack .hs.up-slide .hs-actions { margin-top:12px; }
+  #upTrack .hs.up-slide .hs-btn {
+    height:37px; padding:0 19px; gap:8px;
+    color:#24170d; font-size:12px; font-weight:850;
+    background:linear-gradient(135deg,#ffe2b5 0%,#ffb76c 52%,#ff9850 100%);
+    box-shadow:0 7px 22px rgba(255,151,75,.28);
+    border:1px solid rgba(255,255,255,.38);
+  }
+  #upTrack .hs.up-slide .hs-btn:active { transform:scale(.96); }
+  #upTrack .hs.up-slide .hs-ghost {
+    width:37px; height:37px; color:#fff;
+    background:rgba(255,255,255,.13);
+    border:1px solid rgba(255,255,255,.22);
+    backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  }
+  #upDots { bottom:11px !important; }
+  #upDots .hero-dot { background:rgba(255,255,255,.32); }
+  #upDots .hero-dot.on { background:rgba(255,255,255,.28); }
+  #upDots .hero-dot.on::after { background:linear-gradient(90deg,#ffe1b7,#ffad68); }
+  #upDots .up-count {
+    padding:4px 11px; color:#ffe4c4;
+    background:rgba(10,10,16,.58);
+    border:1px solid rgba(255,210,164,.22);
+    backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  }
+  @media (min-width:700px) {
+    #upTrack .hs.up-slide { height:320px; }
+    #upTrack .hs.up-slide .hs-body { padding:0 8% 42px !important; max-width:66%; }
+    #upTrack .hs.up-slide .hs-title { font-size:34px; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    #upTrack .hs.up-slide::before { display:none; }
+  }
+</style>
+
+
+<style id="sarah-both-banners-cinematic-v2">
+/* ===== SARAH TV: BOTH HOME BANNERS — CINEMATIC REDESIGN ===== */
+
+/* Shared outer frame */
+#heroWrap, #upCard {
+  border: 1px solid rgba(255,255,255,.16) !important;
+  border-radius: 27px !important;
+  overflow: hidden !important;
+  box-shadow: 0 18px 55px rgba(0,0,0,.48), 0 0 0 1px rgba(255,255,255,.035) inset !important;
+}
+#heroWrap { margin: 10px 12px 0 !important; background:#090b18 !important; }
+#upSection { padding-left:12px !important; padding-right:12px !important; }
+#upCard { background:#080b19 !important; }
+
+/* BANNER 1 — bold cinematic live showcase */
+#heroTrack .hs:not(.up-slide) {
+  min-height: 300px;
+  height: clamp(300px, 78vw, 370px) !important;
+  background:
+    radial-gradient(ellipse at 82% 12%, rgba(0,229,255,.34), transparent 38%),
+    radial-gradient(ellipse at 12% 18%, rgba(166,72,255,.38), transparent 44%),
+    linear-gradient(128deg,#10142d 0%,#17102d 48%,#070b17 100%) !important;
+}
+#heroTrack .hs:not(.up-slide)::before {
+  content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(115deg,rgba(255,255,255,.075),transparent 30%,transparent 72%,rgba(0,229,255,.08)),
+    radial-gradient(circle at 78% 42%,rgba(0,214,255,.16),transparent 34%);
+}
+#heroTrack .hs:not(.up-slide)::after {
+  z-index:1 !important; height:82% !important;
+  background:linear-gradient(0deg,rgba(3,5,14,.99) 0%,rgba(3,5,14,.72) 42%,rgba(3,5,14,.08) 100%) !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-art.vid {
+  z-index:0 !important; overflow:hidden;
+  background:linear-gradient(135deg,#1a2750,#130d2b) !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-art.vid img {
+  object-fit:cover !important; object-position:center 32%;
+  filter:saturate(1.18) contrast(1.08);
+  transform:scale(1.035);
+}
+#heroTrack .hs:not(.up-slide) .hs-art.vid > span {
+  color:rgba(255,255,255,.22); font-size:clamp(34px,10vw,66px);
+  font-weight:950; letter-spacing:-.07em;
+  text-shadow:0 8px 32px rgba(0,0,0,.55);
+}
+#heroTrack .hs:not(.up-slide) .hs-body {
+  z-index:2 !important; padding:0 20px 38px !important;
+  max-width:min(100%,680px);
+}
+#heroTrack .hs:not(.up-slide) .hs-live {
+  padding:6px 12px !important; border-radius:999px !important;
+  background:linear-gradient(100deg,#ff315f,#a855f7) !important;
+  color:#fff !important; border:1px solid rgba(255,255,255,.3);
+  box-shadow:0 7px 24px rgba(168,85,247,.3);
+  font-size:9px !important; font-weight:900 !important; letter-spacing:.14em !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-live i {
+  background:#fff !important; box-shadow:0 0 12px #fff;
+}
+#heroTrack .hs:not(.up-slide) .hs-title {
+  margin-top:12px !important; max-width:94%;
+  font-size:clamp(27px,7.3vw,39px) !important;
+  line-height:1.02 !important; font-weight:950 !important;
+  letter-spacing:-.045em !important;
+  text-shadow:0 4px 24px rgba(0,0,0,.75) !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-sub {
+  margin-top:8px !important; color:rgba(240,245,255,.82) !important;
+  font-size:11px !important; font-weight:650 !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-actions { margin-top:15px !important; gap:10px !important; }
+#heroTrack .hs:not(.up-slide) .hs-btn {
+  min-height:43px !important; padding:0 22px !important;
+  border:1px solid rgba(255,255,255,.48) !important;
+  color:#fff !important; font-size:13px !important; font-weight:900 !important;
+  background:linear-gradient(105deg,#ff286b 0%,#a855f7 55%,#367dff 100%) !important;
+  box-shadow:0 9px 28px rgba(143,76,255,.4),inset 0 1px 0 rgba(255,255,255,.25) !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-btn svg { width:16px !important; height:16px !important; }
+#heroTrack .hs:not(.up-slide) .hs-ghost {
+  width:43px !important; height:43px !important;
+  background:rgba(255,255,255,.14) !important;
+  border:1px solid rgba(255,255,255,.3) !important;
+  box-shadow:0 8px 22px rgba(0,0,0,.2);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+}
+#heroDots { bottom:12px !important; gap:7px !important; }
+#heroDots .hero-dot { width:7px; height:7px; background:rgba(255,255,255,.42); }
+#heroDots .hero-dot.on {
+  width:27px !important; height:7px;
+  background:linear-gradient(90deg,#ff4d87,#b58aff,#5ee7ff) !important;
+  box-shadow:0 0 14px rgba(173,120,255,.65);
+}
+#heroPrevBtn, #heroNextBtn {
+  width:38px !important; height:38px !important;
+  border-radius:50% !important; color:#fff !important;
+  background:rgba(8,12,28,.58) !important;
+  border:1px solid rgba(255,255,255,.24) !important;
+  box-shadow:0 5px 18px rgba(0,0,0,.24);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+}
+
+/* Brand intro slide — clearly different from the channel slides */
+#heroTrack .hs-intro:not(.up-slide) {
+  background:
+    radial-gradient(ellipse at 50% 20%,rgba(255,53,130,.38),transparent 34%),
+    radial-gradient(ellipse at 85% 30%,rgba(0,213,255,.25),transparent 40%),
+    linear-gradient(135deg,#17112e 0%,#10152d 55%,#070a16 100%) !important;
+}
+#heroTrack .hs-intro:not(.up-slide)::before {
+  content:""; position:absolute; width:260px; height:260px; left:50%; top:-90px;
+  transform:translateX(-50%); border-radius:50%; z-index:0;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 0 0 22px rgba(255,255,255,.025),0 0 90px rgba(168,85,247,.28);
+}
+#heroTrack .hs-intro .hs-art.brand {
+  top:30px !important; left:50% !important; right:auto !important;
+  width:104px !important; height:104px !important; margin-left:-52px !important;
+  border-radius:31px !important;
+  background:linear-gradient(145deg,#ff4f91 0%,#a855f7 54%,#367dff 100%) !important;
+  border:1px solid rgba(255,255,255,.48);
+  box-shadow:0 18px 48px rgba(168,85,247,.42),inset 0 1px 0 rgba(255,255,255,.42) !important;
+}
+#heroTrack .hs-intro .hs-art.brand svg {
+  width:56px !important; height:56px !important;
+  filter:drop-shadow(0 5px 12px rgba(0,0,0,.3));
+}
+#heroTrack .hs-intro .hs-body { align-items:center !important; text-align:center !important; width:100%; }
+#heroTrack .hs-intro .hs-title {
+  font-size:clamp(34px,9vw,46px) !important;
+  letter-spacing:-.055em !important;
+  background:linear-gradient(90deg,#fff 0%,#ffd6e8 42%,#bcefff 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent !important;
+}
+#heroTrack .hs-intro .hs-sub { font-size:12px !important; color:#d9d9f3 !important; }
+#heroTrack .hs-intro .hs-live { background:rgba(255,255,255,.13) !important; border:1px solid rgba(255,255,255,.25); }
+
+/* BANNER 2 — distinct gold + midnight sports-event look */
+#upSection > div > div:first-child h3 {
+  font-size:15px !important; font-weight:900 !important; letter-spacing:-.02em;
+  color:#fff !important;
+}
+#upSection > div > div:first-child h3::first-letter { color:#ffc56e; }
+#upSection #upCount {
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:25px; padding:3px 9px; border-radius:999px;
+  color:#ffe5bd; background:linear-gradient(110deg,rgba(255,177,92,.2),rgba(168,85,247,.18));
+  border:1px solid rgba(255,201,139,.28); font-weight:900;
+}
+#upTrack .hs.up-slide {
+  height:clamp(278px,72vw,330px) !important;
+  background:
+    radial-gradient(ellipse at 84% 14%,rgba(255,179,90,.34),transparent 39%),
+    radial-gradient(ellipse at 12% 18%,rgba(83,110,255,.26),transparent 43%),
+    linear-gradient(125deg,#17182d 0%,#191426 48%,#080a14 100%) !important;
+}
+#upTrack .hs.up-slide::before {
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.075),transparent 35%,transparent 75%,rgba(255,184,99,.09));
+}
+#upTrack .hs.up-slide::after {
+  z-index:1 !important; height:90% !important;
+  background:linear-gradient(0deg,rgba(5,6,14,.99) 0%,rgba(5,6,14,.78) 43%,rgba(5,6,14,.08) 100%) !important;
+}
+#upTrack .hs.up-slide .hs-art.vid { z-index:0; background:#17182b !important; }
+#upTrack .hs.up-slide .hs-art.vid img {
+  object-fit:cover !important; object-position:center 32%;
+  filter:saturate(1.2) contrast(1.08);
+}
+#upTrack .hs.up-slide .hs-body { z-index:2; padding:0 20px 38px !important; }
+#upTrack .hs.up-slide .hs-live.up {
+  padding:6px 12px !important; border-radius:999px !important;
+  color:#251508 !important;
+  background:linear-gradient(100deg,#ffe6b9,#ffb45e 65%,#ff9651) !important;
+  border:1px solid rgba(255,255,255,.5);
+  box-shadow:0 7px 25px rgba(255,166,83,.3) !important;
+  font-size:9px !important; font-weight:950 !important; letter-spacing:.13em !important;
+}
+#upTrack .hs.up-slide .hs-live.up i { background:#7b3c10 !important; box-shadow:0 0 10px #ffcf8a; }
+#upTrack .hs.up-slide .hs-title {
+  max-width:95%; margin-top:12px !important;
+  font-size:clamp(24px,6.8vw,35px) !important;
+  line-height:1.04 !important; font-weight:950 !important; letter-spacing:-.04em !important;
+  text-shadow:0 4px 24px rgba(0,0,0,.75) !important;
+}
+#upTrack .hs.up-slide .hs-time {
+  margin-top:10px !important; padding:8px 13px !important;
+  color:#fff1dc !important; border-radius:12px !important;
+  background:linear-gradient(110deg,rgba(255,179,92,.2),rgba(255,255,255,.07)) !important;
+  border:1px solid rgba(255,194,126,.42) !important;
+  box-shadow:0 7px 22px rgba(0,0,0,.22);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+}
+#upTrack .hs.up-slide .hs-time svg { color:#ffc27d !important; }
+#upTrack .hs.up-slide .hs-sub { color:rgba(255,255,255,.78) !important; font-size:11px !important; }
+#upTrack .hs.up-slide .hs-btn {
+  min-height:42px !important; padding:0 23px !important;
+  color:#211306 !important; font-weight:950 !important;
+  background:linear-gradient(110deg,#fff0d3,#ffc477 55%,#ff9b56) !important;
+  border:1px solid rgba(255,255,255,.48) !important;
+  box-shadow:0 9px 26px rgba(255,158,79,.34) !important;
+}
+#upTrack .hs.up-slide .hs-ghost {
+  width:42px !important; height:42px !important;
+  background:rgba(255,255,255,.13) !important;
+  border:1px solid rgba(255,255,255,.28) !important;
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+}
+#upDots { bottom:12px !important; }
+#upDots .hero-dot.on { width:27px !important; background:rgba(255,255,255,.25) !important; }
+#upDots .hero-dot.on::after { background:linear-gradient(90deg,#fff0c9,#ffb66c,#ff8e57) !important; }
+#upDots .up-count {
+  color:#ffe5c1 !important; background:rgba(8,9,17,.68) !important;
+  border:1px solid rgba(255,201,139,.28) !important;
+}
+
+@media (min-width:700px) {
+  #heroTrack .hs:not(.up-slide) { height:390px !important; }
+  #heroTrack .hs:not(.up-slide) .hs-body { padding:0 8% 48px !important; max-width:65%; }
+  #heroTrack .hs:not(.up-slide) .hs-title { font-size:43px !important; }
+  #heroTrack .hs-intro .hs-art.brand { top:50% !important; left:auto !important; right:13% !important; margin:-52px 0 0 !important; }
+  #heroTrack .hs-intro .hs-body { align-items:flex-start !important; text-align:left !important; }
+  #upTrack .hs.up-slide { height:350px !important; }
+  #upTrack .hs.up-slide .hs-body { padding:0 8% 46px !important; max-width:68%; }
+}
+@media (max-width:380px) {
+  #heroWrap { margin-left:9px !important; margin-right:9px !important; }
+  #heroTrack .hs:not(.up-slide) .hs-body,
+  #upTrack .hs.up-slide .hs-body { padding-left:15px !important; padding-right:15px !important; }
+}
+@media (prefers-reduced-motion:reduce) {
+  #heroTrack .hs:not(.up-slide)::before,
+  #upTrack .hs.up-slide::before { display:none !important; }
+}
+</style>
+
+
+<style id="sarah-banner-compact-animated-font-v3">
+/* Restore the compact banner dimensions from the original Sarah TV layout */
+#heroTrack .hs:not(.up-slide) {
+  height: clamp(236px, 62vw, 268px) !important;
+  min-height: 0 !important;
+}
+#upTrack .hs.up-slide {
+  height: clamp(222px, 58vw, 250px) !important;
+}
+@media (min-width:700px) {
+  #heroTrack .hs:not(.up-slide),
+  #upTrack .hs.up-slide { height:290px !important; }
+}
+
+/* Elegant, consistent typography */
+#heroTrack .hs,
+#upTrack .hs {
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+#heroTrack .hs .hs-title,
+#upTrack .hs .hs-title {
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  font-weight: 850 !important;
+  letter-spacing: -.045em !important;
+  line-height: 1.08 !important;
+  font-size: clamp(19px, 5.4vw, 25px) !important;
+}
+#heroTrack .hs-intro .hs-title {
+  font-size: clamp(27px, 7vw, 35px) !important;
+}
+#heroTrack .hs .hs-sub,
+#upTrack .hs .hs-sub {
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif !important;
+  font-weight: 550 !important;
+  letter-spacing: .005em !important;
+  font-size: 10.5px !important;
+}
+#heroTrack .hs .hs-live,
+#upTrack .hs .hs-live,
+#heroTrack .hs .hs-btn,
+#upTrack .hs .hs-btn,
+#heroTrack .hs .hs-time,
+#upTrack .hs .hs-time {
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif !important;
+  letter-spacing: .015em;
+}
+
+/* Animated entrance for the text above both banners */
+@keyframes sarahTextRise {
+  0% { opacity:0; transform:translate3d(0,17px,0) scale(.985); filter:blur(4px); }
+  65% { opacity:1; filter:blur(0); }
+  100% { opacity:1; transform:translate3d(0,0,0) scale(1); filter:blur(0); }
+}
+#heroTrack .hs.in .hs-body > *,
+#upTrack .hs.in .hs-body > * {
+  animation: sarahTextRise .72s cubic-bezier(.2,.8,.2,1) both !important;
+}
+#heroTrack .hs.in .hs-body > *:nth-child(1),
+#upTrack .hs.in .hs-body > *:nth-child(1) { animation-delay:.04s !important; }
+#heroTrack .hs.in .hs-body > *:nth-child(2),
+#upTrack .hs.in .hs-body > *:nth-child(2) { animation-delay:.13s !important; }
+#heroTrack .hs.in .hs-body > *:nth-child(3),
+#upTrack .hs.in .hs-body > *:nth-child(3) { animation-delay:.22s !important; }
+#heroTrack .hs.in .hs-body > *:nth-child(4),
+#upTrack .hs.in .hs-body > *:nth-child(4) { animation-delay:.31s !important; }
+
+/* Soft moving highlight on headings — subtle, not distracting */
+@keyframes sarahTitleGlow {
+  0%,100% { text-shadow:0 3px 18px rgba(0,0,0,.58); }
+  50% { text-shadow:0 3px 22px rgba(160,132,255,.32),0 3px 18px rgba(0,0,0,.58); }
+}
+#heroTrack .hs.in .hs-title,
+#upTrack .hs.in .hs-title {
+  animation: sarahTextRise .72s cubic-bezier(.2,.8,.2,1) both,
+             sarahTitleGlow 3.8s ease-in-out 1s infinite !important;
+}
+#upTrack .hs.in .hs-title {
+  text-shadow:0 3px 20px rgba(255,177,100,.22),0 3px 18px rgba(0,0,0,.58);
+}
+
+/* Keep text compact and visible in the smaller cards */
+#heroTrack .hs .hs-body { padding:0 16px 25px !important; }
+#upTrack .hs.up-slide .hs-body { padding:0 16px 25px !important; }
+#heroTrack .hs .hs-actions,
+#upTrack .hs .hs-actions { margin-top:8px !important; }
+#heroTrack .hs .hs-btn,
+#upTrack .hs .hs-btn { min-height:33px !important; padding:0 16px !important; }
+#heroTrack .hs .hs-ghost,
+#upTrack .hs .hs-ghost { width:34px !important; height:34px !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  #heroTrack .hs.in .hs-body > *,
+  #upTrack .hs.in .hs-body > *,
+  #heroTrack .hs.in .hs-title,
+  #upTrack .hs.in .hs-title {
+    animation:none !important; filter:none !important; opacity:1 !important; transform:none !important;
+  }
+}
+</style>
+
+
+<style id="sarah-four-style-hybrid-final">
+/* SARAH TV — Toffee clarity + Apple restraint + Netflix cinema + sports energy */
+:root {
+  --sarah-cyan:#63e7f5;
+  --sarah-violet:#9c8cff;
+  --sarah-pink:#ff6b9d;
+  --sarah-gold:#ffc77d;
+}
+
+/* Compact original-style proportions */
+#heroWrap {
+  margin:8px 12px 0 !important;
+  border-radius:19px !important;
+  overflow:hidden !important;
+  border:1px solid rgba(255,255,255,.11) !important;
+  box-shadow:0 12px 34px rgba(0,0,0,.30) !important;
+}
+#heroTrack .hs:not(.up-slide) {
+  height:clamp(218px,56vw,246px) !important;
+  min-height:0 !important;
+  border-radius:19px !important;
+}
+#upSection { padding-left:12px !important; padding-right:12px !important; }
+#upSection > div > div:first-child { margin-bottom:8px !important; }
+#upCard {
+  border-radius:19px !important;
+  border:1px solid rgba(255,255,255,.11) !important;
+  box-shadow:0 12px 34px rgba(0,0,0,.30) !important;
+}
+#upTrack .hs.up-slide {
+  height:clamp(210px,54vw,236px) !important;
+  border-radius:19px !important;
+}
+@media (min-width:700px) {
+  #heroTrack .hs:not(.up-slide) { height:275px !important; }
+  #upTrack .hs.up-slide { height:265px !important; }
+}
+
+/* Unified refined typography — no external font dependency */
+#heroTrack .hs, #upTrack .hs {
+  font-family: "Avenir Next", "Segoe UI", "Noto Sans", Roboto, Arial, sans-serif !important;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+#heroTrack .hs .hs-title, #upTrack .hs .hs-title {
+  font-family: "Avenir Next", "Segoe UI", "Noto Sans", Roboto, Arial, sans-serif !important;
+  font-size:clamp(20px,5.4vw,26px) !important;
+  line-height:1.08 !important;
+  font-weight:850 !important;
+  letter-spacing:-.04em !important;
+}
+#heroTrack .hs-intro .hs-title { font-size:clamp(28px,7vw,36px) !important; }
+#heroTrack .hs .hs-sub, #upTrack .hs .hs-sub {
+  font-size:11px !important;
+  line-height:1.45 !important;
+  font-weight:550 !important;
+  letter-spacing:.005em !important;
+  color:rgba(245,247,255,.82) !important;
+}
+#heroTrack .hs .hs-body { padding:0 17px 27px !important; }
+#upTrack .hs.up-slide .hs-body { padding:0 17px 27px !important; }
+#heroTrack .hs .hs-actions, #upTrack .hs .hs-actions { margin-top:10px !important; gap:9px !important; }
+#heroTrack .hs .hs-btn, #upTrack .hs .hs-btn {
+  min-height:35px !important;
+  padding:0 17px !important;
+  border-radius:999px !important;
+  font-size:11px !important;
+  font-weight:850 !important;
+  letter-spacing:.01em !important;
+}
+#heroTrack .hs .hs-ghost, #upTrack .hs .hs-ghost {
+  width:35px !important; height:35px !important;
+  border-radius:50% !important;
+}
+
+/* Banner 1: clean streaming-service hierarchy with cinematic image treatment */
+#heroTrack .hs:not(.up-slide) {
+  background:
+    radial-gradient(ellipse at 82% 15%,rgba(91,220,255,.23),transparent 38%),
+    linear-gradient(118deg,#101a2d 0%,#17172b 54%,#080d18 100%) !important;
+}
+#heroTrack .hs:not(.up-slide)::after {
+  height:88% !important;
+  background:linear-gradient(0deg,rgba(4,7,15,.96) 0%,rgba(4,7,15,.64) 45%,rgba(4,7,15,.06) 100%) !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-art.vid img {
+  object-fit:cover !important;
+  filter:saturate(1.10) contrast(1.04) !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-live {
+  display:inline-flex !important;
+  padding:5px 10px !important;
+  border-radius:7px !important;
+  background:rgba(255,65,105,.92) !important;
+  border:1px solid rgba(255,255,255,.24) !important;
+  font-size:8px !important;
+  font-weight:900 !important;
+  letter-spacing:.12em !important;
+  box-shadow:0 4px 15px rgba(255,65,105,.22) !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-btn {
+  background:linear-gradient(100deg,#f8fbff,#dcecff) !important;
+  color:#101827 !important;
+  border:1px solid rgba(255,255,255,.65) !important;
+  box-shadow:0 5px 17px rgba(0,0,0,.22) !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-ghost {
+  background:rgba(255,255,255,.13) !important;
+  border:1px solid rgba(255,255,255,.25) !important;
+  backdrop-filter:blur(12px);
+}
+
+/* Sarah TV brand slide: Apple-like simplicity and premium color */
+#heroTrack .hs-intro:not(.up-slide) {
+  background:
+    radial-gradient(ellipse at 50% 12%,rgba(140,125,255,.25),transparent 38%),
+    linear-gradient(135deg,#11182b 0%,#17152b 58%,#09101c 100%) !important;
+}
+#heroTrack .hs-intro .hs-art.brand {
+  border-radius:25px !important;
+  background:linear-gradient(145deg,#ff6b9d 0%,#9b83ff 52%,#55d9ee 100%) !important;
+  border:1px solid rgba(255,255,255,.4) !important;
+  box-shadow:0 12px 34px rgba(132,112,255,.28) !important;
+}
+#heroTrack .hs-intro .hs-title {
+  background:linear-gradient(90deg,#fff 0%,#d9e6ff 55%,#a9f2f4 100%) !important;
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  color:transparent !important;
+}
+#heroTrack .hs-intro .hs-btn {
+  color:#101827 !important;
+  background:linear-gradient(100deg,#fff,#dcecff) !important;
+}
+
+/* Banner 2: sports-event energy, but with calm readable premium styling */
+#upTrack .hs.up-slide {
+  background:
+    radial-gradient(ellipse at 85% 10%,rgba(255,177,94,.24),transparent 38%),
+    linear-gradient(120deg,#17182a 0%,#1a1728 52%,#090d17 100%) !important;
+}
+#upTrack .hs.up-slide::after {
+  height:90% !important;
+  background:linear-gradient(0deg,rgba(5,7,14,.97) 0%,rgba(5,7,14,.68) 48%,rgba(5,7,14,.06) 100%) !important;
+}
+#upTrack .hs.up-slide .hs-art.vid img {
+  object-fit:cover !important;
+  filter:saturate(1.14) contrast(1.06) !important;
+}
+#upTrack .hs.up-slide .hs-live.up {
+  padding:5px 10px !important;
+  border-radius:7px !important;
+  color:#25180b !important;
+  background:linear-gradient(100deg,#ffe8c5,#ffc47e) !important;
+  border:1px solid rgba(255,255,255,.42) !important;
+  font-size:8px !important;
+  font-weight:950 !important;
+  letter-spacing:.12em !important;
+  box-shadow:0 4px 16px rgba(255,180,103,.22) !important;
+}
+#upTrack .hs.up-slide .hs-title {
+  color:#fff !important;
+  text-shadow:0 3px 20px rgba(0,0,0,.62) !important;
+}
+#upTrack .hs.up-slide .hs-time {
+  display:inline-flex !important;
+  padding:6px 10px !important;
+  border-radius:9px !important;
+  background:rgba(255,190,119,.13) !important;
+  border:1px solid rgba(255,198,137,.30) !important;
+  color:#ffe5c5 !important;
+  font-size:10px !important;
+}
+#upTrack .hs.up-slide .hs-btn {
+  color:#211608 !important;
+  background:linear-gradient(100deg,#fff0d7,#ffc47c) !important;
+  border:1px solid rgba(255,255,255,.48) !important;
+  box-shadow:0 5px 17px rgba(255,171,91,.20) !important;
+}
+#upTrack .hs.up-slide .hs-ghost {
+  background:rgba(255,255,255,.12) !important;
+  border:1px solid rgba(255,255,255,.24) !important;
+  backdrop-filter:blur(12px);
+}
+
+/* Subtle active-slide text motion: refined, not overly flashy */
+@keyframes sarahHybridEnter {
+  from { opacity:0; transform:translateY(11px); filter:blur(2px); }
+  to { opacity:1; transform:translateY(0); filter:blur(0); }
+}
+#heroTrack .hs.in .hs-body > *,
+#upTrack .hs.in .hs-body > * {
+  animation:sarahHybridEnter .55s cubic-bezier(.2,.72,.25,1) both !important;
+}
+#heroTrack .hs.in .hs-body > *:nth-child(1),
+#upTrack .hs.in .hs-body > *:nth-child(1) { animation-delay:.03s !important; }
+#heroTrack .hs.in .hs-body > *:nth-child(2),
+#upTrack .hs.in .hs-body > *:nth-child(2) { animation-delay:.10s !important; }
+#heroTrack .hs.in .hs-body > *:nth-child(3),
+#upTrack .hs.in .hs-body > *:nth-child(3) { animation-delay:.17s !important; }
+#heroTrack .hs.in .hs-body > *:nth-child(4),
+#upTrack .hs.in .hs-body > *:nth-child(4) { animation-delay:.24s !important; }
+
+/* Clear, understated carousel controls */
+#heroDots .hero-dot.on {
+  width:22px !important;
+  background:linear-gradient(90deg,var(--sarah-cyan),var(--sarah-violet)) !important;
+}
+#upDots .hero-dot.on::after {
+  background:linear-gradient(90deg,#ffe7c0,#ffb66e) !important;
+}
+#heroPrevBtn, #heroNextBtn {
+  background:rgba(8,13,25,.48) !important;
+  border:1px solid rgba(255,255,255,.22) !important;
+  backdrop-filter:blur(10px);
+}
+@media (prefers-reduced-motion:reduce) {
+  #heroTrack .hs.in .hs-body > *,
+  #upTrack .hs.in .hs-body > * {
+    animation:none !important; opacity:1 !important; transform:none !important; filter:none !important;
+  }
+}
+</style>
+
+
+<style id="sarah-provider-logos-and-quarter-size-v4">
+/* Both banners reduced to roughly 3/4 of the compact hybrid dimensions */
+#heroTrack .hs:not(.up-slide) {
+  height:clamp(164px,42vw,184px) !important;
+  min-height:0 !important;
+}
+#upTrack .hs.up-slide {
+  height:clamp(158px,40vw,177px) !important;
+}
+@media (min-width:700px) {
+  #heroTrack .hs:not(.up-slide) { height:206px !important; }
+  #upTrack .hs.up-slide { height:199px !important; }
+}
+
+/* Smaller titles, labels and action controls so all content fits */
+#heroTrack .hs .hs-title, #upTrack .hs .hs-title {
+  font-size:clamp(14px,3.9vw,18px) !important;
+  line-height:1.08 !important;
+  letter-spacing:-.035em !important;
+  font-weight:850 !important;
+}
+#heroTrack .hs-intro .hs-title { font-size:clamp(22px,5.8vw,27px) !important; }
+#heroTrack .hs .hs-sub, #upTrack .hs .hs-sub {
+  font-size:9px !important; line-height:1.25 !important;
+}
+#heroTrack .hs .hs-body, #upTrack .hs.up-slide .hs-body {
+  padding:0 13px 20px !important;
+}
+#heroTrack .hs .hs-actions, #upTrack .hs .hs-actions {
+  margin-top:6px !important; gap:7px !important;
+}
+#heroTrack .hs .hs-btn, #upTrack .hs .hs-btn {
+  min-height:28px !important; padding:0 12px !important;
+  font-size:9px !important; border-radius:999px !important;
+}
+#heroTrack .hs .hs-ghost, #upTrack .hs .hs-ghost {
+  width:28px !important; height:28px !important;
+}
+#upTrack .hs.up-slide .hs-time {
+  margin-top:5px !important; padding:4px 8px !important;
+  border-radius:7px !important; font-size:9px !important;
+}
+#heroTrack .hs .hs-live, #upTrack .hs .hs-live {
+  padding:3px 7px !important; font-size:7px !important;
+  gap:4px !important; letter-spacing:.09em !important;
+}
+#heroTrack .hs .hs-live i, #upTrack .hs .hs-live i {
+  width:4px !important; height:4px !important;
+}
+
+/* Provider marks replace provider-name labels in the banners */
+.hs-brandline {
+  display:flex; align-items:center; gap:7px;
+  min-height:22px; margin-bottom:4px;
+}
+.hs-provider-logo {
+  display:inline-flex; align-items:center; justify-content:center;
+  flex:0 0 auto; height:21px; box-sizing:border-box;
+  filter:drop-shadow(0 2px 5px rgba(0,0,0,.28));
+}
+.hs-provider-sony {
+  width:29px; height:25px; padding:2px 3px;
+  flex-direction:column; gap:0; border-radius:6px;
+  background:#08090e; border:1px solid rgba(255,255,255,.55);
+  overflow:hidden; line-height:.82;
+  background-image:linear-gradient(135deg,rgba(0,199,255,.18),rgba(145,65,255,.2),rgba(255,83,104,.18));
+}
+.hs-provider-sony .sony-word {
+  color:#fff; font-family:Georgia,serif; font-size:7px;
+  font-weight:900; letter-spacing:-.04em;
+}
+.hs-provider-sony .liv-word {
+  font-family:Arial,sans-serif; font-size:10px; font-weight:950;
+  letter-spacing:-.08em;
+  background:linear-gradient(90deg,#ffe65c,#ff8d37,#ff477e);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.hs-provider-tapmad {
+  gap:3px; padding:2px 6px; border-radius:6px;
+  color:#fff; background:rgba(5,16,22,.72);
+  border:1px solid rgba(91,219,156,.48);
+}
+.hs-provider-tapmad svg { width:10px; height:10px; color:#42d58a; }
+.hs-provider-tapmad span {
+  font-family:Arial,sans-serif; font-size:10px; font-weight:850;
+  letter-spacing:-.055em; line-height:1;
+}
+.hs-provider-tapmad b { color:#fff; font-weight:900; }
+.hs-provider-tapmad i { color:#53df9b; font-style:normal; font-weight:900; }
+@media (max-width:380px) {
+  #heroTrack .hs .hs-body, #upTrack .hs.up-slide .hs-body {
+    padding-left:10px !important; padding-right:10px !important;
+  }
+  #heroTrack .hs .hs-title, #upTrack .hs .hs-title { font-size:14px !important; }
+}
+</style>
+
+
+<style id="sarah-reference-poster-style">
+/* Compact Toffee-inspired sports poster banners */
+#heroWrap, #upCard {
+  border-radius:16px !important;
+  overflow:hidden !important;
+  border:1px solid rgba(255,255,255,.13) !important;
+  box-shadow:0 9px 28px rgba(0,0,0,.32) !important;
+}
+#heroWrap { margin:7px 12px 0 !important; }
+#upSection { padding-left:12px !important; padding-right:12px !important; }
+#heroTrack .hs:not(.up-slide) {
+  height:clamp(190px,49vw,218px) !important;
+  min-height:0 !important;
+  border-radius:16px !important;
+}
+#upTrack .hs.up-slide {
+  height:clamp(185px,47vw,210px) !important;
+  border-radius:16px !important;
+}
+@media (min-width:700px) {
+  #heroTrack .hs:not(.up-slide) { height:245px !important; }
+  #upTrack .hs.up-slide { height:235px !important; }
+}
+
+/* Full-bleed artwork/poster, matching the supplied Toffee reference */
+#heroTrack .hs:not(.up-slide) .hs-art.vid,
+#upTrack .hs.up-slide .hs-art.vid {
+  position:absolute !important;
+  inset:0 !important;
+  left:0 !important; right:0 !important; top:0 !important; bottom:0 !important;
+  width:100% !important; height:100% !important;
+  aspect-ratio:auto !important;
+  margin:0 !important;
+  border-radius:0 !important;
+  opacity:1 !important;
+  transform:none !important;
+  background:#10182b !important;
+  box-shadow:none !important;
+  overflow:hidden !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-art.vid img,
+#upTrack .hs.up-slide .hs-art.vid img {
+  position:absolute !important; inset:0 !important;
+  width:100% !important; height:100% !important;
+  max-width:none !important; max-height:none !important;
+  object-fit:cover !important;
+  object-position:center 30% !important;
+  padding:0 !important;
+  background:transparent !important;
+  filter:saturate(1.13) contrast(1.06) !important;
+  transform:scale(1.015) !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-art.vid > span,
+#upTrack .hs.up-slide .hs-art.vid > span { display:none !important; }
+
+/* Poster-style cinematic dark fade, with a little Toffee magenta accent */
+#heroTrack .hs:not(.up-slide),
+#upTrack .hs.up-slide {
+  isolation:isolate !important;
+  background:#080d1b !important;
+}
+#heroTrack .hs:not(.up-slide)::before,
+#upTrack .hs.up-slide::before {
+  content:"" !important;
+  position:absolute !important; inset:0 !important; z-index:1 !important;
+  pointer-events:none !important;
+  background:
+    linear-gradient(135deg,rgba(8,12,25,.08) 15%,transparent 48%),
+    linear-gradient(0deg,rgba(4,6,13,.96) 0%,rgba(4,6,13,.72) 34%,rgba(4,6,13,.08) 78%),
+    linear-gradient(110deg,rgba(206,0,125,.16),transparent 55%) !important;
+}
+#heroTrack .hs:not(.up-slide)::after,
+#upTrack .hs.up-slide::after {
+  display:none !important;
+}
+
+/* Small logo/status strip near the upper-left corner */
+#heroTrack .hs:not(.up-slide) .hs-body,
+#upTrack .hs.up-slide .hs-body {
+  position:absolute !important;
+  z-index:3 !important;
+  left:0 !important; right:0 !important; bottom:0 !important;
+  width:100% !important; max-width:none !important;
+  box-sizing:border-box !important;
+  padding:0 14px 19px !important;
+  align-items:center !important;
+  text-align:center !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-brandline,
+#upTrack .hs.up-slide .hs-brandline {
+  position:absolute !important;
+  left:13px !important; top:12px !important;
+  display:flex !important; align-items:center !important; gap:7px !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-live,
+#upTrack .hs.up-slide .hs-live.up {
+  padding:4px 8px !important;
+  border-radius:5px !important;
+  font-size:8px !important;
+  line-height:1.1 !important;
+  font-weight:900 !important;
+  letter-spacing:.09em !important;
+  background:rgba(239,34,111,.93) !important;
+  color:#fff !important;
+  border:1px solid rgba(255,255,255,.36) !important;
+  box-shadow:0 3px 12px rgba(0,0,0,.28) !important;
+}
+#upTrack .hs.up-slide .hs-live.up {
+  background:rgba(255,181,83,.95) !important;
+  color:#201306 !important;
+  border-color:rgba(255,255,255,.48) !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-brandline .hs-provider-logo,
+#upTrack .hs.up-slide .hs-brandline .hs-provider-logo {
+  transform:scale(.88);
+  transform-origin:left center;
+}
+
+/* Compact poster headline and event details */
+#heroTrack .hs:not(.up-slide) .hs-title,
+#upTrack .hs.up-slide .hs-title {
+  width:100% !important;
+  max-width:95% !important;
+  margin:0 auto !important;
+  font-family:"Noto Sans Bengali","Noto Sans","Segoe UI",Arial,sans-serif !important;
+  font-size:clamp(15px,4.1vw,19px) !important;
+  font-weight:850 !important;
+  line-height:1.18 !important;
+  letter-spacing:-.025em !important;
+  text-align:center !important;
+  text-shadow:0 2px 12px rgba(0,0,0,.88) !important;
+  display:-webkit-box !important;
+  -webkit-line-clamp:2 !important;
+  -webkit-box-orient:vertical !important;
+  overflow:hidden !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-sub,
+#upTrack .hs.up-slide .hs-sub {
+  margin:4px auto 0 !important;
+  font-family:"Noto Sans Bengali","Noto Sans","Segoe UI",Arial,sans-serif !important;
+  font-size:9px !important;
+  line-height:1.3 !important;
+  color:rgba(255,255,255,.82) !important;
+  text-align:center !important;
+}
+#upTrack .hs.up-slide .hs-time {
+  margin:5px auto 0 !important;
+  padding:4px 8px !important;
+  border-radius:6px !important;
+  font-size:9px !important;
+  line-height:1.2 !important;
+  color:#fff0d7 !important;
+  background:rgba(255,174,83,.20) !important;
+  border:1px solid rgba(255,203,151,.38) !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-actions,
+#upTrack .hs.up-slide .hs-actions {
+  margin:7px auto 0 !important;
+  justify-content:center !important;
+  gap:7px !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-btn,
+#upTrack .hs.up-slide .hs-btn {
+  height:29px !important; min-height:29px !important;
+  padding:0 14px !important;
+  border-radius:6px !important;
+  font-size:10px !important;
+  font-weight:850 !important;
+  color:#fff !important;
+  background:linear-gradient(100deg,#e50079,#fa287e) !important;
+  border:1px solid rgba(255,255,255,.35) !important;
+  box-shadow:0 4px 14px rgba(229,0,121,.25) !important;
+}
+#upTrack .hs.up-slide .hs-btn {
+  color:#1e1408 !important;
+  background:linear-gradient(100deg,#ffe4b5,#ffb65e) !important;
+  box-shadow:0 4px 14px rgba(255,171,88,.25) !important;
+}
+#heroTrack .hs:not(.up-slide) .hs-ghost,
+#upTrack .hs.up-slide .hs-ghost {
+  width:29px !important; height:29px !important;
+  background:rgba(255,255,255,.17) !important;
+  border:1px solid rgba(255,255,255,.38) !important;
+  font-size:17px !important;
+}
+
+/* Brand intro slide remains branded, but follows the compact poster treatment */
+#heroTrack .hs-intro:not(.up-slide) .hs-art.brand {
+  top:13px !important; left:13px !important; right:auto !important;
+  width:35px !important; height:35px !important;
+  margin:0 !important; border-radius:10px !important;
+  background:linear-gradient(145deg,#f0008b,#7c42e8) !important;
+  box-shadow:0 4px 14px rgba(0,0,0,.3) !important;
+}
+#heroTrack .hs-intro:not(.up-slide) .hs-art.brand svg {
+  width:19px !important; height:19px !important;
+}
+#heroTrack .hs-intro:not(.up-slide) .hs-body {
+  align-items:center !important; text-align:center !important;
+}
+#heroTrack .hs-intro:not(.up-slide) .hs-title {
+  font-size:clamp(21px,5.6vw,27px) !important;
+}
+#heroTrack .hs-intro:not(.up-slide) .hs-brandline {
+  display:none !important;
+}
+#heroDots { bottom:7px !important; }
+#upDots { bottom:7px !important; }
+@media (max-width:380px) {
+  #heroTrack .hs:not(.up-slide) .hs-body,
+  #upTrack .hs.up-slide .hs-body { padding-left:10px !important; padding-right:10px !important; }
+  #heroTrack .hs:not(.up-slide) .hs-title,
+  #upTrack .hs.up-slide .hs-title { font-size:14px !important; }
+}
+@media (prefers-reduced-motion:reduce) {
+  #heroTrack .hs *, #upTrack .hs * { animation:none !important; transition:none !important; }
+}
+</style>
+
 </body>
 </html>
