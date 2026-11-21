@@ -991,6 +991,14 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
       <div id="tbPage" class="sx-news" style="margin-top:6px"></div>
     </section>
 
+    <section id="viewEpg" class="hidden px-4 py-4 space-y-4">
+      <div class="flex items-center justify-between"><h2 class="text-lg font-bold">📅 চ্যানেল গাইড (EPG)</h2><button type="button" id="epRefresh" class="sx-nw-refresh" aria-label="রিফ্রেশ">↻</button></div>
+      <div class="ep-tabs"><button type="button" data-ep-tab="events" class="on">🔴 লাইভ ও শিডিউল</button><button type="button" data-ep-tab="guide">📺 টিভি গাইড</button></div>
+      <input id="epSearch" class="ep-search" type="text" placeholder="🔎 খুঁজুন…" autocomplete="off">
+      <div id="epBody"></div>
+      <div id="epSrc" class="ep-src"></div>
+    </section>
+
     <section id="viewNamaz" class="hidden px-4 py-4 space-y-4">
       <div class="flex items-center justify-between"><h2 class="text-lg font-bold">🕌 নামাজের সময়</h2><span class="text-xs text-slate-400">ঢাকা</span></div>
       <div id="nzHost"></div>
@@ -1231,6 +1239,11 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
         <span id="navIndicatorDiscover" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
         <span>Discover</span>
+      </button>
+      <button data-nav="epg" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
+        <span id="navIndicatorEpg" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
+        <span class="bn-emo">📅</span>
+        <span>Guide</span>
       </button>
       <button data-nav="score" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
         <span id="navIndicatorScore" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
@@ -1975,8 +1988,40 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
       return fetch(url, Object.assign({}, opts, { signal: ac.signal })).finally(() => clearTimeout(t));
     }
 
+
+    // ===== Encrypted playlist (.dat) support =====
+    // Repo te *.m3u / *.json er jaygay encrypt_playlists.py diye banano *.dat file rakhle, plain file er bodole eta load hoy (decrypt browser e hoy)
+    const PL_KEY = 'sarah-tv-CHANGE-THIS-KEY';   // encrypt_playlists.py er KEY er sathe EKI hote hobe
+    let __plKey = null;
+    async function plDecrypt(b64) {
+      if (!__plKey) {
+        const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(PL_KEY), 'PBKDF2', false, ['deriveKey']);
+        __plKey = await crypto.subtle.deriveKey({ name: 'PBKDF2', salt: new TextEncoder().encode('sarahtv-pl-v1'), iterations: 100000, hash: 'SHA-256' }, km, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+      }
+      const raw = Uint8Array.from(atob(String(b64).replace(/\s+/g, '')), c => c.charCodeAt(0));
+      const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: raw.slice(0, 12) }, __plKey, raw.slice(12));
+      return new TextDecoder().decode(pt);
+    }
+    async function fetchLocalText(url) {
+      const base = String(url).split('?')[0];
+      const bust = (u) => u + '?t=' + Date.now();
+      try {
+        const r = await fetchTimeout(bust(base + '.dat'), { cache: 'no-store' });
+        if (r.ok) { const t = (await r.text()).trim(); if (t && t[0] !== '<') { try { return await plDecrypt(t); } catch (e) {} } }
+      } catch (e) {}
+      try {
+        const r = await fetchTimeout(bust(base), { cache: 'no-store' });
+        if (!r.ok) return null;
+        const t = await r.text();
+        return /^\s*<(!doctype|html)/i.test(t) ? null : t;
+      } catch (e) { return null; }
+    }
+
     // Playlist text ane: direct + proxy gulo ekoi sathe try kore, je age valid pay seta nebe
     function fetchPlaylistText(src) {
+      if (/^\.\//.test(src.url)) {
+        return fetchLocalText(src.url).then(t => (t && /#EXTM3U|#EXTINF/i.test(t)) ? { text: t, via: 'local', errs: [] } : { text: null, errs: ['local: file/decrypt fail'] });
+      }
       const bust = src.url + (src.url.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now();
       const tries = [['direct', bust]];
       if (STREAM_PROXY) tries.push(['proxy', proxify(bust)]);
@@ -2217,14 +2262,14 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
     // Ayna OTT: 'unique' = sudhu je channel onno source e nai; 'off' = Ayna ekdom bondho
     const AYNA_MODE = 'unique';
     async function discoverRootFiles() {
-      const CK = 'sarah_root_files_v4';
+      const CK = 'sarah_root_files_v5';
       try {
         const c = JSON.parse(sessionStorage.getItem(CK) || 'null');
         if (c && Date.now() - c.t < 5 * 60 * 1000 && c.files && c.files.length) return c.files;
       } catch (e) {}
       const files = [];
       const add = (n) => {
-        n = String(n || '').replace(/^\.?\//, '');
+        n = String(n || '').replace(/^\.?\//, '').replace(/\.dat$/i, '');
         if (!n || /[\/\\]/.test(n) || !/\.(json|m3u)$/i.test(n) || ROOT_SKIP.test(n)) return;
         if (!files.includes(n)) files.push(n);
       };
@@ -2317,9 +2362,8 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
       const [localResults, remoteJsonLists, m3uList] = await Promise.all([
         Promise.all(sources.map(async (src) => {
           try {
-            const response = await fetchTimeout(src, { cache: 'no-store' });
-            if (!response.ok) return null;
-            const txt = await response.text();
+            const txt = await fetchLocalText(src);
+            if (txt == null) return null;
             let data;
             try { data = JSON.parse(txt.replace(/^\uFEFF/, '')); } catch (e) { data = txt; }
             return { src, data };
@@ -3546,7 +3590,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
       } catch (e) {}
       const plainToffee = isToffee && !hasDrm && type !== 'dash';
       const baseType = plainToffee ? 'hls' : type;
-      const c = buildEngineChainBase(baseType, channel);
+      const c = buildEngineChainBase(baseType, plainToffee ? null : channel);
       // Akamai/SonyLIV/Toffee: hls.js XHR CORS e atke, tai browser er nijer HLS player (CORS lage na) age try
       try {
         const v = document.createElement('video');
@@ -3565,8 +3609,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
       // browser does not treat an encrypted stream as ordinary HLS media.
       const toffeeSource = /toffee/i.test([
         channel && channel.sourceName, channel && channel.category,
-        channel && channel.id, channel && channel.name,
-        ...((channel && Array.isArray(channel.servers)) ? channel.servers.map(sv => sv && sv.sourceName) : [])
+        channel && channel.id, channel && channel.name
       ].filter(Boolean).join(' '));
       if (toffeeSource) {
         if (shakaOk) return ['shaka', ...(hlsOk ? ['hls'] : []), 'native'];
@@ -5241,7 +5284,8 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
         mylist: document.getElementById('viewMyList'),
         settings: document.getElementById('viewSettings'),
         score: document.getElementById('viewScore'),
-        namaz: document.getElementById('viewNamaz')
+        namaz: document.getElementById('viewNamaz'),
+        epg: document.getElementById('viewEpg')
       };
       const indicators = {
         home: document.getElementById('navIndicatorHome'),
@@ -5249,7 +5293,8 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
         mylist: document.getElementById('navIndicatorMylist'),
         settings: document.getElementById('navIndicatorSettings'),
         score: document.getElementById('navIndicatorScore'),
-        namaz: document.getElementById('navIndicatorNamaz')
+        namaz: document.getElementById('navIndicatorNamaz'),
+        epg: document.getElementById('navIndicatorEpg')
       };
 
       Object.keys(views).forEach(k => {
@@ -5274,6 +5319,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
 
       if (viewName === 'discover') renderDiscoverGrid();
       if (viewName === 'mylist') renderMyList();
+      if (viewName === 'epg' && window.epgOpen) window.epgOpen();
       try { window.scrollTo(0, 0); if (window.__sxOnNav) window.__sxOnNav(viewName); } catch (e) {}
     }
 
@@ -6594,6 +6640,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 .sc-pred { margin-top:4px; font-size:10.5px; color:#d1d1d6; display:flex; gap:4px; align-items:center; flex-wrap:wrap; }
 .sc-pred button { border:0; border-radius:999px; background:#2c2c2e; color:#fff; font-size:10.5px; padding:3px 7px; }
 /* Quality chip */
+#sxQ, #sxCC, #playerInfoBtn, #playerQualityBtn { display:none !important; }
 #sxQ { position:absolute; right:12px; top:calc(56px + env(safe-area-inset-top)); z-index:25; display:inline-flex; align-items:center; gap:5px; border:1px solid rgba(255,255,255,.3); background:rgba(0,0,0,.55); color:#fff; border-radius:999px; padding:5px 10px; font-size:11.5px; font-weight:700; backdrop-filter:blur(6px); }
 #playerModal.pl-locked #sxQ, #playerModal.app-inline:not(.app-fs) #sxQ, html.tv-mode #sxQ { display:none !important; }
 </style>
@@ -6731,6 +6778,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 
   /* ================= D) QUALITY CHIP (player) ================= */
   function qualityChip() {
+    return; /* removed */
     var m = $('#playerModal'); if (!m || $('#sxQ')) return;
     var b = document.createElement('button'); b.id = 'sxQ'; b.type = 'button'; b.className = 'ov-fade'; b.setAttribute('data-no-tap', '');
     b.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.4 13a7.5 7.5 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.6 7.6 0 0 0-1.7-1L15 3h-4l-.4 3a7.6 7.6 0 0 0-1.7 1l-2.4-1-2 3.4L6.6 11a7.5 7.5 0 0 0 0 2l-2 1.6 2 3.4 2.4-1c.5.4 1.1.7 1.7 1l.4 3h4l.4-3c.6-.3 1.2-.6 1.7-1l2.4 1 2-3.4-2-1.6zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/></svg><span>Auto</span>';
@@ -6890,6 +6938,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     b.style.display = ''; b.classList.toggle('on', on); b.textContent = on ? 'CC ✓' : 'CC';
   }
   function ccInit() {
+    return; /* removed */
     var m = $('#playerModal'); if (!m || $('#sxCC')) return;
     var b = document.createElement('button'); b.id = 'sxCC'; b.type = 'button'; b.className = 'ov-fade'; b.style.display = 'none'; b.textContent = 'CC'; m.appendChild(b);
     b.addEventListener('click', function (e) { e.stopPropagation(); ccCycle(); });
@@ -7399,5 +7448,211 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 })();
 </script>
 
+<style id="sarah-epg-css">
+.bottom-nav-btn { flex:1 1 0; min-width:0; font-size:10.5px !important; }
+.ep-tabs { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.ep-tabs button { padding:10px 6px; border-radius:12px; background:#202024; color:#e5e5ea; font-size:13px; font-weight:700; border:1px solid rgba(255,255,255,.08); }
+.ep-tabs button.on { background:linear-gradient(135deg,var(--sx-acc),var(--sx-acc2) 55%,var(--sx-acc3)); color:#fff; border-color:rgba(255,255,255,.25); }
+.ep-search { width:100%; background:#141416; border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:10px 12px; font-size:13px; color:#fff; outline:none; }
+.ep-day { font-size:12px; font-weight:800; color:var(--sx-acc-l); margin:14px 2px 6px; letter-spacing:.3px; }
+.ep-row { display:flex; gap:10px; align-items:flex-start; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:10px; margin-bottom:8px; }
+.ep-logo { width:42px; height:42px; border-radius:10px; background:#141416 center/contain no-repeat; flex:none; display:flex; align-items:center; justify-content:center; font-size:18px; }
+.ep-mid { flex:1; min-width:0; }
+.ep-mid b { display:block; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ep-now { font-size:12px; color:#f2f2f7; margin-top:2px; }
+.ep-now i, .ep-next i, .ep-time { font-style:normal; color:#9a9aa1; font-size:11px; }
+.ep-next { font-size:11.5px; color:#b8b8c0; margin-top:3px; }
+.ep-bar { height:3px; border-radius:3px; background:rgba(255,255,255,.12); margin-top:5px; overflow:hidden; }
+.ep-bar u { display:block; height:100%; background:linear-gradient(90deg,var(--sx-acc),var(--sx-acc3)); }
+.ep-play { flex:none; width:36px; height:36px; border-radius:50%; border:0; color:#fff; font-size:14px; background:linear-gradient(135deg,var(--sx-acc),var(--sx-acc3)); }
+.ep-live { display:inline-block; font-size:9.5px; font-weight:800; color:#fff; background:#ef4444; border-radius:5px; padding:1px 5px; margin-right:5px; vertical-align:1px; }
+.ep-sched { margin-top:8px; border-top:1px solid rgba(255,255,255,.08); padding-top:6px; }
+.ep-sched div { display:flex; gap:8px; font-size:12px; padding:4px 0; color:#d1d1d6; }
+.ep-sched div span:first-child { width:62px; flex:none; color:#9a9aa1; }
+.ep-sched div.cur { color:#fff; font-weight:700; }
+.ep-empty { text-align:center; color:#9a9aa1; font-size:12.5px; padding:26px 10px; line-height:1.6; }
+.ep-src { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:12px; font-size:12px; color:#b8b8c0; }
+.ep-src h4 { font-size:12.5px; font-weight:800; color:#fff; margin-bottom:6px; }
+.ep-src .st { display:flex; gap:6px; margin:3px 0; word-break:break-all; }
+.ep-src .row { display:flex; gap:8px; margin-top:8px; }
+.ep-src input { flex:1; min-width:0; background:#141416; border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:8px 10px; font-size:12px; color:#fff; outline:none; }
+.ep-src button { border:0; border-radius:10px; padding:8px 12px; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(135deg,var(--sx-acc),var(--sx-acc3)); }
+.ep-src button.x { background:#2c2c2e; padding:2px 8px; }
+</style>
+<script id="sarah-epg-js">
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var UK = 'sarah_epg_urls';
+  // Default: repo root er epg.xml / epg.xml.gz (apni nijer EPG boshale), tarpor public repo (verify kora nai, fail korle chup kore skip)
+  var DEFAULTS = ['./epg.xml', './epg.xml.gz', 'https://raw.githubusercontent.com/globetvapp/epg/main/Bangladesh/bangladesh1.xml'];
+  var E = { chans: [], idx: {}, status: [], tab: 'events', open: null, at: 0, busy: false, q: '' };
+  var CH = function () { return (typeof CHANNELS !== 'undefined' && CHANNELS) || []; };
+  var UP = function () { return (typeof UPCOMING_POOL !== 'undefined' && UPCOMING_POOL) || []; };
+  var NK = function (n) { try { return typeof nameKey === 'function' ? nameKey(n) : String(n || '').toLowerCase().replace(/[^a-z0-9]+/g, ''); } catch (e) { return ''; } };
+  function userUrls() { try { return JSON.parse(localStorage.getItem(UK) || '[]') || []; } catch (e) { return []; } }
+  function saveUrls(a) { try { localStorage.setItem(UK, JSON.stringify(a)); } catch (e) {} }
+  function esc(t) { return String(t == null ? '' : t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function pt(s) {
+    var m = String(s || '').trim().match(/^(\d{4})\D?(\d{2})\D?(\d{2})\D?(\d{2})\D?(\d{2})\D?(\d{2})?\s*(?:([+-])(\d{2}):?(\d{2}))?/);
+    if (!m) return 0;
+    var off = m[7] ? (m[7] === '-' ? -1 : 1) * (+m[8] * 60 + +m[9]) * 60000 : 0;
+    return Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5], +(m[6] || 0)) - off;
+  }
+  function tm(ts) { try { return new Date(ts).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; } }
+  function dayLabel(ts) {
+    var d = new Date(ts), n = new Date(), a = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime(), b = new Date(n.getFullYear(), n.getMonth(), n.getDate()).getTime();
+    var diff = Math.round((a - b) / 864e5);
+    if (diff === 0) return 'আজ'; if (diff === 1) return 'আগামীকাল'; if (diff === -1) return 'গতকাল';
+    try { return d.toLocaleDateString([], { weekday: 'short', day: 'numeric', month: 'short' }); } catch (e) { return d.toDateString(); }
+  }
+
+  async function getBuf(u) {
+    var ac = new AbortController(), t = setTimeout(function () { ac.abort(); }, 25000);
+    try { var r = await fetch(u, { cache: 'no-store', signal: ac.signal }); if (!r.ok) throw new Error('HTTP ' + r.status); return await r.arrayBuffer(); }
+    finally { clearTimeout(t); }
+  }
+  async function toText(buf) {
+    var u8 = new Uint8Array(buf);
+    if (u8[0] === 0x1f && u8[1] === 0x8b) {
+      if (!window.DecompressionStream) throw new Error('gzip support nai');
+      return await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
+    }
+    return new TextDecoder('utf-8').decode(buf);
+  }
+  function parse(txt) {
+    var doc = new DOMParser().parseFromString(txt, 'text/xml'), map = {}, i, j;
+    var cs = doc.getElementsByTagName('channel');
+    for (i = 0; i < cs.length; i++) {
+      var c = cs[i], id = c.getAttribute('id'), dn = c.getElementsByTagName('display-name'), names = [];
+      for (j = 0; j < dn.length; j++) names.push(dn[j].textContent.trim());
+      var ic = c.getElementsByTagName('icon')[0];
+      map[id] = { id: id, names: names.length ? names : [id], icon: ic ? ic.getAttribute('src') : '', progs: [] };
+    }
+    var now = Date.now(), lo = now - 6 * 3600e3, hi = now + 48 * 3600e3, ps = doc.getElementsByTagName('programme');
+    for (i = 0; i < ps.length; i++) {
+      var p = ps[i], s = pt(p.getAttribute('start')), e = pt(p.getAttribute('stop'));
+      if (!s || !e || e < lo || s > hi) continue;
+      var cid = p.getAttribute('channel'), m = map[cid] || (map[cid] = { id: cid, names: [cid], icon: '', progs: [] });
+      var t = p.getElementsByTagName('title')[0], d = p.getElementsByTagName('desc')[0];
+      m.progs.push({ s: s, e: e, t: t ? t.textContent.trim() : '', d: d ? d.textContent.trim().slice(0, 220) : '' });
+    }
+    return map;
+  }
+  async function loadSrc(u) {
+    var bust = u + (u.indexOf('?') >= 0 ? '&' : '?') + 't=' + Math.floor(Date.now() / 600000), buf;
+    try { buf = await getBuf(bust); }
+    catch (e) {
+      if (/^https?:/i.test(u) && !/raw\.githubusercontent|github\.io/i.test(u)) buf = await getBuf('https://corsproxy.io/?url=' + encodeURIComponent(u));
+      else throw e;
+    }
+    var txt = await toText(buf);
+    if (!/<tv[\s>]/i.test(txt.slice(0, 5000)) && !/<programme/i.test(txt.slice(0, 20000))) throw new Error('XMLTV format na');
+    return parse(txt);
+  }
+  async function loadAll(force) {
+    if (E.busy) return; if (!force && E.at && Date.now() - E.at < 10 * 60e3) return;
+    E.busy = true; render();
+    var srcs = DEFAULTS.concat(userUrls()), res = await Promise.all(srcs.map(async function (u) {
+      try { var m = await loadSrc(u); return { u: u, ok: true, m: m }; } catch (e) { return { u: u, ok: false, err: String(e && e.message || e) }; }
+    }));
+    var all = {}, status = [];
+    res.forEach(function (r) {
+      if (!r.ok) { status.push({ u: r.u, ok: false, err: r.err }); return; }
+      var n = 0;
+      Object.keys(r.m).forEach(function (id) {
+        var c = r.m[id]; if (!c.progs.length) return; n++;
+        var k = NK(c.names[0]) || id, ex = all[k];
+        if (ex) { c.progs.forEach(function (p) { if (!ex.progs.some(function (x) { return x.s === p.s; })) ex.progs.push(p); }); if (!ex.icon) ex.icon = c.icon; c.names.forEach(function (nm) { if (ex.names.indexOf(nm) < 0) ex.names.push(nm); }); }
+        else all[k] = c;
+      });
+      status.push({ u: r.u, ok: true, n: n });
+    });
+    E.chans = Object.keys(all).map(function (k) { var c = all[k]; c.progs.sort(function (a, b) { return a.s - b.s; }); return c; });
+    E.idx = {};
+    E.chans.forEach(function (c) { c.names.concat([c.id]).forEach(function (nm) { var k = NK(nm); if (k && !E.idx[k]) E.idx[k] = c; }); });
+    E.status = status; E.at = Date.now(); E.busy = false; render();
+  }
+  function match(ch) {
+    var k = NK(ch.name); if (!k) return null;
+    if (E.idx[k]) return E.idx[k];
+    if (k.length >= 5) { var ks = Object.keys(E.idx); for (var i = 0; i < ks.length; i++) { if (ks[i].length >= 5 && (ks[i].indexOf(k) >= 0 || k.indexOf(ks[i]) >= 0)) return E.idx[ks[i]]; } }
+    return null;
+  }
+  function hasStream(c) { return !!(c && ((c.servers && c.servers.some(function (s) { return s && (s.url || s.iframe); })) || c.streamUrl || c.iframeUrl)); }
+
+  function eventsHtml(q) {
+    var now = Date.now(), live = [], up = [], seen = {};
+    CH().forEach(function (c) {
+      if (!c || !(c.isEvent || c.startTs) || !hasStream(c)) return;
+      var ts = c.startTs || 0;
+      if (ts && ts > now) up.push({ c: c, ts: ts });
+      else if (!ts || now - ts < 6 * 3600e3) live.push({ c: c, ts: ts });
+    });
+    UP().forEach(function (c) { if (c && c.startTs && c.startTs > now && c.startTs < now + 7 * 864e5) up.push({ c: c, ts: c.startTs, noStream: true }); });
+    var f = function (x) { return !q || (x.c.name + ' ' + (x.c.sourceName || '') + ' ' + (x.c.category || '')).toLowerCase().indexOf(q) >= 0; };
+    live = live.filter(f); up = up.filter(f).filter(function (x) { var k = NK(x.c.name) + x.ts; if (seen[k]) return false; seen[k] = 1; return true; });
+    up.sort(function (a, b) { return a.ts - b.ts; });
+    if (!live.length && !up.length) return '<div class="ep-empty">এখন কোনো লাইভ/আসন্ন ইভেন্ট পাওয়া যায়নি।<br>Sony / Tapmad / Toffee json থেকে ইভেন্ট এলে এখানে দেখাবে।</div>';
+    function row(x, isLive) {
+      var c = x.c, lg = c.logo ? 'background-image:url(' + esc(c.logo) + ')' : '';
+      return '<div class="ep-row"><div class="ep-logo" style="' + lg + '">' + (c.logo ? '' : '📺') + '</div><div class="ep-mid"><b>' + esc(c.name) + '</b><div class="ep-now">' +
+        (isLive ? '<span class="ep-live">LIVE</span>' : '<span class="ep-time">' + tm(x.ts) + '</span> ') + '<i>' + esc(c.sourceName || c.category || '') + '</i></div></div>' +
+        (x.noStream || !hasStream(c) ? '<span class="ep-time" style="align-self:center">শীঘ্রই</span>' : '<button type="button" class="ep-play" data-ep-play="' + esc(c.id) + '">▶</button>') + '</div>';
+    }
+    var h = '';
+    if (live.length) { h += '<div class="ep-day">🔴 এখন লাইভ (' + live.length + ')</div>' + live.slice(0, 80).map(function (x) { return row(x, true); }).join(''); }
+    var last = ''; up.slice(0, 150).forEach(function (x) { var d = dayLabel(x.ts); if (d !== last) { h += '<div class="ep-day">📅 ' + esc(d) + '</div>'; last = d; } h += row(x, false); });
+    return h;
+  }
+  function guideHtml(q) {
+    if (!E.chans.length) return '<div class="ep-empty">' + (E.busy ? 'EPG লোড হচ্ছে…' : 'কোনো EPG ডেটা পাওয়া যায়নি।<br>নিচে EPG (XMLTV) লিংক যোগ করুন, অথবা repo-তে <b>epg.xml</b> / <b>epg.xml.gz</b> রাখুন।') + '</div>';
+    var now = Date.now(), out = [], matched = 0;
+    CH().forEach(function (c) {
+      if (!c || !hasStream(c)) return;
+      if (q && (c.name + '').toLowerCase().indexOf(q) < 0) return;
+      var e = match(c); if (!e) return; matched++;
+      var cur = null, nxt = null;
+      for (var i = 0; i < e.progs.length; i++) { var p = e.progs[i]; if (p.s <= now && p.e > now) { cur = p; nxt = e.progs[i + 1] || null; break; } if (p.s > now) { nxt = p; break; } }
+      out.push({ c: c, e: e, cur: cur, nxt: nxt });
+    });
+    if (!out.length) return '<div class="ep-empty">' + (q ? 'কিছু পাওয়া যায়নি।' : 'EPG লোড হয়েছে (' + E.chans.length + ' চ্যানেল) কিন্তু আপনার কোনো চ্যানেলের নামের সাথে মেলেনি।') + '</div>';
+    return out.slice(0, 120).map(function (x) {
+      var c = x.c, lg = (c.logo || x.e.icon) ? 'background-image:url(' + esc(c.logo || x.e.icon) + ')' : '';
+      var pct = x.cur ? Math.max(2, Math.min(100, (now - x.cur.s) / (x.cur.e - x.cur.s) * 100)) : 0;
+      var sched = '';
+      if (E.open === c.id) sched = '<div class="ep-sched">' + x.e.progs.filter(function (p) { return p.e > now - 3600e3; }).slice(0, 40).map(function (p) { return '<div class="' + (p.s <= now && p.e > now ? 'cur' : '') + '"><span>' + tm(p.s) + '</span><span>' + esc(p.t) + '</span></div>'; }).join('') + '</div>';
+      return '<div class="ep-row" data-ep-open="' + esc(c.id) + '"><div class="ep-logo" style="' + lg + '">' + (lg ? '' : '📺') + '</div><div class="ep-mid"><b>' + esc(c.name) + '</b>' +
+        (x.cur ? '<div class="ep-now"><span class="ep-live">NOW</span>' + esc(x.cur.t) + ' <i>' + tm(x.cur.s) + '–' + tm(x.cur.e) + '</i></div><div class="ep-bar"><u style="width:' + pct + '%"></u></div>' : '<div class="ep-now"><i>এখন তথ্য নেই</i></div>') +
+        (x.nxt ? '<div class="ep-next">পরে: ' + esc(x.nxt.t) + ' <i>' + tm(x.nxt.s) + '</i></div>' : '') + sched + '</div><button type="button" class="ep-play" data-ep-play="' + esc(c.id) + '">▶</button></div>';
+    }).join('');
+  }
+  function srcHtml() {
+    var us = userUrls(), h = '<h4>📡 EPG সোর্স' + (E.at ? ' • ' + tm(E.at) + ' এ আপডেট' : '') + '</h4>';
+    E.status.forEach(function (s) { h += '<div class="st"><span>' + (s.ok ? '✅' : '⚠️') + '</span><span>' + esc(s.u.replace(/^https?:\/\//, '').slice(0, 60)) + ' — ' + (s.ok ? s.n + ' চ্যানেল' : esc(s.err)) + (us.indexOf(s.u) >= 0 ? ' <button type="button" class="x" data-ep-del="' + esc(s.u) + '">✕</button>' : '') + '</span></div>'; });
+    h += '<div class="row"><input id="epUrl" type="text" placeholder="https://.../epg.xml বা epg.xml.gz"><button type="button" id="epAdd">যোগ</button></div>';
+    return h;
+  }
+  function render() {
+    var b = $('#epBody'); if (!b) return;
+    var q = (E.q || '').trim().toLowerCase();
+    b.innerHTML = E.tab === 'events' ? eventsHtml(q) : guideHtml(q);
+    var sc = $('#epSrc'); if (sc) { sc.style.display = E.tab === 'guide' ? '' : 'none'; if (E.tab === 'guide' && document.activeElement !== $('#epUrl')) sc.innerHTML = srcHtml(); }
+    document.querySelectorAll('[data-ep-tab]').forEach(function (x) { x.classList.toggle('on', x.getAttribute('data-ep-tab') === E.tab); });
+  }
+  window.epgOpen = function () { render(); loadAll(false); };
+  document.addEventListener('click', function (e) {
+    var t = e.target; var q; if (!t.closest) return;
+    if ((q = t.closest('[data-ep-tab]'))) { E.tab = q.getAttribute('data-ep-tab'); render(); if (E.tab === 'guide') loadAll(false); return; }
+    if (t.closest('#epRefresh')) { E.at = 0; loadAll(true); return; }
+    if ((q = t.closest('[data-ep-play]'))) { e.stopPropagation(); if (typeof openPlayerByChannelId === 'function') openPlayerByChannelId(q.getAttribute('data-ep-play')); return; }
+    if ((q = t.closest('[data-ep-del]'))) { var u = q.getAttribute('data-ep-del'); saveUrls(userUrls().filter(function (x) { return x !== u; })); E.at = 0; loadAll(true); return; }
+    if (t.closest('#epAdd')) { var v = ($('#epUrl').value || '').trim(); if (/^https?:\/\//i.test(v) || /^\.\//.test(v)) { var a = userUrls(); if (a.indexOf(v) < 0) a.push(v); saveUrls(a); E.at = 0; loadAll(true); } return; }
+    if ((q = t.closest('[data-ep-open]'))) { var id = q.getAttribute('data-ep-open'); E.open = E.open === id ? null : id; render(); return; }
+  });
+  document.addEventListener('input', function (e) { if (e.target && e.target.id === 'epSearch') { E.q = e.target.value; render(); } });
+  setInterval(function () { var v = $('#viewEpg'); if (v && !v.classList.contains('hidden')) render(); }, 60000);
+})();
+</script>
 </body>
 </html>
