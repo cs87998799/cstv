@@ -203,7 +203,7 @@
     /* ===== App UI (WebView / installed app) ===== */
     #appUI { display: none; position: fixed; inset: 0; flex-direction: column; background: #000; color: #fff; z-index: 10; }
     html.app-mode body { background: #000; padding-bottom: 0 !important; display: block; min-height: 0; }
-    html.app-mode body > *:not(#appUI):not(#toastBox):not(#splashScreen):not(#phoneLoginModal):not(#customStreamModal):not(#subscribeModal):not(#dailyModal):not(style):not(script) { display: none !important; }
+    html.app-mode body > *:not(#appUI):not(#toastBox):not(#splashScreen):not(#phoneLoginModal):not(#customStreamModal):not(#dailyModal):not(style):not(script) { display: none !important; }
     html.app-mode #appUI { display: flex; }
     #appCatBar, #appGrid { -webkit-overflow-scrolling: touch; }
     .app-chip { padding: 11px 22px; border-radius: 999px; background: #2c2c2e; color: #e5e5e5; font-size: 16px; font-weight: 500; white-space: nowrap; flex-shrink: 0; transition: background .15s, transform .15s; }
@@ -698,11 +698,6 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .bg-pink-500\/15 { background-co
 html[data-sx-theme]:not([data-sx-theme="pink"]) .bg-pink-500\/20 { background-color: rgba(var(--sx-rgb),.20) !important; }
 html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shadow-color: rgba(var(--sx-rgb),.3) !important; }
 </style>
-<script>
-/* ===== OTP সার্ভারের URL — otp-server/README.md দেখুন. ফাঁকা থাকলে কোড ছাড়াই নম্বর সেভ হবে ===== */
-window.SARAH_OTP_BASE = '';
-window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.replace(/\/$/, '') + '/otp/send', verify: window.SARAH_OTP_BASE.replace(/\/$/, '') + '/otp/verify' } : null;
-</script>
 </head>
 <body class="min-h-screen bg-[#000000] text-white flex flex-col justify-between pb-20">
 
@@ -728,19 +723,12 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
         <span id="jsonStatusLabel" class="text-[9px] text-emerald-400 font-semibold tracking-tight self-end pb-1">● লাইভ</span>
       </button>
 
-      <!-- Right Actions: Live Events + Search + Subscribe + Sign In -->
+      <!-- Right Actions: Search + Sign In -->
       <div class="flex items-center gap-2">
         <button id="headerSearchBtn" aria-label="Search" class="w-9 h-9 rounded-full bg-white/8 border border-white/15 text-white flex items-center justify-center active:scale-95 transition">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"/><path d="M21 21l-4.35-4.35"/></svg>
         </button>
-        <button id="subscribeTopBtn" class="toffee-gradient text-white text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-md shadow-pink-600/30 active:scale-95 transition">
-          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
-          </svg>
-          <span id="subscribeTopText">Subscribe</span>
-        </button>
-
-        <button id="signInTopBtn" class="border border-white/60 hover:border-pink-400 text-white text-xs sm:text-sm font-medium px-3.5 py-1.5 rounded-full transition active:scale-95 flex items-center gap-1.5">
+<button id="signInTopBtn" class="border border-white/60 hover:border-pink-400 text-white text-xs sm:text-sm font-medium px-3.5 py-1.5 rounded-full transition active:scale-95 flex items-center gap-1.5">
           <span id="signInTopText">Sign In</span>
         </button>
       </div>
@@ -886,7 +874,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
           <div id="settingsAvatar" class="w-12 h-12 rounded-full toffee-gradient flex items-center justify-center text-lg font-extrabold">G</div>
           <div>
             <h3 id="settingsUserName" class="font-bold text-base">Guest User</h3>
-            <p id="settingsUserPhone" class="text-xs text-slate-400">Not signed in • Tap Sign In to sync</p>
+            <p id="settingsUserPhone" class="text-xs text-slate-400">Not signed in • Create Account / Login</p>
           </div>
         </div>
         <button id="settingsAuthActionBtn" class="px-4 py-2 rounded-xl toffee-gradient text-xs font-bold shadow">Sign In</button>
@@ -1116,7 +1104,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
 
   <!-- Player-er niche Songbad Shironam (portrait split) -->
   <div id="plNews" class="sx-news sx-news-pl">
-    <div class="sx-nw-head"><b>📰 সংবাদ শিরোনাম</b><button type="button" class="sx-nw-refresh" data-nw-refresh aria-label="রিফ্রেশ">↻</button></div>
+    <div class="sx-nw-head"><b>🏏 খেলার খবর</b><button type="button" class="sx-nw-refresh" data-nw-refresh aria-label="রিফ্রেশ">↻</button></div>
     <div class="sx-nw-chips" data-nw-chips></div>
     <div class="sx-nw-list" id="nwPlayerList"></div>
   </div>
@@ -1143,89 +1131,25 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
     <div id="appGrid" class="flex-1 overflow-y-auto"></div>
   </div>
 
-  <!-- PHONE LOGIN MODAL -->
+  <!-- USERNAME / PASSWORD ACCOUNT MODAL -->
   <div id="phoneLoginModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="w-full max-w-sm rounded-3xl bg-[#1c1c1e] border border-pink-500/30 p-6 shadow-2xl space-y-5">
       <div class="flex items-center justify-between">
-        <div>
-          <h3 class="text-lg font-extrabold text-white">Sign In to Sarah TV</h3>
-          <p class="text-xs text-slate-400">আপনার মোবাইল নম্বর দিয়ে সাইন ইন করুন</p>
-        </div>
+        <div><h3 id="accountModalTitle" class="text-lg font-extrabold text-white">Create Sarah TV Account</h3><p id="accountModalSub" class="text-xs text-slate-400">প্রথমে একটি Username ও Password তৈরি করুন</p></div>
         <button id="closeLoginModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
       </div>
-
-      <div id="loginStepPhone" class="space-y-4">
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Mobile Number (Bangladesh)</label>
-          <div class="flex items-center gap-2">
-            <span class="px-3 py-2.5 rounded-xl bg-white/10 border border-white/15 text-sm font-bold text-white">+880</span>
-            <input id="phoneInput" type="tel" maxlength="11" placeholder="1712345678" class="flex-1 bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-pink-500" />
-          </div>
-        </div>
-        <button id="sendOtpBtn" class="w-full py-3 rounded-xl toffee-gradient font-bold text-sm text-white shadow-lg shadow-pink-600/30 active:scale-95 transition">Send OTP Code</button>
+      <div class="space-y-3">
+        <div><label class="block text-xs font-semibold text-slate-300 mb-1.5">Username</label><input id="accountUsernameInput" type="text" maxlength="24" autocomplete="username" placeholder="আপনার username লিখুন" class="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-pink-500" /></div>
+        <div><label class="block text-xs font-semibold text-slate-300 mb-1.5">Password</label><input id="accountPasswordInput" type="password" minlength="8" autocomplete="new-password" placeholder="কমপক্ষে ৮ অক্ষর" class="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-pink-500" /></div>
+        <div id="confirmPasswordWrap"><label class="block text-xs font-semibold text-slate-300 mb-1.5">Confirm Password</label><input id="accountConfirmPasswordInput" type="password" minlength="8" autocomplete="new-password" placeholder="আবার Password লিখুন" class="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-pink-500" /></div>
+        <button id="createAccountBtn" type="button" class="w-full py-3 rounded-xl toffee-gradient font-bold text-sm text-white shadow-lg shadow-pink-600/30 active:scale-95 transition">Create Account</button>
+        <button id="loginAccountBtn" type="button" class="hidden w-full py-3 rounded-xl toffee-gradient font-bold text-sm text-white shadow-lg shadow-pink-600/30 active:scale-95 transition">Login</button>
+        <p class="text-center text-xs text-slate-400"><span id="accountSwitchPrompt">আগে Account আছে?</span><button id="switchAccountModeBtn" type="button" class="font-bold text-pink-400 ml-1">Login করুন</button></p>
       </div>
-
-      <div id="loginStepOtp" class="hidden space-y-4">
-        <div class="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-xs text-emerald-200">
-          OTP sent to <span id="otpSentPhoneLabel" class="font-bold">+88017...</span>! <br/>
-          <span>SMS-এ পাঠানো কোডটি নিচে লিখুন।</span>
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Enter OTP Code</label>
-          <input id="otpInput" type="text" maxlength="6" placeholder="• • • • • •" inputmode="numeric" autocomplete="one-time-code" class="w-full text-center tracking-[0.5em] font-extrabold text-lg bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-pink-500" />
-        </div>
-        <div class="flex items-center justify-between gap-2">
-          <button id="resendOtpBtn" type="button" class="px-3 py-2.5 rounded-xl bg-white/10 text-xs font-semibold text-slate-300" disabled>আবার পাঠান</button>
-          <button id="backToPhoneStepBtn" class="px-4 py-2.5 rounded-xl bg-white/10 text-xs font-semibold text-slate-300">← Change Number</button>
-          <button id="verifyOtpBtn" class="flex-1 py-2.5 rounded-xl toffee-gradient font-bold text-sm text-white shadow-lg">Verify & Login</button>
-        </div>
-      </div>
+      <p class="text-[10px] leading-relaxed text-slate-500">Online Sarah TV Account: Server-এর মাধ্যমে নিরাপদে সংরক্ষিত হবে।</p>
     </div>
   </div>
 
-  <!-- SUBSCRIBE / PREMIUM PASS MODAL -->
-  <div id="subscribeModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="w-full max-w-sm rounded-3xl bg-[#1c1c1e] border border-pink-500/30 p-6 shadow-2xl space-y-4">
-      <div class="flex items-center justify-between">
-        <span class="px-3 py-1 rounded-full toffee-gradient text-xs font-bold">👑 Sarah TV VIP PASS</span>
-        <button id="closeSubscribeModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
-      </div>
-      <h3 class="text-xl font-extrabold">Unlock All Sarah TV Live Sports & VIP Channels</h3>
-      <p class="text-xs text-slate-300">সব প্রিমিয়াম চ্যানেল দেখুন Full HD-তে, বিজ্ঞাপন ছাড়া।</p>
-      <div class="space-y-2.5 pt-1">
-        <button data-plan="Monthly VIP (৳99)" class="sub-plan-btn w-full p-3.5 rounded-2xl bg-pink-500/15 border-2 border-pink-500 flex items-center justify-between text-left">
-          <div>
-            <p class="font-bold text-sm text-white">30 Days Sarah TV VIP</p>
-            <p class="text-xs text-pink-300">bKash / Nagad / Mobile Balance</p>
-          </div>
-          <span class="text-lg font-extrabold text-white">৳99</span>
-        </button>
-        <button data-plan="Weekly Sports (৳39)" class="sub-plan-btn w-full p-3.5 rounded-2xl bg-white/5 border border-white/15 hover:border-pink-400 flex items-center justify-between text-left">
-          <div>
-            <p class="font-bold text-sm text-white">7 Days Sports Pass</p>
-            <p class="text-xs text-slate-400">All Live Cricket & Football</p>
-          </div>
-          <span class="text-lg font-extrabold text-white">৳39</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- CUSTOM M3U8 STREAM MODAL -->
-  <div id="customStreamModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="w-full max-w-sm rounded-3xl bg-[#1c1c1e] border border-white/20 p-6 shadow-2xl space-y-4">
-      <div class="flex items-center justify-between">
-        <h3 class="text-base font-bold">Play Any Video Link</h3>
-        <button id="closeCustomStreamModalBtn" class="w-8 h-8 rounded-full bg-white/10 text-slate-300 flex items-center justify-center">✕</button>
-      </div>
-      <input id="customM3u8Input" type="url" placeholder=".m3u8 / .mpd / .mp4 / .flv / .ts / YouTube link" class="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500" />
-      <p class="text-[10px] text-slate-400 leading-relaxed">Supported: m3u8 (HLS), mpd (DASH), mp4, webm, mkv, flv, ts, mp3 ar YouTube / Vimeo / Dailymotion link.</p>
-      <button id="playCustomM3u8Btn" class="w-full py-2.5 rounded-xl toffee-gradient text-xs font-bold">Play Now</button>
-    </div>
-  </div>
-
-  <!-- TOAST NOTIFICATION -->
-  <div id="toastBox" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-full bg-pink-600 text-white text-xs font-bold shadow-xl">Notification</div>
 
   <!-- BOTTOM NAVIGATION BAR -->
   <nav class="fixed bottom-0 left-0 right-0 z-30 bg-[#1c1c1e]/95 backdrop-blur-md border-t border-white/10">
@@ -1240,12 +1164,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
         <span>Discover</span>
       </button>
-      <button data-nav="epg" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
-        <span id="navIndicatorEpg" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
-        <span class="bn-emo">📅</span>
-        <span>Guide</span>
-      </button>
-      <button data-nav="score" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
+<button data-nav="score" class="bottom-nav-btn flex flex-col items-center gap-1 text-slate-400 hover:text-white font-medium text-xs relative">
         <span id="navIndicatorScore" class="w-8 h-1 rounded-full bg-pink-500 absolute -top-2 hidden"></span>
         <span class="bn-emo">⚽</span>
         <span>Score</span>
@@ -2426,7 +2345,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
       isPlaying: true,
       isMuted: false,
       favorites: [],
-      userPhone: null,
+      userName: null,
       isSubscribed: false,
       quality: '1080p',
       autoplay: true,
@@ -2443,7 +2362,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
         if (raw) {
           const parsed = JSON.parse(raw);
           if (Array.isArray(parsed.favorites)) state.favorites = parsed.favorites;
-          if (parsed.userPhone) state.userPhone = parsed.userPhone;
+          if (parsed.userName) state.userName = parsed.userName;
           if (typeof parsed.isSubscribed === 'boolean') state.isSubscribed = parsed.isSubscribed;
           if (parsed.quality) state.quality = parsed.quality;
           if (parsed.jsonUrl) state.jsonUrl = parsed.jsonUrl;
@@ -2459,7 +2378,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
       try {
         localStorage.setItem('cstv_live_state_v2', JSON.stringify({
           favorites: state.favorites,
-          userPhone: state.userPhone,
+          userName: state.userName,
           isSubscribed: state.isSubscribed,
           quality: state.quality,
           jsonUrl: state.jsonUrl,
@@ -2644,7 +2563,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
       const saved = state.favorites.includes(ch.id);
       const showVideo = !isUp && !noStream;
       el.innerHTML = `
-        <div class="hs-art vid${isUp ? ' poster' : ''}"><span>${label}</span>${ch.logo ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async" onerror="logoFail(this,'remove')" src="${esc(ch.logo)}" alt="" />` : ''}${showVideo ? `<video class="hs-vid" muted playsinline webkit-playsinline preload="none" data-play-channel="${esc(ch.id)}"></video><button type="button" class="hs-mute" aria-label="Sound">🔇</button>` : ''}</div>
+        <div class="hs-art vid${isUp ? ' poster' : ''}"><span>${label}</span>${(ch.poster || ch.banner || ch.thumbnail || ch.image || ch.logo) ? `<img referrerpolicy="no-referrer" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async" onerror="logoFail(this,'remove')" src="${esc(ch.poster || ch.banner || ch.thumbnail || ch.image || ch.logo)}" alt="" />` : ''}${showVideo ? `<video class="hs-vid" muted playsinline webkit-playsinline preload="none" data-play-channel="${esc(ch.id)}"></video><button type="button" class="hs-mute" aria-label="Sound">🔇</button>` : ''}</div>
         <div class="hs-body">
           <div class="hs-brandline"><span class="hs-live${isUp ? ' up' : ''}"${isUp && ch.startTs ? ` data-up-ts="${ch.startTs}"` : ''}><i></i>${isUp ? 'UPCOMING' + (relTxt ? ' • ' + esc(relTxt) : '') : 'LIVE'}</span>${providerLogo}</div>
           <h2 class="hs-title">${esc(ch.name)}</h2>
@@ -3081,7 +3000,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
         <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-2">
           <button data-play-channel="${ch.id}" class="flex items-center gap-3 text-left flex-1 overflow-hidden">
             <div class="w-12 h-12 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-xs ${ch.badgeColor} overflow-hidden p-1">
-              ${ch.logo ? `<img loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="logoFail(this,'remove')" src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" />` : ch.shortLabel}
+              ${(ch.poster || ch.banner || ch.thumbnail || ch.image || ch.logo) ? `<img loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="logoFail(this,'remove')" src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" />` : ch.shortLabel}
             </div>
             <div class="overflow-hidden">
               <p class="font-bold text-xs sm:text-sm text-white truncate">${ch.name}</p>
@@ -5259,27 +5178,23 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
 
     function syncAuthAndSettingsUI() {
       const signInTopText = document.getElementById('signInTopText');
-      const subscribeTopText = document.getElementById('subscribeTopText');
       const settingsUserName = document.getElementById('settingsUserName');
       const settingsUserPhone = document.getElementById('settingsUserPhone');
       const settingsAvatar = document.getElementById('settingsAvatar');
       const settingsAuthActionBtn = document.getElementById('settingsAuthActionBtn');
-
-      if (state.userPhone) {
-        signInTopText.textContent = state.userPhone.slice(-4);
-        settingsUserName.textContent = 'Sarah TV Verified User';
-        settingsUserPhone.textContent = `${state.userPhone} • Logged In`;
-        settingsAvatar.textContent = '✓';
-        settingsAuthActionBtn.textContent = 'Sign Out';
+      if (state.userName) {
+        if (signInTopText) signInTopText.textContent = state.userName;
+        if (settingsUserName) settingsUserName.textContent = state.userName;
+        if (settingsUserPhone) settingsUserPhone.textContent = 'Username Account • Logged In';
+        if (settingsAvatar) settingsAvatar.textContent = state.userName.slice(0,1).toUpperCase();
+        if (settingsAuthActionBtn) settingsAuthActionBtn.textContent = 'Sign Out';
       } else {
-        signInTopText.textContent = 'Sign In';
-        settingsUserName.textContent = 'Guest User';
-        settingsUserPhone.textContent = 'Not signed in • Tap Sign In with Phone';
-        settingsAvatar.textContent = 'G';
-        settingsAuthActionBtn.textContent = 'Sign In';
+        if (signInTopText) signInTopText.textContent = 'Sign In';
+        if (settingsUserName) settingsUserName.textContent = 'Guest User';
+        if (settingsUserPhone) settingsUserPhone.textContent = 'Not signed in • Create Account / Login';
+        if (settingsAvatar) settingsAvatar.textContent = 'G';
+        if (settingsAuthActionBtn) settingsAuthActionBtn.textContent = 'Sign In';
       }
-
-      subscribeTopText.textContent = state.isSubscribed ? 'VIP Active' : 'Subscribe';
       document.getElementById('settingQualitySelect').value = state.quality;
       document.getElementById('customJsonUrlInput').value = state.jsonUrl || './channels.json';
     }
@@ -5538,114 +5453,115 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
       if (window.__CSTV_TV__) initTvMode();
 
       const loginModal = document.getElementById('phoneLoginModal');
-      function openLoginModal() {
-        loginModal.classList.remove('hidden');
-        loginModal.classList.add('flex');
-        document.getElementById('loginStepPhone').classList.remove('hidden');
-        document.getElementById('loginStepOtp').classList.add('hidden');
-      }
-      function closeLoginModal() {
-        loginModal.classList.add('hidden');
-        loginModal.classList.remove('flex');
-      }
-
-      document.getElementById('signInTopBtn').addEventListener('click', () => {
-        if (state.userPhone) {
-          switchMainView('settings');
-        } else {
-          openLoginModal();
-        }
-      });
-
-      document.getElementById('settingsAuthActionBtn').addEventListener('click', () => {
-        if (state.userPhone) {
-          state.userPhone = null;
-          saveState();
-          syncAuthAndSettingsUI();
-          showToast('Signed out successfully');
-        } else {
-          openLoginModal();
-        }
-      });
-
-      document.getElementById('closeLoginModalBtn').addEventListener('click', closeLoginModal);
-
-      // Real SMS login: set window.SARAH_OTP_API = { send: 'https://your-server/otp/send', verify: 'https://your-server/otp/verify' } (POST JSON).
-      // send -> {phone}; verify -> {phone, code} and must answer {ok:true}. Without it, the number is simply saved on this device (no fake code).
-      const OTP_API = window.SARAH_OTP_API || null;
-      const getPhone = () => document.getElementById('phoneInput').value.replace(/\D/g, '').replace(/^0+/, '');
-      const finishLogin = (rawPhone) => {
-        state.userPhone = `+880${rawPhone}`;
-        saveState();
-        syncAuthAndSettingsUI();
-        closeLoginModal();
-        showToast(`Sarah TV-তে সাইন ইন হয়েছে: ${state.userPhone}`);
-      };
-      const postJson = async (url, body) => {
-        const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-        const j = await r.json().catch(() => null);
-        if (!r.ok) { const err = new Error('http ' + r.status); err.msg = j && j.message; throw err; }
-        return j || { ok: true };
-      };
-
-      document.getElementById('sendOtpBtn').addEventListener('click', async () => {
-        const rawPhone = getPhone();
-        if (rawPhone.length !== 10) { showToast('সঠিক মোবাইল নম্বর দিন (যেমন 1712345678)'); return; }
-        if (!OTP_API || !OTP_API.send) { finishLogin(rawPhone); return; }
-        const btn = document.getElementById('sendOtpBtn');
-        btn.disabled = true; btn.textContent = 'পাঠানো হচ্ছে...';
-        try {
-          await postJson(OTP_API.send, { phone: `+880${rawPhone}` });
-          document.getElementById('otpSentPhoneLabel').textContent = `+880${rawPhone}`;
-          document.getElementById('otpInput').value = '';
-          document.getElementById('loginStepPhone').classList.add('hidden');
-          document.getElementById('loginStepOtp').classList.remove('hidden');
-          document.getElementById('otpInput').focus();
-          startResendTimer();
-        } catch (e) { showToast((e && e.msg) || 'কোড পাঠানো যায়নি, একটু পরে আবার চেষ্টা করুন'); }
-        btn.disabled = false; btn.textContent = 'Send OTP Code';
-      });
-
-      let resendT = null;
-      const startResendTimer = () => {
-        const b = document.getElementById('resendOtpBtn'); let n = 60; clearInterval(resendT); b.disabled = true; b.textContent = `আবার পাঠান (${n})`;
-        resendT = setInterval(() => { n--; if (n <= 0) { clearInterval(resendT); b.disabled = false; b.textContent = 'আবার পাঠান'; } else b.textContent = `আবার পাঠান (${n})`; }, 1000);
-      };
-      document.getElementById('resendOtpBtn').addEventListener('click', () => { if (!document.getElementById('resendOtpBtn').disabled) document.getElementById('sendOtpBtn').click(); });
-      document.getElementById('backToPhoneStepBtn').addEventListener('click', () => {
-        document.getElementById('loginStepOtp').classList.add('hidden');
-        document.getElementById('loginStepPhone').classList.remove('hidden');
-      });
-
-      document.getElementById('verifyOtpBtn').addEventListener('click', async () => {
-        const code = document.getElementById('otpInput').value.trim();
-        const rawPhone = getPhone();
-        if (!/^\d{4,6}$/.test(code)) { showToast('SMS-এর কোডটি লিখুন'); return; }
-        try {
-          const res = await postJson(OTP_API.verify, { phone: `+880${rawPhone}`, code });
-          if (res && res.ok !== false) finishLogin(rawPhone); else showToast('কোডটি ভুল, আবার চেষ্টা করুন');
-        } catch (e) { showToast((e && e.msg) || 'ভেরিফাই করা যায়নি, আবার চেষ্টা করুন'); }
-      });
-
-      const subModal = document.getElementById('subscribeModal');
-      document.getElementById('subscribeTopBtn').addEventListener('click', () => {
-        subModal.classList.remove('hidden');
-        subModal.classList.add('flex');
-      });
-      document.getElementById('closeSubscribeModalBtn').addEventListener('click', () => {
-        subModal.classList.add('hidden');
-        subModal.classList.remove('flex');
-      });
-      document.querySelectorAll('.sub-plan-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          state.isSubscribed = true;
-          saveState();
-          syncAuthAndSettingsUI();
-          subModal.classList.add('hidden');
-          subModal.classList.remove('flex');
-          showToast(`Activated ${btn.dataset.plan}! 👑`);
+      // Set this after deploying the Sarah TV Cloudflare Worker backend.
+      const SARAH_AUTH_API = 'https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev';
+      const SARAH_TOKEN_KEY = 'sarah_tv_auth_token_v1';
+      let accountMode = 'create';
+      const normalizeUsername = value => String(value || '').trim().toLowerCase();
+      const authToken = () => { try { return localStorage.getItem(SARAH_TOKEN_KEY) || ''; } catch (e) { return ''; } };
+      const setAuthToken = token => { try { if (token) localStorage.setItem(SARAH_TOKEN_KEY, token); else localStorage.removeItem(SARAH_TOKEN_KEY); } catch (e) {} };
+      async function authRequest(path, payload, method) {
+        const headers = { 'Content-Type':'application/json' };
+        const token = authToken();
+        if (token) headers.Authorization = 'Bearer ' + token;
+        const response = await fetch(SARAH_AUTH_API + path, {
+          method: method || (payload ? 'POST' : 'GET'),
+          headers,
+          body: payload ? JSON.stringify(payload) : undefined,
+          mode:'cors',
+          credentials:'omit'
         });
+        let data = {};
+        try { data = await response.json(); } catch (e) {}
+        if (!response.ok) throw new Error(data.error || 'SERVER_ERROR');
+        return data;
+      }
+      function setAccountMode(mode) {
+        accountMode = mode;
+        const create = mode === 'create';
+        document.getElementById('accountModalTitle').textContent = create ? 'Create Sarah TV Account' : 'Login to Sarah TV';
+        document.getElementById('accountModalSub').textContent = create ? 'প্রথমে একটি Username ও Password তৈরি করুন' : 'আপনার Username ও Password দিয়ে Login করুন';
+        document.getElementById('confirmPasswordWrap').classList.toggle('hidden', !create);
+        document.getElementById('createAccountBtn').classList.toggle('hidden', !create);
+        document.getElementById('loginAccountBtn').classList.toggle('hidden', create);
+        document.getElementById('accountSwitchPrompt').textContent = create ? 'আগে Account আছে?' : 'নতুন এখানে?';
+        document.getElementById('switchAccountModeBtn').textContent = create ? 'Login করুন' : 'Create Account';
+        document.getElementById('accountPasswordInput').setAttribute('autocomplete', create ? 'new-password' : 'current-password');
+      }
+      function openLoginModal() {
+        setAccountMode('login');
+        loginModal.classList.remove('hidden'); loginModal.classList.add('flex');
+        document.getElementById('accountUsernameInput').value = state.userName || '';
+        document.getElementById('accountPasswordInput').value = '';
+        document.getElementById('accountConfirmPasswordInput').value = '';
+      }
+      function closeLoginModal() { loginModal.classList.add('hidden'); loginModal.classList.remove('flex'); }
+      const finishAccountLogin = (username, token) => {
+        if (token) setAuthToken(token);
+        state.userName = username; saveState(); syncAuthAndSettingsUI(); closeLoginModal();
+        showToast(`Welcome to Sarah TV, ${username}!`);
+      };
+      document.getElementById('signInTopBtn').addEventListener('click', () => state.userName ? switchMainView('settings') : openLoginModal());
+      document.getElementById('settingsAuthActionBtn').addEventListener('click', async () => {
+        if (state.userName) {
+          try { await authRequest('/api/logout', {}); } catch (e) {}
+          setAuthToken('');
+          state.userName = null; saveState(); syncAuthAndSettingsUI(); showToast('Signed out successfully');
+        } else openLoginModal();
       });
+      document.getElementById('closeLoginModalBtn').addEventListener('click', closeLoginModal);
+      document.getElementById('switchAccountModeBtn').addEventListener('click', () => setAccountMode(accountMode === 'create' ? 'login' : 'create'));
+
+      document.getElementById('createAccountBtn').addEventListener('click', async () => {
+        const raw = document.getElementById('accountUsernameInput').value.trim();
+        const username = normalizeUsername(raw);
+        const password = document.getElementById('accountPasswordInput').value;
+        const confirm = document.getElementById('accountConfirmPasswordInput').value;
+        if (!/^[a-zA-Z0-9_.-]{3,24}$/.test(raw)) return showToast('Username ৩–২৪ অক্ষর দিন (English letter/number/._-)');
+        if (password.length < 8 || password.length > 128) return showToast('Password ৮–১২৮ অক্ষরের হতে হবে');
+        if (password !== confirm) return showToast('দুটি Password মিলছে না');
+        const btn = document.getElementById('createAccountBtn');
+        btn.disabled = true; btn.textContent = 'Creating...';
+        try {
+          const result = await authRequest('/api/register', { username, password });
+          finishAccountLogin(result.username || raw, result.token);
+        } catch (e) {
+          const msg = e.message === 'USERNAME_TAKEN' ? 'এই Username আগে থেকেই আছে'
+            : e.message === 'INVALID_USERNAME' ? 'Username ৩–২৪ অক্ষরের হতে হবে'
+            : e.message === 'WEAK_PASSWORD' ? 'Password কমপক্ষে ৮ অক্ষরের হতে হবে'
+            : e.message === 'AUTH_API_NOT_CONFIGURED' ? 'Server URL এখনো সেট করা হয়নি'
+            : 'Account তৈরি হয়নি। Server URL ও deployment পরীক্ষা করুন';
+          showToast(msg);
+        } finally { btn.disabled = false; btn.textContent = 'Create Account'; }
+      });
+      document.getElementById('loginAccountBtn').addEventListener('click', async () => {
+        const username = normalizeUsername(document.getElementById('accountUsernameInput').value);
+        const password = document.getElementById('accountPasswordInput').value;
+        if (!username || !password) return showToast('Username ও Password লিখুন');
+        const btn = document.getElementById('loginAccountBtn');
+        btn.disabled = true; btn.textContent = 'Checking...';
+        try {
+          const result = await authRequest('/api/login', { username, password });
+          finishAccountLogin(result.username || username, result.token);
+        } catch (e) {
+          showToast(e.message === 'INVALID_CREDENTIALS' ? 'Username অথবা Password সঠিক নয়' : 'Login হয়নি। Server connection পরীক্ষা করুন');
+        } finally { btn.disabled = false; btn.textContent = 'Login'; }
+      });
+
+      // Restore a valid server session on page load; the password is never stored in the browser.
+      (async function restoreSarahServerSession() {
+        const token = authToken();
+        if (!token) return;
+        try {
+          const result = await authRequest('/api/me');
+          if (result && result.username) {
+            state.userName = result.username; saveState(); syncAuthAndSettingsUI();
+          } else { setAuthToken(''); }
+        } catch (e) {
+          setAuthToken('');
+          state.userName = null; saveState(); syncAuthAndSettingsUI();
+        }
+      })();
 
       document.getElementById('settingQualitySelect').addEventListener('change', (e) => {
         state.quality = e.target.value;
@@ -6416,8 +6332,11 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     { n: 'ডিবিসি নিউজ', u: 'https://www.dbcnews.tv/rss.xml', k: 'tv' },
     { n: 'চ্যানেল ২৪', u: 'https://www.channel24bd.tv/rss.xml', k: 'tv' }
   ];
-  var CATS = [['all', 'সব'], ['sports', 'খেলা'], ['desh', 'দেশ'], ['media', 'মিডিয়া'], ['intl', 'আন্তর্জাতিক']];
+  var CATS = [['all', 'সব খেলা'], ['cricket', 'ক্রিকেট'], ['football', 'ফুটবল'], ['other', 'অন্যান্য']];
   var CAT_LABEL = { sports: 'খেলা', desh: 'দেশ', media: 'মিডিয়া', intl: 'আন্তর্জাতিক' };
+  var RE_CRICKET = /ক্রিকেট|টেস্ট|ওয়ানডে|টি-?টোয়েন্টি|বিপিএল|আইপিএল|উইকেট|ব্যাটার|বোলার|সাকিব|তামিম|মুশফিক|মিরাজ|cricket|\bBPL\b|\bIPL\b|\bT20\b|\bODI\b|wicket|\bTest\b/i;
+  var RE_FOOTBALL = /ফুটবল|গোল|ফিফা|সাফ|মেসি|রোনালদো|নেইমার|এমবাপ্পে|লিগ|ম্যানচেস্টার|বার্সেলোনা|রিয়াল মাদ্রিদ|football|\bgoal|FIFA|SAFF|league|Messi|Ronaldo/i;
+  function subCat(t) { return RE_CRICKET.test(t) ? 'cricket' : (RE_FOOTBALL.test(t) ? 'football' : 'other'); }
   var RE_SPORTS = /ক্রিকেট|ফুটবল|ম্যাচ|টেস্ট|ওয়ানডে|টি-?টোয়েন্টি|বিপিএল|আইপিএল|বিশ্বকাপ|লিগ|গোল|সাকিব|তামিম|মুশফিক|মিরাজ|মেসি|রোনালদো|নেইমার|এমবাপ্পে|টেনিস|ব্যাডমিন্টন|অলিম্পিক|উইকেট|ব্যাটার|বোলার|কোচ|স্কোয়াড|সিরিজ|ফাইনাল|সেমিফাইনাল|সাফ|ফিফা|ম্যানচেস্টার|বার্সেলোনা|রিয়াল মাদ্রিদ|cricket|football|match|league|goal|world cup|tournament|\bBPL\b|\bIPL\b|\bT20\b|\bODI\b|tennis|olympic|stadium|squad|wicket|FIFA|SAFF|Messi|Ronaldo|\bfinal\b|scores?\b|beat[s]?\b|\bwin[s]?\b.*(?:match|test|series)/i;
   var RE_MEDIA = /টিভি|চ্যানেল|নাটক|সিনেমা|চলচ্চিত্র|অভিনেত্রী|অভিনেতা|শোবিজ|ওটিটি|গণমাধ্যম|সাংবাদিক|মুক্তি পাচ্ছে|টক শো|রিয়েলিটি|সংগীত|গায়ক|গায়িকা|ওয়েব সিরিজ|পরিচালক|ফিল্ম|ঢালিউড|বলিউড|হলিউড|drama|actor|actress|movie|film|showbiz|television|\bTV\b|channel|OTT|journalist|media|singer|bollywood|dhallywood/i;
   var RE_INTL = /যুক্তরাষ্ট্র|আমেরিকা|ভারত|পাকিস্তান|চীন|রাশিয়া|ইউক্রেন|গাজা|ইসরায়েল|ইসরাইল|ইরান|ফিলিস্তিন|জাতিসংঘ|ট্রাম্প|বাইডেন|পুতিন|নেতানিয়াহু|ইউরোপ|ব্রিটেন|যুক্তরাজ্য|জাপান|সৌদি|তুরস্ক|আফগানিস্তান|মিয়ানমার|নেপাল|শ্রীলঙ্কা|ইইউ|ন্যাটো|লন্ডন|ওয়াশিংটন|দিল্লি|বেইজিং|মস্কো|\bUS\b|\bUN\b|\bEU\b|NATO|Trump|Gaza|Israel|Iran|Russia|Ukraine|China|India|Pakistan|Putin|Washington|London|Europe|world/i;
@@ -6430,7 +6349,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     if (RE_INTL.test(t) && !/বাংলাদেশ|ঢাকা|Bangladesh|Dhaka/i.test(t)) return 'intl';
     return 'desh';
   }
-  var NEWS_ENABLED = false;   /* সংবাদ শিরোনাম/ব্রেকিং নিউজ: true করলে আবার চালু হবে */
+  var NEWS_ENABLED = true;   /* সংবাদ শিরোনাম/ব্রেকিং নিউজ: true করলে আবার চালু হবে */
   var NEWS = { items: [], cat: 'all', open: false, busy: false, t: 0, ok: 0 };
   var TO = function (ms) { return typeof AbortController === 'undefined' ? { s: undefined, c: function () {} } : (function () { var a = new AbortController(), t = setTimeout(function () { a.abort(); }, ms); return { s: a.signal, c: function () { clearTimeout(t); } }; })(); };
   function getText(url, ms) {
@@ -6447,7 +6366,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     if (doc.getElementsByTagName('parsererror').length && !doc.getElementsByTagName('item').length && !doc.getElementsByTagName('entry').length) throw new Error('parse');
     var nodes = doc.getElementsByTagName('item'); if (!nodes.length) nodes = doc.getElementsByTagName('entry');
     var out = [];
-    for (var i = 0; i < nodes.length && i < 14; i++) {
+    for (var i = 0; i < nodes.length && i < 40; i++) {
       var n = nodes[i], g = function (tag) { var e = n.getElementsByTagName(tag)[0]; return e ? (e.textContent || '').trim() : ''; };
       var link = g('link'); if (!link) { var le = n.getElementsByTagName('link')[0]; link = le ? (le.getAttribute('href') || '') : ''; }
       var d = g('pubDate') || g('published') || g('updated');
@@ -6461,7 +6380,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   function viaRss2Json(u) {
     return getText('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(u)).then(function (t) {
       var j = JSON.parse(t); if (!j || j.status !== 'ok' || !j.items || !j.items.length) throw new Error('r2j');
-      return j.items.slice(0, 14).map(function (x) { return { title: String(x.title || '').replace(/<[^>]+>/g, '').trim(), link: x.link, t: Date.parse((x.pubDate || '').replace(' ', 'T') + 'Z') }; });
+      return j.items.slice(0, 40).map(function (x) { return { title: String(x.title || '').replace(/<[^>]+>/g, '').trim(), link: x.link, t: Date.parse((x.pubDate || '').replace(' ', 'T') + 'Z') }; });
     });
   }
   function fetchFeed(feed) {
@@ -6484,7 +6403,8 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
         if (t > now + 3600e3) t = now;
         if (now - t > 72 * 3600e3) return;
         var key = it.title.slice(0, 60); if (seen[key]) return; seen[key] = 1;
-        all.push({ title: it.title, link: it.link, t: t, src: feed.n, kind: feed.k, cat: classify(it, feed) });
+        var cat = classify(it, feed); if (cat !== 'sports') return;
+        all.push({ title: it.title, link: it.link, t: t, src: feed.n, kind: feed.k, cat: cat, sub: subCat(it.title) });
       });
     });
     all.sort(function (a, b) { return b.t - a.t; });
@@ -6495,7 +6415,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     if (NEWS.busy) return; if (!force && Date.now() - NEWS.t < 5 * 60000 && NEWS.items.length) return;
     NEWS.busy = true; NEWS.ok = 0; spin(true);
     var bucket = {}, pending = FEEDS.length, tmr = null;
-    function flush() { var m = mergeItems(bucket); if (m.length) { NEWS.items = m; NEWS.t = Date.now(); lsSet('sarah_news_v1', { t: NEWS.t, items: m }); } newsRender(); }
+    function flush() { var m = mergeItems(bucket); if (m.length) { NEWS.items = m; NEWS.t = Date.now(); lsSet('sarah_news_sports_v1', { t: NEWS.t, items: m }); } newsRender(); }
     FEEDS.forEach(function (f) {
       fetchFeed(f).then(function (items) { bucket[f.u] = { feed: f, items: items }; NEWS.ok++; clearTimeout(tmr); tmr = setTimeout(flush, 400); })
         .catch(function () {})
@@ -6510,9 +6430,9 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   }
   function chipsHtml() { return CATS.map(function (c) { return '<button type="button" class="sx-chip' + (NEWS.cat === c[0] ? ' on' : '') + '" data-nw-cat="' + c[0] + '">' + c[1] + '</button>'; }).join(''); }
   function newsRender() {
-    var list = NEWS.items.filter(function (n) { return NEWS.cat === 'all' || n.cat === NEWS.cat; });
+    var list = NEWS.items.filter(function (n) { return NEWS.cat === 'all' || n.sub === NEWS.cat; });
     [].forEach.call(document.querySelectorAll('[data-nw-chips]'), function (c) { c.innerHTML = chipsHtml(); });
-    var empty = '<div class="nw-empty">' + (NEWS.busy ? 'সংবাদ লোড হচ্ছে…' : (NEWS.items.length ? 'এই বিভাগে এখন কোনো সংবাদ নেই' : 'সংবাদ আনা যায়নি — ইন্টারনেট চেক করে ↻ চাপুন')) + '</div>';
+    var empty = '<div class="nw-empty">' + (NEWS.busy ? 'সংবাদ লোড হচ্ছে…' : (NEWS.items.length ? 'এই বিভাগে এখন কোনো খেলার খবর নেই' : 'সংবাদ আনা যায়নি — ইন্টারনেট চেক করে ↻ চাপুন')) + '</div>';
     var pl = $('#nwPlayerList'); if (pl) pl.innerHTML = list.length ? list.slice(0, 40).map(itemHtml).join('') : empty;
     var hl = $('#nwHomeList'); if (hl) {
       var cap = NEWS.open ? 30 : 6;
@@ -6582,7 +6502,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
       '<div id="cwSection" class="sx-sec" style="display:none"><div class="sx-h"><b>▶ দেখা চালিয়ে যান</b><small>আপনার সর্বশেষ দেখা</small></div><div id="cwTrack"></div></div>' +
       '<div id="nzSection" class="sx-sec" style="display:none"><div class="nz-card"><div class="nz-top"><div class="nz-next" id="nzNext"></div><button type="button" id="nzToggle" class="nz-tg">🔕 বন্ধ</button></div>' +
       '<div class="nz-chips" id="nzChips"></div><button type="button" class="nz-link" id="nzMore">⚙ রিমাইন্ডার সেটিংস</button><div class="nz-set" id="nzSet">' + nzSettingsHtml() + '</div></div></div>' +
-      '<div id="nwHome" class="sx-sec sx-news"><div class="sx-nw-head"><b>📰 সংবাদ শিরোনাম</b><button type="button" class="sx-nw-refresh" data-nw-refresh aria-label="রিফ্রেশ">↻</button></div>' +
+      '<div id="nwHome" class="sx-sec sx-news"><div class="sx-nw-head"><b>🏏 খেলার খবর</b><button type="button" class="sx-nw-refresh" data-nw-refresh aria-label="রিফ্রেশ">↻</button></div>' +
       '<div class="sx-nw-chips" data-nw-chips></div><div class="sx-nw-list" id="nwHomeList"></div></div>';
     var wrap = document.createElement('div'); wrap.innerHTML = html;
     while (wrap.firstChild) anchor.parentNode.insertBefore(wrap.firstChild, anchor);
@@ -6592,7 +6512,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   function init() {
     buildSections(); bindVideo(); wmEnsure();
     if (NEWS_ENABLED) document.documentElement.classList.add('sx-news-on');
-    var cache = lsGet('sarah_news_v1', null); if (cache && cache.items) { NEWS.items = cache.items; NEWS.t = cache.t || 0; }
+    var cache = lsGet('sarah_news_sports_v1', null); if (cache && cache.items) { NEWS.items = cache.items; NEWS.t = cache.t || 0; }
     newsRender(); cwRender(); nzRender(); nzCheck();
     loadNews(false);
     setInterval(nzCheck, 15000);
@@ -8666,6 +8586,30 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 @media (prefers-reduced-motion:reduce) {
   #heroTrack .hs *, #upTrack .hs * { animation:none !important; transition:none !important; }
 }
+</style>
+
+
+<style id="sarah-banner-poster-real-fix">
+#heroTrack .hs,#upTrack .hs{position:relative!important;overflow:hidden!important;isolation:isolate!important;border-radius:16px!important;min-width:100%!important}
+#heroTrack .hs:not(.hs-intro),#upTrack .hs{height:clamp(190px,49vw,220px)!important;min-height:190px!important;background:#070d1c!important}
+#heroTrack .hs .hs-art.vid,#upTrack .hs .hs-art.vid{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;aspect-ratio:auto!important;left:0!important;right:0!important;top:0!important;bottom:0!important;margin:0!important;border-radius:0!important;opacity:1!important;transform:none!important;z-index:0!important;display:block!important;background:#10182a!important;box-shadow:none!important}
+#heroTrack .hs .hs-art.vid img,#upTrack .hs .hs-art.vid img{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important;object-position:center 32%!important;padding:0!important;margin:0!important;background:transparent!important;opacity:1!important;filter:saturate(1.13) contrast(1.07)!important;transform:none!important}
+#heroTrack .hs .hs-art.vid>span,#upTrack .hs .hs-art.vid>span{display:none!important}
+#heroTrack .hs:not(.hs-intro)::before,#upTrack .hs::before{content:""!important;position:absolute!important;inset:0!important;z-index:1!important;pointer-events:none!important;background:linear-gradient(0deg,rgba(3,5,12,.96) 0%,rgba(3,5,12,.77) 35%,rgba(3,5,12,.10) 78%),linear-gradient(115deg,rgba(214,0,125,.13),transparent 58%)!important}
+#heroTrack .hs:not(.hs-intro)::after,#upTrack .hs::after{display:none!important}
+#heroTrack .hs .hs-body,#upTrack .hs .hs-body{position:absolute!important;z-index:3!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;box-sizing:border-box!important;padding:0 14px 20px!important;align-items:center!important;text-align:center!important}
+#heroTrack .hs .hs-brandline,#upTrack .hs .hs-brandline{position:absolute!important;top:10px!important;left:12px!important;z-index:4!important;display:flex!important;align-items:center!important;gap:7px!important}
+#heroTrack .hs .hs-live,#upTrack .hs .hs-live{font-size:8px!important;padding:4px 8px!important;border-radius:5px!important;font-weight:900!important;letter-spacing:.09em!important}
+#heroTrack .hs .hs-title,#upTrack .hs .hs-title{max-width:96%!important;margin:0 auto!important;font-family:"Noto Sans Bengali","Segoe UI",Arial,sans-serif!important;font-size:clamp(14px,4vw,19px)!important;font-weight:850!important;line-height:1.18!important;letter-spacing:-.025em!important;text-align:center!important;text-shadow:0 2px 12px rgba(0,0,0,.9)!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+#heroTrack .hs .hs-sub,#upTrack .hs .hs-sub{margin:4px auto 0!important;font-size:9px!important;line-height:1.25!important;text-align:center!important;color:rgba(255,255,255,.83)!important}
+#upTrack .hs .hs-time{margin:4px auto 0!important;padding:4px 8px!important;font-size:9px!important;border-radius:6px!important}
+#heroTrack .hs .hs-actions,#upTrack .hs .hs-actions{margin:7px auto 0!important;justify-content:center!important;gap:7px!important}
+#heroTrack .hs .hs-btn,#upTrack .hs .hs-btn{height:29px!important;min-height:29px!important;padding:0 13px!important;border-radius:6px!important;font-size:10px!important}
+#heroTrack .hs .hs-ghost,#upTrack .hs .hs-ghost{width:29px!important;height:29px!important}
+#heroTrack .hs-intro .hs-art.brand{position:absolute!important;top:12px!important;left:12px!important;right:auto!important;width:34px!important;height:34px!important;margin:0!important;border-radius:10px!important;opacity:1!important;transform:none!important}
+#heroTrack .hs-intro .hs-body{align-items:center!important;text-align:center!important}
+@media(min-width:700px){#heroTrack .hs:not(.hs-intro),#upTrack .hs{height:245px!important;min-height:245px!important}}
+@media(prefers-reduced-motion:reduce){#heroTrack .hs *,#upTrack .hs *{animation:none!important;transition:none!important}}
 </style>
 
 </body>
