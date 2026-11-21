@@ -670,13 +670,25 @@
 <script>try{var __t=localStorage.getItem('sarah_theme');if(__t)document.documentElement.setAttribute('data-sx-theme',__t)}catch(e){}</script>
 <style id="sarah-theme-css">
 :root { --sx-acc:#ff2a6d; --sx-acc2:#e11d48; --sx-acc3:#9333ea; --sx-acc-l:#ff7aa2; --sx-rgb:255,42,109; }
-html[data-sx-theme="blue"]   { --sx-acc:#3b82f6; --sx-acc2:#2563eb; --sx-acc3:#7c3aed; --sx-acc-l:#93c5fd; --sx-rgb:59,130,246; }
-html[data-sx-theme="green"]  { --sx-acc:#22c55e; --sx-acc2:#16a34a; --sx-acc3:#0d9488; --sx-acc-l:#86efac; --sx-rgb:34,197,94; }
+html[data-sx-theme="blue"] { --sx-acc:#3b82f6; --sx-acc2:#2563eb; --sx-acc3:#7c3aed; --sx-acc-l:#93c5fd; --sx-rgb:59,130,246; }
+html[data-sx-theme="green"] { --sx-acc:#22c55e; --sx-acc2:#16a34a; --sx-acc3:#0d9488; --sx-acc-l:#86efac; --sx-rgb:34,197,94; }
 html[data-sx-theme="purple"] { --sx-acc:#a855f7; --sx-acc2:#7c3aed; --sx-acc3:#4f46e5; --sx-acc-l:#d8b4fe; --sx-rgb:168,85,247; }
 html[data-sx-theme="orange"] { --sx-acc:#f97316; --sx-acc2:#ea580c; --sx-acc3:#dc2626; --sx-acc-l:#fdba74; --sx-rgb:249,115,22; }
-html[data-sx-theme="teal"]   { --sx-acc:#14b8a6; --sx-acc2:#0d9488; --sx-acc3:#0891b2; --sx-acc-l:#5eead4; --sx-rgb:20,184,166; }
-html[data-sx-theme="gold"]   { --sx-acc:#f59e0b; --sx-acc2:#d97706; --sx-acc3:#b45309; --sx-acc-l:#fcd34d; --sx-rgb:245,158,11; }
-html[data-sx-theme="red"]    { --sx-acc:#ef4444; --sx-acc2:#dc2626; --sx-acc3:#9f1239; --sx-acc-l:#fca5a5; --sx-rgb:239,68,68; }
+html[data-sx-theme="teal"] { --sx-acc:#14b8a6; --sx-acc2:#0d9488; --sx-acc3:#0891b2; --sx-acc-l:#5eead4; --sx-rgb:20,184,166; }
+html[data-sx-theme="gold"] { --sx-acc:#f59e0b; --sx-acc2:#d97706; --sx-acc3:#b45309; --sx-acc-l:#fcd34d; --sx-rgb:245,158,11; }
+html[data-sx-theme="red"] { --sx-acc:#ef4444; --sx-acc2:#dc2626; --sx-acc3:#9f1239; --sx-acc-l:#fca5a5; --sx-rgb:239,68,68; }
+html[data-sx-theme="sunset"] { --sx-acc:#fb923c; --sx-acc2:#f43f5e; --sx-acc3:#9333ea; --sx-acc-l:#fdba74; --sx-rgb:244,63,94; }
+html[data-sx-theme="ocean"] { --sx-acc:#06b6d4; --sx-acc2:#2563eb; --sx-acc3:#4338ca; --sx-acc-l:#67e8f9; --sx-rgb:37,99,235; }
+html[data-sx-theme="aurora"] { --sx-acc:#34d399; --sx-acc2:#06b6d4; --sx-acc3:#8b5cf6; --sx-acc-l:#6ee7b7; --sx-rgb:6,182,212; }
+html[data-sx-theme="lava"] { --sx-acc:#facc15; --sx-acc2:#ef4444; --sx-acc3:#7f1d1d; --sx-acc-l:#fde047; --sx-rgb:239,68,68; }
+html[data-sx-theme="candy"] { --sx-acc:#f472b6; --sx-acc2:#c084fc; --sx-acc3:#38bdf8; --sx-acc-l:#f9a8d4; --sx-rgb:192,132,252; }
+html[data-sx-theme="mint"] { --sx-acc:#4ade80; --sx-acc2:#14b8a6; --sx-acc3:#0ea5e9; --sx-acc-l:#bbf7d0; --sx-rgb:20,184,166; }
+html[data-sx-theme="royal"] { --sx-acc:#6366f1; --sx-acc2:#a855f7; --sx-acc3:#ec4899; --sx-acc-l:#c7d2fe; --sx-rgb:168,85,247; }
+body { background-image: radial-gradient(120% 55% at 50% -8%, rgba(var(--sx-rgb),.20) 0%, rgba(0,0,0,0) 70%), linear-gradient(180deg, rgba(var(--sx-rgb),.07) 0%, rgba(0,0,0,0) 45%); background-attachment: fixed; background-repeat: no-repeat; }
+#themeGrid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+#themeGrid .th-sw { padding:10px 4px; }
+#themeGrid .th-sw i { width:100%; height:38px; border-radius:10px; box-shadow:0 0 0 1px rgba(255,255,255,.14); }
+#themeGrid .th-sw.on { border-color:#fff; background:#1d1d21; }
 html[data-sx-theme]:not([data-sx-theme="pink"]) .text-pink-300, html[data-sx-theme]:not([data-sx-theme="pink"]) .text-pink-400, html[data-sx-theme]:not([data-sx-theme="pink"]) .text-pink-500 { color: var(--sx-acc-l) !important; }
 html[data-sx-theme]:not([data-sx-theme="pink"]) .bg-pink-500, html[data-sx-theme]:not([data-sx-theme="pink"]) .bg-pink-600 { background-color: var(--sx-acc) !important; }
 html[data-sx-theme]:not([data-sx-theme="pink"]) .border-pink-400, html[data-sx-theme]:not([data-sx-theme="pink"]) .border-pink-500 { border-color: var(--sx-acc) !important; }
@@ -888,6 +900,12 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
           <button data-layout="phone" class="seg-btn">📱 Phone</button>
           <button data-layout="tv" class="seg-btn">📺 TV</button>
         </div>
+      </div>
+
+      <div id="themeCard" class="p-4 rounded-2xl bg-white/5 border border-white/10">
+        <p class="font-semibold text-sm">🎨 Theme (Gradient)</p>
+        <p class="text-xs text-slate-400 mb-3">১৫টি গ্র্যাডিয়েন্ট থিম • বাটন, ট্যাব, হাইলাইট ও ব্যাকগ্রাউন্ডে লাগবে • এই ডিভাইসে সেভ থাকবে</p>
+        <div id="themeGrid"></div>
       </div>
 
       <div id="adminSourceCard" class="admin-only p-4 rounded-2xl bg-pink-500/10 border border-pink-500/30 space-y-3">
@@ -1369,6 +1387,48 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
       return drm;
     }
 
+
+    // ===== Cookie token -> URL query (browser cookie set korte pare na, tai token URL e boshano hoy) =====
+    // SonyLIV: hdnea / hdntl  |  Toffee (Google Cloud CDN): Edge-Cache-Cookie=URLPrefix=..:Expires=..:KeyName=..:Signature=..
+    function cookieTokenQS(cookie) {
+      const c = String(cookie || '').replace(/^cookie:\s*/i, '').trim();
+      if (!c) return '';
+      let m = c.match(/Edge-Cache-Cookie=([^;\s]+)/i) || c.match(/(URLPrefix=[^;\s]+)/i);
+      if (m) return m[1].replace(/:(?=(?:URLPrefix|Expires|KeyName|Signature)=)/gi, '&');
+      m = c.match(/(?:hdnea|hdntl)=[^;\s]+/i);
+      return m ? m[0] : '';
+    }
+    function attachCookieToken(url, cookie) {
+      url = String(url || '');
+      const qs = cookieTokenQS(cookie);
+      if (!qs || !url) return url;
+      if (/[?&](hdnea|hdntl|Signature|URLPrefix)=/i.test(url) || /hdnea=|hdntl=/i.test(url)) return url;
+      return url + (url.indexOf('?') >= 0 ? '&' : '?') + qs;
+    }
+    // m3u_sources.json = playlist link list; er moddhe .m3u link thakle auto-source hishebe load hoy
+    function collectM3uSources(data) {
+      let added = 0;
+      const seen = new Set();
+      (function walk(v, nm) {
+        if (!v) return;
+        if (typeof v === 'string') {
+          const u = v.trim();
+          if (/^https?:\/\/\S+\.m3u(\?\S*)?$/i.test(u) && !seen.has(u)) {
+            seen.add(u);
+            if (M3U_SOURCES.some(x => x.url === u)) return;
+            let host = 'Playlist'; try { host = new URL(u).hostname.replace(/^www\./, ''); } catch (e) {}
+            M3U_SOURCES.push({ url: u, prefix: 'ms' + (M3U_SOURCES.length + 1), sourceName: String(nm || host).slice(0, 24), defaultCategory: String(nm || host).slice(0, 24), corsFallback: true });
+            added++;
+          }
+        } else if (Array.isArray(v)) v.forEach(x => walk(x, nm));
+        else if (typeof v === 'object') {
+          const label = v.name || v.title || v.label || nm;
+          Object.keys(v).forEach(k => walk(v[k], typeof v[k] === 'string' ? label : k));
+        }
+      })(data, '');
+      return added;
+    }
+
     function extractAllStreamsFromObject(item, hdrOut, drmOut) {
       const urls = [];
       const iframes = [];
@@ -1453,15 +1513,9 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
 
       scanVal(item, '');
 
-      // If hdrOut.token has hdnea=... or hdntl=... and stream URL doesn't have it in query string, append it!
-      if (hdrOut.token) {
-        const cleanTok = hdrOut.token.replace(/^cookie:\s*/i, '').trim();
-        for (let i = 0; i < urls.length; i++) {
-          if (!urls[i].includes('hdnea=') && !urls[i].includes('hdntl=') && (cleanTok.includes('hdnea=') || cleanTok.includes('hdntl='))) {
-            urls[i] += (urls[i].includes('?') ? '&' : '?') + cleanTok.split(';')[0].trim();
-          }
-        }
-      }
+      // Cookie token (SonyLIV hdnea/hdntl + Toffee Edge-Cache-Cookie) -> stream URL e boshao
+      const ckTok = hdrOut.token || hdrOut.cookie;
+      if (ckTok) { for (let i = 0; i < urls.length; i++) urls[i] = attachCookieToken(urls[i], ckTok); }
 
       return { urls, iframes };
     }
@@ -1612,7 +1666,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
             if (u && IMAGE_EXT.test(u)) u = '';
             const svDrm = typeof sv === 'object' ? extractDrmFromObject(sv) : null;
             const finalDrm = (svDrm && (Object.keys(svDrm.clearKeys).length || svDrm.licenseUrl)) ? svDrm : ((drm && (Object.keys(drm.clearKeys).length || drm.licenseUrl)) ? drm : null);
-            const finalUrl = u ? proxify(u, hdr) : u;
+            const finalUrl = u ? proxify(attachCookieToken(u, (typeof sv === 'object' && (sv.cookie || sv.Cookie)) || hdr.cookie || hdr.token), hdr) : u;
             if ((finalUrl || f) && !servers.some(existing => existing.url === finalUrl && existing.iframe === f)) {
               servers.push({
                 name: sv.name || `Server ${servers.length + 1}`,
@@ -1855,11 +1909,8 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
               }
             });
           }
-          // If cookie contains hdnea= or hdntl= token and streamLine doesn't have it, attach it to URL query string for browser playback
-          if (hdr.cookie && (/hdnea=|hdntl=/i.test(hdr.cookie)) && !streamLine.includes('hdnea=') && !streamLine.includes('hdntl=')) {
-            const cleanCookieTok = hdr.cookie.replace(/^cookie:\s*/i, '').split(';')[0].trim();
-            streamLine += (streamLine.includes('?') ? '&' : '?') + cleanCookieTok;
-          }
+          // Cookie token (hdnea/hdntl/Toffee Edge-Cache-Cookie) URL e boshao, jeno browser/native player e cholbe
+          if (hdr.cookie) streamLine = attachCookieToken(streamLine, hdr.cookie);
 
           let name = (meta && meta.name) || `Channel ${i + 1}`;
           const source = M3U_SOURCES.find(src => src.prefix === prefix);
@@ -2153,10 +2204,12 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
 
     // ===== Root folder er sokol .json + .m3u file auto-discover =====
     const ROOT_SKIP = /^(package(-lock)?|manifest|composer|tsconfig|jsconfig|vercel|netlify|firebase|renovate|\.eslintrc|\.prettierrc)\.json$/i;
-    // Sudhu ei 4 ta root file load hobe
+    // Repo er sokol .json + .m3u (pordax, m3u_sources shoho) load hobe
     const ROOT_FILES = [
       'aynaott_data.json', 'channels.json', 'channels(1).json',
       'iptvidn.json', 'iptvidn.m3u',
+      'pordax.json', 'pordax.m3u',
+      'm3u_sources.json',
       'sarah.json', 'sarah.m3u',
       'sonyLiv.m3u', 'sonyLiv_data.json',
       'toffee_data.json', 'toffee_playlist.m3u'
@@ -2164,7 +2217,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
     // Ayna OTT: 'unique' = sudhu je channel onno source e nai; 'off' = Ayna ekdom bondho
     const AYNA_MODE = 'unique';
     async function discoverRootFiles() {
-      const CK = 'sarah_root_files_v3';
+      const CK = 'sarah_root_files_v4';
       try {
         const c = JSON.parse(sessionStorage.getItem(CK) || 'null');
         if (c && Date.now() - c.t < 5 * 60 * 1000 && c.files && c.files.length) return c.files;
@@ -2224,6 +2277,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
       if (/sony/i.test(n)) return 'SonyLIV';
       if (/ayna/i.test(n)) return 'Ayna OTT';
       if (/iptvidn/i.test(n)) return 'IPTV IDN';
+      if (/pordax/i.test(n)) return 'PordaX';
       if (/sarah/i.test(n)) return 'Sarah';
       return 'Local';
     }
@@ -2277,10 +2331,11 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
 
       const merged = [];
       const seenIds = new Set();
-      let filesLoaded = 0;
+      let filesLoaded = 0, extraM3u = 0;
       localResults.forEach(r => {
         if (!r) return;
         const fnm = decodeURIComponent(String(r.src).split('?')[0].split('/').pop() || '');
+        if (/^m3u_sources\.json$/i.test(fnm)) { extraM3u += collectM3uSources(r.data); return; }
         const isToffee = /toffee/i.test(fnm), isSony = /sony/i.test(fnm), isAyna = /ayna/i.test(fnm);
         const srcName = srcNameFromFile(fnm);
         const pfx = isToffee ? 'toffee' : (isSony ? 'sonyliv' : (isAyna ? 'aynajson' : 'f_' + fnm.replace(/\W+/g, '_').toLowerCase()));
@@ -2300,6 +2355,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
 
       if (remoteJsonLists && remoteJsonLists.length) REMOTE_JSON_CHANNELS = remoteJsonLists;
       if (m3uList && m3uList.length) M3U_CHANNELS = m3uList;
+      if (extraM3u) { try { const again = await fetchM3UChannels(); if (again && again.length) M3U_CHANNELS = again; } catch (e) {} }
 
       if (merged.length > 0 || REMOTE_JSON_CHANNELS.length > 0 || M3U_CHANNELS.length > 0) {
         if (merged.length) JSON_CHANNELS = merged;
@@ -3495,7 +3551,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
       try {
         const v = document.createElement('video');
         const nativeHls = !!(v.canPlayType && v.canPlayType('application/vnd.apple.mpegurl'));
-        const isSonyish = plainToffee || /sony|akamaized/i.test(String((channel && (channel.sourceName || '')) + ' ' + (channel && (channel.streamUrl || ''))));
+        const isSonyish = /sony|akamaized/i.test(String((channel && (channel.sourceName || '')) + ' ' + (channel && (channel.streamUrl || ''))));
         if (nativeHls && isSonyish && baseType === 'hls' && !hasDrm && !STREAM_PROXY) { const k = c.indexOf('native'); if (k >= 0) c.splice(k, 1); c.unshift('native'); }
       } catch (e) {}
       const i = c.indexOf('hls');
@@ -4042,7 +4098,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
         const qIdx = String(urlStr || '').indexOf('?');
         if (qIdx < 0) return '';
         const qs = String(urlStr).slice(qIdx + 1);
-        if (/hdntl=|hdnea=|token=|hmac=| sig=|Signature=|Policy=|Key-Pair-Id=/i.test(qs)) {
+        if (/hdntl=|hdnea=|token=|hmac=| sig=|Signature=|Policy=|Key-Pair-Id=|URLPrefix=/i.test(qs)) {
           return qs;
         }
       } catch (e) {}
@@ -4051,7 +4107,7 @@ window.SARAH_OTP_API = window.SARAH_OTP_BASE ? { send: window.SARAH_OTP_BASE.rep
 
     function appendTokenToSubUrl(targetUrl, masterToken) {
       if (!masterToken || !targetUrl) return targetUrl;
-      if (targetUrl.includes('hdntl=') || targetUrl.includes('hdnea=') || targetUrl.includes('Signature=')) return targetUrl;
+      if (targetUrl.includes('hdntl=') || targetUrl.includes('hdnea=') || targetUrl.includes('Signature=') || targetUrl.includes('URLPrefix=')) return targetUrl;
       return targetUrl + (targetUrl.includes('?') ? '&' : '?') + masterToken;
     }
 
@@ -7201,13 +7257,19 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   var VAPID_PUBLIC = '';      // web-push generate-vapid-keys এর Public Key
 
   /* ================= THEME ================= */
-  var THEMES = [['pink', 'গোলাপি', '#ff2a6d'], ['blue', 'নীল', '#3b82f6'], ['green', 'সবুজ', '#22c55e'], ['purple', 'বেগুনি', '#a855f7'], ['orange', 'কমলা', '#f97316'], ['teal', 'টিল', '#14b8a6'], ['gold', 'সোনালি', '#f59e0b'], ['red', 'লাল', '#ef4444']];
+  var THEMES = [['pink', 'গোলাপি', 'linear-gradient(135deg,#ff2a6d,#e11d48,#9333ea)'], ['blue', 'নীল', 'linear-gradient(135deg,#3b82f6,#2563eb,#7c3aed)'], ['green', 'সবুজ', 'linear-gradient(135deg,#22c55e,#16a34a,#0d9488)'], ['purple', 'বেগুনি', 'linear-gradient(135deg,#a855f7,#7c3aed,#4f46e5)'], ['orange', 'কমলা', 'linear-gradient(135deg,#f97316,#ea580c,#dc2626)'], ['teal', 'টিল', 'linear-gradient(135deg,#14b8a6,#0d9488,#0891b2)'], ['gold', 'সোনালি', 'linear-gradient(135deg,#f59e0b,#d97706,#b45309)'], ['red', 'লাল', 'linear-gradient(135deg,#ef4444,#dc2626,#9f1239)'], ['sunset', 'সানসেট', 'linear-gradient(135deg,#fb923c,#f43f5e,#9333ea)'], ['ocean', 'ওশান', 'linear-gradient(135deg,#06b6d4,#2563eb,#4338ca)'], ['aurora', 'অরোরা', 'linear-gradient(135deg,#34d399,#06b6d4,#8b5cf6)'], ['lava', 'লাভা', 'linear-gradient(135deg,#facc15,#ef4444,#7f1d1d)'], ['candy', 'ক্যান্ডি', 'linear-gradient(135deg,#f472b6,#c084fc,#38bdf8)'], ['mint', 'মিন্ট', 'linear-gradient(135deg,#4ade80,#14b8a6,#0ea5e9)'], ['royal', 'রয়্যাল', 'linear-gradient(135deg,#6366f1,#a855f7,#ec4899)']];
   function applyTheme(k) { var h = document.documentElement; if (!k || k === 'pink') h.removeAttribute('data-sx-theme'); else h.setAttribute('data-sx-theme', k); }
   function themeOpen() {
     var cur = localStorage.getItem('sarah_theme') || 'pink';
     X3.sheet('🎨 থিম রঙ', '<div class="th-grid">' + THEMES.map(function (t) { return '<button type="button" class="th-sw' + (cur === t[0] ? ' on' : '') + '" data-theme-pick="' + t[0] + '"><i style="background:' + t[2] + '"></i>' + t[1] + '</button>'; }).join('') + '</div><div class="nz-note" style="padding:10px 2px">পছন্দের রঙ সব বাটন, ট্যাব ও হাইলাইটে লাগবে। এই ডিভাইসে সেভ থাকবে।</div>');
   }
+  function themeGridRender() {
+    var g = document.getElementById('themeGrid'); if (!g) return;
+    var cur = 'pink'; try { cur = localStorage.getItem('sarah_theme') || 'pink'; } catch (e) {}
+    g.innerHTML = THEMES.map(function (t) { return '<button type="button" class="th-sw' + (cur === t[0] ? ' on' : '') + '" data-theme-set="' + t[0] + '"><i style="background:' + t[2] + '"></i>' + t[1] + '</button>'; }).join('');
+  }
   try { applyTheme(localStorage.getItem('sarah_theme')); } catch (e) {}
+  themeGridRender();
 
   /* ================= GOAL ALERT ================= */
   function goalCheck() {
@@ -7304,7 +7366,8 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 
   document.addEventListener('click', function (e) {
     var t = e.target; if (!t.closest) return; var q;
-    if ((q = t.closest('[data-theme-pick]'))) { var k = q.getAttribute('data-theme-pick'); try { localStorage.setItem('sarah_theme', k); } catch (er) {} applyTheme(k); themeOpen(); return; }
+    if ((q = t.closest('[data-theme-set]'))) { var k2 = q.getAttribute('data-theme-set'); try { localStorage.setItem('sarah_theme', k2); } catch (er) {} applyTheme(k2); themeGridRender(); return; }
+    if ((q = t.closest('[data-theme-pick]'))) { var k = q.getAttribute('data-theme-pick'); try { localStorage.setItem('sarah_theme', k); } catch (er) {} applyTheme(k); themeOpen(); themeGridRender(); return; }
     if (t.closest('#pushTest')) { pushTest(); return; }
     if (t.closest('#pushOn')) { pushOn(); return; }
     if (t.closest('#pushOff')) { pushOff(); return; }
