@@ -1,20 +1,28 @@
 {
   "website": "https://pordax.pages.dev/livetv",
-  "checked_at": "2026-11-21T02:54:38.611993+00:00",
-  "total_streams": 98,
+  "checked_at": "2026-11-21T06:57:56.735259+00:00",
+  "total_streams": 101,
   "streams": [
     {
       "name": "New Zealand vs India",
       "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1794553818540x302.jpg",
-      "url": "https://tencent-cdn.tapmad.com/v1/01a14a9fb90c15fc60e91e1786b061/01a14a9feb881ea540a81c2b41b75e/main.m3u8",
+      "url": "https://vodnewv2.in-maa-1.linodeobjects.com/promos/Tapmadpromo/master.m3u8",
       "format": "m3u8",
       "group": "PordaX",
       "source": "https://pordax.pages.dev/api/livetv/tapmad"
     },
     {
-      "name": "Hobart Hurricanes vs Sydney Thunder",
-      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1794829739540x302.jpg",
+      "name": "Sydney Sixers vs Perth Scorchers",
+      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1794829865540x302.jpg",
       "url": "https://serieAleague.akamaized.net/hls/live/2107107/A1@25853-tapmad/master.m3u8",
+      "format": "m3u8",
+      "group": "PordaX",
+      "source": "https://pordax.pages.dev/api/livetv/tapmad"
+    },
+    {
+      "name": "Round 19 - Race 1",
+      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1794819825540x302.jpg",
+      "url": "https://multiregion-asia-cdn.tapmad.com/v1/01a1548c4faf15fc600b1e3e968408/01a1548c7fde1ea557841e1612cf76/main.m3u8",
       "format": "m3u8",
       "group": "PordaX",
       "source": "https://pordax.pages.dev/api/livetv/tapmad"
@@ -23,6 +31,14 @@
       "name": "Bangla Vision",
       "logo": "https://i.imgur.com/nCWgp38.png",
       "url": "https://tvsen5.aynaott.com/banglavision/index.m3u8",
+      "format": "m3u8",
+      "group": "PordaX",
+      "source": "https://pordax.pages.dev/api/livetv/channels"
+    },
+    {
+      "name": "NAGORIK TV",
+      "logo": "https://otapp.store/uploads/tv_image/sm/nagorik-tv.png",
+      "url": "https://box.bbaria.net/Nagorik_TV/tracks-v1a1/mono.m3u8",
       "format": "m3u8",
       "group": "PordaX",
       "source": "https://pordax.pages.dev/api/livetv/channels"
@@ -117,15 +133,23 @@
     },
     {
       "name": "Asian TV",
-      "logo": "https://limon-iptv-image.vercel.app/BD/Asian-Tv.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/en/thumb/f/fb/Asian_TV_Logo.svg/330px-Asian_TV_Logo.svg.png",
       "url": "https://tvsen6.aynaott.com/pKb5k6NnzxsKpWUs6E8M/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
+      "name": "BTV",
+      "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/BTV-logo-new-2025.png/330px-BTV-logo-new-2025.png",
+      "url": "https://nkafmbewiff.gpcdn.net/tile_2/master.m3u8",
+      "format": "m3u8",
+      "group": "PordaX",
+      "source": "https://pordax.pages.dev/api/livetv/channels"
+    },
+    {
       "name": "BTV Chattogram",
-      "logo": "https://pordax.pages.dev/posters/btv-bd-logo.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/BTV-logo-new-2025.png/330px-BTV-logo-new-2025.png",
       "url": "https://tvsen6.aynaott.com/TjGR1GcxKetHNVcMVxbq/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -133,7 +157,7 @@
     },
     {
       "name": "Bangla TV",
-      "logo": "https://pordax.pages.dev/posters/bangla-tv-logo.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Bangla_TV_logo.svg/330px-Bangla_TV_logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
       "url": "https://tvsen6.aynaott.com/39ee93nUbCCmm5LsyD4t/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -148,16 +172,16 @@
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
-      "name": "Channel 19",
-      "logo": "https://pordax.pages.dev/posters/channel-24-logo.png",
+      "name": "Channel 22",
+      "logo": "https://backoffice.channel24bd.tv/media/common/logo-fb-pages.png",
       "url": "https://tvsen6.aynaott.com/channel52/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
-      "name": "Channel 20",
-      "logo": "https://pordax.pages.dev/posters/channel-i-logo.png",
+      "name": "Channel 23",
+      "logo": "https://www.channelionline.com/brand/channel-i-logo.webp",
       "url": "https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8?e=1784102558&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=1b6ef0107d8addd36bcab3ca1175877a",
       "format": "m3u8",
       "group": "PordaX",
@@ -165,7 +189,7 @@
     },
     {
       "name": "DBC News",
-      "logo": "https://pordax.pages.dev/posters/dbc-news-logo.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/%E0%A6%A1%E0%A6%BF%E0%A6%AC%E0%A6%BF%E0%A6%B8%E0%A6%BF_%E0%A6%A8%E0%A6%BF%E0%A6%89%E0%A6%9C%E2%80%93%E0%A6%8F%E0%A6%B0_%E0%A6%B2%E0%A7%8B%E0%A6%97%E0%A7%8B.svg/330px-%E0%A6%A1%E0%A6%BF%E0%A6%AC%E0%A6%BF%E0%A6%B8%E0%A6%BF_%E0%A6%A8%E0%A6%BF%E0%A6%89%E0%A6%9C%E2%80%93%E0%A6%8F%E0%A6%B0_%E0%A6%B2%E0%A7%8B%E0%A6%97%E0%A7%8B.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
       "url": "https://tvsen6.aynaott.com/pF66Tkz0qFwP2aMMqHyt/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -173,7 +197,7 @@
     },
     {
       "name": "Deepto TV",
-      "logo": "https://pordax.pages.dev/posters/deepto-tv-logo.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/en/thumb/0/00/Logo_of_Deepto_TV.svg/330px-Logo_of_Deepto_TV.svg.png",
       "url": "https://nkafmbewiff.gpcdn.net/tile_6/master.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -181,7 +205,7 @@
     },
     {
       "name": "Desh TV",
-      "logo": "https://pordax.pages.dev/posters/desh-tv-logo.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Logo_of_Desh_TV.svg/330px-Logo_of_Desh_TV.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
       "url": "https://tvsen6.aynaott.com/ryFkXfd1a4CQ7mMdc820/index.m3u8?e=1784102570&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=78b23c868a34420397be9c985d04db9b",
       "format": "m3u8",
       "group": "PordaX",
@@ -189,7 +213,7 @@
     },
     {
       "name": "Ekattor TV",
-      "logo": "https://pordax.pages.dev/posters/ekattor-tv-logo.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/en/thumb/5/57/Ekattor_TV_logo.svg/330px-Ekattor_TV_logo.svg.png",
       "url": "https://tvsen6.aynaott.com/EWDrV5QskgarZEUBb3pU/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -197,7 +221,7 @@
     },
     {
       "name": "Ekhon TV",
-      "logo": "https://limon-iptv-image.vercel.app/BD/Ekhon-TV.png",
+      "logo": "https://payload-bucket.fringecore.sh/ekhon-tv-768x292.webp",
       "url": "https://tvsen6.aynaott.com/fbgZV3X17hwWcyfZ4pdb/index.m3u8?e=1784102563&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=b5e80a73380863be907284374bdb2bda",
       "format": "m3u8",
       "group": "PordaX",
@@ -213,7 +237,7 @@
     },
     {
       "name": "GTV (Gazi TV)",
-      "logo": "https://pordax.pages.dev/posters/gtv-bd-logo.png",
+      "logo": "https://gazitv.com/wp-content/uploads/2022/05/GTV-LOGO-HD240x108.png",
       "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/gazibdz.stream/live-orgin/gazibdz.stream/playlist.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -221,7 +245,7 @@
     },
     {
       "name": "Independent TV",
-      "logo": "https://pordax.pages.dev/posters/independent-tv-logo.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/en/thumb/c/c1/Independent_Television_Logo.svg/330px-Independent_Television_Logo.svg.png",
       "url": "https://tvsen6.aynaott.com/Wef2Vj67njeYGDqQNFB9/tracks-v1a1/mono.ts.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -229,7 +253,7 @@
     },
     {
       "name": "Jamuna TV",
-      "logo": "https://pordax.pages.dev/posters/jamuna-tv-logo.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Jamuna_TV_logo.svg/330px-Jamuna_TV_logo.svg.png",
       "url": "https://tvsen6.aynaott.com/KGdZEdA7qQ43dmPkgk1j/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -237,7 +261,7 @@
     },
     {
       "name": "Maasranga TV",
-      "logo": "https://pordax.pages.dev/posters/maasranga-tv-logo.png",
+      "logo": "https://upload.wikimedia.org/wikipedia/en/3/39/Maasranga_Television_Logo.jpg",
       "url": "https://tvsen5.aynaott.com/maasrangatv/index.m3u8?e=1753741201&u=9a031201-22d8-4f7e-9516-7d246a8fedc3&token=de21479033f8c7cb7372ac9c67473834",
       "format": "m3u8",
       "group": "PordaX",
@@ -245,7 +269,7 @@
     },
     {
       "name": "Mohona TV",
-      "logo": "https://limon-iptv-image.vercel.app/BD/Mohona-Tv.png",
+      "logo": "https://mohona.tv/wp-content/uploads/2024/07/MohonaTV-Logo-Transparent.png",
       "url": "https://tvsen6.aynaott.com/AkyX5dunzju4cpo26dr7/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -261,7 +285,7 @@
     },
     {
       "name": "RTV",
-      "logo": "https://pordax.pages.dev/posters/rtv-bd-logo.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/en/thumb/4/4e/Rtv_bangladesh.svg/330px-Rtv_bangladesh.svg.png",
       "url": "https://tvsen5.aynaott.com/RtvHD/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -269,7 +293,7 @@
     },
     {
       "name": "Somoy TV",
-      "logo": "https://pordax.pages.dev/posters/somoy-tv-logo.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/en/thumb/c/c4/SOMOY_TV_Logo.svg/330px-SOMOY_TV_Logo.svg.png",
       "url": "https://tvsen6.aynaott.com/4XcqdovJzbbC9WdJA9gk/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -301,15 +325,15 @@
     },
     {
       "name": "T Sports HD",
-      "logo": "https://pordax.pages.dev/posters/t-sports-hd.svg",
-      "url": "https://tvsen5.aynaott.com/TnMn5kZz8aLmjklkk/index.m3u8",
+      "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/T_Sports_logo.svg/330px-T_Sports_logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "url": "https://tvsen5.aynaott.com/TnMn5kZz8/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
       "name": "Willow",
-      "logo": "https://cdn.jsdelivr.net/gh/tv-logo/tv-logos@main/countries/united-states/willow-hd.png",
+      "logo": "https://cdn.jsdelivr.net/gh/tv-logo/tv-logos@main/countries/united-states/willow-us.png",
       "url": "https://tvsen5.aynaott.com/willowhd/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -373,7 +397,7 @@
     },
     {
       "name": "Zee Bangla",
-      "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_ZEE_BANGLA/images/LOGO_HD/LOGO_HD_image.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/%E0%A6%9C%E0%A6%BF_%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE_%E0%A7%A8%E0%A7%A6%E0%A7%A8%E0%A7%AB.svg/330px-%E0%A6%9C%E0%A6%BF_%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE_%E0%A7%A8%E0%A7%A6%E0%A7%A8%E0%A7%AB.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
       "url": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/ZeeBanglaHD.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -381,7 +405,7 @@
     },
     {
       "name": "Zee TV",
-      "logo": "https://pordax.pages.dev/posters/zee-tv.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Zee_TV_2025.svg/330px-Zee_TV_2025.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
       "url": "https://d47ddb99.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZy1kZV9aZWVUVkhEVUtHZXJtYW55X0hMUw/playlist.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -389,7 +413,7 @@
     },
     {
       "name": "Zee Cinema",
-      "logo": "https://pordax.pages.dev/posters/zee-cinema-logo.svg",
+      "logo": "https://cdn.jsdelivr.net/gh/tv-logo/tv-logos@main/countries/india/zee-cinema-in.png",
       "url": "https://j6nfugukcl.gpcdn.net/tile_5/master.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -397,7 +421,7 @@
     },
     {
       "name": "Colors",
-      "logo": "https://pordax.pages.dev/posters/colors-tv-logo.png",
+      "logo": "https://cdn.jsdelivr.net/gh/tv-logo/tv-logos@main/countries/india/colors-in.png",
       "url": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ColorsAPAC.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -405,7 +429,7 @@
     },
     {
       "name": "Colors Cineplex HD",
-      "logo": "https://pordax.pages.dev/posters/colors-cineplex-logo.png",
+      "logo": "https://cdn.jsdelivr.net/gh/tv-logo/tv-logos@main/countries/india/colors-cineplex-hd-in.png",
       "url": "https://d1rc86nwwc9fag.cloudfront.net/260723/smil:rishteycineplexukdev.smil/chunklist_b1928000.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -413,7 +437,7 @@
     },
     {
       "name": "Star Plus HD",
-      "logo": "https://pordax.pages.dev/posters/star-plus-logo.png",
+      "logo": "https://cdn.jsdelivr.net/gh/tv-logo/tv-logos@main/countries/india/star-plus-hd-in.png",
       "url": "https://d1rc86nwwc9fag.cloudfront.net/260723/starplusuk_2500/chunks.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -421,7 +445,7 @@
     },
     {
       "name": "Star Bharat",
-      "logo": "https://pordax.pages.dev/posters/star-bharat-logo.png",
+      "logo": "https://cdn.jsdelivr.net/gh/tv-logo/tv-logos@main/countries/india/star-bharat-in.png",
       "url": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/gb/YuppTV/UtsavBharat.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -429,7 +453,7 @@
     },
     {
       "name": "Star Jalsha",
-      "logo": "https://pordax.pages.dev/posters/star-jalsha-logo.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Star_Jalsha_logo_2023.png/330px-Star_Jalsha_logo_2023.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
       "url": "https://da86m1sqpm3o0.cloudfront.net/28072023/smil:starjalsha.smil/chunklist_b1928000.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -453,7 +477,7 @@
     },
     {
       "name": "9XM",
-      "logo": "https://limon-iptv-image.vercel.app/Music/9XM.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/9XMHindiMusicTelevisionChannelLogo.jpg/330px-9XMHindiMusicTelevisionChannelLogo.jpg",
       "url": "https://cc-706183qeo55ez.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-706183qeo55ez/DIYC/PMSL/9X/9XMusic_IN/9XMusic_IN.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -493,7 +517,7 @@
     },
     {
       "name": "Sangeet Bangla",
-      "logo": "https://pordax.pages.dev/posters/sangeet-bangla-logo.png",
+      "logo": "https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Sangeet%20Bangla.png",
       "url": "https://mumt05.tangotv.in/87NeALx2SANGEETBANGLA/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -501,7 +525,7 @@
     },
     {
       "name": "Sangeet Bhojpuri",
-      "logo": "https://limon-iptv-image.vercel.app/Music/Sangeet-Bhojpuri.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Sangeet_Bhojpuri.jpg/330px-Sangeet_Bhojpuri.jpg",
       "url": "https://cdn.pishow.tv/ott/live/1293/master.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -509,7 +533,7 @@
     },
     {
       "name": "Dhoom Music",
-      "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Dhoom_Music.png",
+      "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_DHOOM_MUSIC/images/LOGO_HD/image.png",
       "url": "https://fta.ektv.in/live/378/master.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -517,7 +541,7 @@
     },
     {
       "name": "&TV",
-      "logo": "https://limon-iptv-image.vercel.app/India/And-TV.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/%26TV_2025.svg/330px-%26TV_2025.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
       "url": "https://3f56f997.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZy1nYl9BbmRUVl9ITFM/playlist.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -525,7 +549,7 @@
     },
     {
       "name": "Sananda TV",
-      "logo": "https://limon-iptv-image.vercel.app/IN-BD/Sananda-TV.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/en/thumb/d/d0/Sananda_TV_Logo.jpg/330px-Sananda_TV_Logo.jpg",
       "url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/sanandatv.stream/playlist.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -581,7 +605,7 @@
     },
     {
       "name": "TEN Sports",
-      "logo": "https://cdn.jsdelivr.net/gh/tv-logo/tv-logos@main/countries/pakistan/ten-sports.png",
+      "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Sony_TEN_logo_new.png/330px-Sony_TEN_logo_new.png",
       "url": "https://ireentv.pages.dev/Ten_Sports_SD.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -597,7 +621,7 @@
     },
     {
       "name": "Cricket Gold",
-      "logo": "",
+      "logo": "https://resources.cricket-australia.pulselive.com/cricket-australia/photo/2025/07/25/836eddae-4329-4542-ad17-dcd37e9d951a/Cricket-Gold-1920x1080_noBG.png",
       "url": "https://streams2.sofast.tv/ptnr-yupptv/title-cricketgold/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/b2048bb8-1686-4432-aa50-647245383e0c/manifest.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -605,7 +629,7 @@
     },
     {
       "name": "Sony Sports Ten 3 Hindi",
-      "logo": "",
+      "logo": "https://dtil.tmsimg.com/assets/GNLZZGG0025TCMR.png?lock=720x540",
       "url": "https://r2.amml.in/sony-ten-3-hd/live.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -613,7 +637,7 @@
     },
     {
       "name": "DD Sports",
-      "logo": "",
+      "logo": "https://dtil.tmsimg.com/assets/s158255_ld_h15_aa.png?lock=720x540",
       "url": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/b17adfe543354fdd8d189b110617cddd/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -621,7 +645,7 @@
     },
     {
       "name": "Fuel TV",
-      "logo": "",
+      "logo": "https://i.imgur.com/I8mviBy.png",
       "url": "https://amg01074-fueltv-fueltvau-samsungau-g09kq.amagi.tv/playlist/amg01074-fueltv-fueltvau-samsungau/playlist.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -629,7 +653,7 @@
     },
     {
       "name": "Red Bull TV",
-      "logo": "",
+      "logo": "https://images.pluto.tv/channels/5e7cb84a172a0f0007da69e4/colorLogoPNG.png",
       "url": "https://3ea22335.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWdiX1JlZEJ1bGxUVl9ITFM/playlist.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -637,7 +661,7 @@
     },
     {
       "name": "Bahrain Sports 1",
-      "logo": "",
+      "logo": "https://i.imgur.com/fBpLsbC.png",
       "url": "https://5c7b683162943.streamlock.net/live/ngrp:sportsone_all/playlist.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -645,7 +669,7 @@
     },
     {
       "name": "Bahrain Sports 2",
-      "logo": "",
+      "logo": "https://i.imgur.com/ZkuZmIo.png",
       "url": "https://5c7b683162943.streamlock.net/live/ngrp:bahrainsportstwo_all/playlist.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -653,7 +677,7 @@
     },
     {
       "name": "Trace Sport Stars",
-      "logo": "",
+      "logo": "https://i.imgur.com/FabFP5A.png",
       "url": "https://channels.trace.plus/Traceprod/TRACE_SPORT_STARS_sd/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -661,7 +685,7 @@
     },
     {
       "name": "Rally TV",
-      "logo": "",
+      "logo": "https://i.postimg.cc/WtLq2C7c/logo-Rally-Tv1.png",
       "url": "https://rally-tv-live.akamaized.net/hls/live/2117704/RallyTV-Pri/master.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -669,7 +693,7 @@
     },
     {
       "name": "Al Iraqia Sport",
-      "logo": "",
+      "logo": "https://i.imgur.com/DrrlxTO.png",
       "url": "https://imn-live.esite-lab.com/hls/iraqia-sports-1.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -677,7 +701,7 @@
     },
     {
       "name": "A Spor",
-      "logo": "",
+      "logo": "https://i.imgur.com/ZhkZzLf.png",
       "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -685,7 +709,7 @@
     },
     {
       "name": "beIN SPORTS XTRA",
-      "logo": "",
+      "logo": "https://i.ibb.co/HT49GPmB/XTRA-2.png",
       "url": "https://bein-xtra-bein.amagi.tv/playlist.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -693,7 +717,7 @@
     },
     {
       "name": "beIN Sports XTRA Español",
-      "logo": "",
+      "logo": "https://i.imgur.com/V562tpO.png",
       "url": "https://dc1644a9jazgj.cloudfront.net/beIN_Sports_Xtra_Espanol.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -701,7 +725,7 @@
     },
     {
       "name": "beIN Sports USA",
-      "logo": "",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/BeIN_Sports_logo_%28vertical_version%29.svg/500px-BeIN_Sports_logo_%28vertical_version%29.svg.png",
       "url": "https://tvsen6.aynaott.com/beinsports/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -709,7 +733,7 @@
     },
     {
       "name": "TyC Sports",
-      "logo": "",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/TyC_Sports_logo.svg/960px-TyC_Sports_logo.svg.png",
       "url": "https://amg26268-amg26268c14-freelivesports-emea-10267.playouts.now.amagi.tv/ts-us-e2-n2/playlist/amg26268-sportsstudio-tycsports-freelivesportsemea/playlist.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -717,7 +741,7 @@
     },
     {
       "name": "TUDN",
-      "logo": "",
+      "logo": "https://i.imgur.com/oT5CAvd.png",
       "url": "https://streaming-live-fcdn.api.prd.univisionnow.com/tudn/tudn.isml/hls/tudn.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -725,7 +749,7 @@
     },
     {
       "name": "NBC Sports NOW",
-      "logo": "",
+      "logo": "https://i.imgur.com/EzNf2Yx.png",
       "url": "https://d4whmvwm0rdvi.cloudfront.net/10007/99993008/hls/master.m3u8?ads.xumo_channelId=99993008",
       "format": "m3u8",
       "group": "PordaX",
@@ -733,7 +757,7 @@
     },
     {
       "name": "PGA Tour",
-      "logo": "",
+      "logo": "https://i.imgur.com/J0TY9dG.png",
       "url": "https://d11k1mnrgfposz.cloudfront.net/playlist.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -741,7 +765,7 @@
     },
     {
       "name": "Fubo Sports Network",
-      "logo": "",
+      "logo": "https://i.imgur.com/qFNRJLb.png",
       "url": "https://dnf08l6u6uxnz.cloudfront.net/master.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -749,7 +773,7 @@
     },
     {
       "name": "ESPN8 The Ocho",
-      "logo": "",
+      "logo": "https://images.fubo.tv/channel-config-ui/station-logos/on-dark/espn_8_the_ocho_bw.png",
       "url": "https://d3b6q2ou5kp8ke.cloudfront.net/ESPNTheOcho.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -757,7 +781,7 @@
     },
     {
       "name": "Stadium",
-      "logo": "",
+      "logo": "https://i.imgur.com/SnZOiER.png",
       "url": "https://wurl120sports.global.transmit.live/hls/679a907dce42a042c23ace37/v1/stadium_gracenote/samsung_us/latest/main/hls/playlist.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -765,7 +789,7 @@
     },
     {
       "name": "Tennis Channel",
-      "logo": "",
+      "logo": "https://i.imgur.com/tsljAnY.png",
       "url": "https://amg01444-tennischannelth-tennischannelnl-samsungnl-x3dq1.amagi.tv/playlist/amg01444-tennischannelth-tennischannelnl-samsungnl/playlist.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -773,7 +797,7 @@
     },
     {
       "name": "Tennis Channel 2",
-      "logo": "",
+      "logo": "https://i.imgur.com/tsljAnY.png",
       "url": "https://mumbai-edge.smartplaytv.in/Tennis2/index.m3u8",
       "format": "m3u8",
       "group": "PordaX",
@@ -781,7 +805,7 @@
     },
     {
       "name": "Swerve Combat",
-      "logo": "",
+      "logo": "https://i.imgur.com/eFZh7aG.png",
       "url": "https://linear-253.frequency.stream/mt/roku/253/hls/master/playlist.m3u8",
       "format": "m3u8",
       "group": "PordaX",
