@@ -1,20 +1,28 @@
 {
   "website": "https://pordax.pages.dev/livetv",
-  "checked_at": "2026-11-21T18:48:54.229075+00:00",
-  "total_streams": 100,
+  "checked_at": "2026-11-22T05:35:02.783343+00:00",
+  "total_streams": 101,
   "streams": [
     {
-      "name": "Sevilla vs Betis",
-      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795172317540x302.jpg",
-      "url": "https://tencent-cdn.tapmad.com/v1/01a145abfb3a1ea540a81c2b41b751/01a145ae0ac115fc600b1e3e9683da/main.m3u8",
+      "name": "New Zealand vs India",
+      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1794553818540x302.jpg",
+      "url": "https://tencent-cdn.tapmad.com/v1/01a14a9fb90c15fc60e91e1786b061/01a14a9feb881ea540a81c2b41b75e/main.m3u8",
       "format": "m3u8",
       "group": "PordaX",
       "source": "https://pordax.pages.dev/api/livetv/tapmad"
     },
     {
-      "name": "Prochazka vs Stirling",
-      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1794811799540x302.jpg",
-      "url": "https://tencent-cdn.tapmad.com/v1/01a14abbcff31ea540a81c2b41b760/01a14abc06421567ee931e109fa577/main.m3u8",
+      "name": "FIA GT World Cup - Day 2",
+      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1794996391540x302.jpg",
+      "url": "https://multiregion-asia-cdn.tapmad.com/v1/01a1548c4faf15fc600b1e3e968408/01a1548c7fde1ea557841e1612cf76/main.m3u8",
+      "format": "m3u8",
+      "group": "PordaX",
+      "source": "https://pordax.pages.dev/api/livetv/tapmad"
+    },
+    {
+      "name": "Brisbane Heat vs Adelaide Strikers",
+      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1794830136540x302.jpg",
+      "url": "https://tencent-cdn.tapmad.com/v1/01a14ab8af8915fc600b1e3e9683f0/01a14ab953dd1ea540a81c2b41b75f/main.m3u8",
       "format": "m3u8",
       "group": "PordaX",
       "source": "https://pordax.pages.dev/api/livetv/tapmad"
@@ -164,7 +172,7 @@
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
-      "name": "Channel 21",
+      "name": "Channel 22",
       "logo": "https://backoffice.channel24bd.tv/media/common/logo-fb-pages.png",
       "url": "https://tvsen6.aynaott.com/channel52/index.m3u8",
       "format": "m3u8",
@@ -172,7 +180,7 @@
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
-      "name": "Channel 22",
+      "name": "Channel 23",
       "logo": "https://www.channelionline.com/brand/channel-i-logo.webp",
       "url": "https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8?e=1784102558&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=1b6ef0107d8addd36bcab3ca1175877a",
       "format": "m3u8",
