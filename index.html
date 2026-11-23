@@ -10,6 +10,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script>
     if (window.tailwind) tailwind.config = {
@@ -81,6 +84,44 @@
       if (app) document.documentElement.classList.add('app-mode');
       if (tv) document.documentElement.classList.add('tv-mode');
     })();
+  </script>
+  <script>
+  /* PERF LAYER: lite-mode detect, visibility-aware polling, async image decode */
+  (function () {
+    var d = document.documentElement, n = navigator, c = n.connection || {};
+    try {
+      var low = (n.deviceMemory && n.deviceMemory <= 4) || (n.hardwareConcurrency && n.hardwareConcurrency <= 4) ||
+        c.saveData || /2g/.test(c.effectiveType || '') ||
+        (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+      if (low || window.__CSTV_TV__) d.classList.add('perf-lite');
+    } catch (e) {}
+    /* slow background polls (>=10s) skip while the tab is hidden */
+    var _si = window.setInterval;
+    window.setInterval = function (fn, ms) {
+      if (typeof fn === 'function' && ms >= 10000) {
+        var a = [].slice.call(arguments, 2);
+        return _si.call(window, function () { if (!document.hidden) fn.apply(this, a); }, ms);
+      }
+      return _si.apply(window, arguments);
+    };
+    /* images: decode off the main thread, lazy-load when not specified */
+    function fix(i) {
+      if (i.tagName !== 'IMG' || i.__px) return; i.__px = 1;
+      if (!i.hasAttribute('decoding')) i.decoding = 'async';
+      if (!i.hasAttribute('loading') && !i.hasAttribute('fetchpriority')) i.loading = 'lazy';
+    }
+    function scan(r) { try { if (r.nodeType !== 1) return; fix(r); var l = r.getElementsByTagName('img'); for (var k = 0; k < l.length; k++) fix(l[k]); } catch (e) {} }
+    var q = [], t = 0;
+    function flush() { t = 0; var x = q; q = []; for (var k = 0; k < x.length; k++) scan(x[k]); }
+    function boot() {
+      scan(document.body);
+      new MutationObserver(function (m) {
+        for (var k = 0; k < m.length; k++) for (var j = 0; j < m[k].addedNodes.length; j++) q.push(m[k].addedNodes[j]);
+        if (!t) t = (window.requestAnimationFrame || setTimeout)(flush);
+      }).observe(document.body, { childList: true, subtree: true });
+    }
+    if (document.body) boot(); else document.addEventListener('DOMContentLoaded', boot);
+  })();
   </script>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/shaka-player@4.11.15/dist/shaka-player.compiled.min.js"></script>
@@ -296,7 +337,7 @@
   <style>
     /* ===== Round 2 polish ===== */
     :focus-visible { outline: 2px solid #d1d1d6; outline-offset: 2px; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: auto; }
     #headerSearchBtn { background: rgba(255,255,255,.08); }
     header { padding-top: env(safe-area-inset-top); }
     /* hero slides 2 & 3 */
@@ -461,7 +502,7 @@
       white-space: nowrap;
       flex-shrink: 0;
       cursor: pointer;
-      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
     #topCategoryNav .cat-tab:hover {
       background: rgba(255, 255, 255, 0.18);
@@ -552,7 +593,7 @@
       font-size: 13px;
       font-weight: 700;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.2s;
+      transition: transform 0.2s, opacity 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s, color 0.2s;
     }
     .seg-btn.on {
       background: linear-gradient(135deg, var(--sx-acc) 0%, #9333ea 100%);
@@ -586,7 +627,7 @@
       font-weight: 700;
       border: 1px solid rgba(255, 255, 255, 0.16);
       white-space: nowrap;
-      transition: all 0.2s;
+      transition: transform 0.2s, opacity 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s, color 0.2s;
     }
     .srv-chip.on {
       background: linear-gradient(135deg, var(--sx-acc) 0%, #9333ea 100%);
@@ -894,6 +935,19 @@ html[data-sx-theme]:not([data-sx-theme="pink"]) .shadow-pink-600\/30 { --tw-shad
     #heroWrap { margin: 8px 18px 0 !important; border-radius: 26px !important; }
     #heroTrack .hs { height: 430px !important; }
   }
+</style>
+<style id="perf-css">
+html{-webkit-text-size-adjust:100%;text-rendering:optimizeSpeed}
+body{overscroll-behavior-y:contain}
+button,a,[role=button],input,select,label,.app-card,.rm-card,.nz-card,.cw-card{touch-action:manipulation}
+.no-scrollbar,#heroTrack,#upTrack{overscroll-behavior-x:contain;transform:translateZ(0)}
+.app-card,.rm-card,.nz-card,.cw-card{contain:layout style}
+video{transform:translateZ(0);backface-visibility:hidden}
+img{content-visibility:auto}
+/* lite mode: weak phones, TVs, data-saver, reduced-motion */
+html.perf-lite *,html.perf-lite *::before,html.perf-lite *::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;scroll-behavior:auto!important}
+html.perf-lite *{text-shadow:none!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body class="min-h-screen bg-[#000000] text-white flex flex-col justify-between pb-20">
