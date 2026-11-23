@@ -1,16 +1,8 @@
 {
   "website": "https://pordax.pages.dev/livetv",
-  "checked_at": "2026-11-22T23:21:38.632957+00:00",
-  "total_streams": 99,
+  "checked_at": "2026-11-23T06:16:02.227917+00:00",
+  "total_streams": 98,
   "streams": [
-    {
-      "name": "New Zealand vs India",
-      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1794553818540x302.jpg",
-      "url": "https://tencent-cdn.tapmad.com/v1/01a14abbcff31ea540a81c2b41b760/01a14abc06421567ee931e109fa577/main.m3u8",
-      "format": "m3u8",
-      "group": "PordaX",
-      "source": "https://pordax.pages.dev/api/livetv/tapmad"
-    },
     {
       "name": "Bangla Vision",
       "logo": "https://i.imgur.com/nCWgp38.png",
@@ -156,7 +148,7 @@
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
-      "name": "Channel 20",
+      "name": "Channel 19",
       "logo": "https://backoffice.channel24bd.tv/media/common/logo-fb-pages.png",
       "url": "https://tvsen6.aynaott.com/channel52/index.m3u8",
       "format": "m3u8",
@@ -164,7 +156,7 @@
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
-      "name": "Channel 21",
+      "name": "Channel 20",
       "logo": "https://www.channelionline.com/brand/channel-i-logo.webp",
       "url": "https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8?e=1784102558&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=1b6ef0107d8addd36bcab3ca1175877a",
       "format": "m3u8",
