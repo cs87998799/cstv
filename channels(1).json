@@ -1,262 +1,364 @@
 {
   "channels": [
     {
-      "name": "STAR SPORTS SELECT 2 HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=8",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "SONY SPORTS TEN 1 HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=12",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "SONY SPORTS TEN 2 HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=13",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "SONY SPORTS TEN 3 HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=14",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "SONY SPORTS TEN 5 HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=15",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "A SPORTS HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=17",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "TEN CRICKET",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=19",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "PTV SPORTS",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=21",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "CRICBUZZ",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=22",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "SONY YAY",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=23",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "WILLOW 2",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=24",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "FOX SPORTS CRICKET",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=26",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "TNT SPORTS 3 HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=29",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "BEIN SPORTS 1 HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=30",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "BEIN SPORTS 2 HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=31",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "BEIN SPORTS 3 HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=32",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "BEIN SPORTS EXTRA HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=34",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
       "name": "JAMUNA TV",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=37",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/37.m3u8",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/xCPxcQ0K/Jamuna-tv.jpg"
     },
     {
       "name": "SOMOY TV HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=38",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/38.m3u8",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/bYCgM3dF/Somoy-TV.jpg"
     },
     {
       "name": "EKATTOR TV",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=39",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/39.m3u8",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/YSHzgPyk/Ekattur.jpg"
+    },
+    {
+      "name": "CHANNEL 24",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/40.m3u8",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/wv9FKrhQ/Channel-24.jpg"
     },
     {
       "name": "DBC NEWS HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=41",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/41.m3u8",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/C5zGSpdB/DBC-News.jpg"
     },
     {
       "name": "CHANNEL I HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=42",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/42.m3u8",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/yxtFNpZ4/Channel-i.jpg"
     },
     {
       "name": "NTV HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=43",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/43.m3u8",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/pTd8JMfw/Ntv.jpg"
     },
     {
       "name": "BANGLA VISION HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=44",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/44.m3u8",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/q7wyKv3N/Banglavision.png"
     },
     {
       "name": "MAASRANGA TV HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=45",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/45.m3u8",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/596kS6mM/MAASRANGA-TV-HD.jpg"
     },
     {
       "name": "GAZI TV HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=46",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/46.m3u8",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/mhWtqv9f/Gazi-TV.jpg"
     },
     {
       "name": "DEEPTO TV HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=47",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/47.m3u8",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/vBj17gHv/Deepto-TV.jpg"
     },
     {
       "name": "NAGORIK TV HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=48",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/48.m3u8",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/rmz0tCTv/Nagorik-TV.jpg"
     },
     {
       "name": "BTV NATIONAL HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=49",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/49.m3u8",
+      "category": "Bangla",
+      "logo": "https://i.postimg.cc/Sx7M0xDh/BTV.png"
     },
     {
-      "name": "&PICTURES HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=51",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "ZEE TV HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=52",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "STAR PLUS",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=53",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "STAR MOVIES HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=54",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "DURONTO TV HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=55",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "POGO",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=56",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "CARTOON NETWORK",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=57",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "name": "STAR JALSHA",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/58.m3u8",
+      "category": "Kolkata Bangla",
+      "logo": "https://i.postimg.cc/XYZzxt83/STAR-JALSHA.png"
     },
     {
       "name": "ZEE BANGLA",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=59",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/59.m3u8",
+      "category": "Kolkata Bangla",
+      "logo": "https://i.postimg.cc/FFZ8Kyz4/ZEE-BANGLA.jpg"
     },
     {
       "name": "COLORS BANGLA",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=60",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/60.m3u8",
+      "category": "Kolkata Bangla",
+      "logo": "https://i.postimg.cc/cH7jwYcT/COLORS-BANGLA.webp"
     },
     {
       "name": "ENTER 10 BANGLA",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=61",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/61.m3u8",
+      "category": "Kolkata Bangla",
+      "logo": "https://i.postimg.cc/CLc3cGpJ/ENTER-10-BANGLA.jpg"
     },
     {
       "name": "SONY AATH",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=62",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "DISCOVERY BANGLA",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=63",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
-    },
-    {
-      "name": "NICK BANGLA",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=64",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/62.m3u8",
+      "category": "Kolkata Bangla",
+      "logo": "https://i.postimg.cc/xCKr5B9J/SONY-AATH.png"
     },
     {
       "name": "JALSHA MOVIES HD",
-      "url": "http://live.ftpbdlive.com:8080/dvlwebtv.php?action=stream&type=live&id=65",
-      "category": "Uncategorized",
-      "logo": "https://raw.githubusercontent.com/Mrbotrx/Mrbotrx/refs/heads/main/IPTV_LINKS_LOGO.jpg"
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/65.m3u8",
+      "category": "Kolkata Bangla",
+      "logo": "https://i.postimg.cc/Y2ytDB7c/Jalsha-Movies.jpg"
+    },
+    {
+      "name": "STAR SPORTS 1 HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/5.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/hGVdbCWv/Star-Sports-1.jpg"
+    },
+    {
+      "name": "STAR SPORTS 2 HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/6.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/jjy7Q80w/Star-Sports-2.jpg"
+    },
+    {
+      "name": "STAR SPORTS SELECT 1 HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/7.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/85sw40LV/Star-Sports-Select-1.jpg"
+    },
+    {
+      "name": "STAR SPORTS SELECT 2 HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/8.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/2jsTdTyR/Star-Sports-Select-2.jpg"
+    },
+    {
+      "name": "STAR SPORTS 3",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/9.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/mrLmzDDk/Star-Sports-3.jpg"
+    },
+    {
+      "name": "T SPORTS",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/10.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/PfWvcMyz/T-Sports2.png"
+    },
+    {
+      "name": "T SPORTS HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/11.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/j24W7sCV/T-Sports.png"
+    },
+    {
+      "name": "SONY SPORTS TEN 1 HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/12.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/J48Z4FtV/Sony-Ten-1-HD.jpg"
+    },
+    {
+      "name": "SONY SPORTS TEN 2 HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/13.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/FHsS0JjV/Sony-Ten-2-HD.jpg"
+    },
+    {
+      "name": "SONY SPORTS TEN 3 HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/14.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/SxTMdNrB/Sony-Ten-3-HD.jpg"
+    },
+    {
+      "name": "SONY SPORTS TEN 5 HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/15.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/7L5TW8tJ/Sony-Ten-5-HD.jpg"
+    },
+    {
+      "name": "EUROSPORT HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/16.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/WpdTqpF0/Eurosport.png"
+    },
+    {
+      "name": "A SPORTS HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/17.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/HncZYhLk/A-Sports.png"
+    },
+    {
+      "name": "TEN SPORTS HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/18.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/DZzpDZk4/Ten-Sports.png"
+    },
+    {
+      "name": "TEN CRICKET",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/19.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/26X9fDrJ/ten-cricket.png"
+    },
+    {
+      "name": "GEO SUPER",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/20.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/52wrQTSg/GEO-SUPER.png"
+    },
+    {
+      "name": "PTV SPORTS",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/21.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/3rcVsgwY/PTV-Sports.jpg"
+    },
+    {
+      "name": "CRICBUZZ",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/22.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/VvdTSNKN/CRICBUZZ.webp"
+    },
+    {
+      "name": "WILLOW 2",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/24.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/CKpVWbmd/WILLOW-SPORTS.png"
+    },
+    {
+      "name": "SKY SPORTS CRICKET",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/25.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/SRvBV9nN/SKY-SPORTS-CRICKET.png"
+    },
+    {
+      "name": "FOX SPORTS CRICKET",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/26.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/XvktmmZY/fox-cricket.png"
+    },
+    {
+      "name": "TNT SPORTS 1 HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/27.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/zvdkSTXs/TNT-Sports-1.png"
+    },
+    {
+      "name": "TNT SPORTS 2 HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/28.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/tghtvK48/TNT-Sports-2.png"
+    },
+    {
+      "name": "TNT SPORTS 3 HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/29.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/Wp9my6s3/TNT-Sports-3.png"
+    },
+    {
+      "name": "BEIN SPORTS 1 HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/30.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/rFLZ8Nvc/BEIN-SPORTS-1.png"
+    },
+    {
+      "name": "BEIN SPORTS 2 HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/31.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/PqcK0Wm9/BEIN-SPORTS-2.png"
+    },
+    {
+      "name": "BEIN SPORTS 3 HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/32.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/ZnPc9X15/BEIN-SPORTS-3.png"
+    },
+    {
+      "name": "BEIN SPORTS ARABIC HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/33.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/QCqQN1TJ/BEIN-SPORTS-ARABIC.png"
+    },
+    {
+      "name": "BEIN SPORTS EXTRA HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/34.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/NF23WG2g/Be-IN-Sports-XTRA.png"
+    },
+    {
+      "name": "UNITE8 SPORTS 1 HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/35.m3u8",
+      "category": "Sports",
+      "logo": "https://i.postimg.cc/nhVXfN2N/Unite8-Sports-1.png"
+    },
+    {
+      "name": "SONY MAX HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/50.m3u8",
+      "category": "Hindi",
+      "logo": "https://i.postimg.cc/vZmZNfHd/Sony-Max-HD.jpg"
+    },
+    {
+      "name": "&PICTURES HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/51.m3u8",
+      "category": "Hindi",
+      "logo": "https://i.postimg.cc/ncSJM5px/And-Picture.jpg"
+    },
+    {
+      "name": "ZEE TV HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/52.m3u8",
+      "category": "Hindi",
+      "logo": "https://i.postimg.cc/05cgH36Q/Zee-TV.jpg"
+    },
+    {
+      "name": "STAR PLUS",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/53.m3u8",
+      "category": "Hindi",
+      "logo": "https://i.postimg.cc/B64ymc43/Star-Plus.jpg"
+    },
+    {
+      "name": "STAR MOVIES HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/54.m3u8",
+      "category": "Hindi",
+      "logo": "https://i.postimg.cc/SQZ5GM52/Star-Movies.jpg"
+    },
+    {
+      "name": "SONY YAY",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/23.m3u8",
+      "category": "Kids",
+      "logo": "https://i.postimg.cc/prj6qbB9/SONY-YAY.jpg"
+    },
+    {
+      "name": "DURONTO TV HD",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/55.m3u8",
+      "category": "Kids",
+      "logo": "https://i.postimg.cc/02MtdHDF/Duronto-TV.jpg"
+    },
+    {
+      "name": "POGO",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/56.m3u8",
+      "category": "Kids",
+      "logo": "https://i.postimg.cc/502gHPf7/POGO1664977122.jpg"
+    },
+    {
+      "name": "CARTOON NETWORK",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/57.m3u8",
+      "category": "Kids",
+      "logo": "https://i.postimg.cc/65v0G4N6/CN.jpg"
+    },
+    {
+      "name": "NICK BANGLA",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/64.m3u8",
+      "category": "Kids",
+      "logo": "https://i.postimg.cc/9XvQFHny/Nick-Bangla.jpg"
+    },
+    {
+      "name": "DISCOVERY BANGLA",
+      "url": "http://live.ftpbdlive.com:8080/live/FTPBD-LIVETV/FTPBD-2026/63.m3u8",
+      "category": "Other",
+      "logo": "https://i.postimg.cc/bJbPMs9m/Discovery.png"
     }
   ]
 }
