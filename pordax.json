@@ -1,8 +1,48 @@
 {
   "website": "https://pordax.pages.dev/livetv",
-  "checked_at": "2026-11-23T23:34:40.243826+00:00",
-  "total_streams": 98,
+  "checked_at": "2026-11-24T08:52:31.312467+00:00",
+  "total_streams": 103,
   "streams": [
+    {
+      "name": "Australia vs England",
+      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1794813008540x302.jpg",
+      "url": "https://tencent-cdn.tapmad.com/v1/01a14a9fb90c15fc60e91e1786b061/01a14a9feb881ea540a81c2b41b75e/main.m3u8",
+      "format": "m3u8",
+      "group": "PordaX",
+      "source": "https://pordax.pages.dev/api/livetv/tapmad"
+    },
+    {
+      "name": "Newcastle Jets FC (AUS) vs Kashiwa Reysol (JPN)",
+      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795161741540x302.jpg",
+      "url": "https://multiregion-asia-cdn.tapmad.com/v1/01a1548c4faf15fc600b1e3e968408/01a1548c7fde1ea557841e1612cf76/main.m3u8",
+      "format": "m3u8",
+      "group": "PordaX",
+      "source": "https://pordax.pages.dev/api/livetv/tapmad"
+    },
+    {
+      "name": "Chattogram City FC Brothers Union Ltd",
+      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795501947540x302.jpg",
+      "url": "https://tencent-cdn.tapmad.com/v1/01a14a80166b1ea557841e1612cf55/01a14a8047211ea557841e1612cf58/main.m3u8",
+      "format": "m3u8",
+      "group": "PordaX",
+      "source": "https://pordax.pages.dev/api/livetv/tapmad"
+    },
+    {
+      "name": "Abahani Ltd. DhakaFakirerpool Young Mens Club",
+      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795501821540x302.jpg",
+      "url": "https://tencent-cdn.tapmad.com/v1/01a14a5b5bd11ea540a81c2b41b75b/01a14a5b94ea15fc600b1e3e9683eb/main.m3u8",
+      "format": "m3u8",
+      "group": "PordaX",
+      "source": "https://pordax.pages.dev/api/livetv/tapmad"
+    },
+    {
+      "name": "Fortis FC Ltd vs Rahamatgonj MFS",
+      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795501699540x302.jpg",
+      "url": "https://tencent-cdn.tapmad.com/v1/01a14a4cd93615fc600b1e3e9683e8/01a14a5761541567ee931e109fa576/main.m3u8",
+      "format": "m3u8",
+      "group": "PordaX",
+      "source": "https://pordax.pages.dev/api/livetv/tapmad"
+    },
     {
       "name": "Bangla Vision",
       "logo": "https://i.imgur.com/nCWgp38.png",
@@ -148,7 +188,7 @@
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
-      "name": "Channel 19",
+      "name": "Channel 24",
       "logo": "https://backoffice.channel24bd.tv/media/common/logo-fb-pages.png",
       "url": "https://tvsen6.aynaott.com/channel52/index.m3u8",
       "format": "m3u8",
@@ -156,7 +196,7 @@
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
-      "name": "Channel 20",
+      "name": "Channel 25",
       "logo": "https://www.channelionline.com/brand/channel-i-logo.webp",
       "url": "https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8?e=1784102558&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=1b6ef0107d8addd36bcab3ca1175877a",
       "format": "m3u8",

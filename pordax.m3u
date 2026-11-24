@@ -1,4 +1,14 @@
 #EXTM3U
+#EXTINF:-1 tvg-id="australia-vs-england" tvg-name="Australia vs England" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1794813008540x302.jpg" group-title="PordaX",Australia vs England
+https://tencent-cdn.tapmad.com/v1/01a14a9fb90c15fc60e91e1786b061/01a14a9feb881ea540a81c2b41b75e/main.m3u8
+#EXTINF:-1 tvg-id="newcastle-jets-fc-aus-vs-kashiwa-reysol-jpn" tvg-name="Newcastle Jets FC (AUS) vs Kashiwa Reysol (JPN)" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795161741540x302.jpg" group-title="PordaX",Newcastle Jets FC (AUS) vs Kashiwa Reysol (JPN)
+https://multiregion-asia-cdn.tapmad.com/v1/01a1548c4faf15fc600b1e3e968408/01a1548c7fde1ea557841e1612cf76/main.m3u8
+#EXTINF:-1 tvg-id="chattogram-city-fc-brothers-union-ltd" tvg-name="Chattogram City FC Brothers Union Ltd" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795501947540x302.jpg" group-title="PordaX",Chattogram City FC Brothers Union Ltd
+https://tencent-cdn.tapmad.com/v1/01a14a80166b1ea557841e1612cf55/01a14a8047211ea557841e1612cf58/main.m3u8
+#EXTINF:-1 tvg-id="abahani-ltd-dhakafakirerpool-young-mens-club" tvg-name="Abahani Ltd. DhakaFakirerpool Young Mens Club" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795501821540x302.jpg" group-title="PordaX",Abahani Ltd. DhakaFakirerpool Young Mens Club
+https://tencent-cdn.tapmad.com/v1/01a14a5b5bd11ea540a81c2b41b75b/01a14a5b94ea15fc600b1e3e9683eb/main.m3u8
+#EXTINF:-1 tvg-id="fortis-fc-ltd-vs-rahamatgonj-mfs" tvg-name="Fortis FC Ltd vs Rahamatgonj MFS" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795501699540x302.jpg" group-title="PordaX",Fortis FC Ltd vs Rahamatgonj MFS
+https://tencent-cdn.tapmad.com/v1/01a14a4cd93615fc600b1e3e9683e8/01a14a5761541567ee931e109fa576/main.m3u8
 #EXTINF:-1 tvg-id="bangla-vision" tvg-name="Bangla Vision" tvg-logo="https://i.imgur.com/nCWgp38.png" group-title="PordaX",Bangla Vision
 https://tvsen5.aynaott.com/banglavision/index.m3u8
 #EXTINF:-1 tvg-id="nagorik-tv" tvg-name="NAGORIK TV" tvg-logo="https://otapp.store/uploads/tv_image/sm/nagorik-tv.png" group-title="PordaX",NAGORIK TV
@@ -35,9 +45,9 @@ https://tvsen6.aynaott.com/TjGR1GcxKetHNVcMVxbq/index.m3u8
 https://tvsen6.aynaott.com/39ee93nUbCCmm5LsyD4t/index.m3u8
 #EXTINF:-1 tvg-id="bijoy-tv" tvg-name="Bijoy TV" tvg-logo="https://limon-iptv-image.vercel.app/BD/Bijoy-TV.png" group-title="PordaX",Bijoy TV
 https://tvsen6.aynaott.com/N8Xbo5vdwVU6sF43RsW0/index.m3u8
-#EXTINF:-1 tvg-id="channel-19" tvg-name="Channel 19" tvg-logo="https://backoffice.channel24bd.tv/media/common/logo-fb-pages.png" group-title="PordaX",Channel 19
+#EXTINF:-1 tvg-id="channel-24" tvg-name="Channel 24" tvg-logo="https://backoffice.channel24bd.tv/media/common/logo-fb-pages.png" group-title="PordaX",Channel 24
 https://tvsen6.aynaott.com/channel52/index.m3u8
-#EXTINF:-1 tvg-id="channel-20" tvg-name="Channel 20" tvg-logo="https://www.channelionline.com/brand/channel-i-logo.webp" group-title="PordaX",Channel 20
+#EXTINF:-1 tvg-id="channel-25" tvg-name="Channel 25" tvg-logo="https://www.channelionline.com/brand/channel-i-logo.webp" group-title="PordaX",Channel 25
 https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8?e=1784102558&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=1b6ef0107d8addd36bcab3ca1175877a
 #EXTINF:-1 tvg-id="dbc-news" tvg-name="DBC News" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/%E0%A6%A1%E0%A6%BF%E0%A6%AC%E0%A6%BF%E0%A6%B8%E0%A6%BF_%E0%A6%A8%E0%A6%BF%E0%A6%89%E0%A6%9C%E2%80%93%E0%A6%8F%E0%A6%B0_%E0%A6%B2%E0%A7%8B%E0%A6%97%E0%A7%8B.svg/330px-%E0%A6%A1%E0%A6%BF%E0%A6%AC%E0%A6%BF%E0%A6%B8%E0%A6%BF_%E0%A6%A8%E0%A6%BF%E0%A6%89%E0%A6%9C%E2%80%93%E0%A6%8F%E0%A6%B0_%E0%A6%B2%E0%A7%8B%E0%A6%97%E0%A7%8B.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail" group-title="PordaX",DBC News
 https://tvsen6.aynaott.com/pF66Tkz0qFwP2aMMqHyt/index.m3u8
