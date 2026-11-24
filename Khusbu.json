@@ -2,8 +2,8 @@
   "website": "https://nexflixtv.lovable.app/",
   "watch_pages_found": 191,
   "watch_pages_scanned": 191,
-  "network_resources_seen": 1545,
-  "total_playlist_candidates": 430,
+  "network_resources_seen": 1457,
+  "total_playlist_candidates": 427,
   "results": [
     {
       "channel": "News 21 Bangla TV\n\nNews",
@@ -106,30 +106,30 @@
     {
       "channel": "Animal Planet\n\nDocumentary",
       "url": "http://23.237.104.106:8080/USA_ANIMAL_PLANET/index.m3u8",
-      "http_status": "ERROR",
-      "content_type": "",
-      "error": "HTTPConnectionPool(host='23.237.104.106', port=8080): Max retries exceeded with url: /USA_ANIMAL_PLANET/index.m3u8 (Caused by ConnectTimeoutError(<HTTPConnection(host='23.237.104.106', port=8080) at 0"
+      "http_status": 206,
+      "content_type": "application/vnd.apple.mpegurl",
+      "final_url": "http://23.237.104.106:8080/USA_ANIMAL_PLANET/index.m3u8"
     },
     {
       "channel": "Animal Planet\n\nDocumentary",
       "url": "http://23.237.104.106:8080/USA_ANIMAL_PLANET/index.m3u8#fb:M3U_World_4K",
-      "http_status": "ERROR",
-      "content_type": "",
-      "error": "HTTPConnectionPool(host='23.237.104.106', port=8080): Max retries exceeded with url: /USA_ANIMAL_PLANET/index.m3u8 (Caused by ConnectTimeoutError(<HTTPConnection(host='23.237.104.106', port=8080) at 0"
+      "http_status": 206,
+      "content_type": "application/vnd.apple.mpegurl",
+      "final_url": "http://23.237.104.106:8080/USA_ANIMAL_PLANET/index.m3u8#fb:M3U_World_4K"
     },
     {
       "channel": "National Geographic\n\nDocumentary",
       "url": "http://23.237.104.106:8080/USA_NAT_GEO/index.m3u8",
-      "http_status": "ERROR",
-      "content_type": "",
-      "error": "HTTPConnectionPool(host='23.237.104.106', port=8080): Max retries exceeded with url: /USA_NAT_GEO/index.m3u8 (Caused by ConnectTimeoutError(<HTTPConnection(host='23.237.104.106', port=8080) at 0x78de9"
+      "http_status": 206,
+      "content_type": "application/vnd.apple.mpegurl",
+      "final_url": "http://23.237.104.106:8080/USA_NAT_GEO/index.m3u8"
     },
     {
       "channel": "National Geographic\n\nDocumentary",
       "url": "http://23.237.104.106:8080/USA_NAT_GEO/index.m3u8#fb:M3U_World_4K",
-      "http_status": "ERROR",
-      "content_type": "",
-      "error": "HTTPConnectionPool(host='23.237.104.106', port=8080): Max retries exceeded with url: /USA_NAT_GEO/index.m3u8 (Caused by ConnectTimeoutError(<HTTPConnection(host='23.237.104.106', port=8080) at 0x78de9"
+      "http_status": 206,
+      "content_type": "application/vnd.apple.mpegurl",
+      "final_url": "http://23.237.104.106:8080/USA_NAT_GEO/index.m3u8#fb:M3U_World_4K"
     },
     {
       "channel": "Animal Planet [Backup 2]\n\nDocumentary",
@@ -253,16 +253,16 @@
     {
       "channel": "Nick Bangla\n\nKids",
       "url": "http://live.balajibroadband.com:3500/live/1341.m3u8",
-      "http_status": 200,
-      "content_type": "text/plain; charset=utf-8",
-      "final_url": "http://live.balajibroadband.com:3500/render.m3u8?auth=zgawq9rKdWaV8LiznjcqaLiz1-_iQLVQDvFPlqVp3LZpVZXT-d73QxevqjXU8zbIW6FSzu-MyiB67mfGWQ7R-R3UcNRWrW9D_lc2VGMM8uALHJSOsF37g4H4DWZuniz2p1drrwTMRuT2X-OdBqde_iIkh1PhYgsLy2nOqKVTFRjV0GxP9gTs3NAoS3VrHTD4vMbahqPS3x2hQH5Xe_j0GJ0vwFCtReXmEMqFaLLv68R799XJQY1ChfbHJiUgPBdQJAJdxEDPCpfLxQJTaqwzWzOX8g2wobjbakRslxF6JD0lhmlHEMzYn4riP9kHWUbfNqF1zsahk7WXpPTMeRSWku7y1Cm3gw==&channel_key_id=1341"
+      "http_status": 500,
+      "content_type": "application/json",
+      "final_url": "http://live.balajibroadband.com:3500/live/1341.m3u8"
     },
     {
       "channel": "Nick Bangla\n\nKids",
       "url": "http://live.balajibroadband.com:3500/live/1341.m3u8#fb:M3U_World_4K",
-      "http_status": 200,
-      "content_type": "text/plain; charset=utf-8",
-      "final_url": "http://live.balajibroadband.com:3500/render.m3u8?auth=0kZdMi-Pn5gdsVcAs8fDBWpg0qWU5RNa2mQ4PQkt9_KcIAei9lHA4DDXxYHMbtQkQnamoia_aQAZEFqoC6AfXsoasDxCwMWvcHi2DuecGYW6u2AfhSPq4KFikgE1QWfxbvffCe-uhHROti7PdAHowH7aqafWIlLr2Qv3GyYRvnWvdYghFr7PIK6up5q1-DvwGB5pb23PFqQ_f5Gg7vlImFWXYfpSclp9hqHTVx4GuqKbZM4skb5e_HVk9tKPz5cs7N9ro5EuP3cOFaC6F0iAsEqlm6AZ_MGivILjp8QUVO2Rq9_WLdAYH8BhfrDz5M8rxsC6xwFgfWotAtbFBydOGE9QyTc9Cw==&channel_key_id=1341#fb:M3U_World_4K"
+      "http_status": 500,
+      "content_type": "application/json",
+      "final_url": "http://live.balajibroadband.com:3500/live/1341.m3u8#fb:M3U_World_4K"
     },
     {
       "channel": "Quran [Backup 2]\n\nIslamic",
@@ -336,24 +336,24 @@
     },
     {
       "channel": "TRAVEL XP [Backup 2]\n\nDocumentary",
-      "url": "https://27c980761ff9437d929e64647afe183a.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-eu_TravelXP/4bef59a2-ee89-4dd3-bcc9-3e4ffdd81d23/0.m3u8",
+      "url": "https://27c980761ff9437d929e64647afe183a.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-eu_TravelXP/64a075d9-e5b1-4880-8839-eaf06e918aa2/0.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://27c980761ff9437d929e64647afe183a.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-eu_TravelXP/4bef59a2-ee89-4dd3-bcc9-3e4ffdd81d23/0.m3u8"
+      "final_url": "https://27c980761ff9437d929e64647afe183a.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-eu_TravelXP/64a075d9-e5b1-4880-8839-eaf06e918aa2/0.m3u8"
     },
     {
       "channel": "TRAVEL XP [Backup 2]\n\nDocumentary",
-      "url": "https://27c980761ff9437d929e64647afe183a.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-eu_TravelXP/4bef59a2-ee89-4dd3-bcc9-3e4ffdd81d23/1.m3u8",
+      "url": "https://27c980761ff9437d929e64647afe183a.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-eu_TravelXP/64a075d9-e5b1-4880-8839-eaf06e918aa2/1.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://27c980761ff9437d929e64647afe183a.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-eu_TravelXP/4bef59a2-ee89-4dd3-bcc9-3e4ffdd81d23/1.m3u8"
+      "final_url": "https://27c980761ff9437d929e64647afe183a.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-eu_TravelXP/64a075d9-e5b1-4880-8839-eaf06e918aa2/1.m3u8"
     },
     {
       "channel": "TRAVEL XP [Backup 2]\n\nDocumentary",
-      "url": "https://27c980761ff9437d929e64647afe183a.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-eu_TravelXP/4bef59a2-ee89-4dd3-bcc9-3e4ffdd81d23/2.m3u8",
+      "url": "https://27c980761ff9437d929e64647afe183a.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-eu_TravelXP/64a075d9-e5b1-4880-8839-eaf06e918aa2/2.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://27c980761ff9437d929e64647afe183a.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-eu_TravelXP/4bef59a2-ee89-4dd3-bcc9-3e4ffdd81d23/2.m3u8"
+      "final_url": "https://27c980761ff9437d929e64647afe183a.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-eu_TravelXP/64a075d9-e5b1-4880-8839-eaf06e918aa2/2.m3u8"
     },
     {
       "channel": "TRAVEL XP [Backup 2]\n\nDocumentary",
@@ -371,38 +371,38 @@
     },
     {
       "channel": "Autentic History\n\nDocumentary",
-      "url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/487ae7f3-b210-4438-bb32-46a284e6d7a0/0.m3u8",
+      "url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/ea6dd55c-0996-4b2b-96f0-1109f40d7fe5/0.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/487ae7f3-b210-4438-bb32-46a284e6d7a0/0.m3u8"
+      "final_url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/ea6dd55c-0996-4b2b-96f0-1109f40d7fe5/0.m3u8"
     },
     {
       "channel": "Autentic History\n\nDocumentary",
-      "url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/487ae7f3-b210-4438-bb32-46a284e6d7a0/1.m3u8",
+      "url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/ea6dd55c-0996-4b2b-96f0-1109f40d7fe5/1.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/487ae7f3-b210-4438-bb32-46a284e6d7a0/1.m3u8"
+      "final_url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/ea6dd55c-0996-4b2b-96f0-1109f40d7fe5/1.m3u8"
     },
     {
       "channel": "Autentic History\n\nDocumentary",
-      "url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/487ae7f3-b210-4438-bb32-46a284e6d7a0/2.m3u8",
+      "url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/ea6dd55c-0996-4b2b-96f0-1109f40d7fe5/2.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/487ae7f3-b210-4438-bb32-46a284e6d7a0/2.m3u8"
+      "final_url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/ea6dd55c-0996-4b2b-96f0-1109f40d7fe5/2.m3u8"
     },
     {
       "channel": "Autentic History\n\nDocumentary",
-      "url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/487ae7f3-b210-4438-bb32-46a284e6d7a0/3.m3u8",
+      "url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/ea6dd55c-0996-4b2b-96f0-1109f40d7fe5/3.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/487ae7f3-b210-4438-bb32-46a284e6d7a0/3.m3u8"
+      "final_url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/ea6dd55c-0996-4b2b-96f0-1109f40d7fe5/3.m3u8"
     },
     {
       "channel": "Autentic History\n\nDocumentary",
-      "url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/487ae7f3-b210-4438-bb32-46a284e6d7a0/4.m3u8",
+      "url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/ea6dd55c-0996-4b2b-96f0-1109f40d7fe5/4.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/487ae7f3-b210-4438-bb32-46a284e6d7a0/4.m3u8"
+      "final_url": "https://9e754fa707344ccca6d84955c8fcaf36.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AutenticHistory/ea6dd55c-0996-4b2b-96f0-1109f40d7fe5/4.m3u8"
     },
     {
       "channel": "Autentic History\n\nDocumentary",
@@ -434,38 +434,38 @@
     },
     {
       "channel": "Mr Bean Animated\n\nCartoon",
-      "url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205d4aea583f5034c0b85ffe204fc4815c8a622088ffde7c3d2c0e0bce5559e7a75ba6f783357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbc2b5a50946b3880461b79ebfefffbb9df6c5e6f41f92d0de/68/1280x720_3329040/index.m3u8",
+      "url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fb17a5747e95b391b37dabf0ab0775393811782797f8cb08c6338795e5dcb5f5ce0f659c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0766822e2a7baa6c75ab6d56350cace258bf44cf6c88ccd2ba/96/1280x720_3329040/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205d4aea583f5034c0b85ffe204fc4815c8a622088ffde7c3d2c0e0bce5559e7a75ba6f783357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbc2b5a50946b3880461b79ebfefffbb9df6c5e6f41f92d0de/68/1280x720_3329040/index.m3u8"
+      "final_url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fb17a5747e95b391b37dabf0ab0775393811782797f8cb08c6338795e5dcb5f5ce0f659c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0766822e2a7baa6c75ab6d56350cace258bf44cf6c88ccd2ba/96/1280x720_3329040/index.m3u8"
     },
     {
       "channel": "Mr Bean Animated\n\nCartoon",
-      "url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205d4aea583f5034c0b85ffe204fc4815c8a622088ffde7c3d2c0e0bce5559e7a75ba6f783357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbc2b5a50946b3880461b79ebfefffbb9df6c5e6f41f92d0de/68/1920x1080_6046040/index.m3u8",
+      "url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fb17a5747e95b391b37dabf0ab0775393811782797f8cb08c6338795e5dcb5f5ce0f659c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0766822e2a7baa6c75ab6d56350cace258bf44cf6c88ccd2ba/96/1920x1080_6046040/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205d4aea583f5034c0b85ffe204fc4815c8a622088ffde7c3d2c0e0bce5559e7a75ba6f783357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbc2b5a50946b3880461b79ebfefffbb9df6c5e6f41f92d0de/68/1920x1080_6046040/index.m3u8"
+      "final_url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fb17a5747e95b391b37dabf0ab0775393811782797f8cb08c6338795e5dcb5f5ce0f659c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0766822e2a7baa6c75ab6d56350cace258bf44cf6c88ccd2ba/96/1920x1080_6046040/index.m3u8"
     },
     {
       "channel": "Mr Bean Animated\n\nCartoon",
-      "url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205d4aea583f5034c0b85ffe204fc4815c8a622088ffde7c3d2c0e0bce5559e7a75ba6f783357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbc2b5a50946b3880461b79ebfefffbb9df6c5e6f41f92d0de/68/426x240_511680/index.m3u8",
+      "url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fb17a5747e95b391b37dabf0ab0775393811782797f8cb08c6338795e5dcb5f5ce0f659c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0766822e2a7baa6c75ab6d56350cace258bf44cf6c88ccd2ba/96/426x240_511680/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205d4aea583f5034c0b85ffe204fc4815c8a622088ffde7c3d2c0e0bce5559e7a75ba6f783357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbc2b5a50946b3880461b79ebfefffbb9df6c5e6f41f92d0de/68/426x240_511680/index.m3u8"
+      "final_url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fb17a5747e95b391b37dabf0ab0775393811782797f8cb08c6338795e5dcb5f5ce0f659c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0766822e2a7baa6c75ab6d56350cace258bf44cf6c88ccd2ba/96/426x240_511680/index.m3u8"
     },
     {
       "channel": "Mr Bean Animated\n\nCartoon",
-      "url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205d4aea583f5034c0b85ffe204fc4815c8a622088ffde7c3d2c0e0bce5559e7a75ba6f783357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbc2b5a50946b3880461b79ebfefffbb9df6c5e6f41f92d0de/68/640x360_1057680/index.m3u8",
+      "url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fb17a5747e95b391b37dabf0ab0775393811782797f8cb08c6338795e5dcb5f5ce0f659c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0766822e2a7baa6c75ab6d56350cace258bf44cf6c88ccd2ba/96/640x360_1057680/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205d4aea583f5034c0b85ffe204fc4815c8a622088ffde7c3d2c0e0bce5559e7a75ba6f783357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbc2b5a50946b3880461b79ebfefffbb9df6c5e6f41f92d0de/68/640x360_1057680/index.m3u8"
+      "final_url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fb17a5747e95b391b37dabf0ab0775393811782797f8cb08c6338795e5dcb5f5ce0f659c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0766822e2a7baa6c75ab6d56350cace258bf44cf6c88ccd2ba/96/640x360_1057680/index.m3u8"
     },
     {
       "channel": "Mr Bean Animated\n\nCartoon",
-      "url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205d4aea583f5034c0b85ffe204fc4815c8a622088ffde7c3d2c0e0bce5559e7a75ba6f783357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbc2b5a50946b3880461b79ebfefffbb9df6c5e6f41f92d0de/68/848x480_1686360/index.m3u8",
+      "url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fb17a5747e95b391b37dabf0ab0775393811782797f8cb08c6338795e5dcb5f5ce0f659c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0766822e2a7baa6c75ab6d56350cace258bf44cf6c88ccd2ba/96/848x480_1686360/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205d4aea583f5034c0b85ffe204fc4815c8a622088ffde7c3d2c0e0bce5559e7a75ba6f783357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbc2b5a50946b3880461b79ebfefffbb9df6c5e6f41f92d0de/68/848x480_1686360/index.m3u8"
+      "final_url": "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fb17a5747e95b391b37dabf0ab0775393811782797f8cb08c6338795e5dcb5f5ce0f659c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0766822e2a7baa6c75ab6d56350cace258bf44cf6c88ccd2ba/96/848x480_1686360/index.m3u8"
     },
     {
       "channel": "BBC Earth\n\nDocumentary",
@@ -476,24 +476,10 @@
     },
     {
       "channel": "B4U Movies\n\nMovies",
-      "url": "https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/1080p/index.m3u8",
-      "http_status": 206,
-      "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/1080p/index.m3u8"
-    },
-    {
-      "channel": "B4U Movies\n\nMovies",
-      "url": "https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/360p/index.m3u8",
-      "http_status": 206,
-      "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/360p/index.m3u8"
-    },
-    {
-      "channel": "B4U Movies\n\nMovies",
       "url": "https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/playlist.m3u8",
-      "http_status": 206,
-      "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/playlist.m3u8"
+      "http_status": "ERROR",
+      "content_type": "",
+      "error": "HTTPSConnectionPool(host='amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv', port=443): Max retries exceeded with url: /playlist.m3u8 (Caused by NameResolutionError(\"HTTPSConnection(hos"
     },
     {
       "channel": "Action Hollywood\n\nMovies",
@@ -511,59 +497,59 @@
     },
     {
       "channel": "Action Hollywood Movies\n\nMovies",
-      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1210610b90f38076bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbccb5a53d46b3880474608e0a375e9b91903948bb37750bce/66/1280x720_2657600/index.m3u8",
+      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe72e0112bd5a3c1b37dabf0ab07753938117da7f2e8eb08b636b7f5c0e995b5be7a40fc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6530afe759a520ab7d9307d8267bfe496f1f5e9b9b805d6fd3/152/1280x720_2657600/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1210610b90f38076bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbccb5a53d46b3880474608e0a375e9b91903948bb37750bce/66/1280x720_2657600/index.m3u8"
+      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe72e0112bd5a3c1b37dabf0ab07753938117da7f2e8eb08b636b7f5c0e995b5be7a40fc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6530afe759a520ab7d9307d8267bfe496f1f5e9b9b805d6fd3/152/1280x720_2657600/index.m3u8"
     },
     {
       "channel": "Action Hollywood Movies\n\nMovies",
-      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1210610b90f38076bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbccb5a53d46b3880474608e0a375e9b91903948bb37750bce/66/1920x1080_4716800/index.m3u8",
+      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe72e0112bd5a3c1b37dabf0ab07753938117da7f2e8eb08b636b7f5c0e995b5be7a40fc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6530afe759a520ab7d9307d8267bfe496f1f5e9b9b805d6fd3/152/1920x1080_4716800/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1210610b90f38076bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbccb5a53d46b3880474608e0a375e9b91903948bb37750bce/66/1920x1080_4716800/index.m3u8"
+      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe72e0112bd5a3c1b37dabf0ab07753938117da7f2e8eb08b636b7f5c0e995b5be7a40fc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6530afe759a520ab7d9307d8267bfe496f1f5e9b9b805d6fd3/152/1920x1080_4716800/index.m3u8"
     },
     {
       "channel": "Action Hollywood Movies\n\nMovies",
-      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1210610b90f38076bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbccb5a53d46b3880474608e0a375e9b91903948bb37750bce/66/640x360_1020800/index.m3u8",
+      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe72e0112bd5a3c1b37dabf0ab07753938117da7f2e8eb08b636b7f5c0e995b5be7a40fc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6530afe759a520ab7d9307d8267bfe496f1f5e9b9b805d6fd3/152/640x360_1020800/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1210610b90f38076bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbccb5a53d46b3880474608e0a375e9b91903948bb37750bce/66/640x360_1020800/index.m3u8"
+      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe72e0112bd5a3c1b37dabf0ab07753938117da7f2e8eb08b636b7f5c0e995b5be7a40fc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6530afe759a520ab7d9307d8267bfe496f1f5e9b9b805d6fd3/152/640x360_1020800/index.m3u8"
     },
     {
       "channel": "Action Hollywood Movies\n\nMovies",
-      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1210610b90f38076bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbccb5a53d46b3880474608e0a375e9b91903948bb37750bce/66/848x480_1249600/index.m3u8",
+      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe72e0112bd5a3c1b37dabf0ab07753938117da7f2e8eb08b636b7f5c0e995b5be7a40fc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6530afe759a520ab7d9307d8267bfe496f1f5e9b9b805d6fd3/152/848x480_1249600/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1210610b90f38076bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726fbccb5a53d46b3880474608e0a375e9b91903948bb37750bce/66/848x480_1249600/index.m3u8"
+      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe72e0112bd5a3c1b37dabf0ab07753938117da7f2e8eb08b636b7f5c0e995b5be7a40fc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6530afe759a520ab7d9307d8267bfe496f1f5e9b9b805d6fd3/152/848x480_1249600/index.m3u8"
     },
     {
       "channel": "Action Hollywood\n\nMovies",
-      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff12e5d47be0b6a5561c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726ffc3b5a55f46b38804a6defc8e6d63e0d2b507a03d06b036f4/29/1280x720_2657600/index.m3u8",
+      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac164b17a5715bd5b681b37dabf0ab07753938117837b7dddb08b673b285d58985e0be0a70bc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6136afe777a520ab7d9c475152acd92f8d73b828fba9609f36/114/1280x720_2657600/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff12e5d47be0b6a5561c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726ffc3b5a55f46b38804a6defc8e6d63e0d2b507a03d06b036f4/29/1280x720_2657600/index.m3u8"
+      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac164b17a5715bd5b681b37dabf0ab07753938117837b7dddb08b673b285d58985e0be0a70bc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6136afe777a520ab7d9c475152acd92f8d73b828fba9609f36/114/1280x720_2657600/index.m3u8"
     },
     {
       "channel": "Action Hollywood\n\nMovies",
-      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff12e5d47be0b6a5561c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726ffc3b5a55f46b38804a6defc8e6d63e0d2b507a03d06b036f4/29/1920x1080_4716800/index.m3u8",
+      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac164b17a5715bd5b681b37dabf0ab07753938117837b7dddb08b673b285d58985e0be0a70bc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6136afe777a520ab7d9c475152acd92f8d73b828fba9609f36/114/1920x1080_4716800/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff12e5d47be0b6a5561c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726ffc3b5a55f46b38804a6defc8e6d63e0d2b507a03d06b036f4/29/1920x1080_4716800/index.m3u8"
+      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac164b17a5715bd5b681b37dabf0ab07753938117837b7dddb08b673b285d58985e0be0a70bc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6136afe777a520ab7d9c475152acd92f8d73b828fba9609f36/114/1920x1080_4716800/index.m3u8"
     },
     {
       "channel": "Action Hollywood\n\nMovies",
-      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff12e5d47be0b6a5561c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726ffc3b5a55f46b38804a6defc8e6d63e0d2b507a03d06b036f4/29/640x360_1020800/index.m3u8",
+      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac164b17a5715bd5b681b37dabf0ab07753938117837b7dddb08b673b285d58985e0be0a70bc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6136afe777a520ab7d9c475152acd92f8d73b828fba9609f36/114/640x360_1020800/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff12e5d47be0b6a5561c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726ffc3b5a55f46b38804a6defc8e6d63e0d2b507a03d06b036f4/29/640x360_1020800/index.m3u8"
+      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac164b17a5715bd5b681b37dabf0ab07753938117837b7dddb08b673b285d58985e0be0a70bc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6136afe777a520ab7d9c475152acd92f8d73b828fba9609f36/114/640x360_1020800/index.m3u8"
     },
     {
       "channel": "Action Hollywood\n\nMovies",
-      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff12e5d47be0b6a5561c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726ffc3b5a55f46b38804a6defc8e6d63e0d2b507a03d06b036f4/29/848x480_1249600/index.m3u8",
+      "url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac164b17a5715bd5b681b37dabf0ab07753938117837b7dddb08b673b285d58985e0be0a70bc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6136afe777a520ab7d9c475152acd92f8d73b828fba9609f36/114/848x480_1249600/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff12e5d47be0b6a5561c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726ffc3b5a55f46b38804a6defc8e6d63e0d2b507a03d06b036f4/29/848x480_1249600/index.m3u8"
+      "final_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac164b17a5715bd5b681b37dabf0ab07753938117837b7dddb08b673b285d58985e0be0a70bc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cba0f6136afe777a520ab7d9c475152acd92f8d73b828fba9609f36/114/848x480_1249600/index.m3u8"
     },
     {
       "channel": "Toon Goggles [Backup 2]\n\nKids",
@@ -581,31 +567,31 @@
     },
     {
       "channel": "Toon Goggles [Backup 2]\n\nKids",
-      "url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1285611b10a380731c0b85ff9764fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f8cbb5a55838b08804d16d6b7ee637fda454c2c6410cd07b4e/51/1280x720_3071200/index.m3u8",
+      "url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac16eed205610bc0c6a1b37dabf0db07753938117d97920deb08f636f755f0a9e580ceca75ec1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0c68822e7c7daa6c75a04226a2156251943efe304739086f29/28/1280x720_3071200/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1285611b10a380731c0b85ff9764fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f8cbb5a55838b08804d16d6b7ee637fda454c2c6410cd07b4e/51/1280x720_3071200/index.m3u8"
+      "final_url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac16eed205610bc0c6a1b37dabf0db07753938117d97920deb08f636f755f0a9e580ceca75ec1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0c68822e7c7daa6c75a04226a2156251943efe304739086f29/28/1280x720_3071200/index.m3u8"
     },
     {
       "channel": "Toon Goggles [Backup 2]\n\nKids",
-      "url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1285611b10a380731c0b85ff9764fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f8cbb5a55838b08804d16d6b7ee637fda454c2c6410cd07b4e/51/640x360_1126400/index.m3u8",
+      "url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac16eed205610bc0c6a1b37dabf0db07753938117d97920deb08f636f755f0a9e580ceca75ec1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0c68822e7c7daa6c75a04226a2156251943efe304739086f29/28/640x360_1126400/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1285611b10a380731c0b85ff9764fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f8cbb5a55838b08804d16d6b7ee637fda454c2c6410cd07b4e/51/640x360_1126400/index.m3u8"
+      "final_url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac16eed205610bc0c6a1b37dabf0db07753938117d97920deb08f636f755f0a9e580ceca75ec1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0c68822e7c7daa6c75a04226a2156251943efe304739086f29/28/640x360_1126400/index.m3u8"
     },
     {
       "channel": "Toon Goggles [Backup 2]\n\nKids",
-      "url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1285611b10a380731c0b85ff9764fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f8cbb5a55838b08804d16d6b7ee637fda454c2c6410cd07b4e/51/854x480_1355200/index.m3u8",
+      "url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac16eed205610bc0c6a1b37dabf0db07753938117d97920deb08f636f755f0a9e580ceca75ec1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0c68822e7c7daa6c75a04226a2156251943efe304739086f29/28/854x480_1355200/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1285611b10a380731c0b85ff9764fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f8cbb5a55838b08804d16d6b7ee637fda454c2c6410cd07b4e/51/854x480_1355200/index.m3u8"
+      "final_url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac16eed205610bc0c6a1b37dabf0db07753938117d97920deb08f636f755f0a9e580ceca75ec1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0c68822e7c7daa6c75a04226a2156251943efe304739086f29/28/854x480_1355200/index.m3u8"
     },
     {
       "channel": "Toon Goggles [Backup 2]\n\nKids",
-      "url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1285611b10a380731c0b85ff9764fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f8cbb5a55838b08804d16d6b7ee637fda454c2c6410cd07b4e/51/960x540_1927200/index.m3u8",
+      "url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac16eed205610bc0c6a1b37dabf0db07753938117d97920deb08f636f755f0a9e580ceca75ec1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0c68822e7c7daa6c75a04226a2156251943efe304739086f29/28/960x540_1927200/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1285611b10a380731c0b85ff9764fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f8cbb5a55838b08804d16d6b7ee637fda454c2c6410cd07b4e/51/960x540_1927200/index.m3u8"
+      "final_url": "https://amg01329-otterainc-toongoggles-samsungau-ad-4c.amagi.tv/ts-eu-w1-n2/playlist/amg01329-otterainc-toongoggles-samsungau/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac16eed205610bc0c6a1b37dabf0db07753938117d97920deb08f636f755f0a9e580ceca75ec1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0c68822e7c7daa6c75a04226a2156251943efe304739086f29/28/960x540_1927200/index.m3u8"
     },
     {
       "channel": "News18 Bangla News\n\nNews",
@@ -623,38 +609,38 @@
     },
     {
       "channel": "News18 Bangla News\n\nNews",
-      "url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b5c40bb0d6d016bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20c24e71fbededa290503cd7b2c8a411255b5e0f6635b37c7/189/1280x720_1599000/index.m3u8",
+      "url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac139b02d5240b05f3c1b37dabf0ab07753938117832a7f83b0de63312e595a965a0ce2a45cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0a66822e657caa6c75dfb2a2eb276c4df498d566a54a948f54/46/1280x720_1599000/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b5c40bb0d6d016bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20c24e71fbededa290503cd7b2c8a411255b5e0f6635b37c7/189/1280x720_1599000/index.m3u8"
+      "final_url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac139b02d5240b05f3c1b37dabf0ab07753938117832a7f83b0de63312e595a965a0ce2a45cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0a66822e657caa6c75dfb2a2eb276c4df498d566a54a948f54/46/1280x720_1599000/index.m3u8"
     },
     {
       "channel": "News18 Bangla News\n\nNews",
-      "url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b5c40bb0d6d016bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20c24e71fbededa290503cd7b2c8a411255b5e0f6635b37c7/189/1920x1080_2790000/index.m3u8",
+      "url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac139b02d5240b05f3c1b37dabf0ab07753938117832a7f83b0de63312e595a965a0ce2a45cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0a66822e657caa6c75dfb2a2eb276c4df498d566a54a948f54/46/1920x1080_2790000/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b5c40bb0d6d016bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20c24e71fbededa290503cd7b2c8a411255b5e0f6635b37c7/189/1920x1080_2790000/index.m3u8"
+      "final_url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac139b02d5240b05f3c1b37dabf0ab07753938117832a7f83b0de63312e595a965a0ce2a45cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0a66822e657caa6c75dfb2a2eb276c4df498d566a54a948f54/46/1920x1080_2790000/index.m3u8"
     },
     {
       "channel": "News18 Bangla News\n\nNews",
-      "url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b5c40bb0d6d016bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20c24e71fbededa290503cd7b2c8a411255b5e0f6635b37c7/189/320x180_212000/index.m3u8",
+      "url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac139b02d5240b05f3c1b37dabf0ab07753938117832a7f83b0de63312e595a965a0ce2a45cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0a66822e657caa6c75dfb2a2eb276c4df498d566a54a948f54/46/320x180_212000/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b5c40bb0d6d016bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20c24e71fbededa290503cd7b2c8a411255b5e0f6635b37c7/189/320x180_212000/index.m3u8"
+      "final_url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac139b02d5240b05f3c1b37dabf0ab07753938117832a7f83b0de63312e595a965a0ce2a45cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0a66822e657caa6c75dfb2a2eb276c4df498d566a54a948f54/46/320x180_212000/index.m3u8"
     },
     {
       "channel": "News18 Bangla News\n\nNews",
-      "url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b5c40bb0d6d016bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20c24e71fbededa290503cd7b2c8a411255b5e0f6635b37c7/189/640x360_467000/index.m3u8",
+      "url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac139b02d5240b05f3c1b37dabf0ab07753938117832a7f83b0de63312e595a965a0ce2a45cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0a66822e657caa6c75dfb2a2eb276c4df498d566a54a948f54/46/640x360_467000/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b5c40bb0d6d016bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20c24e71fbededa290503cd7b2c8a411255b5e0f6635b37c7/189/640x360_467000/index.m3u8"
+      "final_url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac139b02d5240b05f3c1b37dabf0ab07753938117832a7f83b0de63312e595a965a0ce2a45cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0a66822e657caa6c75dfb2a2eb276c4df498d566a54a948f54/46/640x360_467000/index.m3u8"
     },
     {
       "channel": "News18 Bangla News\n\nNews",
-      "url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b5c40bb0d6d016bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20c24e71fbededa290503cd7b2c8a411255b5e0f6635b37c7/189/960x540_884000/index.m3u8",
+      "url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac139b02d5240b05f3c1b37dabf0ab07753938117832a7f83b0de63312e595a965a0ce2a45cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0a66822e657caa6c75dfb2a2eb276c4df498d566a54a948f54/46/960x540_884000/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b5c40bb0d6d016bc0b85ffe204fc4815c8a627bdeafd47c3a2c0f0d970e54b1f659a4fa83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20c24e71fbededa290503cd7b2c8a411255b5e0f6635b37c7/189/960x540_884000/index.m3u8"
+      "final_url": "https://amg01448-samsungin-news18bangla-samsungin-ad-qy.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-news18bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac139b02d5240b05f3c1b37dabf0ab07753938117832a7f83b0de63312e595a965a0ce2a45cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0a66822e657caa6c75dfb2a2eb276c4df498d566a54a948f54/46/960x540_884000/index.m3u8"
     },
     {
       "channel": "TV9 Bangla\n\nNews",
@@ -672,38 +658,38 @@
     },
     {
       "channel": "TV9 Bangla\n\nNews",
-      "url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b0743eb516f5334c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f5ceb5a54f39b08804d810a24e5a52e8facf413fd5918f313e/84/1280x720_3000800/index.m3u8",
+      "url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac138e52c5511ea0c3f1b37dabf0ab07753938117837929dab0db676c7e090bce0c55e5a456c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0865822e607caa6c752b18e65bb2c3fc07db8dcdf2bf85bb5e/65/1280x720_3000800/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b0743eb516f5334c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f5ceb5a54f39b08804d810a24e5a52e8facf413fd5918f313e/84/1280x720_3000800/index.m3u8"
+      "final_url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac138e52c5511ea0c3f1b37dabf0ab07753938117837929dab0db676c7e090bce0c55e5a456c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0865822e607caa6c752b18e65bb2c3fc07db8dcdf2bf85bb5e/65/1280x720_3000800/index.m3u8"
     },
     {
       "channel": "TV9 Bangla\n\nNews",
-      "url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b0743eb516f5334c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f5ceb5a54f39b08804d810a24e5a52e8facf413fd5918f313e/84/1920x1080_5060000/index.m3u8",
+      "url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac138e52c5511ea0c3f1b37dabf0ab07753938117837929dab0db676c7e090bce0c55e5a456c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0865822e607caa6c752b18e65bb2c3fc07db8dcdf2bf85bb5e/65/1920x1080_5060000/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b0743eb516f5334c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f5ceb5a54f39b08804d810a24e5a52e8facf413fd5918f313e/84/1920x1080_5060000/index.m3u8"
+      "final_url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac138e52c5511ea0c3f1b37dabf0ab07753938117837929dab0db676c7e090bce0c55e5a456c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0865822e607caa6c752b18e65bb2c3fc07db8dcdf2bf85bb5e/65/1920x1080_5060000/index.m3u8"
     },
     {
       "channel": "TV9 Bangla\n\nNews",
-      "url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b0743eb516f5334c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f5ceb5a54f39b08804d810a24e5a52e8facf413fd5918f313e/84/426x240_470800/index.m3u8",
+      "url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac138e52c5511ea0c3f1b37dabf0ab07753938117837929dab0db676c7e090bce0c55e5a456c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0865822e607caa6c752b18e65bb2c3fc07db8dcdf2bf85bb5e/65/426x240_470800/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b0743eb516f5334c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f5ceb5a54f39b08804d810a24e5a52e8facf413fd5918f313e/84/426x240_470800/index.m3u8"
+      "final_url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac138e52c5511ea0c3f1b37dabf0ab07753938117837929dab0db676c7e090bce0c55e5a456c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0865822e607caa6c752b18e65bb2c3fc07db8dcdf2bf85bb5e/65/426x240_470800/index.m3u8"
     },
     {
       "channel": "TV9 Bangla\n\nNews",
-      "url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b0743eb516f5334c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f5ceb5a54f39b08804d810a24e5a52e8facf413fd5918f313e/84/640x360_871200/index.m3u8",
+      "url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac138e52c5511ea0c3f1b37dabf0ab07753938117837929dab0db676c7e090bce0c55e5a456c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0865822e607caa6c752b18e65bb2c3fc07db8dcdf2bf85bb5e/65/640x360_871200/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b0743eb516f5334c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f5ceb5a54f39b08804d810a24e5a52e8facf413fd5918f313e/84/640x360_871200/index.m3u8"
+      "final_url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac138e52c5511ea0c3f1b37dabf0ab07753938117837929dab0db676c7e090bce0c55e5a456c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0865822e607caa6c752b18e65bb2c3fc07db8dcdf2bf85bb5e/65/640x360_871200/index.m3u8"
     },
     {
       "channel": "TV9 Bangla\n\nNews",
-      "url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b0743eb516f5334c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f5ceb5a54f39b08804d810a24e5a52e8facf413fd5918f313e/84/854x480_1513600/index.m3u8",
+      "url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac138e52c5511ea0c3f1b37dabf0ab07753938117837929dab0db676c7e090bce0c55e5a456c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0865822e607caa6c752b18e65bb2c3fc07db8dcdf2bf85bb5e/65/854x480_1513600/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17b0743eb516f5334c0b85ffe204fc4815c8a6220ddad8e7c317b0f0c960b08e0f35fa7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4726f5ceb5a54f39b08804d810a24e5a52e8facf413fd5918f313e/84/854x480_1513600/index.m3u8"
+      "final_url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/ts-eu-w1-n2/playlist/amg01448-samsungin-tv9bangla-samsungin/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac138e52c5511ea0c3f1b37dabf0ab07753938117837929dab0db676c7e090bce0c55e5a456c1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0865822e607caa6c752b18e65bb2c3fc07db8dcdf2bf85bb5e/65/854x480_1513600/index.m3u8"
     },
     {
       "channel": "GREAT! movies\n\nMovies",
@@ -721,51 +707,51 @@
     },
     {
       "channel": "GREAT! movies\n\nMovies",
-      "url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205517ea5f6c5564c0b85ffe204fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20324e75bc1ddda29a96a6789cd85be7a39a5233b4731bafb/186/1280x720_3329040/index.m3u8",
+      "url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe32c5d40ba51681b37dabf0ab07753938117d9762cddb0da63307d535b960b0cecf60cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0d64822e267baa6c7523c0f5e676797a28195e347f96ab7d5b/34/1280x720_3329040/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205517ea5f6c5564c0b85ffe204fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20324e75bc1ddda29a96a6789cd85be7a39a5233b4731bafb/186/1280x720_3329040/index.m3u8"
+      "final_url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe32c5d40ba51681b37dabf0ab07753938117d9762cddb0da63307d535b960b0cecf60cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0d64822e267baa6c7523c0f5e676797a28195e347f96ab7d5b/34/1280x720_3329040/index.m3u8"
     },
     {
       "channel": "GREAT! movies\n\nMovies",
-      "url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205517ea5f6c5564c0b85ffe204fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20324e75bc1ddda29a96a6789cd85be7a39a5233b4731bafb/186/1920x1080_5903040/index.m3u8",
+      "url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe32c5d40ba51681b37dabf0ab07753938117d9762cddb0da63307d535b960b0cecf60cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0d64822e267baa6c7523c0f5e676797a28195e347f96ab7d5b/34/1920x1080_5903040/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205517ea5f6c5564c0b85ffe204fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20324e75bc1ddda29a96a6789cd85be7a39a5233b4731bafb/186/1920x1080_5903040/index.m3u8"
+      "final_url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe32c5d40ba51681b37dabf0ab07753938117d9762cddb0da63307d535b960b0cecf60cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0d64822e267baa6c7523c0f5e676797a28195e347f96ab7d5b/34/1920x1080_5903040/index.m3u8"
     },
     {
       "channel": "GREAT! movies\n\nMovies",
-      "url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205517ea5f6c5564c0b85ffe204fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20324e75bc1ddda29a96a6789cd85be7a39a5233b4731bafb/186/640x360_1387360/index.m3u8",
+      "url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe32c5d40ba51681b37dabf0ab07753938117d9762cddb0da63307d535b960b0cecf60cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0d64822e267baa6c7523c0f5e676797a28195e347f96ab7d5b/34/640x360_1387360/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205517ea5f6c5564c0b85ffe204fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20324e75bc1ddda29a96a6789cd85be7a39a5233b4731bafb/186/640x360_1387360/index.m3u8"
+      "final_url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe32c5d40ba51681b37dabf0ab07753938117d9762cddb0da63307d535b960b0cecf60cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0d64822e267baa6c7523c0f5e676797a28195e347f96ab7d5b/34/640x360_1387360/index.m3u8"
     },
     {
       "channel": "GREAT! movies\n\nMovies",
-      "url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205517ea5f6c5564c0b85ffe204fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20324e75bc1ddda29a96a6789cd85be7a39a5233b4731bafb/186/848x480_1686360/index.m3u8",
+      "url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe32c5d40ba51681b37dabf0ab07753938117d9762cddb0da63307d535b960b0cecf60cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0d64822e267baa6c7523c0f5e676797a28195e347f96ab7d5b/34/848x480_1686360/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205517ea5f6c5564c0b85ffe204fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20324e75bc1ddda29a96a6789cd85be7a39a5233b4731bafb/186/848x480_1686360/index.m3u8"
+      "final_url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe32c5d40ba51681b37dabf0ab07753938117d9762cddb0da63307d535b960b0cecf60cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0d64822e267baa6c7523c0f5e676797a28195e347f96ab7d5b/34/848x480_1686360/index.m3u8"
     },
     {
       "channel": "GREAT! movies\n\nMovies",
-      "url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205517ea5f6c5564c0b85ffe204fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20324e75bc1ddda29a96a6789cd85be7a39a5233b4731bafb/186/subs-english-eng/subtitle.m3u8",
+      "url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe32c5d40ba51681b37dabf0ab07753938117d9762cddb0da63307d535b960b0cecf60cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0d64822e267baa6c7523c0f5e676797a28195e347f96ab7d5b/34/subs-english-eng/subtitle.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff1205517ea5f6c5564c0b85ffe204fc4815c8a62218ffeda7c39280b0c9c0b08b0a55aa6fe83357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc20324e75bc1ddda29a96a6789cd85be7a39a5233b4731bafb/186/subs-english-eng/subtitle.m3u8"
+      "final_url": "https://amg01753-narrativeentert-greatmovies-samsunguk-7z6eh.amagi.tv/ts-eu-w1-n2/playlist/amg01753-narrativeentert-greatmovies-samsunguk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13fe32c5d40ba51681b37dabf0ab07753938117d9762cddb0da63307d535b960b0cecf60cc1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0d64822e267baa6c7523c0f5e676797a28195e347f96ab7d5b/34/subs-english-eng/subtitle.m3u8"
     },
     {
       "channel": "Channel S\n\nMore Channels",
-      "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/channels.stream/live-orgin/channels.stream/chunks.m3u8?nimblesessionid=1335379944",
+      "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/channels.stream/live-orgin/channels.stream/chunks.m3u8?nimblesessionid=1338005677",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/channels.stream/live-orgin/channels.stream/chunks.m3u8?nimblesessionid=1335379944"
+      "final_url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/channels.stream/live-orgin/channels.stream/chunks.m3u8?nimblesessionid=1338005677"
     },
     {
       "channel": "Channel S\n\nMore Channels",
       "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/channels.stream/live-orgin/channels.stream/playlist.m3u8",
-      "http_status": 500,
-      "content_type": "text/html",
+      "http_status": 200,
+      "content_type": "application/vnd.apple.mpegurl",
       "final_url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/channels.stream/live-orgin/channels.stream/playlist.m3u8"
     },
     {
@@ -777,10 +763,10 @@
     },
     {
       "channel": "Discovery Pakistan [Backup 2]\n\nDocumentary",
-      "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/discoverpakistan.stream/live-orgin/discoverpakistan.stream/chunks.m3u8?nimblesessionid=1335378743",
+      "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/discoverpakistan.stream/live-orgin/discoverpakistan.stream/chunks.m3u8?nimblesessionid=1338004367",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/discoverpakistan.stream/live-orgin/discoverpakistan.stream/chunks.m3u8?nimblesessionid=1335378743"
+      "final_url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/discoverpakistan.stream/live-orgin/discoverpakistan.stream/chunks.m3u8?nimblesessionid=1338004367"
     },
     {
       "channel": "Discovery Pakistan [Backup 2]\n\nDocumentary",
@@ -819,10 +805,10 @@
     },
     {
       "channel": "Unnamed channel (app.ncare.live)\n\nMore Channels",
-      "url": "https://app.ncare.live/live-orgin/channels.stream/live-orgin/channels.stream/chunks.m3u8?nimblesessionid=1335379639",
+      "url": "https://app.ncare.live/live-orgin/channels.stream/live-orgin/channels.stream/chunks.m3u8?nimblesessionid=1338005304",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://app.ncare.live/live-orgin/channels.stream/live-orgin/channels.stream/chunks.m3u8?nimblesessionid=1335379639"
+      "final_url": "https://app.ncare.live/live-orgin/channels.stream/live-orgin/channels.stream/chunks.m3u8?nimblesessionid=1338005304"
     },
     {
       "channel": "Unnamed channel (app.ncare.live)\n\nMore Channels",
@@ -854,10 +840,10 @@
     },
     {
       "channel": "140.Jago News 24\n\nNews",
-      "url": "https://app.ncare.live/live-orgin/jagonews24.stream/live-orgin/jagonews24.stream/chunks.m3u8?nimblesessionid=1335377492",
+      "url": "https://app.ncare.live/live-orgin/jagonews24.stream/live-orgin/jagonews24.stream/chunks.m3u8?nimblesessionid=1338002815",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://app.ncare.live/live-orgin/jagonews24.stream/live-orgin/jagonews24.stream/chunks.m3u8?nimblesessionid=1335377492"
+      "final_url": "https://app.ncare.live/live-orgin/jagonews24.stream/live-orgin/jagonews24.stream/chunks.m3u8?nimblesessionid=1338002815"
     },
     {
       "channel": "140.Jago News 24\n\nNews",
@@ -875,10 +861,10 @@
     },
     {
       "channel": "NRB TV\n\nMore Channels",
-      "url": "https://app.ncare.live/live-orgin/nrb-eu.stream/live-orgin/nrb-eu.stream/chunks.m3u8?nimblesessionid=1335380201",
+      "url": "https://app.ncare.live/live-orgin/nrb-eu.stream/live-orgin/nrb-eu.stream/chunks.m3u8?nimblesessionid=1338005959",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://app.ncare.live/live-orgin/nrb-eu.stream/live-orgin/nrb-eu.stream/chunks.m3u8?nimblesessionid=1335380201"
+      "final_url": "https://app.ncare.live/live-orgin/nrb-eu.stream/live-orgin/nrb-eu.stream/chunks.m3u8?nimblesessionid=1338005959"
     },
     {
       "channel": "NRB TV\n\nMore Channels",
@@ -939,28 +925,28 @@
     {
       "channel": "beIN SPORTS XTRA\n\nSports",
       "url": "https://bein-esp-xumo.amagi.tv/playlistR1080p.m3u8",
-      "http_status": 206,
+      "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
       "final_url": "https://bein-esp-xumo.amagi.tv/playlistR1080p.m3u8"
     },
     {
       "channel": "beIN SPORTS XTRA\n\nSports",
       "url": "https://bein-esp-xumo.amagi.tv/playlistR1080p.m3u8#fb:M3U_World_4K",
-      "http_status": 206,
+      "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
       "final_url": "https://bein-esp-xumo.amagi.tv/playlistR1080p.m3u8#fb:M3U_World_4K"
     },
     {
       "channel": "beIN SPORTS XTRA [Backup 1]\n\nSports",
       "url": "https://bein-esp-xumo.amagi.tv/playlistR720P.m3u8",
-      "http_status": 206,
+      "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
       "final_url": "https://bein-esp-xumo.amagi.tv/playlistR720P.m3u8"
     },
     {
       "channel": "beIN SPORTS XTRA [Backup 1]\n\nSports",
       "url": "https://bein-esp-xumo.amagi.tv/playlistR720P.m3u8#fb:M3U_World_4K",
-      "http_status": 206,
+      "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
       "final_url": "https://bein-esp-xumo.amagi.tv/playlistR720P.m3u8#fb:M3U_World_4K"
     },
@@ -987,24 +973,24 @@
     },
     {
       "channel": "Baby Shark TV [Backup 1]\n\nKids",
-      "url": "https://c0c65b821b3542c3a4dca92702f59944.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-eu_BabySharkTV/a370a997-4a62-444d-b0f1-f8e33058c03b/0.m3u8",
+      "url": "https://c0c65b821b3542c3a4dca92702f59944.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-eu_BabySharkTV/828f948f-17bf-4c50-8a8d-c66facb2afbc/0.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://c0c65b821b3542c3a4dca92702f59944.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-eu_BabySharkTV/a370a997-4a62-444d-b0f1-f8e33058c03b/0.m3u8"
+      "final_url": "https://c0c65b821b3542c3a4dca92702f59944.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-eu_BabySharkTV/828f948f-17bf-4c50-8a8d-c66facb2afbc/0.m3u8"
     },
     {
       "channel": "Baby Shark TV [Backup 1]\n\nKids",
-      "url": "https://c0c65b821b3542c3a4dca92702f59944.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-eu_BabySharkTV/a370a997-4a62-444d-b0f1-f8e33058c03b/1.m3u8",
+      "url": "https://c0c65b821b3542c3a4dca92702f59944.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-eu_BabySharkTV/828f948f-17bf-4c50-8a8d-c66facb2afbc/1.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://c0c65b821b3542c3a4dca92702f59944.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-eu_BabySharkTV/a370a997-4a62-444d-b0f1-f8e33058c03b/1.m3u8"
+      "final_url": "https://c0c65b821b3542c3a4dca92702f59944.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-eu_BabySharkTV/828f948f-17bf-4c50-8a8d-c66facb2afbc/1.m3u8"
     },
     {
       "channel": "Baby Shark TV [Backup 1]\n\nKids",
-      "url": "https://c0c65b821b3542c3a4dca92702f59944.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-eu_BabySharkTV/a370a997-4a62-444d-b0f1-f8e33058c03b/2.m3u8",
+      "url": "https://c0c65b821b3542c3a4dca92702f59944.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-eu_BabySharkTV/828f948f-17bf-4c50-8a8d-c66facb2afbc/2.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://c0c65b821b3542c3a4dca92702f59944.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-eu_BabySharkTV/a370a997-4a62-444d-b0f1-f8e33058c03b/2.m3u8"
+      "final_url": "https://c0c65b821b3542c3a4dca92702f59944.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/RakutenTV-eu_BabySharkTV/828f948f-17bf-4c50-8a8d-c66facb2afbc/2.m3u8"
     },
     {
       "channel": "Baby Shark TV [Backup 1]\n\nKids",
@@ -1036,10 +1022,10 @@
     },
     {
       "channel": "9XM\n\nMusic",
-      "url": "https://cc-706183qeo55ez.akamaized.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-706183qeo55ez/2c154f72-7824-4e49-87db-774c62ed238b/1.m3u8",
+      "url": "https://cc-706183qeo55ez.akamaized.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-706183qeo55ez/10d3b00d-3b54-4fa2-9f0e-88b81c694ed7/1.m3u8",
       "http_status": 206,
       "content_type": "application/x-mpegURL",
-      "final_url": "https://cc-706183qeo55ez.akamaized.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-706183qeo55ez/2c154f72-7824-4e49-87db-774c62ed238b/1.m3u8"
+      "final_url": "https://cc-706183qeo55ez.akamaized.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-706183qeo55ez/10d3b00d-3b54-4fa2-9f0e-88b81c694ed7/1.m3u8"
     },
     {
       "channel": "9XM\n\nMusic",
@@ -1054,13 +1040,6 @@
       "http_status": 206,
       "content_type": "application/x-mpegURL",
       "final_url": "https://cc-706183qeo55ez.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-706183qeo55ez/DIYC/PMSL/9X/9XMusic_IN/9XMusic_IN.m3u8#fb:M3U_World_4K"
-    },
-    {
-      "channel": "ETV Music\n\nMusic",
-      "url": "https://cc-szivnms4rlah6.akamaized.net/WWBI/Amagi/ETV_Music_IN/1080p-cc/index.m3u8",
-      "http_status": 206,
-      "content_type": "application/x-mpegURL",
-      "final_url": "https://cc-szivnms4rlah6.akamaized.net/WWBI/Amagi/ETV_Music_IN/1080p-cc/index.m3u8"
     },
     {
       "channel": "ETV Music\n\nMusic",
@@ -1085,10 +1064,10 @@
     },
     {
       "channel": "Epic Kids Digital\n\nKids",
-      "url": "https://cc-t8lqe1o99pszu.akamaized.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-t8lqe1o99pszu/cb9b1376-5cf0-4dc4-96f0-401cc6aeff58/0.m3u8",
+      "url": "https://cc-t8lqe1o99pszu.akamaized.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-t8lqe1o99pszu/b953c812-501f-46a9-b0c9-2ca3e9929136/0.m3u8",
       "http_status": 206,
       "content_type": "application/x-mpegURL",
-      "final_url": "https://cc-t8lqe1o99pszu.akamaized.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-t8lqe1o99pszu/cb9b1376-5cf0-4dc4-96f0-401cc6aeff58/0.m3u8"
+      "final_url": "https://cc-t8lqe1o99pszu.akamaized.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-t8lqe1o99pszu/b953c812-501f-46a9-b0c9-2ca3e9929136/0.m3u8"
     },
     {
       "channel": "Epic Kids Digital\n\nKids",
@@ -1141,10 +1120,10 @@
     },
     {
       "channel": "Toon Goggles\n\nKids",
-      "url": "https://d1eg24xrsfr6kv.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-b4b1bzxkt1uzo-prod/5149b00d-f22b-460a-a24a-362f22f3ef33/0.m3u8",
+      "url": "https://d1eg24xrsfr6kv.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-b4b1bzxkt1uzo-prod/2567c9bc-daa5-4983-9cde-bdc32e1f9596/0.m3u8",
       "http_status": 206,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://d1eg24xrsfr6kv.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-b4b1bzxkt1uzo-prod/5149b00d-f22b-460a-a24a-362f22f3ef33/0.m3u8"
+      "final_url": "https://d1eg24xrsfr6kv.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-b4b1bzxkt1uzo-prod/2567c9bc-daa5-4983-9cde-bdc32e1f9596/0.m3u8"
     },
     {
       "channel": "Toon Goggles\n\nKids",
@@ -1177,7 +1156,7 @@
     {
       "channel": "24 Hour Free Movies\n\nMovies",
       "url": "https://d1j2u714xk898n.cloudfront.net/scheduler/scheduleMaster/145/variant/22099472.m3u8",
-      "http_status": 206,
+      "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
       "final_url": "https://d1j2u714xk898n.cloudfront.net/scheduler/scheduleMaster/145/variant/22099472.m3u8"
     },
@@ -1330,10 +1309,10 @@
     },
     {
       "channel": "Toon Goggles Junior [Backup 1]\n\nKids",
-      "url": "https://d3i6upqaqzosi1.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-9k42dil136v1e-prod/92513b68-561e-4ed4-96da-f86133045bbd/0.m3u8",
+      "url": "https://d3i6upqaqzosi1.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-9k42dil136v1e-prod/dedc1c97-ce9a-400e-87c7-d01a50bb3a3e/0.m3u8",
       "http_status": 206,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://d3i6upqaqzosi1.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-9k42dil136v1e-prod/92513b68-561e-4ed4-96da-f86133045bbd/0.m3u8"
+      "final_url": "https://d3i6upqaqzosi1.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-9k42dil136v1e-prod/dedc1c97-ce9a-400e-87c7-d01a50bb3a3e/0.m3u8"
     },
     {
       "channel": "Toon Goggles Junior [Backup 1]\n\nKids",
@@ -1519,24 +1498,24 @@
     },
     {
       "channel": "Moonbug Kids [Backup 1]\n\nKids",
-      "url": "https://dq2a9ghraf7sw.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-zxq18dopv0o6q/91b5bfc8-803c-4493-bcf4-9377a07868a8/0.m3u8",
+      "url": "https://dq2a9ghraf7sw.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-zxq18dopv0o6q/77fc0bdd-b4d2-4247-8b31-6a9a0b7c94f2/0.m3u8",
       "http_status": 206,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://dq2a9ghraf7sw.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-zxq18dopv0o6q/91b5bfc8-803c-4493-bcf4-9377a07868a8/0.m3u8"
+      "final_url": "https://dq2a9ghraf7sw.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-zxq18dopv0o6q/77fc0bdd-b4d2-4247-8b31-6a9a0b7c94f2/0.m3u8"
     },
     {
       "channel": "Moonbug Kids [Backup 1]\n\nKids",
-      "url": "https://dq2a9ghraf7sw.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-zxq18dopv0o6q/91b5bfc8-803c-4493-bcf4-9377a07868a8/3.m3u8",
+      "url": "https://dq2a9ghraf7sw.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-zxq18dopv0o6q/77fc0bdd-b4d2-4247-8b31-6a9a0b7c94f2/3.m3u8",
       "http_status": 206,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://dq2a9ghraf7sw.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-zxq18dopv0o6q/91b5bfc8-803c-4493-bcf4-9377a07868a8/3.m3u8"
+      "final_url": "https://dq2a9ghraf7sw.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-zxq18dopv0o6q/77fc0bdd-b4d2-4247-8b31-6a9a0b7c94f2/3.m3u8"
     },
     {
       "channel": "Moonbug Kids [Backup 1]\n\nKids",
-      "url": "https://dq2a9ghraf7sw.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-zxq18dopv0o6q/91b5bfc8-803c-4493-bcf4-9377a07868a8/4.m3u8",
+      "url": "https://dq2a9ghraf7sw.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-zxq18dopv0o6q/77fc0bdd-b4d2-4247-8b31-6a9a0b7c94f2/4.m3u8",
       "http_status": 206,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://dq2a9ghraf7sw.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-zxq18dopv0o6q/91b5bfc8-803c-4493-bcf4-9377a07868a8/4.m3u8"
+      "final_url": "https://dq2a9ghraf7sw.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-zxq18dopv0o6q/77fc0bdd-b4d2-4247-8b31-6a9a0b7c94f2/4.m3u8"
     },
     {
       "channel": "Moonbug Kids [Backup 1]\n\nKids",
@@ -1554,17 +1533,17 @@
     },
     {
       "channel": "Documentary+ USA\n\nDocumentary",
-      "url": "https://ef79b15c8c7c46c7a9de9d33001dbd07.mediatailor.us-west-2.amazonaws.com/v1/manifest/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-859-DOCUMENTARYPLUS-DOCUMENTARYPLUS/8cc4afe2-8c7e-4665-b91d-b6f1e150890b/0.m3u8",
+      "url": "https://ef79b15c8c7c46c7a9de9d33001dbd07.mediatailor.us-west-2.amazonaws.com/v1/manifest/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-859-DOCUMENTARYPLUS-DOCUMENTARYPLUS/3fe632d2-b8f7-45fc-b78d-e576565f20e9/0.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://ef79b15c8c7c46c7a9de9d33001dbd07.mediatailor.us-west-2.amazonaws.com/v1/manifest/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-859-DOCUMENTARYPLUS-DOCUMENTARYPLUS/8cc4afe2-8c7e-4665-b91d-b6f1e150890b/0.m3u8"
+      "final_url": "https://ef79b15c8c7c46c7a9de9d33001dbd07.mediatailor.us-west-2.amazonaws.com/v1/manifest/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-859-DOCUMENTARYPLUS-DOCUMENTARYPLUS/3fe632d2-b8f7-45fc-b78d-e576565f20e9/0.m3u8"
     },
     {
       "channel": "Documentary+ USA\n\nDocumentary",
-      "url": "https://ef79b15c8c7c46c7a9de9d33001dbd07.mediatailor.us-west-2.amazonaws.com/v1/manifest/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-859-DOCUMENTARYPLUS-DOCUMENTARYPLUS/8cc4afe2-8c7e-4665-b91d-b6f1e150890b/5.m3u8",
+      "url": "https://ef79b15c8c7c46c7a9de9d33001dbd07.mediatailor.us-west-2.amazonaws.com/v1/manifest/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-859-DOCUMENTARYPLUS-DOCUMENTARYPLUS/3fe632d2-b8f7-45fc-b78d-e576565f20e9/5.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://ef79b15c8c7c46c7a9de9d33001dbd07.mediatailor.us-west-2.amazonaws.com/v1/manifest/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-859-DOCUMENTARYPLUS-DOCUMENTARYPLUS/8cc4afe2-8c7e-4665-b91d-b6f1e150890b/5.m3u8"
+      "final_url": "https://ef79b15c8c7c46c7a9de9d33001dbd07.mediatailor.us-west-2.amazonaws.com/v1/manifest/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-859-DOCUMENTARYPLUS-DOCUMENTARYPLUS/3fe632d2-b8f7-45fc-b78d-e576565f20e9/5.m3u8"
     },
     {
       "channel": "Documentary+ USA\n\nDocumentary",
@@ -1596,31 +1575,31 @@
     },
     {
       "channel": "History Hit\n\nDocumentary",
-      "url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17d5747bf0b3b5431c0b85ffe204fc4815c8a62208da8897c6f2c5d5ecd5a5fe6a60ff7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc90224e769bededa298da9ddc96c1319ae906e9f78d1e9302d/137/1280x720_3329040/index.m3u8",
+      "url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13be2785345b95c3f1b37dabf0ab0775393811783787bdab0dd636d7f095acd5958e3a25ac1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0869822e4b7caa6c75e97672513c78c5942f2793bc7868f560/69/1280x720_3329040/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17d5747bf0b3b5431c0b85ffe204fc4815c8a62208da8897c6f2c5d5ecd5a5fe6a60ff7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc90224e769bededa298da9ddc96c1319ae906e9f78d1e9302d/137/1280x720_3329040/index.m3u8"
+      "final_url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13be2785345b95c3f1b37dabf0ab0775393811783787bdab0dd636d7f095acd5958e3a25ac1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0869822e4b7caa6c75e97672513c78c5942f2793bc7868f560/69/1280x720_3329040/index.m3u8"
     },
     {
       "channel": "History Hit\n\nDocumentary",
-      "url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17d5747bf0b3b5431c0b85ffe204fc4815c8a62208da8897c6f2c5d5ecd5a5fe6a60ff7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc90224e769bededa298da9ddc96c1319ae906e9f78d1e9302d/137/640x360_1057680/index.m3u8",
+      "url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13be2785345b95c3f1b37dabf0ab0775393811783787bdab0dd636d7f095acd5958e3a25ac1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0869822e4b7caa6c75e97672513c78c5942f2793bc7868f560/69/640x360_1057680/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17d5747bf0b3b5431c0b85ffe204fc4815c8a62208da8897c6f2c5d5ecd5a5fe6a60ff7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc90224e769bededa298da9ddc96c1319ae906e9f78d1e9302d/137/640x360_1057680/index.m3u8"
+      "final_url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13be2785345b95c3f1b37dabf0ab0775393811783787bdab0dd636d7f095acd5958e3a25ac1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0869822e4b7caa6c75e97672513c78c5942f2793bc7868f560/69/640x360_1057680/index.m3u8"
     },
     {
       "channel": "History Hit\n\nDocumentary",
-      "url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17d5747bf0b3b5431c0b85ffe204fc4815c8a62208da8897c6f2c5d5ecd5a5fe6a60ff7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc90224e769bededa298da9ddc96c1319ae906e9f78d1e9302d/137/848x480_1686360/index.m3u8",
+      "url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13be2785345b95c3f1b37dabf0ab0775393811783787bdab0dd636d7f095acd5958e3a25ac1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0869822e4b7caa6c75e97672513c78c5942f2793bc7868f560/69/848x480_1686360/index.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17d5747bf0b3b5431c0b85ffe204fc4815c8a62208da8897c6f2c5d5ecd5a5fe6a60ff7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc90224e769bededa298da9ddc96c1319ae906e9f78d1e9302d/137/848x480_1686360/index.m3u8"
+      "final_url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13be2785345b95c3f1b37dabf0ab0775393811783787bdab0dd636d7f095acd5958e3a25ac1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0869822e4b7caa6c75e97672513c78c5942f2793bc7868f560/69/848x480_1686360/index.m3u8"
     },
     {
       "channel": "History Hit\n\nDocumentary",
-      "url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17d5747bf0b3b5431c0b85ffe204fc4815c8a62208da8897c6f2c5d5ecd5a5fe6a60ff7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc90224e769bededa298da9ddc96c1319ae906e9f78d1e9302d/137/subs-english-vtt-en/subtitle.m3u8",
+      "url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13be2785345b95c3f1b37dabf0ab0775393811783787bdab0dd636d7f095acd5958e3a25ac1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0869822e4b7caa6c75e97672513c78c5942f2793bc7868f560/69/subs-english-vtt-en/subtitle.m3u8",
       "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb543d19796c678e99d43665cef340a0f97d1fde1d6988693eb5518975d1073184bdfad39112b12d148f57d667656b554477ba599e2054a08b28d308706312779d86b17dc9ea4a4bed855a352bb17a0e32af5844927c4c278abe545bd37ff17d5747bf0b3b5431c0b85ffe204fc4815c8a62208da8897c6f2c5d5ecd5a5fe6a60ff7a983357ff1540e6a8c79bf1d3295907cac8a45ffd5804be51ad821a54bc0b0d1b1e165e7a60db7646598522c4d3072898503f3833de49ef2e15eed10962477bf398ab3876594e11ab869272081d240ea01c19920ce4c38b5049741be31e0408706bde842acacf48a0c1179ecfc0a307ce0c9a984ee2d73a53ead9dbf893a3cb8e6047442fe68da09222cdfa89843ca9043d6952b97bb64187791c315dbaeb385eea28405c9769d89a7ce4f252406280b8848bae004994ef97dbbc5072e4c4727fcc90224e769bededa298da9ddc96c1319ae906e9f78d1e9302d/137/subs-english-vtt-en/subtitle.m3u8"
+      "final_url": "https://ldsaaaaaa-timeline-samsung-uk-azlgu.amagi.tv/ts-eu-w1-n2/playlist/ldsAAAAAA-timeline-samsung-uk/cb563a166573608a84c93878d6f462dba65928d80b6c852a6ab454876da91e588eac8d9ab30ea778149719b1670e74412c278b458b1b5495a523ec4e317f106a999ea20881db4d54e7c70e282aa3194f07af4c4ccf20502597ba4c4ac13be2785345b95c3f1b37dabf0ab0775393811783787bdab0dd636d7f095acd5958e3a25ac1afdb757d09976c83367af04c57dae71c909049ef90b71fcf07d335d33ca7a08efaf38d564ba3499429ed261d50625c94856b9aca5cccbad0096bda19a0216fd6235837bece1ea63edb6f7b3a30ab5d5f59a1a82884723eb801d76c8c39896aad069de0248b80b4c54b4d35a58b0e2f77e0ad98dbaa6e73916ff5b7f19d6b24cfc9422c0e894cc832273da7f8c93f8dd75ac3e574cbe73f5d1bc8834a9698fdd2bde0cd799d23cbd5fdd76811192d5754f43ac8ff41d227c860d2a75146784857a68e5ad48cbb0869822e4b7caa6c75e97672513c78c5942f2793bc7868f560/69/subs-english-vtt-en/subtitle.m3u8"
     },
     {
       "channel": "History Hit\n\nDocumentary",
@@ -2234,14 +2213,14 @@
     {
       "channel": "Movies Thriller\n\nMovies",
       "url": "https://shd-amg-fast.edgenextcdn.net/tx012/playlist.m3u8",
-      "http_status": 206,
+      "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
       "final_url": "https://shd-amg-fast.edgenextcdn.net/tx012/playlist.m3u8"
     },
     {
       "channel": "Movies Thriller\n\nMovies",
       "url": "https://shd-amg-fast.edgenextcdn.net/tx012/playlist.m3u8#fb:M3U_World_4K",
-      "http_status": 206,
+      "http_status": 200,
       "content_type": "application/vnd.apple.mpegurl",
       "final_url": "https://shd-amg-fast.edgenextcdn.net/tx012/playlist.m3u8#fb:M3U_World_4K"
     },
@@ -2374,23 +2353,16 @@
     {
       "channel": "National Geographic HD\n\nDocumentary",
       "url": "https://tvsen3.aynaott.com/7mm4pwCy/index.m3u8",
-      "http_status": 206,
+      "http_status": 404,
       "content_type": "application/vnd.apple.mpegurl",
       "final_url": "https://tvsen3.aynaott.com/7mm4pwCy/index.m3u8"
     },
     {
       "channel": "National Geographic HD\n\nDocumentary",
       "url": "https://tvsen3.aynaott.com/7mm4pwCy/index.m3u8#fb:M3U_World_4K",
-      "http_status": 206,
+      "http_status": 404,
       "content_type": "application/vnd.apple.mpegurl",
       "final_url": "https://tvsen3.aynaott.com/7mm4pwCy/index.m3u8#fb:M3U_World_4K"
-    },
-    {
-      "channel": "National Geographic HD\n\nDocumentary",
-      "url": "https://tvsen3.aynaott.com/7mm4pwCy/tracks-v1a1/mono.ts.m3u8",
-      "http_status": 206,
-      "content_type": "application/vnd.apple.mpegurl",
-      "final_url": "https://tvsen3.aynaott.com/7mm4pwCy/tracks-v1a1/mono.ts.m3u8"
     },
     {
       "channel": "Madani TV\n\nIslamic",
@@ -2696,7 +2668,7 @@
     {
       "channel": "Independent\n\nAyna OTT",
       "url": "https://tvsen6.aynaott.com/Wef2Vj67njeYGDqQNFB9/tracks-v1a1/mono.ts.m3u8",
-      "http_status": 404,
+      "http_status": 206,
       "content_type": "application/vnd.apple.mpegurl",
       "final_url": "https://tvsen6.aynaott.com/Wef2Vj67njeYGDqQNFB9/tracks-v1a1/mono.ts.m3u8"
     },
@@ -2748,6 +2720,13 @@
       "http_status": 206,
       "content_type": "application/vnd.apple.mpegurl",
       "final_url": "https://tvsen6.aynaott.com/da6WMXAk/index.m3u8#fb:M3U_World_4K"
+    },
+    {
+      "channel": "ATN News HD\n\nBangladesh",
+      "url": "https://tvsen6.aynaott.com/da6WMXAk/tracks-a1/mono.ts.m3u8",
+      "http_status": 206,
+      "content_type": "application/vnd.apple.mpegurl",
+      "final_url": "https://tvsen6.aynaott.com/da6WMXAk/tracks-a1/mono.ts.m3u8"
     },
     {
       "channel": "ATN News\n\nAyna OTT",
@@ -2842,24 +2821,24 @@
     },
     {
       "channel": "R Plus Gold\n\nMore Channels",
-      "url": "https://vglivessai.akamaized.net/sg/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/cf883da3-f9f5-4c70-b0ef-b3ac2e2ad1e3/c856f1b0199ea5d40515347a70b8522b/0.m3u8",
+      "url": "https://vglivessai.akamaized.net/sg/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/cf883da3-f9f5-4c70-b0ef-b3ac2e2ad1e3/5261af40762aca0a01680703124930af/0.m3u8",
       "http_status": 206,
       "content_type": "application/x-mpegURL",
-      "final_url": "https://vglivessai.akamaized.net/sg/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/cf883da3-f9f5-4c70-b0ef-b3ac2e2ad1e3/c856f1b0199ea5d40515347a70b8522b/0.m3u8"
+      "final_url": "https://vglivessai.akamaized.net/sg/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/cf883da3-f9f5-4c70-b0ef-b3ac2e2ad1e3/5261af40762aca0a01680703124930af/0.m3u8"
     },
     {
       "channel": "R Plus Gold\n\nMore Channels",
-      "url": "https://vglivessai.akamaized.net/sg/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/cf883da3-f9f5-4c70-b0ef-b3ac2e2ad1e3/c856f1b0199ea5d40515347a70b8522b/2.m3u8",
+      "url": "https://vglivessai.akamaized.net/sg/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/cf883da3-f9f5-4c70-b0ef-b3ac2e2ad1e3/5261af40762aca0a01680703124930af/2.m3u8",
       "http_status": 206,
       "content_type": "application/x-mpegURL",
-      "final_url": "https://vglivessai.akamaized.net/sg/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/cf883da3-f9f5-4c70-b0ef-b3ac2e2ad1e3/c856f1b0199ea5d40515347a70b8522b/2.m3u8"
+      "final_url": "https://vglivessai.akamaized.net/sg/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/cf883da3-f9f5-4c70-b0ef-b3ac2e2ad1e3/5261af40762aca0a01680703124930af/2.m3u8"
     },
     {
       "channel": "Tabbar Hits\n\nMusic",
-      "url": "https://vglivessai.akamaized.net/sg/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/e11b0319-52e8-4190-ab03-3931cc68eac9/1db62ad21ec22d550d432eaf505e5e2b/0.m3u8",
+      "url": "https://vglivessai.akamaized.net/sg/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/e11b0319-52e8-4190-ab03-3931cc68eac9/841e53ba7ea6c87525e688fdc9f46cd1/0.m3u8",
       "http_status": 206,
       "content_type": "application/x-mpegURL",
-      "final_url": "https://vglivessai.akamaized.net/sg/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/e11b0319-52e8-4190-ab03-3931cc68eac9/1db62ad21ec22d550d432eaf505e5e2b/0.m3u8"
+      "final_url": "https://vglivessai.akamaized.net/sg/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/e11b0319-52e8-4190-ab03-3931cc68eac9/841e53ba7ea6c87525e688fdc9f46cd1/0.m3u8"
     },
     {
       "channel": "R Plus Gold\n\nMore Channels",
