@@ -1965,6 +1965,14 @@ html.perf-lite *{text-shadow:none!important}
 
     // ===== 🔰 Active M3U Playlists (SonyLiv, Both Toffee, Ayna OTT, Tapmad, Jago BD, SM Combined) 🔰 =====
     const M3U_SOURCES = [
+      // 📡 BD ISP Server playlist (SM-IPTV)
+      {
+        url: 'https://raw.githubusercontent.com/sm-monirulislam/SM-IPTV/refs/heads/main/new_isp.m3u',
+        prefix: 'sm-isp',
+        sourceName: 'BD ISP Server',
+        defaultCategory: 'Live TV',
+        corsFallback: true
+      },
       // Root folder er sokol .m3u file auto-discover hoye ekhane add hoy (discoverRootFiles)
       // 📡 Ayna OTT Playlist
       {
