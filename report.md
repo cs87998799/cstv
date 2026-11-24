@@ -1,8 +1,8 @@
 # CRICFLIX M3U DETECTION REPORT
 
 Website: https://www.tv.cricflixs.com/
-Pages scanned: 1
-Candidates: 0
+Pages scanned: 22
+Candidates: 29
 Verified playlists: 0
 
 ## Verified Playlist URLs
@@ -11,7 +11,86 @@ No verified playlist found.
 
 ## All Candidates
 
+- https://www.tv.cricflixs.com/iworks-pwa-manifest-js-extra | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/live/iworks-pwa-manifest-js-extra | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/live/li-t20/iworks-pwa-manifest-js-extra | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/live/li-t20/manifest | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/live/manifest | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/manifest | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/manifest.json | HTTP: 200 | Playlist: False
+- https://www.tv.cricflixs.com/privacy-policy/iworks-pwa-manifest-js-extra | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/privacy-policy/manifest | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/cricket/iworks-pwa-manifest-js-extra | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/cricket/manifest | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/football/iworks-pwa-manifest-js-extra | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/football/manifest | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/history/iworks-pwa-manifest-js-extra | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/history/manifest | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/kids/iworks-pwa-manifest-js-extra | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/kids/manifest | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/kolkata-channel/iworks-pwa-manifest-js-extra | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/kolkata-channel/manifest | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/live-events/iworks-pwa-manifest-js-extra | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/live-events/manifest | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/sony-sports-network/iworks-pwa-manifest-js-extra | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/sony-sports-network/manifest | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/sports/iworks-pwa-manifest-js-extra | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/sports/manifest | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/tnt-sports/iworks-pwa-manifest-js-extra | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/tnt-sports/manifest | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/zee5/iworks-pwa-manifest-js-extra | HTTP: 404 | Playlist: False
+- https://www.tv.cricflixs.com/tv/zee5/manifest | HTTP: 404 | Playlist: False
 
 ## Errors
 
-- https://www.tv.cricflixs.com/ : HTTPSConnectionPool(host='www.tv.cricflixs.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("HTTPSConnection(host='www.tv.cricflixs.com', port=443): Failed to resolve 'www.tv.cricflixs.com' ([Errno -3] Temporary failure in name resolution)"))
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100
+- https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/21/ec857b2a7e65a2fde6c002ea8268d4d8
+- https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391 : 403 Client Error: Forbidden for url: https://bancadeltempoidea.org/14/0026e69c6b25908c6dcb0ed2b0fde391
+- https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100 : 403 Client Error: Forbidden for url: https://czernik.org/21/1de8bd9af313592cf733973d4c9a1100

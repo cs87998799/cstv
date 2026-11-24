@@ -1,1 +1,205 @@
-[]
+[
+  {
+    "url": "https://www.tv.cricflixs.com/iworks-pwa-manifest-js-extra",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/live/iworks-pwa-manifest-js-extra",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/live/li-t20/iworks-pwa-manifest-js-extra",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/live/li-t20/manifest",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/live/manifest",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/manifest",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/manifest.json",
+    "status": 200,
+    "content_type": "application/json",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/privacy-policy/iworks-pwa-manifest-js-extra",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/privacy-policy/manifest",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/cricket/iworks-pwa-manifest-js-extra",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/cricket/manifest",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/football/iworks-pwa-manifest-js-extra",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/football/manifest",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/history/iworks-pwa-manifest-js-extra",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/history/manifest",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/kids/iworks-pwa-manifest-js-extra",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/kids/manifest",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/kolkata-channel/iworks-pwa-manifest-js-extra",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/kolkata-channel/manifest",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/live-events/iworks-pwa-manifest-js-extra",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/live-events/manifest",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/sony-sports-network/iworks-pwa-manifest-js-extra",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/sony-sports-network/manifest",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/sports/iworks-pwa-manifest-js-extra",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/sports/manifest",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/tnt-sports/iworks-pwa-manifest-js-extra",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/tnt-sports/manifest",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/zee5/iworks-pwa-manifest-js-extra",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  },
+  {
+    "url": "https://www.tv.cricflixs.com/tv/zee5/manifest",
+    "status": 404,
+    "content_type": "text/html; charset=UTF-8",
+    "playlist_detected": false,
+    "error": null
+  }
+]
