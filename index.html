@@ -1998,7 +1998,7 @@ html.perf-lite *{text-shadow:none!important}
     function proxify(url, headers) {
       if (!STREAM_PROXY) return url;
       // Sudhu header lagbe emon ba SonyLIV/Akamai stream proxy te jabe (Worker er free limit bachate)
-      const needs = !!(headers && (headers.referer || headers.ua || headers.cookie)) || /sonyeventsglobal|sonydaime|sonyliv/i.test(String(url));
+      const needs = (location.protocol === 'https:' && /^http:\/\//i.test(String(url))) || !!(headers && (headers.referer || headers.ua || headers.cookie)) || /sonyeventsglobal|sonydaime|sonyliv/i.test(String(url));
       if (!needs) return url;
       let u = STREAM_PROXY + '?url=' + encodeURIComponent(url);
       if (headers && headers.referer) u += '&referer=' + encodeURIComponent(headers.referer);
