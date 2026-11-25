@@ -3825,7 +3825,7 @@ html.perf-lite *{text-shadow:none!important}
         if (nativeHls && isSonyish && baseType === 'hls' && !hasDrm && !STREAM_PROXY) { const k = c.indexOf('native'); if (k >= 0) c.splice(k, 1); c.unshift('native'); }
       } catch (e) {}
       const i = c.indexOf('hls');
-      if (i >= 0 && !STREAM_PROXY && !hasDrm && type !== 'drm') c.splice(i + 1, 0, 'hlsproxy', 'hlsproxy2');
+      if (i >= 0 && !STREAM_PROXY && !hasDrm && type !== 'drm') c.splice(i + 1, 0, 'hlsproxy', 'hlsproxy2', 'hlsproxy3');
       return c;
     }
     function buildEngineChainBase(type, channel) {
@@ -4449,9 +4449,11 @@ html.perf-lite *{text-shadow:none!important}
           }).catch(() => {
             if (shakaInstance === player) failEngine(token, 'shaka-load-fail');
           });
-        } else if (engine === 'hls' || engine === 'hlsproxy' || engine === 'hlsproxy2') {
+        } else if (engine === 'hls' || engine === 'hlsproxy' || engine === 'hlsproxy2' || engine === 'hlsproxy3') {
           // hlsproxy*: direct CORS-e atkale public CORS proxy diye try (worker lagbe na)
-          const pubBase = engine === 'hlsproxy' ? 'https://corsproxy.io/?url=' : (engine === 'hlsproxy2' ? 'https://api.allorigins.win/raw?url=' : '');
+          const pubBase = engine === 'hlsproxy' ? 'https://corsproxy.io/?url=' :
+            (engine === 'hlsproxy2' ? 'https://api.allorigins.win/raw?url=' :
+            (engine === 'hlsproxy3' ? 'https://api.codetabs.com/v1/proxy?quest=' : ''));
           const saver = !!state.dataSaver;
           const hls = new Hls({
             enableWorker: true,
@@ -6077,7 +6079,14 @@ html.perf-lite *{text-shadow:none!important}
 
   /* ---------- হিজরি তারিখ ---------- */
   function hijriDate(y, m, d) {
-    var base = Date.UTC(y, m - 1, d) + HIJRI_ADJUST * 864e5;
+    // Hijri day begins at local sunset: after sunset calculate using the next civil date.
+    var todaySun = sunTimes(y, m, d);
+    var afterSunset = false;
+    try {
+      var dhaka = dhakaNow(Date.now());
+      afterSunset = (dhaka.y === y && dhaka.m === m && dhaka.d === d && dhaka.min >= todaySun.sunset);
+    } catch (e) {}
+    var base = Date.UTC(y, m - 1, d + (afterSunset ? 1 : 0)) + HIJRI_ADJUST * 864e5;
     try {
       var parts = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn', { day: 'numeric', month: 'numeric', year: 'numeric', timeZone: 'UTC' }).formatToParts(new Date(base));
       var o = {};
@@ -6156,6 +6165,20 @@ html.perf-lite *{text-shadow:none!important}
     return 'আজ কোনো সরকারি সাধারণ ছুটি নেই।';
   }
 
+  /* ---------- জ্যোতির্বৈজ্ঞানিক পূর্ণিমা ও অমাবস্যা (আনুমানিক) ---------- */
+  function nextMoonPhases(nowMs) {
+    var synodic = 29.530588853;
+    var epoch = Date.UTC(2000, 0, 6, 18, 14); // known astronomical new-moon epoch
+    var age = ((nowMs - epoch) / 86400000 % synodic + synodic) % synodic;
+    var toNew = synodic - age;
+    var toFull = (synodic / 2 - age + synodic) % synodic;
+    function dateLabel(days) {
+      var dt = new Date(nowMs + days * 86400000 + TZ * 3600000);
+      return bn(dt.getUTCDate()) + ' ' + GR_MONTHS[dt.getUTCMonth()] + ' ' + bn(dt.getUTCFullYear());
+    }
+    return { full: dateLabel(toFull), newMoon: dateLabel(toNew) };
+  }
+
   /* ---------- সব তথ্য একসাথে ---------- */
   function build(ms) {
     var t = dhakaNow(ms), bd = banglaDate(t.y, t.m, t.d), hj = hijriDate(t.y, t.m, t.d), st = sunTimes(t.y, t.m, t.d);
@@ -6171,6 +6194,7 @@ html.perf-lite *{text-shadow:none!important}
       lengths: 'দিন ' + dur(dayLen) + ' | রাত ' + dur(1440 - dayLen),
       prayers: [['সেহরির শেষ সময়', fmt(st.sehri)], ['ফজর', fmt(st.fajr)], ['যোহর', fmt(st.zuhr)], ['আসর', fmt(st.asr)], ['মাগরিব (ইফতার শুরু)', fmt(st.maghrib)], ['এশা', fmt(st.isha)]],
       holiday: holidayText(t),
+      moon: nextMoonPhases(ms),
       quote: QUOTES[(doy - 1 + QUOTES.length * 10) % QUOTES.length],
       key: t.y + '-' + pad2(t.m) + '-' + pad2(t.d)
     };
@@ -6211,6 +6235,13 @@ html.perf-lite *{text-shadow:none!important}
 
     var s4 = el('div', 'dl-sec'); s4.appendChild(row('📌', ['আজকের ছুটি: ' + D.holiday])); card.appendChild(s4);
 
+    var sm = el('div', 'dl-sec');
+    sm.appendChild(el('div', 'dl-t', '🌕 চাঁদের হিসাব'));
+    sm.appendChild(row('🌕', ['পরবর্তী পূর্ণিমা: ', bold(D.moon.full)]));
+    sm.appendChild(row('🌑', ['পরবর্তী অমাবস্যা: ', bold(D.moon.newMoon)]));
+    sm.appendChild(el('div', 'dl-ft', 'জ্যোতির্বৈজ্ঞানিক চক্র অনুযায়ী আনুমানিক তারিখ; স্থানীয় চাঁদ দেখার তারিখে পার্থক্য হতে পারে।'));
+    card.appendChild(sm);
+
     var s5 = el('div', 'dl-sec'); var qp = D.quote.split('||'); s5.appendChild(el('div', 'dl-t', '✨ আজকের সুন্দর বাণী (আল-কুরআনের অর্থানুবাদ)')); var qd = el('div', 'dl-q', '“' + qp[0] + '”'); qd.appendChild(el('div', 'dl-qr', '— ' + (qp[1] || ''))); s5.appendChild(qd); card.appendChild(s5);
 
     card.appendChild(el('div', 'dl-ft', '🌿 ' + D.greet.w + ' আপনার জন্য মঙ্গলময় ও বরকতময় হোক! 🌿'));
@@ -6220,6 +6251,18 @@ html.perf-lite *{text-shadow:none!important}
   function open() { var D = render(); document.getElementById('dailyModal').classList.add('show'); return D; }
   function close() { document.getElementById('dailyModal').classList.remove('show'); }
   window.openDailyPopup = open;
+  var lastHijriKey = '';
+  setInterval(function () {
+    try {
+      var now = dhakaNow(Date.now()), st = sunTimes(now.y, now.m, now.d);
+      var key = now.y + '-' + now.m + '-' + now.d + '-' + (now.min >= st.sunset ? 'eve' : 'day');
+      if (key !== lastHijriKey) {
+        lastHijriKey = key;
+        var modal = document.getElementById('dailyModal');
+        if (modal && modal.classList.contains('show')) render();
+      }
+    } catch (e) {}
+  }, 30000);
 
   function init() {
     var modal = document.getElementById('dailyModal');
@@ -7426,7 +7469,8 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   function applyTheme(k) { var h = document.documentElement; if (!k || k === 'pink') h.removeAttribute('data-sx-theme'); else h.setAttribute('data-sx-theme', k); }
   function themeOpen() {
     var cur = localStorage.getItem('sarah_theme') || 'pink';
-    X3.sheet('🎨 থিম রঙ', '<div class="th-grid">' + THEMES.map(function (t) { return '<button type="button" class="th-sw' + (cur === t[0] ? ' on' : '') + '" data-theme-pick="' + t[0] + '"><i style="background:' + t[2] + '"></i>' + t[1] + '</button>'; }).join('') + '</div><div class="nz-note" style="padding:10px 2px">পছন্দের রঙ সব বাটন, ট্যাব ও হাইলাইটে লাগবে। এই ডিভাইসে সেভ থাকবে।</div>');
+    var mode = localStorage.getItem('sarah_mode') || 'dark';
+    X3.sheet('🎨 থিম রঙ ও লাইট মোড', '<div class="sx-mode-pick"><button type="button" data-sx-mode="dark" class="' + (mode === 'dark' ? 'on' : '') + '">🌙 ডার্ক</button><button type="button" data-sx-mode="light" class="' + (mode === 'light' ? 'on' : '') + '">☀️ লাইট</button></div><div class="th-grid">' + THEMES.map(function (t) { return '<button type="button" class="th-sw' + (cur === t[0] ? ' on' : '') + '" data-theme-pick="' + t[0] + '"><i style="background:' + t[2] + '"></i>' + t[1] + '</button>'; }).join('') + '</div><div class="nz-note" style="padding:10px 2px">পছন্দের রঙ ও লাইট/ডার্ক মোড এই ডিভাইসে সেভ থাকবে।</div>');
   }
   function themeGridRender() {
     var g = document.getElementById('themeGrid'); if (!g) return;
@@ -7531,6 +7575,12 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 
   document.addEventListener('click', function (e) {
     var t = e.target; if (!t.closest) return; var q;
+    if ((q = t.closest('[data-sx-mode]'))) {
+      var modePick = q.getAttribute('data-sx-mode');
+      try { localStorage.setItem('sarah_mode', modePick); } catch (er) {}
+      document.documentElement.setAttribute('data-sx-mode', modePick);
+      themeOpen(); return;
+    }
     if ((q = t.closest('[data-theme-set]'))) { var k2 = q.getAttribute('data-theme-set'); try { localStorage.setItem('sarah_theme', k2); } catch (er) {} applyTheme(k2); themeGridRender(); return; }
     if ((q = t.closest('[data-theme-pick]'))) { var k = q.getAttribute('data-theme-pick'); try { localStorage.setItem('sarah_theme', k); } catch (er) {} applyTheme(k); themeOpen(); themeGridRender(); return; }
     if (t.closest('#pushTest')) { pushTest(); return; }
@@ -8979,6 +9029,47 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
     } catch (e) { showErr(e.message); }
   });
 })();
+</script>
+
+
+<!-- Sarah TV: smoother hero text, light appearance, and robust HLS fallback -->
+<style id="sarah-tv-polish-v2">
+  html[data-sx-mode="light"] body { background:#f4f6fb !important; color:#172033 !important; }
+  html[data-sx-mode="light"] body .bg-black,
+  html[data-sx-mode="light"] body .bg-slate-950,
+  html[data-sx-mode="light"] body .bg-slate-900,
+  html[data-sx-mode="light"] body .bg-gray-950,
+  html[data-sx-mode="light"] body .bg-gray-900 { background-color:#ffffff !important; }
+  html[data-sx-mode="light"] body .text-white,
+  html[data-sx-mode="light"] body .text-slate-100,
+  html[data-sx-mode="light"] body .text-slate-200,
+  html[data-sx-mode="light"] body .text-gray-100,
+  html[data-sx-mode="light"] body .text-gray-200 { color:#172033 !important; }
+  html[data-sx-mode="light"] body .text-slate-300,
+  html[data-sx-mode="light"] body .text-slate-400,
+  html[data-sx-mode="light"] body .text-gray-300,
+  html[data-sx-mode="light"] body .text-gray-400 { color:#596579 !important; }
+  html[data-sx-mode="light"] body [class*="border-white/"],
+  html[data-sx-mode="light"] body [class*="border-slate-"] { border-color:rgba(30,41,59,.14) !important; }
+  html[data-sx-mode="light"] body .rounded-2xl[class*="bg-"],
+  html[data-sx-mode="light"] body .rounded-3xl[class*="bg-"] { box-shadow:0 8px 26px rgba(25,35,55,.07); }
+  html[data-sx-mode="light"] #dailyModal .dl-card,
+  html[data-sx-mode="light"] #dailyModal .dl-box { background:#fff !important; color:#172033 !important; }
+  .sx-mode-pick { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:4px 0 16px; }
+  .sx-mode-pick button { padding:12px; border-radius:14px; border:1px solid rgba(150,150,170,.28); background:rgba(130,130,150,.10); color:inherit; font-weight:700; }
+  .sx-mode-pick button.on { background:var(--sx-acc); color:#fff; border-color:transparent; }
+  .hs .hs-body { animation: sarahBannerTextIn .85s cubic-bezier(.2,.75,.25,1) both; }
+  .hs .hs-title { animation: sarahBannerTitleIn .95s cubic-bezier(.16,1,.3,1) both; }
+  .hs .hs-desc, .hs .hs-meta { animation: sarahBannerTextIn 1.15s cubic-bezier(.2,.75,.25,1) both; }
+  .hs { transition:opacity .65s ease, transform .85s cubic-bezier(.2,.8,.2,1), filter .8s ease; }
+  .hs.in { animation:sarahBannerSlideIn .9s cubic-bezier(.16,1,.3,1) both; }
+  @keyframes sarahBannerTextIn { from { opacity:0; transform:translate3d(0,16px,0); } to { opacity:1; transform:translate3d(0,0,0); } }
+  @keyframes sarahBannerTitleIn { from { opacity:0; transform:translate3d(0,22px,0) scale(.985); letter-spacing:.01em; } to { opacity:1; transform:translate3d(0,0,0) scale(1); } }
+  @keyframes sarahBannerSlideIn { from { opacity:.45; transform:translate3d(0,10px,0) scale(.992); filter:blur(2px); } to { opacity:1; transform:translate3d(0,0,0) scale(1); filter:blur(0); } }
+  @media (prefers-reduced-motion:reduce) { .hs,.hs .hs-body,.hs .hs-title,.hs .hs-desc,.hs .hs-meta { animation:none !important; transition:none !important; } }
+</style>
+<script>
+try { document.documentElement.setAttribute('data-sx-mode', localStorage.getItem('sarah_mode') || 'dark'); } catch(e) {}
 </script>
 </body>
 </html>
