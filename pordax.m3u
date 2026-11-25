@@ -1,18 +1,6 @@
 #EXTM3U
-#EXTINF:-1 tvg-id="slovan-bratislava-vs-real-betis" tvg-name="Slovan Bratislava vs Real Betis" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795504302540x302.jpg" group-title="PordaX",Slovan Bratislava vs Real Betis
-https://tencent-cdn.tapmad.com/v1/01a14a5b5bd11ea540a81c2b41b75b/01a14a5b94ea15fc600b1e3e9683eb/main.m3u8
-#EXTINF:-1 tvg-id="real-madrid-vs-psv-eindhoven" tvg-name="Real Madrid vs PSV Eindhoven" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795504091540x302.jpg" group-title="PordaX",Real Madrid vs PSV Eindhoven
-https://tencent-cdn.tapmad.com/v1/01a145b15ce115fc600b1e3e9683db/01a145b24db11ea557841e1612cf4c/main.m3u8
-#EXTINF:-1 tvg-id="rb-leipzig-vs-lens" tvg-name="RB Leipzig vs Lens" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795503943540x302.jpg" group-title="PordaX",RB Leipzig vs Lens
-https://tencent-cdn.tapmad.com/v1/01a14a9fb90c15fc60e91e1786b061/01a14a9feb881ea540a81c2b41b75e/main.m3u8
-#EXTINF:-1 tvg-id="manchester-city-vs-napoli" tvg-name="Manchester City vs Napoli" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795503709540x302.jpg" group-title="PordaX",Manchester City vs Napoli
-https://tencent-cdn.tapmad.com/v1/01a145d823d515fc600b1e3e9683de/01a145dc15751ea540a81c2b41b754/main.m3u8
-#EXTINF:-1 tvg-id="feyenoord-vs-porto" tvg-name="Feyenoord vs Porto" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795503574540x302.jpg" group-title="PordaX",Feyenoord vs Porto
-https://tencent-cdn.tapmad.com/v1/01a14ab8af8915fc600b1e3e9683f0/01a14ab953dd1ea540a81c2b41b75f/main.m3u8
-#EXTINF:-1 tvg-id="como-vs-aek-athens" tvg-name="Como vs AEK Athens" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795503442540x302.jpg" group-title="PordaX",Como vs AEK Athens
-https://tencent-cdn.tapmad.com/v1/01a14a80166b1ea557841e1612cf55/01a14a8047211ea557841e1612cf58/main.m3u8
-#EXTINF:-1 tvg-id="arsenal-vs-borussia-dortmund" tvg-name="Arsenal vs Borussia Dortmund" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795503144540x302.jpg" group-title="PordaX",Arsenal vs Borussia Dortmund
-https://tencent-cdn.tapmad.com/v1/01a14a4cd93615fc600b1e3e9683e8/01a14a5761541567ee931e109fa576/main.m3u8
+#EXTINF:-1 tvg-id="melbourne-victory-fc-aus-vs-the-cong-viettel-fc-vie" tvg-name="Melbourne Victory FC (AUS) vs The Cong - Viettel FC (VIE)" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795509969540x302.jpg" group-title="PordaX",Melbourne Victory FC (AUS) vs The Cong - Viettel FC (VIE)
+https://vodintlv2.in-maa-1.linodeobjects.com/promos/AFCTWOPROMO/master.m3u8
 #EXTINF:-1 tvg-id="bangla-vision" tvg-name="Bangla Vision" tvg-logo="https://i.imgur.com/nCWgp38.png" group-title="PordaX",Bangla Vision
 https://tvsen5.aynaott.com/banglavision/index.m3u8
 #EXTINF:-1 tvg-id="nagorik-tv" tvg-name="NAGORIK TV" tvg-logo="https://otapp.store/uploads/tv_image/sm/nagorik-tv.png" group-title="PordaX",NAGORIK TV
@@ -49,9 +37,9 @@ https://tvsen6.aynaott.com/TjGR1GcxKetHNVcMVxbq/index.m3u8
 https://tvsen6.aynaott.com/39ee93nUbCCmm5LsyD4t/index.m3u8
 #EXTINF:-1 tvg-id="bijoy-tv" tvg-name="Bijoy TV" tvg-logo="https://limon-iptv-image.vercel.app/BD/Bijoy-TV.png" group-title="PordaX",Bijoy TV
 https://tvsen6.aynaott.com/N8Xbo5vdwVU6sF43RsW0/index.m3u8
-#EXTINF:-1 tvg-id="channel-26" tvg-name="Channel 26" tvg-logo="https://backoffice.channel24bd.tv/media/common/logo-fb-pages.png" group-title="PordaX",Channel 26
+#EXTINF:-1 tvg-id="channel-20" tvg-name="Channel 20" tvg-logo="https://backoffice.channel24bd.tv/media/common/logo-fb-pages.png" group-title="PordaX",Channel 20
 https://tvsen6.aynaott.com/channel52/index.m3u8
-#EXTINF:-1 tvg-id="channel-27" tvg-name="Channel 27" tvg-logo="https://www.channelionline.com/brand/channel-i-logo.webp" group-title="PordaX",Channel 27
+#EXTINF:-1 tvg-id="channel-21" tvg-name="Channel 21" tvg-logo="https://www.channelionline.com/brand/channel-i-logo.webp" group-title="PordaX",Channel 21
 https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8?e=1784102558&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=1b6ef0107d8addd36bcab3ca1175877a
 #EXTINF:-1 tvg-id="dbc-news" tvg-name="DBC News" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/%E0%A6%A1%E0%A6%BF%E0%A6%AC%E0%A6%BF%E0%A6%B8%E0%A6%BF_%E0%A6%A8%E0%A6%BF%E0%A6%89%E0%A6%9C%E2%80%93%E0%A6%8F%E0%A6%B0_%E0%A6%B2%E0%A7%8B%E0%A6%97%E0%A7%8B.svg/330px-%E0%A6%A1%E0%A6%BF%E0%A6%AC%E0%A6%BF%E0%A6%B8%E0%A6%BF_%E0%A6%A8%E0%A6%BF%E0%A6%89%E0%A6%9C%E2%80%93%E0%A6%8F%E0%A6%B0_%E0%A6%B2%E0%A7%8B%E0%A6%97%E0%A7%8B.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail" group-title="PordaX",DBC News
 https://tvsen6.aynaott.com/pF66Tkz0qFwP2aMMqHyt/index.m3u8

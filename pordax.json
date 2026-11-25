@@ -1,60 +1,12 @@
 {
   "website": "https://pordax.pages.dev/livetv",
-  "checked_at": "2026-11-24T22:01:11.137247+00:00",
-  "total_streams": 105,
+  "checked_at": "2026-11-25T07:27:37.283858+00:00",
+  "total_streams": 99,
   "streams": [
     {
-      "name": "Slovan Bratislava vs Real Betis",
-      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795504302540x302.jpg",
-      "url": "https://tencent-cdn.tapmad.com/v1/01a14a5b5bd11ea540a81c2b41b75b/01a14a5b94ea15fc600b1e3e9683eb/main.m3u8",
-      "format": "m3u8",
-      "group": "PordaX",
-      "source": "https://pordax.pages.dev/api/livetv/tapmad"
-    },
-    {
-      "name": "Real Madrid vs PSV Eindhoven",
-      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795504091540x302.jpg",
-      "url": "https://tencent-cdn.tapmad.com/v1/01a145b15ce115fc600b1e3e9683db/01a145b24db11ea557841e1612cf4c/main.m3u8",
-      "format": "m3u8",
-      "group": "PordaX",
-      "source": "https://pordax.pages.dev/api/livetv/tapmad"
-    },
-    {
-      "name": "RB Leipzig vs Lens",
-      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795503943540x302.jpg",
-      "url": "https://tencent-cdn.tapmad.com/v1/01a14a9fb90c15fc60e91e1786b061/01a14a9feb881ea540a81c2b41b75e/main.m3u8",
-      "format": "m3u8",
-      "group": "PordaX",
-      "source": "https://pordax.pages.dev/api/livetv/tapmad"
-    },
-    {
-      "name": "Manchester City vs Napoli",
-      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795503709540x302.jpg",
-      "url": "https://tencent-cdn.tapmad.com/v1/01a145d823d515fc600b1e3e9683de/01a145dc15751ea540a81c2b41b754/main.m3u8",
-      "format": "m3u8",
-      "group": "PordaX",
-      "source": "https://pordax.pages.dev/api/livetv/tapmad"
-    },
-    {
-      "name": "Feyenoord vs Porto",
-      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795503574540x302.jpg",
-      "url": "https://tencent-cdn.tapmad.com/v1/01a14ab8af8915fc600b1e3e9683f0/01a14ab953dd1ea540a81c2b41b75f/main.m3u8",
-      "format": "m3u8",
-      "group": "PordaX",
-      "source": "https://pordax.pages.dev/api/livetv/tapmad"
-    },
-    {
-      "name": "Como vs AEK Athens",
-      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795503442540x302.jpg",
-      "url": "https://tencent-cdn.tapmad.com/v1/01a14a80166b1ea557841e1612cf55/01a14a8047211ea557841e1612cf58/main.m3u8",
-      "format": "m3u8",
-      "group": "PordaX",
-      "source": "https://pordax.pages.dev/api/livetv/tapmad"
-    },
-    {
-      "name": "Arsenal vs Borussia Dortmund",
-      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795503144540x302.jpg",
-      "url": "https://tencent-cdn.tapmad.com/v1/01a14a4cd93615fc600b1e3e9683e8/01a14a5761541567ee931e109fa576/main.m3u8",
+      "name": "Melbourne Victory FC (AUS) vs The Cong - Viettel FC (VIE)",
+      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795509969540x302.jpg",
+      "url": "https://vodintlv2.in-maa-1.linodeobjects.com/promos/AFCTWOPROMO/master.m3u8",
       "format": "m3u8",
       "group": "PordaX",
       "source": "https://pordax.pages.dev/api/livetv/tapmad"
@@ -204,7 +156,7 @@
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
-      "name": "Channel 26",
+      "name": "Channel 20",
       "logo": "https://backoffice.channel24bd.tv/media/common/logo-fb-pages.png",
       "url": "https://tvsen6.aynaott.com/channel52/index.m3u8",
       "format": "m3u8",
@@ -212,7 +164,7 @@
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
-      "name": "Channel 27",
+      "name": "Channel 21",
       "logo": "https://www.channelionline.com/brand/channel-i-logo.webp",
       "url": "https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8?e=1784102558&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=1b6ef0107d8addd36bcab3ca1175877a",
       "format": "m3u8",
