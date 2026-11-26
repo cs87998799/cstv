@@ -9,7 +9,8 @@
   <title>Sarah TV - Live TV & Sports Streaming</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
   <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -948,6 +949,84 @@ img{content-visibility:auto}
 html.perf-lite *,html.perf-lite *::before,html.perf-lite *::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;scroll-behavior:auto!important}
 html.perf-lite *{text-shadow:none!important}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+
+<style id="sarah-motion-v7">
+/* ===== Motion v7: banner + lekha => fade / morph / wipe =====
+   Sudhu transform, opacity, clip-path use kora hoyeche (GPU friendly) */
+:root { --sx-ease: cubic-bezier(.22, .9, .28, 1); }
+.hs { will-change: auto !important; view-timeline: --sxv inline; }
+
+/* --- Poster: shob shomoy dekha jabe, halka slow zoom (transition diye, tai snap hobe na) --- */
+#heroTrack .hs .hs-art.vid, #upTrack .hs .hs-art.vid { opacity: 1; transform: none; transition: none; }
+.hs .hs-art.vid img { transform: none; transform-origin: 50% 30%; transition: transform .9s var(--sx-ease); }
+.hs.in .hs-art.vid img { transform: scale(1.08); transition: transform 10s linear; }
+.hs.up-slide.in .hs-art img { animation: none; }
+
+/* --- Poster theke live video: fade + halka morph (zoom-in -> settle) --- */
+.hs-vid { transform: scale(1.06); transition: opacity .8s ease, transform 1.3s var(--sx-ease); }
+.hs-art.playing .hs-vid { transform: translateZ(0); }
+
+/* --- Lekha: wipe + fade + morph (active slide e) --- */
+.hs-body > * { opacity: 0; }
+.hs.in .hs-body > * { opacity: 1; transform: none; transition: none; animation-duration: .8s; animation-timing-function: var(--sx-ease); animation-fill-mode: backwards; }
+.hs.in .hs-body > .hs-live,
+.hs.in .hs-body > .hs-time        { animation-name: sxFadeUp; animation-delay: .06s; }
+.hs.in .hs-body > .tf-vs-box      { animation-name: sxMorphIn; animation-delay: .12s; animation-duration: .7s; }
+.hs.in .hs-body > .hs-title       { animation-name: sxWipeBlur; animation-delay: .24s; animation-duration: .95s; }
+.hs.in .hs-body > .hs-sub         { animation-name: sxWipe; animation-delay: .42s; animation-duration: .8s; }
+.hs.in .hs-body > .hs-actions     { animation-name: sxPop; animation-delay: .58s; animation-duration: .7s; }
+
+@keyframes sxFadeUp { from { opacity: 0; transform: translate3d(0, 16px, 0); } to { opacity: 1; transform: none; } }
+@keyframes sxWipe {
+  from { opacity: 0; clip-path: inset(0 50% 0 50%); transform: translate3d(0, 6px, 0); }
+  35%  { opacity: 1; }
+  to   { opacity: 1; clip-path: inset(-4px -4px -4px -4px); transform: none; } }
+@keyframes sxWipeBlur {
+  from { opacity: 0; clip-path: inset(0 50% 0 50%); filter: blur(7px); transform: translate3d(0, 10px, 0) scale(1.06); }
+  40%  { opacity: 1; }
+  to   { opacity: 1; clip-path: inset(-4px -4px -4px -4px); filter: blur(0); transform: none; } }
+@keyframes sxMorphIn { from { opacity: 0; transform: scale(.55); border-radius: 999px; } to { opacity: 1; transform: none; border-radius: 12px; } }
+@keyframes sxPop { from { opacity: 0; transform: translate3d(0, 14px, 0) scale(.9); } 60% { transform: translate3d(0, -2px, 0) scale(1.02); } to { opacity: 1; transform: none; } }
+
+/* --- Badge + diagonal shape: clip-path morph/wipe --- */
+.tf-top-badge, .tf-diag-tr, .tf-diag-bl { opacity: 0; transition: opacity .5s ease; }
+.hs.in .tf-top-badge, .hs.in .tf-diag-tr, .hs.in .tf-diag-bl { opacity: 1; animation-timing-function: var(--sx-ease); animation-fill-mode: backwards; }
+.hs.in .tf-top-badge { animation-name: sxBadgeT; animation-duration: .7s; animation-delay: .05s; }
+.hs.in .tf-diag-tr   { animation-name: sxTR;     animation-duration: 1s;  animation-delay: .1s; }
+.hs.in .tf-diag-bl   { animation-name: sxBL;     animation-duration: 1s;  animation-delay: .2s; }
+@keyframes sxBadgeT { from { transform: translate3d(-14px, 0, 0); clip-path: inset(0 100% 0 0 round 999px); } to { transform: none; clip-path: inset(-2px round 999px); } }
+@keyframes sxTR { from { clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0); } to { clip-path: polygon(100% 0, 18% 0, 52% 46%, 100% 88%); } }
+@keyframes sxBL { from { clip-path: polygon(0 100%, 0 100%, 0 100%); } to { clip-path: polygon(0 28%, 68% 100%, 0 100%); } }
+
+/* --- Slide <-> slide: swipe er shathe fade + parallax (scroll-driven, JS lage na) --- */
+@supports (animation-timeline: view()) {
+  #heroTrack .hs .hs-art.vid, #upTrack .hs .hs-art.vid { animation: sxPosterScroll linear both; animation-timeline: --sxv; animation-range: cover 0% cover 100%; }
+  .hs .hs-body { animation: sxBodyScroll linear both; animation-timeline: --sxv; animation-range: cover 0% cover 100%; }
+  .tf-top-badge, .tf-diag-tr, .tf-diag-bl { transition: none; animation: sxBodyScroll linear both; animation-timeline: --sxv; animation-range: cover 0% cover 100%; }
+  .hs.in .tf-top-badge { animation: sxBodyScroll linear both, sxBadgeT .7s var(--sx-ease) .05s backwards; animation-timeline: --sxv, auto; animation-range: cover 0% cover 100%, normal; }
+  .hs.in .tf-diag-tr   { animation: sxBodyScroll linear both, sxTR 1s var(--sx-ease) .1s backwards;   animation-timeline: --sxv, auto; animation-range: cover 0% cover 100%, normal; }
+  .hs.in .tf-diag-bl   { animation: sxBodyScroll linear both, sxBL 1s var(--sx-ease) .2s backwards;   animation-timeline: --sxv, auto; animation-range: cover 0% cover 100%, normal; }
+}
+@keyframes sxPosterScroll {
+  0%   { opacity: .35; transform: translate3d(-22%, 0, 0) scale(1.12); }
+  50%  { opacity: 1;   transform: none; }
+  100% { opacity: .35; transform: translate3d(22%, 0, 0) scale(1.12); } }
+@keyframes sxBodyScroll { 0%, 28% { opacity: 0; } 50% { opacity: 1; } 72%, 100% { opacity: 0; } }
+
+/* --- Speed: backdrop-filter (GPU e bhari) bad, solid color diye same look --- */
+header.sticky { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+.tf-top-badge, .hs-ghost, .hs-time, .up-count { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+.tf-top-badge { background: rgba(12, 6, 24, .82); }
+.hs-ghost { background: rgba(48, 48, 54, .66); }
+.up-count { background: rgba(60, 60, 66, .7); }
+
+/* weak phone / TV / data-saver: blur bad */
+html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
+@media (prefers-reduced-motion: reduce) {
+  .hs, .hs * { animation: none !important; }
+  .hs.in .hs-art.vid img { transform: none; transition: none; }
+}
 </style>
 </head>
 <body class="min-h-screen bg-[#000000] text-white flex flex-col justify-between pb-20">
@@ -2474,6 +2553,36 @@ html.perf-lite *{text-shadow:none!important}
     }
 
     // Remote JSON (SonyLIV + Live Sports) + M3U + Local JSON merge -> CHANNELS
+    // ===== Playing server mone rakha: je server e shesh bar cholechilo, porer bar sheta-i age =====
+    const SRV_MEMO_KEY = 'sarah_srv_memo';
+    function srvKeyOf(sv) {
+      const u = String((sv && (sv.rawUrl || sv.url || sv.iframe)) || '');
+      return u.split('?')[0].split('#')[0] || String((sv && sv.name) || '');
+    }
+    function srvMemoLoad() { try { return JSON.parse(localStorage.getItem(SRV_MEMO_KEY) || '{}') || {}; } catch (e) { return {}; } }
+    function srvMemoIdx(ch) {
+      try {
+        if (!ch || !ch.servers || ch.servers.length < 2) return 0;
+        const m = srvMemoLoad()[ch.id];
+        if (!m) return 0;
+        let i = ch.servers.findIndex(sv => srvKeyOf(sv) === m.k);
+        if (i < 0 && m.n) i = ch.servers.findIndex(sv => sv && sv.name === m.n);
+        return i > 0 ? i : 0;
+      } catch (e) { return 0; }
+    }
+    function srvMemoSave(ch) {
+      try {
+        if (!ch || !ch.id || !ch.servers || ch.servers.length < 2) return;
+        const sv = ch.servers[ch.srv || 0]; if (!sv) return;
+        const all = srvMemoLoad();
+        const k = srvKeyOf(sv);
+        if (all[ch.id] && all[ch.id].k === k) return;
+        all[ch.id] = { k: k, n: sv.name || '', t: Date.now() };
+        const ids = Object.keys(all);
+        if (ids.length > 300) ids.sort((a, b) => all[a].t - all[b].t).slice(0, ids.length - 300).forEach(id => { delete all[id]; });
+        localStorage.setItem(SRV_MEMO_KEY, JSON.stringify(all));
+      } catch (e) {}
+    }
     function rebuildChannels() {
       const prev = CHANNELS;
       const wasPlaying = (prev[state.currentChannelIndex] || {}).id;
@@ -2491,8 +2600,9 @@ html.perf-lite *{text-shadow:none!important}
       }
       CHANNELS = groupChannels(all);
       CHANNELS.forEach(c => {
-        if (srvById[c.id] != null && srvById[c.id] < c.servers.length) {
-          c.srv = srvById[c.id];
+        const want = (srvById[c.id] > 0 && srvById[c.id] < c.servers.length) ? srvById[c.id] : srvMemoIdx(c);
+        if (want > 0 && want < c.servers.length) {
+          c.srv = want;
           c.streamUrl = c.servers[c.srv].url;
           c.iframeUrl = c.servers[c.srv].iframe;
         }
@@ -4379,6 +4489,7 @@ html.perf-lite *{text-shadow:none!important}
       const n = ch.servers.length;
       ch.srv = ((i % n) + n) % n;
       ch.streamUrl = ch.servers[ch.srv].url; ch.iframeUrl = ch.servers[ch.srv].iframe;
+      srvMemoSave(ch);
       failStreak = 0;
       loadCurrentChannelInPlayer();
       return true;
@@ -5077,6 +5188,7 @@ html.perf-lite *{text-shadow:none!important}
       video.addEventListener('play', () => { state.isPlaying = true; updatePlayPauseIcon(); showPlayerOverlaysAndStart5sTimer(); });
       video.addEventListener('pause', () => { state.isPlaying = false; updatePlayPauseIcon(); if (playerIsOpen()) showPlayerOverlaysAndStart5sTimer(); });
       video.addEventListener('playing', () => {
+        try { if (!currentIsCustom) srvMemoSave(CHANNELS[state.currentChannelIndex]); } catch (e) {}
         clearTimeout(engineTimer); engineTimer = null;
         clearStreamCheck();
         setSpinner(false);
