@@ -3170,8 +3170,9 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
         if (n < 2) return;
         upTimer = setTimeout(() => {
           if (upPaused || document.hidden || !upVisible) { upSchedule(); return; }
-          track.scrollTo({ left: track.clientWidth * ((upIndex() + 1) % n), behavior: 'smooth' });
-        }, 4500);
+          const nx = (upIndex() + 1) % n;
+          track.scrollTo({ left: track.clientWidth * nx, behavior: nx === 0 ? 'instant' : 'smooth' });
+        }, 4000);
       };
       track.__upSchedule = upSchedule;
       if (!track.__bound) {
@@ -6154,18 +6155,20 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
     function idx() { return Math.round(track.scrollLeft / Math.max(1, track.clientWidth)); }
     function paint(i) { if (window.heroPaint) window.heroPaint(i); }
     var st;
-    track.addEventListener('scroll', function () { clearTimeout(st); st = setTimeout(function () { var i = idx(); try { state.heroSlideIndex = i; } catch (e) {} paint(i); }, 80); }, { passive: true });
-    function start() {
-      stop();
-      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      timer = setInterval(function () {
-        if (userTouch || document.hidden || window.__heroVisible === false || window.__heroPlaying) return;
-        var home = document.getElementById('viewHome');
-        if (home && home.classList.contains('hidden')) return;
-        scrollToHeroSlide(idx() + 1);
-      }, 6000);
+    track.addEventListener('scroll', function () { clearTimeout(st); st = setTimeout(function () { var i = idx(); try { state.heroSlideIndex = i; } catch (e) {} paint(i); schedule(); }, 80); }, { passive: true });
+    var HERO_MS = 4000; // প্রতিটি slide 4 সেকেন্ড
+    function reduced() { return window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; }
+    function schedule() { clearTimeout(timer); if (reduced()) return; timer = setTimeout(tick, HERO_MS); }
+    function tick() {
+      var home = document.getElementById('viewHome');
+      var n = track.children.length;
+      if (userTouch || document.hidden || window.__heroVisible === false || n < 2 || (home && home.classList.contains('hidden'))) { schedule(); return; }
+      var next = idx() + 1;
+      if (next >= n) { track.scrollTo({ left: 0, behavior: 'instant' }); schedule(); }
+      else scrollToHeroSlide(next);
     }
-    function stop() { if (timer) clearInterval(timer); }
+    function start() { stop(); schedule(); }
+    function stop() { clearTimeout(timer); }
     track.addEventListener('touchstart', function () { userTouch = true; }, { passive: true });
     track.addEventListener('touchend', function () { setTimeout(function () { userTouch = false; }, 4000); }, { passive: true });
     start();
@@ -9736,5 +9739,55 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   else { applyMode(getMode()); initProxyInput(); }
 })();
 </script>
+
+<style id="sarah-banner-video-motion">
+/* ===== Banner + Upcoming cards: video-style motion (4s per card) =====
+   NB: base rules use transform:none!important, so Ken Burns uses the
+   independent `scale` / `translate` properties instead of `transform`. */
+@keyframes svmZoomIn  { from { scale:1.06; translate:0 1%; }   to { scale:1.20; translate:0 -2%; } }
+@keyframes svmPanLeft { from { scale:1.16; translate:3% 0; }   to { scale:1.16; translate:-3% -1%; } }
+@keyframes svmZoomOut { from { scale:1.20; translate:0 -2%; }  to { scale:1.06; translate:0 1%; } }
+@keyframes svmPanRight{ from { scale:1.16; translate:-3% 1%; } to { scale:1.16; translate:3% -1%; } }
+@keyframes svmProg    { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+@keyframes svmShine   { 0% { transform:translateX(-130%) skewX(-20deg); opacity:0; } 20% { opacity:1; } 100% { transform:translateX(330%) skewX(-20deg); opacity:0; } }
+@keyframes svmFlash   { 0% { opacity:.55; } 100% { opacity:0; } }
+
+#heroTrack .hs .hs-art.vid img,
+#upTrack .hs .hs-art.vid img { scale:1.08; transform-origin:50% 50%; will-change:scale, translate; backface-visibility:hidden; }
+
+#heroTrack .hs.in .hs-art.vid img,
+#upTrack .hs.in .hs-art.vid img { animation:svmZoomIn 4.6s cubic-bezier(.3,.1,.4,1) both !important; transition:none !important; }
+#heroTrack .hs.in:nth-child(4n+2) .hs-art.vid img,
+#upTrack  .hs.in:nth-child(4n+2) .hs-art.vid img { animation-name:svmPanLeft !important; animation-timing-function:linear !important; }
+#heroTrack .hs.in:nth-child(4n+3) .hs-art.vid img,
+#upTrack  .hs.in:nth-child(4n+3) .hs-art.vid img { animation-name:svmZoomOut !important; }
+#heroTrack .hs.in:nth-child(4n+4) .hs-art.vid img,
+#upTrack  .hs.in:nth-child(4n+4) .hs-art.vid img { animation-name:svmPanRight !important; animation-timing-function:linear !important; }
+
+/* light sweep across the poster as each card enters */
+#heroTrack .hs.in .hs-art.vid::before,
+#upTrack  .hs.in .hs-art.vid::before { content:""; position:absolute; top:0; bottom:0; left:0; width:42%; z-index:2; pointer-events:none;
+  background:linear-gradient(100deg, transparent, rgba(255,255,255,.30), transparent); animation:svmShine 1.2s ease-out .3s 1 both; }
+/* soft flash on cut, like a video transition */
+#heroTrack .hs.in .hs-art.vid::after,
+#upTrack  .hs.in .hs-art.vid::after { content:""; position:absolute; inset:0; z-index:2; pointer-events:none; background:#fff; animation:svmFlash .5s ease-out 1 both; }
+
+/* 4s progress bar at the bottom of the card */
+#heroTrack .hs.in .hs-body::after,
+#upTrack  .hs.in .hs-body::after { content:""; position:absolute; left:0; right:0; bottom:0; height:3px; z-index:6; pointer-events:none;
+  background:linear-gradient(90deg, var(--sx-acc,#e91e8c), #fff); transform-origin:left center; border-radius:0 3px 3px 0;
+  animation:svmProg 4s linear both; }
+
+/* touch / hover pauses the upcoming card visually too */
+#upCard.paused .hs.in .hs-art.vid img,
+#upCard.paused .hs.in .hs-body::after { animation-play-state:paused !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  #heroTrack .hs .hs-art.vid img, #upTrack .hs .hs-art.vid img { animation:none !important; scale:1.04; }
+  #heroTrack .hs .hs-art.vid::before, #heroTrack .hs .hs-art.vid::after,
+  #upTrack .hs .hs-art.vid::before, #upTrack .hs .hs-art.vid::after,
+  #heroTrack .hs .hs-body::after, #upTrack .hs .hs-body::after { display:none !important; }
+}
+</style>
 </body>
 </html>
