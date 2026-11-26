@@ -1,6 +1,24 @@
 #EXTM3U
-#EXTINF:-1 tvg-id="sydney-thunder-vs-adelaide-strikers" tvg-name="Sydney Thunder vs Adelaide Strikers" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795414950540x302.jpg" group-title="PordaX",Sydney Thunder vs Adelaide Strikers
+#EXTINF:-1 tvg-id="ferencvaros-vs-celje" tvg-name="Ferencvaros vs Celje" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795370623540x302.jpg" group-title="PordaX",Ferencvaros vs Celje
+https://tencent-cdn.tapmad.com/v1/01a14abbcff31ea540a81c2b41b760/01a14abc06421567ee931e109fa577/main.m3u8
+#EXTINF:-1 tvg-id="ofi-vs-anderlecht" tvg-name="OFI vs Anderlecht" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795370381540x302.jpg" group-title="PordaX",OFI vs Anderlecht
 https://tencent-cdn.tapmad.com/v1/01a14ab8af8915fc600b1e3e9683f0/01a14ab953dd1ea540a81c2b41b75f/main.m3u8
+#EXTINF:-1 tvg-id="ol-vs-lillestrom" tvg-name="OL vs Lillestrom" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795370005540x302.jpg" group-title="PordaX",OL vs Lillestrom
+https://tencent-cdn.tapmad.com/v1/01a14a9fb90c15fc60e91e1786b061/01a14a9feb881ea540a81c2b41b75e/main.m3u8
+#EXTINF:-1 tvg-id="hoffenheim-vs-sturm-graz" tvg-name="Hoffenheim vs Sturm Graz" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795369796540x302.jpg" group-title="PordaX",Hoffenheim vs Sturm Graz
+https://tencent-cdn.tapmad.com/v1/01a14a80166b1ea557841e1612cf55/01a14a8047211ea557841e1612cf58/main.m3u8
+#EXTINF:-1 tvg-id="nec-vs-rennes" tvg-name="NEC vs Rennes" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795369502540x302.jpg" group-title="PordaX",NEC vs Rennes
+https://tencent-cdn.tapmad.com/v1/01a14a5b5bd11ea540a81c2b41b75b/01a14a5b94ea15fc600b1e3e9683eb/main.m3u8
+#EXTINF:-1 tvg-id="sparta-praha-vs-az-alkmaar" tvg-name="Sparta Praha vs AZ Alkmaar" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795369389540x302.jpg" group-title="PordaX",Sparta Praha vs AZ Alkmaar
+https://tencent-cdn.tapmad.com/v1/01a14a4cd93615fc600b1e3e9683e8/01a14a5761541567ee931e109fa576/main.m3u8
+#EXTINF:-1 tvg-id="juventus-vs-omonoia" tvg-name="Juventus vs Omonoia" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795369207540x302.jpg" group-title="PordaX",Juventus vs Omonoia
+https://tencent-cdn.tapmad.com/v1/01a145d823d515fc600b1e3e9683de/01a145dc15751ea540a81c2b41b754/main.m3u8
+#EXTINF:-1 tvg-id="palace-vs-real-sociedad" tvg-name="Palace vs Real Sociedad" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795368933540x302.jpg" group-title="PordaX",Palace vs Real Sociedad
+https://tencent-cdn.tapmad.com/v1/01a145b15ce115fc600b1e3e9683db/01a145b24db11ea557841e1612cf4c/main.m3u8
+#EXTINF:-1 tvg-id="sunderland-vs-jagiellonia-bialystok" tvg-name="Sunderland vs Jagiellonia Bialystok" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795368712540x302.jpg" group-title="PordaX",Sunderland vs Jagiellonia Bialystok
+https://tencent-cdn.tapmad.com/v1/01a1548c4faf15fc600b1e3e968408/01a1548c7fde1ea557841e1612cf76/main.m3u8
+#EXTINF:-1 tvg-id="torreense-vs-celtic" tvg-name="Torreense vs Celtic" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795368451540x302.jpg" group-title="PordaX",Torreense vs Celtic
+https://tencent-cdn.tapmad.com/v1/01a1456f124d15fc600b1e3e9683d7/01a145990eba15fc60e91e1786b054/main.m3u8
 #EXTINF:-1 tvg-id="bangla-vision" tvg-name="Bangla Vision" tvg-logo="https://i.imgur.com/nCWgp38.png" group-title="PordaX",Bangla Vision
 https://tvsen5.aynaott.com/banglavision/index.m3u8
 #EXTINF:-1 tvg-id="nagorik-tv" tvg-name="NAGORIK TV" tvg-logo="https://otapp.store/uploads/tv_image/sm/nagorik-tv.png" group-title="PordaX",NAGORIK TV
@@ -37,9 +55,9 @@ https://tvsen6.aynaott.com/TjGR1GcxKetHNVcMVxbq/index.m3u8
 https://tvsen6.aynaott.com/39ee93nUbCCmm5LsyD4t/index.m3u8
 #EXTINF:-1 tvg-id="bijoy-tv" tvg-name="Bijoy TV" tvg-logo="https://limon-iptv-image.vercel.app/BD/Bijoy-TV.png" group-title="PordaX",Bijoy TV
 https://tvsen6.aynaott.com/N8Xbo5vdwVU6sF43RsW0/index.m3u8
-#EXTINF:-1 tvg-id="channel-20" tvg-name="Channel 20" tvg-logo="https://backoffice.channel24bd.tv/media/common/logo-fb-pages.png" group-title="PordaX",Channel 20
+#EXTINF:-1 tvg-id="channel-29" tvg-name="Channel 29" tvg-logo="https://backoffice.channel24bd.tv/media/common/logo-fb-pages.png" group-title="PordaX",Channel 29
 https://tvsen6.aynaott.com/channel52/index.m3u8
-#EXTINF:-1 tvg-id="channel-21" tvg-name="Channel 21" tvg-logo="https://www.channelionline.com/brand/channel-i-logo.webp" group-title="PordaX",Channel 21
+#EXTINF:-1 tvg-id="channel-30" tvg-name="Channel 30" tvg-logo="https://www.channelionline.com/brand/channel-i-logo.webp" group-title="PordaX",Channel 30
 https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8?e=1784102558&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=1b6ef0107d8addd36bcab3ca1175877a
 #EXTINF:-1 tvg-id="dbc-news" tvg-name="DBC News" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/%E0%A6%A1%E0%A6%BF%E0%A6%AC%E0%A6%BF%E0%A6%B8%E0%A6%BF_%E0%A6%A8%E0%A6%BF%E0%A6%89%E0%A6%9C%E2%80%93%E0%A6%8F%E0%A6%B0_%E0%A6%B2%E0%A7%8B%E0%A6%97%E0%A7%8B.svg/330px-%E0%A6%A1%E0%A6%BF%E0%A6%AC%E0%A6%BF%E0%A6%B8%E0%A6%BF_%E0%A6%A8%E0%A6%BF%E0%A6%89%E0%A6%9C%E2%80%93%E0%A6%8F%E0%A6%B0_%E0%A6%B2%E0%A7%8B%E0%A6%97%E0%A7%8B.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail" group-title="PordaX",DBC News
 https://tvsen6.aynaott.com/pF66Tkz0qFwP2aMMqHyt/index.m3u8
