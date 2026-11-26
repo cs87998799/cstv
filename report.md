@@ -14,4 +14,4 @@ No verified playlist found.
 
 ## Errors
 
-- https://www.tv.cricflixs.com/ : HTTPSConnectionPool(host='www.tv.cricflixs.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("HTTPSConnection(host='www.tv.cricflixs.com', port=443): Failed to resolve 'www.tv.cricflixs.com' ([Errno -3] Temporary failure in name resolution)"))
+- https://www.tv.cricflixs.com/ : HTTPSConnectionPool(host='www.tv.cricflixs.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLError(1, '[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] ssl/tls alert handshake failure (_ssl.c:1018)')))
