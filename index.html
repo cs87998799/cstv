@@ -424,7 +424,7 @@
     @keyframes upKb { from { transform: scale(1); } to { transform: scale(1.09); } }
     #upDots .hero-dot { position: relative; overflow: hidden; }
     #upDots .hero-dot.on { width: 26px; background: rgba(255,255,255,.3); }
-    #upDots .hero-dot.on::after { content: ""; position: absolute; inset: 0; background: #fff; border-radius: 999px; transform-origin: left; animation: upProg 4.5s linear forwards; }
+    #upDots .hero-dot.on::after { content: ""; position: absolute; inset: 0; background: #fff; border-radius: 999px; transform-origin: left; animation: upProg 10s linear forwards; }
     #upCard.paused #upDots .hero-dot.on::after { animation-play-state: paused; }
     @keyframes upProg { from { transform: scaleX(0); } to { transform: scaleX(1); } }
     .hs-live.up { background: #ff9f0a; color: #000; }
@@ -3024,11 +3024,7 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
 
       const vsMatch = String(ch.name || '').match(/^(.+?)\s+(?:vs\.?|v)\s+(.+?)(?:\s*[-|•].*)?$/i);
       const vsCardHtml = vsMatch
-        ? `<div class="tf-vs-box">
-             <span class="tf-team">${esc(vsMatch[1].trim())}</span>
-             <span class="tf-v">V</span>
-             <span class="tf-team">${esc(vsMatch[2].trim())}</span>
-           </div>`
+        ? ''
         : (ch.logo
             ? `<div class="tf-vs-box"><img referrerpolicy="no-referrer" src="${esc(ch.logo)}" alt="" onerror="this.parentElement.remove()" /></div>`
             : '');
@@ -3054,9 +3050,8 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
           <p class="hs-sub">${esc(subLine)}</p>
           <div class="hs-actions">
             ${noStream
-              ? `<button type="button" class="hs-btn" disabled style="opacity:.6">⏰ Coming Soon</button>`
-              : `<button data-play-channel="${esc(ch.id)}" class="hs-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>${isUp ? 'Watch' : 'এখনই দেখুন'}</button>`}
-            ${noStream ? '' : `<button data-hero-fav="${esc(ch.id)}" class="hs-ghost" aria-label="My List">${saved ? '✓' : '+'}</button>`}
+              ? `<button type="button" class="hs-btn hs-icon" disabled aria-label="Coming soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>`
+              : `<button data-play-channel="${esc(ch.id)}" class="hs-btn hs-icon" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>`}
           </div>
         </div>`;
       return el;
@@ -3172,7 +3167,7 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
           if (upPaused || document.hidden || !upVisible) { upSchedule(); return; }
           const nx = (upIndex() + 1) % n;
           track.scrollTo({ left: track.clientWidth * nx, behavior: nx === 0 ? 'instant' : 'smooth' });
-        }, 4000);
+        }, 10000);
       };
       track.__upSchedule = upSchedule;
       if (!track.__bound) {
@@ -3345,8 +3340,8 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
               <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5z"/></svg>
             </span>
           ` : ''}
-          ${getChannelCircleAvatarHtml(ch, 'w-20 h-20 sm:w-24 sm:h-24')}
-          <span class="text-[11px] text-slate-300 font-medium mt-1.5 max-w-[88px] truncate">${ch.name}</span>
+          ${getChannelCircleAvatarHtml(ch, 'w-14 h-14 sm:w-16 sm:h-16')}
+          <span class="text-[10px] text-slate-300 font-medium mt-1 max-w-[62px] truncate">${ch.name}</span>
         </button>
       `).join('');
     }
@@ -6156,7 +6151,7 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
     function paint(i) { if (window.heroPaint) window.heroPaint(i); }
     var st;
     track.addEventListener('scroll', function () { clearTimeout(st); st = setTimeout(function () { var i = idx(); try { state.heroSlideIndex = i; } catch (e) {} paint(i); schedule(); }, 80); }, { passive: true });
-    var HERO_MS = 4000; // প্রতিটি slide 4 সেকেন্ড
+    var HERO_MS = 10000; // প্রতিটি slide 4 সেকেন্ড
     function reduced() { return window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; }
     function schedule() { clearTimeout(timer); if (reduced()) return; timer = setTimeout(tick, HERO_MS); }
     function tick() {
@@ -9756,7 +9751,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 #upTrack .hs .hs-art.vid img { scale:1.08; transform-origin:50% 50%; will-change:scale, translate; backface-visibility:hidden; }
 
 #heroTrack .hs.in .hs-art.vid img,
-#upTrack .hs.in .hs-art.vid img { animation:svmZoomIn 4.6s cubic-bezier(.3,.1,.4,1) both !important; transition:none !important; }
+#upTrack .hs.in .hs-art.vid img { animation:svmZoomIn 10.6s cubic-bezier(.3,.1,.4,1) both !important; transition:none !important; }
 #heroTrack .hs.in:nth-child(4n+2) .hs-art.vid img,
 #upTrack  .hs.in:nth-child(4n+2) .hs-art.vid img { animation-name:svmPanLeft !important; animation-timing-function:linear !important; }
 #heroTrack .hs.in:nth-child(4n+3) .hs-art.vid img,
@@ -9776,7 +9771,7 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 #heroTrack .hs.in .hs-body::after,
 #upTrack  .hs.in .hs-body::after { content:""; position:absolute; left:0; right:0; bottom:0; height:3px; z-index:6; pointer-events:none;
   background:linear-gradient(90deg, var(--sx-acc,#e91e8c), #fff); transform-origin:left center; border-radius:0 3px 3px 0;
-  animation:svmProg 4s linear both; }
+  animation:svmProg 10s linear both; }
 
 /* touch / hover pauses the upcoming card visually too */
 #upCard.paused .hs.in .hs-art.vid img,
@@ -9788,6 +9783,32 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   #upTrack .hs .hs-art.vid::before, #upTrack .hs .hs-art.vid::after,
   #heroTrack .hs .hs-body::after, #upTrack .hs .hs-body::after { display:none !important; }
 }
+</style>
+
+<style id="sarah-banner-compact-icons-v4">
+/* ---- smaller banner text ---- */
+#heroTrack .hs .hs-title,#upTrack .hs .hs-title{font-size:clamp(11px,3.1vw,14px)!important;line-height:1.2!important;letter-spacing:-.01em!important}
+#heroTrack .hs .hs-sub,#upTrack .hs .hs-sub{font-size:8px!important;margin-top:3px!important}
+#heroTrack .hs .tf-top-badge,#upTrack .hs .tf-top-badge{top:10px!important;left:10px!important;padding:3px 8px!important;gap:5px!important;font-size:8.5px!important;letter-spacing:.03em!important}
+#heroTrack .hs .tf-top-badge i,#upTrack .hs .tf-top-badge i{width:5px!important;height:5px!important}
+#heroTrack .hs .hs-body,#upTrack .hs .hs-body{padding-bottom:30px!important}
+/* white team-name box removed; channel-logo box (if any) made small */
+#heroTrack .hs .tf-vs-box,#upTrack .hs .tf-vs-box{display:none!important}
+/* transparent icon-only button (play / clock) */
+#heroTrack .hs .hs-btn.hs-icon,#upTrack .hs .hs-btn.hs-icon{width:34px!important;height:34px!important;min-height:34px!important;padding:0!important;border-radius:50%!important;
+  display:inline-flex!important;align-items:center;justify-content:center;gap:0!important;
+  background:rgba(255,255,255,.12)!important;border:1.5px solid rgba(255,255,255,.75)!important;color:#fff!important;box-shadow:none!important;opacity:1!important}
+#heroTrack .hs .hs-btn.hs-icon svg,#upTrack .hs .hs-btn.hs-icon svg{width:15px!important;height:15px!important;margin:0!important}
+#heroTrack .hs .hs-btn.hs-icon[disabled],#upTrack .hs .hs-btn.hs-icon[disabled]{border-color:rgba(255,255,255,.55)!important;color:rgba(255,255,255,.9)!important}
+#heroTrack .hs .hs-actions,#upTrack .hs .hs-actions{margin-top:6px!important}
+
+/* ---- Live TV channel circles: smaller, tidy ---- */
+#liveTvCirclesTrack{gap:12px!important;padding:6px 2px 8px!important}
+#liveTvCirclesTrack .channel-ring{min-width:62px}
+#liveTvCirclesTrack .channel-ring > div{width:56px!important;height:56px!important;padding:5px!important;border-width:1.5px!important}
+#liveTvCirclesTrack .channel-ring > div span{font-size:9px!important}
+#liveTvCirclesTrack .channel-ring > span:not(.absolute){font-size:10px!important;max-width:62px!important;margin-top:4px!important}
+@media(min-width:640px){#liveTvCirclesTrack .channel-ring > div{width:62px!important;height:62px!important}}
 </style>
 </body>
 </html>
