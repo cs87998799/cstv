@@ -330,7 +330,8 @@
     #viewHome h3::before { content: ""; width: 4px; height: 18px; border-radius: 4px; background: linear-gradient(180deg, #f5f5f7, #98989d); }
     #liveTvCirclesTrack { padding: 8px 2px 10px; }
     #liveTvCirclesTrack .channel-ring:hover > :not(span):first-of-type, #liveTvCirclesTrack .channel-ring:hover > div { box-shadow: 0 0 0 2px #ffffff, 0 8px 24px rgba(255,255,255,.45); }
-    #eplRowTrack > button, #saffRowTrack > button, #dramaRowTrack > button, #dynamicCategorySections button[data-play-channel] { border-radius: 20px; box-shadow: 0 10px 24px rgba(0,0,0,.35); }
+    #eplRowTrack > button, #saffRowTrack > button, #dramaRowTrack > button, #dynamicCategorySections button[data-play-channel] { background: transparent; border: 0; box-shadow: none; }
+    #eplRowTrack, #saffRowTrack, #dramaRowTrack, #dynamicCategorySections .no-scrollbar { gap: 16px; padding: 8px 2px 10px; }
     #topCategoryNav .cat-tab { padding: 6px 14px; border-radius: 999px; border: 0 !important; background: rgba(255,255,255,.06); }
     #topCategoryNav .cat-tab.text-pink-400 { background: linear-gradient(90deg, #f5f5f7, #98989d); color: #fff; }
     #topCategoryNav { gap: 8px; }
@@ -3347,29 +3348,10 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
     }
 
     function buildChannelCardHtml(ch, idx) {
-      const grad = ch.cardGradient || CARD_GRADIENTS[idx % CARD_GRADIENTS.length];
       return `
-        <button data-play-channel="${ch.id}" class="flex-shrink-0 w-60 sm:w-68 rounded-2xl bg-gradient-to-r ${grad} border border-white/15 p-3.5 text-left snap-start-item hover:border-pink-500/60 active:scale-95 transition relative overflow-hidden group">
-          <div class="flex items-center justify-between text-[10px] text-slate-300 font-bold mb-2">
-            <span class="flex items-center gap-1 text-rose-400"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 live-dot"></span> ${ch.category.toUpperCase()}</span>
-            <span>LIVE HD</span>
-          </div>
-          <div class="flex items-center gap-3 my-2">
-            <div class="w-12 h-12 rounded-xl bg-white flex-shrink-0 flex items-center justify-center p-1 overflow-hidden shadow">
-              ${ch.logo
-                ? `<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="logoFail(this,'block')" /><span style="display:none" class="text-[10px] ${ch.badgeColor}">${ch.shortLabel}</span>`
-                : `<span class="text-[11px] ${ch.badgeColor}">${ch.shortLabel}</span>`
-              }
-            </div>
-            <div class="overflow-hidden">
-              <h4 class="font-extrabold text-sm text-white truncate">${ch.name}</h4>
-              <p class="text-[11px] text-slate-300 truncate">${ch.ticker}</p>
-            </div>
-          </div>
-          <div class="mt-2 flex items-center justify-between text-[11px] text-slate-200 font-semibold">
-            <span>Sarah TV Stream</span>
-            <span class="text-pink-400 group-hover:translate-x-0.5 transition">▶ Watch Now</span>
-          </div>
+        <button data-play-channel="${ch.id}" class="channel-ring relative flex-shrink-0 flex flex-col items-center group snap-start-item focus:outline-none">
+          ${getChannelCircleAvatarHtml(ch, 'w-14 h-14 sm:w-16 sm:h-16')}
+          <span class="text-[10px] text-slate-300 font-medium mt-1 max-w-[62px] truncate">${ch.name}</span>
         </button>
       `;
     }
@@ -5285,7 +5267,7 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
       grid.innerHTML = list.map(({ ch, idx }) =>
         `<button data-app-ch="${idx}" class="app-card ${ch.id === activeId ? 'active' : ''}">
            <div class="app-card-logo" style="position:relative">${appLogoHtml(ch)}</div>
-           <div class="app-card-name"><b class="app-card-num">${appNum(idx)}</b> ${appEsc(ch.name)}</div>
+           <div class="app-card-name"><b class="app-card-num">${appNum(idx)}</b></div>
          </button>`
       ).join('');
     }
@@ -9504,9 +9486,9 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   html[data-sx-mode="light"] #saffRowTrack > button,
   html[data-sx-mode="light"] #dramaRowTrack > button,
   html[data-sx-mode="light"] #dynamicCategorySections button[data-play-channel] {
-    background: #ffffff !important;
-    border-color: rgba(15, 23, 42, .1) !important;
-    box-shadow: 0 6px 18px rgba(15, 23, 42, .07) !important;
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
   }
   html[data-sx-mode="light"] #eplRowTrack .text-slate-200,
   html[data-sx-mode="light"] #saffRowTrack .text-slate-200,
