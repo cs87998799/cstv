@@ -1,1 +1,215 @@
 #EXTM3U
+#EXTINF:-1 tvg-id="brest-vs-paris-fc" tvg-name="Brest vs Paris FC" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795598315540x302.jpg" group-title="PordaX",Brest vs Paris FC
+https://tencent-cdn.tapmad.com/v1/01a14abbcff31ea540a81c2b41b760/01a14abc06421567ee931e109fa577/main.m3u8
+#EXTINF:-1 tvg-id="levante-vs-racing-santander" tvg-name="Levante vs Racing Santander" tvg-logo="https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795680381540x302.jpg" group-title="PordaX",Levante vs Racing Santander
+https://tencent-cdn.tapmad.com/v1/01a145d823d515fc600b1e3e9683de/01a145dc15751ea540a81c2b41b754/main.m3u8
+#EXTINF:-1 tvg-id="bangla-vision" tvg-name="Bangla Vision" tvg-logo="https://i.imgur.com/nCWgp38.png" group-title="PordaX",Bangla Vision
+https://tvsen5.aynaott.com/banglavision/index.m3u8
+#EXTINF:-1 tvg-id="nagorik-tv" tvg-name="NAGORIK TV" tvg-logo="https://otapp.store/uploads/tv_image/sm/nagorik-tv.png" group-title="PordaX",NAGORIK TV
+https://box.bbaria.net/Nagorik_TV/tracks-v1a1/mono.m3u8
+#EXTINF:-1 tvg-id="boishakhi-tv" tvg-name="Boishakhi TV" tvg-logo="https://i.imgur.com/gxL05Y4.png" group-title="PordaX",Boishakhi TV
+https://boishakhi.sonarbanglatv.com/boishakhi/boishakhitv/index.m3u8
+#EXTINF:-1 tvg-id="btl-tv-netherlands" tvg-name="BTL TV (Netherlands)" tvg-logo="https://yt3.googleusercontent.com/ytc/APkrFKZYgQTsDhkbaqmPRCPZIf0UgZqF1wa6aG2eo8ti=s176-c-k-c0x00ffffff-no-rj-mo" group-title="PordaX",BTL TV (Netherlands)
+https://cdn.liveplustv.com/v1/live/btl-tv/master.m3u8
+#EXTINF:-1 tvg-id="deshi-tv" tvg-name="Deshi TV" tvg-logo="https://i.imgur.com/PzqzgMm.png" group-title="PordaX",Deshi TV
+https://deshitv.deshitv24.net/live/myStream/playlist.m3u8
+#EXTINF:-1 tvg-id="madani-channel-bangla" tvg-name="Madani Channel Bangla" tvg-logo="https://i.imgur.com/vIJTVia.png" group-title="PordaX",Madani Channel Bangla
+https://streaming.madanichannel.tv/static/streaming-playlists/hls/d3e49b76-ac06-4689-a641-9200445b647f/master.m3u8
+#EXTINF:-1 tvg-id="movie-bangla" tvg-name="Movie Bangla" tvg-logo="https://www.jagobd.com/wp-content/uploads/2016/02/moviebangla.jpg?x50681" group-title="PordaX",Movie Bangla
+http://alvetv.com/moviebanglatv/8080/index.m3u8
+#EXTINF:-1 tvg-id="nexus-tv" tvg-name="Nexus TV" tvg-logo="https://i.imgur.com/XcJZKg4.png" group-title="PordaX",Nexus TV
+https://tvsen6.aynaott.com/Epm7WrFa/index.m3u8
+#EXTINF:-1 tvg-id="ntv-bangladesh" tvg-name="NTV (Bangladesh)" tvg-logo="https://i.imgur.com/l75bDTx.png" group-title="PordaX",NTV (Bangladesh)
+https://tvsen5.aynaott.com/xV4jEKf3D9zc/index.m3u8
+#EXTINF:-1 tvg-id="peace-tv-bangla" tvg-name="Peace TV Bangla" tvg-logo="https://i.imgur.com/1ztVXUi.png" group-title="PordaX",Peace TV Bangla
+https://dzkyvlfyge.erbvr.com/PeaceTvBangla/index.m3u8
+#EXTINF:-1 tvg-id="rajdhani-tv-sd" tvg-name="Rajdhani TV SD" tvg-logo="https://i.imgur.com/MBm2gPz.jpeg" group-title="PordaX",Rajdhani TV SD
+https://stream.shariarsuvo.com/hls5/rajdhanicable.m3u8
+#EXTINF:-1 tvg-id="atn-bangla" tvg-name="ATN Bangla" tvg-logo="https://limon-iptv-image.vercel.app/BD/ATN-Bangla.png" group-title="PordaX",ATN Bangla
+https://tvsen5.aynaott.com/P3y2URgG7LDe/index.m3u8
+#EXTINF:-1 tvg-id="atn-news" tvg-name="ATN News" tvg-logo="https://limon-iptv-image.vercel.app/BD/ATN-News.png" group-title="PordaX",ATN News
+https://tvsen5.aynaott.com/atnbangla/index.m3u8?e=1779283752&u=78be6644-0a65-48ec-81a4-089ac65a2619
+#EXTINF:-1 tvg-id="asian-tv" tvg-name="Asian TV" tvg-logo="https://thumb.wikimedia.org/wikipedia/en/thumb/f/fb/Asian_TV_Logo.svg/330px-Asian_TV_Logo.svg.png" group-title="PordaX",Asian TV
+https://tvsen6.aynaott.com/pKb5k6NnzxsKpWUs6E8M/index.m3u8
+#EXTINF:-1 tvg-id="btv" tvg-name="BTV" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/BTV-logo-new-2025.png/330px-BTV-logo-new-2025.png" group-title="PordaX",BTV
+https://nkafmbewiff.gpcdn.net/tile_2/master.m3u8
+#EXTINF:-1 tvg-id="btv-chattogram" tvg-name="BTV Chattogram" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/BTV-logo-new-2025.png/330px-BTV-logo-new-2025.png" group-title="PordaX",BTV Chattogram
+https://tvsen6.aynaott.com/TjGR1GcxKetHNVcMVxbq/index.m3u8
+#EXTINF:-1 tvg-id="bangla-tv" tvg-name="Bangla TV" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Bangla_TV_logo.svg/330px-Bangla_TV_logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail" group-title="PordaX",Bangla TV
+https://tvsen6.aynaott.com/39ee93nUbCCmm5LsyD4t/index.m3u8
+#EXTINF:-1 tvg-id="bijoy-tv" tvg-name="Bijoy TV" tvg-logo="https://limon-iptv-image.vercel.app/BD/Bijoy-TV.png" group-title="PordaX",Bijoy TV
+https://tvsen6.aynaott.com/N8Xbo5vdwVU6sF43RsW0/index.m3u8
+#EXTINF:-1 tvg-id="channel-21" tvg-name="Channel 21" tvg-logo="https://backoffice.channel24bd.tv/media/common/logo-fb-pages.png" group-title="PordaX",Channel 21
+https://tvsen6.aynaott.com/channel52/index.m3u8
+#EXTINF:-1 tvg-id="channel-22" tvg-name="Channel 22" tvg-logo="https://www.channelionline.com/brand/channel-i-logo.webp" group-title="PordaX",Channel 22
+https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8?e=1784102558&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=1b6ef0107d8addd36bcab3ca1175877a
+#EXTINF:-1 tvg-id="dbc-news" tvg-name="DBC News" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/%E0%A6%A1%E0%A6%BF%E0%A6%AC%E0%A6%BF%E0%A6%B8%E0%A6%BF_%E0%A6%A8%E0%A6%BF%E0%A6%89%E0%A6%9C%E2%80%93%E0%A6%8F%E0%A6%B0_%E0%A6%B2%E0%A7%8B%E0%A6%97%E0%A7%8B.svg/330px-%E0%A6%A1%E0%A6%BF%E0%A6%AC%E0%A6%BF%E0%A6%B8%E0%A6%BF_%E0%A6%A8%E0%A6%BF%E0%A6%89%E0%A6%9C%E2%80%93%E0%A6%8F%E0%A6%B0_%E0%A6%B2%E0%A7%8B%E0%A6%97%E0%A7%8B.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail" group-title="PordaX",DBC News
+https://tvsen6.aynaott.com/pF66Tkz0qFwP2aMMqHyt/index.m3u8
+#EXTINF:-1 tvg-id="deepto-tv" tvg-name="Deepto TV" tvg-logo="https://thumb.wikimedia.org/wikipedia/en/thumb/0/00/Logo_of_Deepto_TV.svg/330px-Logo_of_Deepto_TV.svg.png" group-title="PordaX",Deepto TV
+https://nkafmbewiff.gpcdn.net/tile_6/master.m3u8
+#EXTINF:-1 tvg-id="desh-tv" tvg-name="Desh TV" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Logo_of_Desh_TV.svg/330px-Logo_of_Desh_TV.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail" group-title="PordaX",Desh TV
+https://tvsen6.aynaott.com/ryFkXfd1a4CQ7mMdc820/index.m3u8?e=1784102570&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=78b23c868a34420397be9c985d04db9b
+#EXTINF:-1 tvg-id="ekattor-tv" tvg-name="Ekattor TV" tvg-logo="https://thumb.wikimedia.org/wikipedia/en/thumb/5/57/Ekattor_TV_logo.svg/330px-Ekattor_TV_logo.svg.png" group-title="PordaX",Ekattor TV
+https://tvsen6.aynaott.com/EWDrV5QskgarZEUBb3pU/index.m3u8
+#EXTINF:-1 tvg-id="ekhon-tv" tvg-name="Ekhon TV" tvg-logo="https://payload-bucket.fringecore.sh/ekhon-tv-768x292.webp" group-title="PordaX",Ekhon TV
+https://tvsen6.aynaott.com/fbgZV3X17hwWcyfZ4pdb/index.m3u8?e=1784102563&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=b5e80a73380863be907284374bdb2bda
+#EXTINF:-1 tvg-id="ekushey-tv" tvg-name="Ekushey TV" tvg-logo="https://limon-iptv-image.vercel.app/BD/ETV.png" group-title="PordaX",Ekushey TV
+https://tvsen6.aynaott.com/y4mEVZNAbeNWTbd6Z2Pw/index.m3u8
+#EXTINF:-1 tvg-id="gtv-gazi-tv" tvg-name="GTV (Gazi TV)" tvg-logo="https://gazitv.com/wp-content/uploads/2022/05/GTV-LOGO-HD240x108.png" group-title="PordaX",GTV (Gazi TV)
+https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/gazibdz.stream/live-orgin/gazibdz.stream/playlist.m3u8
+#EXTINF:-1 tvg-id="independent-tv" tvg-name="Independent TV" tvg-logo="https://thumb.wikimedia.org/wikipedia/en/thumb/c/c1/Independent_Television_Logo.svg/330px-Independent_Television_Logo.svg.png" group-title="PordaX",Independent TV
+https://tvsen6.aynaott.com/Wef2Vj67njeYGDqQNFB9/tracks-v1a1/mono.ts.m3u8
+#EXTINF:-1 tvg-id="jamuna-tv" tvg-name="Jamuna TV" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Jamuna_TV_logo.svg/330px-Jamuna_TV_logo.svg.png" group-title="PordaX",Jamuna TV
+https://tvsen6.aynaott.com/KGdZEdA7qQ43dmPkgk1j/index.m3u8
+#EXTINF:-1 tvg-id="maasranga-tv" tvg-name="Maasranga TV" tvg-logo="https://upload.wikimedia.org/wikipedia/en/3/39/Maasranga_Television_Logo.jpg" group-title="PordaX",Maasranga TV
+https://tvsen5.aynaott.com/maasrangatv/index.m3u8?e=1753741201&u=9a031201-22d8-4f7e-9516-7d246a8fedc3&token=de21479033f8c7cb7372ac9c67473834
+#EXTINF:-1 tvg-id="mohona-tv" tvg-name="Mohona TV" tvg-logo="https://mohona.tv/wp-content/uploads/2024/07/MohonaTV-Logo-Transparent.png" group-title="PordaX",Mohona TV
+https://tvsen6.aynaott.com/AkyX5dunzju4cpo26dr7/index.m3u8
+#EXTINF:-1 tvg-id="my-tv" tvg-name="MY TV" tvg-logo="https://limon-iptv-image.vercel.app/BD/MY-TV.png" group-title="PordaX",MY TV
+https://tvsen6.aynaott.com/XMpHaEf0ANBhv8w6NWR7/index.m3u8
+#EXTINF:-1 tvg-id="rtv" tvg-name="RTV" tvg-logo="https://thumb.wikimedia.org/wikipedia/en/thumb/4/4e/Rtv_bangladesh.svg/330px-Rtv_bangladesh.svg.png" group-title="PordaX",RTV
+https://tvsen5.aynaott.com/RtvHD/index.m3u8
+#EXTINF:-1 tvg-id="somoy-tv" tvg-name="Somoy TV" tvg-logo="https://thumb.wikimedia.org/wikipedia/en/thumb/c/c4/SOMOY_TV_Logo.svg/330px-SOMOY_TV_Logo.svg.png" group-title="PordaX",Somoy TV
+https://tvsen6.aynaott.com/4XcqdovJzbbC9WdJA9gk/index.m3u8
+#EXTINF:-1 tvg-id="ananda-tv" tvg-name="Ananda TV" tvg-logo="https://limon-iptv-image.vercel.app/BD/Ananda-TV.png" group-title="PordaX",Ananda TV
+https://tvsen6.aynaott.com/LeUAm4F1iixYns3s3Non/index.m3u8
+#EXTINF:-1 tvg-id="global-tv" tvg-name="Global TV" tvg-logo="https://limon-iptv-image.vercel.app/BD/Global-TV.png" group-title="PordaX",Global TV
+https://tvsen6.aynaott.com/y0q9eFAuquAtvTxRzUHq/index.m3u8
+#EXTINF:-1 tvg-id="g-series" tvg-name="G Series" tvg-logo="https://cdn.jsdelivr.net/gh/BadhanStrom/img@refs/heads/main/G-Series_Logo.png" group-title="PordaX",G Series
+https://vods2.aynaott.com/gseriesDrama/index.m3u8
+#EXTINF:-1 tvg-id="t-sports-hd" tvg-name="T Sports HD" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/T_Sports_logo.svg/330px-T_Sports_logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail" group-title="PordaX",T Sports HD
+https://tvsen5.aynaott.com/TnMn5kZz8/index.m3u8
+#EXTINF:-1 tvg-id="willow" tvg-name="Willow" tvg-logo="https://cdn.jsdelivr.net/gh/tv-logo/tv-logos@main/countries/united-states/willow-us.png" group-title="PordaX",Willow
+https://tvsen5.aynaott.com/willowhd/index.m3u8
+#EXTINF:-1 tvg-id="kabaddi-24x7" tvg-name="Kabaddi 24x7" tvg-logo="" group-title="PordaX",Kabaddi 24x7
+https://samitaorigin.tangotv.in/KABADDI24X7/SAMITAORIGIN/index.m3u8
+#EXTINF:-1 tvg-id="7s-music" tvg-name="7S Music" tvg-logo="https://i.imgur.com/zDiIhdN.png" group-title="PordaX",7S Music
+https://cdn.pishow.tv/ott/live/1257/master.m3u8
+#EXTINF:-1 tvg-id="7x-music" tvg-name="7X Music" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/7X_Music.png" group-title="PordaX",7X Music
+https://7xshreeshyam.akamaized.net/7XPunjabi/index.m3u8
+#EXTINF:-1 tvg-id="9-plus-news" tvg-name="9 Plus News" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/9plusnews.png" group-title="PordaX",9 Plus News
+https://stream.ottlive.co.in/9plusnews/index.m3u8
+#EXTINF:-1 tvg-id="9x-jalwa" tvg-name="9X Jalwa" tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_9X_JALWA/images/LOGO_HD/image.png" group-title="PordaX",9X Jalwa
+https://wiselp.wiseplayout.com/9X_Jalwa/master.m3u8
+#EXTINF:-1 tvg-id="9x-jhakaas" tvg-name="9X Jhakaas" tvg-logo="https://dtil.tmsimg.com/assets/s90012_ld_h15_aa.png?lock=720x540" group-title="PordaX",9X Jhakaas
+https://amg01281-9xmediapvtltd-9xjhakaas-samsungin-ci2cs.amagi.tv/playlist/amg01281-9xmediapvtltd-9xjhakaas-samsungin/playlist.m3u8
+#EXTINF:-1 tvg-id="9x-tashan" tvg-name="9X Tashan" tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_9X_TASHAN/images/LOGO_HD/image.png" group-title="PordaX",9X Tashan
+https://amg01281-9xmediapvtltd-9xtashan-samsungin-xz1sd.amagi.tv/playlist/amg01281-9xmediapvtltd-9xtashan-samsungin/playlist.m3u8
+#EXTINF:-1 tvg-id="animax-asia-india" tvg-name="Animax Asia India" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Animax.png" group-title="PordaX",Animax Asia India
+https://amg02159-kcglobal-amg02159c1-samsung-in-521.playouts.now.amagi.tv/playlist/amg02159-kcglobal-animax-samsungin/playlist.m3u8
+#EXTINF:-1 tvg-id="zee-bangla" tvg-name="Zee Bangla" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/%E0%A6%9C%E0%A6%BF_%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE_%E0%A7%A8%E0%A7%A6%E0%A7%A8%E0%A7%AB.svg/330px-%E0%A6%9C%E0%A6%BF_%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE_%E0%A7%A8%E0%A7%A6%E0%A7%A8%E0%A7%AB.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail" group-title="PordaX",Zee Bangla
+https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/ZeeBanglaHD.m3u8
+#EXTINF:-1 tvg-id="zee-tv" tvg-name="Zee TV" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Zee_TV_2025.svg/330px-Zee_TV_2025.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail" group-title="PordaX",Zee TV
+https://d47ddb99.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZy1kZV9aZWVUVkhEVUtHZXJtYW55X0hMUw/playlist.m3u8
+#EXTINF:-1 tvg-id="zee-cinema" tvg-name="Zee Cinema" tvg-logo="https://cdn.jsdelivr.net/gh/tv-logo/tv-logos@main/countries/india/zee-cinema-in.png" group-title="PordaX",Zee Cinema
+https://j6nfugukcl.gpcdn.net/tile_5/master.m3u8
+#EXTINF:-1 tvg-id="colors" tvg-name="Colors" tvg-logo="https://cdn.jsdelivr.net/gh/tv-logo/tv-logos@main/countries/india/colors-in.png" group-title="PordaX",Colors
+https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ColorsAPAC.m3u8
+#EXTINF:-1 tvg-id="colors-cineplex-hd" tvg-name="Colors Cineplex HD" tvg-logo="https://cdn.jsdelivr.net/gh/tv-logo/tv-logos@main/countries/india/colors-cineplex-hd-in.png" group-title="PordaX",Colors Cineplex HD
+https://d1rc86nwwc9fag.cloudfront.net/260723/smil:rishteycineplexukdev.smil/chunklist_b1928000.m3u8
+#EXTINF:-1 tvg-id="star-plus-hd" tvg-name="Star Plus HD" tvg-logo="https://cdn.jsdelivr.net/gh/tv-logo/tv-logos@main/countries/india/star-plus-hd-in.png" group-title="PordaX",Star Plus HD
+https://d1rc86nwwc9fag.cloudfront.net/260723/starplusuk_2500/chunks.m3u8
+#EXTINF:-1 tvg-id="star-bharat" tvg-name="Star Bharat" tvg-logo="https://cdn.jsdelivr.net/gh/tv-logo/tv-logos@main/countries/india/star-bharat-in.png" group-title="PordaX",Star Bharat
+https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/gb/YuppTV/UtsavBharat.m3u8
+#EXTINF:-1 tvg-id="star-jalsha" tvg-name="Star Jalsha" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Star_Jalsha_logo_2023.png/330px-Star_Jalsha_logo_2023.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail" group-title="PordaX",Star Jalsha
+https://da86m1sqpm3o0.cloudfront.net/28072023/smil:starjalsha.smil/chunklist_b1928000.m3u8
+#EXTINF:-1 tvg-id="cartoon-network" tvg-name="Cartoon Network" tvg-logo="https://limon-iptv-image.vercel.app/Kids/CN.png" group-title="PordaX",Cartoon Network
+https://tvsen5.aynaott.com/cartoonnetwork/index.fmp4.m3u8?token=e93f4ff52eb43c5b3ec8841f136fc005b3e1b0df-150ae4ed6c589fb42c090b36e3dc5caf-1753734641-1753733741&remote=no_check_ip
+#EXTINF:-1 tvg-id="green-gold-tv" tvg-name="Green Gold TV" tvg-logo="https://i.imgur.com/UEg6mJd.jpg" group-title="PordaX",Green Gold TV
+https://cc-szrmqvu8zkg16.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-szrmqvu8zkg16/greengold/stream/grngld/playlist.m3u8
+#EXTINF:-1 tvg-id="9xm" tvg-name="9XM" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/9XMHindiMusicTelevisionChannelLogo.jpg/330px-9XMHindiMusicTelevisionChannelLogo.jpg" group-title="PordaX",9XM
+https://cc-706183qeo55ez.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-706183qeo55ez/DIYC/PMSL/9X/9XMusic_IN/9XMusic_IN.m3u8
+#EXTINF:-1 tvg-id="yrf-music" tvg-name="YRF Music" tvg-logo="https://limon-iptv-image.vercel.app/Music/Yrf-Music.png" group-title="PordaX",YRF Music
+https://amg01412-xiaomiasia-yrfmusic-xiaomi-1rmk2.amagi.tv/playlist/amg01412-xiaomiasia-yrfmusic-xiaomi/playlist.m3u8
+#EXTINF:-1 tvg-id="hindi-hits" tvg-name="Hindi Hits" tvg-logo="https://i.ibb.co/SwWjbPSv/hindi-hits-hd.png" group-title="PordaX",Hindi Hits
+https://samitaorigin.tangotv.in/HINDIHITS/SAMITAORIGIN/index.m3u8
+#EXTINF:-1 tvg-id="music-india" tvg-name="MUSIC INDIA" tvg-logo="https://limon-iptv-image.vercel.app/Music/Music-India.png" group-title="PordaX",MUSIC INDIA
+https://cdn.pishow.tv/ott/live/226/master.m3u8
+#EXTINF:-1 tvg-id="b4u-music" tvg-name="B4U Music" tvg-logo="https://limon-iptv-image.vercel.app/Music/B4U-Music.png" group-title="PordaX",B4U Music
+https://amg00877-b4unew-amg00877c3-xiaomi-in-5474.playouts.now.amagi.tv/720p/index.m3u8
+#EXTINF:-1 tvg-id="sangeet-bangla" tvg-name="Sangeet Bangla" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Sangeet%20Bangla.png" group-title="PordaX",Sangeet Bangla
+https://mumt05.tangotv.in/87NeALx2SANGEETBANGLA/index.m3u8
+#EXTINF:-1 tvg-id="sangeet-bhojpuri" tvg-name="Sangeet Bhojpuri" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Sangeet_Bhojpuri.jpg/330px-Sangeet_Bhojpuri.jpg" group-title="PordaX",Sangeet Bhojpuri
+https://cdn.pishow.tv/ott/live/1293/master.m3u8
+#EXTINF:-1 tvg-id="dhoom-music" tvg-name="Dhoom Music" tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_DHOOM_MUSIC/images/LOGO_HD/image.png" group-title="PordaX",Dhoom Music
+https://fta.ektv.in/live/378/master.m3u8
+#EXTINF:-1 tvg-id="tv" tvg-name="&TV" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/%26TV_2025.svg/330px-%26TV_2025.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail" group-title="PordaX",&TV
+https://3f56f997.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZy1nYl9BbmRUVl9ITFM/playlist.m3u8
+#EXTINF:-1 tvg-id="sananda-tv" tvg-name="Sananda TV" tvg-logo="https://thumb.wikimedia.org/wikipedia/en/thumb/d/d0/Sananda_TV_Logo.jpg/330px-Sananda_TV_Logo.jpg" group-title="PordaX",Sananda TV
+https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/sanandatv.stream/playlist.m3u8
+#EXTINF:-1 tvg-id="khushboo-bangla" tvg-name="Khushboo Bangla" tvg-logo="https://limon-iptv-image.vercel.app/IN-BD/Khushboo-Bangla.png" group-title="PordaX",Khushboo Bangla
+https://mumt01.tangotv.in/O5aw8Zn3KHUSHBOOTVBANGLA/index.m3u8
+#EXTINF:-1 tvg-id="goldmines" tvg-name="Goldmines" tvg-logo="https://dtil.tmsimg.com/assets/s143087_ld_h15_aa.png?lock=720x540" group-title="PordaX",Goldmines
+https://mumt04.tangotv.in/m18aqlK4GOLDMINES/index.m3u8
+#EXTINF:-1 tvg-id="goldmines-bollywood" tvg-name="Goldmines Bollywood" tvg-logo="https://dtil.tmsimg.com/assets/s143087_ld_h15_aa.png?lock=720x540" group-title="PordaX",Goldmines Bollywood
+https://streams.tangotv.in/GOLDMINESBOLLYWOOD/ORIGIN/tracks-v1a1/mono.m3u8
+#EXTINF:-1 tvg-id="goldmines-movies" tvg-name="Goldmines Movies" tvg-logo="https://dtil.tmsimg.com/assets/s143087_ld_h15_aa.png?lock=720x540" group-title="PordaX",Goldmines Movies
+https://cdn.pishow.tv/ott/live/1461/master.m3u8
+#EXTINF:-1 tvg-id="enter-tv" tvg-name="Enter TV" tvg-logo="https://i.postimg.cc/g06jByt1/entertv.jpg" group-title="PordaX",Enter TV
+https://live1.entertv.com.bd/entertv/index.fmp4.m3u8
+#EXTINF:-1 tvg-id="national-geographic" tvg-name="National Geographic" tvg-logo="https://i.ibb.co.com/v4Vs7JJ6/ns.webp" group-title="PordaX",National Geographic
+https://ireentv.pages.dev/National_Geography.m3u8
+#EXTINF:-1 tvg-id="ten-sports" tvg-name="TEN Sports" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Sony_TEN_logo_new.png/330px-Sony_TEN_logo_new.png" group-title="PordaX",TEN Sports
+https://ireentv.pages.dev/Ten_Sports_SD.m3u8
+#EXTINF:-1 tvg-id="star-sports-1-hindi" tvg-name="Star Sports 1 Hindi" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Star_Sports_1_Hindi.png" group-title="PordaX",Star Sports 1 Hindi
+https://ireentv.pages.dev/Star_Sports_1_Hindi.m3u8
+#EXTINF:-1 tvg-id="cricket-gold" tvg-name="Cricket Gold" tvg-logo="https://resources.cricket-australia.pulselive.com/cricket-australia/photo/2025/07/25/836eddae-4329-4542-ad17-dcd37e9d951a/Cricket-Gold-1920x1080_noBG.png" group-title="PordaX",Cricket Gold
+https://streams2.sofast.tv/ptnr-yupptv/title-cricketgold/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/b2048bb8-1686-4432-aa50-647245383e0c/manifest.m3u8
+#EXTINF:-1 tvg-id="sony-sports-ten-3-hindi" tvg-name="Sony Sports Ten 3 Hindi" tvg-logo="https://dtil.tmsimg.com/assets/GNLZZGG0025TCMR.png?lock=720x540" group-title="PordaX",Sony Sports Ten 3 Hindi
+https://r2.amml.in/sony-ten-3-hd/live.m3u8
+#EXTINF:-1 tvg-id="dd-sports" tvg-name="DD Sports" tvg-logo="https://dtil.tmsimg.com/assets/s158255_ld_h15_aa.png?lock=720x540" group-title="PordaX",DD Sports
+https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/b17adfe543354fdd8d189b110617cddd/index.m3u8
+#EXTINF:-1 tvg-id="channel-81" tvg-name="Channel 81" tvg-logo="" group-title="PordaX",Channel 81
+https://cdn.pishow.tv/ott/live/1161/master.m3u8
+#EXTINF:-1 tvg-id="fuel-tv" tvg-name="Fuel TV" tvg-logo="https://i.imgur.com/I8mviBy.png" group-title="PordaX",Fuel TV
+https://amg01074-fueltv-fueltvau-samsungau-g09kq.amagi.tv/playlist/amg01074-fueltv-fueltvau-samsungau/playlist.m3u8
+#EXTINF:-1 tvg-id="red-bull-tv" tvg-name="Red Bull TV" tvg-logo="https://images.pluto.tv/channels/5e7cb84a172a0f0007da69e4/colorLogoPNG.png" group-title="PordaX",Red Bull TV
+https://3ea22335.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWdiX1JlZEJ1bGxUVl9ITFM/playlist.m3u8
+#EXTINF:-1 tvg-id="bahrain-sports-1" tvg-name="Bahrain Sports 1" tvg-logo="https://i.imgur.com/fBpLsbC.png" group-title="PordaX",Bahrain Sports 1
+https://5c7b683162943.streamlock.net/live/ngrp:sportsone_all/playlist.m3u8
+#EXTINF:-1 tvg-id="bahrain-sports-2" tvg-name="Bahrain Sports 2" tvg-logo="https://i.imgur.com/ZkuZmIo.png" group-title="PordaX",Bahrain Sports 2
+https://5c7b683162943.streamlock.net/live/ngrp:bahrainsportstwo_all/playlist.m3u8
+#EXTINF:-1 tvg-id="trace-sport-stars" tvg-name="Trace Sport Stars" tvg-logo="https://i.imgur.com/FabFP5A.png" group-title="PordaX",Trace Sport Stars
+https://channels.trace.plus/Traceprod/TRACE_SPORT_STARS_sd/index.m3u8
+#EXTINF:-1 tvg-id="rally-tv" tvg-name="Rally TV" tvg-logo="https://i.postimg.cc/WtLq2C7c/logo-Rally-Tv1.png" group-title="PordaX",Rally TV
+https://rally-tv-live.akamaized.net/hls/live/2117704/RallyTV-Pri/master.m3u8
+#EXTINF:-1 tvg-id="al-iraqia-sport" tvg-name="Al Iraqia Sport" tvg-logo="https://i.imgur.com/DrrlxTO.png" group-title="PordaX",Al Iraqia Sport
+https://imn-live.esite-lab.com/hls/iraqia-sports-1.m3u8
+#EXTINF:-1 tvg-id="bein-sports-1" tvg-name="Bein Sports 1" tvg-logo="" group-title="PordaX",Bein Sports 1
+http://27.124.71.27/beIN_Sports_1/index.m3u8
+#EXTINF:-1 tvg-id="bein-sports-2" tvg-name="Bein Sports 2" tvg-logo="" group-title="PordaX",Bein Sports 2
+http://27.124.71.27/beIN_Sports_2/index.m3u8
+#EXTINF:-1 tvg-id="bein-sports-3" tvg-name="Bein Sports 3" tvg-logo="" group-title="PordaX",Bein Sports 3
+http://27.124.71.27/beIN_Sports_3/index.m3u8
+#EXTINF:-1 tvg-id="a-spor" tvg-name="A Spor" tvg-logo="https://i.imgur.com/ZhkZzLf.png" group-title="PordaX",A Spor
+https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8
+#EXTINF:-1 tvg-id="bein-xstra" tvg-name="Bein XSTRA" tvg-logo="" group-title="PordaX",Bein XSTRA
+https://bein-esp-xumo.amagi.tv/playlistR1080p.m3u8
+#EXTINF:-1 tvg-id="fox-sports" tvg-name="Fox Sports" tvg-logo="" group-title="PordaX",Fox Sports
+https://raw.githubusercontent.com/stablesports711-hue/stable-sports-movie/refs/heads/main/IPTV/FOX501HD.m3u8
+#EXTINF:-1 tvg-id="bein-sports-xtra" tvg-name="beIN SPORTS XTRA" tvg-logo="https://i.ibb.co/HT49GPmB/XTRA-2.png" group-title="PordaX",beIN SPORTS XTRA
+https://bein-xtra-bein.amagi.tv/playlist.m3u8
+#EXTINF:-1 tvg-id="bein-sports-xtra-espa-ol" tvg-name="beIN Sports XTRA Español" tvg-logo="https://i.imgur.com/V562tpO.png" group-title="PordaX",beIN Sports XTRA Español
+https://dc1644a9jazgj.cloudfront.net/beIN_Sports_Xtra_Espanol.m3u8
+#EXTINF:-1 tvg-id="bein-sports-usa" tvg-name="beIN Sports USA" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/BeIN_Sports_logo_%28vertical_version%29.svg/500px-BeIN_Sports_logo_%28vertical_version%29.svg.png" group-title="PordaX",beIN Sports USA
+https://tvsen6.aynaott.com/beinsports/index.m3u8
+#EXTINF:-1 tvg-id="tyc-sports" tvg-name="TyC Sports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/TyC_Sports_logo.svg/960px-TyC_Sports_logo.svg.png" group-title="PordaX",TyC Sports
+https://amg26268-amg26268c14-freelivesports-emea-10267.playouts.now.amagi.tv/ts-us-e2-n2/playlist/amg26268-sportsstudio-tycsports-freelivesportsemea/playlist.m3u8
+#EXTINF:-1 tvg-id="tudn" tvg-name="TUDN" tvg-logo="https://i.imgur.com/oT5CAvd.png" group-title="PordaX",TUDN
+https://streaming-live-fcdn.api.prd.univisionnow.com/tudn/tudn.isml/hls/tudn.m3u8
+#EXTINF:-1 tvg-id="nbc-sports-now" tvg-name="NBC Sports NOW" tvg-logo="https://i.imgur.com/EzNf2Yx.png" group-title="PordaX",NBC Sports NOW
+https://d4whmvwm0rdvi.cloudfront.net/10007/99993008/hls/master.m3u8?ads.xumo_channelId=99993008
+#EXTINF:-1 tvg-id="pga-tour" tvg-name="PGA Tour" tvg-logo="https://i.imgur.com/J0TY9dG.png" group-title="PordaX",PGA Tour
+https://d11k1mnrgfposz.cloudfront.net/playlist.m3u8
+#EXTINF:-1 tvg-id="fubo-sports-network" tvg-name="Fubo Sports Network" tvg-logo="https://i.imgur.com/qFNRJLb.png" group-title="PordaX",Fubo Sports Network
+https://dnf08l6u6uxnz.cloudfront.net/master.m3u8
+#EXTINF:-1 tvg-id="espn8-the-ocho" tvg-name="ESPN8 The Ocho" tvg-logo="https://images.fubo.tv/channel-config-ui/station-logos/on-dark/espn_8_the_ocho_bw.png" group-title="PordaX",ESPN8 The Ocho
+https://d3b6q2ou5kp8ke.cloudfront.net/ESPNTheOcho.m3u8
+#EXTINF:-1 tvg-id="stadium" tvg-name="Stadium" tvg-logo="https://i.imgur.com/SnZOiER.png" group-title="PordaX",Stadium
+https://wurl120sports.global.transmit.live/hls/679a907dce42a042c23ace37/v1/stadium_gracenote/samsung_us/latest/main/hls/playlist.m3u8
+#EXTINF:-1 tvg-id="tennis-channel" tvg-name="Tennis Channel" tvg-logo="https://i.imgur.com/tsljAnY.png" group-title="PordaX",Tennis Channel
+https://amg01444-tennischannelth-tennischannelnl-samsungnl-x3dq1.amagi.tv/playlist/amg01444-tennischannelth-tennischannelnl-samsungnl/playlist.m3u8
+#EXTINF:-1 tvg-id="tennis-channel-2" tvg-name="Tennis Channel 2" tvg-logo="https://i.imgur.com/tsljAnY.png" group-title="PordaX",Tennis Channel 2
+https://mumbai-edge.smartplaytv.in/Tennis2/index.m3u8
+#EXTINF:-1 tvg-id="swerve-combat" tvg-name="Swerve Combat" tvg-logo="https://i.imgur.com/eFZh7aG.png" group-title="PordaX",Swerve Combat
+https://linear-253.frequency.stream/mt/roku/253/hls/master/playlist.m3u8
