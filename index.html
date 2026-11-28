@@ -330,7 +330,8 @@
     #viewHome h3::before { content: ""; width: 4px; height: 18px; border-radius: 4px; background: linear-gradient(180deg, #f5f5f7, #98989d); }
     #liveTvCirclesTrack { padding: 8px 2px 10px; }
     #liveTvCirclesTrack .channel-ring:hover > :not(span):first-of-type, #liveTvCirclesTrack .channel-ring:hover > div { box-shadow: 0 0 0 2px #ffffff, 0 8px 24px rgba(255,255,255,.45); }
-    #eplRowTrack > button, #saffRowTrack > button, #dramaRowTrack > button, #dynamicCategorySections button[data-play-channel] { border-radius: 20px; box-shadow: 0 10px 24px rgba(0,0,0,.35); }
+    #eplRowTrack > button, #saffRowTrack > button, #dramaRowTrack > button, #dynamicCategorySections button[data-play-channel] { background: transparent; border: 0; box-shadow: none; }
+    #eplRowTrack, #saffRowTrack, #dramaRowTrack, #dynamicCategorySections .no-scrollbar { gap: 16px; padding: 8px 2px 10px; }
     #topCategoryNav .cat-tab { padding: 6px 14px; border-radius: 999px; border: 0 !important; background: rgba(255,255,255,.06); }
     #topCategoryNav .cat-tab.text-pink-400 { background: linear-gradient(90deg, #f5f5f7, #98989d); color: #fff; }
     #topCategoryNav { gap: 8px; }
@@ -2160,7 +2161,7 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
     function proxify(url, headers) {
       if (!STREAM_PROXY) return url;
       // Sudhu header lagbe emon ba SonyLIV/Akamai stream proxy te jabe (Worker er free limit bachate)
-      const needs = (location.protocol === 'https:' && /^http:\/\//i.test(String(url))) || !!(headers && (headers.referer || headers.ua || headers.cookie)) || /sonyeventsglobal|sonydaime|sonyliv/i.test(String(url));
+      const needs = (location.protocol === 'https:' && /^http:\/\//i.test(String(url))) || !!(headers && (headers.referer || headers.ua || headers.cookie)) || /sonyeventsglobal|sonydaime|sonyliv|toffeelive|toffee/i.test(String(url));
       if (!needs) return url;
       let u = STREAM_PROXY + '?url=' + encodeURIComponent(url);
       if (headers && headers.referer) u += '&referer=' + encodeURIComponent(headers.referer);
@@ -2646,7 +2647,8 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
       'm3u_sources.json',
       'sarah.json', 'sarah.m3u',
       'sonyLiv.m3u', 'sonyLiv_data.json',
-      'toffee_data.json', 'toffee_playlist.m3u'
+      'toffee_data.json', 'toffee_playlist.m3u', 'toffee_playlist.json',
+      'toffee.json', 'toffee.m3u', 'toffee_channels.json'
     ];
     // Ayna OTT: 'unique' = sudhu je channel onno source e nai; 'off' = Ayna ekdom bondho
     const AYNA_MODE = 'unique';
@@ -2876,16 +2878,14 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
           <div class="${sizeClasses} rounded-full bg-white border-2 border-white/20 group-hover:border-pink-500 shadow-lg flex items-center justify-center p-2 text-center overflow-hidden relative">
             <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="logoFail(this,'flex')" />
             <div style="display:none" class="flex-col items-center justify-center w-full h-full">
-              <span class="text-xs sm:text-sm ${ch.badgeColor} leading-tight">${ch.shortLabel}</span>
-              <span class="mt-1 px-1.5 py-0.5 rounded bg-slate-900 text-white text-[9px] font-bold">${ch.subLabel}</span>
+              <svg viewBox="0 0 24 24" class="w-1/2 h-1/2 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 3l4 3 4-3"/></svg>
             </div>
           </div>
         `;
       }
       return `
         <div class="${sizeClasses} rounded-full bg-white border-2 border-white/20 group-hover:border-pink-500 shadow-lg flex flex-col items-center justify-center p-2 text-center overflow-hidden">
-          <span class="text-xs sm:text-sm ${ch.badgeColor} leading-tight">${ch.shortLabel}</span>
-          <span class="mt-1 px-1.5 py-0.5 rounded bg-slate-900 text-white text-[9px] font-bold">${ch.subLabel}</span>
+          <svg viewBox="0 0 24 24" class="w-1/2 h-1/2 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 3l4 3 4-3"/></svg>
         </div>
       `;
     }
@@ -3347,29 +3347,10 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
     }
 
     function buildChannelCardHtml(ch, idx) {
-      const grad = ch.cardGradient || CARD_GRADIENTS[idx % CARD_GRADIENTS.length];
       return `
-        <button data-play-channel="${ch.id}" class="flex-shrink-0 w-60 sm:w-68 rounded-2xl bg-gradient-to-r ${grad} border border-white/15 p-3.5 text-left snap-start-item hover:border-pink-500/60 active:scale-95 transition relative overflow-hidden group">
-          <div class="flex items-center justify-between text-[10px] text-slate-300 font-bold mb-2">
-            <span class="flex items-center gap-1 text-rose-400"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 live-dot"></span> ${ch.category.toUpperCase()}</span>
-            <span>LIVE HD</span>
-          </div>
-          <div class="flex items-center gap-3 my-2">
-            <div class="w-12 h-12 rounded-xl bg-white flex-shrink-0 flex items-center justify-center p-1 overflow-hidden shadow">
-              ${ch.logo
-                ? `<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${ch.logo}" alt="${ch.name}" class="w-full h-full object-contain" onerror="logoFail(this,'block')" /><span style="display:none" class="text-[10px] ${ch.badgeColor}">${ch.shortLabel}</span>`
-                : `<span class="text-[11px] ${ch.badgeColor}">${ch.shortLabel}</span>`
-              }
-            </div>
-            <div class="overflow-hidden">
-              <h4 class="font-extrabold text-sm text-white truncate">${ch.name}</h4>
-              <p class="text-[11px] text-slate-300 truncate">${ch.ticker}</p>
-            </div>
-          </div>
-          <div class="mt-2 flex items-center justify-between text-[11px] text-slate-200 font-semibold">
-            <span>Sarah TV Stream</span>
-            <span class="text-pink-400 group-hover:translate-x-0.5 transition">▶ Watch Now</span>
-          </div>
+        <button data-play-channel="${ch.id}" class="channel-ring relative flex-shrink-0 flex flex-col items-center group snap-start-item focus:outline-none">
+          ${getChannelCircleAvatarHtml(ch, 'w-14 h-14 sm:w-16 sm:h-16')}
+          <span class="text-[10px] text-slate-300 font-medium mt-1 max-w-[62px] truncate">${ch.name}</span>
         </button>
       `;
     }
@@ -4010,12 +3991,12 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
       const isHttpOnHttps = (location.protocol === 'https:' && /^http:\/\//i.test(u));
       const plainToffee = isToffee && !hasDrm && type !== 'dash';
       const baseType = plainToffee ? 'hls' : type;
-      const c = buildEngineChainBase(baseType, plainToffee ? null : channel);
+      const c = buildEngineChainBase(baseType, channel); // Toffee source identify kore DRM/HLS engine priority thik rakhe
       // Akamai/SonyLIV/Toffee: hls.js XHR CORS e atke, tai browser er nijer HLS player (CORS lage na) age try
       try {
         const v = document.createElement('video');
         const nativeHls = !!(v.canPlayType && v.canPlayType('application/vnd.apple.mpegurl'));
-        const isSonyish = /sony|akamaized/i.test(String((channel && (channel.sourceName || '')) + ' ' + u));
+        const isSonyish = /sony|akamaized/i.test(String((channel && (channel.sourceName || '')) + ' ' + u)); // Toffee native HLS age dile signed token child playlist-e jay na
         if (nativeHls && isSonyish && baseType === 'hls' && !hasDrm && !STREAM_PROXY) { const k = c.indexOf('native'); if (k >= 0) c.splice(k, 1); c.unshift('native'); }
       } catch (e) {}
       const i = c.indexOf('hls');
@@ -4628,7 +4609,7 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
         const qIdx = String(urlStr || '').indexOf('?');
         if (qIdx < 0) return '';
         const qs = String(urlStr).slice(qIdx + 1);
-        if (/hdntl=|hdnea=|token=|hmac=| sig=|Signature=|Policy=|Key-Pair-Id=|URLPrefix=/i.test(qs)) {
+        if (/hdntl=|hdnea=|edge-cache-token=|token=|hmac=| sig=|Signature=|Policy=|Key-Pair-Id=|URLPrefix=/i.test(qs)) {
           return qs;
         }
       } catch (e) {}
@@ -4637,7 +4618,7 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
 
     function appendTokenToSubUrl(targetUrl, masterToken) {
       if (!masterToken || !targetUrl) return targetUrl;
-      if (targetUrl.includes('hdntl=') || targetUrl.includes('hdnea=') || targetUrl.includes('Signature=') || targetUrl.includes('URLPrefix=')) return targetUrl;
+      if (targetUrl.includes('hdntl=') || targetUrl.includes('hdnea=') || targetUrl.includes('Signature=') || targetUrl.includes('URLPrefix=') || targetUrl.includes('edge-cache-token=')) return targetUrl;
       return targetUrl + (targetUrl.includes('?') ? '&' : '?') + masterToken;
     }
 
@@ -4741,7 +4722,7 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
               xhr.withCredentials = false;
               // Forward Akamai hdntl / hdnea query tokens to child variant playlists and segments if missing
               let target = url;
-              if (masterToken && url && !url.includes('hdntl=') && !url.includes('hdnea=') && !url.includes('Signature=')) {
+              if (masterToken && url && !url.includes('hdntl=') && !url.includes('hdnea=') && !url.includes('Signature=') && !url.includes('edge-cache-token=')) {
                 target = appendTokenToSubUrl(url, masterToken);
               }
               try {
@@ -5248,10 +5229,9 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
 
     function appLogoHtml(ch) {
       if (ch.logo) {
-        return `<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${appEsc(ch.logo)}" alt="" loading="lazy" onerror="logoFail(this,'remove')" />` +
-               `<span style="position:absolute;color:${appEsc(ch.themeColor || '#636366')};font-size:13px;z-index:0">${appEsc(ch.shortLabel)}</span>`;
+        return `<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${appEsc(ch.logo)}" alt="${appEsc(ch.name)}" draggable="false" onerror="logoFail(this,'remove')" />`;
       }
-      return `<span style="color:${appEsc(ch.themeColor || '#636366')};font-size:15px;padding:4px">${appEsc(ch.shortLabel)}</span>`;
+      return `<span class="app-logo-fallback" aria-hidden="true">📺</span>`;
     }
 
     function renderAppCats() {
@@ -5285,7 +5265,7 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
       grid.innerHTML = list.map(({ ch, idx }) =>
         `<button data-app-ch="${idx}" class="app-card ${ch.id === activeId ? 'active' : ''}">
            <div class="app-card-logo" style="position:relative">${appLogoHtml(ch)}</div>
-           <div class="app-card-name"><b class="app-card-num">${appNum(idx)}</b> ${appEsc(ch.name)}</div>
+           <div class="app-card-name" title="${appEsc(ch.name)}"><b>${appEsc(ch.name)}</b></div>
          </button>`
       ).join('');
     }
@@ -9504,9 +9484,9 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
   html[data-sx-mode="light"] #saffRowTrack > button,
   html[data-sx-mode="light"] #dramaRowTrack > button,
   html[data-sx-mode="light"] #dynamicCategorySections button[data-play-channel] {
-    background: #ffffff !important;
-    border-color: rgba(15, 23, 42, .1) !important;
-    box-shadow: 0 6px 18px rgba(15, 23, 42, .07) !important;
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
   }
   html[data-sx-mode="light"] #eplRowTrack .text-slate-200,
   html[data-sx-mode="light"] #saffRowTrack .text-slate-200,
@@ -9810,5 +9790,131 @@ html.is-admin #sxWm { pointer-events:auto; outline:1px dashed rgba(255,255,255,.
 #liveTvCirclesTrack .channel-ring > span:not(.absolute){font-size:10px!important;max-width:62px!important;margin-top:4px!important}
 @media(min-width:640px){#liveTvCirclesTrack .channel-ring > div{width:62px!important;height:62px!important}}
 </style>
+
+<style id="sarah-glow-v1">
+:root{--sg-a:#ff2d87;--sg-b:#7c3aed;--sg-c:#22d3ee}
+html:not([data-sx-mode="light"]) body{background:radial-gradient(1100px 520px at 12% -8%,rgba(124,58,237,.22),transparent 60%),radial-gradient(900px 480px at 100% 0%,rgba(255,45,135,.16),transparent 55%),#09090d!important;background-attachment:fixed!important}
+/* channel logo circles: logo only, name stays below */
+.channel-ring>div{background:linear-gradient(145deg,#fff,#eceef5)!important;border:0!important;box-shadow:0 0 0 2px rgba(255,255,255,.14),0 8px 22px rgba(0,0,0,.45)!important;transition:transform .25s,box-shadow .25s}
+.channel-ring>div span{display:none!important}
+.channel-ring:hover>div,.channel-ring:focus-visible>div{transform:translateY(-3px) scale(1.05);box-shadow:0 0 0 2px var(--sg-a),0 10px 28px rgba(255,45,135,.45)!important}
+.channel-ring>span:not(.absolute){color:#e6e8f2!important;font-weight:600!important;letter-spacing:.01em}
+/* category tabs as pills */
+#topCategoryNav .cat-tab{padding:7px 14px!important;border-radius:999px!important;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(8px);white-space:nowrap}
+#topCategoryNav .cat-tab.active-cat{background:linear-gradient(135deg,var(--sg-a),var(--sg-b))!important;color:#fff!important;border-color:transparent;box-shadow:0 6px 18px rgba(255,45,135,.35)}
+/* section headings with accent bar */
+h3.text-base,h3.text-lg,#discoverSectionTitle{position:relative;padding-left:12px}
+h3.text-base::before,h3.text-lg::before,#discoverSectionTitle::before{content:"";position:absolute;left:0;top:12%;bottom:12%;width:4px;border-radius:4px;background:linear-gradient(var(--sg-a),var(--sg-b))}
+/* discover cards */
+#discoverGrid>button{background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02))!important;border:1px solid rgba(255,255,255,.09)!important;border-radius:20px!important;backdrop-filter:blur(10px);transition:transform .2s,border-color .2s,box-shadow .2s}
+#discoverGrid>button:hover{transform:translateY(-3px);border-color:rgba(255,45,135,.55)!important;box-shadow:0 12px 30px rgba(124,58,237,.25)}
+.va-btn{border-radius:999px!important;background:rgba(255,255,255,.08)!important;padding:4px 12px!important}
+.toffee-gradient{background:linear-gradient(135deg,var(--sg-a),var(--sg-b))!important}
+#heroTrack .hs{border-radius:22px!important;box-shadow:0 18px 44px rgba(0,0,0,.5)}
+.no-scrollbar{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<style id="sarah-tv-app-polish-v5">
+/* APK / Android TV channel grid: logo-only tile with the channel name underneath */
+.app-card{min-width:0!important;padding:9px 8px 10px!important;gap:8px!important;border:1px solid rgba(255,255,255,.10)!important;border-radius:17px!important;background:linear-gradient(155deg,rgba(37,39,53,.96),rgba(16,17,25,.98))!important;box-shadow:0 7px 20px rgba(0,0,0,.22)!important;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease!important}
+.app-card:focus-visible,.app-card.active{outline:none!important;border-color:#f34b9a!important;box-shadow:0 0 0 2px rgba(243,75,154,.25),0 10px 26px rgba(225,29,125,.18)!important}
+.app-card:active{transform:scale(.97)!important}
+.app-card-logo{width:100%!important;aspect-ratio:1/1!important;border-radius:13px!important;padding:10px!important;background:linear-gradient(145deg,#fff,#e9edf5)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 5px 14px rgba(0,0,0,.22)!important}
+.app-card-logo img{width:100%!important;height:100%!important;object-fit:contain!important;position:relative!important;z-index:1!important}
+.app-card-logo .app-logo-fallback{font-size:clamp(22px,4vw,34px);color:#657087}
+.app-card-name{width:100%!important;max-width:100%!important;min-height:2.35em!important;display:flex!important;align-items:center!important;justify-content:center!important;color:#f7f7fb!important;font-size:clamp(10px,1.15vw,13px)!important;line-height:1.18!important;font-weight:700!important;letter-spacing:.01em!important;white-space:normal!important;overflow:hidden!important;overflow-wrap:anywhere!important;text-align:center!important}
+.app-card-name b{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;overflow:hidden!important;font-weight:700!important}
+.app-card-name .app-card-num{display:none!important}
+:root{--sarah-pink:#f04498;--sarah-violet:#8055e8;--sarah-line:rgba(255,255,255,.10)}
+body{background-color:#080910}
+#discoverGrid>button{position:relative;overflow:hidden;min-height:130px;background:linear-gradient(155deg,rgba(35,37,51,.96),rgba(15,16,24,.98))!important;border:1px solid var(--sarah-line)!important;box-shadow:0 8px 24px rgba(0,0,0,.18)!important}
+#discoverGrid>button::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(125deg,rgba(255,255,255,.07),transparent 38%);opacity:.65}
+#discoverGrid>button:active{transform:scale(.975)!important}
+#topCategoryNav{scrollbar-width:none}#topCategoryNav::-webkit-scrollbar{display:none}
+#topCategoryNav .cat-tab{font-weight:700!important;letter-spacing:.01em}
+#heroTrack .hs,#upTrack .hs{overflow:hidden;isolation:isolate}
+#heroTrack .hs::after,#upTrack .hs::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;background:linear-gradient(110deg,rgba(5,6,12,.12),transparent 45%,rgba(5,6,12,.18))}
+button{-webkit-tap-highlight-color:transparent}
+@media(max-width:420px){.app-card{padding:7px 6px 8px!important;border-radius:14px!important}.app-card-logo{border-radius:11px!important;padding:8px!important}.app-card-name{font-size:10px!important}}
+</style>
+
+
+<style id="sarah-compact-smooth-v6">
+/* ===== Compact icons (Live TV row + all category rows + Discover + APK grid) ===== */
+html body #liveTvCirclesTrack,
+html body #eplRowTrack,html body #saffRowTrack,html body #dramaRowTrack,
+html body #dynamicCategorySections .no-scrollbar{
+  display:flex!important;align-items:flex-start!important;gap:10px!important;
+  padding:6px 16px 10px!important;margin:0 -16px!important;
+  scroll-snap-type:x proximity;scroll-behavior:smooth;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+html body .channel-ring{flex:0 0 64px!important;width:64px!important;min-width:64px!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;
+  scroll-snap-align:start;transition:transform .18s cubic-bezier(.2,.8,.2,1);animation:sxIn .4s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*24ms)}
+html body .channel-ring:active{transform:scale(.9)}
+html body .channel-ring > div{width:54px!important;height:54px!important;padding:6px!important;border-width:1.5px!important;margin:0 auto;transition:transform .2s,box-shadow .2s}
+html body .channel-ring:hover > div{transform:translateY(-2px)}
+html body .channel-ring > span:not(.absolute){font-size:10px!important;line-height:1.2;max-width:64px!important;margin-top:5px!important;text-align:center}
+html body .channel-ring.sx-new::after{top:-3px!important;right:-3px!important;font-size:7px!important;padding:0 4px!important;border-radius:6px!important;line-height:11px}
+html body #discoverGrid{grid-template-columns:repeat(auto-fill,minmax(76px,1fr))!important;gap:10px 8px!important}
+html body #discoverGrid>button{min-height:0!important;padding:8px 4px!important;border-radius:14px!important;animation:sxIn .35s ease both}
+html body #discoverGrid>button>div:first-child{width:50px!important;height:50px!important;padding:5px!important}
+html body #discoverGrid>button>span:nth-of-type(1){font-size:10px!important;margin-top:5px!important}
+html body #discoverGrid>button>span:nth-of-type(2){display:none!important}
+/* APK / app channel grid */
+html:not(.tv-mode) body #appGrid{grid-template-columns:repeat(auto-fill,minmax(66px,1fr))!important;gap:10px 4px!important;padding:6px 10px 24px!important}
+html:not(.tv-mode) body .app-card{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;gap:4px!important;border-radius:12px!important;transition:transform .18s}
+html:not(.tv-mode) body .app-card:active{transform:scale(.9)!important}
+html:not(.tv-mode) body .app-card-logo{width:54px!important;height:54px!important;aspect-ratio:auto!important;border-radius:50%!important;margin:0 auto!important;padding:6px!important;border:1.5px solid rgba(255,255,255,.18)}
+html:not(.tv-mode) body .app-card.active .app-card-logo{border-color:#f04498!important;box-shadow:0 0 0 2px rgba(240,68,152,.3)!important}
+html:not(.tv-mode) body .app-card-name{font-size:9.5px!important;min-height:0!important}
+/* ===== Header bug: content ghosting through the sticky header ===== */
+html body header.sticky{background:rgba(8,9,16,.97)!important;border-bottom:1px solid rgba(255,255,255,.07)!important;backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3)}
+html[data-sx-mode="light"] body header.sticky{background:rgba(255,255,255,.97)!important;border-bottom-color:rgba(0,0,0,.08)!important}
+html body #topCategoryNav{scroll-behavior:smooth;scroll-snap-type:x proximity;gap:18px!important}
+html body #topCategoryNav .cat-tab{flex:0 0 auto;scroll-snap-align:center;font-size:13.5px!important;transition:color .2s,border-color .2s,transform .15s}
+html body #topCategoryNav .cat-tab:active{transform:scale(.94)!important}
+/* ===== Smooth + animation ===== */
+@keyframes sxIn{from{opacity:0;transform:translateY(10px) scale(.92)}to{opacity:1;transform:none}}
+html{scroll-behavior:smooth}
+body{-webkit-font-smoothing:antialiased}
+#viewHome>div,#viewHome>section{animation:sxFade .45s ease both}
+@keyframes sxFade{from{opacity:0}to{opacity:1}}
+#dynamicCategorySections>div,#eplRowTrack,#saffRowTrack,#dramaRowTrack{content-visibility:auto;contain-intrinsic-size:0 96px}
+html body .va-btn,html body #viewAllChannelsBtn{transition:transform .15s,opacity .15s}
+html body .va-btn:active,html body #viewAllChannelsBtn:active{transform:scale(.94)}
+img{-webkit-user-drag:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+<script id="sarah-compact-smooth-v6-js">
+(function(){
+  try{
+    var esc=function(v){return (typeof window.appEsc==='function')?window.appEsc(v):String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+    /* every category row now uses the same small round icon as the Live TV row */
+    window.buildChannelCardHtml=function(ch,idx){
+      return '<button data-play-channel="'+esc(ch.id)+'" style="--i:'+((idx||0)%14)+'" class="channel-ring relative flex-shrink-0 flex flex-col items-center group snap-start-item focus:outline-none">'
+        +getChannelCircleAvatarHtml(ch,'w-14 h-14')
+        +'<span class="text-[10px] text-slate-300 font-medium mt-1 max-w-[62px] truncate">'+esc(ch.name)+'</span></button>';
+    };
+    var tries=0,t=setInterval(function(){
+      tries++;
+      if(typeof CHANNELS!=='undefined'&&CHANNELS&&CHANNELS.length&&typeof renderContentRowsFromChannels==='function'){
+        clearInterval(t);try{renderContentRowsFromChannels();}catch(e){}
+      }else if(tries>40)clearInterval(t);
+    },250);
+    /* stagger the Live TV row too */
+    var st=document.createElement('style');var css='';
+    for(var i=1;i<=14;i++)css+='#liveTvCirclesTrack>.channel-ring:nth-child('+i+'){--i:'+i+'}';
+    st.textContent=css;document.head.appendChild(st);
+    /* keep the active top tab visible */
+    var nav=document.getElementById('topCategoryNav');
+    if(nav&&window.MutationObserver){
+      new MutationObserver(function(){
+        var a=nav.querySelector('.active-cat,.text-pink-400');
+        if(a&&a.scrollIntoView)a.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+      }).observe(nav,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
+    }
+  }catch(e){console.warn('compact-v6',e)}
+})();
+</script>
 </body>
 </html>
